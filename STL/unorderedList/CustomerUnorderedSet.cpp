@@ -1,7 +1,12 @@
+/*
+    This is demonstration of using custom Hash function and equal criterion to unordered_set
+*/
+
 #include<iostream>
 #include<unordered_set>
 #include<string>
 #include<algorithm>
+#include<functional>
 #include<iterator>
 
 using namespace std;
@@ -54,11 +59,11 @@ public:
 };
 
 // lambda hash and equal function:
-auto hash_ = [](const Customer &cs) {
+function<size_t(Customer)> hash_ = [](const Customer &cs) {     // auto
     return hash_val(cs.getFname(), cs.getLname(), cs.getNo());
 };
 
-auto equal_ = [](const Customer &c, const Customer &s) {
+function<bool(Customer, Customer)> equal_ = [](const Customer &c, const Customer &s) {
     return c.getNo() == s.getNo();
 };
 
@@ -71,6 +76,8 @@ int main(void) {
     unordered_set<Customer, decltype(hash_), decltype(equal_)> uuset(10, hash_, equal_);
     uuset.insert({Customer("a", "aa", 2001), Customer("b", "bb", 2002)});
     copy(uuset.begin(), uuset.end(), ostream_iterator<Customer>(cout, " "));
+    
+    cout << "type of hash_: " << typeid(hash_).name() << endl; 
     
     return 0;
 }
