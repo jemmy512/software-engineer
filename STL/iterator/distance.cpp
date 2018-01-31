@@ -39,14 +39,14 @@ _distance(Iterator pos1, Iterator pos2, std::random_access_iterator_tag) {
 template<typename Iterator>
 typename std::iterator_traits<Iterator>::difference_type
 _distance(Iterator pos1, Iterator pos2) {
-    return _distance(pos1 ,pos2, std::iterator_traits<Iterator>::iterator_category());
+    return _distance(pos1 ,pos2, typename std::iterator_traits<Iterator>::iterator_category());
 }
 
 int main(void) {
     
-    //array<int, 5> arr = {1, 2, 3, 4, 5};
     vector<int> arr = {1, 2, 3, 4, 5};
     auto pos = find(arr.begin(), arr.end(), 4);
     cout << "distance of arr: " << _distance(arr.begin(), pos) << endl;
+   
     return 0;
 }
