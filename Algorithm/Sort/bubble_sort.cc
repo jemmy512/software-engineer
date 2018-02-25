@@ -1,3 +1,10 @@
+/*
+*   This is an optimized bubble sort algorithm that the algorithm complete
+*   when there were no elements exchanged in one loop.
+*
+*   author: Jemmy Wong
+*   date: 2018-02-25
+*/
 #include<iostream>
 #include<algorithm>
 #include<iterator>
