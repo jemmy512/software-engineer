@@ -32,7 +32,6 @@ void Queen(int i)
             col[j]=lef[i+j]=rig[i-j+7]=0;
         }
     }
-
 }
 
 int main(void)
