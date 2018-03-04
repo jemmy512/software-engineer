@@ -4,31 +4,19 @@
 *   date: 2018-02-25
 */
 #include<iostream>
-#include<algorithm>
 #include<array>
-
-#define N 3
+#include<iterator>
 
 using namespace std;
 
-array<int, N> arr;
-int total = 0;
+#define N 3
 
-void init() {
-    for (int i = 0; i < N; ++i)
-        arr[i] = i + 1;
-}
-
-void print() {
-    for (int i = 0; i < N; ++i)
-        cout << arr[i] << " ";
-    cout << endl;
-}
+array<int, 3> arr;
 
 void arrange(int n) {
-    if (n == N - 1) {
-        print();
-        total++;
+    if (n == N -1) {
+        copy(arr.begin(), arr.end(), ostream_iterator<int>(cout, " "));
+        cout << endl;
         return;
     }
     for (int i = n; i < N; ++i) {
@@ -36,13 +24,13 @@ void arrange(int n) {
         arrange(n + 1);
         swap(arr[n], arr[i]);
     }
+  
 }
 
-int main(void ) {
-    init();
+int main(int argc ,char* argv[]) {
+    for (int i = 0; i < 3; ++i)
+        arr[i] = i + 1;
     arrange(0);
-    cout << endl << "total: " << total << endl;
-
+    
     return 0;
 }
-

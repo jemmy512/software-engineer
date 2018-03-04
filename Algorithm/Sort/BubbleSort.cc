@@ -12,7 +12,8 @@
 
 using namespace std;
 
-void bubble_sort(array<int, 8> arr, int n) {
+template<typename T>
+void bubble_sort(array<T, 8> &arr, int n) {
     bool flag = true;                         // optimization
     int temp;
     for (int i = 0; i < n - 1 && flag; ++i) { // control the loop number of bubbles
@@ -26,11 +27,10 @@ void bubble_sort(array<int, 8> arr, int n) {
             }
         }
     }
-
-    copy(arr.begin(), arr.end(), ostream_iterator<int>(cout, " "));
 }
 
 int main(void) {
     array<int, 8> arr = {3, 2, 5, 8, 4, 7, 6, 9};
     bubble_sort(arr, 8);
+    copy(arr.begin(), arr.end(), ostream_iterator<int>(cout, " "));
 }
