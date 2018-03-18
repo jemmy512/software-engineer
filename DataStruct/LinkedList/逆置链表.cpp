@@ -6,7 +6,7 @@ typedef struct ListNode{
     struct ListNode * pNext;
 }ElemSN;
 
-ListNode *ReverseList(ListNode *head){//方法1
+ListNode *ReverseList(ListNode *head){//懈泄懈械1
     ListNode *pReverseHead=NULL;
     ListNode *pNode=head;
     ListNode *pPre=NULL;
@@ -21,7 +21,7 @@ ListNode *ReverseList(ListNode *head){//方法1
     }
     return pReverseHead;
 }
-ListNode* Reverse(ListNode* head)//方法2-FS
+ListNode* Reverse(ListNode* head)//懈泄懈械2-FS
 {
     ListNode* hn=NULL,* p;
     while(head){
