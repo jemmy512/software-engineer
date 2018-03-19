@@ -34,7 +34,7 @@ BTNode *creatBTree(int a[], int n) {
     return root;
 }
 
-// preorder traversal the tree according to root element
+// preorder traverse the tree according to root element
 void preOrder(BTNode *root) {
     if (root) {
         cout << root->data << " ";
@@ -43,7 +43,7 @@ void preOrder(BTNode *root) {
     }
 }
 
-// in-order traversal the tree according to root element
+// in-order traverse the tree according to root element
 void inOrder(BTNode *root) {
     if (root) {
         inOrder(root->left);
@@ -52,7 +52,7 @@ void inOrder(BTNode *root) {
     }
 }
 
-// post-order traversal the tree according to root element
+// post-order traverse the tree according to root element
 void postOrder(BTNode *root) {
     if (root) {
         postOrder(root->left);
@@ -61,8 +61,7 @@ void postOrder(BTNode *root) {
     }
 }
 
-
-// level traversal the tree
+// level traverse the tree
 void levelOrder(BTNode *root) {
     deque<BTNode *> deq;
     vector<int> vec;
@@ -146,43 +145,42 @@ BTNode *minBTNode(BTNode *root) {
     return minBTNode(root->left);
 }
 
-BTNode *deleteBTree(BTNode *root, BTNode *prev, int key) {
+BTNode *deleteBTree(BTNode *root, BTNode **prev, int key) {
     if (!root)
         return NULL;
     if (root->data == key) {
-        if (root->left && root->right) { Case 3. Two children
-            
-        } else if (prev->left == root) { Case 2. One children-left
-            prev->left = root->left ? root->left : root->right;
+        if (root->left && root->right) {    // Case 3. Two children
+            root->data = minBTNode(root->right)->data;
+            return deleteBTree(root->right, &root, root->data);
+        } else if ((*prev)->left == root) { // Case 2. One children-left
+            (*prev)->left = root->left ? root->left : root->right;
             return root;
-        } else if (prev->right == root) { Case 2. One children-right
-            prev->right = root->right ? right : root->left;
+        } else if ((*prev)->right == root) { // Case 2. One children-right
+            (*prev)->right = root->right ? root->right : root->left;
             return root;
         }
     } else if (root->data > key){
-        
+        return deleteBTree(root->left, &root, key);
     } else {
-        
+        return deleteBTree(root->right, &root, key);
     }
 }
 
 // we need to handle the situation of root node specially
-void deleteBTree(BTNode *root, int key) {        
+void deleteBTree(BTNode **root, int key) {        
     if (!root)
         return;
     BTNode *rm = NULL;
-    if (root->data == key) {
+    if ((*root)->data == key) {
         BTNode *tmp = (BTNode *)malloc(sizeof(BTNode));
         tmp->data = key + 1;
-        tmp->left = root;
+        tmp->left = *root;
         tmp->right = NULL;
-        rm = deleteBTree(root, tmp, key);
-        root->tmp->left;
+        rm = deleteBTree(*root, &tmp, key);
+        *root = tmp->left;
         free(tmp);
-    } else if (root->data > key) {
-        rm = deleteBTree(root->left, root, key);
     } else {
-        rm = deleteBTree(root->right, root, key);
+        rm = deleteBTree(*root, NULL, key);
     }
     if (rm)
         free(rm);
@@ -193,7 +191,7 @@ int main() {
     int arr[8] = {3, 2, 5, 8, 4, 7, 6, 9};
     BTNode *root = creatBTree(arr, 8);
     
-    cout << "preorder traversal tree: \n";
+    cout << "preorder traverse tree: \n";
     preOrder(root);
     
     cout << "\nin-order travese tree:\n";
@@ -203,16 +201,18 @@ int main() {
     postOrder(root);
 
     cout << "\ninsert btree: "; 
-    //insertBTree(root, 1);
-    deleteBTree(root, NULL, 5);
+    insertBTree(root, 1);
     
     cout << "\ntraverse tree by level: \n";
     levelOrder(root);
     
     cout << "\nMirror reverse Tree: \n";
-    mirrorReversal(root);
-    preOrder(root);
+    //mirrorReversal(root);
+    //preOrder(root);
     
+    cout << "\nAfter delete, in-order travese tree:\n";
+    deleteBTree(&root, 3);
+    inOrder(root);
     
     freeTree(root);
     return 0;
