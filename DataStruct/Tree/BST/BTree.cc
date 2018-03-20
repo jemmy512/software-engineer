@@ -166,8 +166,33 @@ BTNode *deleteBTree(BTNode *root, BTNode **prev, int key) {
     }
 }
 
+BTNode *deleteBTree(BTNode *root, int key) {
+    if (!root)
+        return NULL;
+    if (key == root->data) {
+        if (root->left && root->right) {    // Case 3. Two children
+            root->data = minBTNode(root->right)->data;
+            return deleteBTree(root->right, root->data);
+        } else {                            // Case 2. One children
+            BTNode *tmp = root->left ? root->left : root->right;
+            if (tmp) {
+                *root = *tmp;
+            } else {
+                tmp = root;
+                root = NULL;
+            }
+            free(tmp);
+            return root;
+        }
+    } else if (key < root->left){
+        return deleteBTree(root->left, key);
+    } else {
+        return deleteBTree(root->right, key);
+    }
+}
+
 // we need to handle the situation of root node specially
-void deleteBTree(BTNode **root, int key) {        
+/*void deleteBTree(BTNode **root, int key) {        
     if (!root)
         return;
     BTNode *rm = NULL;
@@ -176,15 +201,19 @@ void deleteBTree(BTNode **root, int key) {
         tmp->data = key + 1;
         tmp->left = *root;
         tmp->right = NULL;
-        rm = deleteBTree(*root, &tmp, key);
+        //rm = deleteBTree(*root, &tmp, key);
+        rm = deleteBTree(*root, key);
         *root = tmp->left;
         free(tmp);
     } else {
-        rm = deleteBTree(*root, NULL, key);
+        //rm = deleteBTree(*root, NULL, key);
+        rm = deleteBTree(*root, key);
     }
-    if (rm)
+    if (rm) {
+        cout << "delete: " << rm << endl;
         free(rm);
-}  
+    }
+} */ 
 
 
 int main() {
@@ -211,7 +240,7 @@ int main() {
     //preOrder(root);
     
     cout << "\nAfter delete, in-order travese tree:\n";
-    deleteBTree(&root, 3);
+    root = deleteBTree(root, 6);
     inOrder(root);
     
     freeTree(root);
