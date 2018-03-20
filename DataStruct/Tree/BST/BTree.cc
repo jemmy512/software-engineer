@@ -145,35 +145,14 @@ BTNode *minBTNode(BTNode *root) {
     return minBTNode(root->left);
 }
 
-BTNode *deleteBTree(BTNode *root, BTNode **prev, int key) {
-    if (!root)
-        return NULL;
-    if (root->data == key) {
-        if (root->left && root->right) {    // Case 3. Two children
-            root->data = minBTNode(root->right)->data;
-            return deleteBTree(root->right, &root, root->data);
-        } else if ((*prev)->left == root) { // Case 2. One children-left
-            (*prev)->left = root->left ? root->left : root->right;
-            return root;
-        } else if ((*prev)->right == root) { // Case 2. One children-right
-            (*prev)->right = root->right ? root->right : root->left;
-            return root;
-        }
-    } else if (root->data > key){
-        return deleteBTree(root->left, &root, key);
-    } else {
-        return deleteBTree(root->right, &root, key);
-    }
-}
-
 BTNode *deleteBTree(BTNode *root, int key) {
     if (!root)
         return NULL;
     if (key == root->data) {
         if (root->left && root->right) {    // Case 3. Two children
             root->data = minBTNode(root->right)->data;
-            return deleteBTree(root->right, root->data);
-        } else {                            // Case 2. One children
+            root->right = deleteBTree(root->right, root->data);
+        } else {                            // Case 1, 2. One or zero child
             BTNode *tmp = root->left ? root->left : root->right;
             if (tmp) {
                 *root = *tmp;
@@ -182,39 +161,14 @@ BTNode *deleteBTree(BTNode *root, int key) {
                 root = NULL;
             }
             free(tmp);
-            return root;
         }
-    } else if (key < root->left){
-        return deleteBTree(root->left, key);
+    } else if (key < root->data){
+        root->left = deleteBTree(root->left, key);
     } else {
-        return deleteBTree(root->right, key);
+        root->right = deleteBTree(root->right, key);
     }
+    return root;
 }
-
-// we need to handle the situation of root node specially
-/*void deleteBTree(BTNode **root, int key) {        
-    if (!root)
-        return;
-    BTNode *rm = NULL;
-    if ((*root)->data == key) {
-        BTNode *tmp = (BTNode *)malloc(sizeof(BTNode));
-        tmp->data = key + 1;
-        tmp->left = *root;
-        tmp->right = NULL;
-        //rm = deleteBTree(*root, &tmp, key);
-        rm = deleteBTree(*root, key);
-        *root = tmp->left;
-        free(tmp);
-    } else {
-        //rm = deleteBTree(*root, NULL, key);
-        rm = deleteBTree(*root, key);
-    }
-    if (rm) {
-        cout << "delete: " << rm << endl;
-        free(rm);
-    }
-} */ 
-
 
 int main() {
     int arr[8] = {3, 2, 5, 8, 4, 7, 6, 9};
@@ -240,7 +194,7 @@ int main() {
     //preOrder(root);
     
     cout << "\nAfter delete, in-order travese tree:\n";
-    root = deleteBTree(root, 6);
+    root = deleteBTree(root, 3);
     inOrder(root);
     
     freeTree(root);

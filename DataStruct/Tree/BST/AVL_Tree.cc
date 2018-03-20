@@ -162,9 +162,7 @@ BTNode *deleteNode(BTNode *root, int key) {
     return root;
 }
 
-int main(void) {
-    int arr[] = {3, 2, 5, 8, 4, 7, 6, 9};
-    
+int main(void) {    
     BTNode *root = NULL;
     root = insertNode(root, 9);
     root = insertNode(root, 5);
