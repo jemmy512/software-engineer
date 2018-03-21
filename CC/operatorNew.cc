@@ -1,8 +1,8 @@
 /*
 *   overload new and delete operator
-*   reference: https://kelvinh.github.io/blog/2014/04/19/research-on-operator-new-and-delete/
-*       https://www.jianshu.com/p/4af119c44086
-*       https://www.cnblogs.com/jkred369/p/8320734.html
+*   reference:  https://kelvinh.github.io/blog/2014/04/19/research-on-operator-new-and-delete/
+*               https://www.jianshu.com/p/4af119c44086
+*               https://www.cnblogs.com/jkred369/p/8320734.html
 */
 
 #include<iostream>
