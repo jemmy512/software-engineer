@@ -1,5 +1,7 @@
 /*
 *   Reference: https://www.geeksforgeeks.org/red-black-tree-set-2-insert/
+*   https://juejin.im/entry/58371f13a22b9d006882902d#%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E5
+        %B9%B3%E8%A1%A1%E5%88%A0%E9%99%A4
 */
 
 #include<iostream>
@@ -14,7 +16,7 @@ struct Node {
     Node *left, *right, *parent;
     Node(int data) {
         this->data = data;
-        // color  = RED;
+        color  = RED;
         left = right = parent = NULL;
     }
 };
@@ -23,25 +25,32 @@ class RBTree {
 private:
     Node *root;
 protected:
+    void BSTDelete(Node *&, int);
+    void BSTInsert(Node *&, Node *&);
     void rRotate(Node *&, Node *&);
     void lRotate(Node *&, Node *&);
-    void fixViolation(Node *&, Node *&);
+    void fixDeletion(Node *&, Node *&);
+    void fixInsertion(Node *&, Node *&);
 public:
     RBTree() { root = NULL; }
-    void inOrder();
-    void insert(const int &n);
+    void inOrder(Node *);
+    void RBInsert(const int &n);
+    void RBDelete(int key);
+    void getColor(Node *&node) {
+        if (node == NULL)
+            return BLACK;
+        return node->color;
+    }
+    void setColor(Node *&node, int color) {
+        if (!node)
+            return;
+        node->color = color;
+    }
 };
 
-Node *BSTInsert(Node *root, Node *node) {
-    if (!root)
-        return node;
-    if (node->data < root->data) {
-        root->left = BSTInsert(root->left, node);
-        root->left->parent = root;
-    } else if (node->data > root->data){
-        root->right = BSTInsert(root->right, node);
-        root->right->parent = root;
-    }
+Node *minNode(Node *root) {
+    while(root->left)
+        root = root->left;
     return root;
 }
 
@@ -53,7 +62,7 @@ void inOrderUtil(Node *root) {
     }
 }
 
-void RBTree::inOrder() { inOrderUtil(root); }
+void RBTree::inOrder(Node *&root) { inOrderUtil(root); }
 
 void RBTree::lRotate(Node *&root, Node *&node) {
     Node *tmp = node->right;
@@ -77,35 +86,65 @@ void RBTree::lRotate(Node *&root, Node *&node) {
 void RBTree::rRotate(Node *&root, Node *&node) {
     Node *tmp = node->left;
     
-    node->left = tmp->right;
+    node->left = tmp->right;            // 1. modify node->left
     if (node->left != NULL)
         node->left->parent = node;
     
-    if (node == root)
+    if (node == root)                   // 2. modify node->parent
         root = tmp;
     else if (node == node->parent->left)
         node->parent->left = tmp;
     else 
         node->parent->right = tmp;
     
-    tmp->parent = node->parent;
+    tmp->parent = node->parent;         // 3. modify tmp
     tmp->right = node;
-    node->parent = tmp;
+    node->parent = tmp;                 // 4. modify node
 }
 
-void RBTree::fixViolation(Node *&root, Node *&node) {
+Node *RBTree::BSTInsert(Node *&root, Node *&node) {
+    if (!root)
+        return node;
+    if (node->data < root->data) {      // 1. left insert
+        root->left = BSTInsert(root->left, node);
+        root->left->parent = root;
+    } else if (node->data > root->data){// 2. right inset
+        root->right = BSTInsert(root->right, node);
+        root->right->parent = root;
+    }
+    return root;                        // 3. no insert
+}
+
+Node *RBTree::BSTDelete(Node *&root, int key) {
+    if (!root)
+        return root;
+    if (key == root->data) {
+        if (root->left && root->right)  // 1. has two children
+            root->data = minNode(root->right)->data;
+            return BSTDelete(root->right, root->data);
+        } else {                        // 2. has one or zero child
+            return root;
+        }
+    } else if (key < root->data){
+        return BSTDelete(root->left, key);
+    } else {
+        return BSTDelete(root->right, key);
+    }
+}
+
+void RBTree::fixInsertion(Node *&root, Node *&node) {
     Node *parent, *parent_g, *uncle;
     parent = parent_g = uncle = NULL;
     
-    while ((node != root) && (node->color == RED) && (node->parent->color == RED)) {
+    while ((node != root) && (getColor(node) == RED) && (getColor(node->parent) == RED)) {
         parent = node->parent;
         parent_g = parent->parent;
         
 // Case A: parent is on the left of the parent_g -------------------------------
         if (parent == parent_g->left) {
             uncle = parent_g->right;
-            if (uncle && RED == uncle->color) { // Case 1. uncle color is red
-                parent->color = uncle->color = BLACK;
+            if (uncle && RED == getColor(uncle)) { // Case 1. uncle color is red
+                setColor(parent) = setColor(uncle) = BLACK;
                 parent_g->color = RED;
                 node = parent_g;
             } else {
@@ -140,10 +179,68 @@ void RBTree::fixViolation(Node *&root, Node *&node) {
     root->color = BLACK;
 }
 
-void RBTree::insert(const int &key) {
+void RBTree::fixDeletion(Node *&root, Node *node) {
+    if (root == NULL)
+        return;
+    if (node == root) {
+        root = NULL;
+        return;
+    }
+// Case A: one child or node is red
+    if (getColor(node) == RED || getColor(node->left) == RED || getColor(node->right) == RED) {
+        Node *child = node->left ? node->left : node->right;
+        if (node == node->parent->left) {
+            node->parent->left = child;
+            if (child) 
+                child->parent = node->parent;
+            setColor(child, BLACK);
+            delete(node);
+        } else {
+            node->parent->right = child;
+            if (child)
+                child->parent = node->parent;
+            setColor(child, BLACK);
+            delete(node);
+        }
+// Case B: The color of child of node and node are all black
+    } else {
+        Node *parent = node->parent;
+        Node *sibling = NULL;
+        while () {
+            if (node == parent->left) {
+                 sibling = parent->right;
+                 if (sibling->color == RED) {   // Case 1. sibling is red
+                     
+                 } else {
+                                                // Case 2. sibling children are all black
+                     if (getColor(sibling->left) == BLACK && getColor(sibling->right) == BLACK) {
+                         
+                     } else {                   // Case 3. sibling right child is black
+                         if (getColor(sibling->right) == BLACK) {
+                             
+                         }
+                         // Case 4. sibling righg child is red
+                         
+                     }
+                 }
+            } else {
+                sibling = parent->left;
+                if ()
+            }            
+        }
+        if ();
+    }
+}
+
+void RBTree::RBInsert(const int &key) {
     Node *node = new Node(key);
     root = BSTInsert(root, node);
-    fixViolation(root, node);
+    fixInsertion(root, node);
+}
+
+void RBTree::RBDelete(Node *&root, int key) {
+    Node *node = BSTDelete(root, key);
+    fixDeletion(root, node);
 }
 
 int main(void) {
