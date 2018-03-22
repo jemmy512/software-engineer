@@ -2,17 +2,18 @@
 *   Reference: https://www.geeksforgeeks.org/red-black-tree-set-2-insert/
 *   https://juejin.im/entry/58371f13a22b9d006882902d#%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E5
         %B9%B3%E8%A1%A1%E5%88%A0%E9%99%A4
+        http://www.cnblogs.com/skywang12345/p/3245399.html#a1
 */
 
 #include<iostream>
 
 using namespace std;
 
-enum Color {RED, BLACK};
+enum Color {RED, BLACK, BBLACK};
 
 struct Node {
     int data;
-    bool color;
+    int color;
     Node *left, *right, *parent;
     Node(int data) {
         this->data = data;
@@ -191,44 +192,71 @@ void RBTree::fixDeletion(Node *&root, Node *node) {
         Node *child = node->left ? node->left : node->right;
         if (node == node->parent->left) {
             node->parent->left = child;
-            if (child) 
-                child->parent = node->parent;
-            setColor(child, BLACK);
-            delete(node);
         } else {
             node->parent->right = child;
-            if (child)
-                child->parent = node->parent;
-            setColor(child, BLACK);
-            delete(node);
         }
+        if (child)
+            child->parent = node->parent;
+        setColor(child, BLACK);
+        delete(node);
 // Case B: The color of child of node and node are all black
     } else {
         Node *parent = node->parent;
         Node *sibling = NULL;
-        while () {
+        Node *pt = node;
+        setColor(pt, BBLACK);
+        while (pt != root && getColor(pt) == BBLACK) {
             if (node == parent->left) {
                  sibling = parent->right;
-                 if (sibling->color == RED) {   // Case 1. sibling is red
-                     
+                 if (getColor(sibling) == RED) {   // Case 1. sibling is red
+                     setColor(sibling, BLACK);
+                     setColor(parent, RED);
+                     lRotate(parent);
                  } else {
                                                 // Case 2. sibling children are all black
                      if (getColor(sibling->left) == BLACK && getColor(sibling->right) == BLACK) {
-                         
+                         setColor(sibling, RED);
+                         if (getColor(parent) == RED)
+                             setColor(parent, BLACK);
+                         else 
+                             setColor(parent, BBLACK);
+                         pt = parent;
                      } else {                   // Case 3. sibling right child is black
                          if (getColor(sibling->right) == BLACK) {
-                             
+                             setColor(sibling->left, BLACK);
+                             setColor(sibling, RED);
+                             rRotate(sibling);
+                             sibling = parent->right;
                          }
-                         // Case 4. sibling righg child is red
-                         
+                         // Case 4. sibling righg child red
+                         setColor(sibling, parent->color);
+                         setColor(parent, BLACK);
+                         setColor(sibling->right, BLACK);
+                         lRotate(parent);
+                         break;
                      }
                  }
             } else {
-                sibling = parent->left;
-                if ()
+                sibling = parent->right;
+                if (getColor(sibling) == RED) {
+                    
+                } else {
+                    if (getColor(sibling->left) == BLACK && getColor(sibling->right) == BLACK) {
+                        
+                    } else {
+                        if (getColor(sibling->right) == BLACK) {
+                            
+                        }
+                    }
+                }
             }            
         }
-        if ();
+        if (node == parent->left);
+            parent->left = NULL;
+        else 
+            parent->right = NULL;
+        delete(node);
+        setColor(root, BLACK);
     }
 }
 
