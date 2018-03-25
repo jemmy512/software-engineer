@@ -1,24 +1,29 @@
 /*
-*   Reference: https://www.geeksforgeeks.org/red-black-tree-set-2-insert/
-*   https://juejin.im/entry/58371f13a22b9d006882902d#%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E5
-*       %B9%B3%E8%A1%A1%E5%88%A0%E9%99%A4
+*   Reference: 
+        https://www.geeksforgeeks.org/red-black-tree-set-2-insert/
+*       https://juejin.im/entry/58371f13a22b9d006882902d#%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E5
+            %B9%B3%E8%A1%A1%E5%88%A0%E9%99%A4
 *       http://www.cnblogs.com/skywang12345/p/3245399.html#a1
 *       http://blog.csdn.net/weewqrer/article/details/51866488
+*       https://blog.csdn.net/v_JULY_v/article/details/6284050
 */
 
 #include<iostream>
 #include<iomanip>
+#include<array>
 using namespace std;
 
 enum Color {RED, BLACK};
+
+class RBTree;
 
 struct Node {
     int data;
     int color;
     Node *left, *right, *parent;
-    Node(int data) {
-        this->data = data;
-        color  = RED;
+    Node(int key) {
+        color = RED;
+        data = key;
         left = right = parent = nullptr;
     }
 };
@@ -34,43 +39,59 @@ protected:
     void fixDeletion(Node *&, Node *&);
     void fixInsertion(Node *&, Node *&);
 public:
-    RBTree() { root = nullptr; }
+    RBTree() { 
+        root = nullptr; 
+    }
     void inOrder();
-    void RBInsert(const int &n);
+    void preOrder();
+    void RBInsert(const int n);
     void RBDelete(const int key);
-    int getColor(Node *&node) {
-        if (node == nullptr)
+    int getColor(Node *node) {
+        if (nullptr == node)
             return BLACK;
         return node->color;
     }
-    void setColor(Node *&node, int color) {
-        if (!node)
+    void setColor(Node *node, int color) {
+        if (nullptr == node)
             return;
         node->color = color;
     }
 };
 
+Node *nil = new Node(0);
+
 Node *minNode(Node *root) {
-    while(root->left)
+    if (nil == root)
+        return nil;
+    while(nil != root->left)
         root = root->left;
     return root;
 }
 
 void inOrderUtil(Node *root) {
-    if (root) {
+    if (nil != root) {
         inOrderUtil(root->left);
-        cout << setw(2) << root->data << " c: " << root->color << endl;
+        cout << setw(2) << root->data << "[" << root->color << "] ";
         inOrderUtil(root->right);
     }
 }
 
+void preOrderUtil(Node *root) {
+    if (nil != root) {
+        cout << setw(2) << root->data << "[" << root->color << "] ";
+        preOrderUtil(root->left);
+        preOrderUtil(root->right);
+    }
+}
+
 void RBTree::inOrder() { inOrderUtil(root); }
+void RBTree::preOrder() { preOrderUtil(root); }
 
 void RBTree::lRotate(Node *&root, Node *&node) {
     Node *tmp = node->right;
     
     node->right = tmp->left;
-    if (node->right != nullptr)            // 1. modify node->right
+    if (node->right != nullptr)         // 1. modify node->right
         node->right->parent = node;
     
     if (root == node)                   // 2. modify node->parent
@@ -105,7 +126,7 @@ void RBTree::rRotate(Node *&root, Node *&node) {
 }
 
 Node *RBTree::BSTInsert(Node *&root, Node *&node) {
-    if (!root)
+    if (!root || nil == node)
         return node;
     if (node->data < root->data) {      // 1. left insert
         root->left = BSTInsert(root->left, node);
@@ -184,27 +205,33 @@ void RBTree::fixInsertion(Node *&root, Node *&node) {
 }
 
 void RBTree::fixDeletion(Node *&root, Node *&node) {
-    if (root == nullptr)
+    if (root == nullptr || node == nullptr)
         return;
     // get Child of node
     Node *child = node->left ? node->left : node->right;
-    if (node == node->parent->left) {
+    if (!child) {
+        child = nil;
+        nil->color = BLACK;
+    } 
+    if (root == node)
+        root = child;
+    else if (node == node->parent->left) {
         node->parent->left = child;
     } else {
         node->parent->right = child;
     }
-    if (child)
-        child->parent = node->parent;
-   
+    child->parent = node->parent;
+    
    if (BLACK == getColor(node)) {
-       Node *parent = node->parent; // child may be nullptr
-       Node *sibling = nullptr;
        while (child != root && BLACK == getColor(child)) {
+           Node *parent = child->parent; // child may be nullptr
+           Node *sibling = nullptr;
            if (child == parent->left) {         // Case 1. RED
                sibling = parent->right;
                if (RED == getColor(sibling)) {
-                   setColor(sibling, BLACK);
-                   setColor(parent, RED);
+                   // setColor(sibling, BLACK);
+                   // setColor(parent, RED);
+                   swap(sibling->color, parent->color);
                    lRotate(root, parent);
                } else {
                                                 // Case 2. BLACK - BLACK - BLACK
@@ -220,13 +247,15 @@ void RBTree::fixDeletion(Node *&root, Node *&node) {
                                                 // Case 3. BLACK - RED - BLACK
                    }else {
                        if (getColor(sibling->right) == BLACK) {
-                           setColor(sibling->left, BLACK);
-                           setColor(sibling, RED);
+                           // setColor(sibling->left, BLACK);
+                           // setColor(sibling, RED);
+                           swap(sibling->left, sibling);
                            rRotate(root, sibling);
                            sibling = parent->right;
                        }                        // Case 4. BLACK - <> - RED
-                       setColor(sibling, getColor(parent));
-                       setColor(parent, BLACK);
+                       // setColor(sibling, getColor(parent));
+                       // setColor(parent, BLACK);
+                       swap(sibling, parent);
                        setColor(sibling->right, BLACK);
                        lRotate(root, parent);
                        child = root;
@@ -235,8 +264,9 @@ void RBTree::fixDeletion(Node *&root, Node *&node) {
            } else {
                sibling = parent->left;
                if (getColor(sibling) == RED) {  // Case 1. RED
-                   setColor(sibling, BLACK);
-                   setColor(parent, RED);
+                   // setColor(sibling, BLACK);
+                   // setColor(parent, RED);
+                   swap(sibling, parent);
                    rRotate(root, parent);
                } else {                         // Case 2. BLACK - BLACK - BLACK
                    if (getColor(sibling->left) == BLACK && getColor(sibling->right) == BLACK) {
@@ -251,13 +281,15 @@ void RBTree::fixDeletion(Node *&root, Node *&node) {
                    } else {
                                                 // Case 3. BLACK - BLACK - RED
                        if (BLACK == getColor(sibling->left)) {
-                           setColor(sibling, RED);
-                           setColor(sibling->right, BLACK);
+                           // setColor(sibling, RED);
+                           // setColor(sibling->right, BLACK);
+                           swap(sibling, sibling->right);
                            lRotate(root, sibling);
                            sibling = parent->left;
                        }                        // Case 4. BLACK- RED - <>
-                       setColor(sibling, getColor(parent));
-                       setColor(parent, BLACK);
+                       // setColor(sibling, getColor(parent));
+                       // setColor(parent, BLACK);
+                       swap(sibling, parent);
                        setColor(sibling->left, BLACK);
                        rRotate(root, parent);
                        child = root;
@@ -267,11 +299,13 @@ void RBTree::fixDeletion(Node *&root, Node *&node) {
        }
        setColor(child, BLACK);
    }
-   free(node);
+   delete(node);
 }
 
-void RBTree::RBInsert(const int &key) {
+void RBTree::RBInsert(const int key) {
     Node *node = new Node(key);
+    node->left = node->right = node->parent = nil;
+    
     root = BSTInsert(root, node);
     fixInsertion(root, node);
 }
@@ -284,30 +318,25 @@ void RBTree::RBDelete(const int key) {
 int main(void) {
     RBTree tree;
  
-    tree.RBInsert(12);
-    tree.RBInsert(1);
-    tree.RBInsert(9);
-    tree.RBInsert(2);
-    tree.RBInsert(0);
-    tree.RBInsert(11);
-    tree.RBInsert(7);
-    tree.RBInsert(19);
+    array<int, 20> arr = {12, 1, 9, 2, 0, 11, 7, 19, 4, 15, 18, 5, 14, 13, 10, 16, 6, 3, 8, 17};
+    
+    for (int i = 0; i < arr.size(); ++i) {
+        tree.RBInsert(arr[i]);
+    }
     tree.RBInsert(4);
-    tree.RBInsert(15);
-    tree.RBInsert(18);
-    tree.RBInsert(5);
-    tree.RBInsert(14);
-    tree.RBInsert(13);
-    tree.RBInsert(10);
-    tree.RBInsert(16);
-    tree.RBInsert(6);
-    tree.RBInsert(3);
-    tree.RBInsert(8);
-    tree.RBInsert(17); 
-    
-    tree.RBDelete(12);
-    cout << "Inorder traversal of RBTree:\n";
+    cout << "Insetion. Inorder traversal of RBTree:\n";
     tree.inOrder();
+    cout << endl;
+    tree.preOrder();
     
+    tree.RBDelete(9);
+    // for (int i = arr.size() - 1; i >= 0; --i) {
+        // tree.RBDelete(arr[i]); 
+    // }
+    cout << "\nDeletion. Inorder traversal of RBTree:\n";
+    tree.inOrder();
+    cout << endl;
+    
+    delete(nil);
     return 0;
 }

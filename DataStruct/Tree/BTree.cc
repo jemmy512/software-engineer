@@ -34,6 +34,21 @@ BTNode *creatBTree(int a[], int n) {
     return root;
 }
 
+BTNode *insert(BTNode *root, int key) {
+    if (!root)
+        return root;
+    if (key < root->data)
+        root->left = insert(root->left, key);
+    else if (key > root->data)
+        root->right = insert(root->right, key);
+    else {
+        BTNode *tmp = (BTNode *)malloc(sizeof(BTNode));
+        tmp->data = key;
+        tmp->left = tmp->right =  NULL;
+        return tmp;
+    }
+}
+
 // preorder traverse the tree according to root element
 void preOrder(BTNode *root) {
     if (root) {
@@ -140,9 +155,9 @@ void insertBTree(BTNode *root, int key) {
 *       3. Node has two children 
 */
 BTNode *minBTNode(BTNode *root) {
-    if (!root->left)
-        return root;
-    return minBTNode(root->left);
+    while (root->left)
+        root = root->left;
+    return root;
 }
 
 BTNode *deleteBTree(BTNode *root, int key) {
@@ -152,11 +167,11 @@ BTNode *deleteBTree(BTNode *root, int key) {
         if (root->left && root->right) {    // Case 3. Two children
             root->data = minBTNode(root->right)->data;
             root->right = deleteBTree(root->right, root->data);
-        } else {                            // Case 1, 2. One or zero child
+        } else {                            
             BTNode *tmp = root->left ? root->left : root->right;
-            if (tmp) {
-                *root = *tmp;
-            } else {
+            if (tmp) {                      // Case 2. One child
+                *root = *tmp; // copy from tmp to root
+            } else {                        // Case 1. No child
                 tmp = root;
                 root = NULL;
             }
