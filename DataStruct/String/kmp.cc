@@ -38,6 +38,8 @@ int kmp(const string &ts, const string &ps) {
             j = next[j];
         }
     }
+    delete next;
+    
     if (j == len_p)
         return i - j;
     return -1;
