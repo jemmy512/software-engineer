@@ -25,4 +25,6 @@ Usage:
 ********************************** Factory Method ****************************************************************
     Define a interface to create object, subOjbect determines which class to initialize. Delay the object
         initialization to subObject.
+
+********************************** Prototype *********************************************************************
     
