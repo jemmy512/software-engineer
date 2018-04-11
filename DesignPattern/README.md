@@ -27,4 +27,8 @@ Usage:
         initialization to subObject.
 
 ********************************** Prototype *********************************************************************
-    
+   
+
+********************************** Facade ************************************************************************
+    Provide unifide interface to a set of interfaces in subsystem. Facade defines a high-level interface that make
+        the 
