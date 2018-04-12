@@ -8,7 +8,7 @@ Find the median of the two sorted arrays. The overall run time complexity should
 #include<vector>
 using namespace std;
 
-// 71ms, beat 66.45%
+// 71ms, beat 66.45%. Run time complicity O(log(min(m, n)))
 double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
     int m = nums1.size(), n = nums2.size();
     if (m > n) return findMedianSortedArrays(nums2, nums1);
@@ -32,7 +32,7 @@ double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
     return (num1 + num2) / 2.0;
 }
 
-// 89ms, beat 17.00%
+// 89ms, beat 17.00%. Run time complicity O(m + n)
 double findMedianSortedArrays1(vector<int>& nums1, vector<int>& nums2) {
     int i = 0;
     int j = 0;
