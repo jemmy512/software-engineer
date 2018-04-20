@@ -9,6 +9,7 @@ Tips:
 */
 #include<iostream>
 #include<vector>
+#include<numeric>    // accumulate
 #include<functional> // bit_xor
 using namespace std;
 
@@ -25,4 +26,9 @@ int singleNumber_1(vector<int>& nums) {
         ret = ret ^ nums[i];
     
     return ret;
+}
+
+int main() {
+    vector<int> vec = {1, 2, 6, 2, 1};
+    cout << singleNumber(vec) << endl;
 }
