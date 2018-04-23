@@ -24,6 +24,29 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
+// 231 test cases, 16ms, beat 33.70%
+ListNode* rotateRight(ListNode* head, int k) {
+    if(!head) return head;
+    
+    int len = 1; // number of nodes
+    ListNode *newH, *tail;
+    newH = tail = head;
+    
+    while(tail->next) { // get the number of nodes in the list
+        tail = tail->next;
+        len++;
+    }
+    tail->next = head; // circle the link
+
+    if(k %= len) {
+        for(int i = 0; i < len - k; i++) 
+            tail = tail->next; // the tail node is the (len-k)-th node (1st node is head)
+    }
+    newH = tail->next; 
+    tail->next = NULL;
+    return newH;
+}
+
 // beat 33.70%
 ListNode* rotateRight_1(ListNode* head, int k) {
     if (head == NULL) return head;
