@@ -35,10 +35,12 @@ public:
                 mapt[t[i]] = s[i];
                 continue;
             }
-            if(maps[s[i]] == t[i] && mapt[t[i]] == s[i]) {
-                continue;
-            }
-            return false;
+            // if(maps[s[i]] == t[i] && mapt[t[i]] == s[i]) {
+                // continue;
+            // }
+            // return false;
+            if(maps[s[i]] == t[i]) {
+                return false;
         }
         return true;
     }
