@@ -1,5 +1,6 @@
 #include<iostream>
 #include<deque>
+#include<stack>
 #include<vector>
 #include<iterator>
 
@@ -49,34 +50,90 @@ BTNode *insert(BTNode *root, int key) {
     }
 }
 
-// preorder traverse the tree according to root element
-void preOrder(BTNode *root) {
+/************* pre-order traverse *********************************************/
+void preOrderRecursive(BTNode *root) {
     if (root) {
         cout << root->data << " ";
-        preOrder(root->left);
-        preOrder(root->right);
+        preOrderRecursive(root->left);
+        preOrderRecursive(root->right);
     }
 }
 
-// in-order traverse the tree according to root element
-void inOrder(BTNode *root) {
-    if (root) {
-        inOrder(root->left);
-        cout << root->data << " ";
-        inOrder(root->right);
+void preOrderIterator(BTNode *root) {
+    stack<BTNode *> stk;
+    BTNode *cur = root;
+    while (!stk.empty() || cur) {
+        if (cur) {
+            cout << cur->data << " ";
+            stk.push(cur);
+            cur = cur->left;
+        } else {
+            cur = stk.top()->right;
+            stk.pop();
+        }
     }
 }
 
-// post-order traverse the tree according to root element
-void postOrder(BTNode *root) {
+/************** in-order traverse *********************************************/
+void inOrderRecursive(BTNode *root) {                    // recursive version
     if (root) {
-        postOrder(root->left);
-        postOrder(root->right);
+        inOrderRecursive(root->left);
+        cout << root->data << " ";
+        inOrderRecursive(root->right);
+    }
+}
+
+void inOrderIterator(BTNode* root) {  // iterator version
+    stack<BTNode *> stk;
+    BTNode *cur = root;
+    while (!stk.empty() || cur) {
+        if (cur) {
+            stk.push(cur);
+            cur = cur->left;
+        } else {
+            cout << stk.top()->data << " ";
+            cur = stk.top()->right;
+            stk.pop();
+        }
+    }
+}
+
+/************ post-order traverse *********************************************/
+void postOrderRecursive(BTNode *root) {
+    if (root) {
+        postOrderRecursive(root->left);
+        postOrderRecursive(root->right);
         cout << root->data << " ";
     }
 }
 
-// level traverse the tree
+void postOrderIterator(BTNode *root) {
+    if (!root) return ;
+    
+    stack<BTNode *> stk;
+    BTNode *cur = root;
+    do {
+        while (cur) {
+            if (cur->right)
+                stk.push(cur->right);
+            stk.push(cur);
+            cur = cur->left;
+        }
+        cur = stk.top();
+        stk.pop();
+        // when stack is empty, the behavior of stack.top() is undefined
+        if (cur->right && !stk.empty() && stk.top() == cur->right ) {
+            stk.pop();
+            stk.push(cur);
+            cur = cur->right;
+        } else {
+            cout << cur->data << " ";
+            cur = NULL;
+        }
+    } while (!stk.empty());
+}
+
+/************* Level Tranversal ***********************************************/
 void levelOrder(BTNode *root) {
     deque<BTNode *> deq;
     vector<int> vec;
@@ -95,6 +152,7 @@ void levelOrder(BTNode *root) {
     cout << endl;
 }
 
+/************* Mirror Reversal ************************************************/
 void mirrorReversal(BTNode *root) {
     if (root == NULL || (root->left == NULL && root->right == NULL))
         return;
@@ -190,13 +248,22 @@ int main() {
     BTNode *root = creatBTree(arr, 8);
     
     cout << "preorder traverse tree: \n";
-    preOrder(root);
+    preOrderRecursive(root);
+    cout << endl;
+    preOrderIterator(root);
+    cout << endl;
     
     cout << "\nin-order travese tree:\n";
-    inOrder(root);
+    inOrderRecursive(root);
+    cout << endl;
+    inOrderIterator(root);
+    cout << endl;
     
     cout << "\npost-order traverse tree:\n";
-    postOrder(root);
+    postOrderRecursive(root);
+    cout << endl;
+    postOrderIterator(root);
+    cout << endl;
 
     cout << "\ninsert btree: "; 
     insertBTree(root, 1);
@@ -210,7 +277,7 @@ int main() {
     
     cout << "\nAfter delete, in-order travese tree:\n";
     root = deleteBTree(root, 3);
-    inOrder(root);
+    inOrderRecursive(root);
     
     freeTree(root);
     return 0;

@@ -101,12 +101,12 @@ BTNode *insertNode(BTNode *node, int key) {
     if (balance < -1 && key > node->right->data)
         return lRotate(node);
     // left rigth case
-    if (balance > 1 && key > node->right->data) {
+    if (balance > 1 && key > node->left->data) {
         node->left = lRotate(node->left);
         return rRotate(node);
     }
     // right left case
-    if (balance < -1 && key < node->left->data) {
+    if (balance < -1 && key < node->right->data) {
         node->right = rRotate(node->right);
         return lRotate(node);
     }
