@@ -73,6 +73,22 @@ void Path(Tree* root,int expectedSum) {
 
 }
 
+/*
+
+    int path(TreeNode *root, int curSum, int sum) {
+        if (!root) return 0;
+        curSum += root->val; 
+        return (curSum == sum) + path(root->left, curSum, sum) + path(root->right, curSum, sum);
+    }
+    
+    int pathSum(TreeNode* root, int sum) {
+        if (!root) return 0;
+        return path(root, 0, sum) + pathSum(root->left, sum) + pathSum(root->right, sum);
+    }
+
+*/
+
+
 /**************************** Find Path from Root to Leaf *********************/
 
 void findPath(BTNode *root, int curVal, int reqVal, vector<int> &vec) {

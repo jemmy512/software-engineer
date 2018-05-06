@@ -1,5 +1,6 @@
 #include<iostream>
 #include<deque>
+#include<queue>
 #include<stack>
 #include<vector>
 #include<iterator>
@@ -150,6 +151,36 @@ void levelOrder(BTNode *root) {
     }
     copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
     cout << endl;
+}
+
+vector<vector<int>> levelOrder(TreeNode* root) {
+    vector<vector<int>> vvec;
+    if (!root) return vvec;
+    
+    vector<int> row;
+    queue<TreeNode *> nodes;
+    TreeNode *cur = root, *pre_last = root, *last;
+    nodes.push(root);
+    while (!nodes.empty()) {
+        cur = nodes.front();
+        row.push_back(cur->val);
+        if (cur->left) {
+            nodes.push(cur->left);
+            last = cur->left;
+        }
+        if (cur->right) {
+            nodes.push(cur->right);
+            last = cur->right;
+        }
+        if (cur == pre_last) {
+            vvec.push_back(row);
+            row.clear();
+            pre_last = last;
+        }
+        nodes.pop();
+    }
+    
+    return vvec;
 }
 
 /************* Mirror Reversal ************************************************/
