@@ -195,6 +195,26 @@ void mirrorReversal(BTNode *root) {
     mirrorReversal(root->right);
 }
 
+int LeafCount(BTnode *root){
+	if(!root) return 0;
+	int ll = LeafCount(root->left);
+	int rr = LeafCount(root->right);
+	return ll + rr + (!root->left && !root->right);
+}
+
+int NodeCount(BTnode* root){
+    if(!root) return 0;
+    int ll = NodeCount(root->left);
+    int rr = NodeCount(root->right);
+    return ll + rr + 1;
+}
+
+int LevelCount(BTnode *root){
+	if(!root) return 0;
+	int ll = LeafCount(root->left);
+	int rr = LeafCount(root->right);
+	return ll > rr ? (ll+1) : (rr+1);
+}
 void freeTree(BTNode *root) {
     if (root == NULL)
         return;
