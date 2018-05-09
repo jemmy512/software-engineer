@@ -37,104 +37,22 @@ BTNode *creatBTree(int a[], int n) {
 }
 
 BTNode *insert(BTNode *root, int key) {
-    if (!root)
-        return root;
-    if (key < root->data)
-        root->left = insert(root->left, key);
-    else if (key > root->data)
-        root->right = insert(root->right, key);
-    else {
+    if (!root) {
         BTNode *tmp = (BTNode *)malloc(sizeof(BTNode));
         tmp->data = key;
         tmp->left = tmp->right =  NULL;
         return tmp;
     }
-}
-
-/************* pre-order traverse *********************************************/
-void preOrderRecursive(BTNode *root) {
-    if (root) {
-        cout << root->data << " ";
-        preOrderRecursive(root->left);
-        preOrderRecursive(root->right);
-    }
-}
-
-void preOrderIterator(BTNode *root) {
-    stack<BTNode *> stk;
-    BTNode *cur = root;
-    while (!stk.empty() || cur) {
-        if (cur) {
-            cout << cur->data << " ";
-            stk.push(cur);
-            cur = cur->left;
-        } else {
-            cur = stk.top()->right;
-            stk.pop();
-        }
-    }
-}
-
-/************** in-order traverse *********************************************/
-void inOrderRecursive(BTNode *root) {                    // recursive version
-    if (root) {
-        inOrderRecursive(root->left);
-        cout << root->data << " ";
-        inOrderRecursive(root->right);
-    }
-}
-
-void inOrderIterator(BTNode* root) {  // iterator version
-    stack<BTNode *> stk;
-    BTNode *cur = root;
-    while (!stk.empty() || cur) {
-        if (cur) {
-            stk.push(cur);
-            cur = cur->left;
-        } else {
-            cout << stk.top()->data << " ";
-            cur = stk.top()->right;
-            stk.pop();
-        }
-    }
-}
-
-/************ post-order traverse *********************************************/
-void postOrderRecursive(BTNode *root) {
-    if (root) {
-        postOrderRecursive(root->left);
-        postOrderRecursive(root->right);
-        cout << root->data << " ";
-    }
-}
-
-void postOrderIterator(BTNode *root) {
-    if (!root) return ;
+    if (key < root->data)
+        root->left = insert(root->left, key);
+    else if (key > root->data)
+        root->right = insert(root->right, key);
     
-    stack<BTNode *> stk;
-    BTNode *cur = root;
-    do {
-        while (cur) {
-            if (cur->right)
-                stk.push(cur->right);
-            stk.push(cur);
-            cur = cur->left;
-        }
-        cur = stk.top();
-        stk.pop();
-        // when stack is empty, the behavior of stack.top() is undefined
-        if (cur->right && !stk.empty() && stk.top() == cur->right ) {
-            stk.pop();
-            stk.push(cur);
-            cur = cur->right;
-        } else {
-            cout << cur->data << " ";
-            cur = NULL;
-        }
-    } while (!stk.empty());
+    return root;
 }
 
 /************* Level Tranversal ***********************************************/
+
 void levelOrder(BTNode *root) {
     deque<BTNode *> deq;
     vector<int> vec;
@@ -184,6 +102,7 @@ vector<vector<int>> levelOrder(TreeNode* root) {
 }
 
 /************* Mirror Reversal ************************************************/
+
 void mirrorReversal(BTNode *root) {
     if (root == NULL || (root->left == NULL && root->right == NULL))
         return;
