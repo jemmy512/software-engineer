@@ -22,12 +22,13 @@ TreeNode *insertNode(TreeNode *root, int key) {
     return root;
 }
 
-/**************************** Morris traverse *********************************/
+// Refer: http://www.cnblogs.com/AnnieKim/archive/2013/06/15/MorrisTraversal.html
+/**************************** Morris traversal *********************************/
 
-void MorrisInOrderTranverse(TreeNode *root) {
+void MorrisInOrderTraverse(TreeNode *root) {
     TreeNode *cur = root, *prev = NULL;
     while (cur) {
-        if (cur->left == NULL) {
+        if (cur->left == NULL) {        // The left subtree has not been traversed
             cout << cur->val << " ";
             cur = cur->right;
         } else {
@@ -39,7 +40,7 @@ void MorrisInOrderTranverse(TreeNode *root) {
                 prev->right = NULL;
                 cout << cur->val << " ";
                 cur = cur->right;
-            } else {
+            } else {                    // The left subtree has been traversed
                 prev->right = cur;
                 cur = cur->left;
             }
@@ -47,7 +48,7 @@ void MorrisInOrderTranverse(TreeNode *root) {
     }
 }
 
-void MorrisPreOrderTranverse(TreeNode *root) {
+void MorrisPreOrderTraverse(TreeNode *root) {
     TreeNode *cur = root, *prev = NULL;
     while (cur) {
         if (cur->left == NULL) {
@@ -69,49 +70,44 @@ void MorrisPreOrderTranverse(TreeNode *root) {
     }
 }
 
-void reverse(TreeNode *from, TreeNode *to) { // reverse the tree nodes 'from' -> 'to'.
-    if (from == to)
-        return;
+void reverseTree(TreeNode *from, TreeNode *to) {
+    
     TreeNode *x = from, *y = from->right, *z;
-    while (true) {
+    while (x != to) {
         z = y->right;
         y->right = x;
         x = y;
         y = z;
-        if (x == to)
-            break;
     }
 }
 
-void printReverse(TreeNode* from, TreeNode *to) // print the reversed tree nodes 'from' -> 'to'.
-{
-    reverse(from, to);
-    
+void printReversedTree(TreeNode *from, TreeNode *to) {
+    reverseTree(from, to);
     TreeNode *p = to;
     while (true) {
-        printf("%d ", p->val);
+        cout << p->val << " ";
         if (p == from)
             break;
         p = p->right;
     }
     
-    reverse(to, from);
+    reverseTree(to, from);
 }
 
-void MorrisPostOrderTranverse(TreeNode *root) {
-    TreeNode dump(0);
-    dump.left = root;
-    TreeNode *cur = &dump, *prev = NULL;
+void MorrisPostOrderTraversal(TreeNode *root) {
+    if (!root) return;
+    TreeNode dummy(0);
+    dummy.left = root;
+    TreeNode *cur = &dummy, *prev = NULL;
     while (cur) {
         if (cur->left == NULL) {
             cur = cur->right;
         } else {
             prev = cur->left;
-            while (prev->right && prev->right != cur)
+            while (prev->right && prev->right != cur) 
                 prev = prev->right;
-
             if (prev->right) {
-                printReverse(cur->left, prev);  // call print
+                printReversedTree(cur->left, prev);
                 prev->right = NULL;
                 cur = cur->right;
             } else {
@@ -122,7 +118,7 @@ void MorrisPostOrderTranverse(TreeNode *root) {
     }
 }
 
-/**************************** pre-order traverse ******************************/
+/**************************** pre-order traversal ******************************/
 
 void preOrderRecursive(TreeNode *root) {
     if (root) {
@@ -147,7 +143,7 @@ void preOrderIterator(TreeNode *root) {
     }
 }
 
-/**************************** in-order traverse *******************************/
+/**************************** in-order traversal *******************************/
 
 void inOrderRecursive(TreeNode *root) {                    // recursive version
     if (root) {
@@ -172,7 +168,7 @@ void inOrderIterator(TreeNode* root) {  // iterator version
     }
 }
 
-/**************************** post-order traverse ******************************/
+/**************************** post-order traversal ******************************/
 
 void postOrderRecursive(TreeNode *root) {
     if (root) {
@@ -209,14 +205,26 @@ void postOrderIterator(TreeNode *root) {
 }
 
 int main() {
-    vector<int> vec = {6, 2, 1, 4, 3, 5, 7, 9, 8};
+    vector<int> vec = {6,2,1,4,3,5,7,9,8};
     TreeNode *root = NULL;
     for (int i : vec) {
         root = insertNode(root, i);
     }
-    // inOrderRecursive(root);
-    MorrisInOrderTranverse(root);
+    cout << "****************" << endl;
+    // cout << "PreOrder: ";
+    // preOrderRecursive(root) ;
+    // cout << endl;
+    // cout << "InOrder: ";
+    // inOrderIterator(root);
+    // cout << endl;
+    cout << "PostOrder: " ;
+    postOrderIterator(root);
     cout << endl;
-    MorrisPreOrderTranverse(root);
+    // inOrderRecursive(root);
+    // MorrisInOrderTraverse(root);
+    // cout << endl;
+    // MorrisPreOrderTraverse(root);
+    // cout << endl;
+    MorrisPostOrderTraversal(root);
     cout << endl;
 }
