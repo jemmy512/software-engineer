@@ -8,11 +8,19 @@ You must not modify the array (assume the array is read only).
 You must use only constant, O(1) extra space.
 Your runtime complexity should be less than O(n2).
 There is only one duplicate number in the array, but it could be repeated more than once.
+
+Hint:
+    This problem can be transfromed to "Linked List Cycle" problem.
+    There are two pointers, one goes one step, another goes two steps.
+    
+    Refer to: https://en.wikipedia.org/wiki/Cycle_detection 
+        https://blog.csdn.net/thestoryofsnow/article/details/6822576
+
 */
 
 class Solution {
 public:
-    int findDuplicate(vector<int>& nums) {
+    int findDuplicate(vector<int> &nums) {
         if (nums.size() > 1) {
             int slow = nums[0];
             int fast = nums[nums[0]];
