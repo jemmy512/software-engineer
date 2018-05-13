@@ -12,12 +12,13 @@ If you have figured out the O(n) solution, try coding another solution using the
  divide and conquer approach, which is more subtle.
 */
 
-/*
+/*  Ref: https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm
     Dynamic Solution
     Complexity:
         Time: O(N)
         Space: O(1)
 */
+// Kadane's_algorithm
 class Solution {
 public:
     int maxSub_dp(vector<int> &nums) {
