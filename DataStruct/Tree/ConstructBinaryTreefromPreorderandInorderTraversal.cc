@@ -38,15 +38,15 @@ class Solution {
     TreeNode** curr = &root;
     auto j = preorder.cbegin();
     stack<TreeNode*> s;
-    for (auto i=inorder.cbegin(); i!=inorder.cend(); ++i) {
-      while (s.empty() || s.top()->val != *i) {
-        auto node = new TreeNode{*j++};
-        s.push(node);
-        *curr = node;
-        curr = &node->left;
-      }
-      curr = &(s.top()->right);
-      s.pop();
+    for (auto i = inorder.cbegin(); i != inorder.cend(); ++i) {
+        while (s.empty() || s.top()->val != *i) {
+            auto node = new TreeNode{*j++};
+            s.push(node);
+            *curr = node;
+            curr = &node->left;
+        }
+        curr = &(s.top()->right);
+        s.pop();
     }
 
     assert(j == preorder.cend());

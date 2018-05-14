@@ -40,15 +40,15 @@ class Solution {
     TreeNode** curr = &root;
     auto j = postorder.crbegin();
     stack<TreeNode*> s;
-    for (auto i=inorder.crbegin(); i!=inorder.crend(); ++i) {
-      while (s.empty() || s.top()->val != *i) {
-        auto node = new TreeNode{*j++};
-        s.push(node);
-        *curr = node;
-        curr = &node->right;
-      }
-      curr = &(s.top()->left);
-      s.pop();
+    for (auto i = inorder.crbegin(); i != inorder.crend(); ++i) {
+        while (s.empty() || s.top()->val != *i) {
+            auto node = new TreeNode{*j++};
+            s.push(node);
+            *curr = node;
+            curr = &node->right;
+        }
+        curr = &(s.top()->left);
+        s.pop();
     }
 
     assert(j == postorder.crend());
