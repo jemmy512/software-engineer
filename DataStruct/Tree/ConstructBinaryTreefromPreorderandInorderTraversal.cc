@@ -29,29 +29,31 @@ Return the following binary tree:
  
 // Iterative Version
 class Solution {
- public:
-  TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-    assert(preorder.size() == inorder.size());
-    if (preorder.size() == 0) return nullptr;
-
-    TreeNode* root;
-    TreeNode** curr = &root;
-    auto j = preorder.cbegin();
-    stack<TreeNode*> s;
-    for (auto i = inorder.cbegin(); i != inorder.cend(); ++i) {
-        while (s.empty() || s.top()->val != *i) {
-            auto node = new TreeNode{*j++};
-            s.push(node);
-            *curr = node;
-            curr = &node->left;
+public:
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        if (preorder.size() == 0 || preorder.size() != inorder.size())
+            return nullptr;
+        
+        stack<TreeNode *> stk;
+        auto i = inorder.cbegin();
+        auto p = preorder.cbegin();
+        TreeNode *root = NULL, **cur = &root;
+        
+        for (; i != inorder.cend(); ++i) {
+            while (stk.empty() || stk.top()->val != *i) {
+                TreeNode *node = new TreeNode(*p++);
+                *cur = node;
+                cur = &(node->left);
+                stk.push(node);
+            }
+            cur = &(stk.top()->right);
+            stk.pop();
         }
-        curr = &(s.top()->right);
-        s.pop();
+        
+        if (p != preorder.cend()) // Case: the two orders contain different numbers
+            return nullptr;
+        return root;
     }
-
-    assert(j == preorder.cend());
-    return root;
-  }
 };
  
 // Recursive Version

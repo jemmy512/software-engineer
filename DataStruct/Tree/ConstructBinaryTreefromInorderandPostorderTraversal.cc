@@ -31,29 +31,31 @@ Return the following binary tree:
  
 // Iterative Vesion
 class Solution {
- public:
-  TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
-    assert(inorder.size() == postorder.size());
-    if (inorder.size() == 0) return nullptr;
-
-    TreeNode* root;
-    TreeNode** curr = &root;
-    auto j = postorder.crbegin();
-    stack<TreeNode*> s;
-    for (auto i = inorder.crbegin(); i != inorder.crend(); ++i) {
-        while (s.empty() || s.top()->val != *i) {
-            auto node = new TreeNode{*j++};
-            s.push(node);
-            *curr = node;
-            curr = &node->right;
+public:
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        if (inorder.size() == 0 || inorder.size() != postorder.size())
+            return nullptr;
+        
+        stack<TreeNode *> stk;
+        auto i = inorder.crbegin();
+        auto p = postorder.crbegin();
+        TreeNode *root = nullptr, **cur = &root;
+        
+        for (; i != inorder.crend(); ++i) {
+            while (stk.empty() || stk.top()->val != *i) {
+                TreeNode *node = new TreeNode(*p++);
+                *cur = node;
+                cur = &(node->right);
+                stk.push(node);
+            }
+            cur = &(stk.top()->left);
+            stk.pop();
         }
-        curr = &(s.top()->left);
-        s.pop();
+        
+        if (p != postorder.crend()) // Case: the two orders contain different numbers
+            return nullptr;
+        return root;
     }
-
-    assert(j == postorder.crend());
-    return root;
-  }
 }; 
  
 // Recursive Version
