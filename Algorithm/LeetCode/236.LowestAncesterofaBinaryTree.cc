@@ -39,6 +39,24 @@ Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of 
  */
 class Solution {
 public:
+    TreeNode* lowestCommonAncestor_recur(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (!root || root == p || root == q) return root;
+
+        TreeNode *left = lowestCommonAncestor_recur(root->left, p, q);
+        TreeNode *right = lowestCommonAncestor_recur(root->right, p, q);
+        
+        // left == NULL means both 'p' and 'q' are not in the left tree; 
+        // (left && right) means 'p' and 'q' are seperated in the left and right tree
+        return !left ? right : !right ? left : root;
+    }
+    
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        return lowestCommonAncestor_recur(root, p, q);
+    }
+}; 
+ 
+class Solution_ {
+public:
     bool findPath(TreeNode *root, TreeNode *p, vector<TreeNode *> &vec) {
         if (!root) return false;
         if (root == p) {
@@ -70,18 +88,7 @@ public:
         return result;
     }
     
-    TreeNode* lowestCommonAncestor_recur(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if (!root || root == p || root == q) return root;
-
-        TreeNode *left = lowestCommonAncestor_recur(root->left, p, q);
-        TreeNode *right = lowestCommonAncestor_recur(root->right, p, q);
-
-        return !left ? right : !right ? left : root;
-    }
-    
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        // return lowestCommonAncestor_recur(root, p, q);
-        
         return lowestCommonAncestor_iter(root, p, q);
     }
 };
