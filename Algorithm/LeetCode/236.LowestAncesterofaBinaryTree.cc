@@ -1,0 +1,87 @@
+/*
+Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+
+According to the definition of LCA on Wikipedia: “The lowest common ancestor is 
+defined between two nodes v and w as the lowest node in T that has both v and w as
+ descendants (where we allow a node to be a descendant of itself).”
+
+Given the following binary search tree:  root = [3,5,1,6,2,0,8,null,null,7,4]
+
+        _______3______
+       /              \
+    ___5__          ___1__
+   /      \        /      \
+   6      _2       0       8
+         /  \
+         7   4
+Example 1:
+
+Input: root, p = 5, q = 1
+Output: 3
+Explanation: The LCA of of nodes 5 and 1 is 3.
+Example 2:
+
+Input: root, p = 5, q = 4
+Output: 5
+Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself
+             according to the LCA definition.
+
+*/
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool findPath(TreeNode *root, TreeNode *p, vector<TreeNode *> &vec) {
+        if (!root) return false;
+        if (root == p) {
+            vec.push_back(root);
+            return true;
+        }
+        
+        vec.push_back(root);
+        if (findPath(root->left, p, vec)) return true;
+        if (findPath(root->right, p, vec)) return true;
+        vec.pop_back();
+        
+        return false;
+    }
+    
+    TreeNode* lowestCommonAncestor_iter(TreeNode* root, TreeNode* p, TreeNode* q) {
+        vector<TreeNode *> vec1, vec2;
+        
+        if (!findPath(root, p, vec1)) return NULL;
+        if (!findPath(root, q, vec2)) return NULL;
+        
+        int len = vec1.size() < vec2.size() ? vec1.size() : vec2.size();
+        TreeNode *result = root;
+        for (int i = 0; i < len; ++i) {
+            if (vec1[i] != vec2[i]) return result;
+            result = vec1[i];
+        }
+        
+        return result;
+    }
+    
+    TreeNode* lowestCommonAncestor_recur(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (!root || root == p || root == q) return root;
+
+        TreeNode *left = lowestCommonAncestor_recur(root->left, p, q);
+        TreeNode *right = lowestCommonAncestor_recur(root->right, p, q);
+
+        return !left ? right : !right ? left : root;
+    }
+    
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        // return lowestCommonAncestor_recur(root, p, q);
+        
+        return lowestCommonAncestor_iter(root, p, q);
+    }
+};
