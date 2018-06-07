@@ -9,28 +9,33 @@
 
 using namespace std;
 
-#define N 3
-
-array<int, 3> arr;
-
-void arrange(int n) {
-    if (n == N -1) {
-        copy(arr.begin(), arr.end(), ostream_iterator<int>(cout, " "));
-        cout << endl;
-        return;
+bool isSwap(string str, int beg, int end) {
+    for (; beg < end; ++beg) {
+        if (str[beg] == str[end])
+            return false;
     }
-    for (int i = n; i < N; ++i) {
-        swap(arr[n], arr[i]);
-        arrange(n + 1);
-        swap(arr[n], arr[i]);
+    
+    return true;
+}
+
+void arrange_recursive(string str, int k) {
+    int len = str.size();
+    if (k == len) {
+        cout << str << endl;
+    } else {
+        for (int i = k; i < len; ++i) {
+            if (isSwap(str, k, i)) {
+                swap(str[k], str[i]);
+                arrange(str, k + 1);
+                swap(str[k], str[i]);                
+            }
+        }
     }
-  
 }
 
 int main(int argc ,char* argv[]) {
-    for (int i = 0; i < 3; ++i)
-        arr[i] = i + 1;
-    arrange(0);
+    string str = "122";
+    arrange(str, 0);
     
     return 0;
 }
