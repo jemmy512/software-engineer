@@ -52,3 +52,6 @@
 
 # source insight
 si/
+
+#CLion
+.idea/
