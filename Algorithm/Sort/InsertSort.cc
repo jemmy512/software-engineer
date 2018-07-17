@@ -9,6 +9,8 @@ void insertSort(vector<int> &vec) {
         for (int j = i; j > 0; --j) {
             if (vec[j] < vec[j - 1])
                 swap(vec[j], vec[j - 1]);
+            else 
+                break;
         }
     }
 }
