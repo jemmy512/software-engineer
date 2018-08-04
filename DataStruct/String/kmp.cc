@@ -1,36 +1,44 @@
-#include<iostream>
-#include<string>
-
+/*
+ * Created by Jemmy on 2018/8/4.
+ *
+ */
+#include <iostream>
+#include <string>
 using namespace std;
 
 int *getNext(const string &ps) {
-    int len = ps.size();
+    const int len = ps.size();
+    int i, j, k;
     int *next = new int[len];
-    int i = 0;
-    int k = -1;
+    k = -1;
     next[0] = -1;
-    while(i < len) {
+    for (i = 0; i < len;) {
         if (k == -1 || ps[i] == ps[k]) {
             ++i;
             ++k;
-            if (ps[i] == ps[k])
+            if (ps[i] == ps[k]) {
                 next[i] = next[k];
-            else
+            } else {
                 next[i] = k;
-        } else 
+            }
+        } else {
             k = next[k];
+        }
     }
+    cout << "next[";
+    for (int i = 0; i < len; ++i) {
+        cout << next[i] << ", ";
+    }
+    cout << endl;
     return next;
-        
 }
 
 int kmp(const string &ts, const string &ps) {
-    int len_t = ts.size();
-    int len_p = ps.size();
-    int *next = getNext(ps); 
-    int i, j;
-    i = j = 0;
-    while (i < len_t && j < len_p) {
+    int lenT = ts.size();
+    int lenP = ps.size();
+    int i = 0, j = 0;
+    int *next = getNext(ps);
+    while (i < lenT && j < lenP) {
         if (j == -1 || ts[i] == ps[j]) {
             ++i;
             ++j;
@@ -38,18 +46,15 @@ int kmp(const string &ts, const string &ps) {
             j = next[j];
         }
     }
-    
+
     delete next;
-    
-    if (j == len_p)
+    if (j == lenP)
         return i - j;
     return -1;
 }
 
-int main(void) {
-    string ts = "abcdabcvfd";
-    string ps = "dab";
-    int ret = kmp(ts, ps);
-    cout << ret << endl;
-    return 0;
+int main() {
+    string ts = "abcdabcevf";
+    string ps = "aaacaabv";
+    cout << "index of patter: " << kmp(ts, ps) << endl;
 }
