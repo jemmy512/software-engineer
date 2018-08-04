@@ -37,19 +37,22 @@ bool IsOrder(int *pPush,int *pPop,int Length)
 
 }
 
-//·½·¨2
-bool IsPopOrder(vector<int> pushV,vector<int> popV) {
-        if(pushV.size() == 0) return false;
-        vector<int> stack;
-        for(int i = 0,j = 0 ;i < pushV.size();){
-            stack.push_back(pushV[i++]);
-            while(j < popV.size() && stack.back() == popV[j]){
-                stack.pop_back();
-                j++;
-            }
+bool isPopOrder(const vector<int> &pushV, const vector<int> &popV) {
+    if (pushV.size() == 0)
+        return false;
+
+    stack<int> stk;
+    int i, j;
+    for (i = 0, j = 0; i < pushV.size();) {
+        stk.push(pushV[i++]);
+        // when stack empty, top() is undefined
+        while (j < popV.size() && !stk.empty() && stk.top() == popV[j]) {
+            stk.pop();
+            ++j;
         }
-        return stack.empty();
     }
+    return stk.empty() && j == popV.size();
+}
 
 
 int main(void){
@@ -61,7 +64,6 @@ int main(void){
     vector<int> push={1,2,3,4,5};
     vector<int> pop={5,4,3,2,1,6,7,8};
 
-    cout<<IsPopOrder(push,pop)<<endl;
-   // cout<<IsOrder(pPush,pPop,5)<<endl;
+    cout<< "result: " << isPopOrder(push,pop)<<endl;
     return 0;
 }
