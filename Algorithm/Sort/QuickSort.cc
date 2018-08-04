@@ -9,18 +9,18 @@ void quickSort(vector<T> &data, int beg, int end) {
     if (beg >= end)
         return;
 
-    int b, e, index;
+    int b, e, pivot;
     b = beg;
     e = end;
-    index = data[beg];
+    pivot = data[beg];
     while (b < e)  {
-        while (b < e && data[e] > index) --e;
+        while (b < e && data[e] > pivot) --e;
         if (b < e) data[b++] = data[e];
-        while (b < e && data[b] < index) ++b;
+        while (b < e && data[b] < pivot) ++b;
         if (b < e) data[e--] = data[b];
     }
 
-    data[b] = index;
+    data[b] = pivot;
     quickSort(data, beg, b - 1);
     quickSort(data, b + 1, end);
 }
