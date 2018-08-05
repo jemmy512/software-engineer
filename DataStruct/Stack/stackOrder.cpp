@@ -38,20 +38,22 @@ bool IsOrder(int *pPush,int *pPop,int Length)
 }
 
 bool isPopOrder(const vector<int> &pushV, const vector<int> &popV) {
-    if (pushV.size() == 0)
+    int len1 = pushV.size();
+    int len2 = popV.size();
+    if (!len1 || len1 != len2)
         return false;
 
     stack<int> stk;
     int i, j;
-    for (i = 0, j = 0; i < pushV.size();) {
+    for (i = 0, j = 0; i < len1;) {
         stk.push(pushV[i++]);
         // when stack empty, top() is undefined
-        while (j < popV.size() && !stk.empty() && stk.top() == popV[j]) {
+        while (j < len2 && !stk.empty() && stk.top() == popV[j]) {
             stk.pop();
             ++j;
         }
     }
-    return stk.empty() && j == popV.size();
+    return stk.empty() && j == len2;
 }
 
 
