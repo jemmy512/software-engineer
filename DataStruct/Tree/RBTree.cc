@@ -1,6 +1,12 @@
 /*
  * Created by by on 2018/8/15.
- *
+ * Reference:
+         https://www.geeksforgeeks.org/red-black-tree-set-2-insert/
+ *       https://juejin.im/entry/58371f13a22b9d006882902d#%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E5
+            %B9%B3%E8%A1%A1%E5%88%A0%E9%99%A4
+ *       http://www.cnblogs.com/skywang12345/p/3245399.html#a1
+ *       http://blog.csdn.net/weewqrer/article/details/51866488
+ *       https://blog.csdn.net/v_JULY_v/article/details/6284050
  */
 #include <array>
 #include<iomanip>
@@ -42,7 +48,7 @@ protected:
     Node *BSTInsert(Node *node);
     Node *BSTDelete(int key);
     void fixInsertion(Node *node);
-    void fixDelettion(Node *node);
+    void fixDeletion(Node *node);
 
     void setColor(Node *node, Color color_) {
         if (node != nil)
@@ -115,12 +121,12 @@ void RBTree::fixInsertion(Node *node) {
                 setColor(parent_g, RED);
                 node = parent_g;
             } else {
-                if (node == parent->right) {
+                if (node == parent->right) { /* change inside insert to outside insert */
                     lRotate(parent);
                     node = parent;
                     parent = node->parent;
                 }
-                rRotate(parent_g);
+                rRotate(parent_g);           /* outside insert */
                 swap(parent->color, parent_g->color);
                 node = parent;
             }
@@ -148,7 +154,7 @@ void RBTree::fixInsertion(Node *node) {
 
 void RBTree::RBDelete(int key) {
     Node *node = BSTDelete(key);
-    fixDelettion(node);
+    fixDeletion(node);
 }
 
 Node *RBTree::BSTDelete(int key) {
@@ -170,7 +176,7 @@ Node *RBTree::BSTDelete(int key) {
     return nil;
 }
 
-void RBTree::fixDelettion(Node *node) {
+void RBTree::fixDeletion(Node *node) {
     if (node == nil)
         return;
 
