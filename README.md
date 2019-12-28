@@ -3,8 +3,8 @@
 
 # Formal Entry
 
-- [ ] The key to Accelerating Your Coding Skills[http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/]
-- [ ] Character Encoding[https://en.wikipedia.org/wiki/Character_encoding]
+- [ ] (The key to Accelerating Your Coding Skills)[http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/]
+- [ ] (Character Encoding)[https://en.wikipedia.org/wiki/Character_encoding]
 
 # rogrammer Cultivation
     - [ ] https://www.quora.com/What-are-some-of-the-most-basic-things-every-programmer-should-know
