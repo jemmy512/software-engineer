@@ -1,46 +1,46 @@
-#Leveling Radier
+# Leveling Radier
 
 
-#Formal Entry
+# Formal Entry
 
-    - [ ] The key to Accelerating Your Coding Skills[http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/]
-    - [ ] Character Encoding[https://en.wikipedia.org/wiki/Character_encoding]
+- [ ] The key to Accelerating Your Coding Skills[http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/]
+- [ ] Character Encoding[https://en.wikipedia.org/wiki/Character_encoding]
 
-#Programmer Cultivation
+# rogrammer Cultivation
     - [ ] https://www.quora.com/What-are-some-of-the-most-basic-things-every-programmer-should-know
     - [ ] https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/index.html
-    - [ ] How to Ask Question The Smart Way[http://www.catb.org/~esr/faqs/smart-questions.html]
+    - [ ] (How to Ask Question The Smart Way)[http://www.catb.org/~esr/faqs/smart-questions.html]
 
-	##Coding Cultivation
+## Coding Cultivation
         - [ ] Refactoring: Improving the Design of Existing Code
         - [ ] Working Effectively with Legacy Code
         - [ ] Clean Code: A Handbook of Agile Software Craftsmanship
         - [ ] The Clean Coder：A Code of Conduct for Professional Programmers
 
-	##Code Review
-        - [ ] Code Review Best Practices[https://medium.com/palantir/code-review-best-practices-19e02780015f?]	
-        - [ ] How Google Does Code Review[https://dzone.com/articles/how-google-does-code-review]
+## Code Review
+        - [ ] (Code Review Best Practices)[https://medium.com/palantir/code-review-best-practices-19e02780015f?]	
+        - [ ] (How Google Does Code Review)[https://dzone.com/articles/how-google-does-code-review]
 
-	##Safety Precaution
+## Safety Precaution
         - [ ] https://www.owasp.org/index.php/Main_Page
-        - [ ] Secure Coding Practice Guidelines[https://security.berkeley.edu/secure-coding-practice-guidelines]
-        - [ ] SEI SERT Coding Standards[https://wiki.sei.cmu.edu/confluence/display/seccode/SEI+CERT+Coding+Standards]
-        - [ ] Hardening Your HTTP Security Headers[https://www.keycdn.com/blog/http-security-headers]
+        - [ ] (Secure Coding Practice Guidelines)[https://security.berkeley.edu/secure-coding-practice-guidelines]
+        - [ ] (SEI SERT Coding Standards)[https://wiki.sei.cmu.edu/confluence/display/seccode/SEI+CERT+Coding+Standards]
+        - [ ] (Hardening Your HTTP Security Headers)[https://www.keycdn.com/blog/http-security-headers]
 
-	##Testing
+### Testing
         - [ ] Perfect Software: And Other Illusions about Testing
         - [ ] How Google Tests Software
 
-	##Publishing
+	Publishing
         - [ ] Checklist[https://github.com/mtdvio/going-to-production]
 
-#Theoretical Discipline
+# Theoretical Discipline
     - [ ] Data Structures and Algorithm Analysis in C:Second Edition
     - [ ] Database System Concepts(Fifth Edition)
     - [ ] Modern Operating Systems
     - [ ] Computer Networking: A Top-Down Approach
 
-#System Knowledge
+# System Knowledge
     - [ ] Computer Systems A Programmer’s Perspective
     - [ ] Advanced Programming in the UNIX Environment
     - [ ] UNIX Network Programming, Volume 1: Interprocess Communications (2nd Edition)
@@ -59,7 +59,7 @@
 
 
 
-#Software Design
+# Software Design
     - [ ] Six Programming Paradigm[https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will/]
     - [ ]  Programming Paradigms for Dummies [https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf]
     - [ ] Stanford Programming Paradigm[https://see.stanford.edu/Course/CS107]
@@ -76,7 +76,7 @@
     - [ ] https://blog.codinghorror.com/the-problem-with-logging
 
 
-#Linux
+# Linux
     - [ ] Red Hat Enterprise Linux[https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/]
 
     - [ ] What Every Programmer Should Know About Memory[http://futuretech.blinkenlights.nl/misc/cpumemory.pdf]
@@ -100,7 +100,7 @@
     - [ ] Red Hat Enterprise Linux Network Performance Tuning Guide[https://access.redhat.com/sites/default/files/attachments/20150325_network_performance_tuning.pdf]
     - [ ] Making Linux TCP Fast [https://netdevconf.info/1.2/papers/bbr-netdev-1.2.new.new.pdf]
 
-	##AIO
+### AIO
         - [x] Boost application performance using asynchronous I/O[https://developer.ibm.com/articles/l-async/]
         - [ ] Lazy Asynchronous I/O For Event-Driven Servers[https://www.usenix.org/legacy/event/usenix04/tech/general/full_papers/elmeleegy/elmeleegy_html/html.html]
         - [ ] http://sysinternals.d4rk4.ru/Information/IoCompletionPorts.html[http://sysinternals.d4rk4.ru/Information/IoCompletionPorts.html]
@@ -112,7 +112,7 @@
         - [ ] Epoll is fundamentally broken 2/2[https://idea.popcount.org/2017-03-20-epoll-is-fundamentally-broken-22/]
 
 
-	##Lock-free
+### Lock-free
         - [ ] Lock-Free Data Structures[https://www.drdobbs.com/lock-free-data-structures/184401865]
         - [ ] Lock-Free Data Structures[https://erdani.com/publications/cuj-2004-10.pdf]
         - [ ] Is Parallel Programming Hard, And, If So, What Can You Do About It?[https://mirrors.edge.kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook.html]
@@ -123,8 +123,8 @@
         - [ ] Simple, Fast, and Practical Non-Blocking and Blocking Concurrent Queue Algorithms􏰆[https://www.cs.rochester.edu/~scott/papers/1996_PODC_queues.pdf]
 
 
-#Distributed architecture
+# Distributed architecture
 	
 
-#Microservice
+# Microservice
 
