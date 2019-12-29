@@ -35,13 +35,13 @@
 # Programming Language
 
 ### C/C++
-- [ ] The C Programming Language
-- [ ] C Programming: A Modern Approach
-- [ ] C Traps and Pitfalls
-- [x] C++ Primer, 5th Edition [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/CPPimer.txt)
-- [x] Effective C++ [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/EffectiveCC.txt)
-- [x] Modern Effective C++ [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/EffectiveModernCC.txt)
-- [x] Inside C++ Object Model [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/InsideTheCPPObjectModel.txt)
+- [ ] :blue_book: The C Programming Language
+- [ ] :blue_book: C Programming: A Modern Approach
+- [ ] :blue_book: C Traps and Pitfalls
+- [x] :blue_book: C++ Primer, 5th Edition [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/CPPimer.txt)
+- [x] :blue_book: Effective C++ [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/EffectiveCC.txt)
+- [x] :blue_book: Modern Effective C++ [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/EffectiveModernCC.txt)
+- [x] :blue_book: Inside C++ Object Model [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/InsideTheCPPObjectModel.txt)
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
 
 # Theoretical Discipline
@@ -53,19 +53,19 @@
 # System Knowledge
 - [ ] Computer Systems A Programmer’s Perspective
 - [ ] Advanced Programming in the UNIX Environment
-- [ ] UNIX Network Programming, Volume 1: Interprocess Communications (2nd Edition)
-- [ ] UNIX Network Programming, Volume 2: Interprocess Communications (2nd Edition)
+- [ ] UNIX Network Programming, Volume 1: The Sockets Networking API [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/UNP.txt)
+- [ ] UNIX Network Programming, Volume 2: Interprocess Communications
 - [ ] TCP/IP ILLustrated Volume 1: The Protocols
 - [ ] [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
 
-- [ ] [Let’s Code a TCP/IP Stack, 1: Ethernet&ARP](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/#tuntap-devices)
-- [ ] [Let’s Code a TCP/IP Stack, 2: IPV4&ICMPv4](https://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4)
-- [ ] [Let’s Code a TCP/IP Stack, 3: TCP Basics&Handshake](https://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake)
-- [ ] [Let’s Code a TCP/IP Stack, 4: Tcp Data Flow&Socket API](https://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api)
+- [ ] [Let’s Code a TCP/IP Stack, 1: Ethernet & ARP](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/#tuntap-devices)
+- [ ] [Let’s Code a TCP/IP Stack, 2: IPV4 & ICMPv4](https://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4)
+- [ ] [Let’s Code a TCP/IP Stack, 3: TCP Basics & Handshake](https://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake)
+- [ ] [Let’s Code a TCP/IP Stack, 4: Tcp Data Flow & Socket API](https://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api)
 - [ ] [Let’s Code a TCP/IP Stack, 5: TCP Retransaction](https://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission)
 
 - [ ] [C10k Problem](http://www.kegel.com/c10k.html)
-- [ ] [C10m](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
+- [ ] [C10m Problem](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
 
 
 
