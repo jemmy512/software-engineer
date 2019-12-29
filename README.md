@@ -32,6 +32,18 @@
 ### Publishing
 - [ ] [Checklist](https://github.com/mtdvio/going-to-production)
 
+# Programming Language
+
+### C/C++
+- [ ] The C Programming Language
+- [ ] C Programming: A Modern Approach
+- [ ] C Traps and Pitfalls
+- [ ] C++ Primer, 5th Edition [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/CPPimer.txt)
+- [ ] Effective C++ [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/EffectiveCC.txt)
+- [ ] Modern Effective C++ [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/EffectiveModernCC.txt)
+- [ ] Inside C++ Object Model [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/InsideTheCPPObjectModel.txt)
+- [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
+
 # Theoretical Discipline
 - [ ] Data Structures and Algorithm Analysis in C:Second Edition
 - [ ] Database System Concepts(Fifth Edition)
