@@ -10,10 +10,10 @@
 - [ ] [How to Ask Question The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html)
 
 ### Coding Cultivation
-- [ ] Refactoring: Improving the Design of Existing Code
-- [ ] Working Effectively with Legacy Code
-- [ ] Clean Code: A Handbook of Agile Software Craftsmanship
-- [ ] The Clean Coder：A Code of Conduct for Professional Programmers
+- [ ] :blue_book: Refactoring: Improving the Design of Existing Code
+- [ ] :blue_book: Working Effectively with Legacy Code
+- [ ] :blue_book: Clean Code: A Handbook of Agile Software Craftsmanship
+- [ ] :blue_book: The Clean Coder：A Code of Conduct for Professional Programmers
 
 ### Code Review
 - [ ] [Code Review Best Practices](https://medium.com/palantir/code-review-best-practices-19e02780015f?)
@@ -26,8 +26,8 @@
 - [ ] [Hardening Your HTTP Security Headers](https://www.keycdn.com/blog/http-security-headers)
 
 ### Testing
-- [ ] Perfect Software: And Other Illusions about Testing
-- [ ] How Google Tests Software
+- [ ] :blue_book: Perfect Software: And Other Illusions about Testing
+- [ ] :blue_book: How Google Tests Software
 
 ### Publishing
 - [ ] [Checklist](https://github.com/mtdvio/going-to-production)
@@ -45,18 +45,18 @@
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
 
 # Theoretical Discipline
-- [ ] Data Structures and Algorithm Analysis in C:Second Edition
-- [ ] Database System Concepts(Fifth Edition)
-- [ ] Modern Operating Systems
-- [ ] Computer Networking: A Top-Down Approach
+- [ ] :blue_book: Data Structures and Algorithm Analysis in C:Second Edition
+- [ ] :blue_book: Database System Concepts(Fifth Edition)
+- [ ] :blue_book: Modern Operating Systems
+- [ ] :blue_book: Computer Networking: A Top-Down Approach
 
 # System Knowledge
-- [ ] Computer Systems A Programmer’s Perspective
-- [ ] Advanced Programming in the UNIX Environment
-- [ ] UNIX Network Programming, Volume 1: The Sockets Networking API [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/UNP.txt)
-- [ ] UNIX Network Programming, Volume 2: Interprocess Communications
-- [ ] TCP/IP ILLustrated Volume 1: The Protocols
-- [ ] [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
+- [ ] :blue_book: Computer Systems A Programmer’s Perspective
+- [ ] :blue_book: Advanced Programming in the UNIX Environment
+- [ ] :blue_book: UNIX Network Programming, Volume 1: The Sockets Networking API [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/UNP.txt)
+- [ ] :blue_book: UNIX Network Programming, Volume 2: Interprocess Communications
+- [ ] :blue_book: TCP/IP ILLustrated Volume 1: The Protocols
+- [ ] :blue_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
 
 - [ ] [Let’s Code a TCP/IP Stack, 1: Ethernet & ARP](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/#tuntap-devices)
 - [ ] [Let’s Code a TCP/IP Stack, 2: IPV4 & ICMPv4](https://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4)
@@ -74,9 +74,9 @@
 - [ ] [Programming Paradigms for Dummies](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)
 - [ ] [Stanford Programming Paradigm](https://see.stanford.edu/Course/CS107)
 
-- [ ] Domain-Driven Design: Tackling Complexity in the Heart of Software
-- [ ] The Art of UNIX Programming
-- [ ] Clean Architecture
+- [ ] :blue_book: Domain-Driven Design: Tackling Complexity in the Heart of Software
+- [ ] :blue_book: The Art of UNIX Programming
+- [ ] :blue_book: Clean Architecture
 - [ ] [The Twelve-Factor App](https://12factor.net)
 - [ ] [Avoid Over Engineering](https://medium.com/@rdsubhas/10-modern-software-engineering-mistakes-bc67fbef4fc8)
 
@@ -103,9 +103,9 @@
 
 
 - [ ] Networking
-- [ ] Computer Networks, 5th Edition
+- [ ] :blue_book: Computer Networks, 5th Edition
 
-- [ ] Network tuning
+- [ ] :blue_book: Network tuning
 - [ ] [Linux Advanced Routing & Traffic Control HOWTO](https://lartc.org)
 - [ ] [Red Hat Enterprise Linux Network Performance Tuning Guide](https://access.redhat.com/sites/default/files/attachments/20150325_network_performance_tuning.pdf)
 - [ ] [Making Linux TCP Fast](https://netdevconf.info/1.2/papers/bbr-netdev-1.2.new.new.pdf)
