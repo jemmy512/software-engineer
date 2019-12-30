@@ -43,6 +43,8 @@
 - [x] :blue_book: Modern Effective C++ [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/EffectiveModernCC.txt)
 - [x] :blue_book: Inside C++ Object Model [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/InsideTheCPPObjectModel.txt)
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
+- [x] [C ++ virtual function table analysis(Chinese)](https://coolshell.cn/articles/12165.html)
+- [x] [Memory layout of C ++ objects(Chinese)](https://coolshell.cn/articles/12176.html)
 
 # Theoretical Discipline
 - [ ] :blue_book: Data Structures and Algorithm Analysis in C:Second Edition
