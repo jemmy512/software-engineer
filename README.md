@@ -136,7 +136,91 @@
 
 
 # Distributed architecture
-	
+- [ ] [Scalable Web Architecture and Distributed Systems](http://www.aosabook.org/en/distsys.html)
+- [ ] [Scalability, Availability & Stability Patterns](https://www.slideshare.net/jboner/scalability-availability-stability-patterns)
+- [ ] [System Design Primer](https://github.com/donnemartin/system-design-primer)
+- [ ] [An introduction to distributed systems](https://github.com/aphyr/distsys-class)
+
+- [ ] [Byzantine fault](https://en.wikipedia.org/wiki/Byzantine_fault)[](https://www.microsoft.com/en-us/research/uploads/prod/2016/12/The-Byzantine-Generals-Problem.pdf)
+- [ ] [The Byzantine Generals Problem](https://www.drdobbs.com/cpp/the-byzantine-generals-problem/206904396)
+- [ ] [Practical Byzantine Fault Tolerance](http://pmg.csail.mit.edu/papers/osdi99.pdf)
+- [ ] [CAP Theorem](https://en.wikipedia.org/wiki/CAP_theorem)
+- [ ] [A Brief Tour of FLP Impossibility](https://www.the-paper-trail.org/post/2008-08-13-a-brief-tour-of-flp-impossibility/)
+- [ ] [DLS](http://groups.csail.mit.edu/tds/papers/Lynch/jacm88.pdf)
+
+- [ ] [CAP Twelve Years Later: How the "Rules" Have Changed](https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/)
+- [ ] [Harvest, yield, and scalable tolerant systems](https://www.semanticscholar.org/paper/9c9ceb29a358149e9617d103f5624f325bf08b1e?p2df)
+- [ ] [Base: An Acid Alternative](https://queue.acm.org/detail.cfm?id=1394128)
+- [ ] [Eventually Consistent](https://www.allthingsdistributed.com/2008/12/eventually_consistent.html)
+
+- [ ] :blue_book: [Distributed Systems for fun and profit](http://book.mixu.net/distsys/single-page.html)
+- [ ] :blue_book: Designing Data Intensive Applications
+- [ ] :blue_book: [Distributed Systems: Principles and Paradigms](http://barbie.uta.edu/~jli/Resources/MapReduce&Hadoop/Distributed%20Systems%20Principles%20and%20Paradigms.pdf)
+- [ ] :blue_book: [Principles of Distributed Systems](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
+
+- [ ] :newspaper: [Transaction Across DataCenter](https://snarfed.org/transactions_across_datacenters_io.html)[YouTuBe](https://www.youtube.com/watch?v=srOgpXECblk)
+
+### Distributed Messages System
+- [ ] [Kafka: a Distributed Messaging System for Log Processing](http://notes.stephenholiday.com/Kafka.pdf)
+- [ ] [Wormhole: Reliable Pub-Sub to Support
+Geo-replicated Internet Services](https://www.usenix.org/system/files/conference/nsdi15/nsdi15-paper-sharma.pdf)
+- [ ] [board the Databus! LinkedIn's Scalable Consistent Change Data Capture Platform](https://engineering.linkedin.com/research/2012/all-aboard-the-databus-linkedlns-scalable-consistent-change-data-capture-platform)
+
+### Logs & Data
+- [ ] [The Log: What every software engineer should know about real-time data's unifying abstraction](https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying)
+- [ ] [The Log-Structured Merge-Tree (LSM-Tree)](https://www.cs.umb.edu/~poneil/lsmtree.pdf)
+- [ ] [Immutability Changes Everything](http://cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf) [Video](https://vimeo.com/52831373)
+- [ ] [Tango: Distributed Data Structures over a Shared Log](https://www.microsoft.com/en-us/research/wp-content/uploads/2013/11/Tango.pdf)
+
+### Distributed monitoring and tracking
+- [ ] [Dapper, a Large-Scale Distributed Systems Tracing Infrastructure](http://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36356.pdf)
+
+### Data Analysis
+- [ ] [The Unified Logging Infrastructure for Data Analytics at Twitter](http://vldb.org/pvldb/vol5/p1771_georgelee_vldb2012.pdf)
+- [ ] [Scaling Big Data Mining Infrastructure: The Twitter Experience](http://www.datascienceassn.org/sites/default/files/Scaling%20Big%20Data%20Mining%20Infrastructure%20-%20The%20Twitter%20Experience.pdf)
+- [ ] [Dremel: Interactive Analysis of Web-Scale Datasets](http://static.googleusercontent.com/media/research.google.com/en/us/pubs/archive/36632.pdf)
+- [ ] [Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing](https://www.usenix.org/system/files/conference/nsdi12/nsdi12-final138.pdf)
+
+- [ ] [Distributed Programming Model](https://web.cs.ucdavis.edu/~pandey/Research/Papers/icdcs01.pdf)
+- [ ] [PSYNC: A partially synchronous language for fault-tolerant distributed algorithms](https://www.di.ens.fr/~cezarad/popl16.pdf)
+- [ ] [Logic and Lattices for Distributed Programming](https://dsf.berkeley.edu/papers/UCB-lattice-tr.pdf)
+
+- [ ] [Services Engineering Reading List](https://github.com/mmcgrana/services-engineering)
+- [ ] [Readings in distributed systems](http://christophermeiklejohn.com/distributed/systems/2013/07/12/readings-in-distributed-systems.html)
+- [ ] [Google Research - Distributed Systems and Parallel Computing](https://research.google/pubs/)
+
+## Distributed Architecture Engineering Design
+- [ ] [Designs, Lessons and Advice from Building Large Distributed Systems](https://www.cs.cornell.edu/projects/ladis2009/talks/dean-keynote-ladis2009.pdf)[Building Software Systems At Google and Lessons Learned](https://www.youtube.com/watch?v=modXC5IWTJI)
+- [ ] [The Twelve-Factor App](https://12factor.net)
+- [ ] [Ten design principles for Azure applications](https://docs.microsoft.com/en-us/azure/architecture/guide/design-principles/)
+
+### Design Pattern
+- [ ] [MicroSoft Cloud Design Patterns](https://docs.microsoft.com/en-us/azure/architecture/patterns/)
+- [ ] [AWS Cloud Pattern](http://en.clouddesignpattern.org/index.php/Main_Page)
+- [ ] [Google: Design patterns for container-based distributed systems](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45406.pdf)
+- [ ] [A pattern language for microservices](https://microservices.io/patterns/index.html)
+- [ ] [SOA Patterns](https://patterns.arcitura.com/soa-patterns)
+
+### Failure testing of distributed systems
+
+### Elastic
+
+### Consistent Hashing
+
+### Distributed Database
+
+### Cache
+
+### Message Queue
+
+### Log
+
+### Performance
+
+### Search
+
+### Architecture Practices by Companies
+
 
 # Microservice
 
