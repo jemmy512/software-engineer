@@ -147,6 +147,7 @@
 - [ ] [CAP Theorem](https://en.wikipedia.org/wiki/CAP_theorem)
 - [ ] [A Brief Tour of FLP Impossibility](https://www.the-paper-trail.org/post/2008-08-13-a-brief-tour-of-flp-impossibility/)
 - [ ] [DLS](http://groups.csail.mit.edu/tds/papers/Lynch/jacm88.pdf)
+- [ ] [Introduction to Distributed System Priciples(Chinese)](http://guanzhou.pub/2018/06/04/Distributed/)
 
 - [ ] [CAP Twelve Years Later: How the "Rules" Have Changed](https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/)
 - [ ] [Harvest, yield, and scalable tolerant systems](https://www.semanticscholar.org/paper/9c9ceb29a358149e9617d103f5624f325bf08b1e?p2df)
@@ -156,6 +157,7 @@
 - [ ] :blue_book: [Distributed Systems for fun and profit](http://book.mixu.net/distsys/single-page.html)
 - [ ] :blue_book: Designing Data Intensive Applications
 - [ ] :blue_book: [Distributed Systems: Principles and Paradigms](http://barbie.uta.edu/~jli/Resources/MapReduce&Hadoop/Distributed%20Systems%20Principles%20and%20Paradigms.pdf)
+- [ ] Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services [Book Notes](https://github.com/JemmyWong/Notes/blob/master/Arch/Designing%20Distributed%20Systems.md)
 - [ ] :blue_book: [Principles of Distributed Systems](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
 
 - [ ] :newspaper: [Transaction Across DataCenter](https://snarfed.org/transactions_across_datacenters_io.html)[YouTuBe](https://www.youtube.com/watch?v=srOgpXECblk)
