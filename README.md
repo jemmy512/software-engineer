@@ -106,6 +106,7 @@
 
 - [ ] Networking
 - [ ] :blue_book: Computer Networks, 5th Edition
+- [ ] :blue_book: [Linux Hign Performance Server Programming(Chinese)](https://book.douban.com/subject/24722611/) [Linux Programmnig Noetes](https://github.com/JemmyWong/Notes/blob/master/Linux/LinuxProgramming.md) [Linux System Notes](https://github.com/JemmyWong/Notes/blob/master/Linux/LinuxBasic.txt)
 
 - [ ] :blue_book: Network tuning
 - [ ] [Linux Advanced Routing & Traffic Control HOWTO](https://lartc.org)
