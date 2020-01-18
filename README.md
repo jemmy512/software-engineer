@@ -55,7 +55,7 @@
 # System Knowledge
 - [ ] :blue_book: Computer Systems A Programmer’s Perspective
 - [ ] :blue_book: Advanced Programming in the UNIX Environment
-- [ ] :blue_book: UNIX Network Programming, Volume 1: The Sockets Networking API [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/UNP.txt)
+- [ ] :blue_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/UNP.txt)
 - [ ] :blue_book: UNIX Network Programming, Volume 2: Interprocess Communications
 - [ ] :blue_book: TCP/IP ILLustrated Volume 1: The Protocols
 - [ ] :blue_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
@@ -106,7 +106,7 @@
 
 - [ ] Networking
 - [ ] :blue_book: Computer Networks, 5th Edition
-- [ ] :blue_book: [Linux Hign Performance Server Programming(Chinese)](https://book.douban.com/subject/24722611/) [Linux Programmnig Noetes](https://github.com/JemmyWong/Notes/blob/master/Linux/LinuxProgramming.md) [Linux System Notes](https://github.com/JemmyWong/Notes/blob/master/Linux/LinuxBasic.txt)
+- [ ] :blue_book: [Linux High Performance Server Programming(Chinese)](https://book.douban.com/subject/24722611/) :pencil:  [Linux Programmnig Noetes](https://github.com/JemmyWong/Notes/blob/master/Linux/LinuxProgramming.md) :pencil: [Linux System Notes](https://github.com/JemmyWong/Notes/blob/master/Linux/LinuxBasic.txt)
 
 - [ ] :blue_book: Network tuning
 - [ ] [Linux Advanced Routing & Traffic Control HOWTO](https://lartc.org)
@@ -158,7 +158,7 @@
 - [ ] :blue_book: [Distributed Systems for fun and profit](http://book.mixu.net/distsys/single-page.html)
 - [ ] :blue_book: Designing Data Intensive Applications
 - [ ] :blue_book: [Distributed Systems: Principles and Paradigms](http://barbie.uta.edu/~jli/Resources/MapReduce&Hadoop/Distributed%20Systems%20Principles%20and%20Paradigms.pdf)
-- [ ] Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services [Book Notes](https://github.com/JemmyWong/Notes/blob/master/Arch/Designing%20Distributed%20Systems.md)
+- [ ] Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/Arch/Designing%20Distributed%20Systems.md)
 - [ ] :blue_book: [Principles of Distributed Systems](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
 
 - [ ] :newspaper: [Transaction Across DataCenter](https://snarfed.org/transactions_across_datacenters_io.html)[YouTuBe](https://www.youtube.com/watch?v=srOgpXECblk)
