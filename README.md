@@ -38,10 +38,10 @@
 - [ ] :blue_book: The C Programming Language
 - [ ] :blue_book: C Programming: A Modern Approach
 - [ ] :blue_book: C Traps and Pitfalls
-- [x] :blue_book: C++ Primer, 5th Edition [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/CPPimer.txt)
-- [x] :blue_book: Effective C++ [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/EffectiveCC.txt)
-- [x] :blue_book: Modern Effective C++ [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/EffectiveModernCC.txt)
-- [x] :blue_book: Inside C++ Object Model [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/InsideTheCPPObjectModel.txt)
+- [x] :blue_book: C++ Primer, 5th Edition :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/CPPimer.txt)
+- [x] :blue_book: Effective C++ :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/EffectiveCC.txt)
+- [x] :blue_book: Modern Effective C++ :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/EffectiveModernCC.txt)
+- [x] :blue_book: Inside C++ Object Model :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/InsideTheCPPObjectModel.txt)
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
 - [x] [C ++ virtual function table analysis(Chinese)](https://coolshell.cn/articles/12165.html)
 - [x] [Memory layout of C ++ objects(Chinese)](https://coolshell.cn/articles/12176.html)
