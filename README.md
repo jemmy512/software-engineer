@@ -57,7 +57,7 @@
 - [ ] :blue_book: Advanced Programming in the UNIX Environment
 - [ ] :blue_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/UNP.txt)
 - [ ] :blue_book: UNIX Network Programming, Volume 2: Interprocess Communications
-- [ ] :blue_book: TCP/IP ILLustrated Volume 1: The Protocols
+- [ ] :blue_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CS/TCP:IP%20Illustrated%2C%20Volume%201.md)
 - [ ] :blue_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
 
 - [ ] [Let’s Code a TCP/IP Stack, 1: Ethernet & ARP](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/#tuntap-devices)
