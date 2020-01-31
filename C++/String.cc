@@ -7,15 +7,18 @@
 using namespace std;
 
 class String{
-    friend ostream &operator<<(ostream &, String &);
-    friend istream &operator>>(istream &, String &);
+    friend ostream& operator<<(ostream &, String &);
+    friend istream& operator>>(istream &, String &);
 public:
-    String(const char *str = nullptr);
-    String(const String &);
-    String &operator=(const String &);
-    String operator+(const String &);
-    char &operator[](unsigned int);
-    bool operator==(const String &);
+    String() = default;
+    String(const char*);
+    String(const String&);
+    String(String&&) noexcept;
+    String& operator=(const String&);
+    String& operator=(String&&);
+    String operator+(const String&);
+    char& operator[](unsigned int);
+    bool operator==(const String&);
     size_t size() {
         return strlen(data);
     }
@@ -36,24 +39,36 @@ inline String::String(const char *str) {
 }
 
 inline String::String(const String &other) {
-    if (!other.data) {
-        data = nullptr;
-    } else {
+    if (other.data) {
         data = new char[strlen(other.data)+1];
         strcpy(data, other.data);
+    } else {
+        data = nullptr;
     }
+}
+
+inline String::String(String&& other) noexcept {
+    data = other.data;
+    other.data = nullptr;
 }
 
 inline String &String::operator=(const String &other) {
     if (this != &other) {
         delete[] data;
-        if (!other.data) {
-            data = nullptr;
-        } else {
+        if (other.data) {
             data = new char[strlen(other.data)+1];
             strcpy(data, other.data);
+        } else {
+            data = nullptr;
         }
     }
+    return *this;
+}
+
+inline String& String::operator=(String&& other) {
+    data = other.data;
+    other.data = nullptr;
+
     return *this;
 }
 
@@ -78,6 +93,7 @@ inline char &String::operator[](unsigned int pos) {
     if (pos >= 0 && pos <= strlen(data)) {
         return data[pos];
     }
+    // throw 
 }
 
 inline bool String::operator==(const String &other) {
