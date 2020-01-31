@@ -94,7 +94,7 @@ void ProcessPool<T>::sigHandler(int sig) {
 
 template<typename T>
 ~ProcessPool<T>::ProcessPool() {
-    close(mListenFd);
+    // close(mListenFd); // close by creator
     close(mEpollFd);
 }
 
@@ -184,7 +184,7 @@ void ProcessPool<T>::runChild() {
                     }
                     
                     epollAdd(mEpollFd, connFd);
-                    userData[connFd].init(mEpollFd, connFd, std::move(clientAddr));
+                    // userData[connFd].init(mEpollFd, connFd, std::move(clientAddr));
                 }
             } else if (sockFd == mSigPipeFd[0] && (event & EPOLLIN)) {
                 int sig;
@@ -214,10 +214,13 @@ void ProcessPool<T>::runChild() {
                     }
                 }
             } else if (event | EPOLLIN) {
-
+                // userData[sockFd].process();
             }
         }
     }
+
+    // close(mListenFd); // close by craeator
+    close(mEpollFd);
 }
 
 template<typename T>
@@ -247,8 +250,8 @@ void ProcessPool<T>::runParent() {
                 do {
                     if (mSubProcess[idx].mPid != -1) 
                         break;
-                    i = (i+1)%mProcessNumber;
-                } while (i != roundRobin);
+                    idx = (idx+1)%mProcessNumber;
+                } while (idx != roundRobin);
 
                 if (mSubProcess[idx].mPid == -1) {
                     mIsRunning = false;
@@ -295,7 +298,7 @@ void ProcessPool<T>::runParent() {
                             }
                             case SIGTERM:
                             case SIGINT: {
-                                printf("kill call child process\n");
+                                printf("kill all child process\n");
                                 for (int i = 0; i < mProcessNumber; ++i) {
                                     pid_t pid = mSubProcess[i].mPid;
                                     if (pid != -1) {
