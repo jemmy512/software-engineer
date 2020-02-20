@@ -25,7 +25,8 @@ namespace factoryMethod {
 
     class IConfigFactory {
     public:
-        std::shared_ptr<IConfigParser> createParser() = 0;
+        virtual std::shared_ptr<IConfigParser> createParser() = 0;
+        virtual ~IConfigFactory() = default; 
     };
 
     class JsonConfigFacgtory : public IConfigFactory {
@@ -58,8 +59,9 @@ namespace abstractFactory {
 
     class IConfigParserFactory {
     public:
-        std::shared_ptr<IRuleConfigParser> createRuleConfigParser() = 0;
-        std::shared_ptr<ISystemConfigParser> createSystemConfigParser() = 0;
+        virtual std::shared_ptr<IRuleConfigParser> createRuleConfigParser() = 0;
+        virtual std::shared_ptr<ISystemConfigParser> createSystemConfigParser() = 0;
+        virtual ~IConfigParserFactory() = default;
     };
 
     class JsonConfigParserFactory : public IConfigParserFactory {
