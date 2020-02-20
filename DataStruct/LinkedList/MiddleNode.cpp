@@ -25,6 +25,7 @@ Node* createList(const int* nodes, int size) {
 			beg = end = node;
 		}
 	}
+    
 
 	return beg;
 }
