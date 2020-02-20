@@ -65,22 +65,22 @@ namespace abstractFactory {
     class JsonConfigParserFactory : public IConfigParserFactory {
     public:
         std::shared_ptr<IRuleConfigParser> createRuleConfigParser() override {
-            return std::make_shared<JsonRuleConfigFactory>();
+            return std::make_shared<JsonRuleConfigParser>();
         }
 
         std::shared_ptr<ISystemConfigParser> createSystemConfigParser() override {
-            return std::make_shared<JsonSystemConfigFactory>();
+            return std::make_shared<JsonSystemConfigParser>();
         }
     };
 
     class XmlConfigParserFactory : public IConfigParserFactory {
     public:
         std::shared_ptr<IRuleConfigParser> createRuleConfigParser() override {
-            return std::make_shared<XmlRuleConfigFactory>();
+            return std::make_shared<XmlRuleConfigParser>();
         }
 
         std::shared_ptr<ISystemConfigParser> createSystemConfigParser() override {
-            return std::make_shared<XmlSystemConfigFactory>();
+            return std::make_shared<XmlSystemConfigParser>();
         }
     };
 }
