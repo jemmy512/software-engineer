@@ -28,18 +28,18 @@ void printNode(Node* node) {
 }
 
 int main() {
-	int node5[5]{1, 2, 3, 4, 5};
+    int node5[5]{1, 2, 3, 4, 5};
 
-	Node* begFive = createListHeadInsert(node5, 5);
+    Node* begFive = createListHeadInsert(node5, 5);
 
     Node* zero = findKthNodeToTail(begFive, -1);
-	Node* one = findKthNodeToTail(begFive, 1);
-	Node* two = findKthNodeToTail(begFive, 2);
-	Node* three = findKthNodeToTail(begFive, 3);
-	Node* four = findKthNodeToTail(begFive, 4);
-	Node* five = findKthNodeToTail(begFive, 5);
+    Node* one = findKthNodeToTail(begFive, 1);
+    Node* two = findKthNodeToTail(begFive, 2);
+    Node* three = findKthNodeToTail(begFive, 3);
+    Node* four = findKthNodeToTail(begFive, 4);
+    Node* five = findKthNodeToTail(begFive, 5);
     Node* six = findKthNodeToTail(begFive, 6);
-    
+
 
 
 
@@ -51,7 +51,7 @@ int main() {
     printNode(one);
     printNode(zero);
 
-	releaseList(begFive);
+    releaseList(begFive);
 
-	return 0;
+    return 0;
 }

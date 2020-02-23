@@ -84,17 +84,17 @@ void printList(Node* node) {
 
 /*
 int main() {
-	int node1[1]{1};
-	int node2[2]{1, 2};
-	int node3[3]{1, 2, 3};
-	int node4[4]{1, 2, 3, 4};
-	int node5[5]{1, 2, 3, 4, 5};
+    int node1[1]{1};
+    int node2[2]{1, 2};
+    int node3[3]{1, 2, 3};
+    int node4[4]{1, 2, 3, 4};
+    int node5[5]{1, 2, 3, 4, 5};
 
-	Node* begOne = createListHeadInsert(node1, 1);
-	Node* begTwo = createListHeadInsert(node2, 2);
-	Node* begThree = createListHeadInsert(node3, 3);
-	Node* begFour = createListHeadInsert(node4, 4);
-	Node* begFive = createListHeadInsert(node5, 5);
+    Node* begOne = createListHeadInsert(node1, 1);
+    Node* begTwo = createListHeadInsert(node2, 2);
+    Node* begThree = createListHeadInsert(node3, 3);
+    Node* begFour = createListHeadInsert(node4, 4);
+    Node* begFive = createListHeadInsert(node5, 5);
 
     printList(begOne);
     printList(begTwo);
@@ -102,11 +102,11 @@ int main() {
     printList(begFour);
     printList(begFive);
 
-	Node* one = deleteNode(begOne, 1);
-	Node* two = deleteNode(begTwo, 1);
-	Node* three = deleteNode(begThree, 2);
-	Node* four = deleteNode(begFour,3 );
-	Node* five = deleteNode(begFive, 6);
+    Node* one = deleteNode(begOne, 1);
+    Node* two = deleteNode(begTwo, 1);
+    Node* three = deleteNode(begThree, 2);
+    Node* four = deleteNode(begFour,3 );
+    Node* five = deleteNode(begFive, 6);
 
 
     printList(one);

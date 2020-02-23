@@ -26,22 +26,22 @@ Node* deleteMaxNode(Node* node) {
 
 int main() {
     int node1[1]{1};
-	int node2[2]{1, 2};
-	int node3[3]{1, 3, 2};
-	int node4[4]{5, 3, 3, 1};
-	int node5[5]{3, 2, 5, 4, 7};
+    int node2[2]{1, 2};
+    int node3[3]{1, 3, 2};
+    int node4[4]{5, 3, 3, 1};
+    int node5[5]{3, 2, 5, 4, 7};
 
-	Node* begOne = createListHeadInsert(node1, 1);
-	Node* begTwo = createListHeadInsert(node2, 2);
-	Node* begThree = createListHeadInsert(node3, 3);
-	Node* begFour = createListHeadInsert(node4, 4);
-	Node* begFive = createListHeadInsert(node5, 5);
+    Node* begOne = createListHeadInsert(node1, 1);
+    Node* begTwo = createListHeadInsert(node2, 2);
+    Node* begThree = createListHeadInsert(node3, 3);
+    Node* begFour = createListHeadInsert(node4, 4);
+    Node* begFive = createListHeadInsert(node5, 5);
 
-	Node* one = deleteMaxNode(begOne);
-	Node* two = deleteMaxNode(begTwo);
-	Node* three = deleteMaxNode(begThree);
-	Node* four = deleteMaxNode(begFour);
-	Node* five = deleteMaxNode(begFive);
+    Node* one = deleteMaxNode(begOne);
+    Node* two = deleteMaxNode(begTwo);
+    Node* three = deleteMaxNode(begThree);
+    Node* four = deleteMaxNode(begFour);
+    Node* five = deleteMaxNode(begFive);
 
 
     printList(one);
@@ -50,11 +50,11 @@ int main() {
     printList(four);
     printList(five);
 
-	releaseList(one);
-	releaseList(two);
-	releaseList(three);
-	releaseList(four);
-	releaseList(five);
+    releaseList(one);
+    releaseList(two);
+    releaseList(three);
+    releaseList(four);
+    releaseList(five);
 
-	return 0;
+    return 0;
 }
