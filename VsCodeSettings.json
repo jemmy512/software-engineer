@@ -1,0 +1,94 @@
+{
+    "editor.fontSize": 21,
+    "workbench.colorTheme": "Material Theme",
+    "terminal.integrated.fontSize": 18,
+    "markdown.preview.fontSize": 20,
+    "editor.fontFamily": "Courier",
+    "search.exclude": {        
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "build/": true,
+        "temp/": true,
+        "library/": true,
+        "**/*.anim": true
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**/*.meta": true,
+        "library/": true,
+        "local/": true,
+        "temp/": true,
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "editor.minimap.maxColumn": 50,
+    "window.zoomLevel": 0,
+    "editor.renderLineHighlight": "all",
+    "editor.wrappingIndent": "deepIndent",
+    "C_Cpp.updateChannel": "Insiders",
+    "editor.minimap.enabled": false,
+    "debug.console.fontSize": 14,
+    "editor.fontLigatures": true,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "[markdown]": {},
+    "editor.wordWrap": "on",
+    "explorer.confirmDelete": false,
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.intelliSenseMode": "clang-x64",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.sideBar.location": "right",
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "terminal.integrated.shell.osx": "/bin/bash",
+    "java.debug.settings.hotCodeReplace": "auto",
+    "deploy": {
+        "packages": [
+            {
+                "name": "Front End",
+                "description": "files in webapp",
+                "files": [
+                    "src/main/webapp/*",
+                    "src/main/webapp/*.*",
+                    "src/main/webapp/*/*.*",
+                    "src/main/webapp/*/*/*.*",
+
+                    "src/main/resources/*",
+                    "src/main/resources/*.*",
+                    "src/main/resources/*/*.*",
+                    "src/main/resources/*/*/*.*"
+                ],
+                "exclude": [
+                    "src/main/webapp/test/*"
+                ],
+                "deployOnSave": true,
+                "useTargetList": true,
+                "button": {
+                    "text": "Hot Deploy",
+                    "tooltip": "Hot deploy the front end files",
+                    "targets": [ "HOTSITE" ]
+                },
+               
+            }
+        ],
+        "targets": [
+            {
+                "type": "local",
+                "name": "HOTSITE",
+                "description": "A local folder",
+                "dir": "target/hotsite/",
+                "mappings": [
+                    {
+                        "source": "src/main/resources",
+                        "isRegEx": false,
+
+                        "target": "/"
+                    }
+                ]
+            }
+        ]
+    },
+    "files.trimFinalNewlines": true
+}
