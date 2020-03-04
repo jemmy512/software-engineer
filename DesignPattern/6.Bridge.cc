@@ -110,13 +110,13 @@ public:
 
 int main() {
     ImMsgSender sender({"123", "456"});
-    std::initializer_list<std::string> ids = {"123", "456"};
+    std::initializer_list<std::string> ids{"123", "456"};
     auto imSender = std::make_shared<ImMsgSender>(ids);
 
-    std::initializer_list<std::string> numbers = {"+86123", "+86456"};
+    std::initializer_list<std::string> numbers{"+86123", "+86456"};
     auto telephoneSender = std::make_shared<TelephoneMsgSender>(numbers);
 
-    std::initializer_list<std::string> mails = {"xxx@cisco.com", "xxx@cisco.com"};
+    std::initializer_list<std::string> mails{"xxx@cisco.com", "xxx@cisco.com"};
     auto emailSender = std::make_shared<EmailMsgSender>(mails);
 
 
