@@ -24,6 +24,7 @@ namespace TimeUtil {
 class MsgSender {
 public:
     virtual void send(const std::string& msg) = 0;
+    virtual ~MsgSender(){}
 };
 
 class EmailMsgSender : public MsgSender {
