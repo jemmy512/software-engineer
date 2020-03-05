@@ -25,7 +25,7 @@ namespace TimeUtil {
 class MsgSender {
 public:
     virtual void send(const std::string& msg) = 0;
-    virtual ~MsgSender(){}
+    virtual ~MsgSender() = default;
 };
 
 class EmailMsgSender : public MsgSender {
@@ -140,6 +140,12 @@ int main() {
 /**
  * auto imSender = std::make_shared<ImMsgSender>({"123", "456"}); // compile error
  * 
- * std::make_shared doesn't support braced-list-init std::initializer_list:
+ * The problem is that std::make_shared<T> is a partially specialized function template 
+ * that can accept arguments of arbitrary number and type. Because of this, the compiler 
+ * has no idea how to handle the initializer list.
+ * 
+ * A braced-init-list is never deduced as std::initializer_list<T> by template deduction.
+ * 
  * https://stackoverflow.com/questions/24234480/stdmake-shared-with-stdinitializer-list
+ * https://stackoverflow.com/questions/12431495/initializer-list-and-template-type-deduction
  */
