@@ -11,9 +11,9 @@ void merge(T& data, int beg, int mid, int end) {
     while (lbeg < mid && rbeg < end)
         tmpData[i++] = data[lbeg] < data[rbeg] ? data[lbeg++] : data[rbeg++];
 
-    while (lbeg < mid) 
+    while (lbeg < mid)
         tmpData[i++] = data[lbeg++];
-    
+
     while (rbeg < end)
         tmpData[i++] = data[rbeg++];
 
@@ -31,7 +31,7 @@ void mergeSort(T& data, int beg, int end) {
     }
 }
 
-int main(void) { 
+int main(void) {
     vector<float> data = {3.0, 2.3, 5.5, 8.3, 4.4, 7.6, 6.6, 9.8};
     mergeSort(data, 0, data.size());
     copy(data.begin(), data.end(), ostream_iterator<float>(cout, " "));
