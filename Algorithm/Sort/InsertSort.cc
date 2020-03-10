@@ -4,14 +4,20 @@
 
 using namespace std;
 
-void insertSort(vector<int> &vec) {
-    for (int i = 1; i < vec.size(); ++i) {
-        for (int j = i; j > 0; --j) {
-            if (vec[j] < vec[j - 1])
-                swap(vec[j], vec[j - 1]);
-            else 
+template<typename T>
+void insertSort(T& data) {
+    for (int i = 1; i < data.size(); ++i) {
+        int tmp = data[i];
+        int j = i;
+        do { 
+            if (data[j-1] > tmp) {
+                data[j] = data[j-1];
+            } else {
                 break;
-        }
+            }
+        } while (--j > 0);
+
+        data[j] = tmp;
     }
 }
 
