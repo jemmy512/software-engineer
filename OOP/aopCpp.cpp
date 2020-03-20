@@ -23,10 +23,10 @@ using namespace std;
         const int parent;
         UserData(int id, string name, int parent) : id(id), name(name), parent(parent) {}
     };
-    
+
     /// Shared pointer to immutable data
     using User = std::shared_ptr<UserData>;
-    
+
     /// Error type - code + description
     class Error {
     public:
@@ -49,14 +49,14 @@ using namespace std;
         Maybe() : data(nullptr), error(nullptr) {}
         Maybe(decltype(nullptr) nothing) : data(nullptr), error(nullptr) {}
         Maybe(Error&& error) : data(nullptr), error(make_shared<Error>(error)) {}
-        
+
         bool isEmpty() { return (data == nullptr); };
         bool hasError() { return (error != nullptr); };
         T operator()(){ return data; };
         shared_ptr<Error> getError(){ return error; };
-   
+
     };
-    
+
     template <class T>
     Maybe<T> just(T t)
     {
@@ -69,14 +69,14 @@ using namespace std;
     struct function_traits
     : public function_traits<decltype(&Function::operator())>
     {};
-    
+
     template <typename ClassType, typename ReturnType, typename... Args>
     struct function_traits<ReturnType(ClassType::*)(Args...) const>
     {
         typedef ReturnType (*pointer)(Args...);
         typedef std::function<ReturnType(Args...)> function;
     };
-    
+
     template <typename Function>
     typename function_traits<Function>::function
     to_function (Function& lambda)
@@ -90,16 +90,16 @@ using namespace std;
     std::function<R(Args...)> logged(string name, std::function<R(Args...)> f)
     {
         return [f,name](Args... args){
-           
+
             LOG << name << " start" << NL;
             auto start = std::chrono::high_resolution_clock::now();
-            
+
             R result = f(std::forward<Args>(args)...);
-            
+
             auto end = std::chrono::high_resolution_clock::now();
             auto total = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
             LOG << "Elapsed: " << total << "us" << NL;
-            
+
             return result;
         };
     }
@@ -116,17 +116,17 @@ using namespace std;
                 return Error(403, "Forbidden");
         };
     }
-    
-    
+
+
     // Use local cache (memoize)
     template <typename R, typename C, typename ...Args>
     std::function<Maybe<R>(Args...)> cached(C & cache, std::function<Maybe<R>(Args...)> f)
     {
         return [f,&cache](Args... args){
-            
+
             // get key as tuple of arguments
             auto key = make_tuple(args...);
-            
+
             if (cache.count(key) > 0)
                 return just(cache[key]);
             else
@@ -138,7 +138,7 @@ using namespace std;
             }
         };
     }
-    
+
     // If there was error - try again
     template <typename R, typename ...Args>
     std::function<Maybe<R>(Args...)> triesTwice(std::function<Maybe<R>(Args...)> f)
@@ -150,7 +150,7 @@ using namespace std;
             return result;
         };
     }
-    
+
     // Treat empty state as error
     template <typename R, typename ...Args>
     std::function<Maybe<R>(Args...)> notEmpty(std::function<Maybe<R>(Args...)> f)
@@ -162,7 +162,7 @@ using namespace std;
             return result;
         };
     }
-    
+
     template <typename R, typename ...Args>
     std::function<R(Args...)> locked(std::mutex& m, std::function<R(Args...)> f)
     {
@@ -171,9 +171,9 @@ using namespace std;
             return f(std::forward<Args>(args)...);
         };
     }
-    
+
     // Couple of additional helpers
-    
+
     template <class F, class... Args>
     void for_each_argument(F f, Args&&... args) {
         (void)(int[]){(f(forward<Args>(args)), 0)...};
@@ -186,7 +186,7 @@ using namespace std;
 
 
 int main() {
-	
+
 	// Database...
 	vector<User> users {make<User>(1, "John", 0), make<User>(2, "Bob", 1), make<User>(3, "Max", 1)};
 
@@ -198,19 +198,19 @@ int main() {
             }
             return nullptr;
         };
-        
+
         // Local cache
         map<tuple<int>,User> userCache;
-        
-        // Security 
+
+        // Security
         class Session {
         public:
             bool isValid() { return true; }
         } session;
-        
+
         // Mutex to test locked aspect
         std::mutex lockMutex;
-        
+
         // Main functional factorization
         auto findUserFinal = locked(lockMutex, secured(session, notEmpty( cached(userCache, triesTwice( logged("findUser", to_function(findUser)))))));
 
@@ -220,8 +220,8 @@ int main() {
             auto user = findUserFinal(id);
             LOG << (user.hasError() ? "ERROR: " + user.getError()->message : "NAME:" + user()->name) << NL;
         };
-	
+
         for_each_argument(testUser, 2, 30, 2, 1);
-	
+
 	return 0;
 }
