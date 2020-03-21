@@ -16,7 +16,7 @@ void countSort(Iter begin, Iter end) {
     if (max < 0)
         return;
 
-    std::vector<T> counters(max+1);
+    std::vector<size_t> counters(max+1);
     for (auto ite = begin; ite != end; ++ite) {
         ++counters[*ite];
     }
