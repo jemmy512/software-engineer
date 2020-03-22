@@ -17,61 +17,43 @@ enum class SearchPolicy {
 template<typename Iter,
     typename T = typename std::iterator_traits<Iter>::value_type,
     typename Compare = std::less<T>>
-Iter binarySearch(Iter begin, Iter end, T val,
-    SearchPolicy policy = SearchPolicy::Undefined,
-    Compare comp = Compare())
+Iter binarySearch(Iter begin, Iter end, const T& val, Compare comp = Compare())
 {
-    Iter result = end;
+    auto result = end;
 
     while (std::distance(begin, end) > 0) {
         auto mid = begin + std::distance(begin, end) / 2;
-
-        if (policy == SearchPolicy::FirstNotLessThan) {
-            if (!comp(*mid, val)) { // val <= *mid
-                if (mid == begin || comp(*(mid-1), *mid)) {
-                    result = mid;
-                    break;
-                } else {
-                    end = mid;
-                }
-            } else {
-                begin = mid + 1;
-            }
-        } else if (policy == SearchPolicy::LastNotGreatThan) {
-            if (!comp(val, *mid)) { // val >= *mid
-                if (std::distance(mid, end) == 1 || comp(val, *(mid+1))) {
-                    result = mid;
-                    break;
-                } else {
-                    begin = mid + 1;
-                }
-            } else {
-                end = mid;
-            }
+        if (comp(*mid, val)) {
+            begin = mid + 1;
+        } else if (comp(val, *mid)) {
+            end = mid;
         } else {
-            if (comp(val, *mid)) {
-                end = mid;
-            } else if (comp(*mid, val)) {
-                begin = mid + 1;
+            result = mid;
+            break;
+        }
+    }
+
+    return result;
+}
+
+template<typename Iter,
+    typename T = typename std::iterator_traits<Iter>,
+    typename Compare = std::less<T>>
+Iter binarySearchFirst(Iter begin, Iter end, const T& val, Compare comp = Compare()) {
+    auto result = end;
+
+    while (std::distance(begin, end) > 0) {
+        auto mid = begin + std::distance(begin, end) / 2;
+        if (comp(*mid, val)) {
+            begin = mid + 1;
+        } else if (comp(val, *mid)) {
+            end = mid;
+        } else {
+            if (mid == begin || comp(*(mid-1), *mid)) {
+                result = mid;
+                break;
             } else {
-                if (policy == SearchPolicy::First) {
-                    if (mid == begin || comp(*(mid-1), *mid)) {
-                        result = mid;
-                        break;
-                    } else {
-                        end = mid;
-                    }
-                } else if (policy == SearchPolicy::Last) {
-                    if (std::distance(mid, end) == 1 || comp(*mid, *(mid+1))) {
-                        result = mid;
-                        break;
-                    } else {
-                        begin = mid + 1;
-                    }
-                } else {
-                    result = mid;
-                    break;
-                }
+                end = mid;
             }
         }
     }
@@ -79,36 +61,149 @@ Iter binarySearch(Iter begin, Iter end, T val,
     return result;
 }
 
+template<typename Iter,
+    typename T = typename std::iterator_traits<Iter>::value_type,
+    typename Compare = std::less<T>>
+Iter binarySearchLast(Iter begin, Iter end, const T& val, Compare comp = Compare()) {
+    auto result = end;
+
+    while (std::distance(begin, end) > 0) {
+        auto mid = begin + std::distance(begin, end) / 2;
+        if (comp(*mid, val)) {
+            begin = mid + 1;
+        } else if (comp(val, *mid)) {
+            end = mid;
+        } else {
+            if (std::distance(mid, end) == 1 || comp(*mid, *(mid+1))) {
+                result = mid;
+                break;
+            } else {
+                begin = mid + 1;
+            }
+        }
+    }
+
+    return result;
+}
+
+template<typename Iter,
+    typename T = typename std::iterator_traits<Iter>::value_type,
+    typename Compare = std::less<T>>
+Iter binarySearchFirstNotLess(Iter begin, Iter end, const T& val, Compare comp = Compare()) {
+    auto result = end;
+
+    while (std::distance(begin, end) > 0) {
+        auto mid = begin + std::distance(begin, end) / 2;
+        if (!comp(*mid, val)) { // val <= *mid
+            if (mid == begin || comp(*(mid-1), val)) {
+                result = mid;
+                break;
+            } else {
+                end = mid;
+            }
+        } else {
+            begin = mid + 1;
+        }
+    }
+
+    return result;
+}
+
+template<typename Iter,
+    typename T = typename std::iterator_traits<Iter>::value_type,
+    typename Compare = std::less<T>>
+Iter binarySearchLastNotGreat(Iter begin, Iter end, const T& val, Compare comp = Compare()) {
+    auto result = end;
+
+    while (std::distance(begin, end) > 0) {
+        auto mid = begin + std::distance(begin, end) / 2;
+        if (!comp(val, *mid)) { // *mid <= val
+            if (std::distance(mid, end) == 1 || comp(val, *(mid+1))) {
+                result = mid;
+                break;
+            } else {
+                begin = mid + 1;
+            }
+        } else {
+            end = mid;
+        }
+    }
+
+    return result;
+}
+
+template<typename Iter,
+    typename T = typename std::iterator_traits<Iter>::value_type,
+    typename Compare = std::less<T>>
+Iter binarySearchApi(Iter begin, Iter end, const T& val, SearchPolicy policy = SearchPolicy::Undefined, Compare comp = Compare())
+{
+    auto result = end;
+
+    if (policy == SearchPolicy::Undefined) {
+        result = binarySearch(begin, end, val, comp);
+    } else if (policy == SearchPolicy::First) {
+        result = binarySearchFirst(begin, end, val, comp);
+    } else if (policy == SearchPolicy::Last) {
+        result = binarySearchLast(begin, end, val, comp);
+    } else if (policy == SearchPolicy::FirstNotLessThan) {
+        result = binarySearchFirstNotLess(begin, end, val, comp);
+    } else if (policy == SearchPolicy::LastNotGreatThan) {
+        result = binarySearchLastNotGreat(begin, end, val, comp);
+    }
+
+    return result;
+}
+
 template <typename VecT, typename T = typename VecT::value_type>
-void TestBinarySearch(const VecT& test,
-    T target,
+void TestBinarySearch(const VecT& data, T target,
     SearchPolicy policy = SearchPolicy::Undefined)
 {
-    auto it = binarySearch(test.begin(), test.end(), target, policy);
-    std::cout << std::distance(test.begin(), it) << std::endl;
+    auto it = binarySearchApi(data.begin(), data.end(), target, policy);
+    std::cout << "search[" << target << "], distance: " << std::distance(data.begin(), it) << std::endl;
 }
 
 
 int main() {
-    std::vector<int> test{0, 0, 1, 2, 3, 4, 4, 5, 5, 5, 5, 5, 6, 8};
+    std::vector<int> data{0, 0, 1, 2, 3, 4, 4, 5, 5, 5, 5, 5, 6, 8};
 
-    TestBinarySearch(test, 8);                                      // 13
-    TestBinarySearch(test, -1);                                     // 14
-    TestBinarySearch(test, 0);                                      // 0, 1
-    TestBinarySearch(test, 0, SearchPolicy::First);                 // 0
-    TestBinarySearch(test, 0, SearchPolicy::Last);                  // 1
-    TestBinarySearch(test, 4);                                      // 5, 6
-    TestBinarySearch(test, 4, SearchPolicy::First);                 // 5
-    TestBinarySearch(test, 4, SearchPolicy::Last);                  // 6
-    TestBinarySearch(test, 5);                                      // 7, 8, 9, 10, 11
-    TestBinarySearch(test, 5, SearchPolicy::First);                 // 7
-    TestBinarySearch(test, 5, SearchPolicy::Last);                  // 11
-    TestBinarySearch(test, 7, SearchPolicy::FirstNotLessThan);      // 13
-    TestBinarySearch(test, 7, SearchPolicy::LastNotGreatThan);      // 12
-    TestBinarySearch(test, 7, SearchPolicy::First);                 // 14
-    TestBinarySearch(test, 8);                                      // 13
-    TestBinarySearch(test, 8, SearchPolicy::First);                 // 13
-    TestBinarySearch(test, 8, SearchPolicy::Last);                  // 13
+    std::cout << "------------ Undefined ------------" << std::endl;
+    TestBinarySearch(data, -1);                                     // 13
+    TestBinarySearch(data, 0);                                      // 0, 1
+    TestBinarySearch(data, 5);                                      // 7, 8, 9, 10, 11
+    TestBinarySearch(data, 8);                                      // 13
+    TestBinarySearch(data, 10);                                     // 14
+
+    std::cout << "\n\n------------ First ------------" << std::endl;
+    TestBinarySearch(data, -1, SearchPolicy::First);                // 14
+    TestBinarySearch(data, 0, SearchPolicy::First);                 // 0
+    TestBinarySearch(data, 5, SearchPolicy::First);                 // 7
+    TestBinarySearch(data, 7, SearchPolicy::First);                 // 14
+    TestBinarySearch(data, 8, SearchPolicy::First);                 // 13
+    TestBinarySearch(data, 10, SearchPolicy::First);                // 14
+
+    std::cout << "\n\n------------ Last ------------" << std::endl;
+    TestBinarySearch(data, -1, SearchPolicy::Last);                 // 14
+    TestBinarySearch(data, 0, SearchPolicy::Last);                  // 1
+    TestBinarySearch(data, 5, SearchPolicy::Last);                  // 11
+    TestBinarySearch(data, 7, SearchPolicy::Last);                  // 14
+    TestBinarySearch(data, 8, SearchPolicy::Last);                  // 13
+    TestBinarySearch(data, 10, SearchPolicy::Last);                 // 14
+
+    std::cout << "\n\n------------ FirstNotLessThan ------------" << std::endl;
+    TestBinarySearch(data, -1, SearchPolicy::FirstNotLessThan);     // 0
+    TestBinarySearch(data, 0, SearchPolicy::FirstNotLessThan);      // 0
+    TestBinarySearch(data, 5, SearchPolicy::FirstNotLessThan);      // 7
+    TestBinarySearch(data, 7, SearchPolicy::FirstNotLessThan);      // 13
+    TestBinarySearch(data, 8, SearchPolicy::FirstNotLessThan);      // 13
+    TestBinarySearch(data, 10, SearchPolicy::FirstNotLessThan);     // 14
+
+    std::cout << "\n\n------------ LastNotGreatThan ------------" << std::endl;
+    TestBinarySearch(data, -1, SearchPolicy::LastNotGreatThan);     // 14
+    TestBinarySearch(data, 0, SearchPolicy::LastNotGreatThan);      // 1
+    TestBinarySearch(data, 5, SearchPolicy::LastNotGreatThan);      // 11
+    TestBinarySearch(data, 7, SearchPolicy::LastNotGreatThan);      // 12
+    TestBinarySearch(data, 8, SearchPolicy::LastNotGreatThan);      // 13
+    TestBinarySearch(data, 10, SearchPolicy::LastNotGreatThan);     // 13
 
     return 0;
 }
