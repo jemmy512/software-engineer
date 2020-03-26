@@ -166,15 +166,12 @@ private:
     const double mProbability = 0.5;
 
     // 'auto' not allowed in non-static class member
-    const unsigned int
-        mSeed = std::chrono::system_clock::now().time_since_epoch().count();
+    const unsigned int mSeed = std::chrono::system_clock::now().time_since_epoch().count();
 
     // Mutable is used to specify that the member does not affect the externally visible state of the class.
-    mutable std::default_random_engine
-        mEngine = std::default_random_engine(mSeed);
+    mutable std::default_random_engine mEngine = std::default_random_engine(mSeed);
 
-    mutable std::binomial_distribution<size_type>
-        mDistribution = std::binomial_distribution<size_type>(mMaxLevel-1, mProbability);
+    mutable std::binomial_distribution<size_type> mDistribution = std::binomial_distribution<size_type>(mMaxLevel-1, mProbability);
 
     hash_type mHasher = hash_type();
     node_type* mHead = nullptr;
