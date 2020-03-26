@@ -9,83 +9,80 @@
  *       https://blog.csdn.net/v_JULY_v/article/details/6284050
  */
 #include <array>
-#include<iomanip>
+#include <iomanip>
 #include <iostream>
-using namespace std;
 
-enum Color {RED, BLACK};
-class RBTree;
-
-struct Node {
-    int key;
-    Color color;
-    struct Node *left, *right, *parent;
-    Node (int key_) {
-        key = key_;
-        color = RED;
-    }
-};
-
+template<typename T>
 class RBTree {
 public:
-    Node *root, *nil;
+    enum Color {Red, Black};
+    enum Order {PreOrder, InOrder, PostOrder};
+    struct Node {
+        T value;
+        Color color;
+        struct Node* left, *right, *parent;
+
+        Node(T val, Node* nill)
+        :   value(val), color(Red), left(nill), right(nill), parent(nill)
+        { }
+    };
+
     RBTree() {
-        nil = new Node(0);
-        nil->color = BLACK;
-        nil->parent = nil->left = nil->right = nullptr;
+        nil = new Node(0, nullptr);
+        nil->color = Black;
         root = nil;
     }
     ~RBTree() {
         delete nil;
     }
 
-    void RBInsert(int key);
-    void RBDelete(int key);
-protected:
-    Node *minNode(Node *node);
-    void lRotate(Node *node);
-    void rRotate(Node *node);
-    Node *BSTInsert(Node *node);
-    Node *BSTDelete(int key);
-    void fixInsertion(Node *node);
-    void fixDeletion(Node *node);
+    void insert(T value);
+    void erase(T value);
+    void print(Order order);
 
-    void setColor(Node *node, Color color_) {
+protected:
+    Node* minNode(Node* node);
+    void lRotate(Node* node);
+    void rRotate(Node* node);
+    Node* _insert(Node* node);
+    Node* _erase(T value);
+    void balanceInsertion(Node* node);
+    void balanceErasion(Node* node);
+
+    void preOrderPrint(Node* node);
+    void inOrderPrint(Node* node);
+    void postOrderPrint(Node* node);
+
+    void setColor(Node* node, Color col) {
         if (node != nil)
-            node->color = color_;
+            node->color = col;
     }
-    Color getColor(Node *node) {
+
+    Color getColor(Node* node) {
         return node->color;
     }
+
+private:
+    Node* root = nullptr, *nil = nullptr;
 };
 
-
-void preorder(RBTree *tree, Node *node) {
-    if (node != tree->nil) {
-        cout << setw(2) << node->key << "[" << node->color << "] ";
-        preorder(tree, node->left);
-        preorder(tree, node->right);
-    }
+template<typename T>
+void RBTree<T>::insert(T value) {
+    Node* node = new Node(value, nil);
+    balanceInsertion(_insert(node));
 }
 
-void RBTree::RBInsert(int key) {
-    Node *node = new Node(key);
-    node->left = node->right = node->parent = nil;
-
-    node = BSTInsert(node);
-    fixInsertion(node);
-}
-
-Node *RBTree::BSTInsert(Node *node) {
+template<typename T>
+typename RBTree<T>::Node* RBTree<T>::_insert(Node* node) {
     if (node == nil)
         return nil;
 
-    Node *fast = root, *slow = root;
+    Node* fast = root, *slow = root;
     while (fast != nil) {
         slow = fast;
-        if (fast->key < node->key)
+        if (fast->value < node->value)
             fast = fast->right;
-        else if (fast->key > node->key)
+        else if (fast->value > node->value)
             fast = fast->left;
         else
             return nil;
@@ -93,7 +90,7 @@ Node *RBTree::BSTInsert(Node *node) {
 
     if (slow == nil)
         root = node;
-    else if (slow->key < node->key)
+    else if (slow->value < node->value)
         slow->right = node;
     else
         slow->left = node;
@@ -102,85 +99,88 @@ Node *RBTree::BSTInsert(Node *node) {
     return node;
 }
 
-
-void RBTree::fixInsertion(Node *node) {
+template<typename T>
+void RBTree<T>::balanceInsertion(Node* node) {
     if (node == nil)
         return;
 
-    Node *parent, *parent_g, *uncle;
-    parent = parent_g = uncle = nil;
-    while ((node != root) && (RED == getColor(node)) && (RED == getColor(node->parent))) {
+    Node* parent = nil, *grandpa = nil, *uncle = nil;
+    while ((node != root) && (Red == getColor(node)) && (Red == getColor(node->parent))) {
         parent = node->parent;
-        parent_g = parent->parent;
+        grandpa = parent->parent;
 
-        if (parent == parent_g->left) {
-            uncle = parent_g->right;
-            if (RED == getColor(uncle)) {
-                setColor(uncle, BLACK);
-                setColor(parent, BLACK);
-                setColor(parent_g, RED);
-                node = parent_g;
+        if (parent == grandpa->left) {
+            uncle = grandpa->right;         //          node - parent - uncle
+            if (Red == getColor(uncle)) {   //  case 1. Red  - Red    - Red
+                setColor(uncle, Black);
+                setColor(parent, Black);
+                setColor(grandpa, Red);
+                node = grandpa;
             } else {
-                if (node == parent->right) { /* change inside insert to outside insert */
+                if (node == parent->right) {// case 2. (right)Red - Red - Black
                     lRotate(parent);
                     node = parent;
                     parent = node->parent;
                 }
-                rRotate(parent_g);           /* outside insert */
-                swap(parent->color, parent_g->color);
+                rRotate(grandpa);           // case 3. (left)Red - Red - Black
+                std::swap(parent->color, grandpa->color);
                 node = parent;
             }
         } else {
-            uncle = parent_g->left;
-            if (RED == getColor(uncle)) {
-                setColor(uncle, BLACK);
-                setColor(parent, BLACK);
-                setColor(parent_g, RED);
-                node = parent_g;
+            uncle = grandpa->left;
+            if (Red == getColor(uncle)) {
+                setColor(uncle, Black);
+                setColor(parent, Black);
+                setColor(grandpa, Red);
+                node = grandpa;
             } else {
                 if (node == parent->left) {
                     rRotate(parent);
                     node = parent;
                     parent = node->parent;
                 }
-                lRotate(parent_g);
-                swap(parent->color, parent_g->color);
+                lRotate(grandpa);
+                std::swap(parent->color, grandpa->color);
                 node = parent;
             }
         }
     }
-    setColor(root, BLACK);
+
+    setColor(root, Black);                  // case 4. root insert
 }
 
-void RBTree::RBDelete(int key) {
-    Node *node = BSTDelete(key);
-    fixDeletion(node);
+template<typename T>
+void RBTree<T>::erase(T value) {
+    balanceErasion(_erase(value));
 }
 
-Node *RBTree::BSTDelete(int key) {
-    Node *tmp = root;
-    while (tmp != nil) {
-        if (tmp->key < key)
-            tmp = tmp->right;
-        else if (tmp->key > key)
-            tmp = tmp->left;
+template<typename T>
+typename RBTree<T>::Node* RBTree<T>::_erase(T value) {
+    Node* node = root;
+    while (node != nil) {
+        if (node->value < value)
+            node = node->right;
+        else if (node->value > value)
+            node = node->left;
         else {
-            Node *no = tmp;
+            Node* no = node;
             if (no->left != nil && no->right != nil) {
-                no = minNode(tmp->right);
-                tmp->key =no->key;
+                no = minNode(node->right);
+                node->value = no->value;
             }
             return no;
         }
     }
+
     return nil;
 }
 
-void RBTree::fixDeletion(Node *node) {
+template<typename T>
+void RBTree<T>::balanceErasion(Node* node) {
     if (node == nil)
         return;
 
-    Node *child = node->left != nil ? node->left : node->right;
+    Node* child = node->left != nil ? node->left : node->right;
     if (node == root)
         root = child;
     else if (node == node->parent->left)
@@ -188,81 +188,85 @@ void RBTree::fixDeletion(Node *node) {
     else
         node->parent->right = child;
     child->parent = node->parent;   // child may be nullptr
-    if (BLACK == getColor(node)) {
-        Node *parent = nil;
-        Node *sibling = nil;
-        while ((child != root) && (BLACK == getColor(child))) {
+
+    if (Black == getColor(node)) {
+        Node* parent = nil;
+        Node* sibling = nil;
+        while ((child != root) && (Black == getColor(child))) {
             parent = child->parent;
             if (child == parent->left) {
                 sibling = parent->right;
-                if (RED == getColor(sibling)) {     // Case 1. RED, change to case 2,3,4
-                    swap(sibling->color, parent->color);
+                if (Red == getColor(sibling)) {     // Case 1. Red, change to case 2,3,4
+                    std::swap(sibling->color, parent->color);
                     lRotate(parent);
-                } else {                            // Case 2. BLACK - BLACK - BLACK
-                    if (BLACK == getColor(sibling->left) && BLACK == getColor(sibling->right)) {
-                        setColor(sibling, RED);
-                        if (RED == getColor(parent)) {
-                            setColor(parent, BLACK);
+                } else {                            // Case 2. Black - Black - Black
+                    if (Black == getColor(sibling->left) && Black == getColor(sibling->right)) {
+                        setColor(sibling, Red);
+                        if (Red == getColor(parent)) {
+                            setColor(parent, Black);
                             break;
                         } else {
                             child = parent;
                         }
-                    } else {                        // Case 3. BLACK - RED - BLACK, to case 4
-                        if (BLACK == getColor(sibling->right)) {
-                            swap(sibling->color, sibling->left->color);
+                    } else {                        // Case 3. Black - Red - Black, to case 4
+                        if (Black == getColor(sibling->right)) {
+                            std::swap(sibling->color, sibling->left->color);
                             rRotate(sibling);
                             sibling = parent->right;
-                        }                           // Case 4. BLACK - <> - RED
-                        swap(parent->color, sibling->color);
-                        setColor(sibling->right, BLACK);
+                        }                           // Case 4. Black - <> - Red
+                        std::swap(parent->color, sibling->color);
+                        setColor(sibling->right, Black);
                         lRotate(parent);
                         child = root;
                     }
                 }
             } else {
                 sibling = parent->left;
-                if (RED == getColor(sibling)) {
-                    swap(sibling->color, parent->color);
+                if (Red == getColor(sibling)) {
+                    std::swap(sibling->color, parent->color);
                     rRotate(parent);
                 } else {
-                    if (BLACK == getColor(sibling->left) && BLACK == getColor(sibling->right)) {
-                        setColor(sibling, RED);
-                        if (RED == getColor(parent)) {
-                            setColor(parent, BLACK);
+                    if (Black == getColor(sibling->left) && Black == getColor(sibling->right)) {
+                        setColor(sibling, Red);
+                        if (Red == getColor(parent)) {
+                            setColor(parent, Black);
                             break;
                         } else {
                             child = parent;
                         }
                     } else {
-                        if (BLACK == getColor(sibling->left)) {
-                            swap(sibling->color, sibling->right->color);
+                        if (Black == getColor(sibling->left)) {
+                            std::swap(sibling->color, sibling->right->color);
                             lRotate(sibling);
                             sibling = parent->left;
                         }
-                        swap(sibling->color, parent->color);
-                        setColor(sibling->left, BLACK);
+                        std::swap(sibling->color, parent->color);
+                        setColor(sibling->left, Black);
                         rRotate(parent);
                         child = root;
                     }
                 }
             }
         }
-        setColor(child, BLACK);
+        setColor(child, Black);
     }
+
     delete node;
 }
 
-Node *RBTree::minNode(Node *node) {
+template<typename T>
+typename RBTree<T>::Node* RBTree<T>::minNode(Node* node) {
     while (node->left != nil)
         node = node->left;
     return node;
 }
 
-void RBTree::lRotate(Node *node) {
+template<typename T>
+void RBTree<T>::lRotate(Node* node) {
     if (node == nil)
         return;
 
-    Node *tmp = node->right;
+    Node* tmp = node->right;
     node->right = tmp->left;
     if (node->right != nil)
         node->right->parent = node;
@@ -279,11 +283,12 @@ void RBTree::lRotate(Node *node) {
     node->parent = tmp;
 }
 
-void RBTree::rRotate(Node *node) {
+template<typename T>
+void RBTree<T>::rRotate(Node* node) {
     if (node == nil)
         return;
 
-    Node *tmp = node->left;
+    Node* tmp = node->left;
     node->left = tmp->right;
     if (node->left != nil)
         node->left->parent = node;
@@ -300,38 +305,59 @@ void RBTree::rRotate(Node *node) {
     node->parent = tmp;
 }
 
-int main() {
-    RBTree *tree = new RBTree();
+template<typename T>
+void RBTree<T>::print(typename RBTree<T>::Order order) {
+    if (order == Order::PreOrder)
+        preOrderPrint(root);
+    else if (order == Order::InOrder)
+        inOrderPrint(root);
+    else if (order == Order::PostOrder)
+        postOrderPrint(root);
+}
 
-    array<int, 20> arr = {12, 1, 9, 2, 0, 11, 7, 19, 4, 15, 18, 5, 14, 13, 10, 16, 6, 3, 8, 17};
+template<typename T>
+void RBTree<T>::preOrderPrint(RBTree<T>::Node* node) {
+    if (node != nil) {
+        std::cout << std::setw(2) << node->value << "[" << node->color << "] ";
+        preOrderPrint(node->left);
+        preOrderPrint(node->right);
+    }
+}
+
+template<typename T>
+void RBTree<T>::inOrderPrint(RBTree<T>::Node* node) {
+    if (node != nil) {
+        inOrderPrint(node->left);
+        std::cout << std::setw(2) << node->value << "[" << node->color << "] ";
+        inOrderPrint(node->right);
+    }
+}
+
+template<typename T>
+void RBTree<T>::postOrderPrint(RBTree<T>::Node* node) {
+    if (node != nil) {
+        postOrderPrint(node->left);
+        postOrderPrint(node->right);
+        std::cout << std::setw(2) << node->value << "[" << node->color << "] ";
+    }
+}
+
+int main() {
+    RBTree<int> *tree = new RBTree<int>();
+
+    std::array<int, 20> arr{12, 1, 9, 2, 0, 11, 7, 19, 4, 15, 18, 5, 14, 13, 10, 16, 6, 3, 8, 17};
 
     for (int i = 0; i < arr.size(); ++i) {
-        tree->RBInsert(arr[i]);
-//        preorder(tree, tree->root);
-//        cout << endl << endl;
-    }
-    for (int i = 0; i < 20; ++i) {
-        tree->RBDelete(arr[i]);
-        preorder(tree, tree->root);
-        cout << endl << endl;
+        tree->insert(arr[i]);
+        tree->print(RBTree<int>::Order::InOrder);
+        std::cout << std::endl << std::endl;
     }
 
-//    tree->RBInsert(4);
-//    cout << "Insetion. Inorder traversal of RBTree:\n";
-//    tree->inOrder();
-//    cout << endl;
-//    tree->preOrder();
-//
-//    // tree->RBDelete(9);
-//    for (int i = 0; i < arr.size(); ++i) {
-//        tree->RBDelete(arr[i]);
-//        cout << "D<" << setw(2) << arr[i] << "> ";
-//        tree->inOrder();
-//        cout << endl;
-//    }
-//    cout << "\nDeletion. Inorder traversal of RBTree:\n";
-//    tree->inOrder();
+    for (int i = 0; i < arr.size(); ++i) {
+        tree->erase(arr[i]);
+        tree->print(RBTree<int>::Order::InOrder);
+        std::cout << std::endl << std::endl;
+    }
 
     return 0;
 }
-
