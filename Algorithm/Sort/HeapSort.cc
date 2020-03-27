@@ -2,33 +2,49 @@
 #include<iterator>
 #include<vector>
 
-using namespace std;
+/**
+ * Top to bottom heapify */
+template<typename Iter,
+    typename T = typename std::iterator_traits<Iter>::value_type,
+    typename Compare = std::less<T>>
+void heapify(Iter begin, Iter cur, Iter end, Compare comp = Compare()) {
+    for (Iter iter = cur + std::distance(begin, cur) + 1;
+        iter < end;
+        iter = iter + std::distance(begin, iter) + 1)
+    {
+        if (iter + 1 < end && comp(*iter, *(iter+1)))
+            ++iter;             // max(leftChild, rightChild)
 
-void heapAdjust(vector<int> &vec, int b, int e) {
-    for (int i = 2 * b + 1; i < e; i = i * 2 + 1) {
-        if (i + 1 < e && vec[i] < vec[i + 1])
-            ++i;
-        if (vec[b] >= vec[i])
+        if (!comp(*cur, *iter)) // max(cur, child)
             break;
-        swap(vec[b], vec[i]);
-        b = i;
+
+        std::swap(*cur, *iter);
+        cur = iter;
     }
 }
 
-void heapSort(vector<int> &vec) {
-    int len = vec.size();
-    for (int i = len / 2 - 1; i >= 0; --i) 
-        heapAdjust(vec, i, len);
-    for (int i = len - 1; i > 0; --i) {
-        swap(vec[0], vec[i]);
-        heapAdjust(vec, 0, i);
+
+template<typename Iter,
+    typename T = typename std::iterator_traits<Iter>::value_type,
+    typename Compare = std::less<T>>
+void heapSort(Iter begin, Iter end, Compare comp = Compare()) {
+    for (Iter iter = begin + std::distance(begin, end) / 2 - 1; iter >= begin; --iter)
+        heapify(begin, iter, end, comp);
+
+    for (Iter iter = end - 1; iter > begin; --iter) {
+        std::swap(*begin, *iter);
+        heapify(begin, begin, iter, comp);
     }
 }
 
 int main(void) {
-    vector<int> vec = {3, 2, 5, 8, 4, 7, 6, 9};
-    heapSort(vec);
-    copy(vec.begin(), vec.end(), ostream_iterator<int>(cout, " "));
-    
+    std::vector<int> vec{3, 2, 5, 8, 4, 7, 6, 9, 1};
+
+    // heapSort(vec.begin(), vec.end());
+    heapSort(vec.begin(), vec.end(), std::greater<int>());
+
+    std::copy(vec.begin(), vec.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
+
     return 0;
 }
