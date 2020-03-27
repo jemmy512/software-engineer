@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <random>
 #include <optional>
+#include <functional>
 
 template<typename ValT>
 class SkipList {
