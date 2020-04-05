@@ -49,7 +49,7 @@ public:
 
 class RiskManagement {
 public:
-    RiskManagement& registerFilter(std::shared_ptr<ISensitiveWordsFilter>& filter) {
+    RiskManagement& registerFilter(const std::shared_ptr<ISensitiveWordsFilter>& filter) {
         auto ite = std::find_if(mFilters.cbegin(), mFilters.cend(), [&filter](const auto& item) {
                 return item == filter;
             });
@@ -76,8 +76,9 @@ private:
 
 
 int main() {
-    auto filterA = std::dynamic_pointer_cast<ISensitiveWordsFilter>(std::make_shared<ASensitiveWordsFilterAdaptor>());
-    auto filterB = std::dynamic_pointer_cast<ISensitiveWordsFilter>(std::make_shared<BSensitiveWordsFilterApdator>());
+    auto filterA = std::make_shared<ASensitiveWordsFilterAdaptor>();
+
+    auto filterB = std::make_shared<BSensitiveWordsFilterApdator>();
 
     RiskManagement riskManagement;
     riskManagement.registerFilter(filterA).registerFilter(filterB);
@@ -93,11 +94,11 @@ int main() {
  * Adapter category:
  * 1. Class adapter: implemented by inheritance when adapter have many same interfaces with adaptee.
  * 2. Object adapter: implemented by composing when addapter doesn't have many same interfaces with adaptee.
- * 
+ *
  * Scenarios:
  * 1. Encapsulat interfaces that have defective design
  * 2. Unify interface design for multiple classes
  * 3. Replace external dependent systems
  * 4. Compatible with older versions of the interface
  * 5. Adapt data in different formats
- */ 
+ */
