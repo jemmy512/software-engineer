@@ -59,11 +59,11 @@ public:
         cur->isEndingChar = true;
     }
 
-    bool find(const std::string& curattern) {
+    bool find(const std::string& pattern) {
         auto* cur = root;
 
-        for (int i = 0; i < curattern.size(); ++i) {
-            int idx = index(curattern[i]);
+        for (int i = 0; i < pattern.size(); ++i) {
+            int idx = index(pattern[i]);
 
             if (cur->children[idx] == nullptr) {
                 return false;
@@ -90,67 +90,62 @@ public:
             if (cur == nullptr)
                 cur = root;
 
-            auto* tmp = cur;
-            while (tmp != root) {
-                if (tmp->isEndingChar == true) {
-                    auto pos = i - tmp->length + 1;
-                    matchHandler(text, pos, tmp->length);
-                }
-
-                tmp = tmp->fail;
+            if (cur->isEndingChar == true) {
+                auto pos = i - cur->length + 1;
+                matchHandler(text, pos, cur->length);
             }
         }
-
     }
 
-void buildFailurePointer(const TrieNode* node = root) {
-    auto queue = std::queue<TrieNode*>();
-    if (node != nullptr)
-        queue.push(root);
+    void buildFailurePointer(const TrieNode* node = root) {
+        auto queue = std::queue<TrieNode*>();
+        if (node != nullptr)
+            queue.push(root);
 
-    while (!queue.empty()) {
-        auto* cur = queue.front();
-        queue.pop();
+        while (!queue.empty()) {
+            auto* cur = queue.front();
+            queue.pop();
 
-        for (int i = 0; i < 26; ++i) {
-            auto* child = cur->children[i];
-            if (child == nullptr)
-                continue;
+            for (int i = 0; i < 26; ++i) {
+                auto* child = cur->children[i];
+                if (child == nullptr)
+                    continue;
 
-            if (cur == root) {
-                child->fail = root;
-            } else {
-                auto* curFail = cur->fail;
-                while (curFail != nullptr) {
-                    auto* curFailChild = curFail->children[index(child)];
-                    if (curFailChild != nullptr) {
-                        child->fail = curFailChild;
-                        break;
-                    } else {
-                        curFail = curFail->fail;
+                if (cur == root) {
+                    child->fail = root;
+                } else {
+                    auto* curFail = cur->fail;
+                    while (curFail != nullptr) {
+                        auto* curFailChild = curFail->children[index(child)];
+                        if (curFailChild != nullptr) {
+                            child->fail = curFailChild;
+                            break;
+                        } else {
+                            curFail = curFail->fail;
+                        }
+                    }
+
+                    if (curFail == nullptr) {
+                        child->fail = root;
                     }
                 }
 
-                if (curFail == nullptr) {
-                    child->fail = root;
-                }
+                queue.push(child);
             }
-
-            queue.push(child);
         }
     }
-}
 
-int index(const char& chr) {
-    return chr - 'a';
-}
+private:
+    int index(const char& chr) {
+        return chr - 'a';
+    }
 
-int index(const TrieNode* node) {
-    if (node != nullptr)
-        return node->data - 'a';
-    else
-        throw std::out_of_range("TrieNode is null, can't get it's index!");
-}
+    int index(const TrieNode* node) {
+        if (node != nullptr)
+            return node->data - 'a';
+        else
+            throw std::out_of_range("TrieNode is null, can't get it's index!");
+    }
 
 private:
     bool isBuildFail = true;
