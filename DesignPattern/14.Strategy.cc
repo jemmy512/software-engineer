@@ -8,6 +8,7 @@
 #include <vector>
 #include <list>
 
+/* 1. Define Strategy */
 enum class SortEnum {
     QuickSort,
     InsertSort
@@ -36,7 +37,7 @@ public:
     }
 };
 
-
+/* 2. Create Strategy */
 template<typename Iter>
 class SortFactory {
 public:
@@ -71,7 +72,7 @@ SortFactory<Iter>::getAlgorithm(const SortEnum& type) {
     return sortAlgorithmes[type];
 }
 
-
+/* 3. Use Strategy */
 int main() {
     std::vector<int> data{3, 2, 5, 8, 4, 7, 6, 9, 1};
     std::list<int> dataList{2, 3, 5, 8, 4, 7, 6, 1, 9};
