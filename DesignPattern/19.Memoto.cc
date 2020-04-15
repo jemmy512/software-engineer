@@ -64,7 +64,7 @@ public:
     optional_type pop() {
         optional_type option;
 
-        if (mStack.size()) {
+        if (mStack.size()) { // pop empty container is undefined
             option.emplace(mStack.top());
             mStack.pop();
         }
