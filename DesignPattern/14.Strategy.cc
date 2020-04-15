@@ -49,14 +49,11 @@ public:
 
 };
 
-// template<typename Iter>
-// SortFactory<Iter>::sortAlgorithmes.emplace("QuickSort", std::make_shared<QuickSort<Iter>>());
-
-// SortFactory::sortAlgorithmes.emplace_back("QuickSort", std::make_shared<QuickSort>());
-// sortAlgorithmes.emplace_back("QuickSort", std::make_shared<QuickSort>());
-
-// sorsortAlgorithmests.emplace_back("QuickSort", std::make_shared<QuickSort>());
-
+template<typename Iter>
+std::map<SortEnum, typename SortFactory<Iter>::SortPtr> SortFactory<Iter>::sortAlgorithmes = {
+    {SortEnum::QuickSort, std::make_shared<QuickSort<Iter>>()},
+    {SortEnum::InsertSort, std::make_shared<InsertSort<Iter>>()}
+};
 
 template<typename Iter>
 typename SortFactory<Iter>::SortPtr
@@ -70,6 +67,12 @@ SortFactory<Iter>::getAlgorithm(const SortEnum& type) {
     }
 
     return sortAlgorithmes[type];
+}
+
+template<typename Iter>
+typename SortFactory<Iter>::SortPtr
+SortFactory<Iter>::getAlgorithm(const SortEnum& type) {
+    return sortAlgorithmes.at(type);
 }
 
 /* 3. Use Strategy */
