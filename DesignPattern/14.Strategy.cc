@@ -90,4 +90,14 @@ int main() {
 
 /**
  * Define a family of algorithms, encapsulate each one, and make them interchangeable.
- * Strategy lets the algorithm vary independently from clients that use it. */
+ * Strategy lets the algorithm vary independently from clients that use it.
+ *
+ *
+ * * Strategy VS Command:
+ * 1. A group Strategies have the same goal, but different implementation, they can interexchange
+ * 2. A group commands have different goals, and they can't interexchange
+ *
+ *
+ * Strategy VS Factory:
+ * 1. Strategy focus on strategies or algorithms, select different strategies according to different scenarios
+ * 2. Factory focus on the creation of objects, regardless of scenarios */
