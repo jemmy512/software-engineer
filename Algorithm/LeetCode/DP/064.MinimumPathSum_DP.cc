@@ -1,5 +1,5 @@
 /*
-Given a m x n grid filled with non-negative numbers, find a path from top 
+Given a m x n grid filled with non-negative numbers, find a path from top
 left to bottom right which minimizes the sum of all numbers along its path.
 
 Note: You can only move either down or right at any point in time.
@@ -27,16 +27,16 @@ public:
                 if (i == 0) {
                     if (j == 0)
                         dp[j] = grid[i][j];
-                    else 
+                    else
                         dp[j] = dp[j-1] + grid[i][j];
                 } else if (j == 0) {
                     dp[j] = dp[j] + grid[i][j];
                 } else {
-                    dp[j] = min(dp[j], dp[j-1]) + grid[i][j];  
+                    dp[j] = min(dp[j], dp[j-1]) + grid[i][j];
                 }
             }
         }
-        
+
         return dp[col-1];
     }
 };
