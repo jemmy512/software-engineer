@@ -5,6 +5,8 @@ public:
     virtual void read() {
 
     }
+
+    virtual ~InputStream() = default;
 };
 
 class FileInputStream : public InputStream {
@@ -51,3 +53,10 @@ int main() {
 
     return 0;
 }
+
+/**
+ * The decorator pattern maily solves the complication problem of the inheritance relationship,
+ * and replaces inheritance through combination. It's main role is to add enhancements to the original class.
+ *
+ * You can nest mutiple decorator classes to the original class, this requires the decorator classes need to
+ * inherit the same interface with the original class. */
