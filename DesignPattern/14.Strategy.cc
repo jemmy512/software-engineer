@@ -64,6 +64,8 @@ SortFactory<Iter>::getAlgorithm(const SortEnum& type) {
             sortAlgorithmes.emplace(type, std::make_shared<QuickSort<Iter>>());
         else if (type == SortEnum::InsertSort)
             sortAlgorithmes.emplace(type, std::make_shared<InsertSort<Iter>>());
+        else
+            throw std::invalid_argument("Don't support this type!");
     }
 
     return sortAlgorithmes[type];
