@@ -51,7 +51,7 @@ namespace util::string {
         do {
             begin = (end == std::string::npos) ? 0 : end + 1;
             end = str.find_first_of(delimiter, begin);
-            auto  token = str.substr(begin, end-begin);
+            auto  token = str.substr(begin, end-begin); // std::out_of_range if pos > size()
 
             if (!token.empty())
                 result.emplace_back(token);
@@ -63,9 +63,9 @@ namespace util::string {
 
 inline constexpr char GreatOperator = '>';
 inline constexpr char LessOperator = '<';
-inline std::string EqualOpertor = "==";
-inline std::string AndOpertor = "&&";
-inline std::string OrOperator = "||";
+inline const std::string EqualOpertor = "==";
+inline const std::string AndOpertor = "&&";
+inline const std::string OrOperator = "||";
 
 class IExpression {
 public:
@@ -134,7 +134,7 @@ public:
     EqualExpress(const std::string& expression) {
         const auto& items = util::string::split(expression, EqualOpertor);
         if (items.size() < 2)
-            throw std::runtime_error("Equal Expression is invalid: " + expression);
+            throw std::invalid_argument("Equal Expression is invalid: " + expression);
 
         mKey = util::string::trim(items[0]);
         mValue = std::stol(util::string::trim(items[1]));
@@ -163,14 +163,18 @@ public:
 
         for (auto& expr : splits) {
             expr = util::string::trim(expr);
-            if (expr.find("<") != std::string::npos) {
+            bool isLessExpr = expr.find(LessOperator) != std::string::npos;
+            bool isGreatExpr = expr.find(GreatOperator) != std::string::npos;
+            bool isEqualExpr = expr.find(EqualOpertor) != std::string::npos;
+
+            if (isLessExpr && !isEqualExpr && !isGreatExpr) {
                 mExpressions.emplace_back(std::make_shared<LessExpress>(expr));
-            } else if (expr.find(">") != std::string::npos) {
+            } else if (isGreatExpr && !isLessExpr && !isEqualExpr) {
                 mExpressions.emplace_back(std::make_shared<GreatExpress>(expr));
-            } else if (expr.find("==") != std::string::npos) {
+            } else if (isEqualExpr && !isLessExpr && !isGreatExpr) {
                 mExpressions.emplace_back(std::make_shared<EqualExpress>(expr));
             } else {
-                throw std::runtime_error("And 2 Expression is invalid: " + expr);
+                throw std::invalid_argument("And 2 Expression is invalid: " + expr);
             }
         }
     }
@@ -195,7 +199,7 @@ public:
     OrExpression(const std::string& expression) {
         auto splits = util::string::split(expression, OrOperator);
         if (splits.size() < 2)
-            throw std::runtime_error("Or Expression less than two args: " + expression);
+            throw std::invalid_argument("Or Expression less than two args: " + expression);
 
         for (auto& expr : splits) {
             expr = util::string::trim(expr);
