@@ -53,9 +53,9 @@
 - [ ] :blue_book: Computer Networking: A Top-Down Approach
 
 # System Knowledge
-- [ ] :blue_book: Computer Systems A Programmer’s Perspective
+- [ ] :blue_book: Computer Systems A Programmer’s Perspective :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CS/Computer%20System%20A%20Programmers%20Perspective.md)
 - [ ] :blue_book: Advanced Programming in the UNIX Environment
-- [ ] :blue_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/UNP.txt)
+- [ ] :blue_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/Linux/LinuxProgramming.md)
 - [ ] :blue_book: UNIX Network Programming, Volume 2: Interprocess Communications
 - [ ] :blue_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CS/TCP:IP%20Illustrated%2C%20Volume%201.md)
 - [ ] :blue_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
@@ -226,4 +226,3 @@ Geo-replicated Internet Services](https://www.usenix.org/system/files/conference
 
 
 # Microservice
-
