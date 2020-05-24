@@ -49,7 +49,7 @@
 # Theoretical Discipline
 - [ ] :blue_book: Data Structures and Algorithm Analysis in C:Second Edition
 - [ ] :blue_book: Database System Concepts(Fifth Edition)
-- [ ] :blue_book: Modern Operating Systems
+- [ ] :blue_book: Modern Operating Systems :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CS/Modern%20Operating%20System.md)
 - [ ] :blue_book: Computer Networking: A Top-Down Approach
 
 # System Knowledge
