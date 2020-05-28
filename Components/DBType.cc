@@ -252,6 +252,22 @@ public:
         return getResult<T>(getIndex(name));
     }
 
+    const int& getInt(const std::string& name) {
+        return getResult<int>(name);
+    }
+
+    const std::string& getString(const std::string& name) {
+        return getResult<std::string>(name);
+    }
+
+    const float& getFloat(const std::string& name) {
+        return getResult<float>(name);
+    }
+
+    const std::vector<char>& getBlob(const std::string& name) {
+        return getResult<std::vector<char>>(name);
+    }
+
 private:
     int mPosition{0};
     std::vector<DBType> mResults;
