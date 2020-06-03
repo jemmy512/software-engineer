@@ -110,7 +110,7 @@ void LoggerManager::registerLogger(const Logger::Ptr& logger) {
 }
 
 void LoggerManager::unregisterLogger(const Logger::Ptr& logger) {
-    auto iter = std::find(mLoggers.begin(), mLoggers.end(), logger); 
+    auto iter = std::find(mLoggers.begin(), mLoggers.end(), logger);
     if (iter != mLoggers.end()) {
         logger->finalize();
         mLoggers.erase(iter);
