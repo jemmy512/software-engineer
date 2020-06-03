@@ -57,7 +57,7 @@ public:
     }
 
     void fireNow(TimerId id) {
-        
+
     }
 
     ~TimerManager() {
@@ -77,12 +77,12 @@ private:
     struct TimerInstance {
 
         TimerInstance(TimerId id, TimeStamp next, Duration period, TimerFunc&& func)
-        :   mId(id), mNext(next), mPeriod(period), mHandler(std::forward<TimerFunc>(func)) { 
+        :   mId(id), mNext(next), mPeriod(period), mHandler(std::forward<TimerFunc>(func)) {
             Print(std::string{"TimerInstance() "} + std::string{"Id: "} + std::to_string(mId));
         }
 
         TimerInstance(TimerInstance&& other)
-        :   mId(other.mId), mNext(other.mNext), mPeriod(other.mPeriod), mHandler(std::move(other.mHandler)) { 
+        :   mId(other.mId), mNext(other.mNext), mPeriod(other.mPeriod), mHandler(std::move(other.mHandler)) {
             Print(std::string{"TimerInstance(&&) "} + std::string{"Id: "} + std::to_string(mId));
         }
 
@@ -158,7 +158,7 @@ private:
         }
     }
 
-    std::function<bool(const TimerInstance&, const TimerInstance&)> timerComparator = [](const TimerInstance& lhs, const TimerInstance& rhs) { 
+    std::function<bool(const TimerInstance&, const TimerInstance&)> timerComparator = [](const TimerInstance& lhs, const TimerInstance& rhs) {
         return lhs.mNext < rhs.mNext;
     };
     using TimerMap = std::unordered_map<TimerId, TimerInstance>;
