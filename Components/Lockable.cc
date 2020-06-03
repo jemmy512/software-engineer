@@ -7,14 +7,16 @@ template<typename T>
 class Lockable {
 private:
     mutable std::recursive_mutex mMutex;
-    T *mData;
+    T mData;
 
 public:
     class Ptr {
     public:
-        explicit Ptr(Lockable* lockable) : mLockable(lockable), mLock(lockable->mLock) {}
+        explicit Ptr(Lockable* lockable) : mLockable(lockable), mLock(lockable->mMutex) {}
 
-        Ptr(Ptr&& other) : mLockable(other.mLockable), mLock(std::move(other.mLock)) {}
+        Ptr(Ptr&& other) : mLockable(other.mLockable), mLock(std::move(other.mLock)) {
+            other.mLockable = nullptr;
+        }
 
         Ptr(const Ptr&) = delete;
 
@@ -47,15 +49,17 @@ public:
 
     class ConstPtr {
     public:
-        explicit ConstPtr(const Lockable* lockable) : mLockable(lockable), mLock(lockable->mlock) {}
+        explicit ConstPtr(const Lockable* lockable) : mLockable(lockable), mLock(lockable->mMutex) {}
 
-        ConstPtr(ConstPtr&& other) : mLockable(other.mLockable), mLock(std::move(other.mMutex)) {}
+        ConstPtr(ConstPtr&& other) : mLockable(other.mLockable), mLock(std::move(other.mMutex)) {
+            other.mLockable = nullptr;
+        }
 
         ConstPtr(const ConstPtr&) = delete;
 
         ConstPtr& operator==(const ConstPtr&) = delete;
 
-        T* operator->() {
+        const T* const operator->() {
             if (mLockable) {
                 return &mLockable->mData;
             }
@@ -63,7 +67,7 @@ public:
             return nullptr;
         }
 
-        T& operator*() {
+        const T& operator*() {
             if (mLockable) {
                 return mLockable->mData;
             }
@@ -85,11 +89,12 @@ public:
     explicit Lockable(Args... args) : mData(args...) {}
 
     Ptr lock() {
-        return std::move(Ptr(this));
+        // return std::move(Ptr(this));
+        return Ptr(this); // return copy elision
     }
 
     ConstPtr readLock() const {
-        return std::move(ConstPtr(this));
+        return ConstPtr(this);
     }
 };
 
@@ -99,12 +104,12 @@ public:
     std::cout<< "1. " << std::dec << (long)&str << ", " << std::dec << (long)&str[0] << ", " << str << std::endl;
 
     vecString.push_back(std::move(str));
-    
+
     std::cout << "2. " << std::dec << (long)&str << ", " << std::dec << (long)&str[0] << ", " << str << std::endl;
 
     str.append("w");
     std::cout << "3. " << std::dec << (long)&str << ", " << std::dec << (long)&str[0] << ", " << str << std::endl;
-    
+
     std::cout<< "4. " << std::dec << (long)&(vecString[0]) << ", " << std::dec <<  (long)&(vecString[0][0]) << ", " << std::dec << (long)&vecString << std::endl;
 }
 
@@ -128,4 +133,3 @@ public:
     int age = 23;
     std::string name = "name";
 };
-
