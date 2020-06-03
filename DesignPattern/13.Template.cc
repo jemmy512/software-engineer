@@ -16,4 +16,6 @@ int main() {
  *
  * Callbacks and templates:
  * 1. Callbacks do not need to define new subclasses for new functions
- * 2. Callbacks do not need to implement unwanted template functions */
+ * 2. Callbacks do not need to implement unwanted template functions
+ * 3. Callbacks are implemented by composition, transfor one object to another, are objects relationship
+ * 4. Templates are implemented by inheritance, subclass overrides parent, are classes relationship */
