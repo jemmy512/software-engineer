@@ -43,6 +43,15 @@ public:
             }
         }
 
+        // for (auto iter = mObservers.begin(); iter != mObservers.end();) {
+        //     if (iter->expired()) {
+        //         iter = mObservers.erase(iter);
+        //     } else {
+        //         std::invoke(func, iter->lock(); std::forward<Args>(args)...);
+        //         ++iter;
+        //     }
+        // }
+
         removeExpiredObservers(std::move(liveObservers));
     }
 
