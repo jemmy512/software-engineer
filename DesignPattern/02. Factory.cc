@@ -1,9 +1,16 @@
 #include <iostream>
+#include <map>
+
+class IConfigParser;
+class JsonConfigParser;
+class XmlConfigParser;
+class YamlConfigParser;
+class PropertyConfigParser;
 
 namespace simpleFactory {
     class ConfigFactory {
     public:
-        static std::make_shared<IConfigParser> createParser(std::string& fileExtension) {
+        static std::shared_ptr<IConfigParser> createParser(std::string& fileExtension) {
             if (fileExtension == "json") {
                 return std::make_shared<JsonConfigParser>();
             } else if (fileExtension == "xml") {
@@ -20,13 +27,13 @@ namespace simpleFactory {
 }
 
 namespace factoryMethod {
-// Define an interface for creating an object, but let subclasses decide which class to instantiate. 
+// Define an interface for creating an object, but let subclasses decide which class to instantiate.
 // Factory Method lets a class defer instantiation to subclasses.
 
     class IConfigFactory {
     public:
         virtual std::shared_ptr<IConfigParser> createParser() = 0;
-        virtual ~IConfigFactory() = default; 
+        virtual ~IConfigFactory() = default;
     };
 
     class JsonConfigFacgtory : public IConfigFactory {
@@ -50,7 +57,12 @@ namespace factoryMethod {
         }
 
     private:
-        std::map<std::string, std::make_shared<IConfigFactory>> mFactories;
+        static std::map<std::string, std::shared_ptr<IConfigFactory>> mFactories;
+    };
+
+    std::map<std::string, std::shared_ptr<IConfigFactory>> FactoryContext::mFactories = {
+        {"json", std::make_shared<JsonConfigFacgtory>()},
+        {"xml", std::make_shared<XmlConfigFacgtory>()}
     };
 }
 
