@@ -4,16 +4,34 @@
 #include <map>
 #include <functional>
 
-enum class Event {
-    GOT_DIAMOND,
-    GOT_STAR,
-    HIT_OBSTACLE,
-    ARCHIVE
+class Event {
+public:
+    enum Enum {
+        INVALID,
+        GOT_DIAMOND,
+        GOT_STAR,
+        HIT_OBSTACLE,
+        ARCHIVE
+    };
+
+    static Enum fromString(const std::string& event) {
+        if (event == "got_diamond") {
+            return GOT_DIAMOND;
+        } else if (event == "got_star") {
+            return GOT_STAR;
+        } else if (event == "hit_obstracle") {
+            return HIT_OBSTACLE;
+        } else if (event == "archive") {
+            return ARCHIVE;
+        }
+
+        return INVALID;
+    }
 };
 
 class Request {
 public:
-    Event getEvent() const {
+    Event::Enum getEvent() const {
         return Event::GOT_DIAMOND;
     }
 };

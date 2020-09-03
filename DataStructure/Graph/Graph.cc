@@ -5,14 +5,17 @@
 #include <vector>
 #include <queue>
 #include <map>
+#include <limits>
+#include "../../Algorithm/Sort/HeapSort.cc"
 
 template<typename T>
 struct Vertex {
     using key_type = typename std::hash<T>::result_type;
 
-    Vertex(const T& val) : value(val) { }
+    Vertex(const T& val, int w) : value(val), weight(w) { }
 
     T value;
+    int weight;
     std::vector<key_type> inDegree;
     std::vector<key_type> outDegree;
 };
@@ -24,17 +27,28 @@ public:
     using vertex_type = VertexT;
     using key_type = typename std::hash<T>::result_type;
 
+private:
+    struct DistanceVertex {
+        key_type key;
+        key_type predecessor;
+        bool visited{false};
+        int distance{std::numeric_limits<int>::max()};
+
+        bool operator==(const DistanceVertex& other) {
+            return this == &other;
+        }
+    };
 public:
     int size() const {
         return mVertexes.size();
     }
 
-    void addEdge(const T& from, const T& to) {
+    void addEdge(const T& from, const T& to, int weight) {
         auto fromKey = mHasher(from);
         auto toKey = mHasher(to);
 
-        mVertexes.try_emplace(fromKey, from);
-        mVertexes.try_emplace(toKey, to);
+        mVertexes.try_emplace(fromKey, from, weight);
+        mVertexes.try_emplace(toKey, to, weight);
 
         mVertexes.at(fromKey).outDegree.emplace_back(toKey);
         mVertexes.at(toKey).inDegree.emplace_back(fromKey);
@@ -158,6 +172,55 @@ public:
         std::cout << std::endl;
     }
 
+    void shortestPathByDijkstra(const value_type& from, const value_type& to) {
+        const auto& fromKey = mHasher(from);
+
+        std::map<key_type, DistanceVertex> distanceMap;
+        distanceMap.insert_or_assign(fromKey, DistanceVertex{fromKey, fromKey, true, 0});
+
+
+        struct Compare {
+            bool operator()(const std::reference_wrapper<const DistanceVertex>& left, const std::reference_wrapper<const DistanceVertex>& right) {
+                    return left.get().distance < right.get().distance;
+            };
+        };
+        Heap<std::reference_wrapper<const DistanceVertex>, Compare> heap;
+
+        const auto& fromVer = mVertexes.at(fromKey);
+        for (const auto& outKey : fromVer.outDegree) {
+            distanceMap[outKey].key = outKey;
+        }
+
+        heap.push(std::cref(distanceMap.at(fromKey)));
+
+        while (!heap.empty()) {
+            const auto& top = heap.pop();
+            auto& minVer = top.get();
+            const auto& ver = mVertexes.at(minVer.key);
+            if (ver.value == to)
+                break;
+
+            for (const auto& kk : ver.outDegree) {
+                auto& childVer = mVertexes.at(kk);
+                if (minVer.distance + ver.weight < distanceMap[kk].distance) {
+                    auto& kkVer = distanceMap[kk];
+                    kkVer.key = kk;
+                    kkVer.distance = minVer.distance + ver.weight;
+                    kkVer.predecessor = minVer.key;
+
+                    if (kkVer.visited) {
+                        heap.update(top);
+                    } else {
+                        kkVer.visited = true;
+                        heap.push(std::cref(kkVer));
+                    }
+                }
+            }
+        }
+
+        printShortestPath(distanceMap, mHasher(to));
+    }
+
     void print() const {
         for (const auto& vertex : mVertexes) {
             std::cout << vertex.second.value << " -> ";
@@ -165,6 +228,16 @@ public:
                 std::cout << mVertexes.at(out).value << " -> ";
             }
             std::cout << std::endl;
+        }
+    }
+
+    void printShortestPath(const std::map<key_type, DistanceVertex>& distanceMap, const key_type& target) {
+        const auto& ver = distanceMap.at(target);
+        if (ver.key == ver.predecessor) {
+            std::cout << mVertexes.at(ver.key).value << " +> ";
+        } else {
+            printShortestPath(distanceMap, ver.key);
+            std::cout << mVertexes.at(target).value << " +> ";
         }
     }
 
@@ -204,21 +277,20 @@ private:
     std::map<key_type, vertex_type> mVertexes;
 };
 
-int main() {
-
+void Test() {
     Graph<int> graph;
 
-    graph.addEdge(0, 1);
-    graph.addEdge(1, 2);
-    graph.addEdge(2, 3);
-    graph.addEdge(3, 2);
+    graph.addEdge(0, 1, 0);
+    graph.addEdge(1, 2, 0);
+    graph.addEdge(2, 3, 0);
+    graph.addEdge(3, 2, 0);
 
-    graph.addEdge(6, 7);
-    graph.addEdge(7, 8);
-    graph.addEdge(8, 9);
-    graph.addEdge(9, 10);
-    graph.addEdge(10, 11);
-    graph.addEdge(11, 10);
+    graph.addEdge(6, 7, 0);
+    graph.addEdge(7, 8, 0);
+    graph.addEdge(8, 9, 0);
+    graph.addEdge(9, 10, 0);
+    graph.addEdge(10, 11, 0);
+    graph.addEdge(11, 10, 0);
 
     graph.print();
 
@@ -235,6 +307,24 @@ int main() {
 
     std::cout << "-- topoSortByDfs: " << std::endl;
     graph.topoSortByDfs();
+}
+
+void TestDijkstra() {
+    Graph<int> graph;
+
+    graph.addEdge(1, 3, 10);
+    graph.addEdge(3, 4, 50);
+    graph.addEdge(4, 5, 20);
+    graph.addEdge(5, 6, 60);
+    graph.addEdge(1, 6, 100);
+    graph.addEdge(2, 3, 5);
+
+    graph.shortestPathByDijkstra(1, 5);
+}
+
+int main() {
+
+    TestDijkstra();
 
     return 0;
 }
