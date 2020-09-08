@@ -15,8 +15,7 @@ struct foo {
 int main(int argc, char** argv) {
     struct foo f={0};
     if (f.a->s) {
-        printf( f.a->s);    // crash, invalid access
+        printf(f.a->s);    // crash, invalid access
     }
     return 0;
 }
-

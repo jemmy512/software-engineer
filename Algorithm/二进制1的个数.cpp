@@ -1,24 +1,22 @@
 #include<iostream>
 using namespace std;
 
-/*
-计算和n的二进制中1的个数一样，且最接近的数字
-
-*/
+/* Calculate a number, which has the same 1 in the binary
+ * format as the N, and is closest to N */
 
 int getNext(int n){
-    int c=n;
-    int c0=0;
-    int c1=0;
-//
-    while((c&1)==0&&(c!=0)){
-        c0++;
-        c>>=1;
+    int c = n;
+    int c0 = 0;
+    int c1 = 0;
+
+    while ((c&1) == 0 && (c != 0)){
+        ++c0;
+        c >>=1;
     }
 
-    while((c&1)==1){
-        c1++;
-        c>>=1;
+    while ((c&1) == 1){
+        ++c1;
+        c >>= 1;
     }
 
     if(c0+c1==31||c0+c1==0)//c0+c1+1=32,1表示p所在位。
