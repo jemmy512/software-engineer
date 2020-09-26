@@ -6,7 +6,7 @@ int fabonacci(int n)
     if(n==0||n==1)
         return n;
     int a=0,b=1,m;
-    //״̬ת�Ʒ��� f[i]=f[i-1]+f[i-2];
+    //״̬ת�Ʒ��� f[i]=f[i-1]+f[i-2];
     for(int i=1;i<n;i++){
         m=a+b;
         a=b;

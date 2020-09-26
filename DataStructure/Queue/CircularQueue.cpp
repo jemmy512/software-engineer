@@ -5,7 +5,7 @@ template<typename T, size_t Size>
 class CircularQueue {
 public:
     friend std::ostream& operator<<(std::ostream& os, const CircularQueue& queue) {
-        for (auto i = queue.mHead; i < queue.mTail; ++i) {
+        for (auto i = queue.mHead; i < queue.mTail; i = (i + 1) % queue.mSize) {
             std::cout << queue.mQueue[i] << " ";
         }
 
@@ -26,7 +26,7 @@ public:
 
     CircularQueue(const CircularQueue& rhs) : mSize(rhs.mSize) {
         mQueue = new T[mSize];
-        for (size_t i = rhs.mHead; i != rhs.mTail; i = (i+1)%rhs.mSize) {
+        for (size_t i = rhs.mHead; i != rhs.mTail; i = (i + 1) % rhs.mSize) {
             push(rhs.mQueue[i]);
         }
     }
@@ -69,12 +69,13 @@ public:
         return *this;
     }
 
-    void push(T data) {
-        if ((mTail+1)%mSize == mHead)
+    void push(const T& data) {
+        if ((mTail+1) % mSize == mHead) {
             throw std::out_of_range("The Queue is full!");
+        }
 
         mQueue[mTail] = data;
-        mTail = (mTail+1)%mSize;
+        mTail = (mTail + 1) % mSize;
     }
 
     T pop() {
@@ -82,15 +83,17 @@ public:
             throw std::out_of_range("The Queue is already empty!");
 
         T data = mQueue[mHead];
-        mHead = (mHead+1)%mSize;
+        mHead = (mHead+1) % mSize;
 
         return data;
     }
 
 private:
     void reset() {
-        delete[] mQueue;
-        mQueue = nullptr;
+        if (mQueue != nullptr) {
+            delete[] mQueue;
+            mQueue = nullptr;
+        }
         mSize = 0;
         mHead = 0;
         mTail = 0;

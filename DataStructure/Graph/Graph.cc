@@ -60,41 +60,43 @@ public:
         prev.reserve(size());
 
         for (const auto& [key, vertex] : mVertexes) {
-            if (vertex.inDegree.size() == 0) {
-                std::queue<key_type> queue;
+            if (vertex.inDegree.size() != 0) {
+                continue;
+            }
 
-                if (vertex.value != val)
-                    queue.push(key);
-                else
-                    return;
+            std::queue<key_type> queue;
 
-                while (!queue.empty()) {
-                    const auto& key = queue.front();
-                    queue.pop();
-                    const auto& ver = mVertexes.at(key);
+            if (vertex.value != val)
+                queue.push(key);
+            else
+                return;
 
-                    for (auto i = 0; i < ver.outDegree.size(); ++i) {
-                        const auto& kk = ver.outDegree.at(i);
-                        if (visited[kk])
-                            continue;
+            while (!queue.empty()) {
+                const auto& key = queue.front();
+                queue.pop();
+                const auto& ver = mVertexes.at(key);
 
-                        prev.emplace_back(key);
+                for (auto i = 0; i < ver.outDegree.size(); ++i) {
+                    const auto& kk = ver.outDegree.at(i);
+                    if (visited[kk])
+                        continue;
 
-                        if (mVertexes.at(kk).value == val) {
-                            prev.emplace_back(val);
+                    prev.emplace_back(key);
 
-                            std::cout << "Found: " << val << ", by bfs, search path:" << std::endl;
-                            for (const auto& key : prev) {
-                                std::cout << mVertexes.at(key).value << " ~ ";
-                            }
-                            std::cout << std::endl;
+                    if (mVertexes.at(kk).value == val) {
+                        prev.emplace_back(val);
 
-                            return;
+                        std::cout << "Found: " << val << ", by bfs, search path:" << std::endl;
+                        for (const auto& key : prev) {
+                            std::cout << mVertexes.at(key).value << " ~ ";
                         }
+                        std::cout << std::endl;
 
-                        visited[kk] = true;
-                        queue.push(kk);
+                        return;
                     }
+
+                    visited[kk] = true;
+                    queue.push(kk);
                 }
             }
         }

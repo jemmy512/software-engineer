@@ -63,9 +63,9 @@ void heapSort(Iter begin, Iter end, Compare comp = Compare()) {
 }
 
 template<
-    class T,
-    class Compare = std::less<T>,
-    class Container = std::vector<T>>
+    typename T,
+    typename Compare = std::less<T>,
+    typename Container = std::vector<T>>
 class Heap {
 public:
     using container_type = Container;
@@ -114,6 +114,15 @@ public:
         return *this;
     }
 
+    void update(const T& value) {
+        auto iter = std::find_if(container.begin(), container.end(), [&value](const auto& val) {
+            return val.get() == value.get();
+        });
+
+        if (iter != container.end()) {
+            heapifyUp(container.begin(), ++iter, value_compare());
+        }
+    }
 
     void push(const T& value) {
         container.emplace_back(value);
@@ -173,10 +182,10 @@ void TestHeap() {
 }
 
 
-int main(void) {
-    // TestHeapSort();
+// int main(void) {
+//     // TestHeapSort();
 
-    TestHeap();
+//     TestHeap();
 
-    return 0;
-}
+//     return 0;
+// }

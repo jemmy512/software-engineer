@@ -23,7 +23,7 @@ void merge(T& data, int beg, int mid, int end) {
 
 template<typename T>
 void mergeSort(T& data, int beg, int end) {
-    int mid = (beg+end)/2;
+    int mid = beg + (end - beg) / 2; // (beg + end) may overflow
     if (beg != mid) {
         mergeSort(data, beg, mid);
         mergeSort(data, mid, end);

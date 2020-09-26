@@ -137,21 +137,21 @@ template<typename Iter,
     typename Compare = std::less<T>>
 Iter binarySearchApi(Iter begin, Iter end, const T& val, SearchPolicy policy = SearchPolicy::Undefined, Compare comp = Compare())
 {
-    auto result = end;
-
-    if (policy == SearchPolicy::Undefined) {
-        result = binarySearch(begin, end, val, comp);
-    } else if (policy == SearchPolicy::First) {
-        result = binarySearchFirst(begin, end, val, comp);
-    } else if (policy == SearchPolicy::Last) {
-        result = binarySearchLast(begin, end, val, comp);
-    } else if (policy == SearchPolicy::FirstNotLessThan) {
-        result = binarySearchFirstNotLess(begin, end, val, comp);
-    } else if (policy == SearchPolicy::LastNotGreatThan) {
-        result = binarySearchLastNotGreat(begin, end, val, comp);
+    /* switch run faster than if else */
+    switch (policy) {
+        case SearchPolicy::Undefined:
+            return binarySearch(begin, end, val, comp);
+        case SearchPolicy::First:
+            return binarySearchFirst(begin, end, val, comp);
+        case SearchPolicy::Last:
+            return binarySearchLast(begin, end, val, comp);
+        case SearchPolicy::FirstNotLessThan:
+            return binarySearchFirstNotLess(begin, end, val, comp);
+        case SearchPolicy::LastNotGreatThan:
+            return binarySearchLastNotGreat(begin, end, val, comp);
+        default:
+            return end;
     }
-
-    return result;
 }
 
 template <typename VecT, typename T = typename VecT::value_type>
