@@ -26,20 +26,20 @@ using namespace std;
 
 // beat 96.86%
 int climbStairs(int n) {
-    if(n <= 0) return 0;
-    if(n == 1) return 1;
-    if(n == 2) return 2;
+    if (n <= 0) return 0;
+    if (n == 1) return 1;
+    if (n == 2) return 2;
 
     int one_before = 2; // refers to the number of solution until the point [n - 1]
     int two_before = 1; // refers to the number of solution unitl the potin [n - 2]
-    int ways = 0;       
+    int ways = 0;
 
-    for(int i = 3; i <= n; ++i){
+    for (int i = 3; i <= n; ++i) {
         ways = one_before + two_before;
         two_before = one_before;
         one_before = ways;
     }
-    
+
     return ways;
 }
 
@@ -59,10 +59,11 @@ void climbImpl(int n) {
             ++way;
             cnt -= step[i];
             return;
-        } else 
+        } else {
             climbImpl(n);
+        }
         cnt -= step[i];
-    }    
+    }
 }
 
 int climbStairs_1(int n) {
