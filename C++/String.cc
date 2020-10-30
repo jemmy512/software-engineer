@@ -7,15 +7,15 @@
 using namespace std;
 
 class String{
-    friend ostream& operator<<(ostream &, String &);
-    friend istream& operator>>(istream &, String &);
+    friend ostream& operator<<(ostream&, const String& );
+    friend istream& operator>>(istream&, const String& );
 public:
     String() = default;
     String(const char*);
     String(const String&);
     String(String&&) noexcept;
     String& operator=(const String&);
-    String& operator=(String&&);
+    String& operator=(String&&) noexcept;
     String operator+(const String&);
     char& operator[](unsigned int);
     bool operator==(const String&);
@@ -38,7 +38,7 @@ inline String::String(const char *str) {
     }
 }
 
-inline String::String(const String &other) {
+inline String::String(const String& other) {
     if (other.data) {
         data = new char[strlen(other.data)+1];
         strcpy(data, other.data);
@@ -52,7 +52,7 @@ inline String::String(String&& other) noexcept {
     other.data = nullptr;
 }
 
-inline String &String::operator=(const String &other) {
+inline String& String::operator=(const String& other) {
     if (this != &other) {
         delete[] data;
         if (other.data) {
@@ -65,7 +65,7 @@ inline String &String::operator=(const String &other) {
     return *this;
 }
 
-inline String& String::operator=(String&& other) {
+inline String& String::operator=(String&& other) noexcept {
     data = other.data;
     other.data = nullptr;
 
@@ -73,7 +73,7 @@ inline String& String::operator=(String&& other) {
 }
 
 
-inline String String::operator+(const String &other) {
+inline String String::operator+(const String& other) {
     String newString;
 
     if (!other.data) {
@@ -93,21 +93,21 @@ inline char &String::operator[](unsigned int pos) {
     if (pos >= 0 && pos <= strlen(data)) {
         return data[pos];
     }
-    // throw 
+    // throw
 }
 
-inline bool String::operator==(const String &other) {
+inline bool String::operator==(const String& other) {
     if (strlen(data) != strlen(other.data))
         return false;
     return strcmp(data, other.data) ? false : true;
 }
 
-ostream &operator<<(ostream &os, String &str) {
+ostream &operator<<(ostream &os, const String& str) {
     os << str.data;
     return os;
 }
 
-istream &operator>>(istream &is, String &str) {
+istream &operator>>(istream &is, const String& str) {
     is>>str.data;
     return is;
 }
