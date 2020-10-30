@@ -4,11 +4,13 @@
  */
 #include <iostream>
 #include <cstring>
+#include <stdexcept>
+
 using namespace std;
 
 class String{
-    friend ostream& operator<<(ostream&, const String& );
-    friend istream& operator>>(istream&, const String& );
+    friend ostream& operator<<(ostream&, const String&);
+    friend istream& operator>>(istream&, const String&);
 public:
     String() = default;
     String(const char*);
@@ -93,7 +95,8 @@ inline char &String::operator[](unsigned int pos) {
     if (pos >= 0 && pos <= strlen(data)) {
         return data[pos];
     }
-    // throw
+
+    throw std::out_of_range(std::to_string(pos) + " out of range [0, " + std::to_string(strlen(data)) + "}");
 }
 
 inline bool String::operator==(const String& other) {
