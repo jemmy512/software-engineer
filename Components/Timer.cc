@@ -9,7 +9,60 @@
 
 #define Print(x) std::cout << (x) << std::endl;
 
-class TimerManager {
+class TimerManager;
+
+class Timer {
+public:
+    Timer(TimerManager::TimerId id, const std::weak_ptr<TimerManager>& manager)
+    :   mId(id), mManager(manager) {}
+
+    Timer(const Timer&) = delete;
+
+    Timer(Timer&& other) noexcept : mId (other.mId), mManager(other.mManager) {}
+
+    Timer& operator=(Timer&& other) noexcept {
+        if (this != & other) {
+            mId = other.mId;
+            mManager = other.mManager;
+
+            other.mId = -1;
+            other.mManager.reset();
+        }
+
+        return *this;
+    }
+
+    ~Timer() {
+        if (auto locked = mManager.lock()) {
+            locked->destory(mId);
+        }
+    }
+
+    bool isActive() {
+        bool isActive = false;
+
+        if (auto locked = mManager.lock()) {
+            isActive = locked->isActive(mId);
+        }
+
+        return isActive;
+    }
+
+    TimerManager::TimerId getId() const {
+        return mId;
+    }
+
+    static Timer createTimer(TimerManager::TimerId id, const std::weak_ptr<TimerManager>& manager) {
+        return Timer{id, manager};
+    }
+
+private:
+    std::mutex mMutex{};
+    TimerManager::TimerId mId;
+    std::weak_ptr<TimerManager> mManager;
+};
+
+class TimerManager : public std::enable_shared_from_this<TimerManager> {
 public:
     using TimerId = uint64_t;
     using Clock  = std::chrono::steady_clock;
@@ -26,15 +79,15 @@ public:
         mThreadId = mThread.get_id();
     }
 
-    TimerId creatTimer(uint16_t when, Duration period, TimerFunc&& func) {
+    Timer creatTimer(uint16_t when, Duration period, TimerFunc&& func) {
         std::unique_lock<std::mutex> lock(mMutex);
 
-        auto&& timer = TimerInstance(++mNextId, Clock::now() + Duration(when), Duration(period), std::move(func));
+        auto&& timer = TimerEntry(++mNextId, Clock::now() + Duration(when), Duration(period), std::move(func));
         auto ite = mTimers.emplace(mNextId, std::move(timer));
         mOrderedTimers.emplace(ite.first->second);
         mSignal.notify_one();
 
-        return mNextId;
+        return Timer::createTimer(mNextId, weak_from_this());
     }
 
     bool destory(TimerId id) {
@@ -74,19 +127,18 @@ public:
     }
 
 private:
-    struct TimerInstance {
-
-        TimerInstance(TimerId id, TimeStamp next, Duration period, TimerFunc&& func)
+    struct TimerEntry {
+        TimerEntry(TimerId id, TimeStamp next, Duration period, TimerFunc&& func)
         :   mId(id), mNext(next), mPeriod(period), mHandler(std::forward<TimerFunc>(func)) {
-            Print(std::string{"TimerInstance() "} + std::string{"Id: "} + std::to_string(mId));
+            Print(std::string{"TimerEntry() "} + std::string{"Id: "} + std::to_string(mId));
         }
 
-        TimerInstance(TimerInstance&& other)
+        TimerEntry(TimerEntry&& other)
         :   mId(other.mId), mNext(other.mNext), mPeriod(other.mPeriod), mHandler(std::move(other.mHandler)) {
-            Print(std::string{"TimerInstance(&&) "} + std::string{"Id: "} + std::to_string(mId));
+            Print(std::string{"TimerEntry(&&) "} + std::string{"Id: "} + std::to_string(mId));
         }
 
-        TimerInstance& operator=(TimerInstance&& other) {
+        TimerEntry& operator=(TimerEntry&& other) {
             if (this != &other) {
                 mId = other.mId;
                 mNext = other.mNext;
@@ -94,12 +146,12 @@ private:
                 mHandler = std::move(other.mHandler);
             }
 
-            Print(std::string{"TimerInstance=(&&) "} + std::string{"Id: "} + std::to_string(mId));
+            Print(std::string{"TimerEntry=(&&) "} + std::string{"Id: "} + std::to_string(mId));
             return *this;
         }
 
-        TimerInstance(const TimerInstance&) = delete;
-        TimerInstance& operator=(const TimerInstance&) = delete;
+        TimerEntry(const TimerEntry&) = delete;
+        TimerEntry& operator=(const TimerEntry&) = delete;
 
         TimerId mId;
         TimeStamp mNext;
@@ -114,7 +166,7 @@ private:
         while (!mDone) {
             if (!mOrderedTimers.empty()) {
                 auto timerIte = mOrderedTimers.begin();
-                TimerInstance& timer = *timerIte;
+                TimerEntry& timer = *timerIte;
 
                 auto now = Clock::now();
                 if (now >= timer.mNext) {
@@ -158,11 +210,11 @@ private:
         }
     }
 
-    std::function<bool(const TimerInstance&, const TimerInstance&)> timerComparator = [](const TimerInstance& lhs, const TimerInstance& rhs) {
+    std::function<bool(const TimerEntry&, const TimerEntry&)> timerComparator = [](const TimerEntry& lhs, const TimerEntry& rhs) {
         return lhs.mNext < rhs.mNext;
     };
-    using TimerMap = std::unordered_map<TimerId, TimerInstance>;
-    using OrderedTimers = std::multiset<std::reference_wrapper<TimerInstance>, decltype(timerComparator)>;
+    using TimerMap = std::unordered_map<TimerId, TimerEntry>;
+    using OrderedTimers = std::multiset<std::reference_wrapper<TimerEntry>, decltype(timerComparator)>;
 
     TimerId mNextId;
     TimerMap mTimers;
@@ -180,11 +232,11 @@ int main() {
 
     auto manager = std::make_shared<TimerManager>();
 
-    auto id1 = manager->creatTimer(1000, std::chrono::milliseconds{1000}, [](){
+    auto timerAlice = manager->creatTimer(1000, std::chrono::milliseconds{1000}, [](){
         Print("1");
     });
 
-    auto id2 = manager->creatTimer(4000, std::chrono::milliseconds{1500}, [](){
+    auto timerBob = manager->creatTimer(4000, std::chrono::milliseconds{1500}, [](){
         Print("2");
     });
 
@@ -192,7 +244,7 @@ int main() {
     // Print(manager.isActive(id2));
 
     std::this_thread::sleep_for(std::chrono::milliseconds{5000});
-    manager->destory(id1);
+    manager->destory(timerAlice.getId());
 
     std::this_thread::sleep_for(std::chrono::milliseconds{35000});
 
