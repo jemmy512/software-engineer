@@ -3,16 +3,16 @@
 class MarioStateMachine;
 using IMarioStatePtr = std::shared_ptr<IMarioState>;
 
+enum class MarioStateEnum {
+    Small,
+    Super,
+    Fire,
+    Cape
+};
+
 class IMarioState {
 public:
-    enum State {
-        Small,
-        Super,
-        Fire,
-        Cape
-    };
-
-    virtual State getName() = 0;
+    virtual MarioStateEnum getName() = 0;
     virtual void onObtainMushRoom(MarioStateMachinePtr& sm) { };
     virtual void onObtainFireFlow(MarioStateMachinePtr& sm) { };
     virtual void onObtainCape(MarioStateMachinePtr& sm) { };
@@ -31,8 +31,8 @@ class CapeMario;
 
 class SmallMario : public IMarioState {
 public:
-    State getName() {
-        return Small;
+    MarioStateEnum getName() {
+        return MarioStateEnum::Small;
     }
 
     static IMarioStatePtr getInstance() {
