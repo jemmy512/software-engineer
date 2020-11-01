@@ -50,6 +50,8 @@ namespace util::string {
 
         do {
             begin = (end == std::string::npos) ? 0 : end + 1;
+            /* The search considers only the interval [pos, size()).
+             * If the character is not present in the interval, npos will be returned. */
             end = str.find_first_of(delimiter, begin);
             auto  token = str.substr(begin, end-begin); // std::out_of_range if pos > size()
 
