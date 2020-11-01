@@ -18,6 +18,8 @@ protected:
     std::string mPath;
 };
 
+using FileSystemNodeSP = std::shared_ptr<FileSystemNode>;
+
 class File : public FileSystemNode {
 public:
     File(const std::string& path) : FileSystemNode(path) {}
@@ -37,7 +39,7 @@ public:
         }
     }
 
-    void addSubDirectory(std::shared_ptr<FileSystemNode> subDirectory) {
+    void addSubDirectory(FileSystemNodeSP subDirectory) {
             mSubDirectories.emplace(subDirectory);
     }
 
@@ -52,12 +54,12 @@ public:
     }
 
 private:
-    std::function<bool(const std::shared_ptr<FileSystemNode>&, const std::shared_ptr<FileSystemNode>&)> 
-    comparator = [](const std::shared_ptr<FileSystemNode>& lhs, const std::shared_ptr<FileSystemNode>& rhs) {
-            return lhs->getPath() < rhs->getPath();
-        };
+    std::function<bool(const FileSystemNodeSP&, const FileSystemNodeSP&)> comparator =
+    [](const FileSystemNodeSP& lhs, const FileSystemNodeSP& rhs) {
+        return lhs->getPath() < rhs->getPath();
+    };
 
-    std::set<std::shared_ptr<FileSystemNode>, decltype(comparator)> mSubDirectories{comparator};
+    std::set<FileSystemNodeSP, decltype(comparator)> mSubDirectories{comparator};
 };
 
 int main() {
@@ -79,7 +81,6 @@ int main() {
     usr->addSubDirectory(jemmy);
     usr->addSubDirectory({"/1", "/2", "/3", "/4"});
     jemmy->addSubDirectory({"/lib", "/bin", "/local", "/share"});
-    
 
     std::dynamic_pointer_cast<FileSystemNode>(usr)->ls();
 
@@ -89,6 +90,6 @@ int main() {
 /**
  * Definition:
  * Compose objects into tree structure to represent the part-whole hirarchies.
- * Composite lets client treat the individual objects and compositions of 
+ * Composite lets client treat the individual objects and compositions of
  * objects uniformly.
- */ 
+ */
