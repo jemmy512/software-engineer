@@ -226,3 +226,41 @@ Geo-replicated Internet Services](https://www.usenix.org/system/files/conference
 
 
 # Microservice
+- [ ] [Martin Fowleer: Microservice Architectur](https://martinfowler.com/articles/microservices.html)
+- [ ] [AWS: What are Microservices?](https://aws.amazon.com/microservices/)
+- [ ] [Microsoft: Microservices architecture style](https://docs.microsoft.com/en-us/azure/architecture/guide/architecture-styles/microservices)
+- [ ] [Pivotal: Microservices](https://tanzu.vmware.com/microservices)
+
+- [ ] :blue_book: [IBM: Microservices Best Practices for Java](https://www.redbooks.ibm.com/redbooks/pdfs/sg248357.pdf)
+- [ ] :blue_book: Building MiroService
+
+* Nginx
+    - [ ] [Introduction to Microservices](https://www.nginx.com/blog/introduction-to-microservices/)
+    - [ ] [Building Microservices: Using an API Gateway](https://www.nginx.com/blog/building-microservices-using-an-api-gateway/)
+    - [ ] [Building Microservices: Inter-Process Communication in a Microservices Architecture](https://www.nginx.com/blog/building-microservices-using-an-api-gateway/)
+    - [ ] [Service Discovery in a Microservices Architecture](https://www.nginx.com/blog/building-microservices-using-an-api-gateway/)
+    - [ ] [Event-Driven Data Management for Microservices](https://www.nginx.com/blog/event-driven-data-management-microservices/)
+    - [ ] [Choosing a Microservices Deployment Strategy](https://www.nginx.com/blog/deploying-microservices/)
+    - [ ] [Refactoring a Monolith into Microservices](https://www.nginx.com/blog/refactoring-a-monolith-into-microservices/)
+
+* Auto0 Blog
+    - [ ] [An Introduction to Microservices, Part 1](https://auth0.com/blog/an-introduction-to-microservices-part-1/)
+    - [ ] [API Gateway. An Introduction to Microservices, Part 2](https://auth0.com/blog/an-introduction-to-microservices-part-2-API-gateway/)
+    - [ ] [An Introduction to Microservices, Part 3: The Service Registry](https://auth0.com/blog/an-introduction-to-microservices-part-3-the-service-registry/)
+    - [ ] [Intro to Microservices, Part 4: Dependencies and Data Sharing](https://auth0.com/blog/apigateway-microservices-superglue/)
+    - [ ] [API Gateway: the Microservices Superglue](https://auth0.com/blog/apigateway-microservices-superglue/)
+
+- [ ] [PaaS vs. IaaS for Microservices Architectures: Top 6 Differences](https://www.altoros.com/blog/paas-vs-iaas-for-microservices-architectures-top-6-differences/)
+- [ ] [Microservices vs. Monolithic Architectures: Pros, Cons, and How Cloud Foundry (PaaS) Can Help](https://www.slideshare.net/altoros/microservices-vs-monolithic-architectures-pros-and-cons)
+- [ ] [Microservices - Not A Free Lunch!](http://highscalability.com/blog/2014/4/8/microservices-not-a-free-lunch.html)
+- [ ] [The Hidden Costs Of Microservices](https://www.stackbuilders.com/news/the-hidden-costs-of-microservices)
+
+
+- [ ] [Microservice Patterns](https://microservices.io)
+- [ ] [Microservice Antipatterns and Pitfalls](https://www.oreilly.com/content/microservices-antipatterns-and-pitfalls/)
+- [ ] [Microservice Architecture: All The Best Practices You Need To Kno](https://codingsans.com/blog/microservice-architecture-best-practices)
+- [ ] [Best Practices for Building a Microservice Architecture](https://www.vinaysahni.com/best-practices-for-building-a-microservice-architecture)
+- [ ] [Simplicity by Distributing Complexity](https://engineering.zalando.com/posts/2018/01/simplicity-by-distributing-complexity.html)
+
+
+- [ ] [Microservices Guide](https://martinfowler.com/microservices/)
