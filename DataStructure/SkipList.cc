@@ -14,11 +14,12 @@ template<typename ValT>
 class SkipList {
 public:
     friend std::ostream& operator<<(std::ostream& os, const SkipList& list) {
-        auto node = list.mHead->forwards[0];
+        auto node = list.mHead->indexes[0];
 
         while (node != nullptr && node != list.mNil) {
-            os << "Key: " << node->key << "\tValue: " << node->value << "\tLevel: " << list.getNodeLevel(node) << std::endl;
-            node = node->forwards[0];
+            os << "Key: " << node->key << "\tValue: " << node->value
+            << "\tLevel: " << list.getNodeLevel(node) << std::endl;
+            node = node->indexes[0];
         }
 
         return os;
@@ -27,19 +28,23 @@ public:
     using value_type = ValT;
     using hash_type = std::hash<value_type>;
     using key_type = typename hash_type::result_type;
-    using size_type = size_t;
+    /* key_type is std::size_t, which is the unsigned integer type of the result of the
+     * sizeof operator as well as the sizeof... operator and the alignof operator (since C++11) */
+    using size_type = unsigned int;
+    using optional_type = std::optional<std::reference_wrapper<const value_type>>;
+
 
 public:
     SkipList() {
         auto headKey = std::numeric_limits<key_type>::min();
         auto nilKey = std::numeric_limits<key_type>::max();
 
-        mHead = new node_type(headKey, mMaxLevel);
-        mNil = new node_type(nilKey, mMaxLevel);
-        std::fill(mHead->forwards.begin(), mHead->forwards.end(), mNil);
+        mHead = new node_type(headKey, std::numeric_limits<value_type>::min(), mMaxLevel);
+        mNil = new node_type(nilKey, std::numeric_limits<value_type>::max(), mMaxLevel);
+        std::fill(mHead->indexes.begin(), mHead->indexes.end(), mNil);
     }
 
-    SkipList(std::initializer_list<value_type> list)
+    SkipList(const std::initializer_list<value_type>& list)
     :   SkipList() {
         for (auto& val : list)
             insert(val);
@@ -47,9 +52,9 @@ public:
 
     ~SkipList() {
         auto node = mHead;
-        while (node != nullptr && node->forwards[0] != nullptr) {
+        while (node != nullptr && node->indexes[0] != nullptr) {
             auto tmp = node;
-            node = node->forwards[0];
+            node = node->indexes[0];
             delete tmp;
         }
         delete node;
@@ -75,39 +80,39 @@ public:
     void insert(const value_type& value) {
         auto preds = getPredecessor(value);
         auto level = getRandomLevel();
-        auto node = makeNode(value, level);
+        auto* node = makeNode(value, level);
 
         for (size_type i = 0; i < level; ++i) {
-            node->forwards[i] = preds[i]->forwards[i];
-            preds[i]->forwards[i] = node;
+            node->indexes[i] = preds[i]->indexes[i];
+            preds[i]->indexes[i] = node;
         }
     }
 
     void erase(const value_type& value) {
         auto preds = getPredecessor(value);
-        auto node = preds[0]->forwards[0];
+        auto node = preds[0]->indexes[0];
         if (node == nullptr || node == mNil || node->value != value)
             return;
 
         for (size_type i = 0; i < getNodeLevel(node); ++i) {
-            preds[i]->forwards[i] = node->forwards[i];
+            preds[i]->indexes[i] = node->indexes[i];
         }
 
         delete node;
     }
 
-    using optional_type = std::optional<std::reference_wrapper<const value_type>>;
     optional_type find(const value_type& value) {
         auto key = mHasher(value);
         auto node = mHead;
 
         for (size_type i = getNodeLevel(mHead); i > 0; --i) {
-            while (node->forwards[i-1]->key < key || (node->forwards[i-1]->key == key && node->forwards[i-1]->value != value)) {
-                node = node->forwards[i-1];
+            while (node->indexes[i-1]->key < key
+                || (node->indexes[i-1]->key == key && node->indexes[i-1]->value != value)) {
+                node = node->indexes[i-1];
             }
         }
 
-        node = node->forwards[0];
+        node = node->indexes[0];
         if (node != nullptr && node != mNil && node->value == value)
             return optional_type(value);
         else
@@ -118,7 +123,7 @@ private:
     struct node_type;
 
     node_type* makeNode(const value_type& value, const size_type& level) {
-        return new node_type(value, level);
+        return new node_type(mHasher(value), value, level);
     }
 
     size_type getRandomLevel() const {
@@ -126,40 +131,36 @@ private:
     }
 
     size_type getNodeLevel(const node_type* node) const {
-        return node->forwards.size();
+        return node->indexes.size();
     }
 
     std::vector<node_type*> getPredecessor(const value_type& value) {
         std::vector<node_type*> result(getNodeLevel(mHead), nullptr);
 
         auto key = mHasher(value);
-        auto node = mHead;
+        auto* node = mHead;
 
-        // size_t i = 0; --i // dead loop because i is std::numetic_limist<sizt_t>::max()
+        /* Dead loop: i is unsigned int, when i = 0; --i is std::numetic_limits<unsigned int>::max() */
         for (size_type i = getNodeLevel(mHead); i > 0; --i) {
-            while (node->forwards[i-1]->key < key || (node->forwards[i-1]->key == key && node->forwards[i-1]->value != value)) {
-                node = node->forwards[i-1];
+            while (node->indexes[i-1]->key < key
+                || (node->indexes[i-1]->key == key && node->indexes[i-1]->value != value)) {
+                node = node->indexes[i-1];
             }
 
             result[i-1] = node;
         }
 
-        return result;
+        return result; // NRVO
     }
 
 private:
     struct node_type {
         const key_type key;
         value_type value;
-        std::vector<node_type*> forwards;
+        std::vector<node_type*> indexes;
 
-        // key(mHasher(value)) doesn't work?
-        node_type(const value_type& value, const size_type& level)
-        :   key(hash_type()(value)), value(value), forwards(level, nullptr)
-        { }
-
-        node_type(const key_type& key, const size_type& level)
-        :   key(key), value(), forwards(level, nullptr)
+        node_type(const key_type& key, const value_type& value, const size_type& level)
+        :   key(key), value(value), indexes(level, nullptr)
         { }
     };
 
@@ -172,7 +173,8 @@ private:
     // Mutable is used to specify that the member does not affect the externally visible state of the class.
     mutable std::default_random_engine mEngine = std::default_random_engine(mSeed);
 
-    mutable std::binomial_distribution<size_type> mDistribution = std::binomial_distribution<size_type>(mMaxLevel-1, mProbability);
+    mutable std::binomial_distribution<size_type> mDistribution =
+        std::binomial_distribution<size_type>(mMaxLevel-1, mProbability);
 
     hash_type mHasher = hash_type();
     node_type* mHead = nullptr;
