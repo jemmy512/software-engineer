@@ -43,7 +43,8 @@ public:
     }
 
 private:
-    int mSize;
+    /* const or reference members case synthesized copy-assignment operator, move members are deleted */
+    const int mSize;
     std::list<KeyValuePair> mCache;
     faultFunction<KeyT, ValT> mFaultFunction;
     std::unordered_map<KeyT, typename std::list<KeyValuePair>::iterator> mIndex;
