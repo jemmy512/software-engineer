@@ -12,8 +12,7 @@ Node* createListHeadInsert(int* args, int size) {
         return head;
 
     for (; size > 0; --size) {
-        Node* node = new Node{args[size-1], head};
-        head = node;
+        head = new Node{args[size-1], head};
     }
 
     return head;
@@ -42,7 +41,6 @@ void releaseList(Node* node) {
     while (node) {
         Node* cur = node;
         node = node->next;
-
         delete cur;
     }
 }
@@ -58,7 +56,7 @@ Node* deleteNode(Node* node, int val) {
         node = beg->next;
     } else if (beg != nullptr) {
         end->next = beg->next;
-    } else { 
+    } else {
         // not found
     }
 
@@ -80,6 +78,28 @@ void printList(Node* node) {
     }
 
     std::cout << endl;
+}
+
+Node* mergeSortedList(Node* head1,Node* head2)
+{
+    if(head1 == nullptr && head2 == nullptr)
+        return nullptr;
+    else if (head1 == nullptr)
+        return head2;
+    else if(head2 == nullptr)
+        return head1;
+
+    Node* newHead = nullptr;
+
+    if (head1->val < head2->val) {
+        newHead = head1;
+        newHead->next = mergeSortedList(head1->next, head2);
+    } else {
+        newHead = head2;
+        newHead->next = mergeSortedList(head1, head2->next);
+    }
+
+    return newHead;
 }
 
 /*

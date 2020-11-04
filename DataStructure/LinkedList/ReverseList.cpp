@@ -36,7 +36,7 @@ void releaseList(Node* node) {
 void printList(Node* node) {
     while (node) {
         std::cout << node->val;
-        if (node->next) 
+        if (node->next)
             std::cout << " -> ";
 
         node = node->next;
@@ -52,7 +52,6 @@ Node* reverseList(Node* head) {
         head = head->next;
         mid->next = tail;
         tail = mid;
-        mid = head;
     }
 
     return tail;
