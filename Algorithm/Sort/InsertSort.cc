@@ -9,13 +9,10 @@ void insertSort(T& data) {
     for (int i = 1; i < data.size(); ++i) {
         int tmp = data[i];
         int j = i;
-        do { 
-            if (data[j-1] > tmp) {
-                data[j] = data[j-1];
-            } else {
-                break;
-            }
-        } while (--j > 0);
+        while (j > 0 && data[j-1] > tmp) {
+            data[j] = data[j-1];
+            --j;
+        }
 
         data[j] = tmp;
     }
