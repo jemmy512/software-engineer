@@ -33,11 +33,13 @@
 
 ## Bridge
 1. Definition
-    Decouple the abstration from it's implement so the two can vary independently.
+    * Decouple the abstration from it's implement so the two can vary independently.
+    * The bridge pattern can also be thought of as two layers of abstraction.
+    * When there is only one fixed implementation, this pattern is known as the Pimpl idiom.
 
 
 ## Decorator
-The decorator pattern maily solves the complication problem of the inheritance relationship, and replaces inheritance through combination. It's main role is to add enhancements to the original class.
+The decorator pattern maily solves the complication problem of the inheritance relationship, and replaces inheritance through composition. It's main role is to add enhancements to the original class.
 
 You can nest mutiple decorator classes to the original class, this requires the decorator classes need to inherit the same interface with the original class.
 
@@ -78,7 +80,7 @@ You can nest mutiple decorator classes to the original class, this requires the 
 
 ## Template
 1. Definition
-    * Define the skeleton of an algorithm in an operation, deferring somesteps to subclasses. Template Method lets subclasses redefinecertain steps of an algorithm without changing the algorithm's structure.
+    * Define the skeleton of an algorithm in an operation, deferring some steps to subclasses. Template Method lets subclasses redefinecertain steps of an algorithm without changing the algorithm's structure.
 2. Functionalities:
     1. Reuse: All subclasses can reuse the code of template method provided by parent class.
     2. Extension: Framework provides extension points through template method, so framework users can
@@ -142,4 +144,8 @@ You can nest mutiple decorator classes to the original class, this requires the 
 ## Mediator
 1. Definition
     * Mediator pattern defines a separate (mediator) object that encapsulates the interaction between a set of objects and the objects delegate their interaction to a mediator object instead of interacting with each other directly.
-## Delegate
+## Delegation
+1. Definition
+    * Delegation is a way to make composition as powerful for reuse as inheritance.
+    * In delegation, two objects are involved in handling a request: a receiving object delegates operations to its delegator. This is analogous to subclasses deferring requests to parent classes.
+    * But with inheritance, an inherited operation can always refer to the receiving object through the this member variable in C++. To achieve the same effect with delegation, the receiver passes itself to the delegator to let the delegated operation refer to the receiver
