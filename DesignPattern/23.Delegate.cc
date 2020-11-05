@@ -5,10 +5,10 @@
 #include "../Components/Lockable.cc"
 
 template <typename Signature>
-class Delegate;
+class Delegator;
 
 template <typename R, typename... Args>
-class Delegate<R(Args...)>
+class Delegator<R(Args...)>
 {
 public:
     using Callback = std::function<void(Args...)>;
@@ -55,8 +55,8 @@ public:
     }
 
 public:
-    Delegate() = default;
-    ~Delegate() = default;
+    Delegator() = default;
+    ~Delegator() = default;
 
     void clear() {
         if (auto entries = mEntries.lock()) {
@@ -70,7 +70,7 @@ public:
         }
     }
 
-    Delegate& operator+=(const Callback& callback) {
+    Delegator& operator+=(const Callback& callback) {
         addEntry(Entry(callback));
         return *this;
     }
@@ -110,31 +110,31 @@ public:
     }
 
     template <typename T>
-    struct callback_builder
+    struct Builder
     {
-        callback_builder(Delegate& _delegate, const std::shared_ptr<T>& _shared)
-        : delegate(_delegate), shared(_shared) { }
+        Builder(Delegator& _delegator, const std::shared_ptr<T>& _shared)
+        : delegator(_delegator), shared(_shared) { }
 
         void operator,(void (T::*memFn)(Args...)) {
-            delegate.addEntry(Delegate::entry_from_member_function<T>(shared, memFn));
+            delegator.addEntry(Delegator::entry_from_member_function<T>(shared, memFn));
         }
 
         void operator,(const std::function<void(Args...)>& lambda) {
-            delegate.addEntry(Delegate::entry_from_lambda<T>(shared, lambda));
+            delegator.addEntry(Delegator::entry_from_lambda<T>(shared, lambda));
         }
 
         std::shared_ptr<T> shared;
-        Delegate& delegate;
+        Delegator& delegator;
     };
 
     template <typename T>
-    callback_builder<T> operator+=(T* instance) {
-        return callback_builder<T>(*this, std::dynamic_pointer_cast<T>(instance->shared_from_this()));
+    Builder<T> operator+=(T* instance) {
+        return Builder<T>(*this, std::dynamic_pointer_cast<T>(instance->shared_from_this()));
     }
 
     template <typename T>
-    callback_builder<T> operator+=(const std::shared_ptr<T>& shared) {
-        return callback_builder<T>(*this, shared);
+    Builder<T> operator+=(const std::shared_ptr<T>& shared) {
+        return Builder<T>(*this, shared);
     }
 
 protected:
@@ -168,20 +168,20 @@ public:
 };
 
 int main() {
-    Delegate<void()> myDelegate;
+    Delegator<void()> myDelegator;
     auto manager = std::make_shared<Manager>();
 
-    myDelegate += manager, &Manager::foo;
-    myDelegate += []() { std::cout << "Lambda" << std::endl; };
+    myDelegator += manager, &Manager::foo;
+    myDelegator += []() { std::cout << "Lambda" << std::endl; };
 
-    myDelegate();
+    myDelegator();
 
     return 0;
 }
 
 /* Delegation is a way to make composition as powerful for reuse as inheritance [Lie86, JZ91].
  * In delegation, two objects are involved in handling a request: a receiving object delegates operations
- * to its delegate. This is analogous to subclasses deferring requests to parent classes.
+ * to its delegator. This is analogous to subclasses deferring requests to parent classes.
  * But with inheritance, an inherited operation can always refer to the receiving object through the
  * this member variable in C++ and self in Smalltalk. To achieve the same effect with delegation,
- * the receiver passes itself to the delegate to let the delegated operation refer to the receiver. */
+ * the receiver passes itself to the delegator to let the delegated operation refer to the receiver. */
