@@ -50,7 +50,7 @@ public:
     void send(const std::string& msg) override {
         Pln("[" << TimeUtil::getLocalTime() << "] sent telephone msg: " << msg);
     }
-    
+
 private:
     std::vector<std::string> mTelephoneNumbers;
 };
@@ -111,13 +111,13 @@ public:
 int main() {
     ImMsgSender sender({"123", "456"});
     std::initializer_list<std::string> ids{"123", "456"};
-    auto imSender = std::make_shared<ImMsgSender>(ids);
+    auto imSender = std::make_shared<ImMsgSender>(std::move(ids));
 
     std::initializer_list<std::string> numbers{"+86123", "+86456"};
-    auto telephoneSender = std::make_shared<TelephoneMsgSender>(numbers);
+    auto telephoneSender = std::make_shared<TelephoneMsgSender>(std::move(numbers));
 
     std::initializer_list<std::string> mails{"xxx@cisco.com", "xxx@cisco.com"};
-    auto emailSender = std::make_shared<EmailMsgSender>(mails);
+    auto emailSender = std::make_shared<EmailMsgSender>(std::move(mails));
 
 
     auto severeNotificaiton = std::make_shared<SevereNofitication>(telephoneSender);
@@ -135,17 +135,14 @@ int main() {
 /**
  * Bridge:
  * Decouple the abstration from it's implement so the two can vary independently.
- */
-
-/**
+ *
  * auto imSender = std::make_shared<ImMsgSender>({"123", "456"}); // compile error
- * 
- * The problem is that std::make_shared<T> is a partially specialized function template 
- * that can accept arguments of arbitrary number and type. Because of this, the compiler 
+ *
+ * The problem is that std::make_shared<T> is a partially specialized function template
+ * that can accept arguments of arbitrary number and type. Because of this, the compiler
  * has no idea how to handle the initializer list.
- * 
+ *
  * A braced-init-list is never deduced as std::initializer_list<T> by template deduction.
- * 
+ *
  * https://stackoverflow.com/questions/24234480/stdmake-shared-with-stdinitializer-list
- * https://stackoverflow.com/questions/12431495/initializer-list-and-template-type-deduction
- */
+ * https://stackoverflow.com/questions/12431495/initializer-list-and-template-type-deduction */
