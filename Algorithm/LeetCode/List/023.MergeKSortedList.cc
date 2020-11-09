@@ -26,7 +26,7 @@ Output: 1->1->2->3->4->4->5->6
 /*
 1. Pair up k lists and merge each pair.
 
-2. After the first pairing, k lists are merged into k/2 lists with average 
+2. After the first pairing, k lists are merged into k/2 lists with average
     2N/k length, then k/4, k/8 and so on.
 
 3. Repeat this procedure until we get the final sorted linked list.
@@ -36,7 +36,7 @@ Thus, we'll traverse almost NN nodes per pairing and merging, and repeat this pr
 
 
 */
- 
+
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -56,8 +56,8 @@ public:
     ListNode *merge2List(ListNode *head1, ListNode *head2) {
         if (!head1) return head2;
         if (!head2) return head1;
-        
-        static ListNode dummy = ListNode(INT_MAX);
+
+        static ListNode dummy{INT_MAX};
         ListNode *tail = &dummy;
         while (head1 && head2) {
             if (head1->val < head2->val) {
@@ -69,13 +69,13 @@ public:
             }
         }
         tail->next = head1 ? head1 : head2;
-        
+
         return dummy.next;
     }
-    
+
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if (lists.empty()) return NULL;
-        
+
         int len = lists.size();
         int interval = 1;
         while (interval < len) {
@@ -83,7 +83,7 @@ public:
                 lists[i] = merge2List(lists[i], lists[i + interval]);
             interval *= 2;
         }
-        
+
         return lists[0];
     }
 };
@@ -96,7 +96,7 @@ public:
     ListNode *merge2List(ListNode *head1, ListNode *head2) {
         if (!head1) return head2;
         if (!head2) return head1;
-        
+
         static ListNode dummy = ListNode(INT_MAX);
         ListNode *tail = &dummy;
         while (head1 && head2) {
@@ -109,17 +109,17 @@ public:
             }
         }
         tail->next = head1 ? head1 : head2;
-        
+
         return dummy.next;
     }
-    
+
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         if (lists.empty()) return NULL;
-        
+
         int len = lists.size();
         for (int i = len - 2; i >=0; --i)
             lists[i] = merge2List(lists[i], lists[i+1]);
-        
+
         return lists[0];
     }
 };
@@ -144,7 +144,7 @@ public:
                 if (!lists[i]) {
                     continue;
                 }
-                    
+
                 if (lists[i]->val < tmp->val) {
                     tmp = lists[i];
                     index = i;
@@ -160,8 +160,7 @@ public:
                 tmp = MAX_NODE;
             }
         }
-        
+
         return head;
     }
 };
-
