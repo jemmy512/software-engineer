@@ -22,18 +22,19 @@ std::vector<int> generateNext(const std::string& pattern) {
 }
 
 int kmpSearch(const std::string& str, const std::string& pattern) {
-    const auto strLen = str.size();
-    const auto patLen = pattern.size();
-    const auto next = generateNext(pattern);
+    /* consist with c strstr */
+    if (pattern.empty())
+        return 0;
 
-    for (int i = 0, j = 0; i < strLen; ++i) {
+    const auto next = generateNext(pattern);
+    for (int i = 0, j = 0; i < str.size(); ++i) {
         while (j > 0 && str[i] != pattern[j])
             j = next[j-1] + 1;
 
         if (str[i] == pattern[j])
             ++j;
 
-        if (j == patLen)
+        if (j == pattern.size())
             return i-j+1;
     }
 
