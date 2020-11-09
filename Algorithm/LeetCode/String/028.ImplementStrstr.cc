@@ -12,48 +12,54 @@ Example 2:
 Input: haystack = "aaaaa", needle = "bba"
 Output: -1
 */
+#include <string>
+#include <vector>
+#include <iostream>
 
-void getNext(string needle, int *next) {
-    const int len = needle.size();
-    int i = 0;
-    int k = -1;
-    next[0] = -1;
-    
-    while (i < len) {
-        if (k == -1 || needle[i] == needle[k]) {
-            ++i;
-            ++k;
-            if (needle[i] == needle[k])
-                next[i] = next[k];
-            else 
-                next[i] = k;
-        } else 
-            k = next[k];
-    }
-}
+using std::string;
 
-int strStr(string haystack, string needle) {
-    if (needle.empty())
-        return 0;
-    
-    const int len1 = haystack.size();
-    const int len2 = needle.size();
-    int next[len2];
-    getNext(needle, next);
-    
-    int i = 0;
-    int j = 0;
-    while (i < len1 && j < len2) {
-        if (j == -1 || haystack[i] == needle[j]) {
-            ++i;
-            ++j;
-        } else 
-            j = next[j];
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        if (needle.empty())
+            return 0;
+
+        auto next = getNext(needle);
+        for (int i = 0, j = 0; i < haystack.size(); ++i) {
+            while (j > 0 && haystack[i] != needle[j])
+                j = next[j-1] + 1;
+
+            if (haystack[i] == needle[j])
+                ++j;
+
+            if (j == needle.size())
+                return i-j+1;
+        }
+
+        return -1;
     }
-    
-    //delete next;
-    if (j == len2)
-        return i - j;
-    return -1;
-    
+
+private:
+    std::vector<int> getNext(const std::string& needle) {
+        std::vector<int> next(needle.size(), 0);
+
+        next[0] = -1;
+        int k = -1;
+        for (int i = 1; i < needle.size(); ++i) {
+            while (k != -1 && needle[k+1] != needle[i])
+                k = next[k];
+
+            if (needle[k+1] == needle[i])
+                ++k;
+
+            next[i] = k;
+        }
+
+        return next;
+    }
+};
+
+int main() {
+    Solution slu;
+    std::cout << slu.strStr("", "") << std::endl;;
 }
