@@ -22,7 +22,7 @@ Given 1->2->3->4->5, reorder it to 1->5->2->4->3.
  */
 class Solution {
 public:
-    
+
     ListNode *findMid(ListNode *head) {
         ListNode *prev = head, *mid = head, *ret = NULL;
         while (prev && prev->next)  { // odd, even case
@@ -30,10 +30,10 @@ public:
             mid = mid->next;
             prev = prev->next->next;
         }
-        
+
         return ret;
     }
-    
+
     ListNode *reverseList(ListNode *head) {
         ListNode *tail = NULL, *cur = head, *prev;
         while (cur) {
@@ -42,13 +42,13 @@ public:
             tail = cur;
             cur = prev;
         }
-        
+
         return tail;
     }
-    
+
     void reorderList(ListNode* head) {
         if (!head || !head->next) return;
-        
+
         ListNode *mid = findMid(head);
         ListNode *hd = reverseList(mid->next);
         mid->next = NULL;
