@@ -139,18 +139,16 @@ Iter binarySearchApi(Iter begin, Iter end, const T& val, SearchPolicy policy = S
 {
     /* switch run faster than if else */
     switch (policy) {
-        case SearchPolicy::Undefined:
-            return binarySearch(begin, end, val, comp);
-        case SearchPolicy::First:
-            return binarySearchFirst(begin, end, val, comp);
-        case SearchPolicy::Last:
-            return binarySearchLast(begin, end, val, comp);
-        case SearchPolicy::FirstNotLessThan:
-            return binarySearchFirstNotLess(begin, end, val, comp);
-        case SearchPolicy::LastNotGreatThan:
-            return binarySearchLastNotGreat(begin, end, val, comp);
-        default:
-            return end;
+    case SearchPolicy::First:
+        return binarySearchFirst(begin, end, val, comp);
+    case SearchPolicy::Last:
+        return binarySearchLast(begin, end, val, comp);
+    case SearchPolicy::FirstNotLessThan:
+        return binarySearchFirstNotLess(begin, end, val, comp);
+    case SearchPolicy::LastNotGreatThan:
+        return binarySearchLastNotGreat(begin, end, val, comp);
+    default:
+        return binarySearch(begin, end, val, comp);
     }
 }
 
