@@ -26,8 +26,7 @@ int kmpSearch(const std::string& str, const std::string& pattern) {
     const auto patLen = pattern.size();
     const auto next = generateNext(pattern);
 
-    int j = 0;
-    for (int i = 0; i < strLen; ++i) {
+    for (int i = 0, j = 0; i < strLen; ++i) {
         while (j > 0 && str[i] != pattern[j])
             j = next[j-1] + 1;
 
