@@ -6,7 +6,7 @@ For example, the following two linked lists:
 A:          a1 → a2
                    ↘
                      c1 → c2 → c3
-                   ↗            
+                   ↗
 B:     b1 → b2 → b3
 begin to intersect at node c1.
 
@@ -28,10 +28,20 @@ struct ListNode {
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        auto* left = headA;
+        auto* right = headB;
+        while (left != right) {
+            left = left == nullptr ? headB : left->next;
+            right = right == nullptr ? headA : right->next;
+        }
+        return left;
+    }
+
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         int lenA = getListLength(headA);
         int lenB = getListLength(headB);
         if (lenA <= 0 || lenB <= 0) return NULL;
-        
+
         if (lenA < lenB)
             swap(headA, headB); // headA always points to the longer one.
         for (int i = 0; i < abs(lenA - lenB); ++i)
@@ -40,22 +50,22 @@ public:
             headA = headA->next;
             headB = headB->next;
         }
-        
+
         return headA;
     }
     // 41ms, beat 32.38%
     ListNode *getIntersectionNode_1(ListNode *headA, ListNode *headB) {
         unordered_set<ListNode*> hash;
-        
+
         for (auto a = headA; a; a = a-> next)
             hash.insert(a);
-        for (auto b = headB; b; b = b-> next) 
-            if (hash.find(b) != hash.end()) 
+        for (auto b = headB; b; b = b-> next)
+            if (hash.find(b) != hash.end())
                 return b;
         return NULL;
     }
 private:
-    inline int getListLength(ListNode *head) {
+    int getListLength(ListNode *head) {
         int len = 0;
         while (head != NULL) {
             ++len;
