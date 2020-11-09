@@ -17,12 +17,12 @@ Can you solve it without using extra space?
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
- 
+
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
         if (!head) return NULL;
-        
+
         ListNode *fast = head, *slow = head;
         do {
             if (fast->next && fast->next->next) {
@@ -32,13 +32,13 @@ public:
                 return NULL;
             }
         } while (slow != fast);
-        
+
         fast = head;
         while (fast != slow) {
             fast = fast->next;
             slow = slow->next;
         }
-        
+
         return fast;
     }
 };
