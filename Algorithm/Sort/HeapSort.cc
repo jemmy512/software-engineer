@@ -15,18 +15,19 @@ template<typename Iter,
     typename Compare = std::less<T>>
 void heapifyDown(Iter begin, Iter cur, Iter end, Compare comp = Compare()) {
     Iter child = begin;
-    for (std::advance(child, std::distance(begin, cur) + 1);// child = 2*cur + 1
+    Iter parent = cur;
+    for (std::advance(child, std::distance(begin, parent) + 1);// child = 2*cur + 1
         child < end;
-        std::advance(child, std::distance(begin, child) + 1))
+        std::advance(child, std::distance(begin, parent) + 1))
     {
         if (child + 1 < end && comp(*(child+1), *child))    // comp(rightChild, leftChild)
             ++child;
 
-        if (comp(*cur, *child))
+        if (comp(*parent, *child))
             break;
 
-        std::swap(*cur, *child);
-        cur = child;
+        std::swap(*parent, *child);
+        parent = child;
     }
 }
 
@@ -35,15 +36,16 @@ template<typename Iter,
     typename Compare = std::less<T>>
 void heapifyUp(Iter begin, Iter end, Compare comp = Compare()) {    // [begin, end)
     Iter parent = begin;
-    for (std::advance(parent, std::distance(begin, end) / 2 - 1);   // parent = (cur+1)/2 - 1
+    Iter child = end;
+    for (std::advance(parent, std::distance(begin, child) / 2 - 1);   // parent = (cur+1)/2 - 1
         parent >= begin;
-        std::advance(parent, std::distance(begin, end) / 2 - 1))
+        std::advance(parent, std::distance(begin, child) / 2 - 1))
     {
-        if (!comp(*--end, *parent))
+        if (!comp(*--child, *parent))
             break;
 
-        std::swap(*parent, *end);
-        end = parent+1;
+        std::swap(*parent, *child);
+        child = parent+1;
         parent = begin;
     }
 }
@@ -77,7 +79,7 @@ public:
     using const_reference = typename Container::const_reference;
 
     friend std::ostream& operator<<(std::ostream& os, const Heap& heap) {
-        for (const auto& v : heap.container)
+        for (const auto& v : heap._Container)
             os << v << " ";
         os << std::endl;
 
@@ -93,62 +95,64 @@ public:
         }
     }
 
-    Heap(const Heap& other) : container(other.container) { }
+    Heap(const Heap& other) : _Container(other._Container) { }
 
-    Heap(Heap&& other) : container(std::move(other.container)) {
-        other.container.clear();
+    Heap(Heap&& other) : _Container(std::move(other._Container)) {
+        other._Container.clear();
     }
 
     Heap& operator=(const Heap& other) {
-        container = other.container;
+        _Container = other._Container;
 
         return *this;
     }
 
     Heap& operator=(Heap&& other) {
         if (this != &other) {
-            container = std::move(other.container);
-            other.container.clear();
+            _Container = std::move(other._Container);
+            other._Container.clear();
         }
 
         return *this;
     }
 
     void update(const T& value) {
-        auto iter = std::find_if(container.begin(), container.end(), [&value](const auto& val) {
+        auto iter = std::find_if(_Container.begin(), _Container.end(), [&value](const auto& val) {
             return val.get() == value.get();
         });
 
-        if (iter != container.end()) {
-            heapifyUp(container.begin(), ++iter, value_compare());
+        if (iter != _Container.end()) {
+            heapifyUp(_Container.begin(), ++iter, _Comparator);
         }
     }
 
     void push(const T& value) {
-        container.emplace_back(value);
-        heapifyUp(container.begin(), container.end(), value_compare());
+        _Container.emplace_back(value);
+        heapifyUp(_Container.begin(), _Container.end(), _Comparator);
     }
 
     value_type pop() {
-        T result = container.front();
+        T result = _Container.front();
 
-        std::swap(container.front(), container.back());
-        container.pop_back();
-        heapifyDown(container.begin(), container.begin(), container.end(), value_compare());
+        std::swap(_Container.front(), _Container.back());
+        _Container.pop_back();
+        heapifyDown(_Container.begin(), _Container.begin(), _Container.end(), _Comparator);
 
         return result;
     }
 
     const_reference top() {
-        return container.front();
+        return _Container.front();
     }
 
     bool empty() {
-        return container.empty();
+        return _Container.empty();
     }
 
 private:
-    Container container;
+    Container _Container;
+    Compare _Comparator{};
+
 };
 
 void TestHeapSort() {
