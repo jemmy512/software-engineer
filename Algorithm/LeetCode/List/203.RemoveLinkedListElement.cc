@@ -5,7 +5,7 @@ Example
 Given: 1 --> 2 --> 6 --> 3 --> 4 --> 5 --> 6, val = 6
 Return: 1 --> 2 --> 3 --> 4 --> 5
 */
-#includ<iostream>
+#include <iostream>
 using namespace std;
 
 struct ListNode {
@@ -21,14 +21,17 @@ public:
         ListNode dummy(-1);
         dummy.next = head;
         ListNode *p = &dummy;
-        
+
         while (p->next) {
-            if (p->next->val == val)
+            if (p->next->val == val) {
+                auto* tar = p->next;
                 p->next = p->next->next;
-            else 
+                delete tar;
+            } else {
                 p = p->next;
+            }
         }
-       
+
         return dummy.next;
     }
 };
