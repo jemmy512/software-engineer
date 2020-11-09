@@ -13,7 +13,7 @@ using namespace std;
 struct ListNode {
     int val;
     ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
+    explicit ListNode(int x) : val(x), next(NULL) {}
 };
 
 ListNode *findMiddle(ListNode *head) {
@@ -39,8 +39,8 @@ ListNode *reverseList(ListNode *head) {
 
 // 26 test cases, 20ms, beat 96.66%
 bool isPalindrome(ListNode* head) {
-    ListNode *h, *p, *middle = findMiddle(head);
-    ListNode *q, *right = reverseList(middle);
+    ListNode *middle = findMiddle(head);
+    ListNode *right = reverseList(middle);
     // head != middle not head != right [head has one more node than right]
     for (; head != middle; head = head->next, right = right->next) {
         if (head->val != right->val)
@@ -58,7 +58,6 @@ int main() {
     b.next = &c;
     c.next = &d;
     d.next = NULL;
-    
+
     cout << isPalindrome(&a) << endl;
 }
-
