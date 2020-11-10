@@ -8,12 +8,15 @@ Given s = "hello", return "olleh".
 */
 
 // 467 test cases, 10ms, beat 97.83%
+#include <string>
+using std::string;
+
 class Solution {
 public:
     string reverseString(string s) {
-        int len = s.size();
-        for (int i = 0, j = len - 1; i < j; ++i, --j) {
-            swap(s[i], s[j]);
+        int len = s.size()-1;
+        for (int i = 0; i < len-i; ++i) {
+            std::swap(s[i], s[len-i]);
         }
         return s;
     }
