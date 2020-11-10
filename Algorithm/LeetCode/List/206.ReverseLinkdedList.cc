@@ -18,7 +18,7 @@ ListNode* reverseList(ListNode* head) {
     if (head == NULL) return NULL;
     ListNode *first = head->next;
     ListNode *last = NULL;
-    
+
     while (first != NULL) {
         head->next = last;
         last = head;
@@ -26,6 +26,6 @@ ListNode* reverseList(ListNode* head) {
         first = first->next;
     }
     head->next = last;
-    
+
     return head;
 }
