@@ -84,19 +84,19 @@ public:
         return step;
     }
 
-    int compress(vector<char>& chars) {
+    int compress_(vector<char>& chars) {
         chars.push_back('a');
-        std::vector<char> result;
 
         char chr{chars[0]};
         int cnt{1};
+        int idx{0};
 
         for (int i = 1; i < chars.size(); ++i) {
            if (i+1 == chars.size() || chars[i] != chr) {
-                result.emplace_back(chr);
+                chars[idx++] = chr;
                 if (cnt > 1) {
                     for (const auto& c : std::to_string(cnt))
-                        result.emplace_back(c);
+                        chars[idx++] = c;
                 }
 
                 chr = chars[i];
@@ -105,9 +105,8 @@ public:
                 ++cnt;
             }
         }
-        std::swap(chars, result);
 
-        return chars.size();
+        return idx;
     }
 };
 
