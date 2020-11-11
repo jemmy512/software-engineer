@@ -17,11 +17,34 @@ using namespace std;
 // 312 test cases, 12ms, beat 83.64%
 class Solution {
 public:
-// 315 test cases, 12ms, beat 83.94%
     string addStrings(string num1, string num2) {
+        string ret(std::max(num1.size(), num2.size()), '0');
+
+        int carry = 0;
+        int i = num1.size()-1;
+        int j = num2.size()-1;
+        int cur = ret.size()-1;
+        while (i >= 0 || j >=0) {
+            int vi = i >= 0 ? num1[i--] - '0' : 0;
+            int vj = j >= 0 ? num2[j--] - '0' : 0;
+            int sum = vi + vj + carry;
+            carry = sum / 10;
+            sum %= 10;
+            ret[cur--] = sum + '0';
+        }
+
+        if (carry) {
+            ret = "1" + ret;
+        }
+
+        return ret;
+    }
+
+// 315 test cases, 12ms, beat 83.94%
+    string addStrings_2(string num1, string num2) {
         int len1 = num1.size();
         int len2 = num2.size();
-        
+
         string ret = string(max(len1, len2), '0');
         int cnt = ret.size();
         int i, j, sum, carry = 0;
@@ -32,7 +55,7 @@ public:
             ret[--cnt] = (char)(sum + '0');
             // ret.insert(ret.begin(), (char)(sum + '0'));
         }
-        
+
         i = i > j ? i : j;
         string str = i > j ? num1 : num2;
         for (; i >= 0; --i) {
@@ -44,13 +67,13 @@ public:
         }
         if (carry)
             // ret.insert(ret.begin(), (char)(carry + '0'));
-            ret = '1' + ret; 
-        
+            ret = '1' + ret;
+
         return ret;
     }
-    
+
 // 312 test cases, 12ms, beat 83.64%
-    string addStrings(string &num1, string &num2) const {
+    string addStrings_3(string &num1, string &num2) const {
 		string result = "0";
 		int l1 = (int)num1.length(), l2 = (int)num2.size();
 		if (l1 > 0) {
@@ -81,5 +104,5 @@ public:
 
 int main() {
     Solution sl;
-    cout << sl.addStrings("321", "4321") << endl;
+    cout << sl.addStrings("511", "511") << endl;
 }
