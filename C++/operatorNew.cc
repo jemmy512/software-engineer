@@ -19,14 +19,14 @@ public:
     static void *operator new(size_t size, void *p, const string &str) {
         cout << "In our operator new: " << endl << "    " << str << endl;
         if (!p) {
-            cout << "Hi man, are you aware what you are doing?" << endl;
+            cout << "Hi man, are you aware what you are doing?" << endl << "size: " << size << endl;
             return ::operator new(size);
         }
         return p;
     }
     static void operator delete(void *p) {
         cout << "We should do nothing in operator delete" << endl;
-        // program will crash if uncomment 
+        // program will crash if uncomment
         // ::operator delete(p); // Q: why?
         // ::free(p);
     }
