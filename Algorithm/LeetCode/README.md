@@ -10,6 +10,7 @@ No | Title | Difficulty | Catogary
 18 | 4 Sum | :star: :star:| Arithmetic
 66 | Plus One | :star: | Arithmetic
 67 | Add Binary | :star: | Arithmetic
+190 | Roverse Bits | :star: | Arithmetic
 191 | Numberof 1 Bits | :star: | Arithmetic
 231 | Power Of Two | :star: | Arithmetic
 389 | Findthe Difference | :star: | Arithmetic
