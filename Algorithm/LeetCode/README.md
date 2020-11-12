@@ -14,7 +14,7 @@ No | Title | Difficulty | Catogary
 231 | Power Of Two | :star: | Arithmetic
 389 | Findthe Difference | :star: | Arithmetic
 400 | Nth Digit_[AAA] | :star: :star: | Arithmetic
- - |  - | -  | -
+ |   |   |  | Array
 004 | MedianofTwoSortedArrays  | :star: :star: :star: | Array
 027 | RemoveElement  | :star: | Array
 041 | FirstMissingPositive  | :star: :star: :star: | Array
