@@ -11,7 +11,7 @@ Example 1:
 Example 2:
     Input: [3,2,3,1,2,4,5,5,6] and k = 4
     Output: 4
-Note: 
+Note:
 You may assume k is always valid, 1 ≤ k ≤ array's length.
 */
 #include<iostream>
@@ -22,25 +22,29 @@ using namespace std;
 
 /******************************* Heap Sort Solution ***************************/
 // 32 test cases, 10ms, beat 98.72%
-void heapAdjust(vector<int> &nums, int b, int e) {
+void heapifyDown(vector<int> &nums, int b, int e) {
     for (int i = 2 * b + 1; i < e; i = 2 * i + 1) {
-        if (i + 1 < e && nums[i + 1] > nums[i])
+        if (i + 1 < e && nums[i + 1] < nums[i])
             ++i;
-        if (nums[b] >= nums[i])
+        if (nums[b] <= nums[i])
             break;
         swap(nums[b], nums[i]);
         b = i;
     }
 }
 
-void heapSort(vector<int> &nums) {
-    int len = nums.size();
-    for (int i = len / 2 - 1; i >= 0; --i)
-        heapAdjust(nums, i, len);
-    for (int i = len - 1; i > 0; --i) {
-        swap(nums[0], nums[i]);
-        heapAdjust(nums, 0, i);
+int findKthLargest(vector<int>& nums, int k) {
+    for (int i = k/2-1; i >=0; --i)
+        heapifyDown(nums, i, k);
+
+    for (int i = k; i < nums.size(); ++i) {
+        if (nums[i] > nums[0]) {
+            swap(nums[i], nums[0]);
+            heapifyDown(nums, 0, k);
+        }
     }
+
+    return nums[0];
 }
 
 /******************************* STL Build in Solution ************************/
@@ -73,16 +77,15 @@ int findKthLargest_qsort(vector<int> &nums) {
         pos = partition(nums, left, right);
         if (pos == k - 1)
             return nums[pos];
-        if (pos < k - 1)
+        else if (pos < k - 1)
             left = pos + 1;
-        else 
+        else
             right = pos - 1;
     }
 }
 
 int main() {
     vector<int> nums = {3,2,5,8,4,7,6,9};
-    heapSort(nums);
+    findKthLargest(nums, 4);
     copy(nums.begin(), nums.end(), ostream_iterator<int>(cout, " "));
-  
 }
