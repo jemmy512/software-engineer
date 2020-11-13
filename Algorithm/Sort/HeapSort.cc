@@ -14,11 +14,11 @@ template<typename Iter,
     typename T = typename std::iterator_traits<Iter>::value_type,
     typename Compare = std::less<T>>
 void heapifyDown(Iter begin, Iter cur, Iter end, Compare comp = Compare()) {
-    Iter child = begin;
+    Iter child = cur;
     Iter parent = cur;
-    for (std::advance(child, std::distance(begin, parent) + 1);// child = 2*cur + 1
+    for (std::advance(child, std::distance(begin, child) + 1);// child = 2*cur + 1
         child < end;
-        std::advance(child, std::distance(begin, parent) + 1))
+        std::advance(child, std::distance(begin, child) + 1))
     {
         if (child + 1 < end && comp(*(child+1), *child))    // comp(rightChild, leftChild)
             ++child;
