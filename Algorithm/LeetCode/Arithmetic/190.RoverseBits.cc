@@ -24,9 +24,8 @@ public:
         // 100%
         uint32_t ret = 0, power = 31;
         while (n != 0) {
-          ret += (n & 1) << power;
+          ret += (n & 1) << power--;
           n = n >> 1;
-          power -= 1;
         }
 
         return ret;
