@@ -1,31 +1,30 @@
-/*
-Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
-The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
-*/
+/** Given a string containing just the characters '(', ')', '{', '}', '[' and ']',
+ * determine if the input string is valid.
+ * The brackets must close in the correct order, "()" and "()[]{}" are all valid
+ * but "(]" and "([)]" are not */
 
-#include<iostream>
-#include<iterator>
-#include<vector>
+#include <iostream>
+#include <iterator>
+#include <stack>
 using namespace std;
 
 // 4ms, beat 95.53% submissions
 bool isValid(string s) {
-    int len = s.size();
-    vector<char> vec(len);
-    vec.clear();
-    for (int i = 0; i < len; ++i) {
-        if (s[i] == ']' && '[' == vec.back())
-            vec.pop_back();
-        else if (s[i] == '}' && '{' == vec.back())
-            vec.pop_back();
-        else if (s[i] == ')' && '(' == vec.back())
-            vec.pop_back();
-        else 
-            vec.push_back(s[i]);
+    std::stack<char> stack;
+
+    for (int i = 0; i < s.size(); ++i) {
+        /* Calling top(back) on an empty container causes undefined behavior. */
+        if (s[i] == ']' && !stack.empty() && '[' ==  stack.top())
+            stack.pop();
+        else if (s[i] == '}' && !stack.empty() && '{' ==  stack.top())
+            stack.pop();
+        else if (s[i] == ')' && !stack.empty() && '(' ==  stack.top())
+            stack.pop();
+        else
+            stack.push(s[i]);
     }
-    if (vec.empty())
-        return true;
-    return false;
+
+    return  stack.empty();
 }
 
 int main() {
