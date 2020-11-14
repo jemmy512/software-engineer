@@ -8,20 +8,41 @@
  * Because nums[0] + nums[1] = 2 + 7 = 9,return [0, 1].
  */
 
+#include <unordered_map>
+#include <vector>
+
+using std::vector;
+using std::unordered_map;
+
 class Solution {
 public:
+    /* One-pass Hash Table
+     * Time Complexity: O(1),
+     * Space complexity: O(1) */
     vector<int> twoSum(vector<int>& nums, int target) {
-        int i,j;
-        for(i = 0; i < nums.size()-1; ++i){
-            for(j = i+1; j < nums.size(); ++j){
-                if(nums[i] + nums[j] == target){
-                    nums.clear();
-                    nums.push_back(i);
-                    nums.push_back(j);
-                    return nums;
+        std::unordered_map<int, int> map;
+        for (int i = 0; i < nums.size(); ++i) {
+            if (map.find(target-nums[i]) != map.end())
+               return {map[target-nums[i]], i};
+            else
+                map[nums[i]] = i;
+        }
+
+        return nums;
+    }
+
+    /* Brute Force
+     * Time complexity : O(n^2)
+     * pace complexity : O(1) */
+    vector<int> twoSum(vector<int>& nums, int target) {
+        for (int i = 0; i < nums.size()-1; ++i) {
+            for (int j = i+1; j < nums.size(); ++j) {
+                if (nums[i] + nums[j] == target) {
+                    return {i, j};
                 }
             }
         }
+
         return nums;
     }
 };
