@@ -1,5 +1,5 @@
-/*
-Given an array nums of n integers and an integer target, find three integers 
+/* Medium
+Given an array nums of n integers and an integer target, find three integers
     in nums such that the sum is closest to target. Return the sum of the three
     integers. You may assume that each input would have exactly one solution.
 
@@ -25,16 +25,16 @@ using namespace std;
 //
 // for example:
 //    [-4,-1,-1,1,2]    target=1
-// 
+//
 //    take -4, can cacluate the "two number problem" of the reset array [-1,-1,1,2] while target=5
 //    [(-4),-1,-1,1,2]  target=5  distance=4
-//           ^      ^ 
+//           ^      ^
 //    because the -1+2 = 1 which < 5, then move the `low` pointer(skip the duplication)
 //    [(-4),-1,-1,1,2]  target=5  distance=2
-//                ^ ^ 
+//                ^ ^
 //    take -1(skip the duplication), can cacluate the "two number problem" of the reset array [1,2] while target=2
 //    [-4,-1,(-1),1,2]  target=2  distance=1
-//             
+//
 
 // 125/125 test cases, 10ms, beat  89.25%
 class Solution {
@@ -42,39 +42,29 @@ public:
     static int threeSumClosest(vector<int>& nums, int target) {
         sort(nums.begin(), nums.end());
         int len = nums.size();
-        int a, b, c, low, high;
-        int sum, result, distance = INT_MAX;
-        for (int i = 0; i < len -2; ++i) {
-            // skip the duplication
-            if (i > 0 && nums[i] == nums[i - 1])
-                continue;
-            low = i + 1;
-            high = len - 1;
+        int distance = INT_MAX;
+        for (int i = 0; i < len-2; ++i) {
+            int low = i + 1;
+            int high = len - 1;
             while (low < high) {
-                sum = nums[i] + nums[low] + nums[high];
+                int sum = nums[i] + nums[low] + nums[high];
                 if (sum == target)
                     return target;
                 else {
-                    if (abs(sum - target) < distance) {
-                        result = sum;
-                        distance = abs(sum - target);
+                    if (abs(target - sum) < abs(distance)) {
+                        distance = target - sum;
                     }
-                    
+
                     if (sum > target) {
-                        // skip the duplication
-                        while (high > 0 && nums[high - 1] == nums[high])
-                            --high;
                         --high;
                     } else {
-                        // skip the duplication
-                        while (low < len && nums[low - 1] == nums[low])
-                            ++low;
                         ++low;
                     }
                 }
             }
         }
-        return result;
+
+        return target - distance;
     }
 };
 
