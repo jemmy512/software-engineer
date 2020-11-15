@@ -12,15 +12,19 @@ using namespace std;
 class Solution {
 public:
     int hammingWeight(uint32_t n) {
-        // int cnt = 0;
-        // for (; n > 0; n >>= 1) {
-        //     if (n & 1) ++cnt;
-        // }
-        // return cnt;
+        int cnt = 0;
+        while (n > 0) {
+            if (n & 1)
+                ++cnt;
+            n >>= 1;
+        }
+        return cnt;
+    }
 
-        int count = n ? 1 : 0;
-        while(n &= (n-1)) count++;
-        return count;
+    int hammingWeight_ii(uint32_t n) {
+        int cnt = n ? 1 : 0;
+        while(n &= (n-1)) cnt++;
+        return cnt;
     }
 };
 
