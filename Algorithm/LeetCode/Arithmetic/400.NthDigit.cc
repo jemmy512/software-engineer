@@ -1,4 +1,4 @@
-/*
+/* Medium
 Find the nth digit of the infinite integer sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ...
 
 Note:
@@ -20,24 +20,27 @@ Output:
 0
 
 Explanation:
-The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... is a 0, which is part of the number 10.
+The 11th digit of the sequence 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... is a 0,
+which is part of the number 10. */
 
-*/
+/* We can see the following pattern:
+ * 1, 2, .... 9 : there are 9 * 1 digits.
+ * 10, 11, ..., 99: there are 90 * 2 digits.
+ * 100, 101, 102, ..., 999:  there are 900 * 3. */
 
 class Solution {
 public:
     int findNthDigit(int n) {
-        int len = 1, start = 1;
-        long count = 9;
-        while (n > len * count) {
-            n -= len * count;
-            start *= 10;
-            count *= 10;
-            len++;
+        int cycle = 1, startNum = 1;
+        long cycle9 = 9; /* cycle * cycle9 may overflow */
+        while (n > cycle * cycle9) {
+            n -= cycle * cycle9;
+            startNum *= 10;
+            cycle9 *= 10;
+            ++cycle;
         }
-        start += (n - 1) / len;
-        string s = to_string(start);
-        return s[(n - 1) % len] - '0';
+        startNum += (n - 1) / cycle;
+        return to_string(startNum)[(n - 1) % cycle] - '0';
     }
 };
 
@@ -45,11 +48,11 @@ class Solution {
 public:
     int findNthDigit(int n) {
         int digit = 1;
-        int accu = 0; 
+        int accu = 0;
         while(true){
             if((n - accu)/(9.0*digit) <= pow(10, digit - 1)) break;
             int digit_num = pow(10, digit - 1) * 9 * digit;
-            accu += digit_num; 
+            accu += digit_num;
             digit++;
         }
         n = n - accu;
