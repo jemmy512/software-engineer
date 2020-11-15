@@ -18,16 +18,15 @@ Output: "10101"
 using namespace std;
 
 string addBinary(string a, string b) {
-    int lena = a.length();
-    int lenb = b.length();
-    string ret(std::max(lena, lenb), '0');
+    int lenA = a.length();
+    int lenB = b.length();
+    string ret(std::max(lenA, lenB), '0');
 
-    int idx = std::max(lena, lenb);
+    int idx = std::max(lenA, lenB);
     int carry = 0;
-    int i, j, ca, cb;
-    for (i = lena - 1, j = lenb - 1; i >=0 || j >= 0; --i, --j) {
-        ca = i >= 0 ? a[i] - '0' : 0;
-        cb = j >= 0 ? b[j] - '0' : 0;
+    for (int i = lenA-1, j = lenB-1; i >=0 || j >= 0; --i, --j) {
+        int ca = i >= 0 ? a[i] - '0' : 0;
+        int cb = j >= 0 ? b[j] - '0' : 0;
         carry += ca + cb;
         ret[--idx] = (carry % 2) + '0';
         carry /= 2;
