@@ -29,32 +29,28 @@ public:
         int sum, low, high;
 
         sort(nums.begin(), nums.end());
-        for (int i = 0; i < len - 2; ++i) {
-            // skip the duplication
-            // if (i > 0 && nums[i - 1] == nums[i])
-            //     continue;
-
+        for (int i = 0; i < len-2; ++i) {
             low = i + 1;
             high = len - 1;
             while (low < high) {
                 sum = nums[i] + nums[low] + nums[high];
                 if (sum == 0) {
                     vec.push_back({nums[i], nums[low], nums[high]});
-                    while (low < len - 1 && nums[low] == nums[low + 1]) ++low;
-                    while (high > low && nums[high -1] == nums[high]) -- high;
+                    while (low < high && nums[low] == nums[low + 1]) ++low;
+                    while (low < high && nums[high-1] == nums[high]) -- high;
                     ++low;
                     --high;
                 } else if (sum > 0) {
-                    while (high > low && nums[high -1] == nums[high])
+                    while (low < high && nums[high-1] == nums[high])
                         -- high;
                     --high;
                 } else {
-                    while (low < len - 1 && nums[low] == nums[low + 1])
+                    while (low < high && nums[low] == nums[low + 1])
                         ++low;
                     ++low;
                 }
             }
-            while (i + 1 < nums.size() && nums[i + 1] == nums[i])
+            while (i + 1 < nums.size() && nums[i+1] == nums[i])
                 ++i;
         }
         return vec;
