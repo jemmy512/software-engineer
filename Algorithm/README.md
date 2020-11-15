@@ -1,27 +1,27 @@
 # LeetCode Algorithm
-
 No | Title | Difficulty | Catogary | Notes
 -- | -- | --- | --- | ---
 1 | 2 Sum | :star: | Arithmetic | :unlock:
-2 | Add Two Numbers | :star: :star: | Arithmetic
-445 | Add Two Numbers II | :star: :star: | Arithmetic
-7 | Reverse Integer | :star: | Arithmetic
+2 | Add Two Numbers | :star: :star: | Arithmetic | :unlock:
+445 | Add Two Numbers II | :star: :star: | Arithmetic | :unlock:
+7 | Reverse Integer | :star: | Arithmetic | :unlock:
 9 | Palindrom Number | :star: | Arithmetic | :unlock:
-15 | 3 Sum | :star: :star: | Arithmetic
-16 | 3 Sum Closest | :star: :star: | Arithmetic
-18 | 4 Sum | :star: :star:| Arithmetic
-66 | Plus One | :star: | Arithmetic
-67 | Add Binary | :star: | Arithmetic
-136 | Single Number | :star: | Arithmetic
-179 | Largest Number | :star: :star: | Arithmetic
-190 | Roverse Bits | :star: | Arithmetic
-191 | Numberof 1 Bits | :star: | Arithmetic
+15 | 3 Sum | :star: :star: | Arithmetic | :unlock:
+16 | 3 Sum Closest | :star: :star: | Arithmetic | :unlock:
+18 | 4 Sum | :star: :star:| Arithmetic | :unlock:
+66 | Plus One | :star: | Arithmetic | :unlock:
+67 | Add Binary | :star: | Arithmetic | :unlock:
+136 | Single Number | :star: | Arithmetic | :unlock:
+179 | Largest Number | :star: :star: | Arithmetic | :unlock:
+190 | Roverse Bits | :star: | Arithmetic | :unlock:
+191 | Numberof 1 Bits | :star: | Arithmetic | :unlock:
 202 | Happy Number | :star: | Arithmetic | :unlock:
-231 | Power Of Two | :star: | Arithmetic
+231 | Power Of Two | :star: | Arithmetic | :unlock:
 263 | Ugly Number | :star: | Arithmetic | :unlock:
 264 | Ugly Number II | :star: :star: | Arithmetic | :unlock:
-367 | Valid Perfect Square | :star: | Arithmetic
-389 | Findthe Difference | :star: | Arithmetic
+367 | Valid Perfect Square | :star: | Arithmetic | :unlock:
+371 | SumofTwoIntegers | :star: :star: | Arithmetic | :unlock:
+389 | Findthe Difference | :star: | Arithmetic | :unlock:
 400 | Nth Digit | :star: :star: | Arithmetic
  | | | | Array
 004 | Median of Two Sorted Arrays | :star: :star: :star: | Array
@@ -77,3 +77,18 @@ No | Title | Difficulty | Catogary | Notes
 234 | Palindrome Linked List | :star: | List
 237 | Delete Node In A Linked List | :star: | List
 817 | Linked List Components | :star: :star: | List
+
+# Bit Operations
+Name | Operation
+--- | ---
+set union | A \| B
+set intersection | A & B
+set subtraction  | A & ~B
+set negation | ALL_BITS ^ A or ~A
+set bit | A \|= 1 << bit
+clear bit | A &= ~(1 << bit)
+test bit | (A & 1 << bit) != 0
+extract last bit | A&-A or A&~(A-1) or x^(x&(x-1))
+remove last bit | A & (A-1)
+get all | 1-bits ~0
+-A | ~A + 1
