@@ -23,15 +23,15 @@ using namespace std;
 class Solution {
 public:
     static int squareSum(int n) {
-        int result = 0;
+        int sum = 0;
 
         while (n > 0) {
             int remainder = n % 10;
-            result += remainder * remainder;
+            sum += remainder * remainder;
             n /= 10;
         }
 
-        return result;
+        return sum;
     }
 
     static bool isHappy(int n) {
