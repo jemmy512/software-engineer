@@ -19,8 +19,8 @@ int reverse(int x) {
     while (x != 0) {
         int pop = x % 10;
         // -2147483648 2147483647
-        if (rev > INT_MAX/10 || (rev == INT_MAX / 10 && pop > 7)) return 0;
-        if (rev < INT_MIN/10 || (rev == INT_MIN / 10 && pop < -8)) return 0;
+        if (rev > INT_MAX/10 || (rev == INT_MAX/10 && pop > 7)) return 0;
+        if (rev < INT_MIN/10 || (rev == INT_MIN/10 && pop < -8)) return 0;
         x /= 10;
         rev = rev * 10 + pop;
     }
