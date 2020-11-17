@@ -2,41 +2,6 @@
 
 #include <functional>
 
-/********************************** function_helper **********************************/
-// functor helper
-template <typename R, typename... Args>
-struct function_helper;
-
-// 0 args specialization
-template <typename R>
-struct function_helper<R>
-{
-    using function_type = std::function<R(void)>;
-};
-
-// 1+ arg specialization
-template <typename R, typename Arg, typename... Rest>
-struct function_helper<R, Arg, Rest...>
-{
-    using function_type = std::function<R(Arg, Rest...)>;
-
-    using rest_helper = function_helper<R, Rest...>;
-
-    static typename rest_helper::function_type bind(const function_type& f, Arg arg) {
-        return [arg, f](Rest... rest) -> R { return f(arg, rest...); };
-    }
-
-    template <typename Arg0, typename Callable>
-    static typename rest_helper::function_type bind(const Callable& callable, Arg0 arg0, Arg arg) {
-        return [arg0, arg, callable](Rest... rest) -> R { return callable(arg0, arg, rest...); };
-    }
-
-    template <typename MemFn>
-    static function_type bind(MemFn memFn) {
-        return [memFn](Arg arg, Rest... rest) -> R { return ((*arg).*memFn)(rest...); };
-    }
-};
-
 /********************************** handler **********************************/
 
 // lambda helpers
@@ -122,6 +87,41 @@ struct handler<std::function<void()>>
     }
 };
 
+/********************************** function_helper **********************************/
+// functor helper
+template <typename R, typename... Args>
+struct function_helper;
+
+// 0 args specialization
+template <typename R>
+struct function_helper<R>
+{
+    using function_type = std::function<R(void)>;
+};
+
+// 1+ arg specialization
+template <typename R, typename Arg, typename... Rest>
+struct function_helper<R, Arg, Rest...>
+{
+    using function_type = std::function<R(Arg, Rest...)>;
+
+    using rest_helper = function_helper<R, Rest...>;
+
+    static typename rest_helper::function_type bind(const function_type& f, Arg arg) {
+        return [arg, f](Rest... rest) -> R { return f(arg, rest...); };
+    }
+
+    template <typename Arg0, typename Callable>
+    static typename rest_helper::function_type bind(const Callable& callable, Arg0 arg0, Arg arg) {
+        return [arg0, arg, callable](Rest... rest) -> R { return callable(arg0, arg, rest...); };
+    }
+
+    template <typename MemFn>
+    static function_type bind(MemFn memFn) {
+        return [memFn](Arg arg, Rest... rest) -> R { return ((*arg).*memFn)(rest...); };
+    }
+};
+
 /********************************** function_traits **********************************/
 
 template <typename F>
@@ -130,18 +130,20 @@ struct function_traits;
 // specializations to strip refrence qualifiers
 template <typename F>
 struct function_traits<F&> : public function_traits<F>
-{};
+{ };
 
 template <typename F>
 struct function_traits<F&&> : public function_traits<F>
-{};
+{ };
 
 // specialization on function signature
 template <typename R>
 struct function_traits<R()>
 {
     using return_type = R;
-    using argument_0 = void;
+
+    template<size_t N, typename = std::enable_if<N == 0>>
+    using argument = void;
 
     using helper = function_helper<R>;
 };
@@ -149,21 +151,18 @@ struct function_traits<R()>
 template <typename R, typename... Args>
 struct function_traits<R(Args...)>
 {
-    static constexpr size_t arity = sizeof...(Args);
-
     using return_type = R;
 
     template <size_t N>
     struct arguments
     {
-        static_assert(N < arity, "invalid function traits argument index.");
+        static_assert(N < sizeof...(Args), "invalid function traits argument index.");
         using type = std::tuple_element_t<N, std::tuple<Args...>>;
     };
 
     template<size_t N>
-    using argument_N = typename arguments<N>::type;
+    using argument = typename arguments<N>::type;
 
-    using argument_0 = typename arguments<0>::type;
     using helper = function_helper<R, Args...>;
 
     template <typename T>
@@ -173,24 +172,35 @@ struct function_traits<R(Args...)>
 // function pointer
 template <typename R, typename... Args>
 struct function_traits<R(*)(Args...)> : public function_traits<R(Args...)>
-{};
+{ };
 
 // member function pointer
-template <typename R, typename F, typename... Args>
-struct function_traits<R(F::*)(Args...)> : public function_traits<R(Args...)>
-{};
+template <typename R, typename C, typename... Args>
+struct function_traits<R(C::*)(Args...)> : public function_traits<R(Args...)>
+{ };
 
 // const member function pointer
-template <typename R, typename F, typename... Args>
-struct function_traits<R(F::*)(Args...) const> : public function_traits<R(Args...)>
-{};
+template <typename R, typename C, typename... Args>
+struct function_traits<R(C::*)(Args...) const> : public function_traits<R(Args...)>
+{ };
 
 // callable type (functor)
 template <typename F>
 struct function_traits : public function_traits<decltype(&F::operator())>
-{};
+{ };
 
 template <typename T, typename Lambda>
 typename function_traits<Lambda>::helper::function_type weak_handler(T* t, const Lambda& lambda) {
     return handler<typename function_traits<Lambda>::helper::function_type>::template bind<T, Lambda>(t, lambda);
+}
+
+
+namespace FunctionUtil {
+    template <typename T>
+    T move(T& t) {
+        auto temp = t;
+        t = nullptr;
+
+        return temp;
+    }
 }
