@@ -9,8 +9,11 @@ No | Title | Difficulty | Catogary | Notes
 15 | 3 Sum | :star: :star: | Arithmetic | :unlock:
 16 | 3 Sum Closest | :star: :star: | Arithmetic | :unlock:
 18 | 4 Sum | :star: :star:| Arithmetic | :unlock:
+50 | pow-x-n | :star: :star:| Arithmetic | TODO
 66 | Plus One | :star: | Arithmetic | :unlock:
 67 | Add Binary | :star: | Arithmetic | :unlock:
+69 | Sqrt(x) | :star: | Arithmetic | :unlock:
+367 | Valid Perfect Square | :star: | Arithmetic | :unlock:
 136 | Single Number | :star: | Arithmetic | :unlock:
 179 | Largest Number | :star: :star: | Arithmetic | :unlock:
 190 | Roverse Bits | :star: | Arithmetic | :unlock:
@@ -19,11 +22,10 @@ No | Title | Difficulty | Catogary | Notes
 231 | Power Of Two | :star: | Arithmetic | :unlock:
 263 | Ugly Number | :star: | Arithmetic | :unlock:
 264 | Ugly Number II | :star: :star: | Arithmetic | :unlock:
-367 | Valid Perfect Square | :star: | Arithmetic | :unlock:
-371 | SumofTwoIntegers | :star: :star: | Arithmetic | :unlock:
+371 | Sum of Two Integers | :star: :star: | Arithmetic | :unlock:
 389 | Findthe Difference | :star: | Arithmetic | :unlock:
 400 | Nth Digit | :star: :star: | Arithmetic
- | | | | Array
+ | Array | | |
 004 | Median of Two Sorted Arrays | :star: :star: :star: | Array
 027 | Remove Element | :star: | Array
 041 | First Missing Positive | :star: :star: :star: | Array
@@ -39,7 +41,7 @@ No | Title | Difficulty | Catogary | Notes
 220 | Contains Duplicate III | :star: :star: | Array
 283 | Move Zeroes | :star: :star: | Array
 448 | Find All Numbers Disappeared in An Array | :star: | Array
- | | | | DP
+ | DP |  | |
 5 | Longest Palindromic Substring | :star: :star: | DP
 32 | Longet Valid Paretheses | :star: :star: :star: | DP
 53 | Maximum Subarray | :star: | DP
@@ -59,10 +61,11 @@ No | Title | Difficulty | Catogary | Notes
 338 | Counting Bits | :star: :star: | DP
 523 | Continuous Subarray Sum  | :star: :star: | DP
 746 | MinCost Climb Stair | :star: | DP
- | | | | List
+ | List |  |
 21 | Merge Two Sorted Lists | :star: | List
 23 | Merge K Sorted List | :star: :star: :star: | List
 24 | Swap Nodes in Pairs | :star: :star: | List
+25 | Reverse Nodes in K-Group | :star: :star: :star: | List | :unlock:
 61 | Roate List By K | :star: :star: | List
 86 | Partition List | :star: :star: | List
 92 | Reverse Linked List II | :star: :star: | List | :unlock:
@@ -77,6 +80,49 @@ No | Title | Difficulty | Catogary | Notes
 234 | Palindrome Linked List | :star: | List
 237 | Delete Node In A Linked List | :star: | List
 817 | Linked List Components | :star: :star: | List
+ | Tree | | |
+98 | ValidateBinarySearchTree | :star: | Tree
+100 | SameTree | :star: | Tree
+101 | SymmetricTree | :star: | Tree
+102 | BinaryTreeLevelOrderTranversal | :star: | Tree
+103 | BianryTreeZigZagLevelTreeTranverse | :star: | Tree
+104 | MaximumDepthofBinaryTree | :star: | Tree
+105 | ConstructBinaryTreefromPreorderandInorderTraversal | :star: | Tree
+106 | ConstructBinaryTreefromInorderandPostorderTraversal | :star: | Tree
+107 | BinaryTreeLevelOrderTranversal_II | :star: | Tree
+108 | ConvertSortedArrayToBinarySearchTree | :star: | Tree
+109 | ConverSortedListtoBinaryTree | :star: | Tree
+110 | BalancedBianryTree | :star: | Tree
+111 | MinimumDepthofBinaryTree | :star: | Tree
+173 | Binary Search Tree Iterator | :star: :star: | Tree | :unlock:
+199 | BinaryTreeRightSideView | :star: | Tree
+226 | InvertBinaryTree | :star: | Tree
+230 | kThSmallesElementInTheBST | :star: | Tree
+235 | LowestCommonAncestorofaBinarySearchTree | :star: | Tree
+236 | LowestCommonAncestorofaBinaryTree | :star: | Tree
+257 | BinaryTreePaths | :star: | Tree
+437 | PathSum_III | :star: | Tree
+501 | FindModeinBinarySearchTree | :star: | Tree
+513 | FindBottomLeftTreeValue | :star: | Tree
+637 |  AverageofLevelsinBinaryTree | :star: | Tree
+653 | TwoSum_InputIsaBST | :star: | Tree
+671 | SecondMinimumNodeinaBinaryTree | :star: | Tree
+814 | BinaryTreePruning | :star: | Tree
+ | Queue |  | |
+239 | Sliding Window Maximum | :star: :star: :star: | Queue
+641 | Design Circular Deque | :star: :star: | Queue
+ | String | | |
+3 | Longest Sub string Without Repeating Characters | :star: :star: | String | :unlock:
+8 | atoi | :star: | String
+28 | Implement Strstr | :star: | String
+58 | Length of Last Word | :star: | String
+125 | Valid Palindrome | :star: | String
+151 | Reverse Words in a String | :star: :star: | String
+415 | Adding Strings | :star: | String
+443 | String Compression | :star: :star: | String
+344 | Reverse String | :star: | String
+796 | Rotate String | :star: | String
+
 
 # Bit Operations
 Name | Operation
