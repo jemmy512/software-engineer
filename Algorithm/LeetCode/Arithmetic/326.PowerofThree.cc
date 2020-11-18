@@ -16,19 +16,19 @@ public:
         return isPowerOfThree_loop(n);  //136ms
         return isPowerOfThree_recursive(n); //168ms
     }
-    //If log10(n) / log10(3) returns an int (more precisely, a double but has 0 
-    // after decimal point), then n is a power of 3. (original post). But be 
+    //If log10(n) / log10(3) returns an int (more precisely, a double but has 0
+    // after decimal point), then n is a power of 3. (original post). But be
     // careful here, you cannot use log (natural log) here, because it will generate round off error for n=243.
     bool isPowerOfThree03(int n) {
-        double logRes = log10(n)/log10(3); 
+        double logRes = log10(n)/log10(3);
         return (logRes - int(logRes) == 0);
     }
-    
+
     // 1162261467 is 3^19,  3^20 is bigger than int
     bool isPowerOfThree02(int n) {
         return n > 0 ? (1162261467 % n == 0) : false;
     }
-    
+
     void init(unordered_map<int, bool>& power ){
         int p = 1;
         power[1] = true;
@@ -36,15 +36,15 @@ public:
             p *= 3;
             power[p] = true;
             if (p > INT_MAX / 3) break;
-            
+
         }
     }
     bool isPowerOfThree01(int n) {
-        static unordered_map<int, bool> power; 
+        static unordered_map<int, bool> power;
         if (power.size() == 0) init(power);
         return power.find(n) != power.end();
     }
-    
+
     bool isPowerOfThree_loop(int n) {
         for(; n>0; n /= 3){
             if (n == 1 || n == 3) return true;
@@ -52,10 +52,10 @@ public:
         }
         return false;
     }
-    
+
     bool isPowerOfThree_recursive(int n) {
         if ( n == 1 || n == 3) return true;
         if ( n == 0 || n % 3 != 0 ) return false;
         return isPowerOfThree_recursive(n/3);
-    } 
+    }
 };
