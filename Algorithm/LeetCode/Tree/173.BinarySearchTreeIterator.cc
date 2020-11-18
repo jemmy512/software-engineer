@@ -1,28 +1,55 @@
 /**
- * mplement an iterator over a binary search tree (BST).
+ * Implement an iterator over a binary search tree (BST).
  * Your iterator will be initialized with the root node of a BST.
  * Calling next() will return the next smallest number in the BST.
  * Note: next() and hasNext() should run in average O(1) time and uses O(h)
  * memory, where h is the height of the tree.
  */
 
+#include <vector>
+#include <stack>
 
-/**
-* Definition for binary tree
-* struct TreeNode {
-*     int val;
-*     TreeNode *left;
-*     TreeNode *right;
-*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-* };
-*/
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+
 class BSTIterator {
-private:
-    vector<int> smVec;
-    int index;
 public:
     BSTIterator(TreeNode *root) {
-        stack<TreeNode *> stk;
+        inorderIterate(root);
+    }
+
+    bool hasNext() {
+        return index < sortedData.size();
+    }
+
+    int next() {
+        return sortedData[index++];
+    }
+
+private:
+    void inorderIterate(TreeNode* node) {
+        if (node == nullptr)
+            return;
+
+        inorderIterate(node->left);
+        sortedData.emplace_back(node->val);
+        inorderIterate(node->right);
+    }
+
+private:
+    int index{0};
+    std::vector<int> sortedData;
+};
+
+class BSTIterator {
+public:
+    BSTIterator(TreeNode *root) {
+        std::stack<TreeNode*> stk;
         index = 0;
         TreeNode *cur = root;
         while (!stk.empty() || cur) {
@@ -37,15 +64,17 @@ public:
         }
     }
 
-    /** @return whether we have a next smallest number */
     bool hasNext() {
         return index < smVec.size();
     }
 
-    /** @return the next smallest number */
     int next() {
         return smVec[index++];
     }
+
+private:
+    std::vector<int> smVec;
+    int index;
 };
 
 /**
