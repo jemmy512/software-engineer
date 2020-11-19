@@ -22,6 +22,7 @@ No | Title | Difficulty | Catogary | Notes
 231 | Power Of Two | :star: | Arithmetic | :unlock:
 263 | Ugly Number | :star: | Arithmetic | :unlock:
 264 | Ugly Number II | :star: :star: | Arithmetic | :unlock:
+326 | Power of Three | :star: | Arithmetic | :unlock:
 371 | Sum of Two Integers | :star: :star: | Arithmetic | :unlock:
 389 | Findthe Difference | :star: | Arithmetic | :unlock:
 400 | Nth Digit | :star: :star: | Arithmetic
@@ -122,6 +123,9 @@ No | Title | Difficulty | Catogary | Notes
 443 | String Compression | :star: :star: | String
 344 | Reverse String | :star: | String
 796 | Rotate String | :star: | String
+ | Search | | |
+34 | Search For a Range | :star: star: | Search | :unlock:
+35 | Search Insert Position  | :star: | Search | :unlock:
 
 
 # Bit Operations
