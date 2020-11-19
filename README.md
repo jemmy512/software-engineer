@@ -1,4 +1,4 @@
-# Leveling Radier
+# Programmer Leveling Strategy
 
 # Formal Entry
 - [ ] [The key to Accelerating Your Coding Skills](http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/)
@@ -135,6 +135,14 @@
 - [ ] [Implementing Lock-Free Queues](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.53.8674&rep=rep1&type=pdf)
 - [ ] [Simple, Fast, and Practical Non-Blocking and Blocking Concurrent Queue Algorithms](https://www.cs.rochester.edu/~scott/papers/1996_PODC_queues.pdf)
 
+### Memory Order
+- [ ] [Weak vs. Strong Memory Models](https://preshing.com/20120930/weak-vs-strong-memory-models/)
+- [ ] [This Is Why They Call It a Weakly-Ordered CPU](https://preshing.com/20121019/this-is-why-they-call-it-a-weakly-ordered-cpu/)
+- [ ] [Memory Barriers Are Like Source Control Operations](https://preshing.com/20120710/memory-barriers-are-like-source-control-operations/)
+- [ ] [Acquire and Release Semantics](https://preshing.com/20120913/acquire-and-release-semantics/)
+- [ ] [Memory Ordering at Compile Time](https://preshing.com/20120625/memory-ordering-at-compile-time/)
+- [ ] [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/)
+- [ ] [An Introduction to Lock-Free Programming](https://preshing.com/20120612/an-introduction-to-lock-free-programming/)
 
 # Distributed architecture
 - [ ] [Scalable Web Architecture and Distributed Systems](http://www.aosabook.org/en/distsys.html)
