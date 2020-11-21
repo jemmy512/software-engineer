@@ -1,4 +1,4 @@
-# Architecture
+# UML
 ![CppRest.png](../../.Image/CppRest.png)
 
 # Call Stack
@@ -6,24 +6,25 @@
 ```C++
 overrideable::g_casablancaHttpRequestFunc // CB-> handel http response
 
-    http_client::request
-        http_pipeline::propagate
-            oauth2_handler::propagate
-                oauth2_config::_authenticate_request
-                    req.headers().add(header_names::authorization, "Bearer " + token().access_token());
+pplx::task<http_response> http_client::request
+    http_pipeline::propagate
+        oauth2_handler::propagate
+            oauth2_config::_authenticate_request
+                req.headers().add(header_names::authorization, "Bearer " + token().access_token());
 
-                winhttp_client::propagate   // window platform
-                    _http_client_communicator::async_send_request
-                        _http_client_communicator::open_and_send_request_async
-                            _http_client_communicator::open_and_send_request
-                                winhttp_client::send_request
-                                    winhttp_client::_start_request_send
+            winhttp_client::propagate   // window platform
+                _http_client_communicator::async_send_request
+                    _http_client_communicator::open_and_send_request_async
+                        _http_client_communicator::open_and_send_request
+                            winhttp_client::send_request
+                                winhttp_client::_start_request_send
 
-                asio_client::propagate // create asio_context, obtain a reused connection from pool
+            asio_client::propagate // create asio_context, obtain a reused connection from pool
+                auto result_task = pplx::create_task(context->m_request_completion);
                     _http_client_communicator::async_send_request
-                        _http_client_communicator::push_request                // 1. gurantee order
+                        _http_client_communicator::push_request             // 1. gurantee order
                             m_requests_queue.push(request);
-                        _http_client_communicator::open_and_send_request_async // 2. don't gurantee order
+                        _http_client_communicator::open_and_send_request    // 2. don't gurantee order
                             _http_client_communicator::open_and_send_request
                                 asio_client::send_request
                                     asio_context::start_request
@@ -87,20 +88,40 @@ overrideable::g_casablancaHttpRequestFunc // CB-> handel http response
                                                                         reactive_socket_service_base::async_send
                                                                             reactive_socket_service_base::start_op
                                                                                 ....
-                                                asio_context::handle_write_headers // write callback for boost::asio::async_write
-                                                    asio_context::handle_write_chunked_body //  data is chunked
-                                                        ....
-                                                    asio_context::handle_write_large_body   // data is not chunked
-                                                        // continue write untill completion
-                                                        asio_context::handle_write_body
-                                                            asio_context::handle_status_line
-                                                                asio_context::read_headers
-                                                                    asio_context::complete_headers
-                                                                    asio_context::handle_chunk_header / asio_context::handle_read_content
-                                                                        asio_context::handle_chunk
-                                                                            // if to_read == 0 complete_request
-                                                                            stream_decompressor::decompress
-                                                                            // comtinue read and handle_chunk_header
+                return result_task;
+
+// write callback for boost::asio::async_write
+asio_context::handle_write_headers
+    asio_context::handle_write_chunked_body //  data is chunked
+        ....
+    asio_context::handle_write_large_body   // data is not chunked
+        // continue write untill completion
+        asio_context::handle_write_body
+            boost::asio::async_read_until;
+                asio_context::handle_status_line
+                    asio_context::read_headers
+                        asio_context::complete_headers
+                            m_request.set_body(Concurrency::streams::istream());
+                            m_request_completion.set(m_response);
+                        asio_context::handle_read_content
+                            asio_context::async_read_until_buffersize
+                                boost::asio::async_read(m_socket, buffer, readCondition, readHandler);
+                                    asio_context::handle_read_content
+                                        request_context::complete_request
+                                            m_response._get_impl()->_complete(body_size);
+                                                http_msg_base::_complete
+                                            request_context::finish;
+                                                m_http_client->finish_request();
+                                                    _http_client_communicator::finish_request
+                                                        m_requests_queue.pop();
+                                                        open_and_send_request(request);
+                        asio_context::handle_chunk_header
+                            asio_context::handle_chunk
+                                // if to_read == 0 complete_request
+                                stream_decompressor::decompress
+                                // comtinue read and handle_chunk_header
+                            request_context::complete_request
+                                --->
 ```
 
 ## Receive
