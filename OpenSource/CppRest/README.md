@@ -73,31 +73,43 @@ pplx::task<http_response> http_client::request
                                                                 --->
                                                 asio_connection_fast_ipv4_fallback::async_write
                                                     asio_connect::async_write                           // else
-                                                        boost::asio::async_write(m_socket, buffer, writeHandler);                 handler                 CompletionCondition
-                                                            write.hpp::async_write(stream, buffer, completion, handler)[580]    write_stream_handler
-                                                                write.hpp::write_op::operator()[324]                                    \|/             transfer_all
-                                                                    ssl::stream.hpp::async_write_some[635]                           write::write_op
-                                                                        io.hpp::async_io[334]
-                                                                            io.hpp::io_op operator()[135]
-                                                                                write_op.hpp::operator()[43]
-                                                                                    engine::write
-                                                                                        engine::perform
-                                                                                            engin::write
-                                                                                                ::SSL_write
-                                                                    basic_stream_socket::async_write_some
-                                                                        reactive_socket_service_base::async_send
-                                                                            reactive_socket_service_base::start_op
-                                                                                ....
-                return result_task;
+                                                        boost::asio::async_write(m_socket, buffer, writeHandler);
+                                                            write.hpp::async_write(stream, buffer, completion, handler)[580]
+                                                                write.hpp::start_write_buffer_sequence_op
+                                                                    write_op<AsyncWriteStream, ConstBufferSequence, ConstBufferIterator, CompletionCondition, WriteHandler>(
+                                                                        stream, buffers, completion_condition, handler
+                                                                    )(boost::system::error_code(), 0, 1);
+                                                                        write.hpp::write_op::operator()             // while loop until write completed
+                                                                            ssl::stream.hpp::async_write_some       // while loop until write completed
+                                                                                ssl::io.hpp::async_io
+                                                                                    ssl::io.hpp::io_op::operator()  // while loop until write completed
+                                                                                        ssl::write_op.hpp::operator()
+                                                                                            ssl::engine::write
+                                                                                                ssl::engine::perform
+                                                                                                    ssl::engin::write
+                                                                                                        ::SSL_write
+                                                                            basic_stream_socket::async_write_some
+                                                                                reactive_socket_service_base::async_send
+                                                                                    reactive_socket_service_base::start_op
+                                                                                        epoll_reactor::start_op
+                                                                                            epoll_reactor::post_immediate_completion
+                                                                                                scheduler::post_immediate_completion
+                                                                                                    op_queue_.push(op);
+                                                                                                    wake_one_thread_and_unlock(lock);
+                                                                                                        posix_event.hpp::maybe_unlock_and_signal_one
+                                                                                                            ::pthread_cond_signal
+                                                                                                        epoll_reactor::interrupt
+                                                                                                            epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, interrupter_.read_descriptor(), &ev);
 
 // write callback for boost::asio::async_write
 asio_context::handle_write_headers
     asio_context::handle_write_chunked_body //  data is chunked
         ....
     asio_context::handle_write_large_body   // data is not chunked
-        // continue write untill completion
-        asio_context::handle_write_body
+        // continue write request payload untill completion
+        asio_context::handle_write_body // sending request completed
             boost::asio::async_read_until;
+                    ...
                 asio_context::handle_status_line
                     asio_context::read_headers
                         asio_context::complete_headers
