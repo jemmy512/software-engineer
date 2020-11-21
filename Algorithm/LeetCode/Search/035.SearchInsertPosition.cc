@@ -26,16 +26,16 @@ class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
         int low = 0;
-        int high = nums.size() - 1;
+        int high = nums.size();
 
-        while (low <= high) {
+        while (low < high) {
             int pivot = low + (high - low) / 2;
             if (nums[pivot] == target)
                 return pivot;
             else if (nums[pivot] < target)
                 low = pivot + 1;
             else
-                high = pivot - 1;
+                high = pivot;
         }
 
         return low;
