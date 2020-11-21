@@ -74,7 +74,7 @@ pplx::task<http_response> http_client::request
                                                 asio_connection_fast_ipv4_fallback::async_write
                                                     asio_connect::async_write                           // else
                                                         boost::asio::async_write(m_socket, buffer, writeHandler);
-                                                            write.hpp::async_write(stream, buffer, completion, handler)[580]
+                                                            write.hpp::async_write(stream, buffer, completion, handler)
                                                                 write.hpp::start_write_buffer_sequence_op
                                                                     write_op<AsyncWriteStream, ConstBufferSequence, ConstBufferIterator, CompletionCondition, WriteHandler>(
                                                                         stream, buffers, completion_condition, handler
@@ -115,18 +115,19 @@ asio_context::handle_write_headers
                         asio_context::complete_headers
                             m_request.set_body(Concurrency::streams::istream());
                             m_request_completion.set(m_response);
+
                         asio_context::handle_read_content
                             asio_context::async_read_until_buffersize
                                 boost::asio::async_read(m_socket, buffer, readCondition, readHandler);
-                                    asio_context::handle_read_content
-                                        request_context::complete_request
-                                            m_response._get_impl()->_complete(body_size);
-                                                http_msg_base::_complete
-                                            request_context::finish;
-                                                m_http_client->finish_request();
-                                                    _http_client_communicator::finish_request
-                                                        m_requests_queue.pop();
-                                                        open_and_send_request(request);
+                            request_context::complete_request
+                                m_response._get_impl()->_complete(body_size);
+                                    http_msg_base::_complete
+                                request_context::finish;
+                                    m_http_client->finish_request();
+                                        _http_client_communicator::finish_request
+                                            m_requests_queue.pop();
+                                            open_and_send_request(request);
+
                         asio_context::handle_chunk_header
                             asio_context::handle_chunk
                                 // if to_read == 0 complete_request
