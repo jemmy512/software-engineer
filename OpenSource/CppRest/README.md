@@ -1,5 +1,28 @@
-# UML
+# CppRest
+The [C++ REST SDK](https://github.com/microsoft/cpprestsdk) is a Microsoft project for cloud-based client-server communication in native code using a modern asynchronous C++ API design. This project aims to help C++ developers connect to and interact with services.
+
+Features:
+* Programming with Tasks
+* JSON
+* Asynchronous Stream
+* URIs
+* HTTP Client
+* HTTP Listener
+* Websocket Client
+* OAuth Client
+
 ![CppRest.png](../../.Image/CppRest.png)
+
+# PPLX
+The [Parallel Patterns Library (PPL)](https://docs.microsoft.com/en-us/cpp/parallel/concrt/parallel-patterns-library-ppl?view=msvc-160) provides an imperative programming model that promotes scalability and ease-of-use for developing concurrent applications. The PPL builds on the scheduling and resource management components of the Concurrency Runtime. It raises the level of abstraction between your application code and the underlying threading mechanism by providing generic, type-safe algorithms and containers that act on data in parallel. The PPL also lets you develop applications that scale by providing alternatives to shared state.
+
+The PPL provides the following features:
+* Task Parallelism: a mechanism that works on top of the Windows ThreadPool to execute several work items (tasks) in parallel
+* Parallel algorithms: generic algorithms that works on top of the Concurrency Runtime to act on collections of data in parallel
+* Parallel containers and objects: generic container types that provide safe concurrent access to their elements
+
+![pplx.png](../../.Image/Pplx.png)
+
 
 # Call Stack
 ## Send
