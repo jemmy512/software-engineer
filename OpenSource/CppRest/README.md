@@ -2,27 +2,48 @@
 The [C++ REST SDK](https://github.com/microsoft/cpprestsdk) is a Microsoft project for cloud-based client-server communication in native code using a modern asynchronous C++ API design. This project aims to help C++ developers connect to and interact with services.
 
 Features:
-* Programming with Tasks
-* JSON
+* [Programming with Tasks](https://github.com/microsoft/cpprestsdk/wiki/Programming-with-Tasks)
+* [JSON](https://github.com/microsoft/cpprestsdk/wiki/JSON)
 * Asynchronous Stream
 * URIs
-* HTTP Client
+* [HTTP Client](https://github.com/microsoft/cpprestsdk/wiki/HTTP-Client)
 * HTTP Listener
-* Websocket Client
+* [Websocket Client](https://github.com/microsoft/cpprestsdk/wiki/Web-Socket)
 * OAuth Client
 
 ![CppRest.png](../../.Image/CppRest.png)
 
 # PPLX
-The [Parallel Patterns Library (PPL)](https://docs.microsoft.com/en-us/cpp/parallel/concrt/parallel-patterns-library-ppl?view=msvc-160) provides an imperative programming model that promotes scalability and ease-of-use for developing concurrent applications. The PPL builds on the scheduling and resource management components of the Concurrency Runtime. It raises the level of abstraction between your application code and the underlying threading mechanism by providing generic, type-safe algorithms and containers that act on data in parallel. The PPL also lets you develop applications that scale by providing alternatives to shared state.
+PPLX is a special version of PPL for non-winodws platform.
+
+The [Parallel Patterns Library (PPL)](https://docs.microsoft.com/en-us/cpp/parallel/concrt/parallel-patterns-library-ppl?view=msvc-160) provides an imperative programming model that promotes scalability and ease-of-use for developing concurrent applications. The PPL builds on the scheduling and resource management components of the [Concurrency Runtime](https://docs.microsoft.com/en-us/cpp/parallel/concrt/concurrency-runtime?view=msvc-160). It raises the level of abstraction between your application code and the underlying threading mechanism by providing generic, type-safe algorithms and containers that act on data in parallel. The PPL also lets you develop applications that scale by providing alternatives to shared state.
 
 The PPL provides the following features:
-* Task Parallelism: a mechanism that works on top of the Windows ThreadPool to execute several work items (tasks) in parallel
-* Parallel algorithms: generic algorithms that works on top of the Concurrency Runtime to act on collections of data in parallel
-* Parallel containers and objects: generic container types that provide safe concurrent access to their elements
+* [Task Parallelism](https://docs.microsoft.com/en-us/cpp/parallel/concrt/task-parallelism-concurrency-runtime?view=msvc-160): a mechanism that works on top of the Windows ThreadPool to execute several work items (tasks) in parallel
+* [Parallel algorithms](https://docs.microsoft.com/en-us/cpp/parallel/concrt/parallel-algorithms?view=msvc-160): generic algorithms that works on top of the Concurrency Runtime to act on collections of data in parallel
+* [Parallel containers and objects](https://docs.microsoft.com/en-us/cpp/parallel/concrt/parallel-containers-and-objects?view=msvc-160): generic container types that provide safe concurrent access to their elements
+* [Cancellation in PPL](https://docs.microsoft.com/en-us/cpp/parallel/concrt/cancellation-in-the-ppl?view=msvc-160): Explains how to cancel the work that is being performed by a parallel algorithm.
 
 ![pplx.png](../../.Image/Pplx.png)
 
+```C++
+task::then
+    _M_unitTask._ThenImpl
+        _GetImpl()->_ScheduleContinuation
+            _PTaskHandle->_M_next = _M_Continuations;
+
+            _PTaskHandle->_GetTaskImplBase()->_ScheduleContinuationTask(_PTaskHandle);
+                _ScheduleTask
+                    _M_TaskCollection._ScheduleTask(_PTaskHandle, _InliningMode);
+                        _M_pScheduler->schedule(_TaskProcHandle_t::_RunChoreBridge, _PTaskHandle);
+                            linux_scheduler::schedule
+                                crossplat::threadpool::shared_instance().schedule(boost::bind(proc, param));
+
+            _PTaskHandle->_GetTaskImplBase()->_Cancel(true);
+
+            _PTaskHandle->_GetTaskImplBase()->_CancelWithExceptionHolder(_GetExceptionHolder(), true);
+
+```
 
 # Call Stack
 ## Send
@@ -98,10 +119,10 @@ pplx::task<http_response> http_client::request
                                                     asio_connect::async_write                           // else
                                                         boost::asio::async_write(m_socket, buffer, writeHandler);
                                                             write.hpp::async_write(stream, buffer, completion, handler)
-                                                                write.hpp::start_write_buffer_sequence_op
+                                                                write.hpp::start_write_buffer_sequence_op(stream, buffer, bufferIterator, completion_condition, handler)
                                                                     write_op<AsyncWriteStream, ConstBufferSequence, ConstBufferIterator, CompletionCondition, WriteHandler>(
                                                                         stream, buffers, completion_condition, handler
-                                                                    )(boost::system::error_code(), 0, 1);
+                                                                    )(boost::system::error_code(), 0, 1); // (error_code, bytes_transferred, start)
                                                                         write.hpp::write_op::operator()             // while loop until write completed
                                                                             ssl::stream.hpp::async_write_some       // while loop until write completed
                                                                                 ssl::io.hpp::async_io
@@ -123,14 +144,15 @@ pplx::task<http_response> http_client::request
                                                                                                             ::pthread_cond_signal
                                                                                                         epoll_reactor::interrupt
                                                                                                             epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, interrupter_.read_descriptor(), &ev);
+                return result_task; // return a async pplx::task<response> object to client, client then use response.extract_string() to get the real response string
 
 // write callback for boost::asio::async_write
-asio_context::handle_write_headers
+asio_context::handle_write_headers // request header has sent, then send request body
     asio_context::handle_write_chunked_body //  data is chunked
         ....
     asio_context::handle_write_large_body   // data is not chunked
-        // continue write request payload untill completion
-        asio_context::handle_write_body // sending request completed
+        // continue write request payload untill completed
+        asio_context::handle_write_body // both request header and body sent, wait & handle reponse
             boost::asio::async_read_until;
                     ...
                 asio_context::handle_status_line
@@ -145,6 +167,7 @@ asio_context::handle_write_headers
                             request_context::complete_request
                                 m_response._get_impl()->_complete(body_size);
                                     http_msg_base::_complete
+                                        m_data_available.set(body_size); // notify client which is blocked at reponse.extract_string
                                 request_context::finish;
                                     m_http_client->finish_request();
                                         _http_client_communicator::finish_request
