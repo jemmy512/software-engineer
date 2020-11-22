@@ -13,40 +13,7 @@ Features:
 
 ![CppRest.png](../../.Image/CppRest.png)
 
-# PPLX
-PPLX is a special version of PPL for non-winodws platform.
-
-The [Parallel Patterns Library (PPL)](https://docs.microsoft.com/en-us/cpp/parallel/concrt/parallel-patterns-library-ppl?view=msvc-160) provides an imperative programming model that promotes scalability and ease-of-use for developing concurrent applications. The PPL builds on the scheduling and resource management components of the [Concurrency Runtime](https://docs.microsoft.com/en-us/cpp/parallel/concrt/concurrency-runtime?view=msvc-160). It raises the level of abstraction between your application code and the underlying threading mechanism by providing generic, type-safe algorithms and containers that act on data in parallel. The PPL also lets you develop applications that scale by providing alternatives to shared state.
-
-The PPL provides the following features:
-* [Task Parallelism](https://docs.microsoft.com/en-us/cpp/parallel/concrt/task-parallelism-concurrency-runtime?view=msvc-160): a mechanism that works on top of the Windows ThreadPool to execute several work items (tasks) in parallel
-* [Parallel algorithms](https://docs.microsoft.com/en-us/cpp/parallel/concrt/parallel-algorithms?view=msvc-160): generic algorithms that works on top of the Concurrency Runtime to act on collections of data in parallel
-* [Parallel containers and objects](https://docs.microsoft.com/en-us/cpp/parallel/concrt/parallel-containers-and-objects?view=msvc-160): generic container types that provide safe concurrent access to their elements
-* [Cancellation in PPL](https://docs.microsoft.com/en-us/cpp/parallel/concrt/cancellation-in-the-ppl?view=msvc-160): Explains how to cancel the work that is being performed by a parallel algorithm.
-
-![pplx.png](../../.Image/Pplx.png)
-
-```C++
-task::then
-    _M_unitTask._ThenImpl
-        _GetImpl()->_ScheduleContinuation
-            _PTaskHandle->_M_next = _M_Continuations;
-
-            _PTaskHandle->_GetTaskImplBase()->_ScheduleContinuationTask(_PTaskHandle);
-                _ScheduleTask
-                    _M_TaskCollection._ScheduleTask(_PTaskHandle, _InliningMode);
-                        _M_pScheduler->schedule(_TaskProcHandle_t::_RunChoreBridge, _PTaskHandle);
-                            linux_scheduler::schedule
-                                crossplat::threadpool::shared_instance().schedule(boost::bind(proc, param));
-
-            _PTaskHandle->_GetTaskImplBase()->_Cancel(true);
-
-            _PTaskHandle->_GetTaskImplBase()->_CancelWithExceptionHolder(_GetExceptionHolder(), true);
-
-```
-
-# Call Stack
-## Send
+## Send Request
 ```C++
 overrideable::g_casablancaHttpRequestFunc // CB-> handel http response
 
@@ -157,61 +124,131 @@ asio_context::handle_write_headers // request header has sent, then send request
                     ...
                 asio_context::handle_status_line
                     asio_context::read_headers
-                        asio_context::complete_headers
-                            m_request.set_body(Concurrency::streams::istream());
-                            m_request_completion.set(m_response);
+                      asio_context::complete_headers
+                        m_request.set_body(Concurrency::streams::istream());
+                        m_request_completion.set(m_response);
 
-                        asio_context::handle_read_content
-                            asio_context::async_read_until_buffersize
-                                boost::asio::async_read(m_socket, buffer, readCondition, readHandler);
-                            request_context::complete_request
-                                m_response._get_impl()->_complete(body_size);
-                                    http_msg_base::_complete
-                                        m_data_available.set(body_size); // notify client which is blocked at reponse.extract_string
-                                request_context::finish;
-                                    m_http_client->finish_request();
-                                        _http_client_communicator::finish_request
-                                            m_requests_queue.pop();
-                                            open_and_send_request(request);
+                      asio_context::handle_read_content
+                        asio_context::async_read_until_buffersize
+                          boost::asio::async_read(m_socket, buffer, readCondition, readHandler);
+                        request_context::complete_request
+                          m_response._get_impl()->_complete(body_size);
+                            http_msg_base::_complete
+                              m_data_available.set(body_size); // notify client which is blocked at reponse.extract_string
+                          request_context::finish;
+                            m_http_client->finish_request();
+                              _http_client_communicator::finish_request
+                                m_requests_queue.pop();
+                                open_and_send_request(request);
 
-                        asio_context::handle_chunk_header
-                            asio_context::handle_chunk
-                                // if to_read == 0 complete_request
-                                stream_decompressor::decompress
-                                // comtinue read and handle_chunk_header
-                            request_context::complete_request
-                                --->
+                      asio_context::handle_chunk_header
+                        asio_context::handle_chunk
+                          // if to_read == 0 complete_request
+                          stream_decompressor::decompress
+                          // comtinue read and handle_chunk_header
+                        request_context::complete_request
+                          --->
 ```
 
-## Receive
+## Receive Response
 ```C++
 _TaskProcHandle::_RunChoreBridge
-    _PPLTaskHandle::_invoke
-        _Perform
-            _Continue
-                _LogWorkItemAndInvokeUserLambda
-                    MercuryNetworkConnection::handleIncomingMercuryEvent
-                        --->
+  _PPLTaskHandle::_invoke
+    _Perform
+      _Continue
+        _LogWorkItemAndInvokeUserLambda
+          MercuryNetworkConnection::handleIncomingMercuryEvent
+            --->
 
 ws_client_wspp.cpp::connect_impl
-    endpoint.hpp::run
+  endpoint.hpp::run
 
-        io_service::run
-            win_iocp_io_service::run
-                win_iocp_io_service::do_one
-                    ....
-                    strand_service::dispatch
-                        connection.hpp::handle_async_read
-                            connection<config>::handle_read_http_response
-                                connection<config>::read_frame
+    io_service::run
+      win_iocp_io_service::run
+        win_iocp_io_service::do_one
+          ....
+          strand_service::dispatch
+            connection.hpp::handle_async_read
+              connection<config>::handle_read_http_response
+                connection<config>::read_frame
 
-                                    connection<config>::async_read_at_least | connection<config>::handle_async_read
-                                        read.hpp::async_read    // boost
-                                            connection.hpp::handle_async_read
-                                                connection<config>::handle_read_frame   // invoke by connection::m_handle_read_frame
-                                                    m_message_handler   // set by ws_client_wspp.cpp::connect_impl set_message_handler
+                  connection<config>::async_read_at_least | connection<config>::handle_async_read
+                    read.hpp::async_read    // boost
+                      connection.hpp::handle_async_read
+                          connection<config>::handle_read_frame   // invoke by connection::m_handle_read_frame
+                            m_message_handler   // set by ws_client_wspp.cpp::connect_impl set_message_handler
 
-                                                        MercuryNetworkConnection::handleIncomingMercuryEvent    // set at MercuryNetworkConnection::connectToMercury set_message_handler
-                                                            MercuryConnectionManager::onMercuryEventArrived
-                                                                MercuryConnectionManager::fireMercuryEventArrived
+                              MercuryNetworkConnection::handleIncomingMercuryEvent    // set at MercuryNetworkConnection::connectToMercury set_message_handler
+                                  MercuryConnectionManager::onMercuryEventArrived
+                                      MercuryConnectionManager::fireMercuryEventArrived
+```
+
+# PPLX
+PPLX is a special version of PPL for non-winodws platform.
+
+The [Parallel Patterns Library (PPL)](https://docs.microsoft.com/en-us/cpp/parallel/concrt/parallel-patterns-library-ppl?view=msvc-160) provides an imperative programming model that promotes scalability and ease-of-use for developing concurrent applications. The PPL builds on the scheduling and resource management components of the [Concurrency Runtime](https://docs.microsoft.com/en-us/cpp/parallel/concrt/concurrency-runtime?view=msvc-160). It raises the level of abstraction between your application code and the underlying threading mechanism by providing generic, type-safe algorithms and containers that act on data in parallel. The PPL also lets you develop applications that scale by providing alternatives to shared state.
+
+The PPL provides the following features:
+* [Task Parallelism](https://docs.microsoft.com/en-us/cpp/parallel/concrt/task-parallelism-concurrency-runtime?view=msvc-160): a mechanism that works on top of the Windows ThreadPool to execute several work items (tasks) in parallel
+* [Parallel algorithms](https://docs.microsoft.com/en-us/cpp/parallel/concrt/parallel-algorithms?view=msvc-160): generic algorithms that works on top of the Concurrency Runtime to act on collections of data in parallel
+* [Parallel containers and objects](https://docs.microsoft.com/en-us/cpp/parallel/concrt/parallel-containers-and-objects?view=msvc-160): generic container types that provide safe concurrent access to their elements
+* [Cancellation in PPL](https://docs.microsoft.com/en-us/cpp/parallel/concrt/cancellation-in-the-ppl?view=msvc-160): Explains how to cancel the work that is being performed by a parallel algorithm.
+
+![pplx.png](../../.Image/Pplx.png)
+
+## task::task
+```C++
+task::task
+  _CreateImpl
+    _Task_ptr<_ReturnType>::_Make
+      std::make_shared<_Task_impl<_ReturnType>>(_Ct, _Scheduler_arg);
+  _SetTaskCreationCallstack(_CAPTURE_CALLSTACK());
+  _TaskInitMaybeFunctor(_Param, details::_IsCallable(_Param,0));
+    _TaskInitWithFunctor(const _Function& _Func)
+      _M_Impl->_ScheduleTask
+        --->
+
+    _TaskInitNoFunctor(task_completion_event<_ReturnType>& _Event)
+      _Event._RegisterTask(_M_Impl)
+        _RegisterTask
+          _M_Impl->_M_tasks.push_back(_TaskParam)    // 1.
+
+          _TaskParam->_CancelWithExceptionHolder     // 2.
+
+          _TaskParam->_FinalizeAndRunContinuations   // 3.
+            _M_Result.Set(_Result);
+              _M_TaskCollection._Complete();
+                condition_variable.notify_all();
+              _RunTaskContinuations
+                _RunContinuation // while loop
+                  _ScheduleContinuationTask
+                    _ScheduleTask
+                      --->
+```
+
+##  task::then
+```C++
+task::then
+  _M_unitTask._ThenImpl
+    _GetImpl()->_ScheduleContinuation
+      _PTaskHandle->_M_next = _M_Continuations;
+
+      _Task_impl_base::_ScheduleContinuationTask(_PTaskHandle);
+        _Task_impl_base::_ScheduleTask
+          _TaskCollectionImpl::_ScheduleTask(_PTaskHandle, _InliningMode);
+              linux_scheduler::schedule
+                  crossplat::threadpool::shared_instance().schedule(boost::bind(proc, param));
+
+      _Task_impl_base::_Cancel(true);
+
+      _Task_impl_base::_CancelWithExceptionHolder(_GetExceptionHolder(), true);
+```
+
+## task::wait
+```C++
+_Task_impl_base::_Wait
+    _TaskCollection_impl::_Wait
+        event_impl::wait
+            condition_variable.wait
+
 ```
