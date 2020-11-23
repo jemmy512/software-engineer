@@ -11,6 +11,11 @@ Features:
 * [Websocket Client](https://github.com/microsoft/cpprestsdk/wiki/Web-Socket)
 * OAuth Client
 
+C++ Rest consists three parts:
+* PPL
+* C++ Rest
+* Boost Asio
+
 ![CppRest.png](../../.Image/CppRest.png)
 
 ## Send Request
@@ -153,12 +158,12 @@ asio_context::handle_write_headers // request header has sent, then send request
 ## Receive Response
 ```C++
 _TaskProcHandle::_RunChoreBridge
-  _PPLTaskHandle::_invoke
-    _Perform
-      _Continue
-        _LogWorkItemAndInvokeUserLambda
-          MercuryNetworkConnection::handleIncomingMercuryEvent
-            --->
+    _PPLTaskHandle::_invoke
+        _Perform
+            _Continue
+                _LogWorkItemAndInvokeUserLambda
+                MercuryNetworkConnection::handleIncomingMercuryEvent
+                    --->
 
 ws_client_wspp.cpp::connect_impl
   endpoint.hpp::run
@@ -196,34 +201,373 @@ The PPL provides the following features:
 
 ![pplx.png](../../.Image/Pplx.png)
 
+## class task
+```C++
+template<typename _ReturnType>
+class task
+{
+public:
+    typedef _ReturnType result_type;
+
+    task() : _M_Impl(nullptr) {
+        // The default constructor should create a task with a nullptr impl. This is a signal that the
+        // task is not usable and should throw if any wait(), get() or then() APIs are used.
+    }
+
+
+    template<typename _Ty>
+    __declspec(noinline)
+    explicit task(_Ty _Param) {
+        task_options _TaskOptions;
+        _ValidateTaskConstructorArgs<_ReturnType,_Ty>(_Param);
+        _CreateImpl(_TaskOptions.get_cancellation_token()._GetImplValue(), _TaskOptions.get_scheduler());
+        _SetTaskCreationCallstack(_CAPTURE_CALLSTACK());
+        _TaskInitMaybeFunctor(_Param, _IsCallable(_Param,0));
+    }
+
+    template<typename _Ty>
+    __declspec(noinline)
+    explicit task(_Ty _Param, const task_options &_TaskOptions) {
+        _ValidateTaskConstructorArgs<_ReturnType,_Ty>(_Param);
+
+        _CreateImpl(_TaskOptions.get_cancellation_token()._GetImplValue(), _TaskOptions.get_scheduler());
+        _SetTaskCreationCallstack(_get_internal_task_options(_TaskOptions)._M_hasPresetCreationCallstack ? _get_internal_task_options(_TaskOptions)._M_presetCreationCallstack : _CAPTURE_CALLSTACK());
+        _TaskInitMaybeFunctor(_Param, _IsCallable(_Param,0));
+    }
+
+    template<typename _Function>
+    __declspec(noinline)
+    auto then(_Function&& _Func) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType
+    {
+        task_options _TaskOptions;
+        _get_internal_task_options(_TaskOptions)._set_creation_callstack(_CAPTURE_CALLSTACK());
+        return _ThenImpl<_ReturnType, _Function>(std::forward<_Function>(_Func), _TaskOptions);
+    }
+
+
+    template<typename _Function>
+    __declspec(noinline)
+    auto then(_Function&& _Func, task_options _TaskOptions) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType
+    {
+        _get_internal_task_options(_TaskOptions)._set_creation_callstack(_CAPTURE_CALLSTACK());
+        return _ThenImpl<_ReturnType, _Function>(std::forward<_Function>(_Func), _TaskOptions);
+    }
+
+
+    template<typename _Function>
+    __declspec(noinline)
+    auto then(_Function&& _Func, cancellation_token _CancellationToken, task_continuation_context _ContinuationContext) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType
+    {
+        task_options _TaskOptions(_CancellationToken, _ContinuationContext);
+        _get_internal_task_options(_TaskOptions)._set_creation_callstack(_CAPTURE_CALLSTACK());
+        return _ThenImpl<_ReturnType, _Function>(std::forward<_Function>(_Func), _TaskOptions);
+    }
+
+
+    task_status wait() const {
+        if (!_M_Impl) {
+            throw invalid_operation("wait() cannot be called on a default constructed task.");
+        }
+
+        return _M_Impl->_Wait();
+    }
+
+
+    _ReturnType get() const {
+        if (!_M_Impl) {
+            throw invalid_operation("get() cannot be called on a default constructed task.");
+        }
+
+        if (_M_Impl->_Wait() == canceled) {
+            throw task_canceled();
+        }
+
+        return _M_Impl->_GetResult();
+    }
+
+    bool is_done() const {
+        if (!_M_Impl) {
+            throw invalid_operation("is_done() cannot be called on a default constructed task.");
+        }
+
+        return _M_Impl->_IsDone();
+    }
+
+    scheduler_ptr scheduler() const {
+        if (!_M_Impl) {
+            throw invalid_operation("scheduler() cannot be called on a default constructed task.");
+        }
+
+        return _M_Impl->_GetScheduler();
+    }
+
+
+    bool is_apartment_aware() const {
+        if (!_M_Impl) {
+            throw invalid_operation("is_apartment_aware() cannot be called on a default constructed task.");
+        }
+        return _M_Impl->_IsApartmentAware();
+    }
+
+    void _CreateImpl(_CancellationTokenState * _Ct, scheduler_ptr _Scheduler) {
+        _ASSERTE(_Ct != nullptr);
+        _M_Impl = _Task_ptr<_ReturnType>::_Make(_Ct, _Scheduler);
+        if (_Ct != _CancellationTokenState::_None()) {
+            _M_Impl->_RegisterCancellation(_M_Impl);
+        }
+    }
+
+    void _SetAsync(bool _Async = true) {
+        _GetImpl()->_SetAsync(_Async);
+    }
+
+    template<typename _Function>
+    auto _Then(_Function&& _Func, _CancellationTokenState *_PTokenState,
+        _TaskInliningMode_t _InliningMode = _ForceInline) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType
+    {
+        // inherit from antecedent
+        auto _Scheduler = _GetImpl()->_GetScheduler();
+
+        return _ThenImpl<_ReturnType, _Function>(std::forward<_Function>(_Func), _PTokenState, task_continuation_context::use_default(), _Scheduler, _CAPTURE_CALLSTACK(), _InliningMode);
+    }
+
+private:
+    template<typename _InternalReturnType, typename _Function>
+    void _TaskInitWithFunctor(const _Function& _Func) {
+        typedef typename _InitFunctorTypeTraits<_InternalReturnType, decltype(_Func())> _Async_type_traits;
+
+        _M_Impl->_M_fFromAsync = _Async_type_traits::_IsAsyncTask;
+        _M_Impl->_M_fUnwrappedTask = _Async_type_traits::_IsUnwrappedTaskOrAsync;
+        _M_Impl->_M_taskEventLogger._LogScheduleTask(false);
+        _M_Impl->_ScheduleTask(new _InitialTaskHandle<_InternalReturnType, _Function, typename _Async_type_traits::_AsyncKind>(_GetImpl(), _Func), _NoInline);
+    }
+
+    void _TaskInitNoFunctor(task_completion_event<_ReturnType>& _Event) {
+        _Event._RegisterTask(_M_Impl);
+    }
+
+    template<typename _Function>
+    void _TaskInitMaybeFunctor(_Function & _Func, std::true_type) {
+        _TaskInitWithFunctor<_ReturnType, _Function>(_Func);
+    }
+
+    template<typename _Ty>
+    void _TaskInitMaybeFunctor(_Ty & _Param, std::false_type) {
+        _TaskInitNoFunctor(_Param);
+    }
+
+    template<typename _InternalReturnType, typename _Function>
+    auto _ThenImpl(_Function&& _Func, const task_options& _TaskOptions) const -> typename _ContinuationTypeTraits<_Function, _InternalReturnType>::_TaskOfType
+    {
+        if (!_M_Impl) {
+            throw invalid_operation("then() cannot be called on a default constructed task.");
+        }
+
+        _CancellationTokenState *_PTokenState = _TaskOptions.has_cancellation_token() ? _TaskOptions.get_cancellation_token()._GetImplValue() : nullptr;
+        auto _Scheduler = _TaskOptions.has_scheduler() ? _TaskOptions.get_scheduler() : _GetImpl()->_GetScheduler();
+        auto _CreationStack = _get_internal_task_options(_TaskOptions)._M_hasPresetCreationCallstack ? _get_internal_task_options(_TaskOptions)._M_presetCreationCallstack : _TaskCreationCallstack();
+        return _ThenImpl<_InternalReturnType, _Function>(std::forward<_Function>(_Func), _PTokenState, _TaskOptions.get_continuation_context(), _Scheduler, _CreationStack);
+    }
+
+    template<typename _InternalReturnType, typename _Function>
+    auto _ThenImpl(_Function&& _Func,
+      scheduler_ptr _Scheduler,
+      _TaskCreationCallstack _CreationStack,
+      _CancellationTokenState *_PTokenState,
+      const task_continuation_context& _ContinuationContext,
+      _TaskInliningMode_t _InliningMode = _NoInline
+    ) const -> typename _ContinuationTypeTraits<_Function, _InternalReturnType>::_TaskOfType {
+        if (!_M_Impl) {
+            throw invalid_operation("then() cannot be called on a default constructed task.");
+        }
+
+        typedef _FunctionTypeTraits<_Function, _InternalReturnType> _Function_type_traits;
+        typedef _TaskTypeTraits<typename _Function_type_traits::_FuncRetType> _Async_type_traits;
+        typedef typename _Async_type_traits::_TaskRetType _TaskType;
+
+        if (_PTokenState == nullptr) {
+            if (_Function_type_traits::_Takes_task::value) {
+              _PTokenState = _CancellationTokenState::_None();
+            } else {
+              _PTokenState = _GetImpl()->_M_pTokenState;
+            }
+        }
+
+        task<_TaskType> _ContinuationTask;
+        _ContinuationTask._CreateImpl(_PTokenState, _Scheduler);
+        _ContinuationTask._GetImpl()->_M_fFromAsync = (_GetImpl()->_M_fFromAsync || _Async_type_traits::_IsAsyncTask);
+        _ContinuationTask._GetImpl()->_M_fUnwrappedTask = _Async_type_traits::_IsUnwrappedTaskOrAsync;
+        _ContinuationTask._SetTaskCreationCallstack(_CreationStack);
+
+        _GetImpl()->_ScheduleContinuation(new _ContinuationTaskHandle<_InternalReturnType, _TaskType, _Function,
+          typename _Function_type_traits::_Takes_task, typename _Async_type_traits::_AsyncKind>
+            (_GetImpl(), _ContinuationTask._GetImpl(), std::forward<_Function>(_Func), _ContinuationContext,
+            _InliningMode)
+          );
+
+        return _ContinuationTask;
+    }
+
+    // The underlying implementation for this task
+    typename _Task_ptr<_ReturnType>::_Type _M_Impl;
+};
+```
+
+```C++
+template<>
+class task<void>
+{
+public:
+
+private:
+     task<details::_Unit_type> _M_unitTask;
+}
+```
+
+## Type Traits
+```C++
+template<typename _Type>
+task<_Type> _To_task(_Type t);
+
+template<typename _Func>
+task<void> _To_task_void(_Func f);
+```
+
+```C++
+struct _BadContinuationParamType{ };
+
+template <typename _Function, typename _Type>
+auto _ReturnTypeHelper(_Type t, _Function _Func, int, int) -> decltype(_Func(_To_task(t)));
+
+template <typename _Function, typename _Type>
+auto _ReturnTypeHelper(_Type t, _Function _Func, int, ...) -> decltype(_Func(t));
+
+template <typename _Function, typename _Type>
+auto _ReturnTypeHelper(_Type t, _Function _Func, ...) -> _BadContinuationParamType;
+```
+
+```C++
+template <typename _Function>
+auto _VoidReturnTypeHelper(_Function _Func, int, int) -> decltype(_Func(_To_task_void(_Func)));
+
+template <typename _Function>
+auto _VoidReturnTypeHelper(_Function _Func, int, ...) -> decltype(_Func());
+```
+
+```C++
+template <typename _Function>
+auto _VoidIsTaskHelper(_Function _Func, int, int) -> decltype(_Func(_To_task_void(_Func)), std::true_type());
+
+template <typename _Function>
+std::false_type _VoidIsTaskHelper(_Function _Func, int, ...);
+```
+
+```C++
+template <typename _Function, typename _Type>
+auto _IsTaskHelper(_Type t, _Function _Func, int, int) -> decltype(_Func(_To_task(t)), std::true_type());
+
+template <typename _Function, typename _Type>
+std::false_type _IsTaskHelper(_Type t, _Function _Func, int, ...);
+```
+
+```C++
+template<typename _Function, typename _ExpectedParameterType>
+struct _FunctionTypeTraits
+{
+  typedef decltype(_ReturnTypeHelper(stdx::declval<_ExpectedParameterType>(),stdx::declval<_Function>(), 0, 0))
+    _FuncRetType;
+
+  static_assert(!std::is_same<_FuncRetType,_BadContinuationParamType>::value, "incorrect parameter type for the
+    callable object in 'then'; consider _ExpectedParameterType or task<_ExpectedParameterType> (see below)");
+
+  typedef decltype(_IsTaskHelper(stdx::declval<_ExpectedParameterType>(),stdx::declval<_Function>(), 0, 0)) _Takes_task;
+};
+
+template<typename _Function>
+struct _FunctionTypeTraits<_Function, void>
+{
+  typedef decltype(_VoidReturnTypeHelper(stdx::declval<_Function>(), 0, 0)) _FuncRetType;
+  typedef decltype(_VoidIsTaskHelper(stdx::declval<_Function>(), 0, 0)) _Takes_task;
+};
+```
+
+```C++
+template <typename _Type, bool _IsAsync = false>
+struct _TaskTypeTraits
+{
+    typedef typename _UnwrapTaskType<_Type>::_Type _TaskRetType;
+    typedef decltype(_AsyncOperationKindSelector(stdx::declval<_Type>())) _AsyncKind;
+    typedef typename _NormalizeVoidToUnitType<_TaskRetType>::_Type _NormalizedTaskRetType;
+
+    static const bool _IsAsyncTask = false;
+    static const bool _IsUnwrappedTaskOrAsync = _IsUnwrappedAsyncSelector<_AsyncKind>::_Value;
+};
+
+template <>
+struct _TaskTypeTraits<void>
+{
+    typedef void _TaskRetType;
+    typedef _TypeSelectorNoAsync _AsyncKind;
+    typedef _Unit_type _NormalizedTaskRetType;
+
+    static const bool _IsAsyncTask = false;
+    static const bool _IsUnwrappedTaskOrAsync = false;
+};
+
+template <typename _Function>
+auto _IsCallable(_Function _Func, int) -> decltype(_Func(), std::true_type()) {
+    (void)(_Func);
+    return std::true_type();
+}
+
+template <typename _Function>
+std::false_type _IsCallable(_Function, ...) { return std::false_type(); }
+```
+
+```C++
+template<typename _Function, typename _ReturnType>
+struct _ContinuationTypeTraits
+{
+  typedef task<typename _TaskTypeTraits<typename _FunctionTypeTraits<_Function, _ReturnType>::_FuncRetType>::_TaskRetType> _TaskOfType;
+};
+
+template <typename _TaskType, typename _FuncRetType>
+struct _InitFunctorTypeTraits
+{
+  typedef typename _TaskTypeTraits<_FuncRetType>::_AsyncKind _AsyncKind;
+  static const bool _IsAsyncTask = _TaskTypeTraits<_FuncRetType>::_IsAsyncTask;
+  static const bool _IsUnwrappedTaskOrAsync = _TaskTypeTraits<_FuncRetType>::_IsUnwrappedTaskOrAsync;
+};
+
+template<typename T>
+struct _InitFunctorTypeTraits<T, T>
+{
+  typedef _TypeSelectorNoAsync _AsyncKind;
+  static const bool _IsAsyncTask = false;
+  static const bool _IsUnwrappedTaskOrAsync = false;
+};
+```
+
 ## task::task
 ```C++
-task::task
-  _CreateImpl
-    _Task_ptr<_ReturnType>::_Make
-      std::make_shared<_Task_impl<_ReturnType>>(_Ct, _Scheduler_arg);
-  _SetTaskCreationCallstack(_CAPTURE_CALLSTACK());
-  _TaskInitMaybeFunctor(_Param, details::_IsCallable(_Param,0));
+_CreateImpl
+  _Task_ptr<_ReturnType>::_Make
+    std::make_shared<_Task_impl<_ReturnType>>(_Ct, _Scheduler_arg);
+_SetTaskCreationCallstack(_CAPTURE_CALLSTACK());
+_TaskInitMaybeFunctor(_Param, _IsCallable(_Param,0));
     _TaskInitWithFunctor(const _Function& _Func)
-      _M_Impl->_ScheduleTask
-        --->
+        _Task_impl_base::_ScheduleTask(new _InitialTaskHandle());
+            --->
 
     _TaskInitNoFunctor(task_completion_event<_ReturnType>& _Event)
-      _Event._RegisterTask(_M_Impl)
-        _RegisterTask
-          _M_Impl->_M_tasks.push_back(_TaskParam)    // 1.
+        _Event._RegisterTask(_M_Impl)
+            task_completion_event::_RegisterTask
+                _M_Impl->_M_tasks.push_back(_TaskParam)         // 1. else
 
-          _TaskParam->_CancelWithExceptionHolder     // 2.
+                _Task_impl_base::CancelWithExceptionHolder      // 2. _M_Impl->_HasUserException()
 
-          _TaskParam->_FinalizeAndRunContinuations   // 3.
-            _M_Result.Set(_Result);
-              _M_TaskCollection._Complete();
-                condition_variable.notify_all();
-              _RunTaskContinuations
-                _RunContinuation // while loop
-                  _ScheduleContinuationTask
-                    _ScheduleTask
-                      --->
+                _Task_impl_base::_FinalizeAndRunContinuations   // 3. _M_Impl->_M_fHasValue
+                    --->
 ```
 
 ##  task::then
@@ -231,17 +575,14 @@ task::task
 task::then
   _M_unitTask._ThenImpl
     _GetImpl()->_ScheduleContinuation
-      _PTaskHandle->_M_next = _M_Continuations;
+      _PTaskHandle->_M_next = _M_Continuations;                 // 1. if (!_IsCompleted)
 
-      _Task_impl_base::_ScheduleContinuationTask(_PTaskHandle);
-        _Task_impl_base::_ScheduleTask
-          _TaskCollectionImpl::_ScheduleTask(_PTaskHandle, _InliningMode);
-              linux_scheduler::schedule
-                  crossplat::threadpool::shared_instance().schedule(boost::bind(proc, param));
+    _Task_impl_base::_ScheduleContinuationTask(_PTaskHandle);   // 2. if (_IsCompleted)
+        --->
 
-      _Task_impl_base::_Cancel(true);
+    _Task_impl_base::_Cancel(true);                             // 3. if cancel
 
-      _Task_impl_base::_CancelWithExceptionHolder(_GetExceptionHolder(), true);
+    _Task_impl_base::_CancelWithExceptionHolder(_GetExceptionHolder(), true); // 4. if cancel with exception
 ```
 
 ## task::wait
@@ -251,4 +592,49 @@ _Task_impl_base::_Wait
         event_impl::wait
             condition_variable.wait
 
+```
+
+## Run Continuation
+```C++
+task_completion_event::set
+  _Task_impl_base::_FinalizeAndRunContinuations(_M_Impl->_M_value.Get()); // while loop
+    _M_Result.Set(_Result);
+      _TaskCollectionImpl::_Complete();
+        condition_variable.notify_all();
+      _Task_impl_base::_RunTaskContinuations // while loop iterate all continuation
+        _Task_impl_base::_RunContinuation
+            _Task_impl_base::_ScheduleContinuationTask // _ContinuationTaskHandleBase * _PTaskHandle
+                // _ScheduleFuncWithAutoInline([]() { });
+                _Task_impl_base::_ScheduleFuncWithAutoInline // 1. _HasCapturedContext
+                    _TaskCollection_t::_RunTask(&_TaskProcThunk::_Bridge, new _TaskProcThunk(_Func), _InliningMode);
+                        _Bridge(_ThunkFunc);                            // 1.1 if __ForceInline
+            --->            _Func = []() {
+                                _Task_impl_base::_ScheduleTask   // 1.1.1 _M_continuationContext == _ContextCallback::_CaptureCurrent()
+                                _ContextCallback::_CallInContext // 1.1.2 else
+                            }
+
+                        linux_scheduler::schedule(_Bridge, _ThunkFunc)  // 1.2 else not _ForceInline
+
+                _Task_impl_base::_ScheduleTask                // 2. not _HasCapturedContext
+                    _TaskCollectionImpl::_ScheduleTask(_TaskProcHandle* _PTaskHandle, _TaskInliningMode _InliningMode)
+                        _TaskProcHandle_t::_RunChoreBridge(_PTaskHandle)    // 2.1. if _ForceInline
+                            _PTaskHandle->invoke();
+                                (this)->_Perform();
+                                    _ContinuationTaskHandle::_Perform();
+                                        _ContinuationTaskHandle::_Continue(std::true_type, _TypeSelectorNoAsync)
+                                            _Task_impl_base::_FinalizeAndRunContinuations(
+                                                _LogWorkItemAndInvokeUserLambda(
+                                                    _Continuation_func_transformer<_FuncInputType, _ContinuationReturnType>::_Perform(_M_function),
+                                                    std::move(_ResultTask)
+                                                )
+                                            );
+
+                                        _ContinuationTaskHandle::_Continue(std::true_type, _TypeSelectorAsyncOperationOrTask)
+                                            _Task_impl_base::_AsyncInit<_NormalizedContinuationReturnType, _ContinuationReturnType>(
+                                                    this->_M_pTask,
+                                                    _LogWorkItemAndInvokeUserLambda(_M_function, std::move(_ResultTask))
+                                                );
+
+                        linux_scheduler::schedule                               // 2.2 else if not _ForceInline
+                            crossplat::threadpool::shared_instance().schedule(boost::bind(proc, param));
 ```
