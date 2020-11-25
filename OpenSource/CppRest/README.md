@@ -22,72 +22,76 @@ C++ Rest consists three parts:
 ```C++
 overrideable::g_casablancaHttpRequestFunc // CB-> handel http response
 
-pplx::task<http_response> http_client::request
-    http_pipeline::propagate
-        oauth2_handler::propagate
-            oauth2_config::_authenticate_request
+pplx::task<http_response> http_client::request()
+    http_pipeline::propagate()
+        oauth2_handler::propagate()
+            oauth2_config::_authenticate_request()
                 req.headers().add(header_names::authorization, "Bearer " + token().access_token());
 
             winhttp_client::propagate   // window platform
-                _http_client_communicator::async_send_request
-                    _http_client_communicator::open_and_send_request_async
-                        _http_client_communicator::open_and_send_request
-                            winhttp_client::send_request
-                                winhttp_client::_start_request_send
+                _http_client_communicator::async_send_request()
+                    _http_client_communicator::open_and_send_request_async()
+                        _http_client_communicator::open_and_send_request()
+                            winhttp_client::send_request()
+                                winhttp_client::_start_request_send()
 
             asio_client::propagate // create asio_context, obtain a reused connection from pool
                 auto result_task = pplx::create_task(context->m_request_completion);
-                    _http_client_communicator::async_send_request
+                    _http_client_communicator::async_send_request()
                         _http_client_communicator::push_request             // 1. gurantee order
                             m_requests_queue.push(request);
                         _http_client_communicator::open_and_send_request    // 2. don't gurantee order
-                            _http_client_communicator::open_and_send_request
-                                asio_client::send_request
-                                    asio_context::start_request
+                            _http_client_communicator::open_and_send_request()
+                                asio_client::send_request()
+                                    asio_context::start_request()
                                         ssl_proxy_tunnel::start_proxy_connect   // if it's ssl and not connected
-                                            ssl_proxy_tunnel::write_connect
-                                            basic_resolver.hpp::async_resolve
-                                                ssl_proxy_tunnel::handle_resolve
-                                                    ssl_proxy_tunnel::connect   // handler: ssl_proxy_tunnel::handle_tcp_connect
-                                                        asio_connection_fast_ipv4_fallback::connect
+                                            ssl_proxy_tunnel::write_connect()
+                                            basic_resolver.hpp::async_resolve()
+                                                ssl_proxy_tunnel::handle_resolve()
+                                                    ssl_proxy_tunnel::connect   // handler: ssl_proxy_tunnel::handle_tcp_connect()
+                                                        asio_connection_fast_ipv4_fallback::connect()
                                                             asio_connection_fast_ipv4_fallback::connect_unlock  // if connection is not reused
-                                                                asio_connection::async_connect
-                                                                    reactive_socket_service.hpp::async_connect
-                                                                        reactive_socket_service_base::start_connect_op
+                                                                asio_connection::async_connect()
+                                                                    reactive_socket_service::async_connect // reactive_socket_connect_op
+                                                                        reactive_socket_service_base::start_connect_op()
                                                                             // ctrl socket to async, else post_immediate_completion
-                                                                asio_connection_fast_ipv4_fallback::handle_tcp_connect
+                                                                            socket_ops::connect()
+                                                                                epoll_reactor::start_op(reactor::connect_op);
+
+                                                                            epoll_reactor::post_immediate_completion(op, is_continuation);
+                                                                asio_connection_fast_ipv4_fallback::handle_tcp_connect()
                                                                     // call ssl or normal socket connection handler
                                                             ssl_proxy_tunnel::handle_tcp_connect                // if connection is reused
-                                                                asio_connection_fast_ipv4_fallback::async_write
-                                                                    asio_connection::async_write
+                                                                asio_connection_fast_ipv4_fallback::async_write()
+                                                                    asio_connection::async_write()
                                                                         --->
-                                                                    ssl_proxy_tunnel::handle_write_request
-                                                                        ssl_proxy_tunnel::async_read_until
-                                                                            asio_connection::async_read_until
-                                                                        ssl_proxy_tunnel::handle_status_line
-                                                                            start_http_request_flow    // web::http::status_codes::OK
+                                                                    ssl_proxy_tunnel::handle_write_request()
+                                                                        ssl_proxy_tunnel::async_read_until()
+                                                                            asio_connection::async_read_until()
+                                                                        ssl_proxy_tunnel::handle_status_line()
+                                                                            start_http_request_flow    // web::http::status_codes::OK()
                                                                                 --->
-                                                                            ssl_proxy_tunnel::handle_body_read
+                                                                            ssl_proxy_tunnel::handle_body_read()
                                                                                 // check proxy auth required
-                                                            asio_context::handle_connect
-                                                                asio_context::write_request
+                                                            asio_context::handle_connect()
+                                                                asio_context::write_request()
                                                                     --->
                                         start_http_request_flow
-                                            // compose raw request stream, start timer: ctx->m_timer.start();
+                                            // compose raw request stream, start timer: ctx->m_timer.start()
                                             basic_resolver.hpp::async_resolve   // if it's not ssl and not connected
-                                                asio_context::handle_resolve
-                                                    asio_context::connect
-                                                        asio_connection_fast_ipv4_fallback::connect
+                                                asio_context::handle_resolve()
+                                                    asio_context::connect()
+                                                        asio_connection_fast_ipv4_fallback::connect()
                                                             --->
-                                            asio_context::write_request
+                                            asio_context::write_request()
                                                 asio_connection_fast_ipv4_fallback::async_handshake     // if ssl and not reused
-                                                    asio_connection::async_handshake
-                                                        stream.hpp::async_handshake
+                                                    asio_connection::async_handshake()
+                                                        stream.hpp::async_handshake()
                                                             ....
-                                                        asio_context::handle_handshake
-                                                            asio_connection_fast_ipv4_fallback::async_write
+                                                        asio_context::handle_handshake()
+                                                            asio_connection_fast_ipv4_fallback::async_write()
                                                                 --->
-                                                asio_connection_fast_ipv4_fallback::async_write
+                                                asio_connection_fast_ipv4_fallback::async_write()
                                                     asio_connect::async_write                           // else
                                                         boost::asio::async_write(m_socket, buffer, writeHandler);
                                                             write.hpp::async_write(stream, buffer, completion, handler)
@@ -97,28 +101,28 @@ pplx::task<http_response> http_client::request
                                                                     )(boost::system::error_code(), 0, 1); // (error_code, bytes_transferred, start)
                                                                         write.hpp::write_op::operator()             // while loop until write completed
                                                                             ssl::stream.hpp::async_write_some       // while loop until write completed
-                                                                                ssl::io.hpp::async_io
+                                                                                ssl::io.hpp::async_io()
                                                                                     ssl::io.hpp::io_op::operator()  // while loop until write completed
                                                                                         ssl::write_op.hpp::operator()
-                                                                                            ssl::engine::write
-                                                                                                ssl::engine::perform
-                                                                                                    ssl::engin::write
-                                                                                                        ::SSL_write
-                                                                            basic_stream_socket::async_write_some
-                                                                                reactive_socket_service_base::async_send
-                                                                                    reactive_socket_service_base::start_op
-                                                                                        epoll_reactor::start_op
-                                                                                            epoll_reactor::post_immediate_completion
-                                                                                                scheduler::post_immediate_completion
+                                                                                            ssl::engine::write()
+                                                                                                ssl::engine::perform()
+                                                                                                    ssl::engin::write()
+                                                                                                        ::SSL_write()
+                                                                            basic_stream_socket::async_write_some()
+                                                                                reactive_socket_service_base::async_send()
+                                                                                    reactive_socket_service_base::start_op()
+                                                                                        epoll_reactor::start_op()
+                                                                                            epoll_reactor::post_immediate_completion()
+                                                                                                scheduler::post_immediate_completion()
                                                                                                     op_queue_.push(op);
                                                                                                     wake_one_thread_and_unlock(lock);
-                                                                                                        posix_event.hpp::maybe_unlock_and_signal_one
-                                                                                                            ::pthread_cond_signal
-                                                                                                        epoll_reactor::interrupt
+                                                                                                        posix_event.hpp::maybe_unlock_and_signal_one()
+                                                                                                            ::pthread_cond_signal()
+                                                                                                        epoll_reactor::interrupt()
                                                                                                             epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, interrupter_.read_descriptor(), &ev);
                 return result_task; // return a async pplx::task<response> object to client, client then use response.extract_string() to get the real response string
 
-// write callback for boost::asio::async_write
+// write callback for boost::asio::async_write()
 asio_context::handle_write_headers // request header has sent, then send request body
     asio_context::handle_write_chunked_body //  data is chunked
         ....
@@ -127,67 +131,67 @@ asio_context::handle_write_headers // request header has sent, then send request
         asio_context::handle_write_body // both request header and body sent, wait & handle reponse
             boost::asio::async_read_until;
                     ...
-                asio_context::handle_status_line
-                    asio_context::read_headers
-                        asio_context::complete_headers
+                asio_context::handle_status_line()
+                    asio_context::read_headers()
+                        asio_context::complete_headers()
                             m_request.set_body(Concurrency::streams::istream());
                             m_request_completion.set(m_response);
-                                task_completion_event::set
+                                task_completion_event::set()
                                     --->
 
-                        asio_context::handle_read_content
-                            asio_context::async_read_until_buffersize
+                        asio_context::handle_read_content()
+                            asio_context::async_read_until_buffersize()
                             boost::asio::async_read(m_socket, buffer, readCondition, readHandler);
-                            request_context::complete_request
+                            request_context::complete_request()
                             m_response._get_impl()->_complete(body_size);
-                                http_msg_base::_complete
+                                http_msg_base::_complete()
                                 m_data_available.set(body_size); // notify client which is blocked at reponse.extract_string
                             request_context::finish;
-                                m_http_client->finish_request();
-                                _http_client_communicator::finish_request
-                                    m_requests_queue.pop();
+                                m_http_client->finish_request()
+                                _http_client_communicator::finish_request()
+                                    m_requests_queue.pop()
                                     open_and_send_request(request);
 
-                        asio_context::handle_chunk_header
-                            asio_context::handle_chunk
+                        asio_context::handle_chunk_header()
+                            asio_context::handle_chunk()
                             // if to_read == 0 complete_request
-                            stream_decompressor::decompress
+                            stream_decompressor::decompress()
                             // comtinue read and handle_chunk_header
-                            request_context::complete_request
+                            request_context::complete_request()
                                 --->
 ```
 
 ## Receive Response
 ```C++
-_TaskProcHandle::_RunChoreBridge
-    _PPLTaskHandle::_invoke
+_TaskProcHandle::_RunChoreBridge()
+    _PPLTaskHandle::_invoke()
         _Perform
             _Continue
                 _LogWorkItemAndInvokeUserLambda
-                MercuryNetworkConnection::handleIncomingMercuryEvent
+                MercuryNetworkConnection::handleIncomingMercuryEvent()
                     --->
 
-ws_client_wspp.cpp::connect_impl
-  endpoint.hpp::run
+ws_client_wspp.cpp::connect_impl()
+  endpoint.hpp::run()
 
-    io_service::run
-      win_iocp_io_service::run
-        win_iocp_io_service::do_one
+    io_service::run()
+      win_iocp_io_service::run()
+        win_iocp_io_service::do_one()
           ....
-          strand_service::dispatch
-            connection.hpp::handle_async_read
-              connection<config>::handle_read_http_response
-                connection<config>::read_frame
+          strand_service::dispatch()
+            connection.hpp::handle_async_read()
+              connection<config>::handle_read_http_response()
+                connection<config>::read_frame()
 
-                  connection<config>::async_read_at_least | connection<config>::handle_async_read
+                  connection<config>::async_read_at_least | connection<config>::handle_async_read()
                     read.hpp::async_read    // boost
-                      connection.hpp::handle_async_read
-                          connection<config>::handle_read_frame   // invoke by connection::m_handle_read_frame
+                      connection.hpp::handle_async_read()
+                          connection<config>::handle_read_frame   // invoke by connection::m_handle_read_frame()
                             m_message_handler   // set by ws_client_wspp.cpp::connect_impl set_message_handler
 
                               MercuryNetworkConnection::handleIncomingMercuryEvent    // set at MercuryNetworkConnection::connectToMercury set_message_handler
-                                  MercuryConnectionManager::onMercuryEventArrived
-                                      MercuryConnectionManager::fireMercuryEventArrived
+                                  MercuryConnectionManager::onMercuryEventArrived()
+                                      MercuryConnectionManager::fireMercuryEventArrived()
 ```
 
 # PPLX
@@ -239,7 +243,7 @@ public:
 
     template<typename _Function>
     __declspec(noinline)
-    auto then(_Function&& _Func) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType
+    auto then(_Function&& _Func) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
     {
         task_options _TaskOptions;
         _get_internal_task_options(_TaskOptions)._set_creation_callstack(_CAPTURE_CALLSTACK());
@@ -249,7 +253,7 @@ public:
 
     template<typename _Function>
     __declspec(noinline)
-    auto then(_Function&& _Func, task_options _TaskOptions) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType
+    auto then(_Function&& _Func, task_options _TaskOptions) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
     {
         _get_internal_task_options(_TaskOptions)._set_creation_callstack(_CAPTURE_CALLSTACK());
         return _ThenImpl<_ReturnType, _Function>(std::forward<_Function>(_Func), _TaskOptions);
@@ -258,7 +262,7 @@ public:
 
     template<typename _Function>
     __declspec(noinline)
-    auto then(_Function&& _Func, cancellation_token _CancellationToken, task_continuation_context _ContinuationContext) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType
+    auto then(_Function&& _Func, cancellation_token _CancellationToken, task_continuation_context _ContinuationContext) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
     {
         task_options _TaskOptions(_CancellationToken, _ContinuationContext);
         _get_internal_task_options(_TaskOptions)._set_creation_callstack(_CAPTURE_CALLSTACK());
@@ -271,7 +275,7 @@ public:
             throw invalid_operation("wait() cannot be called on a default constructed task.");
         }
 
-        return _M_Impl->_Wait();
+        return _M_Impl->_Wait()
     }
 
 
@@ -281,10 +285,10 @@ public:
         }
 
         if (_M_Impl->_Wait() == canceled) {
-            throw task_canceled();
+            throw task_canceled()
         }
 
-        return _M_Impl->_GetResult();
+        return _M_Impl->_GetResult()
     }
 
     bool is_done() const {
@@ -292,7 +296,7 @@ public:
             throw invalid_operation("is_done() cannot be called on a default constructed task.");
         }
 
-        return _M_Impl->_IsDone();
+        return _M_Impl->_IsDone()
     }
 
     scheduler_ptr scheduler() const {
@@ -300,7 +304,7 @@ public:
             throw invalid_operation("scheduler() cannot be called on a default constructed task.");
         }
 
-        return _M_Impl->_GetScheduler();
+        return _M_Impl->_GetScheduler()
     }
 
 
@@ -308,7 +312,7 @@ public:
         if (!_M_Impl) {
             throw invalid_operation("is_apartment_aware() cannot be called on a default constructed task.");
         }
-        return _M_Impl->_IsApartmentAware();
+        return _M_Impl->_IsApartmentAware()
     }
 
     void _CreateImpl(_CancellationTokenState * _Ct, scheduler_ptr _Scheduler) {
@@ -325,10 +329,10 @@ public:
 
     template<typename _Function>
     auto _Then(_Function&& _Func, _CancellationTokenState *_PTokenState,
-        _TaskInliningMode_t _InliningMode = _ForceInline) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType
+        _TaskInliningMode_t _InliningMode = _ForceInline) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
     {
         // inherit from antecedent
-        auto _Scheduler = _GetImpl()->_GetScheduler();
+        auto _Scheduler = _GetImpl()->_GetScheduler()
 
         return _ThenImpl<_ReturnType, _Function>(std::forward<_Function>(_Func), _PTokenState, task_continuation_context::use_default(), _Scheduler, _CAPTURE_CALLSTACK(), _InliningMode);
     }
@@ -359,15 +363,15 @@ private:
     }
 
     template<typename _InternalReturnType, typename _Function>
-    auto _ThenImpl(_Function&& _Func, const task_options& _TaskOptions) const -> typename _ContinuationTypeTraits<_Function, _InternalReturnType>::_TaskOfType
+    auto _ThenImpl(_Function&& _Func, const task_options& _TaskOptions) const -> typename _ContinuationTypeTraits<_Function, _InternalReturnType>::_TaskOfType()
     {
         if (!_M_Impl) {
             throw invalid_operation("then() cannot be called on a default constructed task.");
         }
 
         _CancellationTokenState *_PTokenState = _TaskOptions.has_cancellation_token() ? _TaskOptions.get_cancellation_token()._GetImplValue() : nullptr;
-        auto _Scheduler = _TaskOptions.has_scheduler() ? _TaskOptions.get_scheduler() : _GetImpl()->_GetScheduler();
-        auto _CreationStack = _get_internal_task_options(_TaskOptions)._M_hasPresetCreationCallstack ? _get_internal_task_options(_TaskOptions)._M_presetCreationCallstack : _TaskCreationCallstack();
+        auto _Scheduler = _TaskOptions.has_scheduler() ? _TaskOptions.get_scheduler() : _GetImpl()->_GetScheduler()
+        auto _CreationStack = _get_internal_task_options(_TaskOptions)._M_hasPresetCreationCallstack ? _get_internal_task_options(_TaskOptions)._M_presetCreationCallstack : _TaskCreationCallstack()
         return _ThenImpl<_InternalReturnType, _Function>(std::forward<_Function>(_Func), _PTokenState, _TaskOptions.get_continuation_context(), _Scheduler, _CreationStack);
     }
 
@@ -389,7 +393,7 @@ private:
 
         if (_PTokenState == nullptr) {
             if (_Function_type_traits::_Takes_task::value) {
-              _PTokenState = _CancellationTokenState::_None();
+              _PTokenState = _CancellationTokenState::_None()
             } else {
               _PTokenState = _GetImpl()->_M_pTokenState;
             }
@@ -402,10 +406,10 @@ private:
         _ContinuationTask._SetTaskCreationCallstack(_CreationStack);
 
         _GetImpl()->_ScheduleContinuation(new _ContinuationTaskHandle<_InternalReturnType, _TaskType, _Function,
-          typename _Function_type_traits::_Takes_task, typename _Async_type_traits::_AsyncKind>
-            (_GetImpl(), _ContinuationTask._GetImpl(), std::forward<_Function>(_Func), _ContinuationContext,
-            _InliningMode)
-          );
+            typename _Function_type_traits::_Takes_task, typename _Async_type_traits::_AsyncKind>
+                (_GetImpl(), _ContinuationTask._GetImpl(), std::forward<_Function>(_Func), _ContinuationContext,
+                _InliningMode)
+        );
 
         return _ContinuationTask;
     }
@@ -519,11 +523,11 @@ struct _TaskTypeTraits<void>
 template <typename _Function>
 auto _IsCallable(_Function _Func, int) -> decltype(_Func(), std::true_type()) {
     (void)(_Func);
-    return std::true_type();
+    return std::true_type()
 }
 
 template <typename _Function>
-std::false_type _IsCallable(_Function, ...) { return std::false_type(); }
+std::false_type _IsCallable(_Function, ...) { return std::false_type() }
 ```
 
 ```C++
@@ -596,7 +600,7 @@ struct _TaskTypeFromParam
 };
 ```
 
-## task::task
+## task::task()
 ```C++
 template<typename _Ty>
 task<typename _TaskTypeFromParam<_Ty>::_Type>
@@ -629,7 +633,7 @@ task<_Ty> task_from_result(_Ty _Param, const task_options& _TaskOptions = task_o
 inline task<void> task_from_result(const task_options& _TaskOptions = task_options())
 {
     task_completion_event<void> _Tce;
-    _Tce.set();
+    _Tce.set()
     return create_task(_Tce, _TaskOptions);
 }
 
@@ -643,10 +647,10 @@ task<_TaskType> task_from_exception(_ExType _Exception, const task_options& _Tas
 ```
 
 ```C++
-task::task
+task::task()
     _CreateImpl
-    _Task_ptr<_ReturnType>::_Make
-        std::make_shared<_Task_impl<_ReturnType>>(_Ct, _Scheduler_arg);
+        _Task_ptr<_ReturnType>::_Make()
+            std::make_shared<_Task_impl<_ReturnType>>(_Ct, _Scheduler_arg);
     _SetTaskCreationCallstack(_CAPTURE_CALLSTACK());
     _TaskInitMaybeFunctor(_Param, _IsCallable(_Param,0));
         _TaskInitWithFunctor(const _Function& _Func)                    // 1. _IsCallable true
@@ -655,7 +659,7 @@ task::task
 
         _TaskInitNoFunctor(task_completion_event<_ReturnType>& _Event)  // 2. _IsCallable false
             _Event._RegisterTask(_M_Impl)
-                task_completion_event::_RegisterTask
+                task_completion_event::_RegisterTask()
                     _M_Impl->_M_tasks.push_back(_TaskParam)         // 2.1. else
 
                     _Task_impl_base::CancelWithExceptionHolder      // 2.2. _M_Impl->_HasUserException()
@@ -664,12 +668,12 @@ task::task
                         --->
 ```
 
-## task::then
+## task::then()
 ```C++
-task::then
-  _M_unitTask._ThenImpl
-    _Task_impl_base::_ScheduleContinuation
-        _PTaskHandle->_M_next = _M_Continuations;                   // 1. if (!_IsCompleted)
+task::then()
+  task::_ThenImpl()
+    _Task_impl_base::_ScheduleContinuation()
+        _ContinuationTaskHandleBase::_M_next = _M_Continuations;    // 1. if (!_IsCompleted)
 
         _Task_impl_base::_ScheduleContinuationTask(_PTaskHandle);   // 2. if (_IsCompleted)
             --->
@@ -679,11 +683,11 @@ task::then
         _Task_impl_base::_CancelWithExceptionHolder(_GetExceptionHolder(), true); // 4. if cancel with exception
 ```
 
-## task::wait
+## task::wait()
 ```C++
-_Task_impl_base::_Wait
-    _TaskCollection_impl::_Wait
-        event_impl::wait
+_Task_impl_base::_Wait()
+    _TaskCollection_impl::_Wait()
+        event_impl::wait()
             condition_variable.wait
 
 ```
@@ -691,18 +695,18 @@ _Task_impl_base::_Wait
 ## Run Continuation
 ```C++
 // 1. _InitialTaskHandle finished
-_InitialTaskHandle::_Perform
-    _Task_impl_base::_FinalizeAndRunContinuations
+_InitialTaskHandle::_Perform()
+    _Task_impl_base::_FinalizeAndRunContinuations()
 
 
 // 2. task_completion_event completed
-task_completion_event::set
+task_completion_event::set()
   _Task_impl_base::_FinalizeAndRunContinuations(_M_Impl->_M_value.Get()); // while loops all tasks
     _M_Result.Set(_Result);
-        _TaskCollectionImpl::_Complete();
-            condition_variable.notify_all();
+        _TaskCollectionImpl::_Complete()
+            condition_variable.notify_all()
         _Task_impl_base::_RunTaskContinuations // while loops all continuations
-            _Task_impl_base::_RunContinuation
+            _Task_impl_base::_RunContinuation()
                 _Task_impl_base::_ScheduleContinuationTask // _ContinuationTaskHandleBase * _PTaskHandle
                     // _ScheduleFuncWithAutoInline([]() { });
                     _Task_impl_base::_ScheduleFuncWithAutoInline // 1. _HasCapturedContext
@@ -718,16 +722,16 @@ task_completion_event::set
                     _Task_impl_base::_ScheduleTask                // 2. not _HasCapturedContext
                         _TaskCollectionImpl::_ScheduleTask(_TaskProcHandle* _PTaskHandle, _TaskInliningMode _InliningMode)
                             _TaskProcHandle_t::_RunChoreBridge(_PTaskHandle)                            // 2.1. if _ForceInline
-                                _PTaskHandle->invoke();
-                                    (this)->_Perform(); // 2.1.1 for init handle
+                                _PTaskHandle->invoke()
+                                    (this)->_Perform() // 2.1.1 for init handle
                                         _Init(_TypeSelectorNoAsync)                // 2.1.1.1 NoAsync
                                             _Task_impl_base::_FinalizeAndRunContinuations(_ReturnType _Result)
 
                                         _Init(_TypeSelectorAsyncOperationOrTask)   // 2.1.1.2 Async
-                                            _Task_impl_base::_AsyncInit
+                                            _Task_impl_base::_AsyncInit()
 
-                                    (this)->_Perform(); // 2.2.2 for continuation handle
-                                        _ContinuationTaskHandle::_Perform();
+                                    (this)->_Perform() // 2.2.2 for continuation handle
+                                        _ContinuationTaskHandle::_Perform()
                                             _ContinuationTaskHandle::_Continue(_IsTaskBased(), _TypeSelectorNoAsync)                // 2.2.2.1 task based && No Async
                                                 task<_InternalReturnType> ancestorTask;
                                                 ancestorTask._SetImpl(std::move(_M_ancestorTaskImpl));
@@ -763,4 +767,94 @@ task_completion_event::set
 
                             linux_scheduler::schedule(_TaskProcHandle_t::_RunChoreBridge, _PTaskHandle); // 2.2 else if not _ForceInline
                                 crossplat::threadpool::shared_instance().schedule(boost::bind(proc, param));
+```
+
+## HTTP Server
+```C++
+http_listener_impl::open()
+    http_server_api::register_listener()
+        http_linux_server::start() // if (s_registrations == 1)
+            hostport_listener::start()
+                m_acceptor.reset(new tcp::acceptor(service, endpoint));
+                    basic_socket_acceptor::basic_socket_acceptor()
+                        reactive_socket_service_base::do_open()
+                            epoll_reactor::register_descriptor()
+                                allocate_descriptor_state()
+                                epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
+                        // set reuse address
+                        reactive_socket_service::bind()
+                        reactive_socket_service::listen()
+
+                hostport_listener::on_accept()
+                    basic_socket_acceptor::async_accept()
+                        reactive_socket_service::async_accept() // reactive_socket_accept_op
+                            reactive_socket_service_base::start_accept_op()
+                                reactive_socket_service_base::start_op(impl, reactor::read_op, op, is_continuation, true, false);
+                                    socket_ops::set_internal_non_blocking()
+                                    epoll_reactor::start_op()
+                                        if (allow_speculative) // is_non_blocking
+                                            op->perform()
+                                                reactive_socket_accept_op_base::do_perform()
+                                                    socket_ops::non_blocking_accept()
+                                        else
+                                            descriptor_data->op_queue_[op_type].push(op);
+
+                                epoll_reactor::post_immediate_completion // is_continuation true
+                                    schedule::do_run_one()
+                                        o->complete()
+                                            reactive_socket_accept_op::do_complete()
+                                                reactive_descriptor_service::assign()
+                                                    epoll_reactor::register_descriptor()
+
+                    m_connections.insert(new connection(std::move(socket), m_p_server, this, m_is_https, m_ssl_context_callback));
+                        connection::start_request_response()
+                            boost::asio::async_read_until // crlfcrlf_nonascii_searcher
+                                --->
+                                connection::handle_http_line()
+                                    http_request::_create_request()
+                                        // compose request object
+                                        connection::handle_headers()
+                                            connection::async_read_until // CRLF
+                                                connection::handle_chunked_header()
+                                                    http_msg_base::_complete()
+                                                        m_data_available.set(body_size);
+                                                connection::dispatch_request_to_listener()
+                                                    // find listern by request URI path
+                                                    connection::do_response(false)
+                                                        http_listener_impl::handle_request()
+                                                            m_supported_methods[mtd](msg)
+
+_http_request::reply()
+    _http_request::_reply_impl()
+        http_linux_server::respond()
+            return pplx::create_task(p_context->m_response_completed);
+
+connection::do_response()
+    connection::async_process_response()
+        // compose response header
+        connection::async_write(&connection::handle_headers_written, response);
+            boost::asio::async_write()
+            connection::handle_write_large_response()
+                connection::async_write(&connection::handle_write_large_response, response);
+                connection::handle_response_written()
+                    m_response_completed.set()
+                    connection::start_request_response()
+                    connection::finish_request_response()
+                        m_connections.erase(this)
+                        connection::close()
+                            basic_socket::cancel()
+                                reactive_socket_service_base::cancel()
+                                    epoll_reactor::cancel_ops()
+                                        // schedule unfinished operations
+                            basic_socket::shotdown()
+                                reactive_socket_service_base::base_shutdown()
+                            basic_socket::close()
+                                reactive_socket_service_base::close()
+                                    epoll_reactor::deregister_descriptor()
+                                        epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, descriptor, &ev);
+                                        // schedule unfinished operations
+                                    socket_ops::close()
+                                    epoll_reactor::cleanup_descriptor_data()
+                                        epoll_reactor::free_descriptor_state()
+                            _http_request::_reply_if_not_already()
 ```
