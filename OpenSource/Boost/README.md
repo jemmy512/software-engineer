@@ -1,72 +1,181 @@
 # UML
 ![CppRest.png](../../.Image/BoostAsio.png)
 
-# Call Stack
+# async_accept
+```C++
+basic_socket_acceptor::async_accept()
+    reactive_socket_service::async_accept() // reactive_socket_accept_op
+        reactive_socket_service_base::start_accept_op()
+            if (!peer_is_open)
+                reactive_socket_service_base::start_op()
+                    if (socket_ops::set_internal_non_blocking())
+                        epoll_reactor::start_op(reactor::read_op)
+                            if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
+                                operation::perform()
+                                    reactive_socket_accept_op_base::do_perform()
+                                        socket_ops::non_blocking_accept()
+                                            ::poll() // fd writable means it is connected
+                                epoll_reactor::post_immediate_completion
+                            else
+                                descriptor_data->op_queue_[op_type].push(op)
+                                    // when client request connect, listen socket wake up from epoll
+                                    scheduler::do_run_one()
+                                        operation::complete()
+                                            descriptor_state::do_complete()
+                                                descriptor_state::perform_io() // loop op_queue[]
+                                                    operation::perform()
+                                                        reactive_socket_accept_op_base::do_perform()
+                                                            --->
+                                                        ~perform_io_cleanup_on_block_exit()
+                                                            schedueler::post_immediate_completion
+                                                                reactive_descriptor_service::assign()
+                                                                    epoll_reactor::register_descriptor()
+                    else // blocking io
+                        epoll_reactor::post_immediate_completion
+            else // peer_is_open
+                epoll_reactor::post_immediate_completion
+```
 
-## boost::asio::async_read
+# async_connect
+```C++
+basic_stream_socket::async_connect()
+    reactive_socket_service::async_connect // reactive_socket_connect_op
+        reactive_socket_service_base::start_connect_op()
+            if (socket_ops::set_internal_non_blocking)
+                socket_ops::connect()
+                    ::connect(s, addr, (SockLenType)addrlen);
+                epoll_reactor::start_op(reactor::connect_op);
+                    if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
+                        operation::perform()
+                            reactive_socket_connect_op_base::do_perform()
+                                socket_ops::non_blocking_connect
+                                    ::poll(&fds, 1, 0); // fd writable means it's connected
+                        schedueler::post_immediate_completion
+                    else
+                        descriptor_data->op_queue_[op_type].push(op)
+                            schedule::do_run_one()
+                                operation::complete()
+                                    descriptor_state::do_complete()
+                                        descriptor_state::perform_io() // loop op_queue[]
+                                            operation::perform()
+                                                reactive_socket_connect_op_base::do_perform()
+                                                    --->
+                                                ~perform_io_cleanup_on_block_exit()
+                                                    // schedule operations
+            else
+                epoll_reactor::post_immediate_completion(op, is_continuation);
+                    schedule::do_run_one()
+                        operation::complete()
+                            reactive_socket_connect_op::do_complete()
+                                handler();
+```
 
-## boost::asio::async_read_until
+# async_read
+```C++
+template <typename AsyncReadStream, typename Allocator, typename ReadHandler>
 
-## boost::asio::async_write
+template <typename AsyncReadStream, typename Allocator, typename CompletionCondition, typename ReadHandler>
+
+template <typename AsyncReadStream, typename DynamicBuffer, typename ReadHandler>
+async_read(AsyncReadStream& s, DynamicBuffer buffers, ReadHandler handler,
+    typename enable_if<is_dynamic_buffer<typename decay<DynamicBuffer>::type>::value>::type* = 0);
+
+template <typename AsyncReadStream, typename DynamicBuffer, typename CompletionCondition, typename ReadHandler>
+
+template <typename AsyncReadStream, typename MutableBufferSequence, typename ReadHandler>
+
+template <typename AsyncReadStream, typename MutableBufferSequence, typename CompletionCondition, typename ReadHandler>
+
+template <typename AsyncReadStream, typename MutableBufferSequence,typename CompletionCondition, typename ReadHandler>
+
+read.hpp::async_read_until()
+    read.hpp::start_read_buffer_sequence_op()
+        read.hpp::read_op()
+            basic_stream_socket::async_read_some()
+                reactive_socket_service_base::async_receive()
+                    reactive_socket_service_base::start_op() // reactive_socket_recv_op
+                        epoll_reactor::start_op(reactor::read_op)
+                            if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
+                                operation::perform()
+                                    reactive_socket_accept_op_base::do_perform()
+                                        socket_ops::non_blocking_accept()
+                                            ::poll() // fd writable means it is connected
+                                    epoll_reactor::post_immediate_completion
+                                        schedule::do_run_one()
+                                            operation::complete()
+                                                reactive_socket_accept_op::do_complete()
+                                                    reactive_descriptor_service::assign()
+                                                        epoll_reactor::register_descriptor()
+                            else
+                                descriptor_data->op_queue_[op_type].push(op)
+                                    // when client request connect, listen socket wake up from epoll
+                                    scheduler::do_run_one()
+                                        operation::complete()
+                                            descriptor_state::do_complete()
+                                                descriptor_state::perform_io() // loop op_queue[]
+                                                    op->perform()
+                                                        reactive_socket_accept_op_base::do_perform()
+                                                            --->
+                                                        ~perform_io_cleanup_on_block_exit()
+                                                            // schedule operations
+```
+
+# async_write
 ```C++
 template <typename AsyncWriteStream, typename ConstBufferSequence, typename CompletionCondition, typename WriteHandler>
-inline BOOST_ASIO_INITFN_RESULT_TYPE(WriteHandler,void (boost::system::error_code, std::size_t))
-async_write(AsyncWriteStream& s,
-  const ConstBufferSequence& buffers,
-  CompletionCondition completion_condition,
-  (WriteHandler) handler,
-  typename enable_if<is_const_buffer_sequence<ConstBufferSequence>::value>::type*)
-{
-
-}
 
 template <typename AsyncWriteStream, typename ConstBufferSequence, typename WriteHandler>
-inline BOOST_ASIO_INITFN_RESULT_TYPE(WriteHandler,void (boost::system::error_code, std::size_t))
-async_write(AsyncWriteStream& s,
-  const ConstBufferSequence& buffers,
-  (WriteHandler) handler,
-  typename enable_if<is_const_buffer_sequence<ConstBufferSequence>::value>::type*)
-{
-
-}
 
 template <typename AsyncWriteStream, typename DynamicBuffer, typename WriteHandler>
-inline BOOST_ASIO_INITFN_RESULT_TYPE(WriteHandler, void (boost::system::error_code, std::size_t))
-async_write(AsyncWriteStream& s,
-  (DynamicBuffer) buffers,
-  (WriteHandler) handler,
-  typename enable_if<is_dynamic_buffer<typename decay<DynamicBuffer>::type>::value>::type*)
-{
-
-}
 
 template <typename AsyncWriteStream, typename DynamicBuffer, typename CompletionCondition, typename WriteHandler>
-inline BOOST_ASIO_INITFN_RESULT_TYPE(WriteHandler, void (boost::system::error_code, std::size_t))
-async_write(AsyncWriteStream& s,
-  (DynamicBuffer) buffers,
-  CompletionCondition completion_condition,
-  (WriteHandler) handler,
-  typename enable_if<is_dynamic_buffer<typename decay<DynamicBuffer>::type>::value>::type*)
-{
-
-}
 
 template <typename AsyncWriteStream, typename Allocator, typename WriteHandler>
-inline BOOST_ASIO_INITFN_RESULT_TYPE(WriteHandler, void (boost::system::error_code, std::size_t))
-async_write(AsyncWriteStream& s, ::asio::basic_streambuf<Allocator>& b, (WriteHandler) handler)
-{
-  return async_write(s, basic_streambuf_ref<Allocator>(b), (WriteHandler)(handler));
-}
 
 template <typename AsyncWriteStream, typename Allocator, typename CompletionCondition, typename WriteHandler>
-inline BOOST_ASIO_INITFN_RESULT_TYPE(WriteHandler, void (boost::system::error_code, std::size_t))
-async_write(AsyncWriteStream& s,
-    boost::asio::basic_streambuf<Allocator>& b,
-    CompletionCondition completion_condition,
-    (WriteHandler) handler)
-{
-  return async_write(s, basic_streambuf_ref<Allocator>(b), completion_condition, (WriteHandler)(handler));
-}
+
+
+boost::asio::async_write(m_socket, buffer, writeHandler);
+    write.hpp::async_write(stream, buffer, completion, handler)
+        write.hpp::start_write_buffer_sequence_op(stream, buffer, bufferIterator, completion_condition, handler)
+            write_op<AsyncWriteStream, ConstBufferSequence, ConstBufferIterator, CompletionCondition, WriteHandler>(
+                stream, buffers, completion_condition, handler
+            )(boost::system::error_code(), 0, 1); // (error_code, bytes_transferred, start)
+                write.hpp::write_op::operator()             // while loop until write completed
+                    ssl::stream.hpp::async_write_some       // while loop until write completed
+                        ssl::io.hpp::async_io()
+                            ssl::io.hpp::io_op::operator()  // while loop until write completed
+                                ssl::write_op.hpp::operator()
+                                    ssl::engine::write()
+                                        ssl::engine::perform()
+                                            ssl::engin::write()
+                                                ::SSL_write()
+
+                    basic_stream_socket::async_write_some()
+                        reactive_socket_service_base::async_send()
+                            reactive_socket_service_base::start_op() // reactive_socket_send_op
+                                epoll_reactor::start_op(reactor::write_op)
+                                    if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
+                                        operation::perform()
+                                            reactive_socket_send_op::do_perform()
+                                                    socket_ops::non_blocking_send()
+                                                        socket_ops::sendmsg
+                                        epoll_reactor::post_immediate_completion
+                                            schedule::do_run_one()
+                                                operation::complete()
+                                                    reactive_socket_send_op::do_complete()
+                                    else
+                                        descriptor_data->op_queue_[op_type].push(op)
+                                            // when client request connect, listen socket wake up from epoll
+                                            scheduler::do_run_one()
+                                                operation::complete()
+                                                    descriptor_state::do_complete()
+                                                        descriptor_state::perform_io() // loop op_queue[]
+                                                            op->perform()
+                                                                reactive_socket_send_op::do_perform()
+                                                                    --->
+                                                                ~perform_io_cleanup_on_block_exit()
+                                                                    // schedule operations
 ```
 
 tricky switch
@@ -96,7 +205,7 @@ struct write_op {
 };
 ```
 
-## io_context::post
+# io_context::post
 ```C++
 template <typename LegacyCompletionHandler>
 BOOST_ASIO_INITFN_RESULT_TYPE(LegacyCompletionHandler, void ())
@@ -114,7 +223,7 @@ io_context::post((LegacyCompletionHandler) handler)
   impl_.post_immediate_completion(p.p, is_continuation);
   p.v = p.p = 0;
 
-  return init.result.get();
+  return init.result.get()
 }
 
 #define BOOST_ASIO_DEFINE_HANDLER_PTR(op)
@@ -125,13 +234,13 @@ struct ptr
     op* p;
 
     ~ptr() {
-        reset();
+        reset()
     }
 
     static op* allocate(Handler& handler) {
         typedef typename ::boost::asio::associated_allocator<Handler>::type associated_allocator_type;
-        typedef typename ::boost::asio::detail::get_hook_allocator<Handler, associated_allocator_type>::type
-            hook_allocator_type;
+        typedef typename ::boost::asio::detail::get_hook_allocator<Handler, associated_allocator_type>::type hook_allocator_type;
+
         BOOST_ASIO_REBIND_ALLOC(hook_allocator_type, op)
             a(::boost::asio::detail::get_hook_allocator<Handler, associated_allocator_type>
                 ::get(handler, ::boost::asio::get_associated_allocator(handler)));
@@ -146,8 +255,8 @@ struct ptr
 
         if (v) {
             typedef typename ::boost::asio::associated_allocator<Handler>::type associated_allocator_type;
-            typedef typename ::boost::asio::detail::get_hook_allocator<Handler, associated_allocator_type>::type
-                hook_allocator_type;
+            typedef typename ::boost::asio::detail::get_hook_allocator<Handler, associated_allocator_type>::type hook_allocator_type;
+
             BOOST_ASIO_REBIND_ALLOC(hook_allocator_type, op)
                 a(::boost::asio::detail::get_hook_allocator<Handler, associated_allocator_type>
                     ::get(*h, ::boost::asio::get_associated_allocator(*h)));
@@ -157,13 +266,11 @@ struct ptr
     }
 }
 
-void scheduler::post_immediate_completion(
-    scheduler::operation* op, bool is_continuation)
+void scheduler::post_immediate_completion(scheduler::operation* op, bool is_continuation)
 {
-  work_started();
+  work_started()
   mutex::scoped_lock lock(mutex_);
   op_queue_.push(op);
   wake_one_thread_and_unlock(lock);
 }
-
 ```
