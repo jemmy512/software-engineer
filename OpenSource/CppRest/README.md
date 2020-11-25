@@ -12,13 +12,14 @@ Features:
 * OAuth Client
 
 C++ Rest consists three parts:
-* PPL
-* C++ Rest
-* Boost Asio
+* [PPL](#PPLX)
+* [C++ Rest](#CppRest)
+* [Boost Asio](#Boost.Asio)
 
 ![CppRest.png](../../.Image/CppRest.png)
 
-## Send Request
+## Client
+### Send Request
 ```C++
 overrideable::g_casablancaHttpRequestFunc // CB-> handel http response
 
@@ -38,138 +39,127 @@ pplx::task<http_response> http_client::request()
             asio_client::propagate // create asio_context, obtain a reused connection from pool
                 auto result_task = pplx::create_task(context->m_request_completion);
                     _http_client_communicator::async_send_request()
-                        _http_client_communicator::push_request             // 1. gurantee order
+                        // 1. gurantee order
+                        _http_client_communicator::push_request
                             m_requests_queue.push(request);
-                        _http_client_communicator::open_and_send_request    // 2. don't gurantee order
-                            _http_client_communicator::open_and_send_request()
-                                asio_client::send_request()
-                                    asio_context::start_request()
-                                        ssl_proxy_tunnel::start_proxy_connect   // if it's ssl and not connected
-                                            ssl_proxy_tunnel::write_connect()
-                                            basic_resolver.hpp::async_resolve()
-                                                ssl_proxy_tunnel::handle_resolve()
-                                                    ssl_proxy_tunnel::connect   // handler: ssl_proxy_tunnel::handle_tcp_connect()
-                                                        asio_connection_fast_ipv4_fallback::connect()
-                                                            asio_connection_fast_ipv4_fallback::connect_unlock  // if connection is not reused
-                                                                asio_connection::async_connect()
-                                                                    reactive_socket_service::async_connect // reactive_socket_connect_op
-                                                                        reactive_socket_service_base::start_connect_op()
-                                                                            // ctrl socket to async, else post_immediate_completion
-                                                                            socket_ops::connect()
-                                                                                epoll_reactor::start_op(reactor::connect_op);
 
-                                                                            epoll_reactor::post_immediate_completion(op, is_continuation);
-                                                                asio_connection_fast_ipv4_fallback::handle_tcp_connect()
-                                                                    // call ssl or normal socket connection handler
-                                                            ssl_proxy_tunnel::handle_tcp_connect                // if connection is reused
-                                                                asio_connection_fast_ipv4_fallback::async_write()
-                                                                    asio_connection::async_write()
-                                                                        --->
-                                                                    ssl_proxy_tunnel::handle_write_request()
-                                                                        ssl_proxy_tunnel::async_read_until()
-                                                                            asio_connection::async_read_until()
-                                                                        ssl_proxy_tunnel::handle_status_line()
-                                                                            start_http_request_flow    // web::http::status_codes::OK()
-                                                                                --->
-                                                                            ssl_proxy_tunnel::handle_body_read()
-                                                                                // check proxy auth required
-                                                            asio_context::handle_connect()
-                                                                asio_context::write_request()
+                        // 2. don't gurantee order
+                        _http_client_communicator::open_and_send_request()
+                            asio_client::send_request()
+                                asio_context::start_request()
+                                    ssl_proxy_tunnel::start_proxy_connect   // if it's ssl and not connected
+                                        ssl_proxy_tunnel::write_connect()
+                                        basic_resolver.hpp::async_resolve()
+                                            ssl_proxy_tunnel::handle_resolve()
+                                                ssl_proxy_tunnel::connect   // handler: ssl_proxy_tunnel::handle_tcp_connect()
+                                                    asio_connection_fast_ipv4_fallback::connect()
+                                                        asio_connection_fast_ipv4_fallback::connect_unlock  // if connection is not reused
+// connect socket
+                                                            asio_connection::async_connect()
+                                                                basic_stream_socket::async_connect()
+                                                                    ---> Boost.Asio
+                                                            asio_connection_fast_ipv4_fallback::handle_tcp_connect()
+                                                                // call ssl or normal socket connection handler
+                                                        ssl_proxy_tunnel::handle_tcp_connect                // if connection is reused
+                                                            asio_connection_fast_ipv4_fallback::async_write()
+                                                                asio_connection::async_write()
+                                                                    ---> Boost.Asio
+                                                                ssl_proxy_tunnel::handle_write_request()
+                                                                    ssl_proxy_tunnel::async_read_until()
+                                                                        asio_connection::async_read_until()
+                                                                    ssl_proxy_tunnel::handle_status_line()
+                                                                        start_http_request_flow    // web::http::status_codes::OK()
+                                                                            --->
+                                                                        ssl_proxy_tunnel::handle_body_read()
+                                                                            // check proxy auth required
+                                                        asio_context::handle_connect()
+                                                            asio_context::write_request()
+                                                                boost::asio::async_write
                                                                     --->
-                                        start_http_request_flow
-                                            // compose raw request stream, start timer: ctx->m_timer.start()
-                                            basic_resolver.hpp::async_resolve   // if it's not ssl and not connected
-                                                asio_context::handle_resolve()
-                                                    asio_context::connect()
-                                                        asio_connection_fast_ipv4_fallback::connect()
-                                                            --->
-                                            asio_context::write_request()
-                                                asio_connection_fast_ipv4_fallback::async_handshake     // if ssl and not reused
+                                    start_http_request_flow()
+                                        // compose raw request stream, start timer: ctx->m_timer.start()
+                                        basic_resolver.hpp::async_resolve
+                                            asio_context::handle_resolve()
+                                                asio_context::connect()
+                                                    asio_connection_fast_ipv4_fallback::connect()
+                                                        --->
+                                        asio_context::write_request()
+                                            if (m_connection->is_ssl() && !m_connection->is_reused())
+                                                asio_connection_fast_ipv4_fallback::async_handshake
                                                     asio_connection::async_handshake()
                                                         stream.hpp::async_handshake()
                                                             ....
                                                         asio_context::handle_handshake()
                                                             asio_connection_fast_ipv4_fallback::async_write()
                                                                 --->
-                                                asio_connection_fast_ipv4_fallback::async_write()
-                                                    asio_connect::async_write                           // else
-                                                        boost::asio::async_write(m_socket, buffer, writeHandler);
-                                                            write.hpp::async_write(stream, buffer, completion, handler)
-                                                                write.hpp::start_write_buffer_sequence_op(stream, buffer, bufferIterator, completion_condition, handler)
-                                                                    write_op<AsyncWriteStream, ConstBufferSequence, ConstBufferIterator, CompletionCondition, WriteHandler>(
-                                                                        stream, buffers, completion_condition, handler
-                                                                    )(boost::system::error_code(), 0, 1); // (error_code, bytes_transferred, start)
-                                                                        write.hpp::write_op::operator()             // while loop until write completed
-                                                                            ssl::stream.hpp::async_write_some       // while loop until write completed
-                                                                                ssl::io.hpp::async_io()
-                                                                                    ssl::io.hpp::io_op::operator()  // while loop until write completed
-                                                                                        ssl::write_op.hpp::operator()
-                                                                                            ssl::engine::write()
-                                                                                                ssl::engine::perform()
-                                                                                                    ssl::engin::write()
-                                                                                                        ::SSL_write()
-                                                                            basic_stream_socket::async_write_some()
-                                                                                reactive_socket_service_base::async_send()
-                                                                                    reactive_socket_service_base::start_op()
-                                                                                        epoll_reactor::start_op()
-                                                                                            epoll_reactor::post_immediate_completion()
-                                                                                                scheduler::post_immediate_completion()
-                                                                                                    op_queue_.push(op);
-                                                                                                    wake_one_thread_and_unlock(lock);
-                                                                                                        posix_event.hpp::maybe_unlock_and_signal_one()
-                                                                                                            ::pthread_cond_signal()
-                                                                                                        epoll_reactor::interrupt()
-                                                                                                            epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, interrupter_.read_descriptor(), &ev);
+                                            else
+                                                asio_connection_fast_ipv4_fallback::async_write(buffer, asio_context::handle_write_headers)
+                                                    asio_connect::async_write
+                                                        boost::asio::async_write(asio_context::handle_write_large_body)
+                                                            --->
                 return result_task; // return a async pplx::task<response> object to client, client then use response.extract_string() to get the real response string
 
 // write callback for boost::asio::async_write()
-asio_context::handle_write_headers // request header has sent, then send request body
-    asio_context::handle_write_chunked_body //  data is chunked
+asio_context::handle_write_headers() // request header has sent, then send request body
+    asio_context::handle_write_chunked_body() //  data is chunked
         ....
-    asio_context::handle_write_large_body   // data is not chunked
+    asio_context::handle_write_large_body()   // data is not chunked
         // continue write request payload untill completed
-        asio_context::handle_write_body // both request header and body sent, wait & handle reponse
-            boost::asio::async_read_until;
-                    ...
-                asio_context::handle_status_line()
-                    asio_context::read_headers()
-                        asio_context::complete_headers()
-                            m_request.set_body(Concurrency::streams::istream());
-                            m_request_completion.set(m_response);
-                                task_completion_event::set()
+        if (ec || m_uploaded >= m_content_length)
+            asio_context::handle_write_body() // both request header and body sent, wait & handle reponse
+                boost::asio::async_read_until()
+                        ---> Boost.Asio
+                    asio_context::handle_status_line()
+                        asio_context::read_headers()
+                            asio_context::complete_headers()
+                                m_request.set_body(Concurrency::streams::istream());
+                                m_request_completion.set(m_response);
+                                    task_completion_event::set()
+                                        // notify client which is blocked at response.get()
+                            asio_context::handle_read_content()
+                                asio_context::async_read_until_buffersize()
+                                boost::asio::async_read(m_socket, buffer, readCondition, readHandler);
+                                request_context::complete_request()
+                                m_response._get_impl()->_complete(body_size);
+                                    http_msg_base::_complete()
+                                    m_data_available.set(body_size);
+                                        // notify clients which are blocked at reponse.extract_string()
+                                request_context::finish;
+                                    m_http_client->finish_request()
+                                    _http_client_communicator::finish_request()
+                                        m_requests_queue.pop()
+                                        open_and_send_request(request);
+
+                            asio_context::handle_chunk_header()
+                                asio_context::handle_chunk()
+                                // if to_read == 0 complete_request
+                                stream_decompressor::decompress()
+                                // comtinue read and handle_chunk_header
+                                request_context::complete_request()
                                     --->
-
-                        asio_context::handle_read_content()
-                            asio_context::async_read_until_buffersize()
-                            boost::asio::async_read(m_socket, buffer, readCondition, readHandler);
-                            request_context::complete_request()
-                            m_response._get_impl()->_complete(body_size);
-                                http_msg_base::_complete()
-                                m_data_available.set(body_size); // notify client which is blocked at reponse.extract_string
-                            request_context::finish;
-                                m_http_client->finish_request()
-                                _http_client_communicator::finish_request()
-                                    m_requests_queue.pop()
-                                    open_and_send_request(request);
-
-                        asio_context::handle_chunk_header()
-                            asio_context::handle_chunk()
-                            // if to_read == 0 complete_request
-                            stream_decompressor::decompress()
-                            // comtinue read and handle_chunk_header
-                            request_context::complete_request()
-                                --->
+        else
+            asio_connect::async_write()
+                boost::asio::async_write(asio_context::handle_write_large_body)
+                    --->
 ```
 
-## Receive Response
+### Receive Response
 ```C++
 _TaskProcHandle::_RunChoreBridge()
     _PPLTaskHandle::_invoke()
-        _Perform
-            _Continue
-                _LogWorkItemAndInvokeUserLambda
-                MercuryNetworkConnection::handleIncomingMercuryEvent()
-                    --->
+        if (initHandle)
+            _InitialTaskHandle::_Perform()
+                _InitialTaskHandle::_Init()
+                    _Task_impl_base::_FinalizeAndRunContinuations()
+                        --->
+        else
+            _ContinuationTaskHandle::_Perform()
+                _ContinuationTaskHandle::_Continue()
+                    _Task_impl_base::_FinalizeAndRunContinuations()
+                        --->
+
+
+        --->                MercuryNetworkConnection::handleIncomingMercuryEvent()
 
 ws_client_wspp.cpp::connect_impl()
   endpoint.hpp::run()
@@ -192,6 +182,98 @@ ws_client_wspp.cpp::connect_impl()
                               MercuryNetworkConnection::handleIncomingMercuryEvent    // set at MercuryNetworkConnection::connectToMercury set_message_handler
                                   MercuryConnectionManager::onMercuryEventArrived()
                                       MercuryConnectionManager::fireMercuryEventArrived()
+```
+
+## HTTP Server
+### open listen socket
+```C++
+http_listener::open()
+    http_server_api::register_listener()
+        http_linux_server::start()
+        if (s_registrations == 1)
+            hostport_listener::start()
+                m_acceptor.reset(new tcp::acceptor(service, endpoint));
+                    basic_socket_acceptor::basic_socket_acceptor()
+                        reactive_socket_service_base::do_open()
+                            epoll_reactor::register_descriptor()
+                                allocate_descriptor_state()
+                                epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
+                        // set reuse address
+                        reactive_socket_service::bind()
+                        reactive_socket_service::listen()
+                m_acceptor->async_accept(*socket, &hostport_listener::on_accept);
+                    --->
+        http_linux_server::register_listener()
+            m_registered_listeners[listener] = make_unique<reader_writer_lock_t>();
+            std::map<std::string, hostport_listener>.insert({hostport, make_unique<hostport_listener>(this, hostport, is_https, listener->configuration())});
+            if (http_server_started)
+                hostport_listener::start()
+                    --->
+            hostport_listener::add_listener(path, listener);
+```
+### accept socket
+```C++
+hostport_listener::on_accept()
+    basic_socket_acceptor::async_accept()
+        ---> Boost.Asio
+```
+### read socket
+```C++
+    m_connections.insert(new connection(std::move(socket), m_p_server, this, m_is_https, m_ssl_context_callback));
+        connection::start_request_response()
+            boost::asio::async_read_until // crlfcrlf_nonascii_searcher
+                ---> Boost.Asio
+                connection::handle_http_line()
+                    http_request::_create_request()
+                        // compose request object
+                        connection::handle_headers()
+                            connection::async_read_until // CRLF
+                                boost::asio::async_read_until()
+                                    ---> Boost.Asio
+                                connection::handle_chunked_header()
+                                    http_msg_base::_complete()
+                                        m_data_available.set(body_size);
+                                connection::dispatch_request_to_listener()
+                                    // find listern by request URI path
+                                    connection::do_response(false)
+                                        http_listener_impl::handle_request()
+                                            m_supported_methods[mtd](msg)
+```
+### write socket
+```C++
+_http_request::reply()
+    _http_request::_reply_impl()
+        http_linux_server::respond()
+            return pplx::create_task(p_context->m_response_completed);
+
+connection::do_response()
+    connection::async_process_response()
+        // compose response header
+        connection::async_write(&connection::handle_headers_written, response);
+            boost::asio::async_write()
+            connection::handle_write_large_response()
+                connection::async_write(&connection::handle_write_large_response, response);
+                connection::handle_response_written()
+                    m_response_completed.set()
+                    connection::start_request_response()
+                    connection::finish_request_response()
+                        m_connections.erase(this)
+                        connection::close()
+                            basic_socket::cancel()
+                                reactive_socket_service_base::cancel()
+                                    epoll_reactor::cancel_ops()
+                                        // schedule unfinished operations
+                            basic_socket::shotdown()
+                                reactive_socket_service_base::base_shutdown()
+                            basic_socket::close()
+                                reactive_socket_service_base::close()
+                                    epoll_reactor::deregister_descriptor()
+                                        epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, descriptor, &ev);
+                                        // schedule unfinished operations
+                                    socket_ops::close()
+                                    epoll_reactor::cleanup_descriptor_data()
+                                        epoll_reactor::free_descriptor_state()
+                            _http_request::_reply_if_not_already()
 ```
 
 # PPLX
@@ -222,7 +304,6 @@ public:
 
 
     template<typename _Ty>
-    __declspec(noinline)
     explicit task(_Ty _Param) {
         task_options _TaskOptions;
         _ValidateTaskConstructorArgs<_ReturnType,_Ty>(_Param);
@@ -232,17 +313,16 @@ public:
     }
 
     template<typename _Ty>
-    __declspec(noinline)
     explicit task(_Ty _Param, const task_options &_TaskOptions) {
         _ValidateTaskConstructorArgs<_ReturnType,_Ty>(_Param);
 
         _CreateImpl(_TaskOptions.get_cancellation_token()._GetImplValue(), _TaskOptions.get_scheduler());
-        _SetTaskCreationCallstack(_get_internal_task_options(_TaskOptions)._M_hasPresetCreationCallstack ? _get_internal_task_options(_TaskOptions)._M_presetCreationCallstack : _CAPTURE_CALLSTACK());
+        _SetTaskCreationCallstack(_get_internal_task_options(_TaskOptions)._M_hasPresetCreationCallstack
+            ? _get_internal_task_options(_TaskOptions)._M_presetCreationCallstack : _CAPTURE_CALLSTACK());
         _TaskInitMaybeFunctor(_Param, _IsCallable(_Param,0));
     }
 
     template<typename _Function>
-    __declspec(noinline)
     auto then(_Function&& _Func) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
     {
         task_options _TaskOptions;
@@ -252,8 +332,8 @@ public:
 
 
     template<typename _Function>
-    __declspec(noinline)
-    auto then(_Function&& _Func, task_options _TaskOptions) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
+    typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
+    then(_Function&& _Func, task_options _TaskOptions) const
     {
         _get_internal_task_options(_TaskOptions)._set_creation_callstack(_CAPTURE_CALLSTACK());
         return _ThenImpl<_ReturnType, _Function>(std::forward<_Function>(_Func), _TaskOptions);
@@ -261,8 +341,8 @@ public:
 
 
     template<typename _Function>
-    __declspec(noinline)
-    auto then(_Function&& _Func, cancellation_token _CancellationToken, task_continuation_context _ContinuationContext) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
+    typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
+    then(_Function&& _Func, cancellation_token _CancellationToken, task_continuation_context _ContinuationContext) const
     {
         task_options _TaskOptions(_CancellationToken, _ContinuationContext);
         _get_internal_task_options(_TaskOptions)._set_creation_callstack(_CAPTURE_CALLSTACK());
@@ -328,13 +408,14 @@ public:
     }
 
     template<typename _Function>
-    auto _Then(_Function&& _Func, _CancellationTokenState *_PTokenState,
-        _TaskInliningMode_t _InliningMode = _ForceInline) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
+    typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
+    _Then(_Function&& _Func, _CancellationTokenState *_PTokenState, _TaskInliningMode_t _InliningMode = _ForceInline) const
     {
         // inherit from antecedent
         auto _Scheduler = _GetImpl()->_GetScheduler()
 
-        return _ThenImpl<_ReturnType, _Function>(std::forward<_Function>(_Func), _PTokenState, task_continuation_context::use_default(), _Scheduler, _CAPTURE_CALLSTACK(), _InliningMode);
+        return _ThenImpl<_ReturnType, _Function>(std::forward<_Function>(_Func), _PTokenState,
+            task_continuation_context::use_default(), _Scheduler, _CAPTURE_CALLSTACK(), _InliningMode);
     }
 
 private:
@@ -363,7 +444,8 @@ private:
     }
 
     template<typename _InternalReturnType, typename _Function>
-    auto _ThenImpl(_Function&& _Func, const task_options& _TaskOptions) const -> typename _ContinuationTypeTraits<_Function, _InternalReturnType>::_TaskOfType()
+    typename _ContinuationTypeTraits<_Function, _InternalReturnType>::_TaskOfType()
+    _ThenImpl(_Function&& _Func, const task_options& _TaskOptions) const
     {
         if (!_M_Impl) {
             throw invalid_operation("then() cannot be called on a default constructed task.");
@@ -376,13 +458,14 @@ private:
     }
 
     template<typename _InternalReturnType, typename _Function>
-    auto _ThenImpl(_Function&& _Func,
+    typename _ContinuationTypeTraits<_Function, _InternalReturnType>::_TaskOfType
+    _ThenImpl(_Function&& _Func,
       scheduler_ptr _Scheduler,
       _TaskCreationCallstack _CreationStack,
       _CancellationTokenState *_PTokenState,
       const task_continuation_context& _ContinuationContext,
       _TaskInliningMode_t _InliningMode = _NoInline
-    ) const -> typename _ContinuationTypeTraits<_Function, _InternalReturnType>::_TaskOfType {
+    ) const {
         if (!_M_Impl) {
             throw invalid_operation("then() cannot be called on a default constructed task.");
         }
@@ -653,19 +736,21 @@ task::task()
             std::make_shared<_Task_impl<_ReturnType>>(_Ct, _Scheduler_arg);
     _SetTaskCreationCallstack(_CAPTURE_CALLSTACK());
     _TaskInitMaybeFunctor(_Param, _IsCallable(_Param,0));
-        _TaskInitWithFunctor(const _Function& _Func)                    // 1. _IsCallable true
-            _Task_impl_base::_ScheduleTask(new _InitialTaskHandle());
-                --->
-
-        _TaskInitNoFunctor(task_completion_event<_ReturnType>& _Event)  // 2. _IsCallable false
-            _Event._RegisterTask(_M_Impl)
-                task_completion_event::_RegisterTask()
-                    _M_Impl->_M_tasks.push_back(_TaskParam)         // 2.1. else
-
-                    _Task_impl_base::CancelWithExceptionHolder      // 2.2. _M_Impl->_HasUserException()
-
-                    _Task_impl_base::_FinalizeAndRunContinuations   // 2.3. _M_Impl->_M_fHasValue
-                        --->
+        if (_IsCallable)
+            _TaskInitWithFunctor(const _Function& _Func)
+                _Task_impl_base::_ScheduleTask(new _InitialTaskHandle());
+                    --->
+        else
+            _TaskInitNoFunctor(task_completion_event<_ReturnType>& _Event)
+                _Event._RegisterTask(_M_Impl)
+                    task_completion_event::_RegisterTask()
+                        if (HasUserException)
+                            _Task_impl_base::CancelWithExceptionHolder()
+                        else if (_M_fHasValue)
+                            _Task_impl_base::_FinalizeAndRunContinuations()
+                                --->
+                        else
+                            _M_Impl->_M_tasks.push_back(_TaskParam)
 ```
 
 ## task::then()
@@ -673,14 +758,15 @@ task::task()
 task::then()
   task::_ThenImpl()
     _Task_impl_base::_ScheduleContinuation()
-        _ContinuationTaskHandleBase::_M_next = _M_Continuations;    // 1. if (!_IsCompleted)
-
-        _Task_impl_base::_ScheduleContinuationTask(_PTaskHandle);   // 2. if (_IsCompleted)
-            --->
-
-        _Task_impl_base::_Cancel(true);                             // 3. if cancel
-
-        _Task_impl_base::_CancelWithExceptionHolder(_GetExceptionHolder(), true); // 4. if cancel with exception
+        if (!_IsCompleted)
+            _ContinuationTaskHandleBase::_M_next = _M_Continuations;
+        else if (_IsCompleted)
+            _Task_impl_base::_ScheduleContinuationTask(_PTaskHandle);
+                --->
+        else if (cancel)
+            _Task_impl_base::_Cancel(true);
+        else if (cancel_and_exception)
+            _Task_impl_base::_CancelWithExceptionHolder(_GetExceptionHolder(), true);
 ```
 
 ## task::wait()
@@ -709,152 +795,72 @@ task_completion_event::set()
             _Task_impl_base::_RunContinuation()
                 _Task_impl_base::_ScheduleContinuationTask // _ContinuationTaskHandleBase * _PTaskHandle
                     // _ScheduleFuncWithAutoInline([]() { });
-                    _Task_impl_base::_ScheduleFuncWithAutoInline // 1. _HasCapturedContext
-                        _TaskCollection_t::_RunTask(&_TaskProcThunk::_Bridge, new _TaskProcThunk(_Func), _InliningMode);
-                            _Bridge(_ThunkFunc);                            // 1.1 if __ForceInline
-                --->            _Func = []() {
-                                    _Task_impl_base::_ScheduleTask   // 1.1.1 _M_continuationContext == _ContextCallback::_CaptureCurrent()
-                                    _ContextCallback::_CallInContext // 1.1.2 else
-                                }
+                    if (_HasCapturedContext)
+                        _Task_impl_base::_ScheduleFuncWithAutoInline
+                            _TaskCollection_t::_RunTask(&_TaskProcThunk::_Bridge, new _TaskProcThunk(_Func), _InliningMode);
+                                if (__ForceInline)
+                                    _TaskProcThunk::_Bridge(_ThunkFunc);
+                --->                    _Func = []() {
+                                            if (_M_continuationContext == _ContextCallback::_CaptureCurrent)
+                                                _Task_impl_base::_ScheduleTask
+                                            else
+                                                _ContextCallback::_CallInContext
+                                        }
+                                else // not _ForceInline
+                                    linux_scheduler::schedule(_Bridge, _ThunkFunc)
+                    else // not _HasCapturedContext
+                        _Task_impl_base::_ScheduleTask
+                            _TaskCollectionImpl::_ScheduleTask(_TaskProcHandle* _PTaskHandle, _TaskInliningMode _InliningMode)
+                                if (_ForceInline)
+                                    _TaskProcHandle_t::_RunChoreBridge(_PTaskHandle)
+                                        _PTaskHandle->invoke()
+                                            if (is_init_handle)
+                                                (this)->_Perform()
+                                                    if (NoAsync)
+                                                        _Init(_TypeSelectorNoAsync)
+                                                            _Task_impl_base::_FinalizeAndRunContinuations(_ReturnType _Result)
+                                                    else // Async
+                                                        _Init(_TypeSelectorAsyncOperationOrTask)
+                                                            _Task_impl_base::_AsyncInit()
+                                            else // is conitnuation handle
+                                                (this)->_Perform()
+                                                    _ContinuationTaskHandle::_Perform()
+                                                        if (is_task_based && NoAsync)
+                                                            _ContinuationTaskHandle::_Continue(_IsTaskBased(), _TypeSelectorNoAsync)
+                                                                task<_InternalReturnType> ancestorTask;
+                                                                ancestorTask._SetImpl(std::move(_M_ancestorTaskImpl));
 
-                            linux_scheduler::schedule(_Bridge, _ThunkFunc)  // 1.2 else not _ForceInline
-
-                    _Task_impl_base::_ScheduleTask                // 2. not _HasCapturedContext
-                        _TaskCollectionImpl::_ScheduleTask(_TaskProcHandle* _PTaskHandle, _TaskInliningMode _InliningMode)
-                            _TaskProcHandle_t::_RunChoreBridge(_PTaskHandle)                            // 2.1. if _ForceInline
-                                _PTaskHandle->invoke()
-                                    (this)->_Perform() // 2.1.1 for init handle
-                                        _Init(_TypeSelectorNoAsync)                // 2.1.1.1 NoAsync
-                                            _Task_impl_base::_FinalizeAndRunContinuations(_ReturnType _Result)
-
-                                        _Init(_TypeSelectorAsyncOperationOrTask)   // 2.1.1.2 Async
-                                            _Task_impl_base::_AsyncInit()
-
-                                    (this)->_Perform() // 2.2.2 for continuation handle
-                                        _ContinuationTaskHandle::_Perform()
-                                            _ContinuationTaskHandle::_Continue(_IsTaskBased(), _TypeSelectorNoAsync)                // 2.2.2.1 task based && No Async
-                                                task<_InternalReturnType> ancestorTask;
-                                                ancestorTask._SetImpl(std::move(_M_ancestorTaskImpl));
-
-                                                _Task_impl_base::_FinalizeAndRunContinuations(_ReturnType _Result)(
-                                                    _LogWorkItemAndInvokeUserLambda(
-                                                        _Continuation_func_transformer<_FuncInputType, _ContinuationReturnType>::_Perform(_M_function),
-                                                        std::move(ancestorTask)
-                                                    ) {
-                                                        _func(std::forward<_Arg>(_value))
-                                                    };
-                                                );
-
-                                            _ContinuationTaskHandle::_Continue(_IsTaskBased(), _TypeSelectorAsyncOperationOrTask)   // 2.2.2.2 task based && Async
-                                                _Task_impl_base::_AsyncInit<_NormalizedContinuationReturnType, _ContinuationReturnType>(
-                                                    this->_M_pTask,
-                                                    _LogWorkItemAndInvokeUserLambda(_M_function, std::move(ancestorTask))
-                                                );
-
-                                            _ContinuationTaskHandle::_Continue(!_IsTaskBased(), _TypeSelectorNoAsync)               // 2.2.2.3 not task based && No Async
-                                                _Task_impl_base::_FinalizeAndRunContinuations(_ReturnType _Result)(
-                                                    _LogWorkItemAndInvokeUserLambda(
-                                                        _Continuation_func_transformer<_FuncInputType, _FuncOutputType>::_Perform(_M_function),
-                                                        _M_ancestorTaskImpl->_GetResult()
-                                                    );
-                                                );
-
-                                            _ContinuationTaskHandle::_Continue(!_IsTaskBased(), _TypeSelectorNoAsync)               // 2.2.2.4 not task based && Async
-                                                _Task_impl_base::_AsyncInit<_NormalizedContinuationReturnType, _ContinuationReturnType>(
-                                                    this->_M_pTask,
-                                                    _LogWorkItemAndInvokeUserLambda(_M_function, _M_ancestorTaskImpl->_GetResult())
-                                                );
-
-                            linux_scheduler::schedule(_TaskProcHandle_t::_RunChoreBridge, _PTaskHandle); // 2.2 else if not _ForceInline
-                                crossplat::threadpool::shared_instance().schedule(boost::bind(proc, param));
+                                                                _Task_impl_base::_FinalizeAndRunContinuations(_ReturnType _Result)(
+                                                                    _LogWorkItemAndInvokeUserLambda(
+                                                                        _Continuation_func_transformer<_FuncInputType, _ContinuationReturnType>::_Perform(_M_function),
+                                                                        std::move(ancestorTask)
+                                                                    ) {
+                                                                        _func(std::forward<_Arg>(_value))
+                                                                    };
+                                                                );
+                                                        if (is_task_based && Async)
+                                                            _ContinuationTaskHandle::_Continue(_IsTaskBased(), _TypeSelectorAsyncOperationOrTask)
+                                                                _Task_impl_base::_AsyncInit<_NormalizedContinuationReturnType, _ContinuationReturnType>(
+                                                                    this->_M_pTask,
+                                                                    _LogWorkItemAndInvokeUserLambda(_M_function, std::move(ancestorTask))
+                                                                );
+                                                        if (not_task_based && NoAsync)
+                                                            _ContinuationTaskHandle::_Continue(!_IsTaskBased(), _TypeSelectorNoAsync)
+                                                                _Task_impl_base::_FinalizeAndRunContinuations(_ReturnType _Result)(
+                                                                    _LogWorkItemAndInvokeUserLambda(
+                                                                        _Continuation_func_transformer<_FuncInputType, _FuncOutputType>::_Perform(_M_function),
+                                                                        _M_ancestorTaskImpl->_GetResult()
+                                                                    );
+                                                                );
+                                                        if (not_task_based && Async)
+                                                            _ContinuationTaskHandle::_Continue(!_IsTaskBased(), _TypeSelectorNoAsync)
+                                                                _Task_impl_base::_AsyncInit<_NormalizedContinuationReturnType, _ContinuationReturnType>(
+                                                                    this->_M_pTask,
+                                                                    _LogWorkItemAndInvokeUserLambda(_M_function, _M_ancestorTaskImpl->_GetResult())
+                                                                );
+                                else // not _ForceInline
+                                    linux_scheduler::schedule(_TaskProcHandle_t::_RunChoreBridge, _PTaskHandle);
+                                        crossplat::threadpool::shared_instance().schedule(boost::bind(proc, param));
 ```
 
-## HTTP Server
-```C++
-http_listener_impl::open()
-    http_server_api::register_listener()
-        http_linux_server::start() // if (s_registrations == 1)
-            hostport_listener::start()
-                m_acceptor.reset(new tcp::acceptor(service, endpoint));
-                    basic_socket_acceptor::basic_socket_acceptor()
-                        reactive_socket_service_base::do_open()
-                            epoll_reactor::register_descriptor()
-                                allocate_descriptor_state()
-                                epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
-                        // set reuse address
-                        reactive_socket_service::bind()
-                        reactive_socket_service::listen()
-
-                hostport_listener::on_accept()
-                    basic_socket_acceptor::async_accept()
-                        reactive_socket_service::async_accept() // reactive_socket_accept_op
-                            reactive_socket_service_base::start_accept_op()
-                                reactive_socket_service_base::start_op(impl, reactor::read_op, op, is_continuation, true, false);
-                                    socket_ops::set_internal_non_blocking()
-                                    epoll_reactor::start_op()
-                                        if (allow_speculative) // is_non_blocking
-                                            op->perform()
-                                                reactive_socket_accept_op_base::do_perform()
-                                                    socket_ops::non_blocking_accept()
-                                        else
-                                            descriptor_data->op_queue_[op_type].push(op);
-
-                                epoll_reactor::post_immediate_completion // is_continuation true
-                                    schedule::do_run_one()
-                                        o->complete()
-                                            reactive_socket_accept_op::do_complete()
-                                                reactive_descriptor_service::assign()
-                                                    epoll_reactor::register_descriptor()
-
-                    m_connections.insert(new connection(std::move(socket), m_p_server, this, m_is_https, m_ssl_context_callback));
-                        connection::start_request_response()
-                            boost::asio::async_read_until // crlfcrlf_nonascii_searcher
-                                --->
-                                connection::handle_http_line()
-                                    http_request::_create_request()
-                                        // compose request object
-                                        connection::handle_headers()
-                                            connection::async_read_until // CRLF
-                                                connection::handle_chunked_header()
-                                                    http_msg_base::_complete()
-                                                        m_data_available.set(body_size);
-                                                connection::dispatch_request_to_listener()
-                                                    // find listern by request URI path
-                                                    connection::do_response(false)
-                                                        http_listener_impl::handle_request()
-                                                            m_supported_methods[mtd](msg)
-
-_http_request::reply()
-    _http_request::_reply_impl()
-        http_linux_server::respond()
-            return pplx::create_task(p_context->m_response_completed);
-
-connection::do_response()
-    connection::async_process_response()
-        // compose response header
-        connection::async_write(&connection::handle_headers_written, response);
-            boost::asio::async_write()
-            connection::handle_write_large_response()
-                connection::async_write(&connection::handle_write_large_response, response);
-                connection::handle_response_written()
-                    m_response_completed.set()
-                    connection::start_request_response()
-                    connection::finish_request_response()
-                        m_connections.erase(this)
-                        connection::close()
-                            basic_socket::cancel()
-                                reactive_socket_service_base::cancel()
-                                    epoll_reactor::cancel_ops()
-                                        // schedule unfinished operations
-                            basic_socket::shotdown()
-                                reactive_socket_service_base::base_shutdown()
-                            basic_socket::close()
-                                reactive_socket_service_base::close()
-                                    epoll_reactor::deregister_descriptor()
-                                        epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, descriptor, &ev);
-                                        // schedule unfinished operations
-                                    socket_ops::close()
-                                    epoll_reactor::cleanup_descriptor_data()
-                                        epoll_reactor::free_descriptor_state()
-                            _http_request::_reply_if_not_already()
-```
+# [Boost.Asio](../Boost/READEME.md)
