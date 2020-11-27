@@ -15,7 +15,11 @@ basic_socket_acceptor::async_accept()
                                     reactive_socket_accept_op_base::do_perform()
                                         socket_ops::non_blocking_accept()
                                             ::poll() // fd writable means it is connected
-                                epoll_reactor::post_immediate_completion
+                                schedueler::post_immediate_completion()
+                                    schedule::do_run_one()
+                                        operation::complete()
+                                            reactive_socket_accept_op::do_complete()
+                                                --->
                             else
                                 descriptor_data->op_queue_[op_type].push(op)
                                     // when client request connect, listen socket wake up from epoll
@@ -27,13 +31,22 @@ basic_socket_acceptor::async_accept()
                                                         reactive_socket_accept_op_base::do_perform()
                                                             --->
                                                         ~perform_io_cleanup_on_block_exit()
-                                                            schedueler::post_immediate_completion
-                                                                reactive_descriptor_service::assign()
-                                                                    epoll_reactor::register_descriptor()
+                                                            schedueler::post_deferred_completions()
+                                                                schedule::do_run_one()
+                                                                    operation::complete()
+                                                                        reactive_socket_accept_op::do_complete()
+                                                                            --->
                     else // blocking io
-                        epoll_reactor::post_immediate_completion
+                        epoll_reactor::post_immediate_completion()
             else // peer_is_open
-                epoll_reactor::post_immediate_completion
+                schedule::post_immediate_completion()
+                    schedule::do_run_one()
+                        operation::complete()
+                            reactive_socket_accept_op::do_complete()
+                                reactive_socket_accept_op::do_assign()
+                                    basic_scoket::assign()
+                                        reactive_descriptor_service::assign()
+                                            epoll_reactor::register_descriptor()
 ```
 
 # async_connect
@@ -43,14 +56,14 @@ basic_stream_socket::async_connect()
         reactive_socket_service_base::start_connect_op()
             if (socket_ops::set_internal_non_blocking)
                 socket_ops::connect()
-                    ::connect(s, addr, (SockLenType)addrlen);
-                epoll_reactor::start_op(reactor::connect_op);
+                    ::connect(s, addr, (SockLenType)addrlen)
+                epoll_reactor::start_op(reactor::connect_op)
                     if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
                         operation::perform()
                             reactive_socket_connect_op_base::do_perform()
-                                socket_ops::non_blocking_connect
+                                socket_ops::non_blocking_connect()
                                     ::poll(&fds, 1, 0); // fd writable means it's connected
-                        schedueler::post_immediate_completion
+                        schedueler::post_immediate_completion()
                     else
                         descriptor_data->op_queue_[op_type].push(op)
                             schedule::do_run_one()
@@ -61,13 +74,17 @@ basic_stream_socket::async_connect()
                                                 reactive_socket_connect_op_base::do_perform()
                                                     --->
                                                 ~perform_io_cleanup_on_block_exit()
-                                                    // schedule operations
+                                                    schedule::post_deferred_completions(op)
+                                                        schedule::do_run_one()
+                                                            operation::complete()
+                                                                reactive_socket_connect_op::do_complete()
+                                                                    user_callback()
             else
-                epoll_reactor::post_immediate_completion(op, is_continuation);
+                schedule::post_immediate_completion(op, is_continuation);
                     schedule::do_run_one()
                         operation::complete()
                             reactive_socket_connect_op::do_complete()
-                                handler();
+                                user_callback()
 ```
 
 # async_read
@@ -97,15 +114,14 @@ read.hpp::async_read_until()
                         epoll_reactor::start_op(reactor::read_op)
                             if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
                                 operation::perform()
-                                    reactive_socket_accept_op_base::do_perform()
-                                        socket_ops::non_blocking_accept()
-                                            ::poll() // fd writable means it is connected
-                                    epoll_reactor::post_immediate_completion
-                                        schedule::do_run_one()
-                                            operation::complete()
-                                                reactive_socket_accept_op::do_complete()
-                                                    reactive_descriptor_service::assign()
-                                                        epoll_reactor::register_descriptor()
+                                    reactive_socket_recv_op_base::do_perform()
+                                        socket_ops::non_blocking_recv()
+                                            socket_ops::recv
+                                scheduler::post_immediate_completion
+                                    schedule::do_run_one()
+                                        operation::complete()
+                                            reactive_socket_recv_op::do_complete()
+                                                user_callback()
                             else
                                 descriptor_data->op_queue_[op_type].push(op)
                                     // when client request connect, listen socket wake up from epoll
@@ -114,10 +130,14 @@ read.hpp::async_read_until()
                                             descriptor_state::do_complete()
                                                 descriptor_state::perform_io() // loop op_queue[]
                                                     op->perform()
-                                                        reactive_socket_accept_op_base::do_perform()
+                                                        reactive_socket_recv_op_base::do_perform()
                                                             --->
                                                         ~perform_io_cleanup_on_block_exit()
-                                                            // schedule operations
+                                                            scheduler::post_deferred_completions()
+                                                                schedule::do_run_one()
+                                                                    operation::complete()
+                                                                        reactive_socket_recv_op::do_complete()
+                                                                            user_callback()
 ```
 
 # async_write
@@ -160,10 +180,11 @@ boost::asio::async_write(m_socket, buffer, writeHandler);
                                             reactive_socket_send_op::do_perform()
                                                     socket_ops::non_blocking_send()
                                                         socket_ops::sendmsg
-                                        epoll_reactor::post_immediate_completion
+                                        epoll_reactor::post_immediate_completion()
                                             schedule::do_run_one()
                                                 operation::complete()
                                                     reactive_socket_send_op::do_complete()
+                                                        user_callback()
                                     else
                                         descriptor_data->op_queue_[op_type].push(op)
                                             // when client request connect, listen socket wake up from epoll
@@ -175,7 +196,11 @@ boost::asio::async_write(m_socket, buffer, writeHandler);
                                                                 reactive_socket_send_op::do_perform()
                                                                     --->
                                                                 ~perform_io_cleanup_on_block_exit()
-                                                                    // schedule operations
+                                                                    scheduler::post_deferred_completions()
+                                                                        schedule::do_run_one()
+                                                                            operation::complete()
+                                                                                reactive_socket_send_op::do_complete()
+                                                                                    user_callback()
 ```
 
 tricky switch
