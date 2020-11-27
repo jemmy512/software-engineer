@@ -14,7 +14,7 @@ Features:
 C++ Rest consists three parts:
 * [PPL](#PPLX)
 * [C++ Rest](#CppRest)
-* [Boost Asio](#Boost.Asio)
+* [Boost Asio](#Boost\.Asio)
 
 ![CppRest.png](../../.Image/CppRest.png)
 
@@ -37,7 +37,7 @@ pplx::task<http_response> http_client::request()
                                 winhttp_client::_start_request_send()
 
             asio_client::propagate // create asio_context, obtain a reused connection from pool
-                auto result_task = pplx::create_task(context->m_request_completion);
+                auto result_task = pplx::create_task(context->m_request_completion); // task_completion_event<http_response>
                     _http_client_communicator::async_send_request()
                         // 1. gurantee order
                         _http_client_communicator::push_request
@@ -90,16 +90,15 @@ pplx::task<http_response> http_client::request()
                                                         stream.hpp::async_handshake()
                                                             ....
                                                         asio_context::handle_handshake()
-                                                            asio_connection_fast_ipv4_fallback::async_write()
+                                                            asio_connection::async_write(asio_context::handle_write_headers)
                                                                 --->
                                             else
-                                                asio_connection_fast_ipv4_fallback::async_write(buffer, asio_context::handle_write_headers)
-                                                    asio_connect::async_write
-                                                        boost::asio::async_write(asio_context::handle_write_large_body)
+                                                asio_connect::async_write(buffer, asio_context::handle_write_headers)
+                                                    boost::asio::async_write(asio_context::handle_write_large_body)
                                                             --->
                 return result_task; // return a async pplx::task<response> object to client, client then use response.extract_string() to get the real response string
 
-// write callback for boost::asio::async_write()
+// write callback for asio_context::write_request()
 asio_context::handle_write_headers() // request header has sent, then send request body
     asio_context::handle_write_chunked_body() //  data is chunked
         ....
@@ -107,7 +106,7 @@ asio_context::handle_write_headers() // request header has sent, then send reque
         // continue write request payload untill completed
         if (ec || m_uploaded >= m_content_length)
             asio_context::handle_write_body() // both request header and body sent, wait & handle reponse
-                boost::asio::async_read_until()
+                boost::asio::async_read_until() // CRLF + CRLF
                         ---> Boost.Asio
                     asio_context::handle_status_line()
                         asio_context::read_headers()
@@ -116,27 +115,32 @@ asio_context::handle_write_headers() // request header has sent, then send reque
                                 m_request_completion.set(m_response);
                                     task_completion_event::set()
                                         // notify client which is blocked at response.get()
-                            asio_context::handle_read_content()
-                                asio_context::async_read_until_buffersize()
-                                boost::asio::async_read(m_socket, buffer, readCondition, readHandler);
-                                request_context::complete_request()
-                                m_response._get_impl()->_complete(body_size);
-                                    http_msg_base::_complete()
-                                    m_data_available.set(body_size);
-                                        // notify clients which are blocked at reponse.extract_string()
-                                request_context::finish;
-                                    m_http_client->finish_request()
-                                    _http_client_communicator::finish_request()
-                                        m_requests_queue.pop()
-                                        open_and_send_request(request);
-
-                            asio_context::handle_chunk_header()
-                                asio_context::handle_chunk()
-                                // if to_read == 0 complete_request
-                                stream_decompressor::decompress()
-                                // comtinue read and handle_chunk_header
-                                request_context::complete_request()
-                                    --->
+                            if (!needChunked)
+                                asio_context::async_read_until_buffersize(asio_context::handle_read_content)
+                            --->asio_context::handle_read_content()
+                                    if (m_downloaded < m_content_length)
+                                        asio_context::async_read_until_buffersize()
+                                            boost::asio::async_read(m_socket, buffer, readCondition, asio_context::handle_read_content();
+                                    else
+                                        request_context::complete_request()
+                                            m_response._get_impl()->_complete(body_size);
+                                                http_msg_base::_complete()
+                                                m_data_available.set(body_size);
+                                                    // notify clients which are blocked at reponse.extract_string()
+                                            request_context::finish()
+                                                m_http_client->finish_request()
+                                                _http_client_communicator::finish_request()
+                                                    m_requests_queue.pop()
+                                                    open_and_send_request(request);
+                            else
+                                asio_context::async_read_until(asio_context::handle_chunk_header)
+                            --->asio_context::handle_chunk_header()
+                                    asio_context::handle_chunk()
+                                    // if to_read == 0 complete_request
+                                    stream_decompressor::decompress()
+                                    // comtinue read and handle_chunk_header
+                                    request_context::complete_request()
+                                        --->
         else
             asio_connect::async_write()
                 boost::asio::async_write(asio_context::handle_write_large_body)
@@ -145,21 +149,23 @@ asio_context::handle_write_headers() // request header has sent, then send reque
 
 ### Receive Response
 ```C++
-_TaskProcHandle::_RunChoreBridge()
-    _PPLTaskHandle::_invoke()
-        if (initHandle)
-            _InitialTaskHandle::_Perform()
-                _InitialTaskHandle::_Init()
-                    _Task_impl_base::_FinalizeAndRunContinuations()
-                        --->
-        else
-            _ContinuationTaskHandle::_Perform()
-                _ContinuationTaskHandle::_Continue()
-                    _Task_impl_base::_FinalizeAndRunContinuations()
-                        --->
+boost::asio::scheduler::do_run_one()
+    operation::complete()
+        _TaskProcHandle::_RunChoreBridge()
+            _PPLTaskHandle::_invoke()
+                if (initHandle)
+                    _InitialTaskHandle::_Perform()
+                        _InitialTaskHandle::_Init()
+                            _Task_impl_base::_FinalizeAndRunContinuations()
+                                --->
+                else
+                    _ContinuationTaskHandle::_Perform()
+                        _ContinuationTaskHandle::_Continue()
+                            _Task_impl_base::_FinalizeAndRunContinuations()
+                                --->
 
 
-        --->                MercuryNetworkConnection::handleIncomingMercuryEvent()
+                --->                MercuryNetworkConnection::handleIncomingMercuryEvent()
 
 ws_client_wspp.cpp::connect_impl()
   endpoint.hpp::run()
@@ -184,25 +190,25 @@ ws_client_wspp.cpp::connect_impl()
                                       MercuryConnectionManager::fireMercuryEventArrived()
 ```
 
-## HTTP Server
+## Server
 ### open listen socket
 ```C++
 http_listener::open()
     http_server_api::register_listener()
-        http_linux_server::start()
         if (s_registrations == 1)
-            hostport_listener::start()
-                m_acceptor.reset(new tcp::acceptor(service, endpoint));
-                    basic_socket_acceptor::basic_socket_acceptor()
-                        reactive_socket_service_base::do_open()
-                            epoll_reactor::register_descriptor()
-                                allocate_descriptor_state()
-                                epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
-                        // set reuse address
-                        reactive_socket_service::bind()
-                        reactive_socket_service::listen()
-                m_acceptor->async_accept(*socket, &hostport_listener::on_accept);
-                    --->
+            http_linux_server::start()
+                hostport_listener::start()
+                    m_acceptor.reset(new tcp::acceptor(service, endpoint));
+                        basic_socket_acceptor::basic_socket_acceptor()
+                            reactive_socket_service_base::do_open()
+                                epoll_reactor::register_descriptor()
+                                    allocate_descriptor_state()
+                                    epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
+                            // set reuse address
+                            reactive_socket_service::bind()
+                            reactive_socket_service::listen()
+                    m_acceptor->async_accept(*socket, &hostport_listener::on_accept);
+                        --->
         http_linux_server::register_listener()
             m_registered_listeners[listener] = make_unique<reader_writer_lock_t>();
             std::map<std::string, hostport_listener>.insert({hostport, make_unique<hostport_listener>(this, hostport, is_https, listener->configuration())});
@@ -216,10 +222,10 @@ http_listener::open()
 hostport_listener::on_accept()
     basic_socket_acceptor::async_accept()
         ---> Boost.Asio
+    m_connections.insert(new connection(std::move(socket), m_p_server, this, m_is_https, m_ssl_context_callback));
 ```
 ### read socket
 ```C++
-    m_connections.insert(new connection(std::move(socket), m_p_server, this, m_is_https, m_ssl_context_callback));
         connection::start_request_response()
             boost::asio::async_read_until // crlfcrlf_nonascii_searcher
                 ---> Boost.Asio
@@ -235,45 +241,57 @@ hostport_listener::on_accept()
                                         m_data_available.set(body_size);
                                 connection::dispatch_request_to_listener()
                                     // find listern by request URI path
+                                    http_request::_set_listener_path()
                                     connection::do_response(false)
-                                        http_listener_impl::handle_request()
-                                            m_supported_methods[mtd](msg)
+                                    http_listener_impl::handle_request()
+                                        m_supported_methods[mtd](request)
+                                            http_request::reply()
 ```
 ### write socket
 ```C++
-_http_request::reply()
-    _http_request::_reply_impl()
-        http_linux_server::respond()
-            return pplx::create_task(p_context->m_response_completed);
-
 connection::do_response()
-    connection::async_process_response()
-        // compose response header
-        connection::async_write(&connection::handle_headers_written, response);
-            boost::asio::async_write()
-            connection::handle_write_large_response()
-                connection::async_write(&connection::handle_write_large_response, response);
-                connection::handle_response_written()
-                    m_response_completed.set()
-                    connection::start_request_response()
-                    connection::finish_request_response()
-                        m_connections.erase(this)
-                        connection::close()
-                            basic_socket::cancel()
-                                reactive_socket_service_base::cancel()
-                                    epoll_reactor::cancel_ops()
-                                        // schedule unfinished operations
-                            basic_socket::shotdown()
-                                reactive_socket_service_base::base_shutdown()
-                            basic_socket::close()
-                                reactive_socket_service_base::close()
-                                    epoll_reactor::deregister_descriptor()
-                                        epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, descriptor, &ev);
-                                        // schedule unfinished operations
-                                    socket_ops::close()
-                                    epoll_reactor::cleanup_descriptor_data()
-                                        epoll_reactor::free_descriptor_state()
-                            _http_request::_reply_if_not_already()
+    http_request::m_request.get_response() // task<task_completion_event<http_response>>
+    .then()
+        connection::async_process_response()
+            // compose response header
+            connection::async_write(&connection::handle_headers_written, response);
+                boost::asio::async_write()
+                    --->
+        --->connection::handle_headers_written()
+                connection::handle_write_large_response() // handle_write_chunked_response
+                    connection::async_write(&connection::handle_write_large_response, response);
+                        --->
+                    if (ec || m_write == m_write_size)
+                        connection::handle_response_written()
+                            linux_request_context::m_response_completed.set()
+                            if (!close_connection)
+                                connection::start_request_response()
+                            else
+                                connection::finish_request_response()
+                                    m_connections.erase(this)
+                                    connection::close()
+                                        basic_socket::cancel()
+                                            reactive_socket_service_base::cancel()
+                                                epoll_reactor::cancel_ops()
+                                                    // schedule unfinished operations
+                                        basic_socket::shotdown()
+                                            reactive_socket_service_base::base_shutdown()
+                                        basic_socket::close()
+                                            reactive_socket_service_base::close()
+                                                epoll_reactor::deregister_descriptor()
+                                                    epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, descriptor, &ev);
+                                                    // schedule unfinished operations
+                                                socket_ops::close()
+                                                epoll_reactor::cleanup_descriptor_data()
+                                                    epoll_reactor::free_descriptor_state()
+
+http_request::reply()
+    _http_request::_reply_impl()
+        http_response::_set_server_context(http_linux_context)
+        http_linux_server::respond()
+            return pplx::create_task(response->linux_request_context::m_response_completed)
+        http_request::m_response::set_response() // task_completion_event<http_response> m_response
+            // activate connection::do_response to run
 ```
 
 # PPLX
@@ -731,7 +749,7 @@ task<_TaskType> task_from_exception(_ExType _Exception, const task_options& _Tas
 
 ```C++
 task::task()
-    _CreateImpl
+    _CreateImpl()
         _Task_ptr<_ReturnType>::_Make()
             std::make_shared<_Task_impl<_ReturnType>>(_Ct, _Scheduler_arg);
     _SetTaskCreationCallstack(_CAPTURE_CALLSTACK());
@@ -742,11 +760,11 @@ task::task()
                     --->
         else
             _TaskInitNoFunctor(task_completion_event<_ReturnType>& _Event)
-                _Event._RegisterTask(_M_Impl)
+                _Event._RegisterTask()
                     task_completion_event::_RegisterTask()
-                        if (HasUserException)
+                        if (_Event->HasUserException)
                             _Task_impl_base::CancelWithExceptionHolder()
-                        else if (_M_fHasValue)
+                        else if (_Event->_M_fHasValue)
                             _Task_impl_base::_FinalizeAndRunContinuations()
                                 --->
                         else
@@ -775,7 +793,6 @@ _Task_impl_base::_Wait()
     _TaskCollection_impl::_Wait()
         event_impl::wait()
             condition_variable.wait
-
 ```
 
 ## Run Continuation
