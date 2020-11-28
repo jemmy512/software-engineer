@@ -1,3 +1,4 @@
+#include <cassert>
 #include <vector>
 #include <iostream>
 
@@ -12,6 +13,8 @@ template<typename Container,
     typename T = typename Container::value_type,
     typename Comparator = std::less<T>>
 typename Container::value_type heapSort(Container& data, int kth, Comparator comp = Comparator()) {
+    kth = std::min(kth, data.size());
+
     for (auto i = kth/2-1; i >=0; --i)
         heapifyDown(data.begin(), data.begin()+i, data.begin()+kth, comp);
 
@@ -35,8 +38,8 @@ void heapifyDown(Iter begin, Iter cur, Iter end, Comparator comp) {
     auto child = cur;
     for (std::advance(child, std::distance(begin, child) + 1);
         child < end;
-        std::advance(child, std::distance(begin, child) + 1))
-    {
+        std::advance(child, std::distance(begin, child) + 1)
+    ) {
         if (child + 1 < end && comp(*(child+1), *(child)))
             ++child;
         if (!comp(*child, *parent))
