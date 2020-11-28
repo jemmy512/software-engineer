@@ -12,11 +12,11 @@
 
 template<typename Iter,
     typename T = typename std::iterator_traits<Iter>::value_type,
-    typename Compare = std::less<T>>
-void heapifyDown(Iter begin, Iter cur, Iter end, Compare comp = Compare()) {
+    typename Comparator = std::less<T>>
+void heapifyDown(Iter begin, Iter cur, Iter end, Comparator comp) {
     Iter child = cur;
     Iter parent = cur;
-    for (std::advance(child, std::distance(begin, child) + 1);// child = 2*cur + 1
+    for (std::advance(child, std::distance(begin, child) + 1);// child = 2 * parent + 1
         child < end;
         std::advance(child, std::distance(begin, child) + 1))
     {
@@ -33,30 +33,30 @@ void heapifyDown(Iter begin, Iter cur, Iter end, Compare comp = Compare()) {
 
 template<typename Iter,
     typename T = typename std::iterator_traits<Iter>::value_type,
-    typename Compare = std::less<T>>
-void heapifyUp(Iter begin, Iter end, Compare comp = Compare()) {    // [begin, end)
+    typename Comparator = std::less<T>>
+void heapifyUp(Iter begin, Iter end, Comparator comp) {    // [begin, end)
     Iter parent = begin;
     Iter child = end;
-    for (std::advance(parent, std::distance(begin, child) / 2 - 1);   // parent = (cur+1)/2 - 1
+    for (parent = begin + std::distance(begin, child)/2-1; // parent = (child + 1 ) / 2 - 1
         parent >= begin;
-        std::advance(parent, std::distance(begin, child) / 2 - 1))
+        parent = begin + std::distance(begin, child)/2-1)
     {
         if (!comp(*--child, *parent))
             break;
 
         std::swap(*parent, *child);
         child = parent+1;
-        parent = begin;
     }
 }
 
 
 template<typename Iter,
     typename T = typename std::iterator_traits<Iter>::value_type,
-    typename Compare = std::less<T>>
-void heapSort(Iter begin, Iter end, Compare comp = Compare()) {
-    for (Iter iter = begin + std::distance(begin, end) / 2 - 1; iter >= begin; --iter)
+    typename Comparator = std::less<T>>
+void heapSort(Iter begin, Iter end, Comparator comp = Comparator()) {
+    for (Iter iter = begin + std::distance(begin, end) / 2 - 1; iter >= begin; --iter) {
         heapifyDown(begin, iter, end, comp);
+    }
 
     for (Iter iter = end - 1; iter > begin; --iter) {
         std::swap(*begin, *iter);
@@ -66,12 +66,18 @@ void heapSort(Iter begin, Iter end, Compare comp = Compare()) {
 
 template<
     typename T,
-    typename Compare = std::less<T>,
-    typename Container = std::vector<T>>
+    typename Comparator = std::less<T>,
+    typename Container = std::vector<T>,
+    typename OppositeComparator = typename std::conditional_t<
+        std::is_same_v<Comparator, std::less<T>>,
+        std::greater<T>,
+        std::less<T>
+    >
+>
 class Heap {
 public:
     using container_type = Container;
-    using value_compare = Compare;
+    using value_compare = Comparator;
     using value_type = typename Container::value_type;
     using size_type = typename Container::size_type;
     using reference = typename Container::reference;
@@ -79,8 +85,9 @@ public:
     using const_reference = typename Container::const_reference;
 
     friend std::ostream& operator<<(std::ostream& os, const Heap& heap) {
-        for (const auto& v : heap._Container)
-            os << v << " ";
+        std::for_each(heap._Container.begin(), heap._Container.end(), [&os](const auto& data) {
+           os << data << " ";
+        });
         os << std::endl;
 
         return os;
@@ -89,10 +96,8 @@ public:
 public:
     Heap() = default;
 
-    Heap(std::initializer_list<T> list) {
-        for (const auto& v : list) {
-            push(v);
-        }
+    Heap(std::initializer_list<T> list) : _Container(list.begin(), list.end()) {
+        heapSort(_Container.begin(), _Container.end(), _Comparator);
     }
 
     Heap(const Heap& other) : _Container(other._Container) { }
@@ -116,27 +121,25 @@ public:
         return *this;
     }
 
-    void update(const T& value) {
-        auto iter = std::find_if(_Container.begin(), _Container.end(), [&value](const auto& val) {
-            return val.get() == value.get();
-        });
-
-        if (iter != _Container.end()) {
-            heapifyUp(_Container.begin(), ++iter, _Comparator);
-        }
-    }
-
     void push(const T& value) {
         _Container.emplace_back(value);
-        heapifyUp(_Container.begin(), _Container.end(), _Comparator);
+        // heapifyUp(_Container.begin(), _Container.end(), _OppositeComparator);
+        // heapifyDown(_Container.begin(), _Container.begin(), _Container.end(), _Comparator);
+        heapSort(_Container.begin(), _Container.end(), _Comparator);
     }
 
-    value_type pop() {
+    value_type pop_back() {
+        T result = _Container.back();
+
+        _Container.pop_back();
+
+        return result;
+    }
+
+    value_type pop_front() {
         T result = _Container.front();
 
-        std::swap(_Container.front(), _Container.back());
-        _Container.pop_back();
-        heapifyDown(_Container.begin(), _Container.begin(), _Container.end(), _Comparator);
+        _Container = {_Container.begin()+1, _Container.end()};
 
         return result;
     }
@@ -151,45 +154,45 @@ public:
 
 private:
     Container _Container;
-    Compare _Comparator{};
+    Comparator _Comparator{};
+    OppositeComparator _OppositeComparator{};
 
 };
 
 void TestHeapSort() {
-    std::vector<int> vec{3, 2, 5, 8, 4, 7, 6, 9, 1};
-
+    std::vector<int> vec{3, 2, 5, 8, 4, 7, 6, 12, 1, 0};
     // heapSort(vec.begin(), vec.end());
     heapSort(vec.begin(), vec.end(), std::greater<int>());
-    std::copy(vec.begin(), vec.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::move(vec.begin(), vec.end(), std::ostream_iterator<int>(std::cout, " "));
     std::cout << std::endl;
 
-    vec.emplace_back(12);
-    heapifyUp(vec.begin(), vec.end(), std::greater<int>());
+    vec.emplace_back(9);
+    heapifyUp(vec.begin(), vec.end(), std::less<int>());
 
-    std::copy(vec.begin(), vec.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::move(vec.begin(), vec.end(), std::ostream_iterator<int>(std::cout, " "));
     std::cout << std::endl;
 }
 
 void TestHeap() {
-    std::vector<int> vec{3, 2, 5, 8, 4, 7, 6, 9, 1};
+    std::vector<int> vec{9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
     // Heap<int> heap;
-    Heap<int, std::greater<int>> heap;
+    Heap<int> heap;
     for (const auto& v : vec) {
         heap.push(v);
         std::cout << heap << std::endl;
     }
 
     for (const auto& v : vec) {
-        auto val = heap.pop();
+        auto val = heap.pop_front();
         std::cout << val << ": " << heap << std::endl;
     }
 }
 
 
-// int main(void) {
-//     // TestHeapSort();
+int main(void) {
+    TestHeapSort();
 
-//     TestHeap();
+    // TestHeap();
 
-//     return 0;
-// }
+    return 0;
+}
