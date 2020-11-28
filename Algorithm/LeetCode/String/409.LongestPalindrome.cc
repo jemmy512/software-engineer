@@ -20,27 +20,32 @@ Output:
 Explanation:
 One longest palindrome that can be built is "dccaccd", whose length is 7.
 */
+#include <string>
+#include <algorithm>
+#include <unordered_map>
 
-// 95 tese cases, 7ms, beat 69.70%
+using std::string;
+using std::unordered_map;
+
 class Solution {
 public:
     int longestPalindrome(string s) {
+        unordered_map<char, int> hashMap;
+        std::for_each(s.begin(), s.end(), [&hashMap](const auto& ch) {
+            hashMap[ch] +=1;
+        });
+
+        bool hasSingle = false;
         int cnt = 0;
-        unordered_map<char, int> omap;
-        int len = s.size();
-        for (int i = 0; i < len; ++i) {
-            omap[s[i]] += 1;
-        }
-        bool single = false;;
-        for (pair<char, int> pa : omap) {
-            if (pa.second % 2 == 0) {
-                cnt += pa.second;
+        for (const auto& [ch, count] : hashMap) {
+            if (count % 2 == 0) {
+                cnt += count;
             } else {
-                cnt += pa.second - 1;
-                single = true;
+                cnt += count-1;
+                hasSingle = true;
             }
         }
-        
-        return single ? cnt + 1 : cnt;
+
+        return hasSingle ? cnt + 1 : cnt;
     }
 };
