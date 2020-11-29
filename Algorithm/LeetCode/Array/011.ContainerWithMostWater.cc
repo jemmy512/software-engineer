@@ -33,13 +33,15 @@ public:
             // However, the above code could cause the unnecessary `area` cacluation
             // We can do some improvement as below:
             if (height[left] < height[right]) {
+                int cur = left;
                 do {
                     ++left;
-                } while (left < right && height[left - 1] >= height[left]);
+                } while (left < right && height[cur] >= height[left]);
             } else {
+                int cur = right;
                 do {
                     --right;
-                } while (left < right && height[right + 1] >= height[right]);
+                } while (left < right && height[cur] >= height[right]);
             }
         }
 
