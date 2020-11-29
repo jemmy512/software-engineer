@@ -4,6 +4,7 @@ No | Title | Difficulty | Catogary | Notes
 1 | 2 Sum | :star: | Arithmetic | :unlock:
 2 | Add Two Numbers | :star: :star: | Arithmetic | :unlock:
 445 | Add Two Numbers II | :star: :star: | Arithmetic | :unlock:
+6 | Zig Zag Conversion | :star: :star: | Arithmetic | :unlock:
 7 | Reverse Integer | :star: | Arithmetic | :unlock:
 9 | Palindrom Number | :star: | Arithmetic | :unlock:
 15 | 3 Sum | :star: :star: | Arithmetic | :unlock:
@@ -26,8 +27,10 @@ No | Title | Difficulty | Catogary | Notes
 371 | Sum of Two Integers | :star: :star: | Arithmetic | :unlock:
 389 | Findthe Difference | :star: | Arithmetic | :unlock:
 400 | Nth Digit | :star: :star: | Arithmetic
+414 | Third Maximum Number | :star: | Arithmetic
  | Array | | |
 004 | Median of Two Sorted Arrays | :star: :star: :star: | Array
+011 | Container With Most Water| :star: :star: :star: | Array | :unlock:
 027 | Remove Element | :star: | Array
 041 | First Missing Positive | :star: :star: :star: | Array
 080 | Remove Duplicate from Sorted Array II | :star: :star: | Array
@@ -63,6 +66,7 @@ No | Title | Difficulty | Catogary | Notes
 523 | Continuous Subarray Sum  | :star: :star: | DP
 746 | MinCost Climb Stair | :star: | DP
  | List |  |
+19 | Remove Nth Node From End of List | :star: :star: | List | :unlock:
 21 | Merge Two Sorted Lists | :star: | List
 23 | Merge K Sorted List | :star: :star: :star: | List
 24 | Swap Nodes in Pairs | :star: :star: | List
@@ -95,6 +99,10 @@ No | Title | Difficulty | Catogary | Notes
 109 | ConverSortedListtoBinaryTree | :star: | Tree
 110 | BalancedBianryTree | :star: | Tree
 111 | MinimumDepthofBinaryTree | :star: | Tree
+112 | PathSum | :star: | Tree
+113 | PathSum_II | :star: :star: | Tree
+124 | BinaryTreeMaximumPath Sum | :star: :star: :star: | Tree
+666 | PathSumIV | :star: :star: | Tree
 173 | Binary Search Tree Iterator | :star: :star: | Tree | :unlock:
 199 | BinaryTreeRightSideView | :star: | Tree
 226 | InvertBinaryTree | :star: | Tree
@@ -108,6 +116,7 @@ No | Title | Difficulty | Catogary | Notes
 637 |  AverageofLevelsinBinaryTree | :star: | Tree
 653 | TwoSum_InputIsaBST | :star: | Tree
 671 | SecondMinimumNodeinaBinaryTree | :star: | Tree
+687 | LongestUnivaluePath | :star: :star: | Tree
 814 | BinaryTreePruning | :star: | Tree
  | Queue |  | |
 239 | Sliding Window Maximum | :star: :star: :star: | Queue
@@ -115,17 +124,23 @@ No | Title | Difficulty | Catogary | Notes
  | String | | |
 3 | Longest Sub string Without Repeating Characters | :star: :star: | String | :unlock:
 8 | atoi | :star: | String
+14 | Logst Common Prefix | :star: | String | :unlock:
 28 | Implement Strstr | :star: | String
 58 | Length of Last Word | :star: | String
 125 | Valid Palindrome | :star: | String
 151 | Reverse Words in a String | :star: :star: | String
+409 | Longest Palindrome | :star: | String | :unlock:
 415 | Adding Strings | :star: | String
 443 | String Compression | :star: :star: | String
 344 | Reverse String | :star: | String
+345 | Reverse Vowels of a String | :star: | String | :unlock:
 796 | Rotate String | :star: | String
  | Search | | |
 34 | Search For a Range | :star: star: | Search | :unlock:
 35 | Search Insert Position  | :star: | Search | :unlock:
+ | BackTrack | | |
+017 | Letter Combination of a Phone Number | :star: star: | BackTrack | :unlock:
+046 | Permutations | :star: star: | BackTrack | :unlock:
 
 
 # Bit Operations
