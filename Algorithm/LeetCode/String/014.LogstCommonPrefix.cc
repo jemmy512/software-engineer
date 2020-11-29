@@ -15,6 +15,11 @@
  * Note:
  * All given inputs are in lowercase letters a-z.
  */
+#include <string>
+#include <vector>
+
+using std::string;
+using std::vector;
 
 class Solution {
 public:
@@ -27,13 +32,11 @@ public:
         for (int i = 0; i < le; ++i) {
             for (int j = 1; j < len; ++j) {
                 if (strs[0][i] != strs[j][i]) {
-                    // string ret(strs[0].begin(), strs[0].begin() + i);
-                    // return ret;
                     return strs[0].substr(0, i);
                 }
             }
         }
+
         return strs[0];
     }
 };
-
