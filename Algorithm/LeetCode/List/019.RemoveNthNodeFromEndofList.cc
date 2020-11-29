@@ -1,4 +1,4 @@
-/*
+/* Medium
 Given a linked list, remove the n-th node from the end of list and return its head.
 
 Example:
@@ -12,8 +12,7 @@ Given n will always be valid.
 
 Follow up:
 
-Could you do this in one pass?
-*/
+Could you do this in one pass? */
 
 struct ListNode {
     int val;
@@ -25,14 +24,19 @@ struct ListNode {
 ListNode* removeNthFromEnd(ListNode* head, int n) {
     ListNode *prev = head;
     ListNode *last = head;
-   
+
     while (prev != NULL) {
         prev = prev->next;
-        if (n-- < 0) last = last->next;
+        if (n-- < 0) {
+            last = last->next;
+        }
     }
-    if (n)  last->next = last->next->next;
-    else head = head->next;
-    
+
+    if (n)
+        last->next = last->next->next;
+    else
+        head = head->next;
+
     return head;
 }
 
@@ -40,7 +44,7 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
 ListNode* removeNthFromEnd_1(ListNode* head, int n) {
     ListNode *m = head;
     ListNode *l = head;
-    
+
     while (m != NULL && n) {
         m = m->next;
         --n;
@@ -51,7 +55,7 @@ ListNode* removeNthFromEnd_1(ListNode* head, int n) {
     }
     if (m == NULL)
         head = head->next;
-    else 
+    else
         l->next = l->next->next;
     return head;
 }
