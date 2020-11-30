@@ -33,4 +33,3 @@ int main() {
     string str = "bbc";
     stringPermuation(str, 0, str.size());
 }
-
