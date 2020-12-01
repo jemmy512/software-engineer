@@ -7,38 +7,42 @@ Note: Do not modify the linked list.
 
 Follow up:
 Can you solve it without using extra space?
-*/
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
+Relative:
+141 linked List Cycle
+287 Findthe Duplicate Number
+
+Approches:
+1. Floyd's tortoise and hare
+2. Hash table */
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
 
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
         if (!head) return NULL;
 
-        ListNode *fast = head, *slow = head;
+        ListNode *hare = head, *tortoise = head;
         do {
-            if (fast->next && fast->next->next) {
-                slow = slow->next;
-                fast = fast->next->next;
+            if (hare->next && hare->next->next) {
+                tortoise = tortoise->next;
+                hare = hare->next->next;
             } else {
                 return NULL;
             }
-        } while (slow != fast);
+        } while (tortoise != hare);
 
-        fast = head;
-        while (fast != slow) {
-            fast = fast->next;
-            slow = slow->next;
+        hare = head;
+        while (hare != tortoise) {
+            hare = hare->next;
+            tortoise = tortoise->next;
         }
 
-        return fast;
+        return hare;
     }
 };
