@@ -1,5 +1,4 @@
-/*
-Difficulty: Easy
+/* Difficulty: Easy
 
 Given a pattern and a string str, find if str follows the same pattern.
 
@@ -13,17 +12,17 @@ Examples:
 Notes:
 You may assume pattern contains only lowercase letters, and str contains lowercase letters separated by a single space.
 
-Related Problem: 205. Isomorphic Strings
-*/
-#include<iostream>
-#include<vector>
-#include<sstream>
-#include<string>
-#include<unordered_map>
+Related Problem: 205. Isomorphic Strings */
+
+#include <iostream>
+#include <vector>
+#include <sstream>
+#include <string>
+#include <unordered_map>
+
 using namespace std;
 
-// 33 test cases, 2ms, beat 100%
-// optimized version of Solution_
+/* Approch 1: two hash table */
 class Solution{
 public:
     bool wordPattern(string pattern, string str) {
@@ -33,25 +32,25 @@ public:
         while (ss >> s) {
             vec.push_back(s);
         }
-        
+
         if (vec.size() != pattern.size()) {
             return false;
         }
-        
-        unordered_map<string, char> s2c;
-        unordered_map<char, string> c2s;
-        int len = vec.size();
-        for (int i = 0; i < len; ++i) {
-            if (s2c[vec[i]] == 0 && c2s[pattern[i]] == "") { 
-                s2c[vec[i]] = pattern[i];
-                c2s[pattern[i]] = vec[i];
-                continue;
-            }
-            if (s2c[vec[i]] != pattern[i]) {
+
+        unordered_map<string, char> stringCharMap;
+        unordered_map<char, string> charStringMap;
+        for (int i = 0; i < vec.size(); ++i) {
+            const auto& c = pattern[i];
+            const auto& w = vec[i];
+
+            if (stringCharMap.find(w) == stringCharMap.end() && charStringMap.find(c) == charStringMap.end()) {
+                stringCharMap[w] = c;
+                charStringMap[c] = w;
+            } else if (stringCharMap[w] != c) {
                 return false;
             }
         }
-        
+
         return true;
     }
 };
@@ -72,10 +71,10 @@ public:
             }
         }
         vec.push_back(string(str.begin() + j, str.end()));
-        
-        if (pattern.size() != vec.size()) 
+
+        if (pattern.size() != vec.size())
             return false;
-        
+
         string keyC = "";
         string keyS = "";
         len = vec.size();
