@@ -14,15 +14,22 @@ No | Title | Difficulty | Catogary | Notes
 66 | Plus One | :star: | Arithmetic | :unlock:
 67 | Add Binary | :star: | Arithmetic | :unlock:
 69 | Sqrt(x) | :star: | Arithmetic | :unlock:
+168 ｜ Excel Sheet Colum Title | :star: | Arithmetic | :unlock:
+171 ｜ Excel Sheet Colum Number | :star: | Arithmetic | :unlock:
+172 | Factorial Trailing Zeros | :star: :star: | Arithmetic | :unlock:
 367 | Valid Perfect Square | :star: | Arithmetic | :unlock:
 136 | Single Number | :star: | Arithmetic | :unlock:
 179 | Largest Number | :star: :star: | Arithmetic | :unlock:
 190 | Roverse Bits | :star: | Arithmetic | :unlock:
 191 | Numberof 1 Bits | :star: | Arithmetic | :unlock:
 202 | Happy Number | :star: | Arithmetic | :unlock:
+204 | Count Primes | :star: | Arithmetic | :unlock:
 231 | Power Of Two | :star: | Arithmetic | :unlock:
 263 | Ugly Number | :star: | Arithmetic | :unlock:
 264 | Ugly Number II | :star: :star: | Arithmetic | :unlock:
+268 | Missing Number | :star: | Arithmetic | :unlock:
+287 | Findthe Duplicate Number | :star: :star: | Arithmetic | :unlock:
+292 | Nim Game | :star: | Arithmetic | :unlock:
 326 | Power of Three | :star: | Arithmetic | :unlock:
 371 | Sum of Two Integers | :star: :star: | Arithmetic | :unlock:
 389 | Findthe Difference | :star: | Arithmetic | :unlock:
@@ -31,6 +38,7 @@ No | Title | Difficulty | Catogary | Notes
  | Array | | |
 004 | Median of Two Sorted Arrays | :star: :star: :star: | Array
 011 | Container With Most Water| :star: :star: :star: | Array | :unlock:
+026 | Remote Duplicates from Sorted Array | :star: | Array | :unlock:
 027 | Remove Element | :star: | Array
 041 | First Missing Positive | :star: :star: :star: | Array
 080 | Remove Duplicate from Sorted Array II | :star: :star: | Array
@@ -74,8 +82,9 @@ No | Title | Difficulty | Catogary | Notes
 61 | Roate List By K | :star: :star: | List
 86 | Partition List | :star: :star: | List
 92 | Reverse Linked List II | :star: :star: | List | :unlock:
-141 | linked List Cycle | :star: | List
-142 | Linked List Cycle II | :star: :star: | List
+138 | Copy List With Random Pointer  | :star: | List | :unlock:
+141 | linked List Cycle | :star: | List | :unlock:
+142 | Linked List Cycle II | :star: :star: | List | :unlock:
 143 | Reorder List | :star: :star: | List
 147 | Insertion Sorted List | :star: :star: | List
 148 | Sort List | :star: :star: | List
@@ -84,11 +93,12 @@ No | Title | Difficulty | Catogary | Notes
 206 | Reverse Linkded List | :star: | List
 234 | Palindrome Linked List | :star: | List
 237 | Delete Node In A Linked List | :star: | List
+328 | Odd Even Linked List | :star: :star: | List | :unlock:
 817 | Linked List Components | :star: :star: | List
  | Tree | | |
-98 | ValidateBinarySearchTree | :star: | Tree
-100 | SameTree | :star: | Tree
-101 | SymmetricTree | :star: | Tree
+98 | Validate Binary Search Tree | :star: | Tree | :unlock:
+100 | Same Tree | :star: | Tree | :unlock:
+101 | Symmetric Tree | :star: | Tree | :unlock:
 102 | BinaryTreeLevelOrderTranversal | :star: | Tree
 103 | BianryTreeZigZagLevelTreeTranverse | :star: | Tree
 104 | MaximumDepthofBinaryTree | :star: | Tree
@@ -101,10 +111,15 @@ No | Title | Difficulty | Catogary | Notes
 111 | MinimumDepthofBinaryTree | :star: | Tree
 112 | PathSum | :star: | Tree
 113 | PathSum_II | :star: :star: | Tree
+114 | FlattenBinaryTreeToLinkedList | :star: :star: | Tree
+116 | PopulatingNextRightPointersinEachNode | :star: :star: | Tree
+117 | PopulatingNextRightPointersinEachnode II  | :star: :star: | Tree
 124 | BinaryTreeMaximumPath Sum | :star: :star: :star: | Tree
+129 | SumRoottoLeafNumbers | :star: :star: :star: | Tree
 666 | PathSumIV | :star: :star: | Tree
 173 | Binary Search Tree Iterator | :star: :star: | Tree | :unlock:
 199 | BinaryTreeRightSideView | :star: | Tree
+222 | CountCompleteTreeNodes | :star: :star: | Tree | :unlock:
 226 | InvertBinaryTree | :star: | Tree
 230 | kThSmallesElementInTheBST | :star: | Tree
 235 | LowestCommonAncestorofaBinarySearchTree | :star: | Tree
@@ -129,19 +144,27 @@ No | Title | Difficulty | Catogary | Notes
 58 | Length of Last Word | :star: | String
 125 | Valid Palindrome | :star: | String
 151 | Reverse Words in a String | :star: :star: | String
+205 | Isomorphic Strings | :star: | String | :unlock:
+242 | Valid Anagram | :star: | String | :unlock:
 409 | Longest Palindrome | :star: | String | :unlock:
 415 | Adding Strings | :star: | String
 443 | String Compression | :star: :star: | String
 344 | Reverse String | :star: | String
 345 | Reverse Vowels of a String | :star: | String | :unlock:
 796 | Rotate String | :star: | String
+ | Map | | |
+290 | Word Pattern | :star: | Map | :unlock:
+383 | Ransom Note | :star: | Map | :unlock:
+412 | Fizz Buzz | :star: | Map | :unlock:
+771 | Jewelsand Stones | :star: | Map | :unlock:
  | Search | | |
-34 | Search For a Range | :star: star: | Search | :unlock:
-35 | Search Insert Position  | :star: | Search | :unlock:
+34 | Search For a Range | :star: :star: | Search | :unlock:
+35 | Search Insert Position | :star: | Search | :unlock:
+278 | First Bad Version | :star: | Search | :unlock:
+374 | Guess Number Higher Or Lower | :star: | Search | :unlock:
  | BackTrack | | |
-017 | Letter Combination of a Phone Number | :star: star: | BackTrack | :unlock:
+017 | Letter Combination of a Phone Number | :star: :star: | BackTrack | :unlock:
 046 | Permutations | :star: star: | BackTrack | :unlock:
-
 
 # Bit Operations
 Name | Operation
