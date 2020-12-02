@@ -14,8 +14,8 @@ No | Title | Difficulty | Catogary | Notes
 66 | Plus One | :star: | Arithmetic | :unlock:
 67 | Add Binary | :star: | Arithmetic | :unlock:
 69 | Sqrt(x) | :star: | Arithmetic | :unlock:
-168 ｜ Excel Sheet Colum Title | :star: | Arithmetic | :unlock:
-171 ｜ Excel Sheet Colum Number | :star: | Arithmetic | :unlock:
+168 | Excel Sheet Colum Title | :star: | Arithmetic | :unlock:
+171 | Excel Sheet Colum Number | :star: | Arithmetic | :unlock:
 172 | Factorial Trailing Zeros | :star: :star: | Arithmetic | :unlock:
 367 | Valid Perfect Square | :star: | Arithmetic | :unlock:
 136 | Single Number | :star: | Arithmetic | :unlock:
@@ -164,7 +164,7 @@ No | Title | Difficulty | Catogary | Notes
 374 | Guess Number Higher Or Lower | :star: | Search | :unlock:
  | BackTrack | | |
 017 | Letter Combination of a Phone Number | :star: :star: | BackTrack | :unlock:
-046 | Permutations | :star: star: | BackTrack | :unlock:
+046 | Permutations | :star: :star: | BackTrack | :unlock:
 
 # Bit Operations
 Name | Operation
