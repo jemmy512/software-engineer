@@ -42,18 +42,18 @@ public:
 	bool isValidBST(TreeNode* root) {
 		return validateBST(root, LLONG_MIN, LLONG_MAX);
 	}
-	
+
 private:
 	bool validateBST(TreeNode* node, long min, long max) {
 		if(!node) return true;
 		if(node->val <= min || node->val >= max) return false;
-		return validateBST(node->left, min, node->val) 
+		return validateBST(node->left, min, node->val)
 				&& validateBST(node->right, node->val, max);
 	}
 };
- 
+
 // 75 test cases, 13ms, beat 26.77%
-// Iterative Version
+// Iterative Version, inorder traversal
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
@@ -75,7 +75,7 @@ public:
             if (vec[i] >= vec[i+1])
                 return false;
         }
-        
+
         return true;
     }
 };
