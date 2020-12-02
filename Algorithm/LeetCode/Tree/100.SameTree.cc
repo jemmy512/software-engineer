@@ -32,25 +32,37 @@ Input:     1         1
 Output: false
 */
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
- 
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        bool isSame{false};
+
+        if (p && q && p->val == q->val) {
+            isSame = isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+        } else if (q == nullptr && p == nullptr) {
+            isSame = true;
+        }
+
+        return isSame;
+    }
+};
+
  // 57 test cases, 4ms, beat 80.20%
 class Solution {
 public:
     bool isSameTree(TreeNode* p, TreeNode* q) {
         if (p == NULL || q == NULL) return (p == q);
-        return (p->val == q->val) && 
+        return (p->val == q->val) &&
             isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
     }
-    
+
     bool isSameTree(TreeNode *p, TreeNode *q) {
         queue<TreeNode*> q1, q2;
         q1.push(p);
@@ -72,7 +84,7 @@ public:
             q2.push(p2->left);
             q2.push(p2->right);
         }
-        
+
         return true;
     }
 };
