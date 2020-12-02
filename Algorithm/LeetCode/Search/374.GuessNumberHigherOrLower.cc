@@ -1,4 +1,4 @@
-/**
+/** Easy
  * We are playing the Guess Game. The game is as follows:
  * I pick a number from 1 to n. You have to guess which number I picked.
  * Every time you guess wrong, I'll tell you whether the number is higher or lower.
@@ -9,8 +9,7 @@
  *
  * Example:
  * n = 10, I pick 6.
- * Return 6.
- */
+ * Return 6. */
 
 // Forward declaration of guess API.
 // @param num, your guess
