@@ -40,6 +40,7 @@ public:
     int kthSmallest(TreeNode* root, int k) {
         stack<TreeNode *> stk;
         TreeNode *cur = root;
+
         while (!stk.empty() || cur) {
             if (cur) {
                 stk.push(cur);
@@ -51,5 +52,7 @@ public:
                 stk.pop();
             }
         }
+
+        return -1;
     }
 };
