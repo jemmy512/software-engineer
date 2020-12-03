@@ -109,29 +109,29 @@ No | Title | Difficulty | Catogary | Notes
 109 | ConverSortedListtoBinaryTree | :star: | Tree
 110 | BalancedBianryTree | :star: | Tree
 111 | MinimumDepthofBinaryTree | :star: | Tree
-112 | PathSum | :star: | Tree
-113 | PathSum_II | :star: :star: | Tree
+112 | Path Sum | :star: | Tree | :unlock:
+113 | PathSum II | :star: :star: | Tree | :unlock:
+437 | PathSum_III | :star: | Tree
+666 | PathSumIV | :star: :star: | Tree
+653 | TwoSum_InputIsaBST | :star: | Tree
+129 | SumRoottoLeafNumbers | :star: :star: :star: | Tree
+124 | BinaryTreeMaximumPath Sum | :star: :star: :star: | Tree
+257 | Binary Tree Paths | :star: | Tree | :unlock:
+687 | LongestUnivaluePath | :star: :star: | Tree
 114 | FlattenBinaryTreeToLinkedList | :star: :star: | Tree
 116 | PopulatingNextRightPointersinEachNode | :star: :star: | Tree
 117 | PopulatingNextRightPointersinEachnode II  | :star: :star: | Tree
-124 | BinaryTreeMaximumPath Sum | :star: :star: :star: | Tree
-129 | SumRoottoLeafNumbers | :star: :star: :star: | Tree
-666 | PathSumIV | :star: :star: | Tree
 173 | Binary Search Tree Iterator | :star: :star: | Tree | :unlock:
 199 | BinaryTreeRightSideView | :star: | Tree
 222 | CountCompleteTreeNodes | :star: :star: | Tree | :unlock:
-226 | InvertBinaryTree | :star: | Tree
-230 | kThSmallesElementInTheBST | :star: | Tree
+226 | Invert Binary Tree | :star: | Tree | :unlock:
+230 | kth Smallest Element In The BST | :star: :star: | Tree | :unlock:
+671 | SecondMinimumNodeinaBinaryTree | :star: | Tree
 235 | LowestCommonAncestorofaBinarySearchTree | :star: | Tree
 236 | LowestCommonAncestorofaBinaryTree | :star: | Tree
-257 | BinaryTreePaths | :star: | Tree
-437 | PathSum_III | :star: | Tree
 501 | FindModeinBinarySearchTree | :star: | Tree
 513 | FindBottomLeftTreeValue | :star: | Tree
-637 |  AverageofLevelsinBinaryTree | :star: | Tree
-653 | TwoSum_InputIsaBST | :star: | Tree
-671 | SecondMinimumNodeinaBinaryTree | :star: | Tree
-687 | LongestUnivaluePath | :star: :star: | Tree
+637 | AverageofLevelsinBinaryTree | :star: | Tree
 814 | BinaryTreePruning | :star: | Tree
  | Queue |  | |
 239 | Sliding Window Maximum | :star: :star: :star: | Queue
