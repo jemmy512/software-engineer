@@ -1,8 +1,7 @@
-/* 
-*   Find a path summary equals to the expected value.
-*/
-#include<iostream>
-#include<vector>
+/* Find a path summary equals to the expected value. */
+
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -16,12 +15,12 @@ BTNode *creatBTree(int a[], int n) {
     root = (BTNode *)malloc(sizeof(BTNode));
     root->data = a[0];
     root->left = root->right = NULL;
-    
+
     for (int i = 1; i < n; ++i) {
         pn = (BTNode *)malloc(sizeof(BTNode));
         pn->data = a[i];
         pn->left = pn->right = NULL;
-        
+
         c = root;
         while (c) {
             p = c;
@@ -29,7 +28,7 @@ BTNode *creatBTree(int a[], int n) {
         }
         if (p->data > pn->data)
             p->left = pn;
-        else 
+        else
             p->right = pn;
     }
     return root;
@@ -77,10 +76,10 @@ void Path(Tree* root,int expectedSum) {
 
     int path(TreeNode *root, int curSum, int sum) {
         if (!root) return 0;
-        curSum += root->val; 
+        curSum += root->val;
         return (curSum == sum) + path(root->left, curSum, sum) + path(root->right, curSum, sum);
     }
-    
+
     int pathSum(TreeNode* root, int sum) {
         if (!root) return 0;
         return path(root, 0, sum) + pathSum(root->left, sum) + pathSum(root->right, sum);
@@ -94,7 +93,7 @@ void Path(Tree* root,int expectedSum) {
 void findPath(BTNode *root, int curVal, int reqVal, vector<int> &vec) {
     curVal += root->data;
     vec.push_back(root->data);
-    
+
     bool isLeaf = !root->left && !root->right;
     if (curVal == reqVal && isLeaf) {
         cout << "A path is found:\n";
@@ -117,10 +116,22 @@ void findPath(BTNode *root, int reqVal) {
     findPath(root, curVal, reqVal, vec);
 }
 
+bool hasPathSum(BTNode* root, int sum) {
+    if (!root)
+        return false;
+
+    sum -= root->val;
+
+    if (root->left == nullptr && root->right == nullptr)
+        return sum == 0;
+
+    return hasPathSum(root->left, sum) || hasPathSum(root->right, sum);
+}
+
 int main() {
     int arr[] = {3,2,5,8,4,7,6,9};
     BTNode *root = creatBTree(arr, 8);
     findPath(root, 29);
-    
+
     return 0;
 }
