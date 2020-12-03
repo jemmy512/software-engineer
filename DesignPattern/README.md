@@ -29,7 +29,7 @@
 
 # Structural Patterns
 
-# Proxy
+## Proxy
 
 ## Bridge
 1. Definition
