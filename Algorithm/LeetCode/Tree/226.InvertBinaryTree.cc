@@ -22,7 +22,7 @@ Output:
 Trivia:
 This problem was inspired by this original tweet by Max Howell:
 
-Google: 90% of our engineers use the software you wrote (Homebrew), 
+Google: 90% of our engineers use the software you wrote (Homebrew),
 but you can’t invert a binary tree on a whiteboard so f*** off.
 */
 
@@ -39,12 +39,11 @@ class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
         if (!root) return root;
-        
+
         queue<TreeNode *> queue;
         queue.push(root);
-        TreeNode *node, *tmp;
         while (!queue.empty()) {
-            node = queue.front();
+            TreeNode *node = queue.front();
             queue.pop();
             swap(node->left, node->right);
             if (node->left)
@@ -52,7 +51,7 @@ public:
             if (node->right)
                 queue.push(node->right);
         }
-        
+
         return root;
     }
 };
@@ -61,16 +60,14 @@ class Solution {
 public:
     TreeNode* invertTree(TreeNode* root) {
         if (!root) return root;
-        
-        TreeNode *tmp = root->left;
-        root->left = root->right;
-        root->right = tmp;
-        
+
+        std::swap(root->left, root->right);
+
         if (root->left)
             invertTree(root->left);
         if (root->right)
             invertTree(root->right);
-        
+
         return root;
     }
 };
