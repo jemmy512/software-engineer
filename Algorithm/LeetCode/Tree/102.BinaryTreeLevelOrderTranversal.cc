@@ -1,5 +1,5 @@
-/*
-Given a binary tree, return the level order traversal of its nodes' values. 
+/* Medium
+Given a binary tree, return the level order traversal of its nodes' values.
 (ie, from left to right, level by level).
 
 For example:
@@ -17,59 +17,64 @@ return its level order traversal as:
 ]
 */
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
- 
- class Solution {
+#include <queue>
+#include <vector>
+
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> vvec;
-        if (!root) return vvec;
-        
+        if (!root)
+            return {};
+
         vector<int> row;
-        queue<TreeNode *> nodes;
-        TreeNode *cur = root, *pre_last = root, *last;
-        nodes.push(root);
-        while (!nodes.empty()) {
-            cur = nodes.front();
-            row.push_back(cur->val);
+        vector<vector<int>> vvec;
+        queue<TreeNode*> que;
+        TreeNode* cur, *preLast = root, *last;
+
+        que.push(root);
+        while (!que.empty()) {
+            cur = que.front(); que.pop();
+            row.emplace_back(cur->val);
+
             if (cur->left) {
-                nodes.push(cur->left);
+                que.push(cur->left);
                 last = cur->left;
             }
             if (cur->right) {
-                nodes.push(cur->right);
+                que.push(cur->right);
                 last = cur->right;
             }
-            if (cur == pre_last) {
-                vvec.push_back(row);
+
+            if (cur == preLast) {
+                vvec.emplace_back(row);
                 row.clear();
-                pre_last = last;
+                preLast = last;
             }
-            nodes.pop();
         }
-        
+
         return vvec;
     }
 };
- 
+
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
         vector<vector<int>> vvec;
         if (!root) return vvec;
-        
+
         deque<TreeNode *> stk;
         deque<TreeNode *> stkk;
         stk.push_back(root);
-        TreeNode * left, *right;
+        TreeNodeleft, *right;
         while (!stk.empty() || !stkk.empty()) {
             vector<int> vec;
             while (!stk.empty()) {
