@@ -14,8 +14,7 @@ return its level order traversal as:
   [3],
   [9,20],
   [15,7]
-]
-*/
+] */
 
 #include <queue>
 #include <vector>
@@ -33,10 +32,38 @@ class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
         if (!root)
+            return rows;
+
+        levelOrder(root, 0);
+
+        return rows;
+    }
+
+private:
+    void levelOrder(TreeNode* node, int level) {
+        if (rows.size() == level)
+            rows.push_back({});
+
+        rows[level].emplace_back(node->val);
+
+        if (node->left)
+            levelOrder(node->left, level+1);
+        if (node->right)
+            levelOrder(node->right, level+1);
+    }
+
+private:
+    vector<vector<int>> rows;
+};
+
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        if (!root)
             return {};
 
         vector<int> row;
-        vector<vector<int>> vvec;
+        vector<vector<int>> rows;
         queue<TreeNode*> que;
         TreeNode* cur, *preLast = root, *last;
 
@@ -55,26 +82,26 @@ public:
             }
 
             if (cur == preLast) {
-                vvec.emplace_back(row);
+                rows.emplace_back(row);
                 row.clear();
                 preLast = last;
             }
         }
 
-        return vvec;
+        return rows;
     }
 };
 
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
-        vector<vector<int>> vvec;
-        if (!root) return vvec;
+        if (!root) return {};
 
+        vector<vector<int>> rows;
         deque<TreeNode *> stk;
         deque<TreeNode *> stkk;
         stk.push_back(root);
-        TreeNodeleft, *right;
+        TreeNode* left, *right;
         while (!stk.empty() || !stkk.empty()) {
             vector<int> vec;
             while (!stk.empty()) {
@@ -94,9 +121,9 @@ public:
                 if (right) stk.push_back(right);
                 stkk.pop_front();
             }
-            if (!vec.empty()) vvec.push_back(vec);
-            if (!vc.empty()) vvec.push_back(vc);
+            if (!vec.empty()) rows.push_back(vec);
+            if (!vc.empty()) rows.push_back(vc);
         }
-        return vvec;
+        return rows;
     }
 };
