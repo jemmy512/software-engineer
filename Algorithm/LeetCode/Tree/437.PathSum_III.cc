@@ -27,7 +27,13 @@ Return 3. The paths that sum to 8 are:
 3. -3 -> 11
 
 Relatives:
-560. Subarray Sum Equals K */
+560. Subarray Sum Equals K
+
+1. Two Sum
+167. Two Sum II - Input array is sorted
+170. Two Sum III - Data structure design
+653. Two Sum IV - Input is a BST
+1214. Two Sum BSTs */
 
 #include <unordered_map>
 
