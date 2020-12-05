@@ -29,23 +29,31 @@ Given the following tree [1,2,2,3,3,null,null,4,4]:
    3   3
   / \
  4   4
-Return false.
-*/
+Return false. */
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
 class Solution {
 public:
-    int levelCount(TreeNode *root, bool &flag) {
+    bool isBalanced(TreeNode* root) {
+        if (!root) return true;
+
+        bool flag = true;
+        levelCount(root, flag);
+
+        return flag;
+
+    }
+
+private:
+    int levelCount(TreeNode* root, bool& flag) {
         if (!root) return 0;
-        
+
         int ll = levelCount(root->left, flag);
         int lr = levelCount(root->right, flag);
         if (abs(ll - lr) > 1) {
@@ -54,13 +62,24 @@ public:
         }
         return (ll > lr ? ll + 1 : lr + 1);
     }
+};
+
+/* Time complexity:  O(nlogn)
+ *  * For a node p at depth d, height(p) will be called d times.
+ *
+ * Space complexity: O(n). */
+class Solution {
+public:
     bool isBalanced(TreeNode* root) {
-        if (!root) return true;
-        
-        bool flag = true;
-        levelCount(root, flag);
-        
-        return flag;
-        
+        if (!root)
+            return true;
+        return abs(height(root->left) - height(root->right)) < 2 && isBalanced(root->left) && isBalanced(root->right);
+    }
+
+private:
+    int height(TreeNode* node) {
+        if (!node) // An empty tree has height -1
+            return -1;
+        return max(height(node->left), height(node->right)) + 1;
     }
 };
