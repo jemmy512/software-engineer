@@ -25,6 +25,7 @@ Relative:
 
 using namespace std;
 
+/* Prefix Sum, solution ref: https://leetcode.com/problems/path-sum-iii/solution/ */
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
