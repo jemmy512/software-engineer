@@ -7,30 +7,35 @@ You may assume that each input would have exactly one solution and you may not u
 
 Input: numbers={2, 7, 11, 15}, target=9
 Output: index1=1, index2=2
-*/
+
+Relatives:
+1. Two Sum
+167. Two Sum II - Input array is sorted
+170. Two Sum III - Data structure design
+653. Two Sum IV - Input is a BST
+1214. Two Sum BSTs */
+
 #include<iostream>
 #include<vector>
 using namespace std;
 
-// 17/17 test cases, 6ms, beat 99.69%
+/* Approaches:
+ * 1. hash table
+ * 2. two pointers */
 class Solution {
 public:
     vector<int> twoSum(vector<int>& numbers, int target) {
-        vector<int> ret;
-        int i = 0;
-        int j  = numbers.size() - 1;
-        while (i < j) {
-            if (numbers[i] + numbers[j] < target) {
-                ++i;
-            } else if (numbers[i] + numbers[j] > target) {
-                --j;
-            } else {
-                ret.push_back(i + 1);
-                ret.push_back(j + 1);
-                return ret;
-            }
+        int low = 0, high = numbers.size() - 1;
+        while (low < high) {
+            int sum = numbers[low] + numbers[high];
+            if (sum == target)
+                return {low + 1, high + 1};
+            else if (sum < target)
+                ++low;
+            else
+                --high;
         }
-        
-        return ret;
+
+        return {-1, -1};
     }
 };
