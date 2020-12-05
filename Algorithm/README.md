@@ -1,7 +1,6 @@
 # LeetCode Algorithm
 No | Title | Difficulty | Catogary | Notes
 -- | -- | --- | --- | ---
-1 | 2 Sum | :star: | Arithmetic | :unlock:
 2 | Add Two Numbers | :star: :star: | Arithmetic | :unlock:
 445 | Add Two Numbers II | :star: :star: | Arithmetic | :unlock:
 6 | Zig Zag Conversion | :star: :star: | Arithmetic | :unlock:
@@ -53,6 +52,7 @@ No | Title | Difficulty | Catogary | Notes
 220 | Contains Duplicate III | :star: :star: | Array
 283 | Move Zeroes | :star: :star: | Array
 448 | Find All Numbers Disappeared in An Array | :star: | Array
+560 | Sub array Sum Equals K | :star: :star: | Array | :unlock: `Prefix Sum`
  | DP |  | |
 5 | Longest Palindromic Substring | :star: :star: | DP
 32 | Longet Valid Paretheses | :star: :star: :star: | DP
@@ -99,26 +99,25 @@ No | Title | Difficulty | Catogary | Notes
 98 | Validate Binary Search Tree | :star: | Tree | :unlock:
 100 | Same Tree | :star: | Tree | :unlock:
 101 | Symmetric Tree | :star: | Tree | :unlock:
-102 | BinaryTreeLevelOrderTranversal | :star: | Tree
-103 | BianryTreeZigZagLevelTreeTranverse | :star: | Tree
-104 | MaximumDepthofBinaryTree | :star: | Tree
+102 | Binary Tree Level Order Traversal | :star: :star: | Tree | :unlock:
+107 | Binary Tree Level Order Traversal II | :star: | Tree | :unlock:
+103 | BianryTreeZigZagLevelTreeTraverse | :star: | Tree
+104 | Maximum Depth of Binary Tree | :star: | Tree | :unlock:
+111 | Minimum Depth of Binary Tree | :star: | Tree | :unlock:
 105 | ConstructBinaryTreefromPreorderandInorderTraversal | :star: | Tree
 106 | ConstructBinaryTreefromInorderandPostorderTraversal | :star: | Tree
-107 | BinaryTreeLevelOrderTranversal_II | :star: | Tree
-108 | ConvertSortedArrayToBinarySearchTree | :star: | Tree
-109 | ConverSortedListtoBinaryTree | :star: | Tree
+108 | Convert Sorted Array to Binary Search Tree | :star: :star: | Tree | :unlock:
+109 | Convert Sorted List to Binary Search Tree | :star: | Tree | :unlock:
 110 | BalancedBianryTree | :star: | Tree
-111 | MinimumDepthofBinaryTree | :star: | Tree
 112 | Path Sum | :star: | Tree | :unlock:
 113 | PathSum II | :star: :star: | Tree | :unlock:
-437 | PathSum_III | :star: | Tree
-666 | PathSumIV | :star: :star: | Tree
-653 | TwoSum_InputIsaBST | :star: | Tree
+437 | Path Sum III | :star: :star: | Tree | :unlock: `Prefix Sum`
+666 | Path Sum IV | :star: :star: | Tree | :unlock:
 129 | SumRoottoLeafNumbers | :star: :star: :star: | Tree
 124 | BinaryTreeMaximumPath Sum | :star: :star: :star: | Tree
 257 | Binary Tree Paths | :star: | Tree | :unlock:
 687 | LongestUnivaluePath | :star: :star: | Tree
-114 | FlattenBinaryTreeToLinkedList | :star: :star: | Tree
+114 | Flatten Binary Tree To Linked List | :star: :star: | Tree | :unlock:
 116 | PopulatingNextRightPointersinEachNode | :star: :star: | Tree
 117 | PopulatingNextRightPointersinEachnode II  | :star: :star: | Tree
 173 | Binary Search Tree Iterator | :star: :star: | Tree | :unlock:
@@ -153,6 +152,11 @@ No | Title | Difficulty | Catogary | Notes
 345 | Reverse Vowels of a String | :star: | String | :unlock:
 796 | Rotate String | :star: | String
  | Map | | |
+001 | Two Sum | :star: | Map | :unlock:
+167 | Two Sum II | :star: | Map | :unlock:
+170 | Two Sum III - Data structure design | :star: | Map | :unlock:
+653 | Two Sum IV | :star: | Map | :unlock:
+1214 | Two Sum BSTs | :star: :star: | Map Tree | :unlock:
 290 | Word Pattern | :star: | Map | :unlock:
 383 | Ransom Note | :star: | Map | :unlock:
 412 | Fizz Buzz | :star: | Map | :unlock:
