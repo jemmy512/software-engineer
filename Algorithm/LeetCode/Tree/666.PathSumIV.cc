@@ -33,5 +33,46 @@ The tree that the list represents is:
      \
       1
 
-The path sum is (3 + 1) = 4.
-*/
+The path sum is (3 + 1) = 4. */
+
+#include <vector>
+#include <unordered_map>
+
+using namespace std;
+
+class Solution {
+public:
+    int pathSum(vector<int>& nums) {
+        for (const auto& num : nums) {
+            _HashMap[num/10] = num % 10;
+        }
+
+        dfs(nums[0]/10, 0);
+
+        return _Sum;
+    }
+
+private:
+    void dfs(int node, int curSum) {
+        if (_HashMap.find(node) == _HashMap.end())
+            return;
+
+        curSum += _HashMap[node];
+
+        int depth = node / 10;
+        int pos = node % 10;
+        int left = 10 * (depth + 1) + 2 * pos - 1;
+        int right = left + 1;
+
+        if (!_HashMap.contains(left) || !_HashMap.contains(right)) {
+            _Sum += curSum;
+        } else {
+            dfs(left, curSum);
+            dfs(right, curSum);
+        }
+    }
+
+private:
+    int _Sum{0};
+    unordered_map<int, int> _HashMap;
+};
