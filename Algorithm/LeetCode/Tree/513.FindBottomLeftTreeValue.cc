@@ -35,14 +35,17 @@ struct TreeNode {
 class Solution {
 public:
     int findBottomLeftValue(TreeNode* root) {
-        if (!root) return 0;
+        if (!root)
+            return 0;
 
-        queue<TreeNode *> que;
+        queue<TreeNode*> que;
         que.push(root);
         int ret = root->val;
         TreeNode *cur, *prevLast = root, *last;
         while (!que.empty()) {
             cur = que.front();
+            que.pop();
+
             if (cur->left) {
                 last = cur->left;
                 que.push(cur->left);
@@ -51,12 +54,10 @@ public:
                 last = cur->right;
                 que.push(cur->right);
             }
+
             if (cur == prevLast) {
                 prevLast = last;
-                que.pop();
                 ret = !que.empty() ? que.front()->val : ret;
-            } else {
-                que.pop();
             }
         }
 
