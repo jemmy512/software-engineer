@@ -1,6 +1,4 @@
-/*
-Difficulty: Medium
-
+/* Medium
 Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.
 
 An example is the root-to-leaf path 1->2->3 which represents the number 123.
@@ -33,21 +31,28 @@ Explanation:
 The root-to-leaf path 4->9->5 represents the number 495.
 The root-to-leaf path 4->9->1 represents the number 491.
 The root-to-leaf path 4->0 represents the number 40.
-Therefore, sum = 495 + 491 + 40 = 1026.
-*/
+Therefore, sum = 495 + 491 + 40 = 1026. */
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
 
 class Solution {
 public:
+    int sumNumbers(TreeNode* root) {
+        if (!root) return 0;
+
+        int sumCur = 0, sumRet = 0;
+        preOrderRecursieve(root, sumCur, sumRet);
+
+        return sumRet;
+    }
+
+private:
     void preOrderRecursieve(TreeNode *root, int sumCur, int &sumRet) {
         sumCur = sumCur * 10 + root->val;
         if (root->left)
@@ -56,14 +61,5 @@ public:
             preOrderRecursieve(root->right, sumCur, sumRet);
         if (!root->left && !root->right)
             sumRet += sumCur;
-    }
-    
-    int sumNumbers(TreeNode* root) {
-        if (!root) return 0;
-        
-        int sumCur = 0, sumRet = 0;
-        preOrderRecursieve(root, sumCur, sumRet);
-        
-        return sumRet;
     }
 };
