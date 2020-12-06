@@ -24,7 +24,16 @@ Example 2:
 Input: root, p = 5, q = 4
 Output: 5
 Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of
-itself according to the LCA definition. */
+itself according to the LCA definition.
+
+Relatives:
+235.  Lowest Common Ancestor of a Binary Search Tree
+236.  Lowest Common Ancestor of a Binary Tree
+1644. Lowest Common Ancestor of a Binary Tree II
+1650. Lowest Common Ancestor of a Binary Tree III
+676.  Lowest Common Ancestor of a Binary Tree IV
+1123. Lowest Common Ancestor of Deepest Leaves
+1257. Smallest Common Region */
 
 struct TreeNode {
     int val;
