@@ -1,4 +1,4 @@
-/*
+/* Medium
 Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
 
 Note: A leaf is a node with no children.
@@ -22,45 +22,45 @@ Return:
 ]
 */
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
 class Solution {
 public:
-    void pathSum(TreeNode *root, int curSum, int sum, vector<vector<int>> &vvec, vector<int> &vec) {
+    vector<vector<int>> pathSum(TreeNode* root, int sum) {
+        vector<vector<int>> vvec;
+        vector<int> vec;
+        pathSum(root, 0, sum, vvec, vec);
+
+        return vvec;
+    }
+
+private:
+    void pathSum(TreeNode *root, int curSum, int sum, vector<vector<int>>& vvec, vector<int>& vec) {
         if (!root) return;
-        
+
         curSum += root->val;
         vec.push_back(root->val);
-        
+
         bool isLeaf = !root->left && !root->right;
         if (isLeaf && curSum == sum) {
-            vvec.push_back(vector<int>(vec.begin(), vec.end()));
+            vvec.push_back(vec);
             vec.pop_back();
             return;
         }
-        
+
         if (root->left) {
             pathSum(root->left, curSum, sum, vvec, vec);
         }
         if (root->right) {
             pathSum(root->right, curSum, sum, vvec, vec);
         }
-        
+
         curSum -= root->val;
         vec.pop_back();
-    }
-    vector<vector<int>> pathSum(TreeNode* root, int sum) {
-        vector<vector<int>> vvec;
-        vector<int> vec;
-        pathSum(root, 0, sum, vvec, vec);
-        
-        return vvec;
     }
 };
