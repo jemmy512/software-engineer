@@ -12,34 +12,36 @@ If you have figured out the O(n) solution, try coding another solution using the
  divide and conquer approach, which is more subtle.
 */
 
-/*  Ref: https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm
-    Dynamic Solution
-    Complexity:
-        Time: O(N)
-        Space: O(1)
-*/
+/* Ref: https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm
+ * Dynamic Solution
+ * Time: O(N)
+ * Space: O(1) */
+
 // Kadane's_algorithm
 class Solution {
 public:
-    int maxSub_dp(vector<int> &nums) {
-        int len = nums.size();
-        int prev = nums[0];
-        int answer = nums[0];
-        int beg = 0, end = 0;
-        for (int i = 1; i < len; ++i) {
-            if (prev + nums[i] < nums[i])
-                beg = i;
-            prev = max(prev + nums[i], nums[i]);
-            if (prev > answer)
-                end = i;
-            answer = max(prev, answer);
-        }
-        cout << beg << ", " << end << endl;
-        return answer;
-    }
-    
     int maxSubArray(vector<int>& nums) {
-        return maxSub_dp(nums);
+        int maxSum = nums[0];
+        int curSum = nums[0];
+        int beg = 0, end = nums.size();
+
+        for (int i = 1; i < nums.size(); ++i) {
+            if (curSum < 0) {
+                beg = i;
+                curSum = nums[i];
+            } else {
+                curSum += nums[i];
+            }
+
+            if (curSum > maxSum) {
+                end = i;
+                maxSum = curSum;
+            }
+        }
+
+        cout << "[" << beg << ", " << end << "]" << endl;
+
+        return maxSum;
     }
 };
 /*
@@ -56,15 +58,15 @@ public:
         int mid = (beg + end) >> 1;
         int answer = max(maxSub_divideConquer(nums, beg, mid), maxSub_divideConquer(nums, mid + 1, end));
         int now = nums[mid], may = now;
-        for (int i = mid - 1; i >= 0; --i) 
+        for (int i = mid - 1; i >= 0; --i)
             may = max(may, now += nums[i]);
         now = may;
         for (int i = mid + 1; i <= end; ++i)
             may = max(may, now += nums[i]);
-        
+
         return max(answer, may);
     }
-    
+
     int maxSubArray(vector<int>& nums) {
         int len = nums.size();
         return maxSub_divideConquer(nums, 0, len - 1);
@@ -89,10 +91,10 @@ public:
             answer = max(answer, sum - minSum);
             minSum = min(sum, minSum);
         }
-        
+
         return answer;
     }
-    
+
     int maxSubArray(vector<int>& nums) {
         return maxSub_maxMin(nums);
     }
