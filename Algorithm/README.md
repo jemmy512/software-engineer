@@ -9,7 +9,7 @@ No | Title | Difficulty | Catogary | Notes
 15 | 3 Sum | :star: :star: | Arithmetic | :unlock:
 16 | 3 Sum Closest | :star: :star: | Arithmetic | :unlock:
 18 | 4 Sum | :star: :star:| Arithmetic | :unlock:
-50 | pow-x-n | :star: :star:| Arithmetic | TODO
+50 | pow-x-n | :star: :star:| Arithmetic | `TODO`
 66 | Plus One | :star: | Arithmetic | :unlock:
 67 | Add Binary | :star: | Arithmetic | :unlock:
 69 | Sqrt(x) | :star: | Arithmetic | :unlock:
@@ -56,7 +56,7 @@ No | Title | Difficulty | Catogary | Notes
  | DP |  | |
 5 | Longest Palindromic Substring | :star: :star: | DP
 32 | Longet Valid Paretheses | :star: :star: :star: | DP
-53 | Maximum Subarray | :star: | DP
+53 | Maximum Subarray | :star: | DP | :unlock:
 62 | Unique Paths | :star: :star: | DP
 63 | Unique Paths II | :star: :star: | DP
 64 | Minimum Path Sum | :star: :star: | DP
@@ -101,37 +101,42 @@ No | Title | Difficulty | Catogary | Notes
 101 | Symmetric Tree | :star: | Tree | :unlock:
 102 | Binary Tree Level Order Traversal | :star: :star: | Tree | :unlock:
 107 | Binary Tree Level Order Traversal II | :star: | Tree | :unlock:
-103 | BianryTreeZigZagLevelTreeTraverse | :star: | Tree
+103 | Bianry Tree Zig Zag Level Tree Traverse | :star: :star: | Tree | :unlock:
 104 | Maximum Depth of Binary Tree | :star: | Tree | :unlock:
 111 | Minimum Depth of Binary Tree | :star: | Tree | :unlock:
 105 | ConstructBinaryTreefromPreorderandInorderTraversal | :star: | Tree
 106 | ConstructBinaryTreefromInorderandPostorderTraversal | :star: | Tree
 108 | Convert Sorted Array to Binary Search Tree | :star: :star: | Tree | :unlock:
 109 | Convert Sorted List to Binary Search Tree | :star: | Tree | :unlock:
-110 | BalancedBianryTree | :star: | Tree
-112 | Path Sum | :star: | Tree | :unlock:
-113 | PathSum II | :star: :star: | Tree | :unlock:
+110 | Balanced Bianry Tree | :star: | Tree | :unlock:
+112 | Path Sum | :star: | Tree | :unlock: `DFS`
+113 | Path Sum II | :star: :star: | Tree | :unlock: `DFS`
 437 | Path Sum III | :star: :star: | Tree | :unlock: `Prefix Sum`
-666 | Path Sum IV | :star: :star: | Tree | :unlock:
-129 | SumRoottoLeafNumbers | :star: :star: :star: | Tree
-124 | BinaryTreeMaximumPath Sum | :star: :star: :star: | Tree
+666 | Path Sum IV | :star: :star: | Tree | :unlock: `DFS`
+129 | Sum Root to Leaf Numbers | :star: :star: | Tree | :unlock:
+124 | Binary Tree Maximum Path Sum | :star: :star: :star: | Tree | `DP` `TODO`
 257 | Binary Tree Paths | :star: | Tree | :unlock:
 687 | LongestUnivaluePath | :star: :star: | Tree
 114 | Flatten Binary Tree To Linked List | :star: :star: | Tree | :unlock:
-116 | PopulatingNextRightPointersinEachNode | :star: :star: | Tree
-117 | PopulatingNextRightPointersinEachnode II  | :star: :star: | Tree
+116 | Populating Next Right Pointers in Each Node | :star: :star: | Tree | :unlock:
+117 | Populating Next Right Pointers in Each Node II  | :star: :star: | Tree | :unlock:
 173 | Binary Search Tree Iterator | :star: :star: | Tree | :unlock:
-199 | BinaryTreeRightSideView | :star: | Tree
+199 | Binary Tree Right Side View | :star: :star: | Tree | :unlock:
 222 | CountCompleteTreeNodes | :star: :star: | Tree | :unlock:
 226 | Invert Binary Tree | :star: | Tree | :unlock:
 230 | kth Smallest Element In The BST | :star: :star: | Tree | :unlock:
-671 | SecondMinimumNodeinaBinaryTree | :star: | Tree
-235 | LowestCommonAncestorofaBinarySearchTree | :star: | Tree
-236 | LowestCommonAncestorofaBinaryTree | :star: | Tree
+671 | Second Minimum Node in a Binary Tree | :star: | Tree | :unlock:
+235 | Lowest Common Ancestor of a Binary Search Tree | :star: | Tree | :unlock:
+236 | Lowest Common Ancestor of a Binary Tree | :star: :star: | Tree | :unlock: :thinking:
+1644 | Lowest Common Ancestor of a Binary Tree II | :star: :star: | Tree | :unlock: `p, q may be null`
+1650 | Lowest Common Ancestor of a Binary Tree III | :star: :star: | Tree | `List Common Node`
+1676 | Lowest Common Ancestor of a Binary Tree IV | :star: :star: | Tree | `Multiple-nodes`
+1123 | Lowest Common Ancestor of Deepest Leaves | :star: :star: | Tree | `TODO`
+1257 | Smallest Common Region | :star: :star: | Tree | `TODO`
 501 | FindModeinBinarySearchTree | :star: | Tree
-513 | FindBottomLeftTreeValue | :star: | Tree
-637 | AverageofLevelsinBinaryTree | :star: | Tree
-814 | BinaryTreePruning | :star: | Tree
+513 | Find Bottom Left Tree Value | :star: | Tree | :unlock: `Level Traversal`
+637 | Average of Levels in Binary Tree | :star: | Tree | :unlock: `Level Traversal`
+814 | Binary Tree Pruning | :star: | Tree | :unlock:
  | Queue |  | |
 239 | Sliding Window Maximum | :star: :star: :star: | Queue
 641 | Design Circular Deque | :star: :star: | Queue
