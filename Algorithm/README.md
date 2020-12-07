@@ -1,39 +1,39 @@
 # LeetCode Algorithm
 No | Title | Difficulty | Catogary | Notes
 -- | -- | --- | --- | ---
-2 | Add Two Numbers | :star: :star: | Arithmetic | :unlock:
-445 | Add Two Numbers II | :star: :star: | Arithmetic | :unlock:
-6 | Zig Zag Conversion | :star: :star: | Arithmetic | :unlock:
-7 | Reverse Integer | :star: | Arithmetic | :unlock:
-9 | Palindrom Number | :star: | Arithmetic | :unlock:
-15 | 3 Sum | :star: :star: | Arithmetic | :unlock:
-16 | 3 Sum Closest | :star: :star: | Arithmetic | :unlock:
-18 | 4 Sum | :star: :star:| Arithmetic | :unlock:
-50 | pow-x-n | :star: :star:| Arithmetic | `TODO`
-66 | Plus One | :star: | Arithmetic | :unlock:
-67 | Add Binary | :star: | Arithmetic | :unlock:
-69 | Sqrt(x) | :star: | Arithmetic | :unlock:
-168 | Excel Sheet Colum Title | :star: | Arithmetic | :unlock:
-171 | Excel Sheet Colum Number | :star: | Arithmetic | :unlock:
-172 | Factorial Trailing Zeros | :star: :star: | Arithmetic | :unlock:
-367 | Valid Perfect Square | :star: | Arithmetic | :unlock:
-136 | Single Number | :star: | Arithmetic | :unlock:
-179 | Largest Number | :star: :star: | Arithmetic | :unlock:
-190 | Roverse Bits | :star: | Arithmetic | :unlock:
-191 | Numberof 1 Bits | :star: | Arithmetic | :unlock:
-202 | Happy Number | :star: | Arithmetic | :unlock:
-204 | Count Primes | :star: | Arithmetic | :unlock:
-231 | Power Of Two | :star: | Arithmetic | :unlock:
-263 | Ugly Number | :star: | Arithmetic | :unlock:
-264 | Ugly Number II | :star: :star: | Arithmetic | :unlock:
-268 | Missing Number | :star: | Arithmetic | :unlock:
-287 | Findthe Duplicate Number | :star: :star: | Arithmetic | :unlock:
-292 | Nim Game | :star: | Arithmetic | :unlock:
-326 | Power of Three | :star: | Arithmetic | :unlock:
-371 | Sum of Two Integers | :star: :star: | Arithmetic | :unlock:
-389 | Findthe Difference | :star: | Arithmetic | :unlock:
-400 | Nth Digit | :star: :star: | Arithmetic
-414 | Third Maximum Number | :star: | Arithmetic
+2 | Add Two Numbers | :star: :star: | Math | :unlock:
+445 | Add Two Numbers II | :star: :star: | Math | :unlock:
+6 | Zig Zag Conversion | :star: :star: | Math | :unlock:
+7 | Reverse Integer | :star: | Math | :unlock:
+9 | Palindrom Number | :star: | Math | :unlock:
+15 | 3 Sum | :star: :star: | Math | :unlock:
+16 | 3 Sum Closest | :star: :star: | Math | :unlock:
+18 | 4 Sum | :star: :star:| Math | :unlock:
+50 | pow-x-n | :star: :star:| Math | `TODO`
+66 | Plus One | :star: | Math | :unlock:
+67 | Add Binary | :star: | Math | :unlock:
+69 | Sqrt(x) | :star: | Math | :unlock:
+168 | Excel Sheet Colum Title | :star: | Math | :unlock:
+171 | Excel Sheet Colum Number | :star: | Math | :unlock:
+172 | Factorial Trailing Zeros | :star: :star: | Math | :unlock:
+367 | Valid Perfect Square | :star: | Math | :unlock:
+136 | Single Number | :star: | Math | :unlock:
+179 | Largest Number | :star: :star: | Math | :unlock:
+190 | Roverse Bits | :star: | Math | :unlock:
+191 | Numberof 1 Bits | :star: | Math | :unlock:
+202 | Happy Number | :star: | Math | :unlock:
+204 | Count Primes | :star: | Math | :unlock:
+231 | Power Of Two | :star: | Math | :unlock:
+263 | Ugly Number | :star: | Math | :unlock:
+264 | Ugly Number II | :star: :star: | Math | :unlock:
+268 | Missing Number | :star: | Math | :unlock:
+287 | Findthe Duplicate Number | :star: :star: | Math | :unlock:
+292 | Nim Game | :star: | Math | :unlock:
+326 | Power of Three | :star: | Math | :unlock:
+371 | Sum of Two Integers | :star: :star: | Math | :unlock:
+389 | Findthe Difference | :star: | Math | :unlock:
+400 | Nth Digit | :star: :star: | Math
+414 | Third Maximum Number | :star: | Math
  | Array | | |
 004 | Median of Two Sorted Arrays | :star: :star: :star: | Array
 011 | Container With Most Water| :star: :star: :star: | Array | :unlock:
