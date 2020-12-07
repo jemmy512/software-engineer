@@ -10,12 +10,38 @@ Follow up:
 
 If you have figured out the O(n) solution, try coding another solution using the
  divide and conquer approach, which is more subtle.
-*/
+
+Relatives:
+53. Maximum Subarray
+121. Best Time to Buy and Sell Stock
+124. Binary Tree Maximum Path Sum
+152. Maximum Product Subarray
+697. Degree of an Array
+978. Longest Turbulent Subarray */
 
 /* Ref: https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm
  * Dynamic Solution
  * Time: O(N)
  * Space: O(1) */
+
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int maxSum = nums[0];
+        for (int i = 1; i < nums.size(); ++i) {
+            if (nums[i-1] > 0)
+                nums[i] += nums[i-1];
+            maxSum = max(maxSum, nums[i]);
+        }
+
+        return maxSum;
+    }
+};
 
 // Kadane's_algorithm
 class Solution {
