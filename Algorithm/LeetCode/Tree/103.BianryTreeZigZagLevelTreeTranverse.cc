@@ -1,9 +1,9 @@
 /**
- * Given a binary tree, return the zigzag level order traversal of its nodes' values.
- * (ie, from left to right, then right to left for the next level and alternate between).
+ Given a binary tree, return the zigzag level order traversal of its nodes' values.
+ (ie, from left to right, then right to left for the next level and alternate between).
  *
- * For example:
- * Given binary tree [3,9,20,null,null,15,7],
+ For example:
+ Given binary tree [3,9,20,null,null,15,7],
     3
    / \
   9  20
@@ -17,51 +17,60 @@
 ]
  */
 
+#include <vector>
+#include <queue>
+#include <deque>
 
-/**
-* Definition for a binary tree node.
-* struct TreeNode {
-*     int val;
-*     TreeNode *left;
-*     TreeNode *right;
-*     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-* };
-*/
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
 class Solution {
 public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
-        vector<vector<int>> vvec;
-        if (!root) return vvec;
+        if (!root)
+            return levels;
 
-        TreeNode *pre_last = root, *cur, *last;
-        queue<TreeNode *> nodes;
-        vector<int> vec;
-        bool zigzag = false;
-        nodes.push(root);
-        while (!nodes.empty()) {
-            cur = nodes.front();
-            vec.push_back(cur->val);
+        deque<int> level;
+        queue<TreeNode*> que;
+        que.push(root);
+        TreeNode* preLast = root, *cur, *last;
+
+        while (!que.empty()) {
+            cur = que.front();
+            que.pop();
+
+            if (isOrderRight)
+                level.emplace_back(cur->val);
+            else
+                level.emplace_front(cur->val);
 
             if (cur->left) {
-                nodes.push(cur->left);
+                que.push(cur->left);
                 last = cur->left;
             }
             if (cur->right) {
-                nodes.push(cur->right);
+                que.push(cur->right);
                 last = cur->right;
             }
 
-            if (cur == pre_last) {
-                if (zigzag)
-                    reverse(vec.begin(), vec.end());
-                zigzag = !zigzag;
-                vvec.push_back(vec);
-                vec.clear();
-                pre_last = last;
+            if (cur == preLast) {
+                levels.push_back({level.begin(), level.end()});
+                level.clear();
+                isOrderRight = !isOrderRight;
+                preLast = last;
             }
-            nodes.pop();
         }
 
-        return vvec;
+        return levels;
     }
+
+private:
+    bool isOrderRight{true};
+    vector<vector<int>> levels;
 };
