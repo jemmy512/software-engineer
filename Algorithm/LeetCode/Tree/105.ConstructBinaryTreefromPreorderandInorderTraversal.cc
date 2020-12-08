@@ -1,11 +1,10 @@
-/*
+/* Medium
 Given preorder and inorder traversal of a tree, construct the binary tree.
 
 Note:
 You may assume that duplicates do not exist in the tree.
 
 For example, given
-
 preorder = [3,9,20,15,7]
 inorder = [9,3,15,20,7]
 Return the following binary tree:
@@ -14,56 +13,53 @@ Return the following binary tree:
    / \
   9  20
     /  \
-   15   7
-*/
+   15   7 */
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
- 
+#include <vector>
+#include <stack>
+
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
 // Iterative Version
 class Solution {
  public:
-  TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-    assert(preorder.size() == inorder.size());
-    if (preorder.size() == 0) return nullptr;
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        if (preorder.empty() || inorder.empty() || preorder.size() != inorder.size())
+            return nullptr;
 
-    TreeNode* root;
-    TreeNode** curr = &root;
-    auto j = preorder.cbegin();
-    stack<TreeNode*> s;
-    for (auto i=inorder.cbegin(); i!=inorder.cend(); ++i) {
-      while (s.empty() || s.top()->val != *i) {
-        auto node = new TreeNode{*j++};
-        s.push(node);
-        *curr = node;
-        curr = &node->left;
-      }
-      curr = &(s.top()->right);
-      s.pop();
+        TreeNode* root;
+        TreeNode** cur = &root;
+        auto preIter = preorder.cbegin();
+        stack<TreeNode*> stk;
+
+        for (const auto& inValue : inorder) {
+            while (stk.empty() || stk.top()->val != inValue) {
+                auto* node = new TreeNode{*preIter++};
+                stk.push(node);
+                *cur = node;
+                cur = &node->left;
+            }
+            cur = &(stk.top()->right);
+            stk.pop();
+        }
+
+        return root;
     }
-
-    assert(j == preorder.cend());
-    return root;
-  }
 };
 
-/*
-The idea is as follows:
-
-1. Keep pushing the nodes from the preorder into a stack (and keep making the tree by adding nodes to the left of the 
+/* The idea is as follows:
+1. Keep pushing the nodes from the preorder into a stack (and keep making the tree by adding nodes to the left of the
     previous node) until the top of the stack matches the inorder.
-
-2. At this point, pop the top of the stack until the top does not equal inorder (keep a flag to note that you have made a pop).
-
-3. Repeat 1 and 2 until preorder is empty. The key point is that whenever the flag is set, insert a node to the right and reset the flag.
-*/
+2. At this point, pop the top of the stack until the top does not equal inorder
+    (keep a flag to note that you have made a pop).
+3. Repeat 1 and 2 until preorder is empty. The key point is that whenever the flag is set, insert a node to the right and reset the flag. */
 class Solution {
 public:
     TreeNode *buildTree(vector &preorder, vector &inorder) {
@@ -82,7 +78,7 @@ public:
         st.push(root);
         t = root;
         i++;
-     
+
         while(i<preorder.size()) {
             if(!st.empty() && st.top()->val==inorder[j]) {
                 t = st.top();
@@ -107,13 +103,12 @@ public:
                 }
             }
         }
-     
+
         return root;
     }
 };
- 
-// Recursive Version
 
+// Recursive Version
 class Solution {
 public:
     TreeNode* dfs(vector<int>& preorder, vector<int>& inorder, int& p, int& i, int end) {
@@ -123,10 +118,10 @@ public:
             ++i;
             ret->right = dfs(preorder, inorder, p, i, end);
             return ret;
-        } else 
+        } else
             return NULL;
     }
-    
+
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         int p = 0, i = 0;
         int end = inorder.size();
@@ -173,7 +168,7 @@ public:
 
         return root;
     }
-    
+
     TreeNode *buildTree(vector<int> &preorder, vector<int> &inorder) {
         int preidx=0;
         return buildTree(preorder, preidx, inorder);
