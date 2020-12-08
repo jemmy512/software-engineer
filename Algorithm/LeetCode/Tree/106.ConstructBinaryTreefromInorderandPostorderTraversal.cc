@@ -1,6 +1,4 @@
-/*
-Difficulty: Medium
-
+/* Medium
 Given inorder and postorder traversal of a tree, construct the binary tree.
 
 Note:
@@ -16,46 +14,47 @@ Return the following binary tree:
    / \
   9  20
     /  \
-   15   7
-*/
+   15   7 */
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
- 
+#include <vector>
+#include <stack>
+
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
 // Iterative Vesion
 class Solution {
  public:
-  TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
-    assert(inorder.size() == postorder.size());
-    if (inorder.size() == 0) return nullptr;
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        if (inorder.empty() || postorder.empty() || inorder.size() != postorder.size())
+            return nullptr;
 
-    TreeNode* root;
-    TreeNode** curr = &root;
-    auto j = postorder.crbegin();
-    stack<TreeNode*> s;
-    for (auto i=inorder.crbegin(); i!=inorder.crend(); ++i) {
-      while (s.empty() || s.top()->val != *i) {
-        auto node = new TreeNode{*j++};
-        s.push(node);
-        *curr = node;
-        curr = &node->right;
-      }
-      curr = &(s.top()->left);
-      s.pop();
+        TreeNode* root;
+        TreeNode** cur = &root;
+        auto postIter = postorder.crbegin();
+        stack<TreeNode*> stk;
+
+        for_each (inorder.crbegin(), inorder.crend(), [&](const auto& inVal) {
+            while (stk.empty() || stk.top()->val != inVal) {
+                auto* node = new TreeNode{*postIter++};
+                stk.push(node);
+                *cur = node;
+                cur = &node->right;
+            }
+            cur = &(stk.top()->left);
+            stk.pop();
+        });
+
+        return root;
     }
+};
 
-    assert(j == postorder.crend());
-    return root;
-  }
-}; 
- 
 // Recursive Version
 class Solution_ {
 public:
@@ -84,7 +83,7 @@ public:
 
         return root;
     }
-    
+
     TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
         return buildTree(inorder, 0, postorder, 0, postorder.size());
     }
