@@ -1,20 +1,20 @@
-/*
+/* Medium
 A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
 
-The robot can only move either down or right at any point in time. The robot is trying to reach 
+The robot can only move either down or right at any point in time. The robot is trying to reach
     the bottom-right corner of the grid (marked 'Finish' in the diagram below).
-        start                                          
-        +---------+----+----+----+----+----+                   
-        |----|    |    |    |    |    |    |                   
-        |----|    |    |    |    |    |    |                   
-        +----------------------------------+                   
-        |    |    |    |    |    |    |    |                   
-        |    |    |    |    |    |    |    |                   
-        +----------------------------------+                   
-        |    |    |    |    |    |    |----|                   
-        |    |    |    |    |    |    |----|                   
-        +----+----+----+----+----+---------+                   
-                                    finish  
+        start
+        +---------+----+----+----+----+----+
+        |----|    |    |    |    |    |    |
+        |----|    |    |    |    |    |    |
+        +----------------------------------+
+        |    |    |    |    |    |    |    |
+        |    |    |    |    |    |    |    |
+        +----------------------------------+
+        |    |    |    |    |    |    |----|
+        |    |    |    |    |    |    |----|
+        +----+----+----+----+----+---------+
+                                    finish
 How many possible unique paths are there?
 
 
@@ -34,18 +34,17 @@ From the top-left corner, there are a total of 3 ways to reach the bottom-right 
 Example 2:
 
 Input: m = 7, n = 3
-Output: 28
-*/
+Output: 28 */
 
 class Solution {
 public:
     int uniquePaths(int m, int n) {
         vector<int> vec(n, 1);
-        for (int i = 1; i < m; ++i) {
-            for (int j = 1; j < n; ++j)
-                vec[j] += vec[j-1];
+        for (int row = 1; row < m; ++row) {
+            for (int col = 1; col < n; ++col)
+                vec[col] += vec[col-1];
         }
-        
+
         return vec.back();
     }
 };
