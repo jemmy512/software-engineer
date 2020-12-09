@@ -104,8 +104,8 @@ No | Title | Difficulty | Catogary | Notes
 103 | Bianry Tree Zig Zag Level Tree Traverse | :star: :star: | Tree | :unlock:
 104 | Maximum Depth of Binary Tree | :star: | Tree | :unlock:
 111 | Minimum Depth of Binary Tree | :star: | Tree | :unlock:
-105 | ConstructBinaryTreefromPreorderandInorderTraversal | :star: | Tree
-106 | ConstructBinaryTreefromInorderandPostorderTraversal | :star: | Tree
+105 | Construct Binary Tree from Preorder and Inorder Traversal | :star: :star: | Tree | :unlock: :thinking:
+106 | Construct Binary Tree from Inorder and Postorder Traversal | :star: :star: | Tree | :unlock:
 108 | Convert Sorted Array to Binary Search Tree | :star: :star: | Tree | :unlock:
 109 | Convert Sorted List to Binary Search Tree | :star: | Tree | :unlock:
 110 | Balanced Bianry Tree | :star: | Tree | :unlock:
@@ -174,6 +174,27 @@ No | Title | Difficulty | Catogary | Notes
  | BackTrack | | |
 017 | Letter Combination of a Phone Number | :star: :star: | BackTrack | :unlock:
 046 | Permutations | :star: :star: | BackTrack | :unlock:
+
+# Dynamic Programming
+## For problems:
+1. Counting Problem
+2. Extreme value problem
+3. Existing Problem
+
+## Steps:
+1. Determine last step status and subproblems
+2. Determine the state transition equation
+3. Determine initializers and boundary check
+4. Determine calculating order
+
+## Catogories
+1. Coordinate
+2. Sequence
+3. Divide
+4. Interval
+5. Backpack
+6. Longest sequence
+7. Game
 
 # Bit Operations
 Name | Operation
