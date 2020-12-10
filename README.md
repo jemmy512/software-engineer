@@ -89,6 +89,7 @@
 
 
 # Linux
+- [x] :pencil: [Linux Kernel 4.19](https://github.com/Jemmy512/Notes/blob/master/Linux/LinuxKernel.md)
 - [ ] [Red Hat Enterprise Linux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/)
 
 - [ ] [What Every Programmer Should Know About Memory](http://futuretech.blinkenlights.nl/misc/cpumemory.pdf)
