@@ -19,6 +19,12 @@ Explanation: The result cannot be 2, because [-2,-1] is not a subarray. */
 // ending with the previous element multiplied by this element. For example, in array {12, 2, -3, -5, -6, -2},
 // when we are at element -2, the maximum product is multiplication of, minimum product ending with -6 and -2.
 
+/* Relatives:
+* 121. Best Time to Buy and Sell Stock
+* 152. Maximum Product Subarry
+* 437. Path Sum III
+* 560. Sub array Sum Equals K */
+
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
