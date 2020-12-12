@@ -55,7 +55,6 @@ public:
         }
 
         return costProfits.back().second;
-
     }
 };
 
