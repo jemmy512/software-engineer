@@ -10,6 +10,7 @@ No | Title | Difficulty | Catogary | Notes
 16 | 3 Sum Closest | :star: :star: | Math | :unlock:
 18 | 4 Sum | :star: :star:| Math | :unlock:
 50 | pow-x-n | :star: :star:| Math | `TODO`
+65 | Valid Number | :star: :star: :star: | Math
 66 | Plus One | :star: | Math | :unlock:
 67 | Add Binary | :star: | Math | :unlock:
 69 | Sqrt(x) | :star: | Math | :unlock:
@@ -52,18 +53,21 @@ No | Title | Difficulty | Catogary | Notes
 220 | Contains Duplicate III | :star: :star: | Array
 283 | Move Zeroes | :star: :star: | Array
 448 | Find All Numbers Disappeared in An Array | :star: | Array
-560 | Sub array Sum Equals K | :star: :star: | Array | :unlock: `Prefix Sum`
+560 | Sub array Sum Equals K | :star: :star: | Array | :unlock: `Prefix Sum` `Map`
  | DP |  | |
-5 | Longest Palindromic Substring | :star: :star: | DP
-32 | Longet Valid Paretheses | :star: :star: :star: | DP
+5 | Longest Palindromic Substring | :star: :star: | DP | :unlock:
+32 | Longet Valid Paretheses | :star: :star: :star: |  DP | :unlock: `stack`
 53 | Maximum Subarray | :star: | DP | :unlock:
-62 | Unique Paths | :star: :star: | DP
-63 | Unique Paths II | :star: :star: | DP
+62 | Unique Paths | :star: :star: | DP | :unlock:
+63 | Unique Paths II | :star: :star: | DP | :unlock:
+980 | Unique Paths III | :star: :star: :star: | DP | `TODO`
 64 | Minimum Path Sum | :star: :star: | DP
-65 | Valid Number | :star: :star: | DP
-70 | Climbing Stairs | :star: | DP
+70 | Climbing Stairs | :star: | DP | :unlock:
 72 | Edit Distance | :star: :star: :star: | DP
-121 | Best Time to Buy and Sell Stock | :star: | DP
+121 | Best Time to Buy and Sell Stock | :star: | DP | :unlock: `Prefix Sum`
+122 | Best Time to Buy and Sell Stock II | :star: | DP | :unlock: `Greedy`
+123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | DP | :unlock: `Bidirectional DP`
+188 | Best Time to Buy and Sell Stock IV | :star: :star: :star:| DP |
 152 | Maximum Product Subarry | :star: :star: | DP
 198 | House Robber | :star: | DP
 209 | Minimum SizeSubarraySum | :star: :star: | DP
@@ -71,8 +75,10 @@ No | Title | Difficulty | Catogary | Notes
 303 | Range SumQuery Immutable | :star: | DP
 304 | Range SumQuery 2D Immutable | :star: :star: | DP
 338 | Counting Bits | :star: :star: | DP
-523 | Continuous Subarray Sum  | :star: :star: | DP
-746 | MinCost Climb Stair | :star: | DP
+509 | Fibonacci Number| :star: | DP | :unlock:
+523 | Continuous Subarray Sum  | :star: :star: | DP | `Map`
+746 | MinCost Climb Stair | :star: | DP | :unlock:
+1137 | N-th Tribonacci Number | :star: | DP | :unlock:
  | List |  |
 19 | Remove Nth Node From End of List | :star: :star: | List | :unlock:
 21 | Merge Two Sorted Lists | :star: | List
@@ -131,6 +137,7 @@ No | Title | Difficulty | Catogary | Notes
 1644 | Lowest Common Ancestor of a Binary Tree II | :star: :star: | Tree | :unlock: `p, q may be null`
 1650 | Lowest Common Ancestor of a Binary Tree III | :star: :star: | Tree | `List Common Node`
 1676 | Lowest Common Ancestor of a Binary Tree IV | :star: :star: | Tree | `Multiple-nodes`
+1214 | Two Sum BSTs | :star: :star: | Tree | :unlock: `Map`
 1123 | Lowest Common Ancestor of Deepest Leaves | :star: :star: | Tree | `TODO`
 1257 | Smallest Common Region | :star: :star: | Tree | `TODO`
 501 | FindModeinBinarySearchTree | :star: | Tree
@@ -161,11 +168,15 @@ No | Title | Difficulty | Catogary | Notes
 167 | Two Sum II | :star: | Map | :unlock:
 170 | Two Sum III - Data structure design | :star: | Map | :unlock:
 653 | Two Sum IV | :star: | Map | :unlock:
-1214 | Two Sum BSTs | :star: :star: | Map Tree | :unlock:
+1214 | Two Sum BSTs | :star: :star: | Map | :unlock: `Tree`
 290 | Word Pattern | :star: | Map | :unlock:
 383 | Ransom Note | :star: | Map | :unlock:
 412 | Fizz Buzz | :star: | Map | :unlock:
 771 | Jewelsand Stones | :star: | Map | :unlock:
+ | Stack | | |
+020 | validParentheses | :star: | Stack
+32 | Longet Valid Paretheses | :star: :star: :star: |  Stack | :unlock: `DP`
+155 | MinStack | :star: | Stack
  | Search | | |
 34 | Search For a Range | :star: :star: | Search | :unlock:
 35 | Search Insert Position | :star: | Search | :unlock:
@@ -174,6 +185,9 @@ No | Title | Difficulty | Catogary | Notes
  | BackTrack | | |
 017 | Letter Combination of a Phone Number | :star: :star: | BackTrack | :unlock:
 046 | Permutations | :star: :star: | BackTrack | :unlock:
+ | Greedy | | |
+122 | Best Time to Buy and Sell Stock II | :star: | Greedy | :unlock:
+
 
 # Dynamic Programming
 ## For problems:
