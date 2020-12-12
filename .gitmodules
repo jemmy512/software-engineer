@@ -1,4 +1,4 @@
 [submodule "BookNotes"]
 	path = BookNotes
-	url = git@github.com:JemmyWong/Notes.git
+	url = git@github.com:Jemmy512/book-notes.git
 	branch = master
