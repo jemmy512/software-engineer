@@ -1,30 +1,43 @@
-/*
-You are a professional robber planning to rob houses along a street. Each house 
+/* Easy
+You are a professional robber planning to rob houses along a street. Each house
 has a certain amount of money stashed, the only constraint stopping you from robbing
- each of them is that adjacent houses have security system connected and it will automatically
- contact the police if two adjacent houses were broken into on the same night.
+each of them is that adjacent houses have security system connected and it will automatically
+contact the police if two adjacent houses were broken into on the same night.
 
-Given a list of non-negative integers representing the amount of money of each house, 
+Given a list of non-negative integers representing the amount of money of each house,
 determine the maximum amount of money you can rob tonight without alerting the police.
 
 Dynamic Programming
-
 We can easy find the recurive fomulary:
 
-    dp[n] = max( 
-        dp[n-1],            // the previous house has been robbed. 
+    dp[n] = max(
+        dp[n-1],            // the previous house has been robbed.
         dp[n-2] + money[n]  // the previous house has NOT been robbed.
     )
-                 
+
 The initalization is obvious:
     dp[1] = money[1]
-    dp[2] = max(money[1], money[2])
+    dp[2] = max(money[1], money[2]) */
 
-*/
 #include<iostream>
 #include<vector>
 using namespace std;
-/******************************************************************************/
+
+/* Acutally, we no need to allocate an additional array for DP.
+ * we can only use several variables to record previous steps */
+int rob2(vector<int> &money) {
+    int secondPrev = 0; // dp[i-2];
+    int firstPrev = 0;   // dp[i-1];
+
+    for (int i = 0; i < money.size(); ++i){
+        int current = max(firstPrev, secondPrev + money[i]);
+        secondPrev = firstPrev;
+        firstPrev = current;
+    }
+
+    return firstPrev;
+}
+
 // 69 test 2ms, beat 100%
 int rob1(vector<int> &money) {
 
@@ -40,27 +53,9 @@ int rob1(vector<int> &money) {
     }
     return dp[n-1];
 }
-/*
- * Acutally, we no need to allocate an additional array for DP.
- * we can only use several variables to record previous steps
- */
 
-int rob2(vector<int> &money) {
-    int n2 = 0; // dp[i-2];
-    int n1 = 0; // dp[i-1];
-
-    for (int i = 0; i < money.size(); ++i){
-        int current = max(n1, n2 + money[i]);
-        n2 = n1;
-        n1 = current;
-    }
-    return n1;
-}
-
-/*
-    Combination usage of rob1 and robs will beat 100%,
-    but single usage of rob1 or rob2 just beat 73.93%
-*/
+/* Combination usage of rob1 and robs will beat 100%,
+ * but single usage of rob1 or rob2 just beat 73.93% */
 int rob(vector<int> &num) {
     if (rand()%2)
         return rob1(num);
@@ -68,7 +63,7 @@ int rob(vector<int> &num) {
 }
 
 /******************************************************************************/
-// 69 test cases, 3ms, beat 73.93% 
+// 69 test cases, 3ms, beat 73.93%
 int rob(vector<int>& num) {
     int n = num.size();
     int a = 0;
