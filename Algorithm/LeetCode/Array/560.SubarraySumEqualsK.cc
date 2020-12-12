@@ -18,7 +18,9 @@ Constraints:
 -107 <= k <= 107
 
 Relative:
-437.PathSum_III */
+437.PathSum_III
+523. Continuous Subarray Sum
+560. Subarray Sum Equals K */
 
 #include <unordered_map>
 #include <vector>
