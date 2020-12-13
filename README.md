@@ -97,7 +97,7 @@
 - [ ] [A Tutorial Introduction to the ARM and POWER Relaxed Memory Models](https://www.cl.cam.ac.uk/~pes20/ppc-supplemental/test7.pdf)
 - [ ] [x86-TSO: A Rigorous and Usable Programmer’s Model for x86 Multiprocessors](https://www.cl.cam.ac.uk/~pes20/weakmemory/cacm.pdf)
 - [x] [ptmalloc](http://www.malloc.de/en/)
-- [x] tcmalloc [Code](https://github.com/gperftools/gperftools) [Doc](http://goog-perftools.sourceforge.net/doc/tcmalloc.html) [Ref](https://developer.aliyun.com/article/6045)
+- [x] tcmalloc [Code](https://github.com/gperftools/gperftools) [Doc](http://goog-perftools.sourceforge.net/doc/tcmalloc.html) [Ref](https://wallenwang.com/2018/11/tcmalloc/) [Ref](https://www.programmersought.com/article/84461226079/)
 - [x] [jemalloc](http://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf)
 - [x] [C dynamic memory allocation](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation)
 - [x] [Research on ptmalloc, tcmalloc and jemalloc memory allocation strategies](https://owent.net/2013/867.html)
