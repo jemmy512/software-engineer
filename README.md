@@ -96,16 +96,14 @@
 - [ ] [Memory Barriers: a Hardware View for Software Hackers](https://irl.cs.ucla.edu/~yingdi/web/paperreadingwhymb.2010.06.07c.pdf)
 - [ ] [A Tutorial Introduction to the ARM and POWER Relaxed Memory Models](https://www.cl.cam.ac.uk/~pes20/ppc-supplemental/test7.pdf)
 - [ ] [x86-TSO: A Rigorous and Usable Programmer’s Model for x86 Multiprocessors](https://www.cl.cam.ac.uk/~pes20/weakmemory/cacm.pdf)
-- [ ] [ptmalloc](http://www.malloc.de/en/)
-- [ ] [tcmalloc](https://github.com/gperftools/gperftools)
-- [ ] [jemalloc(http://jemalloc.net](https://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf)
-- [ ] [C dynamic memory allocation](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation)
-- [ ] [Research on ptmalloc, tcmalloc and jemalloc memory allocation strategies](https://owent.net/2013/867.html)
-- [ ] [Memory optimization summary: ptmalloc, tcmalloc, and jemalloc](http://www.cnhalo.net/2016/06/13/memory-optimize)
-- [ ] [Scalable memory allocation using jemalloc](https://www.facebook.com/notes/facebook-engineering/scalable-memory-allocation-using-jemalloc/480222803919)
+- [x] [ptmalloc](http://www.malloc.de/en/)
+- [x] tcmalloc [Code](https://github.com/gperftools/gperftools) [Doc](http://goog-perftools.sourceforge.net/doc/tcmalloc.html) [Ref](https://developer.aliyun.com/article/6045)
+- [x] [jemalloc](http://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf)
+- [x] [C dynamic memory allocation](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation)
+- [x] [Research on ptmalloc, tcmalloc and jemalloc memory allocation strategies](https://owent.net/2013/867.html)
+- [x] [Memory optimization summary: ptmalloc, tcmalloc, and jemalloc](http://www.cnhalo.net/2016/06/13/memory-optimize)
+- [x] [Scalable memory allocation using jemalloc](https://www.facebook.com/notes/facebook-engineering/scalable-memory-allocation-using-jemalloc/480222803919)
 
-
-- [ ] Networking
 - [ ] :blue_book: Computer Networks, 5th Edition
 - [ ] :blue_book: [Linux High Performance Server Programming(Chinese)](https://book.douban.com/subject/24722611/) :pencil:  [Linux Programmnig Noetes](https://github.com/JemmyWong/Notes/blob/master/Linux/LinuxProgramming.md) :pencil: [Linux System Notes](https://github.com/JemmyWong/Notes/blob/master/Linux/LinuxBasic.txt)
 
