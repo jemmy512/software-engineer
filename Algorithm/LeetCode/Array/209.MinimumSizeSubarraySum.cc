@@ -5,7 +5,14 @@ length of a contiguous subarray of which the sum ≥ s. If there isn't one, retu
 Example:
 Input: [2,3,1,2,4,3], s = 7
 Output: 2
-Explanation: the subarray [4,3] has the minimal length under the problem constraint. */
+Explanation: the subarray [4,3] has the minimal length under the problem constraint.
+
+Relatives:
+76. Minimum Window Substring
+209. Minimum Size Subarray Sum
+325. Maximum Size Subarray Sum Equals k
+1658. Minimum Operations to Reduce X to Zero
+718. Maximum Length of Repeated Subarray */
 
 #include <climits>
 #include <vector>
