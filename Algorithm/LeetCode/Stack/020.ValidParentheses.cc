@@ -1,4 +1,5 @@
-/** Given a string containing just the characters '(', ')', '{', '}', '[' and ']',
+/* Easy
+ * Given a string containing just the characters '(', ')', '{', '}', '[' and ']',
  * determine if the input string is valid.
  * The brackets must close in the correct order, "()" and "()[]{}" are all valid
  * but "(]" and "([)]" are not */
@@ -6,6 +7,7 @@
 #include <iostream>
 #include <iterator>
 #include <stack>
+
 using namespace std;
 
 // 4ms, beat 95.53% submissions
