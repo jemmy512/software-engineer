@@ -2,7 +2,12 @@
  * Given a string containing just the characters '(', ')', '{', '}', '[' and ']',
  * determine if the input string is valid.
  * The brackets must close in the correct order, "()" and "()[]{}" are all valid
- * but "(]" and "([)]" are not */
+ * but "(]" and "([)]" are not
+ *
+ * Relatives:
+ * 017. Letter Combination of a Phone Number
+ * 020. validParentheses
+ * 022. Generate Parentheses*/
 
 #include <iostream>
 #include <iterator>
