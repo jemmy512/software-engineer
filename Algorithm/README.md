@@ -38,21 +38,23 @@ No | Title | Difficulty | Catogary | Notes
  | Array | | |
 004 | Median of Two Sorted Arrays | :star: :star: :star: | Array
 011 | Container With Most Water| :star: :star: :star: | Array | :trophy:
-026 | Remote Duplicates from Sorted Array | :star: | Array | :trophy:
-027 | Remove Element | :star: | Array
+027 | Remove Element | :star: | Array | :trophy:
 041 | First Missing Positive | :star: :star: :star: | Array
-080 | Remove Duplicate from Sorted Array II | :star: :star: | Array
-082 | Remove Duplicates from Sorted List II | :star: :star: | Array
-083 | Remove Duplicates from Sorted List | :star: | Array
+026 | Remote Duplicates from Sorted Array | :star: | Array | :trophy:
+080 | Remove Duplicates from Sorted Array II | :star: :star: | Array | :trohpy: `Can dup N`
+083 | Remove Duplicates from Sorted List | :star: | Array | :trophy:
+082 | Remove Duplicates from Sorted List II | :star: :star: | Array | :trophy:
 088 | Merge Sorted Array | :star:| Array
 169 | Majority Element | :star: | Array
 189 | Rotate Array | :star: :star: | Array
+209 | Minimum Size Sub array Sum | :star: :star: | Array | :trophy: `Two Pointers`
 215 | Kth Largest Element in an Array | :star: :star: | Array
 217 | Contains Duplicate I | :star: | Array
 219 | Contains Duplicate II | :star: | Array
 220 | Contains Duplicate III | :star: :star: | Array
 283 | Move Zeroes | :star: :star: | Array
 448 | Find All Numbers Disappeared in An Array | :star: | Array
+325 | Maximum Size Subarray Sum Equals k | :star: :star:| Array | :trophy: `Prefix Sum` `Map`
 560 | Sub array Sum Equals K | :star: :star: | Array | :trophy: `Prefix Sum` `Map`
  | DP |  | |
 5 | Longest Palindromic Substring | :star: :star: | DP | :trophy:
@@ -61,7 +63,7 @@ No | Title | Difficulty | Catogary | Notes
 62 | Unique Paths | :star: :star: | DP | :trophy:
 63 | Unique Paths II | :star: :star: | DP | :trophy:
 980 | Unique Paths III | :star: :star: :star: | DP | `TODO`
-64 | Minimum Path Sum | :star: :star: | DP
+64 | Minimum Path Sum | :star: :star: | DP | :trophy:
 70 | Climbing Stairs | :star: | DP | :trophy:
 72 | Edit Distance | :star: :star: :star: | DP
 121 | Best Time to Buy and Sell Stock | :star: | DP | :trophy: `Prefix Sum`
@@ -69,12 +71,12 @@ No | Title | Difficulty | Catogary | Notes
 123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | DP | :trophy: `Bidirectional DP`
 188 | Best Time to Buy and Sell Stock IV | :star: :star: :star:| DP | :trophy: :thinking:
 152 | Maximum Product Subarry | :star: :star: | DP | :trophy: `Prefix Sum`
-198 | House Robber | :star: | DP
-209 | Minimum SizeSubarraySum | :star: :star: | DP
+198 | House Robber | :star: | DP | :trophy:
 264 | Ugly Number II | :star: :star: | DP | :trophy:
-303 | Range SumQuery Immutable | :star: | DP
-304 | Range SumQuery 2D Immutable | :star: :star: | DP
-338 | Counting Bits | :star: :star: | DP
+303 | Range Sum Query Immutable | :star: | DP | :trophy:
+307 | Range Sum Query Mutable | :star: :star: | DP | :trophy: `Segment Tree`
+304 | Range Sum Query 2D Immutable | :star: :star: | DP | :trophy:
+338 | Counting Bits | :star: :star: | DP | :trophy: :thinking: `Bit`
 509 | Fibonacci Number| :star: | DP | :trophy:
 523 | Continuous Subarray Sum  | :star: :star: | DP | `Map`
 746 | MinCost Climb Stair | :star: | DP | :trophy:
@@ -184,6 +186,7 @@ No | Title | Difficulty | Catogary | Notes
 374 | Guess Number Higher Or Lower | :star: | Search | :trophy:
  | BackTrack | | |
 017 | Letter Combination of a Phone Number | :star: :star: | BackTrack | :trophy:
+022 | Generate Parenthesis | :star: :star: | BackTrack | :trophy: :thinking:
 046 | Permutations | :star: :star: | BackTrack | :trophy:
  | Greedy | | |
 122 | Best Time to Buy and Sell Stock II | :star: | Greedy | :trophy:
