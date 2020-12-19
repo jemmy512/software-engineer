@@ -6,7 +6,10 @@ using namespace std;
 /* Curiously Recurring Template Pattern (CRTP)
  * https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern
  *
- * The main usage of the CRTP is to add a generic functionality to a particular class.
+ * The main usage of the CRTP is to implementing:
+ *  * static polymorphism
+ *  * static interface
+ *  * adding functionality to original class
  *
  * In general, a class deriving from another class expresses
  * that the derived class somehow conceptually “is a” base class.
@@ -17,7 +20,13 @@ using namespace std;
  * The derived class does not express the fact it “is a” base class.
  * Rather, it expands its interface by inherting from the base class, in order to add more functionality.
  *
- * Therefore the base class is not the interface, and the derived class is not the implementation */
+ * Therefore the base class is not the interface, and the derived class is not the implementation
+ *
+ * Drawbacks:
+ * 1. Derivec class may hide the base class function if they have the same function name (can solve by mixin class)
+ * 2. There is a level of indirection that is inherent to the CRTP:
+ *      have to implement functionality in the base and derived classes (cal solve by mixin class)
+ * 3. It doesn’t clearly express the intention that it is constraining the API of CRTP (can solve by concepts) */
 namespace crtp {
 template <typename T>
 struct crtp
