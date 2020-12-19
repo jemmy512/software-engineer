@@ -1,15 +1,17 @@
 #include <iostream>
 
-class InputStream {
+/* Approach 1: traditional decorator */
+namespace std {
+class IStream {
 public:
     virtual void read() {
 
     }
 
-    virtual ~InputStream() = default;
+    virtual ~IStream() = default;
 };
 
-class FileInputStream : public InputStream {
+class FileInputStream : public IStream {
 public:
     void read() override {
 
@@ -17,9 +19,9 @@ public:
 };
 
 
-class BufferedInputStream : public InputStream {
+class BufferedInputStream : public IStream {
 public:
-    BufferedInputStream(InputStream&& istream)
+    BufferedInputStream(IStream&& istream)
     :   mInputStream(istream)
     {}
 
@@ -30,12 +32,12 @@ public:
     }
 
 private:
-    InputStream mInputStream;
+    IStream mInputStream;
 };
 
-class DataInputStream : public InputStream {
+class DataInputStream : public IStream {
 public:
-    DataInputStream(InputStream&& istream)
+    DataInputStream(IStream&& istream)
     : mInputStream(istream)
     {}
 
@@ -46,8 +48,36 @@ public:
     }
 
 private:
-    InputStream mInputStream;
+    IStream mInputStream;
 };
+} // namespace std;
+
+
+/* Approach 2: decorator with CRTP, mixin classe
+ * advantage: compile time polymorphism, avoid overhead of virtual function calls */
+namespace crtp {
+template<typename Stream> // Stream must be a derived class type
+class FileInputStream : public Stream {
+public:
+    FileInputStream(cosnt Stream& stream) : Stream(stream) {}
+
+    void read() {
+        static_cast<Stream*>(this)->read();
+        // do something about file input stream
+    }
+};
+
+template<typename Stream>
+class BufferedInputStream : public Stream {
+public:
+    BufferedInputStream(const Stream& stream) : Stream(stream) {}
+
+    void read() {
+        static_cast<Stream*>(this)->read();
+        // do something about buffered input stream
+    }
+};
+} // namespace crtp
 
 int main() {
 
