@@ -45,6 +45,15 @@
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
 - [x] [C ++ virtual function table analysis(Chinese)](https://coolshell.cn/articles/12165.html)
 - [x] [Memory layout of C ++ objects(Chinese)](https://coolshell.cn/articles/12176.html)
+- [x] [The cost of dynamic (virtual calls) vs. static (CRTP) dispatch in C++](https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c)
+- [x] [CRTP](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern)
+    - [x] [Curiously Recurring Template Pattern (CRTP)](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern)
+    - [x] [The CRTP, episode One: Definition](https://www.fluentcpp.com/2017/05/12/curiously-recurring-template-pattern/)
+    - [x] [The CRTP, episode Two: What the CRTP can bring to your code](https://www.fluentcpp.com/2017/05/16/what-the-crtp-brings-to-code/)
+    - [x] [The CRTP, episode Three: An implementation helper for the CRTP](https://www.fluentcpp.com/2017/05/19/crtp-helper/)
+    - [x] [Mixin Classes: The Yang of the CRTP](https://www.fluentcpp.com/2017/12/12/mixin-classes-yang-crtp/)
+    - [x] [How to replace virtual methods by a CRTP](https://www.fluentcpp.com/2018/05/22/how-to-transform-a-hierarchy-of-virtual-methods-into-a-crtp/)
+    - [x] [How to make a CRTP inherit from another CRTP](https://www.fluentcpp.com/2020/09/11/replacing-crtp-static-polymorphism-with-concepts/)
 
 # Theoretical Discipline
 - [ ] :blue_book: Data Structures and Algorithm Analysis in C:Second Edition
