@@ -115,11 +115,6 @@ struct RepeatPrint : Printable {
     }
 };
 
-template<typename Printable>
-RepeatPrint<Printable> repeatPrint(Printable const& printable) {
-    return RepeatPrint<Printable>(printable);
-}
-
 int main() {
     Name ned("Eddard", "Stark");
     RepeatPrint<Name>(ned).repeat(10);
@@ -134,11 +129,21 @@ int main() {
  * Here are the points where they differ:
  *
  * The CRTP:
- * • impacts the definition of the existing class, because it has to inherit from the CRTP,
+ * • impacts the definition of the original class, because it has to inherit from the CRTP,
  * • client code uses the original class directly and benefits from its augmented functionalities.
  *
  * The mixin class:
  * • leaves the original class unchanged,
- * • client code doesn’t use the original class directly, it needs to wrap it into the mixin to use the augmented functionality,
+ * • client code doesn’t use the original class directly,
+ *      it needs to wrap it into the mixin to use the augmented functionality,
  * • inherits from a the original class even if it doesn’t have a virtual destructor. This is ok
- *      unless the mixin class is deleted polymorphically through a pointer to the original class. */
+ *      unless the mixin class is deleted polymorphically through a pointer to the original class.
+ *
+ * References:
+ * [Curiously Recurring Template Pattern (CRTP)](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern)
+ * [The CRTP, episode One: Definition](https://www.fluentcpp.com/2017/05/12/curiously-recurring-template-pattern/
+ * [The CRTP, episode Two: What the CRTP can bring to your code](https://www.fluentcpp.com/2017/05/16/what-the-crtp-brings-to-code/)
+ * [The CRTP, episode Three: An implementation helper for the CRTP](https://www.fluentcpp.com/2017/05/19/crtp-helper/)
+ * [Mixin Classes: The Yang of the CRTP](https://www.fluentcpp.com/2017/12/12/mixin-classes-yang-crtp/)
+ * [How to replace virtual methods by a CRTP](https://www.fluentcpp.com/2018/05/22/how-to-transform-a-hierarchy-of-virtual-methods-into-a-crtp/)
+ * [How to make a CRTP inherit from another CRTP](https://www.fluentcpp.com/2020/09/11/replacing-crtp-static-polymorphism-with-concepts/) */
