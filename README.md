@@ -52,8 +52,12 @@
     - [x] [The CRTP, episode Two: What the CRTP can bring to your code](https://www.fluentcpp.com/2017/05/16/what-the-crtp-brings-to-code/)
     - [x] [The CRTP, episode Three: An implementation helper for the CRTP](https://www.fluentcpp.com/2017/05/19/crtp-helper/)
     - [x] [Mixin Classes: The Yang of the CRTP](https://www.fluentcpp.com/2017/12/12/mixin-classes-yang-crtp/)
-    - [x] [How to replace virtual methods by a CRTP](https://www.fluentcpp.com/2018/05/22/how-to-transform-a-hierarchy-of-virtual-methods-into-a-crtp/)
-    - [x] [How to make a CRTP inherit from another CRTP](https://www.fluentcpp.com/2020/09/11/replacing-crtp-static-polymorphism-with-concepts/)
+    - [x] [How to Turn a Hierarchy of Virtual Methods into a CRTP](https://www.fluentcpp.com/2018/05/22/how-to-transform-a-hierarchy-of-virtual-methods-into-a-crtp/)
+    - [x] [Replacing CRTP Static Polymorphism With Concepts](https://www.fluentcpp.com/2020/09/11/replacing-crtp-static-polymorphism-with-concepts/)
+    - [x] [Removing Duplicates in C++ CRTP Base Classes](https://www.fluentcpp.com/2018/08/28/removing-duplicates-crtp-base-classes/)
+    - [x] [How to Reduce the Code Bloat of a Variadic CRTP](https://www.fluentcpp.com/2018/07/03/how-to-reduce-the-code-bloat-of-a-variadic-crtp/)
+    - [x] [Variadic CRTP Packs: From Opt-in Skills to Opt-in Skillsets](https://www.fluentcpp.com/2018/06/26/variadic-crtp-packs-from-opt-in-skills-to-opt-in-skillsets/)
+    - [x] [Variadic CRTP: An Opt-in for Class Features, at Compile Time](https://www.fluentcpp.com/2018/06/22/variadic-crtp-opt-in-for-class-features-at-compile-time/)
 
 # Theoretical Discipline
 - [ ] :blue_book: Data Structures and Algorithm Analysis in C:Second Edition
