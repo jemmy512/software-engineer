@@ -72,36 +72,3 @@ int climbStairs(int n) {
 
     return steps[n];
 }
-
-// recursive version, Time limit Exceeded.
-int step[2] = {1, 2};
-int cnt = 0;
-int way = 0;
-int total = 0;
-
-void climbImpl(int n) {
-    for (int i = 0; i < 2; ++i) {
-        cnt += step[i];
-        if (cnt > total) {
-            cnt -= step[i];
-            return;
-        } else if (cnt == total) {
-            ++way;
-            cnt -= step[i];
-            return;
-        } else {
-            climbImpl(n);
-        }
-        cnt -= step[i];
-    }
-}
-
-int climbStairs_1(int n) {
-    total = n;
-    climbImpl(n);
-    return way;
-}
-
-int main() {
-    cout << climbStairs(44) << endl;
-}
