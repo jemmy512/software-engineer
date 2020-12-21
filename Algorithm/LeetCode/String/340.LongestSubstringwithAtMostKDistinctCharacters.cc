@@ -42,7 +42,6 @@ public:
                 });
                 start = iter->second + 1;
                 hashMap.erase(iter->first);
-
             }
             maxLen = max(maxLen, end - start + 1);
         }
