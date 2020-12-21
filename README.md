@@ -129,13 +129,13 @@
 ### AIO
 - [x] [Boost application performance using asynchronous I/O](https://developer.ibm.com/articles/l-async/)
 - [ ] [Lazy Asynchronous I/O For Event-Driven Servers](https://www.usenix.org/legacy/event/usenix04/tech/general/full_papers/elmeleegy/elmeleegy_html/html.html)
-- [ ] [IOP](http://sysinternals.d4rk4.ru/Information/IoCompletionPorts.html)
-- [ ] [Understanding Reactor Pattern: Thread-Based and Event-Driven](https://dzone.com/articles/understanding-reactor-pattern-thread-based-and-eve)
+- [ ] [IOCP](http://sysinternals.d4rk4.ru/Information/IoCompletionPorts.html)
+- [x] [Understanding Reactor Pattern: Thread-Based and Event-Driven](https://dzone.com/articles/understanding-reactor-pattern-thread-based-and-eve)
 - [ ] [The Design and Implementation of the Reactor](https://www.dre.vanderbilt.edu/~schmidt/PDF/Reactor2-93.pdf)
 - [ ] [The reactor pattern and non-blocking IO](https://www.celum.com/en/blog/technology/the-reactor-pattern-and-non-blocking-io)
 - [ ] [The Secret To 10 Million Concurrent Connections -The Kernel Is The Problem, Not The Solution](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
-- [ ] [Epoll is fundamentally broken 1/2](https://idea.popcount.org/2017-02-20-epoll-is-fundamentally-broken-12)
-- [ ] [Epoll is fundamentally broken 2/2](https://idea.popcount.org/2017-03-20-epoll-is-fundamentally-broken-22)
+- [x] [Epoll is fundamentally broken 1/2](https://idea.popcount.org/2017-02-20-epoll-is-fundamentally-broken-12)
+- [x] [Epoll is fundamentally broken 2/2](https://idea.popcount.org/2017-03-20-epoll-is-fundamentally-broken-22)
 
 
 ### Lock-free
