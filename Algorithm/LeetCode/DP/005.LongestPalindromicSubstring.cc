@@ -9,7 +9,17 @@ Note: "aba" is also a valid answer.
 
 Example 2:
 Input: "cbbd"
-Output: "bb" */
+Output: "bb"
+
+Relatives:
+5. Longest Palindromic Substring
+266. Palindrome Permutation
+267. Palindrome Permutation II
+516. Longest Palindromic Subsequence
+647. Palindromic Substrings
+
+214. Shortest Palindrome
+336. Palindrome Pairs */
 
 #include <string>
 #include <utility>
