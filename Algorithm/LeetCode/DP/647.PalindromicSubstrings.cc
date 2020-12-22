@@ -19,6 +19,7 @@ Note:
 The input string length won't exceed 1000.
 
 Relatives:
+5. Longest Palindromic Substring
 266. Palindrome Permutation
 267. Palindrome Permutation II
 516. Longest Palindromic Subsequence
