@@ -15,6 +15,7 @@ Output: true
 
 Relatives:
 266. Palindrome Permutation
+267. Palindrome Permutation II
 516. Longest Palindromic Subsequence
 647. Palindromic Substrings
 
