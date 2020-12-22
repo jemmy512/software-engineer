@@ -12,7 +12,7 @@
 ### Coding Cultivation
 - [ ] :blue_book: Refactoring: Improving the Design of Existing Code
 - [ ] :blue_book: Working Effectively with Legacy Code
-- [ ] :blue_book: Clean Code: A Handbook of Agile Software Craftsmanship
+- [ ] :blue_book: Clean Code: A Handbook of Agile Software Craftsmanship :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/clean-code.md)
 - [ ] :blue_book: The Clean Coder：A Code of Conduct for Professional Programmers
 
 ### Code Review
@@ -30,7 +30,7 @@
 - [ ] :blue_book: How Google Tests Software
 
 ### Publishing
-- [ ] [Checklist](https://github.com/mtdvio/going-to-production)
+- [x] [Checklist](https://github.com/mtdvio/going-to-production)
 
 # Programming Language
 
@@ -38,10 +38,11 @@
 - [ ] :blue_book: The C Programming Language
 - [ ] :blue_book: C Programming: A Modern Approach
 - [ ] :blue_book: C Traps and Pitfalls
-- [x] :blue_book: C++ Primer, 5th Edition :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/CPPimer.txt)
-- [x] :blue_book: Effective C++ :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/EffectiveCC.txt)
-- [x] :blue_book: Modern Effective C++ :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/EffectiveModernCC.txt)
-- [x] :blue_book: Inside C++ Object Model :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CPP/InsideTheCPPObjectModel.txt)
+- [x] :blue_book: C++ Primer, 5th Edition :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/C%2B%2B/C%2B%2BPrimer.md)
+- [x] :blue_book: Effective C++ :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/C%2B%2B/EffectiveC%2B%2B.md)
+- [ ] :blue_book: More Effective C++ :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/C%2B%2B/MoreEffectiveC%2B%2B.md)
+- [x] :blue_book: Modern Effective C++ :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/C%2B%2B/EffectiveModernC%2B%2B.md)
+- [x] :blue_book: Inside C++ Object Model :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/C%2B%2B/InsideTheC%2B%2BObjectModel.md)
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
 - [x] [C ++ virtual function table analysis(Chinese)](https://coolshell.cn/articles/12165.html)
 - [x] [Memory layout of C ++ objects(Chinese)](https://coolshell.cn/articles/12176.html)
@@ -62,15 +63,15 @@
 # Theoretical Discipline
 - [ ] :blue_book: Data Structures and Algorithm Analysis in C:Second Edition
 - [ ] :blue_book: Database System Concepts(Fifth Edition)
-- [ ] :blue_book: Modern Operating Systems :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CS/Modern%20Operating%20System.md)
+- [ ] :blue_book: Modern Operating Systems :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/modern-operating-system.md)
 - [ ] :blue_book: Computer Networking: A Top-Down Approach
 
 # System Knowledge
-- [ ] :blue_book: Computer Systems A Programmer’s Perspective :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CS/Computer%20System%20A%20Programmers%20Perspective.md)
+- [ ] :blue_book: Computer Systems A Programmer’s Perspective :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
 - [ ] :blue_book: Advanced Programming in the UNIX Environment
-- [ ] :blue_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/Linux/LinuxProgramming.md)
+- [ ] :blue_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxProgramming.md)
 - [ ] :blue_book: UNIX Network Programming, Volume 2: Interprocess Communications
-- [ ] :blue_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/CS/TCP:IP%20Illustrated%2C%20Volume%201.md)
+- [ ] :blue_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/TCP:IP%20Illustrated%2C%20Volume%201.md)
 - [ ] :blue_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
 
 - [ ] [Let’s Code a TCP/IP Stack, 1: Ethernet & ARP](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/#tuntap-devices)
@@ -95,10 +96,10 @@
 - [ ] [The Twelve-Factor App](https://12factor.net)
 - [ ] [Avoid Over Engineering](https://medium.com/@rdsubhas/10-modern-software-engineering-mistakes-bc67fbef4fc8)
 
-- [ ] https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api
-- [ ] https://github.com/interagent/http-api-design
-- [ ] https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md
-- [ ] https://blog.codinghorror.com/the-problem-with-logging
+- [ ] [Best Practices for Designing a Pragmatic RESTful API](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
+- [ ] [HTTP API Desgin](https://github.com/interagent/http-api-design)
+- [ ] [API Guildlines](https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md)
+- [ ] [The Problem With Logging](https://blog.codinghorror.com/the-problem-with-logging)
 
 
 # Linux
@@ -119,7 +120,7 @@
 
 ### Network
 - [ ] :blue_book: Computer Networks, 5th Edition
-- [ ] :blue_book: [Linux High Performance Server Programming(Chinese)](https://book.douban.com/subject/24722611/) :pencil:  [Linux Programmnig Noetes](https://github.com/JemmyWong/Notes/blob/master/Linux/LinuxProgramming.md) :pencil: [Linux System Notes](https://github.com/JemmyWong/Notes/blob/master/Linux/LinuxBasic.txt)
+- [ ] :blue_book: [Linux High Performance Server Programming(Chinese)](https://book.douban.com/subject/24722611/) :pencil:  [Linux Programmnig Noetes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxProgramming.md) :pencil: [Linux System Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxBasic.md)
 
 - [ ] :blue_book: Network tuning
 - [ ] [Linux Advanced Routing & Traffic Control HOWTO](https://lartc.org)
@@ -132,7 +133,6 @@
 - [ ] [IOCP](http://sysinternals.d4rk4.ru/Information/IoCompletionPorts.html)
 - [x] [Understanding Reactor Pattern: Thread-Based and Event-Driven](https://dzone.com/articles/understanding-reactor-pattern-thread-based-and-eve)
 - [ ] [The Design and Implementation of the Reactor](https://www.dre.vanderbilt.edu/~schmidt/PDF/Reactor2-93.pdf)
-- [ ] [The reactor pattern and non-blocking IO](https://www.celum.com/en/blog/technology/the-reactor-pattern-and-non-blocking-io)
 - [ ] [The Secret To 10 Million Concurrent Connections -The Kernel Is The Problem, Not The Solution](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
 - [x] [Epoll is fundamentally broken 1/2](https://idea.popcount.org/2017-02-20-epoll-is-fundamentally-broken-12)
 - [x] [Epoll is fundamentally broken 2/2](https://idea.popcount.org/2017-03-20-epoll-is-fundamentally-broken-22)
@@ -167,13 +167,16 @@
 - [x] [Atomic vs. Non-Atomic Operations](https://preshing.com/20130618/atomic-vs-non-atomic-operations)
 - [x] [Memory Reordering Caught in the Act](https://preshing.com/20120515/memory-reordering-caught-in-the-act)
 
+### Kernel
+- [x] [RCU]() [Part 1](https://lwn.net/Articles/262464/) [Part 2](https://lwn.net/Articles/263130/) [Part 3](https://lwn.net/Articles/264090/)
+
 # Distributed architecture
 - [ ] [Scalable Web Architecture and Distributed Systems](http://www.aosabook.org/en/distsys.html)
 - [ ] [Scalability, Availability & Stability Patterns](https://www.slideshare.net/jboner/scalability-availability-stability-patterns)
 - [ ] [System Design Primer](https://github.com/donnemartin/system-design-primer)
 - [ ] [An introduction to distributed systems](https://github.com/aphyr/distsys-class)
 
-- [ ] [Byzantine fault](https://en.wikipedia.org/wiki/Byzantine_fault)[](https://www.microsoft.com/en-us/research/uploads/prod/2016/12/The-Byzantine-Generals-Problem.pdf)
+- [ ] [Byzantine fault](https://en.wikipedia.org/wiki/Byzantine_fault) [PDF](https://www.microsoft.com/en-us/research/uploads/prod/2016/12/The-Byzantine-Generals-Problem.pdf)
 - [ ] [The Byzantine Generals Problem](https://www.drdobbs.com/cpp/the-byzantine-generals-problem/206904396)
 - [ ] [Practical Byzantine Fault Tolerance](http://pmg.csail.mit.edu/papers/osdi99.pdf)
 - [ ] [CAP Theorem](https://en.wikipedia.org/wiki/CAP_theorem)
@@ -189,15 +192,14 @@
 - [ ] :blue_book: [Distributed Systems for fun and profit](http://book.mixu.net/distsys/single-page.html)
 - [ ] :blue_book: Designing Data Intensive Applications
 - [ ] :blue_book: [Distributed Systems: Principles and Paradigms](http://barbie.uta.edu/~jli/Resources/MapReduce&Hadoop/Distributed%20Systems%20Principles%20and%20Paradigms.pdf)
-- [ ] Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services :pencil: [Book Notes](https://github.com/JemmyWong/Notes/blob/master/Arch/Designing%20Distributed%20Systems.md)
+- [ ] [Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services]() :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/Designing%20Distributed%20Systems.md)
 - [ ] :blue_book: [Principles of Distributed Systems](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
 
 - [ ] :newspaper: [Transaction Across DataCenter](https://snarfed.org/transactions_across_datacenters_io.html)[YouTuBe](https://www.youtube.com/watch?v=srOgpXECblk)
 
 ### Distributed Messages System
 - [ ] [Kafka: a Distributed Messaging System for Log Processing](http://notes.stephenholiday.com/Kafka.pdf)
-- [ ] [Wormhole: Reliable Pub-Sub to Support
-Geo-replicated Internet Services](https://www.usenix.org/system/files/conference/nsdi15/nsdi15-paper-sharma.pdf)
+- [ ] [Wormhole: Reliable Pub-Sub to Support Geo-replicated Internet Services](https://www.usenix.org/system/files/conference/nsdi15/nsdi15-paper-sharma.pdf)
 - [ ] [board the Databus! LinkedIn's Scalable Consistent Change Data Capture Platform](https://engineering.linkedin.com/research/2012/all-aboard-the-databus-linkedlns-scalable-consistent-change-data-capture-platform)
 
 ### Logs & Data
