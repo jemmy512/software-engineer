@@ -7,9 +7,9 @@
 
 using namespace std;
 
-bool isSwap(const string &str, int beg, int len) {
-    for (; beg < len; ++beg) {
-        if (str[beg] == str[len])
+bool isSwap(const string &str, int beg, int end) {
+    for (; beg < end; ++beg) {
+        if (str[beg] == str[end])
             return false;
     }
     return true;
