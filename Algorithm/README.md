@@ -146,11 +146,9 @@ No | Title | Difficulty | Catogary | Notes
 513 | Find Bottom Left Tree Value | :star: | Tree | :trophy: `Level Traversal`
 637 | Average of Levels in Binary Tree | :star: | Tree | :trophy: `Level Traversal`
 814 | Binary Tree Pruning | :star: | Tree | :trophy:
- | Queue |  | |
-239 | Sliding Window Maximum | :star: :star: :star: | Queue
-641 | Design Circular Deque | :star: :star: | Queue
  | String | | |
-3 | Longest Sub string Without Repeating Characters | :star: :star: | String | :trophy:
+3 | Longest Sub string Without Repeating Characters | :star: :star: | String | :trophy: `Sliding Window`
+159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | String | :trophy: `Sliding Window`
 8 | atoi | :star: | String
 14 | Logst Common Prefix | :star: | String | :trophy:
 28 | Implement Strstr | :star: | String
@@ -171,6 +169,10 @@ No | Title | Difficulty | Catogary | Notes
 170 | Two Sum III - Data structure design | :star: | Map | :trophy:
 653 | Two Sum IV | :star: | Map | :trophy:
 1214 | Two Sum BSTs | :star: :star: | Map | :trophy: `Tree`
+266 | Palindrome Permutation | :star: | Map | :trophy:
+267 | Palindrome Permutation II | :star: :star: | Map | :trophy: `Backtracking`
+516 | Longest Palindromic Subsequence | :star: :star: | Map | `TODO`
+647 | Palindromic Substrings | :star: :star: | Map | `TODO`
 290 | Word Pattern | :star: | Map | :trophy:
 383 | Ransom Note | :star: | Map | :trophy:
 412 | Fizz Buzz | :star: | Map | :trophy:
@@ -179,6 +181,9 @@ No | Title | Difficulty | Catogary | Notes
 020 | validParentheses | :star: | Stack
 32 | Longet Valid Paretheses | :star: :star: :star: |  Stack | :trophy: `DP`
 155 | MinStack | :star: | Stack
+ | Queue |  | |
+239 | Sliding Window Maximum | :star: :star: :star: | Queue | :trophy: `DP`
+641 | Design Circular Deque | :star: :star: | Queue
  | Search | | |
 34 | Search For a Range | :star: :star: | Search | :trophy:
 35 | Search Insert Position | :star: | Search | :trophy:
@@ -188,8 +193,15 @@ No | Title | Difficulty | Catogary | Notes
 017 | Letter Combination of a Phone Number | :star: :star: | BackTrack | :trophy:
 022 | Generate Parenthesis | :star: :star: | BackTrack | :trophy: :thinking:
 046 | Permutations | :star: :star: | BackTrack | :trophy:
+047 | Permutations II | :star: :star: | BackTrack | `TODO`
  | Greedy | | |
 122 | Best Time to Buy and Sell Stock II | :star: | Greedy | :trophy:
+ | Two Pointers, Sliding Window | | |
+3 | Longest Sub string Without Repeating Characters | :star: :star: | Two Pointers | :trophy:
+239 | Sliding Window Maximum | :star: :star: :star: | Two Pointers | :trophy: `DP` `deque`
+159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | Two Pointers | :trophy:
+340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star:| Two Pointers | :trophy:
+992 | Subarrays with K Different Integers | :star: :star: :star:| Two Pointers | `TODO`
 
 
 # Dynamic Programming
