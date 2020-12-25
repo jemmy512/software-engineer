@@ -38,12 +38,12 @@
 - [ ] :blue_book: The C Programming Language
 - [ ] :blue_book: C Programming: A Modern Approach
 - [ ] :blue_book: C Traps and Pitfalls
-- [x] :blue_book: C++ Primer, 5th Edition :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/C%2B%2B/C%2B%2BPrimer.md)
-- [x] :blue_book: Effective C++ :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/C%2B%2B/EffectiveC%2B%2B.md)
-- [ ] :blue_book: More Effective C++ :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/C%2B%2B/MoreEffectiveC%2B%2B.md)
-- [x] :blue_book: Modern Effective C++ :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/C%2B%2B/EffectiveModernC%2B%2B.md)
-- [x] :blue_book: Inside C++ Object Model :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/C%2B%2B/InsideTheC%2B%2BObjectModel.md)
-- [x] :blue_book: C++ Templates The Complete Guide :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/C%2B%2B/cpp-templates-the-complete-guid.md)
+- [x] :blue_book: C++ Primer, 5th Edition :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-primer.md)
+- [x] :blue_book: Effective C++ :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/effective-cpp.md)
+- [ ] :blue_book: More Effective C++ :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/more-effective-cpp.md)
+- [x] :blue_book: Modern Effective C++ :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/effective-modern-cpp.md)
+- [x] :blue_book: Inside C++ Object Model :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/inside-the-cpp-object-model.md)
+- [x] :blue_book: C++ Templates The Complete Guide :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-templates-the-complete-guid.md)
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
 - [x] [C ++ virtual function table analysis(Chinese)](https://coolshell.cn/articles/12165.html)
 - [x] [Memory layout of C ++ objects(Chinese)](https://coolshell.cn/articles/12176.html)
