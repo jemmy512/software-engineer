@@ -44,8 +44,8 @@ No | Title | Difficulty | Catogary | Notes
 080 | Remove Duplicates from Sorted Array II | :star: :star: | Array | :trohpy: `Can dup N`
 083 | Remove Duplicates from Sorted List | :star: | Array | :trophy:
 082 | Remove Duplicates from Sorted List II | :star: :star: | Array | :trophy:
-088 | Merge Sorted Array | :star:| Array
-169 | Majority Element | :star: | Array
+088 | Merge Sorted Array | :star:| Array | :trophy:
+169 | Majority Element | :star: | Array | :trophy:
 189 | Rotate Array | :star: :star: | Array
 209 | Minimum Size Sub array Sum | :star: :star: | Array | :trophy: `Two Pointers`
 215 | Kth Largest Element in an Array | :star: :star: | Array
@@ -182,12 +182,15 @@ No | Title | Difficulty | Catogary | Notes
 32 | Longet Valid Paretheses | :star: :star: :star: |  Stack | :trophy: `DP`
 155 | MinStack | :star: | Stack
  | Queue |  | |
-239 | Sliding Window Maximum | :star: :star: :star: | Queue | :trophy: `DP`
+239 | Sliding Window Maximum | :star: :star: :star: | Queue | :trophy: :thinking: `DP`
 641 | Design Circular Deque | :star: :star: | Queue
  | Search | | |
 34 | Search For a Range | :star: :star: | Search | :trophy:
 35 | Search Insert Position | :star: | Search | :trophy:
+130 | Surrounded Regions | :star: :star: | Search | :trophy: `DFS` `BFS` `Opposite`
+200 | Number of Islands | :star: :star: | Search | :trophy: `DFS` `BFS`
 278 | First Bad Version | :star: | Search | :trophy:
+286 | Walls and Gates | :star: :star: | Search | :trophy: `BFS`
 374 | Guess Number Higher Or Lower | :star: | Search | :trophy:
  | BackTrack | | |
 017 | Letter Combination of a Phone Number | :star: :star: | BackTrack | :trophy:
@@ -202,6 +205,8 @@ No | Title | Difficulty | Catogary | Notes
 159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | Two Pointers | :trophy:
 340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star:| Two Pointers | :trophy:
 992 | Subarrays with K Different Integers | :star: :star: :star:| Two Pointers | `TODO`
+ | Design | | |
+146 | LRU Cache | :star: :star: | Design | :trophy:
 
 
 # Dynamic Programming
