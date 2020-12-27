@@ -35,6 +35,11 @@ Relatives:
 
 using namespace std;
 
+/* Instead of searching from an empty room to the gates,
+ * how about searching the other way round?
+ * In other words, we initiate breadth-first search (BFS) from all gates at the same time.
+ * Since BFS guarantees that we search all rooms of distance d before searching rooms of distance d + 1,
+ * the distance to an empty room must be the shortest */
 class Solution {
 public:
     void wallsAndGates(vector<vector<int>>& rooms) {
