@@ -11,7 +11,7 @@ Features:
 * [Websocket Client](https://github.com/microsoft/cpprestsdk/wiki/Web-Socket)
 * OAuth Client
 
-C++ Rest consists three parts:
+C++ Rest consists three components:
 * [PPL](#PPLX)
 * [C++ Rest](#CppRest)
 * [Boost Asio](#Boost.Asio)
