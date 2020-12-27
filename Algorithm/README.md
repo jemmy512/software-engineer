@@ -40,8 +40,9 @@ No | Title | Difficulty | Catogary | Notes
 011 | Container With Most Water| :star: :star: :star: | Array | :trophy:
 027 | Remove Element | :star: | Array | :trophy:
 041 | First Missing Positive | :star: :star: :star: | Array
+056 | Merge Intervals | :star: :star: | Array | :trophy:
 026 | Remote Duplicates from Sorted Array | :star: | Array | :trophy:
-080 | Remove Duplicates from Sorted Array II | :star: :star: | Array | :trohpy: `Can dup N`
+080 | Remove Duplicates from Sorted Array II | :star: :star: | Array | :trophy: `Can dup N`
 083 | Remove Duplicates from Sorted List | :star: | Array | :trophy:
 082 | Remove Duplicates from Sorted List II | :star: :star: | Array | :trophy:
 088 | Merge Sorted Array | :star:| Array | :trophy:
@@ -52,6 +53,7 @@ No | Title | Difficulty | Catogary | Notes
 217 | Contains Duplicate I | :star: | Array
 219 | Contains Duplicate II | :star: | Array
 220 | Contains Duplicate III | :star: :star: | Array
+238 | Product of Array Except Self  | :star: :star: | Array | :trophy: `L-R Lists`
 283 | Move Zeroes | :star: :star: | Array
 448 | Find All Numbers Disappeared in An Array | :star: | Array
 325 | Maximum Size Subarray Sum Equals k | :star: :star:| Array | :trophy: `Prefix Sum` `Map`
@@ -66,6 +68,7 @@ No | Title | Difficulty | Catogary | Notes
 64 | Minimum Path Sum | :star: :star: | DP | :trophy:
 70 | Climbing Stairs | :star: | DP | :trophy:
 72 | Edit Distance | :star: :star: :star: | DP
+91 | Decode Ways | :star: :star: | DP | :trophy:
 121 | Best Time to Buy and Sell Stock | :star: | DP | :trophy: `Prefix Sum`
 122 | Best Time to Buy and Sell Stock II | :star: | DP | :trophy: `Greedy`
 123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | DP | :trophy: `Bidirectional DP`
@@ -177,12 +180,14 @@ No | Title | Difficulty | Catogary | Notes
 383 | Ransom Note | :star: | Map | :trophy:
 412 | Fizz Buzz | :star: | Map | :trophy:
 771 | Jewelsand Stones | :star: | Map | :trophy:
+953 | Verifying an Alien Dictionary  | :star: | Map | :trophy:
  | Stack | | |
 020 | validParentheses | :star: | Stack
 32 | Longet Valid Paretheses | :star: :star: :star: |  Stack | :trophy: `DP`
 155 | MinStack | :star: | Stack
+394 | DecodeString | :star: :star: | Stack | :trophy:
  | Queue |  | |
-239 | Sliding Window Maximum | :star: :star: :star: | Queue | :trophy: :thinking: `DP`
+239 | Sliding Window Maximum | :star: :star: :star: | Queue | :trophy: :thinking: `DP` `L-R Lists`
 641 | Design Circular Deque | :star: :star: | Queue
  | Search | | |
 34 | Search For a Range | :star: :star: | Search | :trophy:
@@ -190,7 +195,7 @@ No | Title | Difficulty | Catogary | Notes
 130 | Surrounded Regions | :star: :star: | Search | :trophy: `DFS` `BFS` `Opposite`
 200 | Number of Islands | :star: :star: | Search | :trophy: `DFS` `BFS`
 278 | First Bad Version | :star: | Search | :trophy:
-286 | Walls and Gates | :star: :star: | Search | :trophy: `BFS`
+286 | Walls and Gates | :star: :star: | Search | :trophy: :thinking: `BFS`
 374 | Guess Number Higher Or Lower | :star: | Search | :trophy:
  | BackTrack | | |
 017 | Letter Combination of a Phone Number | :star: :star: | BackTrack | :trophy:
