@@ -50,23 +50,23 @@ public:
             return isValid(s[0]) ? 1 : 0;
         }
 
-        int prevPrevPath = isValid(s[0]) ? 1 : 0;
-        int prevPath = (isValid(s[1]) ? prevPrevPath : 0) + (isValid(s[0], s[1]) ? 1 : 0);
+        int prevTwoSteps = isValid(s[0]) ? 1 : 0;
+        int prevOneStep = (isValid(s[1]) ? prevTwoSteps : 0) + (isValid(s[0], s[1]) ? 1 : 0);
 
         for (int i = 2; i < s.size(); ++i) {
             int path = 0;
             if (isValid(s[i])) {
-                path = prevPath;
+                path = prevOneStep;
             }
             if (isValid(s[i-1], s[i])) {
-                path += prevPrevPath;
+                path += prevTwoSteps;
             }
 
-            prevPrevPath = prevPath;
-            prevPath = path;
+            prevTwoSteps = prevOneStep;
+            prevOneStep = path;
         }
 
-        return prevPath;
+        return prevOneStep;
     }
 
 private:
