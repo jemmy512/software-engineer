@@ -1,100 +1,73 @@
 #include <iostream>
-#include <chrono>
-#include <optional>
+#include <iterator>
+#include <cstddef> // std::ptrdiff_t
 
-using time_point = std::chrono::system_clock::time_point;
-using optional_time_point = std::optional<std::chrono::system_clock::time_point>;
-
-template<typename T>
-struct Node {
-    T data;
-    optional_time_point ctime; // creat time
-    optional_time_point dtime; // delet time
-};
-
-
-template<typename T, typename Node = Node<T>>
-class Vector {
+template<size_t Size>
+class Integers {
 public:
-    ~Vector() {
-        delete[] mData;
-    }
+    struct iterator {
+        using iterator_catogory = std::forward_iterator_tag;
+        using difference_type = std::ptrdiff_t;
+        using value_type = int;
+        using pointer = int*;
+        using reference = int&;
 
-    void push_back(const T& val) {
-        if (mSize + 1 >= mCapacity) {
-            expand();
-        }
+        iterator(pointer ptr) : _Ptr(ptr) {}
 
-        mData[mSize++] = {val, optional_time_point(std::chrono::system_clock::now()), optional_time_point()};
-    }
+        reference operator*() { return *_Ptr; }
+        pointer operator->() { return _Ptr; }
+        iterator operator++() { ++_Ptr; return *this; }
+        iterator operator++(int) { auto tmp = *this; ++_Ptr; return tmp; }
+        friend bool operator==(const iterator& lhs, const iterator& rhs) { return lhs._Ptr == rhs._Ptr; }
+        friend bool operator!=(const iterator& lhs, const iterator& rhs) { return lhs._Ptr != rhs._Ptr; }
 
-    void erase(const T& val) {
-        for (auto i = 0; i < mSize; ++i) {
-            auto& v = mData[i];
-            if (v.data == val) {
-                v.dtime = std::chrono::system_clock::now();
-                ++mExpired;
+    private:
+        pointer _Ptr;
+    };
 
-                return;
-            }
-        }
-    }
+    struct const_iterator {
+        using iterator_catogory = std::forward_iterator_tag;
+        using difference_type = std::ptrdiff_t;
+        using value_type = int;
+        using const_pointer = const int*;
+        using const_reference = const int&;
 
-    void clearExpired(time_point time) {
-        if (staic_cast<double>(mExpired) / mSize >= 0.75) {
-            auot newSize = mSize;
-            bool deleted = false;
+        const_iterator(const_pointer ptr) : _Ptr(ptr) {}
 
-            for (auto i =0; i < mSize; ++i) {
-                const auto& node = mData[i];
-                if (deleted) {
-                    if (node.dtime && node.dtime < time) {
-                        --newSize;
-                    }
+        const_reference operator*() { return *_Ptr; }
+        const_pointer operator->() { return _Ptr; }
+        const_iterator operator++() { ++_Ptr; return *this; }
+        const_iterator operator++(int) { auto tmp = *this; ++_Ptr; return tmp; }
+        friend bool operator==(const const_iterator& lhs, const const_iterator& rhs) { return lhs._Ptr == rhs._Ptr; }
+        friend bool operator!=(const const_iterator& lhs, const const_iterator& rhs) { return lhs._Ptr != rhs._Ptr; }
 
-                    mData[i-1] = std::move(mData[i]);
-                } else {
-                    if (node.dtime && node.dtime < time) {
-                        mData[i] = std::move(mData[i+1]);
-                        --newSize;
-                        ++i;
-                        deleted = true;
-                    }
-                }
-            }
+    private:
+        const_pointer _Ptr;
+    };
+
+    Integers(std::initializer_list<int> list) {
+        for (int i = 0; i < list.size(); ++i) {
+            _Data[i] = *(list.begin()+i);
         }
     }
+
+    iterator begin() { return iterator(&_Data[0]); }
+    iterator end() { return iterator(&_Data[Size]); }
+
+    const_iterator cbegin() { return const_iterator(&_Data[0]); }
+    const_iterator cend() { return const_iterator(&_Data[Size]); }
 
 private:
-    void expand() {
-        mCapacity *= 2;
-        Node<T>* tmp  = new Node<T>[mCapacity]();
-
-        for (auto i = 0; i < mSize; ++i) {
-            tmp[i] = mData[i];
-        }
-
-        delete[] mData;
-        mData = tmp;
-    }
-
-private:
-    int mSize = 0;
-    int mExpired = 0;
-    int mCapacity = 16;
-    Node<T>* mData = nullptr;
-};
-
-
-template<typename Container>
-class Iterator {
-public:
-
-private:
-    Container& mContainer;
+    int _Data[Size];
 };
 
 int main() {
+    Integers<5> ints = {1, 2, 3, 4, 5};
+    std::copy(ints.begin(), ints.end(), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
+
+    std::copy(ints.cbegin(), ints.cend(), std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
 
     return 0;
 }
