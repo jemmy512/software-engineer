@@ -188,6 +188,8 @@ No | Title | Difficulty | Catogary | Notes
 394 | DecodeString | :star: :star: | Stack | :trophy:
  | Queue |  | |
 239 | Sliding Window Maximum | :star: :star: :star: | Queue | :trophy: :thinking: `DP` `L-R Lists`
+252 | Meeting Rooms | :star: | Queue | :trophy:
+253 | Meeting Rooms II | :star: :star: | Queue | :trophy:
 641 | Design Circular Deque | :star: :star: | Queue
  | Search | | |
 34 | Search For a Range | :star: :star: | Search | :trophy:
@@ -204,6 +206,7 @@ No | Title | Difficulty | Catogary | Notes
 047 | Permutations II | :star: :star: | BackTrack | `TODO`
  | Greedy | | |
 122 | Best Time to Buy and Sell Stock II | :star: | Greedy | :trophy:
+452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | Greedy | :trophy:
  | Two Pointers, Sliding Window | | |
 3 | Longest Sub string Without Repeating Characters | :star: :star: | Two Pointers | :trophy:
 239 | Sliding Window Maximum | :star: :star: :star: | Two Pointers | :trophy: `DP` `deque`
