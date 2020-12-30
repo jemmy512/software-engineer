@@ -16,7 +16,18 @@ Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 Constraints:
 1 <= intervals.length <= 10^4
 intervals[i].length == 2
-0 <= starti <= endi <= 10^4 */
+0 <= starti <= endi <= 10^4
+
+Relatives:
+57. Insert Interval
+252. Meeting Rooms
+253. Meeting Rooms II
+495. Teemo Attacking
+616. Add Bold Tag in String
+715. Range Module - Hard
+759. Employee Free Time - Hard
+763. Partition Labels
+986. Interval List Intersections */
 
 #include <vector>
 #include <algorithm>
