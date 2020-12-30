@@ -46,9 +46,27 @@
 - [x] :blue_book: C++ Templates The Complete Guide :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-templates-the-complete-guid.md)
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
 - [x] [C ++ virtual function table analysis(Chinese)](https://coolshell.cn/articles/12165.html)
-- [x] [Memory layout of C ++ objects(Chinese)](https://coolshell.cn/articles/12176.html)
 - [x] [The cost of dynamic (virtual calls) vs. static (CRTP) dispatch in C++](https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c)
-- [x] [CRTP](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern)
+- [x] [Memory layout of C ++ objects(Chinese)](https://coolshell.cn/articles/12176.html)
+
+* C++ Memory Model
+    - [x] [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)
+    - [x] [C++ Memory Model](https://www.modernescpp.com/index.php/c-memory-model)
+    - [x] [Sequential Consistency](https://www.modernescpp.com/index.php/sequential-consistency)
+    - [x] [The Atomic Flag](https://www.modernescpp.com/index.php/the-atomic-flag)
+    - [x] [The Atomic Boolean](https://www.modernescpp.com/index.php/the-atomic-boolean)
+    - [x] [Atomics](https://www.modernescpp.com/index.php/atomics)
+    - [x] [Synchronization and Ordering Constraints](https://www.modernescpp.com/index.php/synchronization-and-ordering-constraints)
+    - [x] [Sequential Consistency applied](https://www.modernescpp.com/index.php/sequential-consistency-applied)
+    - [x] [Acquire-Release Semantic](https://www.modernescpp.com/index.php/acquire-release-semantic)
+    - [x] [Transitivity of the Acquire-Release Semantic](https://www.modernescpp.com/index.php/transivity-of-the-acquire-release-semantic)
+    - [x] [memory_order_consume](https://www.modernescpp.com/index.php/memory-order-consume)
+    - [x] [Acquire-Release Semantic - The typical Misunderstanding](https://www.modernescpp.com/index.php/acquire-release-semantic-the-typical-misunderstanding)
+    - [x] [Fences are Memory Barriers](https://www.modernescpp.com/index.php/fences-as-memory-barriers)
+    - [x] [Acquire-Release Fences](https://www.modernescpp.com/index.php/acquire-release-fences)
+    - [x] [Relaxed Semantic](https://www.modernescpp.com/index.php/relaxed-semantic)
+
+* CRTP
     - [x] [Curiously Recurring Template Pattern (CRTP)](https://en.wikipedia.org/wiki/Curiously_recurring_template_pattern)
     - [x] [The CRTP, episode One: Definition](https://www.fluentcpp.com/2017/05/12/curiously-recurring-template-pattern/)
     - [x] [The CRTP, episode Two: What the CRTP can bring to your code](https://www.fluentcpp.com/2017/05/16/what-the-crtp-brings-to-code/)
@@ -112,12 +130,13 @@
 - [ ] [A Tutorial Introduction to the ARM and POWER Relaxed Memory Models](https://www.cl.cam.ac.uk/~pes20/ppc-supplemental/test7.pdf)
 - [ ] [x86-TSO: A Rigorous and Usable Programmer’s Model for x86 Multiprocessors](https://www.cl.cam.ac.uk/~pes20/weakmemory/cacm.pdf)
 - [x] [ptmalloc](http://www.malloc.de/en/)
-- [x] [tcmalloc](https://github.com/google/tcmalloc) [Ref](https://wallenwang.com/2018/11/tcmalloc/) [Ref](https://www.programmersought.com/article/84461226079/)
+- [x] [tcmalloc](https://github.com/google/tcmalloc) [:link: Ref](https://wallenwang.com/2018/11/tcmalloc/) [:link: Ref](https://www.programmersought.com/article/84461226079/)
 - [x] [jemalloc](http://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf)
 - [x] [C dynamic memory allocation](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation)
 - [x] [Research on ptmalloc, tcmalloc and jemalloc memory allocation strategies](https://owent.net/2013/867.html)
 - [x] [Memory optimization summary: ptmalloc, tcmalloc, and jemalloc](http://www.cnhalo.net/2016/06/13/memory-optimize)
 - [x] [Scalable memory allocation using jemalloc](https://www.facebook.com/notes/facebook-engineering/scalable-memory-allocation-using-jemalloc/480222803919)
+- [x] [Spurious wakeup](https://en.wikipedia.org/wiki/Spurious_wakeup)  [:link: C++ Condition Variable](https://www.modernescpp.com/index.php/c-core-guidelines-be-aware-of-the-traps-of-condition-variables)
 
 ### Network
 - [ ] :blue_book: Computer Networks, 5th Edition
@@ -169,7 +188,7 @@
 - [x] [Memory Reordering Caught in the Act](https://preshing.com/20120515/memory-reordering-caught-in-the-act)
 
 ### Kernel
-- [x] [RCU]() [Part 1](https://lwn.net/Articles/262464/) [Part 2](https://lwn.net/Articles/263130/) [Part 3](https://lwn.net/Articles/264090/)
+- [x] [RCU]() [:link: Part 1](https://lwn.net/Articles/262464/) [:link: Part 2](https://lwn.net/Articles/263130/) [:link: Part 3](https://lwn.net/Articles/264090/)
 
 # Distributed architecture
 - [ ] [Scalable Web Architecture and Distributed Systems](http://www.aosabook.org/en/distsys.html)
