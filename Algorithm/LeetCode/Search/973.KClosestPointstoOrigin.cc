@@ -64,32 +64,27 @@ private:
     }
 
     template<typename Iter, typename Compare>
-    Iter partition(Iter begin, Iter end, Compare cmp) { // [begin, end}
-        end = std::next(end, -1);
-        auto pivotIter = std::next(begin, getRandom<int>(std::distance(begin, end)));
-        auto pivot = *pivotIter;
-        std:swap(*begin, *pivotIter);
+    Iter partition(Iter begin, Iter end, Compare cmp) {
+        --end;
+        auto pivot = *std::next(begin, getRandom<int>(0, std::distance(begin, end)));
 
-        while (begin < end) {
-            while (begin < end && cmp(pivot, *end))
-                --end;
-            if (begin < end)
-                *begin++ = *end;
-            while (begin < end && cmp(*begin, pivot))
+        while (begin <= end) {
+            while (cmp(*begin, pivot))
                 ++begin;
-            if (begin < end)
-                *end-- = *begin;
+            while (cmp(pivot, *end))
+                --end;
+            if (begin <= end)
+                std::swap(*begin++, *end--);
         }
-        *begin = pivot;
 
         return begin;
     }
 
-    template<typename sizeT>
-    sizeT getRandom(sizeT maxSize, double probability = 0.5) {
-        auto seed = std::chrono::system_clock::now().time_since_epoch().count();
-        auto engine = std::default_random_engine(seed);
-        auto distribution = std::binomial_distribution<sizeT>(maxSize, probability);
+    template<typename Size = int>
+    Size getRandom(Size min, Size max) {
+        std::random_device dev;
+        std::default_random_engine engine(dev());
+        std::uniform_int_distribution<Size> distribution(min, max);
 
         return distribution(engine);
     }
