@@ -41,6 +41,7 @@ No | Title | Difficulty | Catogary | Notes
 027 | Remove Element | :star: | Array | :trophy:
 041 | First Missing Positive | :star: :star: :star: | Array
 056 | Merge Intervals | :star: :star: | Array | :trophy:
+057 | Insert Intervals | :star: :star: | Array | :trophy:
 026 | Remote Duplicates from Sorted Array | :star: | Array | :trophy:
 080 | Remove Duplicates from Sorted Array II | :star: :star: | Array | :trophy: `Can dup N`
 083 | Remove Duplicates from Sorted List | :star: | Array | :trophy:
@@ -194,11 +195,15 @@ No | Title | Difficulty | Catogary | Notes
  | Search | | |
 34 | Search For a Range | :star: :star: | Search | :trophy:
 35 | Search Insert Position | :star: | Search | :trophy:
+74 | Search a 2D Matrix | :star: :star: | Search | :trophy: `BS`
+240 | Search a 2D Matrix II | :star: :star: | Search | :trophy: `BS` :thinking:
 130 | Surrounded Regions | :star: :star: | Search | :trophy: `DFS` `BFS` `Opposite`
 200 | Number of Islands | :star: :star: | Search | :trophy: `DFS` `BFS`
 278 | First Bad Version | :star: | Search | :trophy:
 286 | Walls and Gates | :star: :star: | Search | :trophy: :thinking: `BFS`
 374 | Guess Number Higher Or Lower | :star: | Search | :trophy:
+378 | Kth Smallest Element in a Sorted Matrix  | :star: :star:| Sort | :trophy: `BS` :thinking:
+973 | K Closest Points to Origin | :star: :star:| Sort | :trophy: :thinking: `Quick Select` `BS`
  | BackTrack | | |
 017 | Letter Combination of a Phone Number | :star: :star: | BackTrack | :trophy:
 022 | Generate Parenthesis | :star: :star: | BackTrack | :trophy: :thinking:
@@ -207,6 +212,7 @@ No | Title | Difficulty | Catogary | Notes
  | Greedy | | |
 122 | Best Time to Buy and Sell Stock II | :star: | Greedy | :trophy:
 452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | Greedy | :trophy:
+763 | Partition Labels | :star: :star: | Greedy | :trophy:
  | Two Pointers, Sliding Window | | |
 3 | Longest Sub string Without Repeating Characters | :star: :star: | Two Pointers | :trophy:
 239 | Sliding Window Maximum | :star: :star: :star: | Two Pointers | :trophy: `DP` `deque`
