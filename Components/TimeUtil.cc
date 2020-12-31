@@ -21,11 +21,11 @@ std::string getCurrentTime() {
 }
 
 
-template<typename sizeT>
-sizeT getRandom(sizeT maxSize, double probability = 0.5) {
-    auto seed = std::chrono::system_clock::now().time_since_epoch().count();
-    auto engine = std::default_random_engine(seed);
-    auto distribution = std::binomial_distribution<sizeT>(maxSize, probability);
+template<typename Size = int>
+Size getRandom(Size min, Size max) {
+    std::random_device dev;
+    std::default_random_engine engine(dev());
+    std::uniform_int_distribution<Size> distribution(min, max);
 
     return distribution(engine);
 }
