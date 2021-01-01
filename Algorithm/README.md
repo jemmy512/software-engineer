@@ -35,6 +35,7 @@ No | Title | Difficulty | Catogary | Notes
 389 | Findthe Difference | :star: | Math | :trophy:
 400 | Nth Digit | :star: :star: | Math
 414 | Third Maximum Number | :star: | Math
+1041 | Robot Bounded In Circle | :star: :star: | Math | :trophy: :thinking:
  | Array | | |
 004 | Median of Two Sorted Arrays | :star: :star: :star: | Array
 011 | Container With Most Water| :star: :star: :star: | Array | :trophy:
@@ -46,6 +47,7 @@ No | Title | Difficulty | Catogary | Notes
 080 | Remove Duplicates from Sorted Array II | :star: :star: | Array | :trophy: `Can dup N`
 083 | Remove Duplicates from Sorted List | :star: | Array | :trophy:
 082 | Remove Duplicates from Sorted List II | :star: :star: | Array | :trophy:
+048 | Rotate Image | :star: :star: | Array | :trophy:
 088 | Merge Sorted Array | :star:| Array | :trophy:
 169 | Majority Element | :star: | Array | :trophy:
 189 | Rotate Array | :star: :star: | Array
@@ -76,6 +78,7 @@ No | Title | Difficulty | Catogary | Notes
 188 | Best Time to Buy and Sell Stock IV | :star: :star: :star:| DP | :trophy: :thinking:
 152 | Maximum Product Subarry | :star: :star: | DP | :trophy: `Prefix Sum`
 198 | House Robber | :star: | DP | :trophy:
+221 | Maximal Square | :star: :start: | DP | :trophy: :thinking:
 264 | Ugly Number II | :star: :star: | DP | :trophy:
 303 | Range Sum Query Immutable | :star: | DP | :trophy:
 307 | Range Sum Query Mutable | :star: :star: | DP | :trophy: `Segment Tree`
@@ -88,15 +91,15 @@ No | Title | Difficulty | Catogary | Notes
  | List |  |
 19 | Remove Nth Node From End of List | :star: :star: | List | :trophy:
 21 | Merge Two Sorted Lists | :star: | List
-23 | Merge K Sorted List | :star: :star: :star: | List
+23 | Merge K Sorted List | :star: :star: :star: | List `K-way Merge`
 24 | Swap Nodes in Pairs | :star: :star: | List
 25 | Reverse Nodes in K-Group | :star: :star: :star: | List | :trophy:
 61 | Roate List By K | :star: :star: | List
 86 | Partition List | :star: :star: | List
 92 | Reverse Linked List II | :star: :star: | List | :trophy:
 138 | Copy List With Random Pointer  | :star: | List | :trophy:
-141 | linked List Cycle | :star: | List | :trophy:
-142 | Linked List Cycle II | :star: :star: | List | :trophy:
+141 | linked List Cycle | :star: | List | :trophy: `Fast Slow Pointers`
+142 | Linked List Cycle II | :star: :star: | List | :trophy: `Fast Slow Pointers`
 143 | Reorder List | :star: :star: | List
 147 | Insertion Sorted List | :star: :star: | List
 148 | Sort List | :star: :star: | List
