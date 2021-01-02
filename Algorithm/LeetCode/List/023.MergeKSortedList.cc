@@ -1,27 +1,20 @@
-/*
-Difficulty: Hard
-
+/* Hard
 Merge k sorted linked lists and return it as one sorted list. Analyze and describe its complexity.
 
 Example:
-
 Input:
 [
   1->4->5,
   1->3->4,
   2->6
 ]
-Output: 1->1->2->3->4->4->5->6
-*/
+Output: 1->1->2->3->4->4->5->6 */
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
 
 /*
 1. Pair up k lists and merge each pair.
@@ -32,27 +25,31 @@ Output: 1->1->2->3->4->4->5->6
 3. Repeat this procedure until we get the final sorted linked list.
 
 Thus, we'll traverse almost NN nodes per pairing and merging, and repeat this procedure about \log_{2}{k}
-​​ k times.
+​​ k times. */
 
+#include <climits>
+#include <vector>
 
-*/
+using namespace std;
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
-
-/**
-* Merge with Divide And Conquer
-* Time Complexity: O(NlogK), merge two lists use N time complexity, divide use logK time complexity
-*/
-
+/* Divide And Conquer
+ * Time Complexity: O(NlogK), merge two lists use N time complexity, divide use logK time complexity */
 class Solution {
 public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if (lists.empty()) return NULL;
+
+        int interval = 1;
+        while (interval < lists.size()) {
+            for (int i = 0; i < lists.size() - interval; i += interval * 2)
+                lists[i] = merge2List(lists[i], lists[i + interval]);
+            interval *= 2;
+        }
+
+        return lists[0];
+    }
+
+private:
     ListNode *merge2List(ListNode *head1, ListNode *head2) {
         if (!head1) return head2;
         if (!head2) return head1;
@@ -72,25 +69,9 @@ public:
 
         return dummy.next;
     }
-
-    ListNode* mergeKLists(vector<ListNode*>& lists) {
-        if (lists.empty()) return NULL;
-
-        int len = lists.size();
-        int interval = 1;
-        while (interval < len) {
-            for (int i = 0; i < len - interval; i += interval * 2)
-                lists[i] = merge2List(lists[i], lists[i + interval]);
-            interval *= 2;
-        }
-
-        return lists[0];
-    }
 };
 
-/*
-    Time Complexity: O(KN), where K is the length of the list, N is the complexity of merge two lists
-*/
+/* Time Complexity: O(KN), where K is the length of the list, N is the complexity of merge two lists */
 class Solution_1 {
 public:
     ListNode *merge2List(ListNode *head1, ListNode *head2) {
