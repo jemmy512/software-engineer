@@ -29,10 +29,10 @@ n == grid[i].length
 grid[i][j] is '0' or '1'.
 
 Relatives:
-130.Surrounded Regions
-200.Number of Islands
-286. Walls and Gates
+130. Surrounded Regions
+200. Number of Islands
 305. Number of Islands II
+286. Walls and Gates
 323. Number of Connected Components in an Undirected Graph
 694. Number of Distinct Islands
 695. Max Area of Island */
@@ -44,8 +44,11 @@ using namespace std;
 class Solution {
 public:
     int numIslands(vector<vector<char>>& grid) {
-        int rowSize = grid.size();
-        int colSize = grid[0].size();
+        if (grid.empty())
+            return 0;
+
+        rowSize = grid.size();
+        colSize = grid[0].size();
         int ret = 0;
 
         for (int row = 0; row < rowSize; ++row) {
@@ -62,13 +65,20 @@ public:
 
 private:
     void dfs(vector<vector<char>>& grid, int row, int col) {
-        int rowSize = grid.size();
-        int colSize = grid[0].size();
+        if (row < 0 || col < 0 || row >= rowSize || col >= colSize)
+            return;
+        if (grid[row][col] != '1')
+            return;
 
         grid[row][col] = '0';
-        if (row + 1 < rowSize && grid[row+1][col] == '1') dfs(grid, row+1, col);
-        if (col + 1 < colSize && grid[row][col+1] == '1') dfs(grid, row, col+1);
-        if (row - 1 >= 0 && grid[row-1][col] == '1') dfs(grid, row-1, col);
-        if (col -1 >= 0 && grid[row][col-1] == '1') dfs(grid, row, col-1);
+
+        for (const auto& [r, c] : directions) {
+            dfs(grid, row + r, col + c);
+        }
     }
+
+private:
+    int rowSize{0};
+    int colSize{0};
+    vector<pair<int, int>> directions {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 };
