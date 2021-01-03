@@ -22,8 +22,8 @@ After running your function, the 2D grid should be:
   0  -1   3   4
 
 Relatives:
-130.Surrounded Regions
-200.Number of Islands
+130. Surrounded Regions
+200. Number of Islands
 286. Walls and Gates
 305. Number of Islands II
 323. Number of Connected Components in an Undirected Graph
@@ -65,7 +65,7 @@ public:
             for (const auto& [r, c] : directions) {
                 int rowNew = row + r;
                 int colNew = col + c;
-                if (isValidIndex(rooms, rowNew, colNew)) {
+                if (!isInvalidIndex(rooms, rowNew, colNew)) {
                     rooms[rowNew][colNew] = rooms[row][col] + 1;
                     que.emplace(rowNew, colNew);
                 }
@@ -74,8 +74,8 @@ public:
     }
 
 private:
-    bool isValidIndex(vector<vector<int>>& rooms, int row, int col) {
-        return row >= 0 && col >= 0 && row < _RowSize && col < _ColSize && rooms[row][col] == Empty;
+    bool isInvalidIndex(vector<vector<int>>& rooms, int row, int col) {
+        return row < 0 || col < 0 || row >= _RowSize || col >= _ColSize || rooms[row][col] != Empty;
     }
 
 private:
