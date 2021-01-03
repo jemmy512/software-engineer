@@ -21,8 +21,8 @@ Any 'O' that is not on the border and it is not connected to an 'O' on the borde
 Two cells are connected if they are adjacent cells connected horizontally or vertically.
 
 Relatives:
-130.Surrounded Regions
-200.Number of Islands
+130. Surrounded Regions
+200. Number of Islands
 286. Walls and Gates
 305. Number of Islands II
 323. Number of Connected Components in an Undirected Graph
@@ -41,9 +41,10 @@ using namespace std;
 class Solution {
 public:
     void solve(vector<vector<char>>& board) {
-        int rowSize= board.size();
-        if (rowSize <= 0)
+        if (board.empty())
             return;
+
+        int rowSize= board.size();
         int colSize = board[0].size();
 
         for (int row = 0; row < rowSize; ++row) {
