@@ -105,6 +105,8 @@
 
 
 # Software Design
+- [x] [Grokking System Design](https://www.educative.io/courses/grokking-the-system-design-interview)  [:pencil2: Book Notes](BookNotes/Arch/grokking-the-system-design.md)
+- [ ] [System Design Primer](https://github.com/donnemartin/system-design-primer)
 - [ ] [Six Programming Paradigm](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will)
 - [ ] [Programming Paradigms for Dummies](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)
 - [ ] [Stanford Programming Paradigm](https://see.stanford.edu/Course/CS107)
