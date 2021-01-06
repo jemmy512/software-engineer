@@ -137,7 +137,6 @@
 # Linux
 - [x] :pencil2: [Linux Kernel 4.19](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxKernel.md)
 - [ ] [Red Hat Enterprise Linux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/)
-
 - [ ] [What Every Programmer Should Know About Memory](http://futuretech.blinkenlights.nl/misc/cpumemory.pdf)
 - [ ] [Memory Barriers: a Hardware View for Software Hackers](https://irl.cs.ucla.edu/~yingdi/web/paperreadingwhymb.2010.06.07c.pdf)
 - [ ] [A Tutorial Introduction to the ARM and POWER Relaxed Memory Models](https://www.cl.cam.ac.uk/~pes20/ppc-supplemental/test7.pdf)
@@ -154,8 +153,8 @@
 ### Network
 - [ ] :blue_book: Computer Networks, 5th Edition
 - [ ] :blue_book: [Linux High Performance Server Programming (CN)](https://book.douban.com/subject/24722611/) :pencil2:  [Linux Programmnig Noetes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxProgramming.md) :pencil2: [Linux System Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxBasic.md)
-
 - [ ] :blue_book: Network tuning
+
 - [ ] [Linux Advanced Routing & Traffic Control HOWTO](https://lartc.org)
 - [ ] [Red Hat Enterprise Linux Network Performance Tuning Guide](https://access.redhat.com/sites/default/files/attachments/20150325_network_performance_tuning.pdf)
 - [ ] [Making Linux TCP Fast](https://netdevconf.info/1.2/papers/bbr-netdev-1.2.new.new.pdf)
@@ -228,6 +227,7 @@
 - [ ] :blue_book: [Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services](https://azure.microsoft.com/en-us/resources/designing-distributed-systems/) :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/designing-distributed-systems.md)
 - [ ] :blue_book: [Principles of Distributed Systems](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
 - [ ] :newspaper: [Transaction Across DataCenter](https://snarfed.org/transactions_across_datacenters_io.html)   [:tv: YouTuBe](https://www.youtube.com/watch?v=srOgpXECblk)
+
 - [ ] [Martin Fowler: Patterns of Distributed Systems](https://martinfowler.com/articles/patterns-of-distributed-systems/)
     - [ ] [Consistent Core](https://martinfowler.com/articles/patterns-of-distributed-systems/consistent-core.html)
     - [ ] [Generation Clock](https://martinfowler.com/articles/patterns-of-distributed-systems/generation.html)
@@ -390,7 +390,8 @@
 
 
 # Microservice
-- [ ] [Martin Fowleer: Microservice Architectur](https://martinfowler.com/articles/microservices.html)
+- [ ] [Martin Fowler: Microservices Guide](https://martinfowler.com/microservices/)
+- [ ] [Martin Fowler: Microservice Architecture](https://martinfowler.com/articles/microservices.html)
 - [ ] [AWS: What are Microservices?](https://aws.amazon.com/microservices/)
 - [ ] [Microsoft: Microservices architecture style](https://docs.microsoft.com/en-us/azure/architecture/guide/architecture-styles/microservices)
 - [ ] [Pivotal: Microservices](https://tanzu.vmware.com/microservices)
@@ -419,13 +420,8 @@
 - [ ] [Microservices vs. Monolithic Architectures: Pros, Cons, and How Cloud Foundry (PaaS) Can Help](https://www.slideshare.net/altoros/microservices-vs-monolithic-architectures-pros-and-cons)
 - [ ] [Microservices - Not A Free Lunch!](http://highscalability.com/blog/2014/4/8/microservices-not-a-free-lunch.html)
 - [ ] [The Hidden Costs Of Microservices](https://www.stackbuilders.com/news/the-hidden-costs-of-microservices)
-
-
-- [ ] [Microservice Patterns](https://microservices.io)
+- [ ] [Microservice Architecture (https://microservices.io)](https://microservices.io)
 - [ ] [Microservice Antipatterns and Pitfalls](https://www.oreilly.com/content/microservices-antipatterns-and-pitfalls/)
 - [ ] [Microservice Architecture: All The Best Practices You Need To Kno](https://codingsans.com/blog/microservice-architecture-best-practices)
 - [ ] [Best Practices for Building a Microservice Architecture](https://www.vinaysahni.com/best-practices-for-building-a-microservice-architecture)
 - [ ] [Simplicity by Distributing Complexity](https://engineering.zalando.com/posts/2018/01/simplicity-by-distributing-complexity.html)
-
-
-- [ ] [Microservices Guide](https://martinfowler.com/microservices/)
