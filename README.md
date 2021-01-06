@@ -12,7 +12,7 @@
 ### Coding Cultivation
 - [ ] :blue_book: Refactoring: Improving the Design of Existing Code
 - [ ] :blue_book: Working Effectively with Legacy Code
-- [ ] :blue_book: Clean Code: A Handbook of Agile Software Craftsmanship :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/clean-code.md)
+- [ ] :blue_book: Clean Code: A Handbook of Agile Software Craftsmanship :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/clean-code.md)
 - [ ] :blue_book: The Clean Coder：A Code of Conduct for Professional Programmers
 
 ### Code Review
@@ -38,16 +38,16 @@
 - [ ] :blue_book: The C Programming Language
 - [ ] :blue_book: C Programming: A Modern Approach
 - [ ] :blue_book: C Traps and Pitfalls
-- [x] :blue_book: C++ Primer, 5th Edition :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-primer.md)
-- [x] :blue_book: Effective C++ :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/effective-cpp.md)
-- [ ] :blue_book: More Effective C++ :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/more-effective-cpp.md)
-- [x] :blue_book: Modern Effective C++ :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/effective-modern-cpp.md)
-- [x] :blue_book: Inside C++ Object Model :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/inside-the-cpp-object-model.md)
-- [x] :blue_book: C++ Templates The Complete Guide :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-templates-the-complete-guid.md)
+- [x] :blue_book: C++ Primer, 5th Edition :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-primer.md)
+- [x] :blue_book: Effective C++ :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/effective-cpp.md)
+- [ ] :blue_book: More Effective C++ :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/more-effective-cpp.md)
+- [x] :blue_book: Modern Effective C++ :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/effective-modern-cpp.md)
+- [x] :blue_book: Inside C++ Object Model :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/inside-the-cpp-object-model.md)
+- [x] :blue_book: C++ Templates The Complete Guide :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-templates-the-complete-guid.md)
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
-- [x] [C ++ virtual function table analysis(Chinese)](https://coolshell.cn/articles/12165.html)
+- [x] [C ++ virtual function table analysis(CN)](https://coolshell.cn/articles/12165.html)
 - [x] [The cost of dynamic (virtual calls) vs. static (CRTP) dispatch in C++](https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c)
-- [x] [Memory layout of C ++ objects(Chinese)](https://coolshell.cn/articles/12176.html)
+- [x] [Memory layout of C ++ objects(CN)](https://coolshell.cn/articles/12176.html)
 
 * C++ Memory Model
     - [x] [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)
@@ -78,19 +78,22 @@
     - [x] [How to Reduce the Code Bloat of a Variadic CRTP](https://www.fluentcpp.com/2018/07/03/how-to-reduce-the-code-bloat-of-a-variadic-crtp/)
     - [x] [Variadic CRTP Packs: From Opt-in Skills to Opt-in Skillsets](https://www.fluentcpp.com/2018/06/26/variadic-crtp-packs-from-opt-in-skills-to-opt-in-skillsets/)
     - [x] [Variadic CRTP: An Opt-in for Class Features, at Compile Time](https://www.fluentcpp.com/2018/06/22/variadic-crtp-opt-in-for-class-features-at-compile-time/)
+* Template
+    - [x] [How to Share Code with Const and Non-Const Functions in C++](https://www.cppstories.com/2020/11/share-code-const-nonconst.html)
+    - [x] [One Trick with Private Names and Function Templates](https://www.cppstories.com/2020/12/private-names-trick)
 
 # Theoretical Discipline
 - [ ] :blue_book: Data Structures and Algorithm Analysis in C:Second Edition
 - [ ] :blue_book: Database System Concepts(Fifth Edition)
-- [ ] :blue_book: Modern Operating Systems :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/modern-operating-system.md)
+- [ ] :blue_book: Modern Operating Systems :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/modern-operating-system.md)
 - [ ] :blue_book: Computer Networking: A Top-Down Approach
 
 # System Knowledge
-- [ ] :blue_book: Computer Systems A Programmer’s Perspective :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
+- [ ] :blue_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
 - [ ] :blue_book: Advanced Programming in the UNIX Environment
-- [ ] :blue_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxProgramming.md)
+- [ ] :blue_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxProgramming.md)
 - [ ] :blue_book: UNIX Network Programming, Volume 2: Interprocess Communications
-- [ ] :blue_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/TCP:IP%20Illustrated%2C%20Volume%201.md)
+- [ ] :blue_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/TCP:IP%20Illustrated%2C%20Volume%201.md)
 - [ ] :blue_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
 
 - [ ] [Let’s Code a TCP/IP Stack, 1: Ethernet & ARP](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/#tuntap-devices)
@@ -104,8 +107,8 @@
 
 
 
-# Software Design
-- [x] [Grokking System Design](https://www.educative.io/courses/grokking-the-system-design-interview)  [:pencil2: Book Notes](BookNotes/Arch/grokking-the-system-design.md)
+# System Design
+- [x] [Grokking System Design](https://www.educative.io/courses/grokking-the-system-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/grokking-the-system-design.md)
 - [ ] [System Design Primer](https://github.com/donnemartin/system-design-primer)
 - [ ] [Six Programming Paradigm](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will)
 - [ ] [Programming Paradigms for Dummies](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)
@@ -124,7 +127,7 @@
 
 
 # Linux
-- [x] :pencil: [Linux Kernel 4.19](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxKernel.md)
+- [x] :pencil2: [Linux Kernel 4.19](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxKernel.md)
 - [ ] [Red Hat Enterprise Linux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/)
 
 - [ ] [What Every Programmer Should Know About Memory](http://futuretech.blinkenlights.nl/misc/cpumemory.pdf)
@@ -142,7 +145,7 @@
 
 ### Network
 - [ ] :blue_book: Computer Networks, 5th Edition
-- [ ] :blue_book: [Linux High Performance Server Programming(Chinese)](https://book.douban.com/subject/24722611/) :pencil:  [Linux Programmnig Noetes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxProgramming.md) :pencil: [Linux System Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxBasic.md)
+- [ ] :blue_book: [Linux High Performance Server Programming (CN)](https://book.douban.com/subject/24722611/) :pencil2:  [Linux Programmnig Noetes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxProgramming.md) :pencil2: [Linux System Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxBasic.md)
 
 - [ ] :blue_book: Network tuning
 - [ ] [Linux Advanced Routing & Traffic Control HOWTO](https://lartc.org)
@@ -204,7 +207,7 @@
 - [ ] [CAP Theorem](https://en.wikipedia.org/wiki/CAP_theorem)
 - [ ] [A Brief Tour of FLP Impossibility](https://www.the-paper-trail.org/post/2008-08-13-a-brief-tour-of-flp-impossibility/)
 - [ ] [DLS](http://groups.csail.mit.edu/tds/papers/Lynch/jacm88.pdf)
-- [ ] [Introduction to Distributed System Priciples(Chinese)](http://guanzhou.pub/2018/06/04/Distributed/)
+- [ ] [Introduction to Distributed System Priciples(CN)](http://guanzhou.pub/2018/06/04/Distributed/)
 
 - [ ] [CAP Twelve Years Later: How the "Rules" Have Changed](https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/)
 - [ ] [Harvest, yield, and scalable tolerant systems](https://www.semanticscholar.org/paper/9c9ceb29a358149e9617d103f5624f325bf08b1e?p2df)
@@ -214,7 +217,7 @@
 - [ ] :blue_book: [Distributed Systems for fun and profit](http://book.mixu.net/distsys/single-page.html)
 - [ ] :blue_book: Designing Data Intensive Applications
 - [ ] :blue_book: [Distributed Systems: Principles and Paradigms](http://barbie.uta.edu/~jli/Resources/MapReduce&Hadoop/Distributed%20Systems%20Principles%20and%20Paradigms.pdf)
-- [ ] :blue_book: [Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services](https://azure.microsoft.com/en-us/resources/designing-distributed-systems/) :pencil: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/designing-distributed-systems.md)
+- [ ] :blue_book: [Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services](https://azure.microsoft.com/en-us/resources/designing-distributed-systems/) :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/designing-distributed-systems.md)
 - [ ] :blue_book: [Principles of Distributed Systems](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
 - [ ] :newspaper: [Transaction Across DataCenter](https://snarfed.org/transactions_across_datacenters_io.html)   [YouTuBe](https://www.youtube.com/watch?v=srOgpXECblk)
 
