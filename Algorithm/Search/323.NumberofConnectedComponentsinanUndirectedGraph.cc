@@ -35,6 +35,7 @@ Relatives:
 
 using namespace std;
 
+/* Union Find */
 class Solution {
 public:
     int countComponents(int n, vector<vector<int>>& edges) {
@@ -57,8 +58,7 @@ public:
 private:
     int find(vector<int>& roots, int id) {
         while (roots[id] != id) {
-            roots[id] = roots[roots[id]];  // optional: path compression
-            id = roots[id];
+            id = roots[id] = roots[roots[id]];  // optional: path compression
         }
         return id;
     }
