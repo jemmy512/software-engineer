@@ -49,6 +49,11 @@
 - [x] [The cost of dynamic (virtual calls) vs. static (CRTP) dispatch in C++](https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c)
 - [x] [Memory layout of C ++ objects(CN)](https://coolshell.cn/articles/12176.html)
 
+* Const & Mutable
+    - [x] [Const Correctness](https://arne-mertz.de/2016/07/const-correctness/)
+    - [x] [Mutable](https://arne-mertz.de/2017/10/mutable/)
+    - [x] [How to Share Code with Const and Non-Const Functions in C++](https://www.cppstories.com/2020/11/share-code-const-nonconst.html)
+
 * C++ Memory Model
     - [x] [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)
     - [x] [C++ Memory Model](https://www.modernescpp.com/index.php/c-memory-model)
@@ -79,8 +84,11 @@
     - [x] [Variadic CRTP Packs: From Opt-in Skills to Opt-in Skillsets](https://www.fluentcpp.com/2018/06/26/variadic-crtp-packs-from-opt-in-skills-to-opt-in-skillsets/)
     - [x] [Variadic CRTP: An Opt-in for Class Features, at Compile Time](https://www.fluentcpp.com/2018/06/22/variadic-crtp-opt-in-for-class-features-at-compile-time/)
 * Template
-    - [x] [How to Share Code with Const and Non-Const Functions in C++](https://www.cppstories.com/2020/11/share-code-const-nonconst.html)
     - [x] [One Trick with Private Names and Function Templates](https://www.cppstories.com/2020/12/private-names-trick)
+    - [x] [Modern C++ Features – Class Template Argument Deduction](https://arne-mertz.de/2017/06/class-template-argument-deduction/)
+
+* C++ 20
+    - [x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
 
 # Theoretical Discipline
 - [ ] :blue_book: Data Structures and Algorithm Analysis in C:Second Edition
@@ -219,7 +227,20 @@
 - [ ] :blue_book: [Distributed Systems: Principles and Paradigms](http://barbie.uta.edu/~jli/Resources/MapReduce&Hadoop/Distributed%20Systems%20Principles%20and%20Paradigms.pdf)
 - [ ] :blue_book: [Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services](https://azure.microsoft.com/en-us/resources/designing-distributed-systems/) :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/designing-distributed-systems.md)
 - [ ] :blue_book: [Principles of Distributed Systems](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
-- [ ] :newspaper: [Transaction Across DataCenter](https://snarfed.org/transactions_across_datacenters_io.html)   [YouTuBe](https://www.youtube.com/watch?v=srOgpXECblk)
+- [ ] :newspaper: [Transaction Across DataCenter](https://snarfed.org/transactions_across_datacenters_io.html)   [:tv: YouTuBe](https://www.youtube.com/watch?v=srOgpXECblk)
+- [ ] [Martin Fowler: Patterns of Distributed Systems](https://martinfowler.com/articles/patterns-of-distributed-systems/)
+    - [ ] [Consistent Core](https://martinfowler.com/articles/patterns-of-distributed-systems/consistent-core.html)
+    - [ ] [Generation Clock](https://martinfowler.com/articles/patterns-of-distributed-systems/generation.html)
+    - [ ] [Hear Beat](https://martinfowler.com/articles/patterns-of-distributed-systems/heartbeat.html)
+    - [ ] [High-Water Mark](https://martinfowler.com/articles/patterns-of-distributed-systems/high-watermark.html)
+    - [ ] [Low-Water Mark](https://martinfowler.com/articles/patterns-of-distributed-systems/low-watermark.html)
+    - [ ] [Leader Follwers](https://martinfowler.com/articles/patterns-of-distributed-systems/leader-follower.html)
+    - [ ] [Quorum](https://martinfowler.com/articles/patterns-of-distributed-systems/quorum.html)
+    - [ ] [Request Pipeline](https://martinfowler.com/articles/patterns-of-distributed-systems/request-pipeline.html)
+    - [ ] [Segemented Log](https://martinfowler.com/articles/patterns-of-distributed-systems/log-segmentation.html)
+    - [ ] [Single Scoekt Channel](https://martinfowler.com/articles/patterns-of-distributed-systems/single-socket-channel.html)
+    - [ ] [Singular Update Queue](https://martinfowler.com/articles/patterns-of-distributed-systems/singular-update-queue.html)
+    - [ ] [Write-Ahead Log](https://martinfowler.com/articles/patterns-of-distributed-systems/wal.html)
 
 ### Distributed Messages System
 - [ ] [Kafka: a Distributed Messaging System for Log Processing](http://notes.stephenholiday.com/Kafka.pdf)
