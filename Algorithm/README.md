@@ -61,37 +61,10 @@ No | Title | Difficulty | Catogary | Notes
 448 | Find All Numbers Disappeared in An Array | :star: | Array
 325 | Maximum Size Subarray Sum Equals k | :star: :star:| Array | :trophy: `Prefix Sum` `Map`
 560 | Sub array Sum Equals K | :star: :star: | Array | :trophy: `Prefix Sum` `Map`
- | DP |  | |
-5 | Longest Palindromic Substring | :star: :star: | DP | :trophy:
-32 | Longet Valid Paretheses | :star: :star: :star: |  DP | :trophy: `stack`
-53 | Maximum Subarray | :star: | DP | :trophy:
-62 | Unique Paths | :star: :star: | DP | :trophy:
-63 | Unique Paths II | :star: :star: | DP | :trophy:
-980 | Unique Paths III | :star: :star: :star: | DP | `TODO`
-64 | Minimum Path Sum | :star: :star: | DP | :trophy:
-70 | Climbing Stairs | :star: | DP | :trophy:
-72 | Edit Distance | :star: :star: :star: | DP
-91 | Decode Ways | :star: :star: | DP | :trophy:
-121 | Best Time to Buy and Sell Stock | :star: | DP | :trophy: `Prefix Sum`
-122 | Best Time to Buy and Sell Stock II | :star: | DP | :trophy: `Greedy`
-123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | DP | :trophy: `Bidirectional DP`
-188 | Best Time to Buy and Sell Stock IV | :star: :star: :star:| DP | :trophy: :thinking:
-152 | Maximum Product Subarry | :star: :star: | DP | :trophy: `Prefix Sum`
-198 | House Robber | :star: | DP | :trophy:
-221 | Maximal Square | :star: :start: | DP | :trophy: :thinking:
-264 | Ugly Number II | :star: :star: | DP | :trophy:
-303 | Range Sum Query Immutable | :star: | DP | :trophy:
-307 | Range Sum Query Mutable | :star: :star: | DP | :trophy: `Segment Tree`
-304 | Range Sum Query 2D Immutable | :star: :star: | DP | :trophy:
-338 | Counting Bits | :star: :star: | DP | :trophy: :thinking: `Bit`
-509 | Fibonacci Number| :star: | DP | :trophy:
-523 | Continuous Subarray Sum  | :star: :star: | DP | `Map`
-746 | MinCost Climb Stair | :star: | DP | :trophy:
-1137 | N-th Tribonacci Number | :star: | DP | :trophy:
  | List |  |
 19 | Remove Nth Node From End of List | :star: :star: | List | :trophy:
 21 | Merge Two Sorted Lists | :star: | List
-23 | Merge K Sorted List | :star: :star: :star: | List `K-way Merge`
+23 | Merge K Sorted List | :star: :star: :star: | List ｜:trophy: `K-way Merge` `Divide Conquer`
 24 | Swap Nodes in Pairs | :star: :star: | List
 25 | Reverse Nodes in K-Group | :star: :star: :star: | List | :trophy:
 61 | Roate List By K | :star: :star: | List
@@ -195,6 +168,36 @@ No | Title | Difficulty | Catogary | Notes
 252 | Meeting Rooms | :star: | Queue | :trophy:
 253 | Meeting Rooms II | :star: :star: | Queue | :trophy:
 641 | Design Circular Deque | :star: :star: | Queue
+ | DP |  | |
+5 | Longest Palindromic Substring | :star: :star: | DP | :trophy:
+32 | Longet Valid Paretheses | :star: :star: :star: |  DP | :trophy: `stack`
+53 | Maximum Subarray | :star: | DP | :trophy:
+62 | Unique Paths | :star: :star: | DP | :trophy:
+63 | Unique Paths II | :star: :star: | DP | :trophy:
+980 | Unique Paths III | :star: :star: :star: | DP | `TODO`
+64 | Minimum Path Sum | :star: :star: | DP | :trophy:
+70 | Climbing Stairs | :star: | DP | :trophy:
+72 | Edit Distance | :star: :star: :star: | DP
+91 | Decode Ways | :star: :star: | DP | :trophy:
+121 | Best Time to Buy and Sell Stock | :star: | DP | :trophy: `Prefix Sum`
+122 | Best Time to Buy and Sell Stock II | :star: | DP | :trophy: `Greedy`
+123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | DP | :trophy: `Bidirectional DP`
+188 | Best Time to Buy and Sell Stock IV | :star: :star: :star:| DP | :trophy: :thinking:
+152 | Maximum Product Subarry | :star: :star: | DP | :trophy: `Prefix Sum`
+198 | House Robber | :star: | DP | :trophy:
+221 | Maximal Square | :star: :star: | DP | :trophy: :thinking:
+264 | Ugly Number II | :star: :star: | DP | :trophy:
+303 | Range Sum Query Immutable | :star: | DP | :trophy:
+307 | Range Sum Query Mutable | :star: :star: | DP | :trophy: `Segment Tree`
+304 | Range Sum Query 2D Immutable | :star: :star: | DP | :trophy:
+322 | Coin Change | :star: :star: | DP | :trophy: `Bottom Up` `Top Down`
+518 | Coin Change 2 | :star: :star: | DP | :trophy: :thining: `Bottom Up` `Top Down`
+338 | Counting Bits | :star: :star: | DP | :trophy: :thinking: `Bit`
+509 | Fibonacci Number| :star: | DP | :trophy:
+523 | Continuous Subarray Sum  | :star: :star: | DP | `Map`
+547 | Number of Provinces | :star: :star: | DP | :trophy:
+746 | MinCost Climb Stair | :star: | DP | :trophy:
+1137 | N-th Tribonacci Number | :star: | DP | :trophy:
  | Search | | |
 34 | Search For a Range | :star: :star: | Search | :trophy:
 35 | Search Insert Position | :star: | Search | :trophy:
@@ -204,9 +207,11 @@ No | Title | Difficulty | Catogary | Notes
 200 | Number of Islands | :star: :star: | Search | :trophy: `DFS` `BFS`
 278 | First Bad Version | :star: | Search | :trophy:
 286 | Walls and Gates | :star: :star: | Search | :trophy: :thinking: `BFS`
+323 | Number of Connected Components in an Undirected Graph | :star: :star: | Search | :trophy: :thinking: `Union Find`
 374 | Guess Number Higher Or Lower | :star: | Search | :trophy:
-378 | Kth Smallest Element in a Sorted Matrix  | :star: :star:| Sort | :trophy: `BS` :thinking:
-973 | K Closest Points to Origin | :star: :star:| Sort | :trophy: :thinking: `Quick Select` `BS`
+378 | Kth Smallest Element in a Sorted Matrix  | :star: :star:| Search | :trophy: `BS` :thinking:
+695 | Max Area of Island  | :star: :star: | Search | :trophy: `DFS`
+973 | K Closest Points to Origin | :star: :star:| Search | :trophy: :thinking: `Quick Select` `BS`
  | BackTrack | | |
 017 | Letter Combination of a Phone Number | :star: :star: | BackTrack | :trophy:
 022 | Generate Parenthesis | :star: :star: | BackTrack | :trophy: :thinking:
@@ -222,8 +227,11 @@ No | Title | Difficulty | Catogary | Notes
 159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | Two Pointers | :trophy:
 340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star:| Two Pointers | :trophy:
 992 | Subarrays with K Different Integers | :star: :star: :star:| Two Pointers | `TODO`
+ | Divide Conquer | | |
+23 | Merge K Sorted List | :star: :star: :star: | Divide Conquer ｜:trophy: `K-way Merge`
  | Design | | |
 146 | LRU Cache | :star: :star: | Design | :trophy:
+380 | Insert Delete GetRandom O(1) | :star: :star: | Design | :trophy:
 
 
 # Dynamic Programming
@@ -246,6 +254,14 @@ No | Title | Difficulty | Catogary | Notes
 5. Backpack
 6. Longest sequence
 7. Game
+
+# DFS BFS
+1. Recursion
+2. Deque
+
+# Union Find
+* [:link: Disjoint Set (Or Union-Find) | Set 1 (Detect Cycle in an Undirected Graph)](https://www.geeksforgeeks.org/union-find/)
+* [:link: Union-Find Algorithm | Set 2 (Union By Rank and Path Compression)](https://www.geeksforgeeks.org/union-find-algorithm-set-2-union-by-rank/)
 
 # Bit Operations
 Name | Operation
