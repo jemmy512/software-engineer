@@ -162,6 +162,46 @@ public:
     }
 };
 
+/* STL List Version */
+class LRUCache {
+public:
+    LRUCache(int capacity) {
+        assert(capacity > 0);
+        _Capacity = capacity;
+        _Index.reserve(capacity);
+    }
+
+    int get(int key) {
+        auto iter = _Index.find(key);
+        if (iter == _Index.end()) {
+            return -1;
+        }
+
+        _Cache.splice(_Cache.begin(), _Cache, iter->second);
+        return iter->second->second;
+    }
+
+    void put(int key, int value) {
+        auto iter = _Index.find(key);
+        if (iter != _Index.end()) {
+            iter->second->second = value;
+            _Cache.splice(_Cache.begin(), _Cache, iter->second);
+        } else {
+            if (_Cache.size() >= _Capacity) {
+                _Index.erase((--_Cache.end())->first);
+                _Cache.erase(--_Cache.end());
+            }
+            _Cache.emplace_front(key, value);
+            _Index.emplace(key, _Cache.begin());
+        }
+    }
+
+private:
+    int _Capacity;
+    std::list<std::pair<int, int>> _Cache;
+    unordered_map<int, std::list<std::pair<int, int>>::iterator> _Index;
+};
+
 /* Your LRUCache object will be instantiated and called as such:
  * LRUCache* obj = new LRUCache(capacity);
  * int param_1 = obj->get(key);
