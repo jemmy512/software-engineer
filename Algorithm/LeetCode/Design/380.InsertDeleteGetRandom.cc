@@ -34,6 +34,8 @@ Constraints:
 At most 105 calls will be made to insert, remove, and getRandom.
 There will be at least one element in the data structure when getRandom is called. */
 
+#include <list>
+#include <vector>
 #include <chrono>
 #include <random>
 #include <unordered_map>
@@ -53,7 +55,7 @@ public:
         return true;
     }
 
-    /* remove ith element from vec will cause all indcies in hashMap invalied
+    /* remove ith element from vec will cause all indcies in hashMap invalide
      * swap the ith elem and back elem of vec, then delete the back elem */
     bool remove(int val) {
         auto iter = hashMap.find(val);
@@ -74,6 +76,51 @@ public:
 private:
     std::vector<int> vec;
     std::unordered_map<int, int> hashMap;
+
+    template<typename Size = int>
+    Size getRandom(Size min, Size max) {
+        std::random_device dev;
+        std::default_random_engine engine(dev());
+        std::uniform_int_distribution<Size> distribution(min, max);
+
+        return distribution(engine);
+    }
+};
+
+/* List Version */
+class RandomizedSet {
+public:
+    RandomizedSet() = default;
+
+    bool insert(int val) {
+        if (hashMap.find(val) != hashMap.end())
+            return false;
+
+        list.emplace_back(val);
+        hashMap.emplace(val, --list.end());
+        return true;
+    }
+
+    bool remove(int val) {
+        auto iter = hashMap.find(val);
+        if (iter == hashMap.end())
+            return false;
+
+        list.erase(hashMap[val]);
+        hashMap.erase(val);
+        return true;
+    }
+
+    /* Time complexity: O(N) */
+    int getRandom() {
+        auto begin = list.begin();
+        std::advance(begin, getRandom<size_t>(0, list.size()-1));
+        return *begin;
+    }
+
+private:
+    std::list<int> list;
+    std::unordered_map<int, std::list<int>::iterator> hashMap;
 
     template<typename Size = int>
     Size getRandom(Size min, Size max) {
