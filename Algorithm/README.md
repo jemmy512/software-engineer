@@ -232,8 +232,8 @@ No | Title | Difficulty | Catogary | Notes
  | Sort | | |
 937 | Reorder Data in Log Files | :star: | Sort | :trophy:
  | Design | | |
-146 | LRU Cache | :star: :star: | Design | :trophy:
-380 | Insert Delete GetRandom O(1) | :star: :star: | Design | :trophy:
+146 | LRU Cache | :star: :star: | Design | :trophy: `Map + List (O(1) + Date Move)`
+380 | Insert Delete GetRandom O(1) | :star: :star: | Design | :trophy: `Map + Vec (O(1) + Random Access)`
 
 
 # Dynamic Programming
