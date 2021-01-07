@@ -191,7 +191,7 @@ No | Title | Difficulty | Catogary | Notes
 307 | Range Sum Query Mutable | :star: :star: | DP | :trophy: `Segment Tree`
 304 | Range Sum Query 2D Immutable | :star: :star: | DP | :trophy:
 322 | Coin Change | :star: :star: | DP | :trophy: `Bottom Up` `Top Down`
-518 | Coin Change 2 | :star: :star: | DP | :trophy: :thining: `Bottom Up` `Top Down`
+518 | Coin Change 2 | :star: :star: | DP | :trophy: :thinking: `Bottom Up` `Top Down`
 338 | Counting Bits | :star: :star: | DP | :trophy: :thinking: `Bit`
 509 | Fibonacci Number| :star: | DP | :trophy:
 523 | Continuous Subarray Sum  | :star: :star: | DP | `Map`
@@ -225,10 +225,12 @@ No | Title | Difficulty | Catogary | Notes
 3 | Longest Sub string Without Repeating Characters | :star: :star: | Two Pointers | :trophy:
 239 | Sliding Window Maximum | :star: :star: :star: | Two Pointers | :trophy: `DP` `deque`
 159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | Two Pointers | :trophy:
-340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star:| Two Pointers | :trophy:
-992 | Subarrays with K Different Integers | :star: :star: :star:| Two Pointers | `TODO`
+340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | Two Pointers | :trophy:
+992 | Subarrays with K Different Integers | :star: :star: :star: | Two Pointers | `TODO`
  | Divide Conquer | | |
-23 | Merge K Sorted List | :star: :star: :star: | Divide Conquer ｜:trophy: `K-way Merge`
+23 | Merge K Sorted List | :star: :star: :star: | Divide Conquer | :trophy: `K-way Merge`
+ | Sort | | |
+937 | Reorder Data in Log Files | :star: | Sort | :trophy:
  | Design | | |
 146 | LRU Cache | :star: :star: | Design | :trophy:
 380 | Insert Delete GetRandom O(1) | :star: :star: | Design | :trophy:
