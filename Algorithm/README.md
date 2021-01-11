@@ -64,7 +64,7 @@ No | Title | Difficulty | Catogary | Notes
  | List |  |
 19 | Remove Nth Node From End of List | :star: :star: | List | :trophy:
 21 | Merge Two Sorted Lists | :star: | List
-23 | Merge K Sorted List | :star: :star: :star: | List ｜:trophy: `K-way Merge` `Divide Conquer`
+23 | Merge K Sorted List | :star: :star: :star: | List | :trophy: `K-way Merge` `Divide Conquer`
 24 | Swap Nodes in Pairs | :star: :star: | List
 25 | Reverse Nodes in K-Group | :star: :star: :star: | List | :trophy:
 61 | Roate List By K | :star: :star: | List
@@ -163,6 +163,7 @@ No | Title | Difficulty | Catogary | Notes
 32 | Longet Valid Paretheses | :star: :star: :star: |  Stack | :trophy: `DP`
 155 | MinStack | :star: | Stack
 394 | DecodeString | :star: :star: | Stack | :trophy:
+1249 | Minimum Remove to Make Valid Parentheses| :star: :star: | Stack | :trophy: `Bit Set`
  | Queue |  | |
 239 | Sliding Window Maximum | :star: :star: :star: | Queue | :trophy: :thinking: `DP` `L-R Lists`
 252 | Meeting Rooms | :star: | Queue | :trophy:
@@ -183,6 +184,7 @@ No | Title | Difficulty | Catogary | Notes
 122 | Best Time to Buy and Sell Stock II | :star: | DP | :trophy: `Greedy`
 123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | DP | :trophy: `Bidirectional DP`
 188 | Best Time to Buy and Sell Stock IV | :star: :star: :star:| DP | :trophy: :thinking:
+139 | Word Break | :start: :star: | DP | :trophy: :thinking: `Bottom Up`
 152 | Maximum Product Subarry | :star: :star: | DP | :trophy: `Prefix Sum`
 198 | House Robber | :star: | DP | :trophy:
 221 | Maximal Square | :star: :star: | DP | :trophy: :thinking:
@@ -201,15 +203,15 @@ No | Title | Difficulty | Catogary | Notes
  | Search | | |
 34 | Search For a Range | :star: :star: | Search | :trophy:
 35 | Search Insert Position | :star: | Search | :trophy:
-74 | Search a 2D Matrix | :star: :star: | Search | :trophy: `BS`
-240 | Search a 2D Matrix II | :star: :star: | Search | :trophy: `BS` :thinking:
+74 | Search a 2D Matrix | :star: :star: | Search | :trophy: `BS` `Matrix`
+240 | Search a 2D Matrix II | :star: :star: | Search | :trophy: :thinking: `BS` `Matrix`
 130 | Surrounded Regions | :star: :star: | Search | :trophy: `DFS` `BFS` `Opposite`
 200 | Number of Islands | :star: :star: | Search | :trophy: `DFS` `BFS`
 278 | First Bad Version | :star: | Search | :trophy:
 286 | Walls and Gates | :star: :star: | Search | :trophy: :thinking: `BFS`
 323 | Number of Connected Components in an Undirected Graph | :star: :star: | Search | :trophy: :thinking: `Union Find`
 374 | Guess Number Higher Or Lower | :star: | Search | :trophy:
-378 | Kth Smallest Element in a Sorted Matrix  | :star: :star:| Search | :trophy: `BS` :thinking:
+378 | Kth Smallest Element in a Sorted Matrix  | :star: :star:| Search | :trophy: :thinking: `BS` `Matrix`
 695 | Max Area of Island  | :star: :star: | Search | :trophy: `DFS`
 973 | K Closest Points to Origin | :star: :star:| Search | :trophy: :thinking: `Quick Select` `BS`
  | BackTrack | | |
@@ -217,6 +219,8 @@ No | Title | Difficulty | Catogary | Notes
 022 | Generate Parenthesis | :star: :star: | BackTrack | :trophy: :thinking:
 046 | Permutations | :star: :star: | BackTrack | :trophy:
 047 | Permutations II | :star: :star: | BackTrack | `TODO`
+079 | Word Search | :star: :star: | BackTrack | :trophy `Matrix`
+212 | Word Search II | :star: :star: :star: | BackTrack | :trophy `Matrix`
  | Greedy | | |
 122 | Best Time to Buy and Sell Stock II | :star: | Greedy | :trophy:
 452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | Greedy | :trophy:
@@ -234,6 +238,7 @@ No | Title | Difficulty | Catogary | Notes
  | Design | | |
 146 | LRU Cache | :star: :star: | Design | :trophy: `Map + List (O(1) + Date Move)`
 380 | Insert Delete GetRandom O(1) | :star: :star: | Design | :trophy: `Map + Vec (O(1) + Random Access)`
+1396 | Design Underground System | :star: :star: | Design | :trophy:
 
 
 # Dynamic Programming
