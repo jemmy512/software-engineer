@@ -10,10 +10,10 @@
 - [ ] [How to Ask Question The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html)
 
 ### Coding Cultivation
-- [ ] :blue_book: Refactoring: Improving the Design of Existing Code
-- [ ] :blue_book: Working Effectively with Legacy Code
-- [ ] :blue_book: Clean Code: A Handbook of Agile Software Craftsmanship :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/clean-code.md)
-- [ ] :blue_book: The Clean Coder：A Code of Conduct for Professional Programmers
+- [ ] :orange_book: Refactoring: Improving the Design of Existing Code
+- [ ] :orange_book: Working Effectively with Legacy Code
+- [ ] :orange_book: Clean Code: A Handbook of Agile Software Craftsmanship :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/clean-code.md)
+- [ ] :orange_book: The Clean Coder：A Code of Conduct for Professional Programmers
 
 ### Code Review
 - [ ] [Code Review Best Practices](https://medium.com/palantir/code-review-best-practices-19e02780015f?)
@@ -26,8 +26,8 @@
 - [ ] [Hardening Your HTTP Security Headers](https://www.keycdn.com/blog/http-security-headers)
 
 ### Testing
-- [ ] :blue_book: Perfect Software: And Other Illusions about Testing
-- [ ] :blue_book: How Google Tests Software
+- [ ] :orange_book: Perfect Software: And Other Illusions about Testing
+- [ ] :orange_book: How Google Tests Software
 
 ### Publishing
 - [x] [Checklist](https://github.com/mtdvio/going-to-production)
@@ -35,15 +35,15 @@
 # Programming Language
 
 ### C/C++
-- [ ] :blue_book: The C Programming Language
-- [ ] :blue_book: C Programming: A Modern Approach
-- [ ] :blue_book: C Traps and Pitfalls
-- [x] :blue_book: C++ Primer, 5th Edition :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-primer.md)
-- [x] :blue_book: Effective C++ :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/effective-cpp.md)
-- [ ] :blue_book: More Effective C++ :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/more-effective-cpp.md)
-- [x] :blue_book: Modern Effective C++ :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/effective-modern-cpp.md)
-- [x] :blue_book: Inside C++ Object Model :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/inside-the-cpp-object-model.md)
-- [x] :blue_book: C++ Templates The Complete Guide :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-templates-the-complete-guid.md)
+- [ ] :orange_book: The C Programming Language
+- [ ] :orange_book: C Programming: A Modern Approach
+- [ ] :orange_book: C Traps and Pitfalls
+- [x] :orange_book: C++ Primer, 5th Edition :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-primer.md)
+- [x] :orange_book: Effective C++ :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/effective-cpp.md)
+- [ ] :orange_book: More Effective C++ :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/more-effective-cpp.md)
+- [x] :orange_book: Modern Effective C++ :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/effective-modern-cpp.md)
+- [x] :orange_book: Inside C++ Object Model :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/inside-the-cpp-object-model.md)
+- [x] :orange_book: C++ Templates The Complete Guide :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-templates-the-complete-guid.md)
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
 - [x] [C ++ virtual function table analysis(CN)](https://coolshell.cn/articles/12165.html)
 - [x] [The cost of dynamic (virtual calls) vs. static (CRTP) dispatch in C++](https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c)
@@ -91,18 +91,18 @@
     - [x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
 
 # Theoretical Discipline
-- [ ] :blue_book: Data Structures and Algorithm Analysis in C:Second Edition
-- [ ] :blue_book: Database System Concepts(Fifth Edition)
-- [ ] :blue_book: Modern Operating Systems :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/modern-operating-system.md)
-- [ ] :blue_book: Computer Networking: A Top-Down Approach
+- [ ] :orange_book: Data Structures and Algorithm Analysis in C:Second Edition
+- [ ] :orange_book: Database System Concepts(Fifth Edition)
+- [ ] :orange_book: Modern Operating Systems :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/modern-operating-system.md)
+- [ ] :orange_book: Computer Networking: A Top-Down Approach
 
 # System Knowledge
-- [ ] :blue_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
-- [ ] :blue_book: Advanced Programming in the UNIX Environment
-- [ ] :blue_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxProgramming.md)
-- [ ] :blue_book: UNIX Network Programming, Volume 2: Interprocess Communications
-- [ ] :blue_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/TCP:IP%20Illustrated%2C%20Volume%201.md)
-- [ ] :blue_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
+- [ ] :orange_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
+- [ ] :orange_book: Advanced Programming in the UNIX Environment
+- [ ] :orange_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxProgramming.md)
+- [ ] :orange_book: UNIX Network Programming, Volume 2: Interprocess Communications
+- [ ] :orange_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/TCP:IP%20Illustrated%2C%20Volume%201.md)
+- [ ] :orange_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
 
 - [ ] [Let’s Code a TCP/IP Stack, 1: Ethernet & ARP](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/#tuntap-devices)
 - [ ] [Let’s Code a TCP/IP Stack, 2: IPV4 & ICMPv4](https://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4)
@@ -122,9 +122,9 @@
 - [ ] [Programming Paradigms for Dummies](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)
 - [ ] [Stanford Programming Paradigm](https://see.stanford.edu/Course/CS107)
 
-- [ ] :blue_book: Domain-Driven Design: Tackling Complexity in the Heart of Software
-- [ ] :blue_book: The Art of UNIX Programming
-- [ ] :blue_book: Clean Architecture
+- [ ] :orange_book: Domain-Driven Design: Tackling Complexity in the Heart of Software
+- [ ] :orange_book: The Art of UNIX Programming
+- [ ] :orange_book: Clean Architecture
 - [ ] [The Twelve-Factor App](https://12factor.net)
 - [ ] [Avoid Over Engineering](https://medium.com/@rdsubhas/10-modern-software-engineering-mistakes-bc67fbef4fc8)
 
@@ -151,9 +151,9 @@
 - [x] [Spurious wakeup](https://en.wikipedia.org/wiki/Spurious_wakeup)  [:link: C++ Condition Variable](https://www.modernescpp.com/index.php/c-core-guidelines-be-aware-of-the-traps-of-condition-variables)
 
 ### Network
-- [ ] :blue_book: Computer Networks, 5th Edition
-- [ ] :blue_book: [Linux High Performance Server Programming (CN)](https://book.douban.com/subject/24722611/) :pencil2:  [Linux Programmnig Noetes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxProgramming.md) :pencil2: [Linux System Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxBasic.md)
-- [ ] :blue_book: Network tuning
+- [ ] :orange_book: Computer Networks, 5th Edition
+- [ ] :orange_book: [Linux High Performance Server Programming (CN)](https://book.douban.com/subject/24722611/) :pencil2:  [Linux Programmnig Noetes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxProgramming.md) :pencil2: [Linux System Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxBasic.md)
+- [ ] :orange_book: Network tuning
 
 - [ ] [Linux Advanced Routing & Traffic Control HOWTO](https://lartc.org)
 - [ ] [Red Hat Enterprise Linux Network Performance Tuning Guide](https://access.redhat.com/sites/default/files/attachments/20150325_network_performance_tuning.pdf)
@@ -221,11 +221,11 @@
 - [ ] [Base: An Acid Alternative](https://queue.acm.org/detail.cfm?id=1394128)
 - [ ] [Eventually Consistent](https://www.allthingsdistributed.com/2008/12/eventually_consistent.html)
 
-- [ ] :blue_book: [Distributed Systems for fun and profit](http://book.mixu.net/distsys/single-page.html)
-- [ ] :blue_book: Designing Data Intensive Applications
-- [ ] :blue_book: [Distributed Systems: Principles and Paradigms](http://barbie.uta.edu/~jli/Resources/MapReduce&Hadoop/Distributed%20Systems%20Principles%20and%20Paradigms.pdf)
-- [ ] :blue_book: [Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services](https://azure.microsoft.com/en-us/resources/designing-distributed-systems/) :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/designing-distributed-systems.md)
-- [ ] :blue_book: [Principles of Distributed Systems](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
+- [ ] :orange_book: [Distributed Systems for fun and profit](http://book.mixu.net/distsys/single-page.html)
+- [ ] :orange_book: Designing Data Intensive Applications
+- [ ] :orange_book: [Distributed Systems: Principles and Paradigms](http://barbie.uta.edu/~jli/Resources/MapReduce&Hadoop/Distributed%20Systems%20Principles%20and%20Paradigms.pdf)
+- [ ] :orange_book: [Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services](https://azure.microsoft.com/en-us/resources/designing-distributed-systems/) :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/designing-distributed-systems.md)
+- [ ] :orange_book: [Principles of Distributed Systems](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
 - [ ] :newspaper: [Transaction Across DataCenter](https://snarfed.org/transactions_across_datacenters_io.html)   [:tv: YouTuBe](https://www.youtube.com/watch?v=srOgpXECblk)
 
 - [ ] [Martin Fowler: Patterns of Distributed Systems](https://martinfowler.com/articles/patterns-of-distributed-systems/)
@@ -336,6 +336,7 @@
 - [ ] [Billions of Messages a Day - Yelp’s Real-time Data Pipeline](https://engineeringblog.yelp.com/2016/07/billions-of-messages-a-day-yelps-real-time-data-pipeline.html)
 - [ ] [Uber: Building Reliable Reprocessing and Dead Letter Queues with Kafka](https://eng.uber.com/reliable-reprocessing/)
 - [ ] [Uber: Introducing Chaperone: How Uber Engineering Audits Kafka End-to-End](https://eng.uber.com/chaperone-audit-kafka-messages/)
+- [ ] [Uber: Uber’s Real-Time Push Platform](https://eng.uber.com/real-time-push-platform/)
 - [ ] [Publishing with Apache Kafka at The New York Times](https://open.nytimes.com/publishing-with-apache-kafka-at-the-new-york-times-7f0e3b7d2077)
 - [ ] [Kafka Streams on Heroku](https://blog.heroku.com/kafka-streams-on-heroku)
 - [ ] [Salesforce: How Apache Kafka Inspired Our Platform Events Architecture](https://engineering.salesforce.com/how-apache-kafka-inspired-our-platform-events-architecture-2f351fe4cf63)
@@ -352,7 +353,7 @@
 - [ ] [Understand Latency](http://highscalability.com/latency-everywhere-and-it-costs-you-sales-how-crush-it)
 - [ ] [Common Bottlenecks](http://highscalability.com/blog/2012/5/16/big-list-of-20-common-bottlenecks.html)
 - [ ] [Performance is a Feature](https://blog.codinghorror.com/performance-is-a-feature/)
-- [ ] [Make Performance Part of Your Workflow](https://codeascraft.com/2014/12/11/make-performance-part-of-your-workflow/)  :blue_book: [Designing for Performance](https://learning.oreilly.com/library/view/designing-for-performance/9781491903704/)
+- [ ] [Make Performance Part of Your Workflow](https://codeascraft.com/2014/12/11/make-performance-part-of-your-workflow/)  :orange_book: [Designing for Performance](https://learning.oreilly.com/library/view/designing-for-performance/9781491903704/)
 - [ ] [CloudFlare: How we built rate limiting capable of scaling to millions of domains](https://blog.cloudflare.com/counting-things-a-lot-of-different-things/)
 
 ### Search
@@ -392,13 +393,16 @@
 # Microservice
 - [ ] [Martin Fowler: Microservices Guide](https://martinfowler.com/microservices/)
 - [ ] [Martin Fowler: Microservice Architecture](https://martinfowler.com/articles/microservices.html)
+
 - [ ] [AWS: What are Microservices?](https://aws.amazon.com/microservices/)
 - [ ] [Microsoft: Microservices architecture style](https://docs.microsoft.com/en-us/azure/architecture/guide/architecture-styles/microservices)
 - [ ] [Pivotal: Microservices](https://tanzu.vmware.com/microservices)
+- [ ] [Uber: Introducing Domain-Oriented Microservice Architecture](https://eng.uber.com/microservice-architecture/)
+- [ ] [Uber: Designing Edge Gateway, Uber’s API Lifecycle Management Platform](https://eng.uber.com/gatewayuberapi/)
 - [ ] [Microservice Architecture](https://microservices.io)
 
-- [ ] :blue_book: [IBM: Microservices Best Practices for Java](https://www.redbooks.ibm.com/redbooks/pdfs/sg248357.pdf)
-- [ ] :blue_book: Building MicroService
+- [ ] :orange_book: [IBM: Microservices Best Practices for Java](https://www.redbooks.ibm.com/redbooks/pdfs/sg248357.pdf)
+- [ ] :orange_book: [Building MicroService](https://www.amazon.com/Building-Microservices-Designing-Fine-Grained-Systems/dp/1491950358/ref=sr_1_2?crid=LWHLL3P5PIT6&dchild=1&keywords=building+microservices&qid=1610330674&sprefix=building+micros%2Caps%2C390&sr=8-2)
 
 * Nginx
     - [ ] [Introduction to Microservices](https://www.nginx.com/blog/introduction-to-microservices/)
@@ -416,12 +420,36 @@
     - [ ] [Intro to Microservices, Part 4: Dependencies and Data Sharing](https://auth0.com/blog/apigateway-microservices-superglue/)
     - [ ] [API Gateway: the Microservices Superglue](https://auth0.com/blog/apigateway-microservices-superglue/)
 
+## API Gatway
+- [ ] [Kubernetes api gateway](https://k8s-it.medium.com/kubernetes-api-gateway-cac310589f4d)
+
+## Microservice VS SOA, IaaS, Paas, Monolithic
+- [ ] :orange_book: [Microservices vs. Service-Oriented Architecture](https://www.nginx.com/resources/library/microservices-vs-soa/)
+- [ ] [DZone: Microservices vs. SOA](https://dzone.com/articles/microservices-vs-soa-2)
+- [ ] [DZone: Microservices vs. SOA - Is There Any Difference at All?](https://dzone.com/articles/microservices-vs-soa-is-there-any-difference-at-al)
+- [ ] [Microservices, SOA, and APIs: Friends or enemies?](https://www.ibm.com/cloud/learn/microservices)
+
 - [ ] [PaaS vs. IaaS for Microservices Architectures: Top 6 Differences](https://www.altoros.com/blog/paas-vs-iaas-for-microservices-architectures-top-6-differences/)
 - [ ] [Microservices vs. Monolithic Architectures: Pros, Cons, and How Cloud Foundry (PaaS) Can Help](https://www.slideshare.net/altoros/microservices-vs-monolithic-architectures-pros-and-cons)
 - [ ] [Microservices - Not A Free Lunch!](http://highscalability.com/blog/2014/4/8/microservices-not-a-free-lunch.html)
+- [ ] [The Hidden Costs Of Microservices](https://www.stackbuilders.com/news/the-hidden-costs-of-microservices)
+
+## Pratice
+* Mircroservcie with Spring-Boot
+    - [ ] [Part 1 - Getting Started with Microservices Architecture](http://www.springboottutorial.com/creating-microservices-with-spring-boot-part-1-getting-started)
+    - [ ] [Part 2 - Creating Forex Microservice](http://www.springboottutorial.com/creating-microservices-with-spring-boot-part-2-forex-microservice)
+    - [ ] [Part 3 - Creating Currency Conversion Microservice](http://www.springboottutorial.com/creating-microservices-with-spring-boot-part-3-currency-conversion-microservice)
+    - [ ] [Part 4 - Using Ribbon for Load Balancing](http://www.springboottutorial.com/microservices-with-spring-boot-part-4-ribbon-for-load-balancing)
+    - [ ] [Part 5 - Using Eureka Naming Server](http://www.springboottutorial.com/microservices-with-spring-boot-part-5-eureka-naming-server)
+
 - [ ] [The Hidden Costs Of Microservices](https://www.stackbuilders.com/news/the-hidden-costs-of-microservices)
 - [ ] [Microservice Architecture (https://microservices.io)](https://microservices.io)
 - [ ] [Microservice Antipatterns and Pitfalls](https://www.oreilly.com/content/microservices-antipatterns-and-pitfalls/)
 - [ ] [Microservice Architecture: All The Best Practices You Need To Kno](https://codingsans.com/blog/microservice-architecture-best-practices)
 - [ ] [Best Practices for Building a Microservice Architecture](https://www.vinaysahni.com/best-practices-for-building-a-microservice-architecture)
 - [ ] [Simplicity by Distributing Complexity](https://engineering.zalando.com/posts/2018/01/simplicity-by-distributing-complexity.html)
+
+## Authentication & Authorization
+- [ ] [ForgeRock: Identity Gateway](https://backstage.forgerock.com/docs/ig/7/gateway-guide/index.html#preface)
+- [ ] [ForgeRock: Token Validation Microservice](https://backstage.forgerock.com/docs/tvm/1/user-guide/)
+- [ ] [Bringing Token state consistency to the Edge](https://charan-mann.medium.com/bringing-token-state-consistency-to-the-edge-eeaffc911b08)
