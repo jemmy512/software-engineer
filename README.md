@@ -404,9 +404,11 @@
 - [ ] :orange_book: [IBM: Microservices Best Practices for Java](https://www.redbooks.ibm.com/redbooks/pdfs/sg248357.pdf)
 - [ ] :orange_book: [Building MicroService](https://www.amazon.com/Building-Microservices-Designing-Fine-Grained-Systems/dp/1491950358/ref=sr_1_2?crid=LWHLL3P5PIT6&dchild=1&keywords=building+microservices&qid=1610330674&sprefix=building+micros%2Caps%2C390&sr=8-2)
 
+- [ ] [Google: API Improvement Proposals](https://google.aip.dev)
+
 * Nginx
-    - [ ] [Introduction to Microservices](https://www.nginx.com/blog/introduction-to-microservices/)
-    - [ ] [Building Microservices: Using an API Gateway](https://www.nginx.com/blog/building-microservices-using-an-api-gateway/)
+    - [x] [Introduction to Microservices](https://www.nginx.com/blog/introduction-to-microservices/)
+    - [x] [Building Microservices: Using an API Gateway](https://www.nginx.com/blog/building-microservices-using-an-api-gateway/)
     - [ ] [Building Microservices: Inter-Process Communication in a Microservices Architecture](https://www.nginx.com/blog/building-microservices-using-an-api-gateway/)
     - [ ] [Service Discovery in a Microservices Architecture](https://www.nginx.com/blog/building-microservices-using-an-api-gateway/)
     - [ ] [Event-Driven Data Management for Microservices](https://www.nginx.com/blog/event-driven-data-management-microservices/)
