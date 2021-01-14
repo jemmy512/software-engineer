@@ -52,6 +52,40 @@ public:
             return {};
 
         for (const auto& countDomain : cpdomains) {
+            size_t pos;
+            auto count = std::stoi(countDomain, &pos);
+            while (pos != std::string::npos) {
+                auto domain = countDomain.substr(pos+1);
+                _DomainCount[domain] += count;
+                pos = countDomain.find(".", pos+1);
+            }
+        }
+
+        return composeResult();
+    }
+
+private:
+    vector<string> composeResult() const {
+        vector<string> result;
+
+        for (const auto& [domain, count] : _DomainCount) {
+            result.emplace_back(std::to_string(count) + " " + domain);
+        }
+
+        return result;
+    }
+
+private:
+    unordered_map<string, int> _DomainCount;
+};
+
+class Solution {
+public:
+    vector<string> subdomainVisits(vector<string>& cpdomains) {
+        if (cpdomains.empty())
+            return {};
+
+        for (const auto& countDomain : cpdomains) {
             auto [count, domain] = splitCountDomain(countDomain);
             auto domains = splitDomain(domain, '.');
             for (const auto& d : domains) {
@@ -59,7 +93,7 @@ public:
             }
         }
 
-        return toString();
+        return composeResult();
     }
 
 private:
@@ -139,7 +173,7 @@ private:
         return result;
     }
 
-    vector<string> toString() const {
+    vector<string> composeResult() const {
         vector<string> result;
 
         for (const auto& [domain, count] : _DomainCount) {
