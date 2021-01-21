@@ -243,6 +243,8 @@
     - [ ] [Single Scoekt Channel](https://martinfowler.com/articles/patterns-of-distributed-systems/single-socket-channel.html)
     - [ ] [Singular Update Queue](https://martinfowler.com/articles/patterns-of-distributed-systems/singular-update-queue.html)
     - [ ] [Write-Ahead Log](https://martinfowler.com/articles/patterns-of-distributed-systems/wal.html)
+    - [ ] [Lease](https://martinfowler.com/articles/patterns-of-distributed-systems/time-bound-lease.html)
+    - [ ] [State Watch](https://martinfowler.com/articles/patterns-of-distributed-systems/state-watch.html)
 
 ### Distributed Messages System
 - [ ] [Kafka: a Distributed Messaging System for Log Processing](http://notes.stephenholiday.com/Kafka.pdf)
@@ -438,7 +440,7 @@
 - [ ] [Microservices - Not A Free Lunch!](http://highscalability.com/blog/2014/4/8/microservices-not-a-free-lunch.html)
 - [ ] [The Hidden Costs Of Microservices](https://www.stackbuilders.com/news/the-hidden-costs-of-microservices)
 
-## Pratice
+## Practice
 * Mircroservcie with Spring-Boot
     - [ ] [Part 1 - Getting Started with Microservices Architecture](http://www.springboottutorial.com/creating-microservices-with-spring-boot-part-1-getting-started)
     - [ ] [Part 2 - Creating Forex Microservice](http://www.springboottutorial.com/creating-microservices-with-spring-boot-part-2-forex-microservice)
