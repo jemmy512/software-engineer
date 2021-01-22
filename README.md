@@ -204,7 +204,7 @@
 ### Kernel
 - [x] [RCU]() [:link: Part 1](https://lwn.net/Articles/262464/) [:link: Part 2](https://lwn.net/Articles/263130/) [:link: Part 3](https://lwn.net/Articles/264090/)
 
-# Distributed architecture
+# Distributed Architecture
 - [ ] [Scalable Web Architecture and Distributed Systems](http://www.aosabook.org/en/distsys.html)
 - [ ] [Scalability, Availability & Stability Patterns](https://www.slideshare.net/jboner/scalability-availability-stability-patterns)
 - [ ] [System Design Primer](https://github.com/donnemartin/system-design-primer)
@@ -229,22 +229,6 @@
 - [ ] :orange_book: [Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services](https://azure.microsoft.com/en-us/resources/designing-distributed-systems/) :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/designing-distributed-systems.md)
 - [ ] :orange_book: [Principles of Distributed Systems](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
 - [ ] :newspaper: [Transaction Across DataCenter](https://snarfed.org/transactions_across_datacenters_io.html)   [:tv: YouTuBe](https://www.youtube.com/watch?v=srOgpXECblk)
-
-- [ ] [Martin Fowler: Patterns of Distributed Systems](https://martinfowler.com/articles/patterns-of-distributed-systems/)
-    - [ ] [Consistent Core](https://martinfowler.com/articles/patterns-of-distributed-systems/consistent-core.html)
-    - [ ] [Generation Clock](https://martinfowler.com/articles/patterns-of-distributed-systems/generation.html)
-    - [ ] [Hear Beat](https://martinfowler.com/articles/patterns-of-distributed-systems/heartbeat.html)
-    - [ ] [High-Water Mark](https://martinfowler.com/articles/patterns-of-distributed-systems/high-watermark.html)
-    - [ ] [Low-Water Mark](https://martinfowler.com/articles/patterns-of-distributed-systems/low-watermark.html)
-    - [ ] [Leader Follwers](https://martinfowler.com/articles/patterns-of-distributed-systems/leader-follower.html)
-    - [ ] [Quorum](https://martinfowler.com/articles/patterns-of-distributed-systems/quorum.html)
-    - [ ] [Request Pipeline](https://martinfowler.com/articles/patterns-of-distributed-systems/request-pipeline.html)
-    - [ ] [Segemented Log](https://martinfowler.com/articles/patterns-of-distributed-systems/log-segmentation.html)
-    - [ ] [Single Scoekt Channel](https://martinfowler.com/articles/patterns-of-distributed-systems/single-socket-channel.html)
-    - [ ] [Singular Update Queue](https://martinfowler.com/articles/patterns-of-distributed-systems/singular-update-queue.html)
-    - [ ] [Write-Ahead Log](https://martinfowler.com/articles/patterns-of-distributed-systems/wal.html)
-    - [ ] [Lease](https://martinfowler.com/articles/patterns-of-distributed-systems/time-bound-lease.html)
-    - [ ] [State Watch](https://martinfowler.com/articles/patterns-of-distributed-systems/state-watch.html)
 
 ### Distributed Messages System
 - [ ] [Kafka: a Distributed Messaging System for Log Processing](http://notes.stephenholiday.com/Kafka.pdf)
@@ -290,7 +274,112 @@
 - [ ] [Automate and Abstract: Lessons from Facebook on Engineering for Scale](https://architecht.io/lessons-from-facebook-on-engineering-for-scale-f5716f0afc7a)
 
 ### Design Pattern
+- [ ] [Martin Fowler: Patterns of Distributed Systems](https://martinfowler.com/articles/patterns-of-distributed-systems/)
+    - [ ] [Consistent Core](https://martinfowler.com/articles/patterns-of-distributed-systems/consistent-core.html)
+    - [ ] [Generation Clock](https://martinfowler.com/articles/patterns-of-distributed-systems/generation.html)
+    - [ ] [Hear Beat](https://martinfowler.com/articles/patterns-of-distributed-systems/heartbeat.html)
+    - [ ] [High-Water Mark](https://martinfowler.com/articles/patterns-of-distributed-systems/high-watermark.html)
+    - [ ] [Low-Water Mark](https://martinfowler.com/articles/patterns-of-distributed-systems/low-watermark.html)
+    - [ ] [Leader Follwers](https://martinfowler.com/articles/patterns-of-distributed-systems/leader-follower.html)
+    - [ ] [Quorum](https://martinfowler.com/articles/patterns-of-distributed-systems/quorum.html)
+    - [ ] [Request Pipeline](https://martinfowler.com/articles/patterns-of-distributed-systems/request-pipeline.html)
+    - [ ] [Segemented Log](https://martinfowler.com/articles/patterns-of-distributed-systems/log-segmentation.html)
+    - [ ] [Single Scoekt Channel](https://martinfowler.com/articles/patterns-of-distributed-systems/single-socket-channel.html)
+    - [ ] [Singular Update Queue](https://martinfowler.com/articles/patterns-of-distributed-systems/singular-update-queue.html)
+    - [ ] [Write-Ahead Log](https://martinfowler.com/articles/patterns-of-distributed-systems/wal.html)
+    - [ ] [Lease](https://martinfowler.com/articles/patterns-of-distributed-systems/time-bound-lease.html)
+    - [ ] [State Watch](https://martinfowler.com/articles/patterns-of-distributed-systems/state-watch.html)
+
 - [ ] [MicroSoft Cloud Design Patterns](https://docs.microsoft.com/en-us/azure/architecture/patterns/)
+
+    * Design and implementation
+        - [ ] [Ambassador](https://docs.microsoft.com/en-us/azure/architecture/patterns/ambassador)
+        - [ ] [Anti-corruption Layer](https://docs.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer)
+        - [ ] [Backends for Frontends](https://docs.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends)
+        - [ ] [Command and Query Responsibility Segregation (CQRS)](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)
+        - [ ] [Compute Resource Consolidation](https://docs.microsoft.com/en-us/azure/architecture/patterns/compute-resource-consolidation)
+        - [ ] [External Configuration Store](https://docs.microsoft.com/en-us/azure/architecture/patterns/external-configuration-store)
+        - [ ] [Gateway Aggregation](https://docs.microsoft.com/en-us/azure/architecture/patterns/gateway-aggregation)
+        - [ ] [Gateway Offloading](https://docs.microsoft.com/en-us/azure/architecture/patterns/gateway-offloading)
+        - [ ] [Gateway Routing](https://docs.microsoft.com/en-us/azure/architecture/patterns/gateway-routing)
+        - [ ] [Leader Election](https://docs.microsoft.com/en-us/azure/architecture/patterns/leader-election)
+        - [ ] [Pipes and Filters](https://docs.microsoft.com/en-us/azure/architecture/patterns/pipes-and-filters)
+        - [ ] [Sidecar](https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar)
+        - [ ] [Static Content Hosting](https://docs.microsoft.com/en-us/azure/architecture/patterns/static-content-hosting)
+        - [ ] [Strangler Fig](https://docs.microsoft.com/en-us/azure/architecture/patterns/strangler-fig)
+
+    * Management and monitoring
+        - [x] [Ambassador](https://docs.microsoft.com/en-us/azure/architecture/patterns/ambassador)
+        - [x] [Anti-corruption Layer](https://docs.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer)
+        - [x] [External Configuration Store](https://docs.microsoft.com/en-us/azure/architecture/patterns/external-configuration-store)
+        - [x] [Gateway Aggregation](https://docs.microsoft.com/en-us/azure/architecture/patterns/gateway-aggregation)
+        - [x] [Gateway Offloading](https://docs.microsoft.com/en-us/azure/architecture/patterns/gateway-offloading)
+        - [x] [Gateway Routing](https://docs.microsoft.com/en-us/azure/architecture/patterns/gateway-routing)
+        - [x] [Health Endpoint Monitoring](https://docs.microsoft.com/en-us/azure/architecture/patterns/health-endpoint-monitoring)
+        - [x] [Sidecar](https://docs.microsoft.com/en-us/azure/architecture/patterns/sidecar)
+        - [ ] [Strangler Fig](https://docs.microsoft.com/en-us/azure/architecture/patterns/strangler-fig)
+
+    * Messaging
+        - [x] [Anti-corruption Layer](https://docs.microsoft.com/en-us/azure/architecture/patterns/anti-corruption-layer)
+        - [ ] [Claim Check](https://docs.microsoft.com/en-us/azure/architecture/patterns/claim-check)
+        - [x] [Choreography](https://docs.microsoft.com/en-us/azure/architecture/patterns/choreography)
+        - [ ] [Competing Consumers](https://docs.microsoft.com/en-us/azure/architecture/patterns/competing-consumers)
+        - [x] [Pipes and Filters](https://docs.microsoft.com/en-us/azure/architecture/patterns/pipes-and-filters)
+        - [ ] [Priority Queue](https://docs.microsoft.com/en-us/azure/architecture/patterns/priority-queue)
+        - [ ] [Publisher/Subscriber](https://docs.microsoft.com/en-us/azure/architecture/patterns/publisher-subscriber)
+        - [x] [Queue-Based Load Leveling](https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling)
+        - [x] [Scheduler Agent Supervisor](https://docs.microsoft.com/en-us/azure/architecture/patterns/scheduler-agent-supervisor)
+        - [x] [Sequential Convoy](https://docs.microsoft.com/en-us/azure/architecture/patterns/sequential-convoy)
+        - [ ] [Asynchronous Request-Reply](https://docs.microsoft.com/en-us/azure/architecture/patterns/async-request-reply)
+
+    * Data management
+        - [ ] [Cache-Aside](https://docs.microsoft.com/en-us/azure/architecture/patterns/cache-aside)
+        - [x] [Command and Query Responsibility Segregation (CQRS)](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)
+        - [ ] [Event Sourcing](https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing)
+        - [ ] [Index Table](https://docs.microsoft.com/en-us/azure/architecture/patterns/index-table)
+        - [ ] [Materialized View](https://docs.microsoft.com/en-us/azure/architecture/patterns/materialized-view)
+        - [ ] [Sharding](https://docs.microsoft.com/en-us/azure/architecture/patterns/sharding)
+        - [x] [Static Content Hosting](https://docs.microsoft.com/en-us/azure/architecture/patterns/static-content-hosting)
+        - [ ] [Valet Key](https://docs.microsoft.com/en-us/azure/architecture/patterns/valet-key)
+        - [ ] [Saga](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/saga/saga)
+
+    * Performance and scalability
+        - [x] [Cache-Aside](https://docs.microsoft.com/en-us/azure/architecture/patterns/cache-aside)
+        - [ ] [Choreography](https://docs.microsoft.com/en-us/azure/architecture/patterns/choreography)
+        - [x] [Command and Query Responsibility Segregation (CQRS)](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)
+        - [x] [Event Sourcing](https://docs.microsoft.com/en-us/azure/architecture/patterns/event-sourcing)
+        - [x] [Deployment Stamps](https://docs.microsoft.com/en-us/azure/architecture/patterns/deployment-stamp)
+        - [x] [Geodes](https://docs.microsoft.com/en-us/azure/architecture/patterns/geodes)
+        - [x] [Index Table](https://docs.microsoft.com/en-us/azure/architecture/patterns/index-table)
+        - [x] [Materialized View](https://docs.microsoft.com/en-us/azure/architecture/patterns/materialized-view)
+        - [x] [Priority Queue](https://docs.microsoft.com/en-us/azure/architecture/patterns/priority-queue)
+        - [x] [Queue-Based Load Leveling](https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling)
+        - [x] [Sharding](https://docs.microsoft.com/en-us/azure/architecture/patterns/sharding)
+        - [x] [Static Content Hosting](https://docs.microsoft.com/en-us/azure/architecture/patterns/static-content-hosting)
+        - [x] [Throttling](https://docs.microsoft.com/en-us/azure/architecture/patterns/throttling)
+
+    * Availability
+        - [ ] [Deployment Stamps](https://docs.microsoft.com/en-us/azure/architecture/patterns/deployment-stamp)
+        - [ ] [Geodes](https://docs.microsoft.com/en-us/azure/architecture/patterns/geodes)
+        - [ ] [Health Endpoint Monitoring](https://docs.microsoft.com/en-us/azure/architecture/patterns/health-endpoint-monitoring)
+        - [ ] [Queue-Based Load Leveling](https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling)
+        - [ ] [Throttling](https://docs.microsoft.com/en-us/azure/architecture/patterns/throttling)
+
+    * Resiliency
+        - [ ] [Bulkhead](https://docs.microsoft.com/en-us/azure/architecture/patterns/bulkhead)
+        - [ ] [Circuit Breaker](https://docs.microsoft.com/en-us/azure/architecture/patterns/circuit-breaker)
+        - [ ] [Compensating Transaction](https://docs.microsoft.com/en-us/azure/architecture/patterns/compensating-transaction)
+        - [x] [Health Endpoint Monitoring](https://docs.microsoft.com/en-us/azure/architecture/patterns/health-endpoint-monitoring)
+        - [x] [Leader Election](https://docs.microsoft.com/en-us/azure/architecture/patterns/leader-election)
+        - [x] [Queue-Based Load Leveling](https://docs.microsoft.com/en-us/azure/architecture/patterns/queue-based-load-leveling)
+        - [ ] [Retry](https://docs.microsoft.com/en-us/azure/architecture/patterns/retry)
+        - [ ] [Scheduler Agent Supervisor](https://docs.microsoft.com/en-us/azure/architecture/patterns/scheduler-agent-supervisor)
+
+    * Security
+        - [ ] [Federated Identity](https://docs.microsoft.com/en-us/azure/architecture/patterns/federated-identity)
+        - [ ] [Gatekeeper](https://docs.microsoft.com/en-us/azure/architecture/patterns/gatekeeper)
+        - [x] [Valet Key](https://docs.microsoft.com/en-us/azure/architecture/patterns/valet-key)
+
 - [ ] [AWS Cloud Pattern](http://en.clouddesignpattern.org/index.php/Main_Page)
 - [ ] [Google: Design patterns for container-based distributed systems](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45406.pdf)
 - [ ] [A pattern language for microservices](https://microservices.io/patterns/index.html)
@@ -454,8 +543,16 @@
 - [ ] [Microservice Architecture: All The Best Practices You Need To Kno](https://codingsans.com/blog/microservice-architecture-best-practices)
 - [ ] [Best Practices for Building a Microservice Architecture](https://www.vinaysahni.com/best-practices-for-building-a-microservice-architecture)
 - [ ] [Simplicity by Distributing Complexity](https://engineering.zalando.com/posts/2018/01/simplicity-by-distributing-complexity.html)
+- [ ] [Effective Microservices: 10 Best Practices](https://towardsdatascience.com/effective-microservices-10-best-practices-c6e4ba0c6ee2)
 
 ## Authentication & Authorization
 - [ ] [ForgeRock: Identity Gateway](https://backstage.forgerock.com/docs/ig/7/gateway-guide/index.html#preface)
 - [ ] [ForgeRock: Token Validation Microservice](https://backstage.forgerock.com/docs/tvm/1/user-guide/)
 - [ ] [Bringing Token state consistency to the Edge](https://charan-mann.medium.com/bringing-token-state-consistency-to-the-edge-eeaffc911b08)
+
+## Design Pattern
+- [ ] [Microservice Architecture and its 10 Most Important Design Patterns](https://towardsdatascience.com/microservice-architecture-and-its-10-most-important-design-patterns-824952d7fa41)
+    * `Database per Microservice`  `Event Sourcing` `CQRS` `Saga` `BFF` `API Gateway` `Strangler` `Circuit Breaker` `Externalize Configuration` `Consumer-Driven Contract Testing`
+- [ ] [Modularity and Information Hiding](https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf)
+- [ ] [Separation of Concern](https://www.cs.utexas.edu/users/EWD/transcriptions/EWD04xx/EWD447.html)
+- [ ] [Service Oriented Architecture](https://en.wikipedia.org/wiki/Service-oriented_architecture)
