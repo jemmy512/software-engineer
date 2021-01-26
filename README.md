@@ -88,6 +88,7 @@
     - [x] [Modern C++ Features – Class Template Argument Deduction](https://arne-mertz.de/2017/06/class-template-argument-deduction/)
     - [x] [Build Throughput Series: Template Metaprogramming Fundamentals](https://devblogs.microsoft.com/cppblog/build-throughput-series-template-metaprogramming-fundamentals/)
     - [x] [Build Throughput Series: More Efficient Template Metaprogramming](https://devblogs.microsoft.com/cppblog/build-throughput-series-more-efficient-template-metaprogramming/)
+    -[x] [How to Pass a Variadic Pack as a First Argument of a Function ](https://www.fluentcpp.com/2021/01/22/how-to-pass-a-variadic-pack-as-a-first-argument-of-a-function-in-cpp/)
 
 * C++ 20
     - [x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
@@ -289,6 +290,7 @@
     - [ ] [Write-Ahead Log](https://martinfowler.com/articles/patterns-of-distributed-systems/wal.html)
     - [ ] [Lease](https://martinfowler.com/articles/patterns-of-distributed-systems/time-bound-lease.html)
     - [ ] [State Watch](https://martinfowler.com/articles/patterns-of-distributed-systems/state-watch.html)
+    - [ ] [Idempotent Receiver](https://martinfowler.com/articles/patterns-of-distributed-systems/idempotent-receiver.html)
 
 - [ ] [MicroSoft Cloud Design Patterns](https://docs.microsoft.com/en-us/azure/architecture/patterns/)
 
