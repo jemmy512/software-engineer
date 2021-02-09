@@ -7,35 +7,35 @@ template <class... Ts> struct tuple {};
 
 template <class T, class... Ts>
 struct tuple<T, Ts...> : tuple<Ts...> {
-    tuple(T t, Ts... ts) : tuple<Ts...>(ts...), tail(t) {}
+    tuple(T t, Ts... ts) : tuple<Ts...>(ts...), _Data(t) {}
 
-    T tail;
+    T _Data;
 };
 
-/********************************** elem_type_holder **********************************/
+/********************************** nth_type **********************************/
 
-template <size_t, class> struct elem_type_holder;
+template <size_t, class> struct nth_type;
 
 template <class T, class... Ts>
-struct elem_type_holder<0, tuple<T, Ts...>> {
-    typedef T type;
+struct nth_type<0, tuple<T, Ts...>> {
+    using type = T;
 };
 
 template <size_t k, class T, class... Ts>
-struct elem_type_holder<k, tuple<T, Ts...>> {
-    typedef typename elem_type_holder<k - 1, tuple<Ts...>>::type type;
+struct nth_type<k, tuple<T, Ts...>> {
+    using type = typename nth_type<k - 1, tuple<Ts...>>::type;
 };
 
 /********************************** get **********************************/
 
 template <size_t k, class... Ts>
-typename std::enable_if<k == 0, typename elem_type_holder<0, tuple<Ts...>>::type&>::type
+typename std::enable_if<k == 0, typename nth_type<0, tuple<Ts...>>::type&>::type
 get(tuple<Ts...>& t) {
-    return t.tail;
+    return t._Data;
 }
 
 template <size_t k, class T, class... Ts>
-typename std::enable_if<k != 0, typename elem_type_holder<k, tuple<T, Ts...>>::type&>::type
+typename std::enable_if<k != 0, typename nth_type<k, tuple<T, Ts...>>::type&>::type
 get(tuple<T, Ts...>& t) {
     tuple<Ts...>& base = t;
     return get<k - 1>(base);
