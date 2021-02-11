@@ -35,6 +35,9 @@
 # Programming Language
 
 ### C/C++
+<details>
+<summary>Open/Close</summary>
+
 - [ ] :orange_book: The C Programming Language
 - [ ] :orange_book: C Programming: A Modern Approach
 - [ ] :orange_book: C Traps and Pitfalls
@@ -47,7 +50,8 @@
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
 - [x] [C ++ virtual function table analysis(CN)](https://coolshell.cn/articles/12165.html)
 - [x] [The cost of dynamic (virtual calls) vs. static (CRTP) dispatch in C++](https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c)
-- [x] [Memory layout of C ++ objects(CN)](https://coolshell.cn/articles/12176.html)
+- [x] [Memory layout of C ++ objects (CN)](https://coolshell.cn/articles/12176.html)
+- [x] [How std::any Works](https://www.fluentcpp.com/2021/02/05/how-stdany-works/)
 
 * Const & Mutable
     - [x] [Const Correctness](https://arne-mertz.de/2016/07/const-correctness/)
@@ -92,6 +96,8 @@
 
 * C++ 20
     - [x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
+
+</details>
 
 # Theoretical Discipline
 - [ ] :orange_book: Data Structures and Algorithm Analysis in C:Second Edition
