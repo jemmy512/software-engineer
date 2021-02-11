@@ -299,6 +299,8 @@
     - [ ] [Idempotent Receiver](https://martinfowler.com/articles/patterns-of-distributed-systems/idempotent-receiver.html)
 
 - [ ] [MicroSoft Cloud Design Patterns](https://docs.microsoft.com/en-us/azure/architecture/patterns/)
+    <details>
+    <summary>Open/Close</summary>
 
     * Design and implementation
         - [ ] [Ambassador](https://docs.microsoft.com/en-us/azure/architecture/patterns/ambassador)
@@ -387,6 +389,8 @@
         - [ ] [Federated Identity](https://docs.microsoft.com/en-us/azure/architecture/patterns/federated-identity)
         - [ ] [Gatekeeper](https://docs.microsoft.com/en-us/azure/architecture/patterns/gatekeeper)
         - [x] [Valet Key](https://docs.microsoft.com/en-us/azure/architecture/patterns/valet-key)
+
+    </details>
 
 - [ ] [AWS Cloud Pattern](http://en.clouddesignpattern.org/index.php/Main_Page)
 - [ ] [Google: Design patterns for container-based distributed systems](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45406.pdf)
