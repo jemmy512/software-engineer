@@ -16,7 +16,8 @@
     2. [AIO](#AIO)
     3. [Lock-free](#Lock-free)
     4. [Memory Order](#Memory-Order)
-    5. [Kernel](#Kernel)
+    5. [CPU Cache](#CPU-Cache)
+    6. [Kernel](#Kernel)
 8. [Distributed Architecture](#Distributed-Architecture)
     1. [Distributed Messages System](#Distributed-Messages-System)
     2. [Logs & Data](#Logs--Data)
@@ -37,7 +38,7 @@
     1. [API Gatway](#API-Gatway)
     2. [Microservice VS SOA, IaaS, Paas, Monolithic](#Microservice-VS-SOA-IaaS-Paas-Monolithic)
     3. [Practice](#Practice)
-    4. [Authentication & Authorization](#Authentication---Authorization)
+    4. [Authentication & Authorization](#Authentication--Authorization)
     5. [Design Pattern](#Design-Pattern)
 
 # Formal Entry
@@ -168,7 +169,6 @@
 - [ ] [C10m Problem](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
 
 
-
 # System Design
 - [x] [Grokking System Design](https://www.educative.io/courses/grokking-the-system-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/grokking-the-system-design.md)
 - [ ] [System Design Primer](https://github.com/donnemartin/system-design-primer)
@@ -252,6 +252,10 @@
 - [x] [The Purpose of memory_order_consume in C++11](https://preshing.com/20140709/the-purpose-of-memory_order_consume-in-cpp11)
 - [x] [Atomic vs. Non-Atomic Operations](https://preshing.com/20130618/atomic-vs-non-atomic-operations)
 - [x] [Memory Reordering Caught in the Act](https://preshing.com/20120515/memory-reordering-caught-in-the-act)
+
+### CPU Cache
+- [x] [Gallery of Processor Cache Effects](http://igoro.com/archive/gallery-of-processor-cache-effects/) [TODO:?]()
+- [x] [coolshell: CPU Cache](https://coolshell.cn/articles/20793.html)
 
 ### Kernel
 - [x] [RCU]() [:link: Part 1](https://lwn.net/Articles/262464/) [:link: Part 2](https://lwn.net/Articles/263130/) [:link: Part 3](https://lwn.net/Articles/264090/)
