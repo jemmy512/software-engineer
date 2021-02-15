@@ -12,12 +12,12 @@
 5. [System Knowledge](#System-Knowledge)
 6. [System Design](#System-Design)
 7. [Linux](#Linux)
-    1. [Network](#Network)
-    2. [AIO](#AIO)
-    3. [Lock-free](#Lock-free)
-    4. [Memory Order](#Memory-Order)
-    5. [CPU Cache](#CPU-Cache)
-    6. [Kernel](#Kernel)
+    1. [Kernel](#Kernel)
+    2. [Network](#Network)
+    3. [AIO](#AIO)
+    4. [Lock-free](#Lock-free)
+    5. [Memory Order](#Memory-Order)
+    6. [CPU Cache](#CPU-Cache)
 8. [Distributed Architecture](#Distributed-Architecture)
     1. [Distributed Messages System](#Distributed-Messages-System)
     2. [Logs & Data](#Logs--Data)
@@ -153,11 +153,11 @@
 
 # System Knowledge
 - [ ] :orange_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
-- [ ] :orange_book: Advanced Programming in the UNIX Environment
+- [ ] :orange_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/tcp-ip-illustrated-volume-1.md)
 - [ ] :orange_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxProgramming.md)
 - [ ] :orange_book: UNIX Network Programming, Volume 2: Interprocess Communications
-- [ ] :orange_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/TCP:IP%20Illustrated%2C%20Volume%201.md)
 - [ ] :orange_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
+- [ ] :orange_book: Advanced Programming in the UNIX Environment
 
 - [ ] [Let’s Code a TCP/IP Stack, 1: Ethernet & ARP](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/#tuntap-devices)
 - [ ] [Let’s Code a TCP/IP Stack, 2: IPV4 & ICMPv4](https://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4)
@@ -189,7 +189,6 @@
 
 
 # Linux
-- [x] :pencil2: [Linux Kernel 4.19](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxKernel.md)
 - [ ] [Red Hat Enterprise Linux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/)
 - [ ] [What Every Programmer Should Know About Memory](http://futuretech.blinkenlights.nl/misc/cpumemory.pdf)
 - [ ] [Memory Barriers: a Hardware View for Software Hackers](https://irl.cs.ucla.edu/~yingdi/web/paperreadingwhymb.2010.06.07c.pdf)
@@ -203,6 +202,11 @@
 - [x] [Memory optimization summary: ptmalloc, tcmalloc, and jemalloc](http://www.cnhalo.net/2016/06/13/memory-optimize)
 - [x] [Scalable memory allocation using jemalloc](https://www.facebook.com/notes/facebook-engineering/scalable-memory-allocation-using-jemalloc/480222803919)
 - [x] [Spurious wakeup](https://en.wikipedia.org/wiki/Spurious_wakeup)  [:link: C++ Condition Variable](https://www.modernescpp.com/index.php/c-core-guidelines-be-aware-of-the-traps-of-condition-variables)
+
+### Kernel
+- [x] :pencil2: [Linux Kernel 4.19](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-kernel.md)
+- [x] :pencil2: [Understanding Linux Kernel](https://github.com/Jemmy512/book-notes/blob/master/Linux/understanding-linux-kernel.md)
+- [x] [RCU]() [:link: Part 1](https://lwn.net/Articles/262464/) [:link: Part 2](https://lwn.net/Articles/263130/) [:link: Part 3](https://lwn.net/Articles/264090/)
 
 ### Network
 - [ ] :orange_book: Computer Networks, 5th Edition
@@ -257,8 +261,6 @@
 - [x] [Gallery of Processor Cache Effects](http://igoro.com/archive/gallery-of-processor-cache-effects/) [TODO:?]()
 - [x] [coolshell: CPU Cache](https://coolshell.cn/articles/20793.html)
 
-### Kernel
-- [x] [RCU]() [:link: Part 1](https://lwn.net/Articles/262464/) [:link: Part 2](https://lwn.net/Articles/263130/) [:link: Part 3](https://lwn.net/Articles/264090/)
 
 # Distributed Architecture
 - [ ] [Scalable Web Architecture and Distributed Systems](http://www.aosabook.org/en/distsys.html)
