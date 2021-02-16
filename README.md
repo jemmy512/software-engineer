@@ -154,7 +154,7 @@
 # System Knowledge
 - [ ] :orange_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
 - [ ] :orange_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/tcp-ip-illustrated-volume-1.md)
-- [ ] :orange_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxProgramming.md)
+- [ ] :orange_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-programming.md)
 - [ ] :orange_book: UNIX Network Programming, Volume 2: Interprocess Communications
 - [ ] :orange_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
 - [ ] :orange_book: Advanced Programming in the UNIX Environment
@@ -210,7 +210,7 @@
 
 ### Network
 - [ ] :orange_book: Computer Networks, 5th Edition
-- [ ] :orange_book: [Linux High Performance Server Programming (CN)](https://book.douban.com/subject/24722611/) :pencil2:  [Linux Programmnig Noetes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxProgramming.md) :pencil2: [Linux System Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxBasic.md)
+- [ ] :orange_book: [Linux High Performance Server Programming (CN)](https://book.douban.com/subject/24722611/) :pencil2:  [Linux Programmnig Noetes](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-programming.md) :pencil2: [Linux System Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxBasic.md)
 - [ ] :orange_book: Network tuning
 
 - [ ] [Linux Advanced Routing & Traffic Control HOWTO](https://lartc.org)
