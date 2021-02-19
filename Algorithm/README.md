@@ -41,6 +41,7 @@ No | Title | Difficulty | Catogary | Notes
 011 | Container With Most Water| :star: :star: :star: | Array | :trophy:
 027 | Remove Element | :star: | Array | :trophy:
 041 | First Missing Positive | :star: :star: :star: | Array
+054 | Spiral Matrix | :star: :star: | Array | :trophy: `Matrix`
 056 | Merge Intervals | :star: :star: | Array | :trophy:
 057 | Insert Intervals | :star: :star: | Array | :trophy:
 026 | Remote Duplicates from Sorted Array | :star: | Array | :trophy:
@@ -157,6 +158,7 @@ No | Title | Difficulty | Catogary | Notes
 383 | Ransom Note | :star: | Map | :trophy:
 412 | Fizz Buzz | :star: | Map | :trophy:
 771 | Jewelsand Stones | :star: | Map | :trophy:
+811 | Subdomain Visit Count | :star: | Map | :trophy:
 953 | Verifying an Alien Dictionary  | :star: | Map | :trophy:
  | Stack | | |
 020 | validParentheses | :star: | Stack
@@ -184,7 +186,7 @@ No | Title | Difficulty | Catogary | Notes
 122 | Best Time to Buy and Sell Stock II | :star: | DP | :trophy: `Greedy`
 123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | DP | :trophy: `Bidirectional DP`
 188 | Best Time to Buy and Sell Stock IV | :star: :star: :star:| DP | :trophy: :thinking:
-139 | Word Break | :start: :star: | DP | :trophy: :thinking: `Bottom Up`
+139 | Word Break | :star: :star: | DP | :trophy: :thinking: `Bottom Up`
 152 | Maximum Product Subarry | :star: :star: | DP | :trophy: `Prefix Sum`
 198 | House Robber | :star: | DP | :trophy:
 221 | Maximal Square | :star: :star: | DP | :trophy: :thinking:
@@ -235,6 +237,7 @@ No | Title | Difficulty | Catogary | Notes
 23 | Merge K Sorted List | :star: :star: :star: | Divide Conquer | :trophy: `K-way Merge`
  | Sort | | |
 937 | Reorder Data in Log Files | :star: | Sort | :trophy:
+347 | Top K Frequent Elements | :star: :star: | Sort | :trophy: `Heap`
  | Design | | |
 146 | LRU Cache | :star: :star: | Design | :trophy: `Map + List (O(1) + Date Move)`
 380 | Insert Delete GetRandom O(1) | :star: :star: | Design | :trophy: `Map + Vec (O(1) + Random Access)`
