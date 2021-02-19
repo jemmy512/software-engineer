@@ -206,6 +206,7 @@
 ### Kernel
 - [x] :pencil2: [Linux Kernel 4.19](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-kernel.md)
 - [x] :pencil2: [Understanding Linux Kernel](https://github.com/Jemmy512/book-notes/blob/master/Linux/understanding-linux-kernel.md)
+- [x] :pencil2: [Linux Kernel Development](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-kernel-development.md)
 - [x] [RCU]() [:link: Part 1](https://lwn.net/Articles/262464/) [:link: Part 2](https://lwn.net/Articles/263130/) [:link: Part 3](https://lwn.net/Articles/264090/)
 
 ### Network
