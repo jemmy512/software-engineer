@@ -261,6 +261,7 @@
 ### CPU Cache
 - [x] [Gallery of Processor Cache Effects](http://igoro.com/archive/gallery-of-processor-cache-effects/) [TODO:?]()
 - [x] [coolshell: CPU Cache](https://coolshell.cn/articles/20793.html)
+- [x] [L1 cache lines](https://vorbrodt.blog/2019/02/02/cache-lines/)
 
 
 # Distributed Architecture
