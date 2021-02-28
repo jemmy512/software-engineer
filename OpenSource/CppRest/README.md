@@ -23,72 +23,79 @@ C++ Rest consists three components:
 ```C++
 overrideable::g_casablancaHttpRequestFunc // CB-> handle http response
 
+web::http::http_request request(http::method)
+request.set_body(jsonPayload)
+    http_msg_base::set_body(concurrency::streams::istream(jsonPayload))
+        m_inStream = instream
+request.addHeader(headers)
+
 pplx::task<http_response> http_client::request()
     http_pipeline::propagate()
         oauth2_handler::propagate()
             oauth2_config::_authenticate_request()
                 req.headers().add(header_names::authorization, "Bearer " + token().access_token());
 
-            asio_client::propagate // create asio_context, obtain a reused connection from pool
-                auto result_task = pplx::create_task(context->m_request_completion); // task_completion_event<http_response>
-                    _http_client_communicator::async_send_request()
-                        // 1. gurantee order
-                        _http_client_communicator::push_request
-                            m_requests_queue.push(request);
-
-                        // 2. don't gurantee order
-                        _http_client_communicator::open_and_send_request()
-                            asio_client::send_request()
-                                asio_context::start_request()
-                                    ssl_proxy_tunnel::start_proxy_connect   // if it's ssl and not connected
-                                        ssl_proxy_tunnel::write_connect()
-                                        basic_resolver.hpp::async_resolve()
-                                            ssl_proxy_tunnel::handle_resolve()
-                                                ssl_proxy_tunnel::connect   // handler: ssl_proxy_tunnel::handle_tcp_connect()
-                                                    asio_connection_fast_ipv4_fallback::connect()
-                                                        asio_connection_fast_ipv4_fallback::connect_unlock  // if connection is not reused
+            asio_client::propagate() // create asio_context, obtain a reused connection from pool
+                auto context =asio_context::create_request_context()
+                auto result_task = pplx::create_task(context->m_request_completion) // task_completion_event<http_response>
+                _http_client_communicator::async_send_request(context)
+                    _http_client_communicator::push_request()           // 1. gurantee order
+                        m_requests_queue.push(request)
+                    _http_client_communicator::open_and_send_request()  // 2. don't gurantee order
+                        asio_client::send_request()
+                            asio_context::start_request()
+                                ssl_proxy_tunnel::start_proxy_connect()  // if it's ssl and not connected
+                                    ssl_proxy_tunnel::write_connect()
+                                    basic_resolver.hpp::async_resolve()
+                                        ssl_proxy_tunnel::handle_resolve()
+                                            ssl_proxy_tunnel::connect()  // handler: ssl_proxy_tunnel::handle_tcp_connect()
+                                                asio_connection_fast_ipv4_fallback::connect()
+                                                    asio_connection_fast_ipv4_fallback::connect_unlock() // if connection is not reused
 // connect socket
-                                                            asio_connection::async_connect()
-                                                                basic_stream_socket::async_connect()
-                                                                    ---> Boost.Asio
-                                                            asio_connection_fast_ipv4_fallback::handle_tcp_connect()
-                                                                // call ssl or normal socket connection handler
-                                                        ssl_proxy_tunnel::handle_tcp_connect                // if connection is reused
-                                                            asio_connection_fast_ipv4_fallback::async_write()
-                                                                asio_connection::async_write()
-                                                                    ---> Boost.Asio
-                                                                ssl_proxy_tunnel::handle_write_request()
-                                                                    ssl_proxy_tunnel::async_read_until()
-                                                                        asio_connection::async_read_until()
-                                                                    ssl_proxy_tunnel::handle_status_line()
-                                                                        start_http_request_flow    // web::http::status_codes::OK()
-                                                                            --->
-                                                                        ssl_proxy_tunnel::handle_body_read()
-                                                                            // check proxy auth required
-                                                        asio_context::handle_connect()
-                                                            asio_context::write_request()
-                                                                boost::asio::async_write
-                                                                    --->
-                                    start_http_request_flow()
-                                        // compose raw request stream, start timer: ctx->m_timer.start()
-                                        basic_resolver.hpp::async_resolve()
-                                            asio_context::handle_resolve()
-                                                asio_context::connect()
-                                                    asio_connection_fast_ipv4_fallback::connect()
-                                                        --->
-                                        asio_context::write_request()
-                                            if (m_connection->is_ssl() && !m_connection->is_reused())
-                                                asio_connection_fast_ipv4_fallback::async_handshake()
-                                                    asio_connection::async_handshake()
-                                                        stream.hpp::async_handshake()
-                                                            ....
-                                                        asio_context::handle_handshake()
-                                                            asio_connection::async_write(asio_context::handle_write_headers)
+                                                        asio_connection::async_connect()
+                                                            basic_stream_socket::async_connect()
+                                                                ---> Boost.Asio
+                                                        asio_connection_fast_ipv4_fallback::handle_tcp_connect()
+                                                            // call ssl or normal socket connection handler
+                                                    ssl_proxy_tunnel::handle_tcp_connect()                // if connection is reused
+                                                        asio_connection_fast_ipv4_fallback::async_write()
+                                                            asio_connection::async_write()
+                                                                ---> Boost.Asio
+                                                            ssl_proxy_tunnel::handle_write_request()
+                                                                ssl_proxy_tunnel::async_read_until()
+                                                                    asio_connection::async_read_until()
+                                                                ssl_proxy_tunnel::handle_status_line()
+                                                                    start_http_request_flow()    // web::http::status_codes::OK()
+                                                                        --->
+                                                                    ssl_proxy_tunnel::handle_body_read()
+                                                                        // check proxy auth required
+                                                    asio_context::handle_connect()
+                                                        asio_context::write_request()
+                                                            boost::asio::async_write()
                                                                 --->
-                                            else
-                                                asio_connect::async_write(buffer, asio_context::handle_write_headers)
-                                                    boost::asio::async_write(asio_context::handle_write_large_body)
+                                start_http_request_flow()
+                                    // compose raw request header stream, start timer: ctx->m_timer.start()
+                                        std::ostream request_stream(&ctx->m_body_buf)
+                                        request_stream << method << " " << encoded_resource << " " << "HTTP/1.1" << CRLF;
+                                        request_stream << "Host: " << host << ":" << port << CRLF;
+                                    basic_resolver.hpp::async_resolve()
+                                        asio_context::handle_resolve()
+                                            asio_context::connect()
+                                                asio_connection_fast_ipv4_fallback::connect()
+                                                    --->
+                                    asio_context::write_request()
+                                        if (m_connection->is_ssl() && !m_connection->is_reused())
+                                            asio_connection_fast_ipv4_fallback::async_handshake()
+                                                asio_connection::async_handshake()
+                                                    stream.hpp::async_handshake()
+                                                        ....
+                                                    asio_context::handle_handshake()
+                                                        asio_connection::async_write(asio_context::handle_write_headers)
                                                             --->
+                                        else
+                                            asio_connect::async_write(buffer, asio_context::handle_write_headers)
+                                                boost::asio::async_write(asio_context::handle_write_large_body)
+                                                        --->
                 return result_task; // return a async pplx::task<response> object to client, client then use response.extract_string() to get the real response string
 
 // write callback for asio_context::write_request()
@@ -146,8 +153,13 @@ asio_context::handle_write_headers() // request header has sent, then send reque
                                     request_context::complete_request()
                                         --->
         else
-            asio_connect::async_write()
-                boost::asio::async_write(asio_context::handle_write_large_body)
+            auto readbuf = _get_readbuffer()
+                m_request.body()
+                    m_instream;
+            // get readSize data from m_instream to m_body_buf, and send it out
+            readbuf.getn(boost::asio::buffer_cast<uint8_t *>(m_body_buf.prepare(readSize)), readSize)
+            asio_connect::async_write(m_body_buf, asio_context::handle_write_large_body)
+                boost::asio::async_write(m_body_buf, asio_context::handle_write_large_body)
                     --->
 ```
 
@@ -232,13 +244,13 @@ hostport_listener::on_accept()
 ### read socket
 ```C++
         connection::start_request_response()
-            boost::asio::async_read_until // crlfcrlf_nonascii_searcher
+            boost::asio::async_read_until() // crlfcrlf_nonascii_searcher
                 ---> Boost.Asio
                 connection::handle_http_line()
                     http_request::_create_request()
                         // compose request object
                         connection::handle_headers()
-                            connection::async_read_until // CRLF
+                            connection::async_read_until() // CRLF
                                 boost::asio::async_read_until()
                                     ---> Boost.Asio
                                 connection::handle_chunked_header()
@@ -250,53 +262,56 @@ hostport_listener::on_accept()
                                     connection::do_response(false)
                                     http_listener_impl::handle_request()
                                         m_supported_methods[mtd](request)
-                                            http_request::reply()
+                                            http_request::reply(const http_response &response)
+                                                _http_request::_reply_impl()
+                                                    http_response::_set_server_context(http_linux_context)
+                                                    http_linux_server::respond()
+                                                        return pplx::create_task(response->linux_request_context::m_response_completed)
+                                                    http_request::m_response::set_response() // task_completion_event<http_response> m_response
+                                                        task_completion_event::set(response)
+                                                        // activate connection::do_response to run
 ```
 ### write socket
 ```C++
 connection::do_response()
     http_request::m_request.get_response() // task<task_completion_event<http_response>>
+        pplx::task<http_response>(m_response)
     .then()
-        connection::async_process_response()
-            // compose response header
-            connection::async_write(&connection::handle_headers_written, response);
-                boost::asio::async_write()
-                    --->
-        --->connection::handle_headers_written()
-                connection::handle_write_large_response() // handle_write_chunked_response
-                    connection::async_write(&connection::handle_write_large_response, response);
+        m_request.content_ready()
+            pplx::create_task(m_data_available).then([req](utility::size64_t) { return req; }
+        .then()
+            connection::async_process_response(response)
+                // compose response header
+                connection::async_write(&connection::handle_headers_written, response);
+                    boost::asio::async_write()
                         --->
-                    if (ec || m_write == m_write_size)
-                        connection::handle_response_written()
-                            linux_request_context::m_response_completed.set()
-                            if (!close_connection)
-                                connection::start_request_response()
-                            else
-                                connection::finish_request_response()
-                                    m_connections.erase(this)
-                                    connection::close()
-                                        basic_socket::cancel()
-                                            reactive_socket_service_base::cancel()
-                                                epoll_reactor::cancel_ops()
-                                                    // schedule unfinished operations
-                                        basic_socket::shotdown()
-                                            reactive_socket_service_base::base_shutdown()
-                                        basic_socket::close()
-                                            reactive_socket_service_base::close()
-                                                epoll_reactor::deregister_descriptor()
-                                                    epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, descriptor, &ev);
-                                                    // schedule unfinished operations
-                                                socket_ops::close()
-                                                epoll_reactor::cleanup_descriptor_data()
-                                                    epoll_reactor::free_descriptor_state()
-
-http_request::reply()
-    _http_request::_reply_impl()
-        http_response::_set_server_context(http_linux_context)
-        http_linux_server::respond()
-            return pplx::create_task(response->linux_request_context::m_response_completed)
-        http_request::m_response::set_response() // task_completion_event<http_response> m_response
-            // activate connection::do_response to run
+            --->connection::handle_headers_written()
+                    connection::handle_write_large_response() // handle_write_chunked_response
+                        connection::async_write(&connection::handle_write_large_response, response);
+                            --->
+                        if (ec || m_write == m_write_size)
+                            connection::handle_response_written()
+                                linux_request_context::m_response_completed.set()
+                                if (!close_connection)
+                                    connection::start_request_response()
+                                else
+                                    connection::finish_request_response()
+                                        m_connections.erase(this)
+                                        connection::close()
+                                            basic_socket::cancel()
+                                                reactive_socket_service_base::cancel()
+                                                    epoll_reactor::cancel_ops()
+                                                        // schedule unfinished operations
+                                            basic_socket::shotdown()
+                                                reactive_socket_service_base::base_shutdown()
+                                            basic_socket::close()
+                                                reactive_socket_service_base::close()
+                                                    epoll_reactor::deregister_descriptor()
+                                                        epoll_ctl(epoll_fd_, EPOLL_CTL_DEL, descriptor, &ev);
+                                                        // schedule unfinished operations
+                                                    socket_ops::close()
+                                                    epoll_reactor::cleanup_descriptor_data()
+                                                        epoll_reactor::free_descriptor_state()
 ```
 
 ## Exception
