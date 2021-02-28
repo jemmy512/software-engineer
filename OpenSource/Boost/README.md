@@ -1,17 +1,19 @@
 # UML
 ![boost-asio.png](../../.Image/boost-asio.png)
 
+![](../../.Image/boost-asio-call-flow.png)
+
 # async_accept
 ```C++
 basic_socket_acceptor::async_accept()
-    reactive_socket_service::async_accept() // reactive_socket_accept_op
-        reactive_socket_service_base::start_accept_op()
+    reactive_socket_service::async_accept()
+        reactive_socket_service_base::start_accept_op() // construct reactive_socket_accept_op
             if (!peer_is_open)
                 reactive_socket_service_base::start_op()
                     if (socket_ops::set_internal_non_blocking())
                         epoll_reactor::start_op(reactor::read_op)
                             if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
-                                operation::perform()
+                                reactor_op::perform()
                                     reactive_socket_accept_op_base::do_perform()
                                         socket_ops::non_blocking_accept()
                                             ::poll() // fd writable means it is connected
@@ -27,7 +29,7 @@ basic_socket_acceptor::async_accept()
                                         operation::complete()
                                             descriptor_state::do_complete()
                                                 descriptor_state::perform_io() // loop op_queue[]
-                                                    operation::perform()
+                                                    reactor_op::perform()
                                                         reactive_socket_accept_op_base::do_perform()
                                                             --->
                                                         ~perform_io_cleanup_on_block_exit()
@@ -52,8 +54,8 @@ basic_socket_acceptor::async_accept()
 # async_connect
 ```C++
 basic_stream_socket::async_connect()
-    reactive_socket_service::async_connect // reactive_socket_connect_op
-        reactive_socket_service_base::start_connect_op()
+    reactive_socket_service::async_connect()
+        reactive_socket_service_base::start_connect_op() // construct reactive_socket_connect_op
             if (socket_ops::set_internal_non_blocking)
                 socket_ops::connect()
                     ::connect(s, addr, (SockLenType)addrlen)
@@ -109,15 +111,15 @@ read.hpp::async_read_until()
     read.hpp::start_read_buffer_sequence_op()
         read.hpp::read_op()
             basic_stream_socket::async_read_some()
-                reactive_socket_service_base::async_receive()
-                    reactive_socket_service_base::start_op() // reactive_socket_recv_op
+                reactive_socket_service_base::async_receive() // construct reactive_socket_recv_op
+                    reactive_socket_service_base::start_op()
                         epoll_reactor::start_op(reactor::read_op)
                             if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
                                 operation::perform()
                                     reactive_socket_recv_op_base::do_perform()
                                         socket_ops::non_blocking_recv()
                                             socket_ops::recv
-                                scheduler::post_immediate_completion
+                                scheduler::post_immediate_completion()
                                     schedule::do_run_one()
                                         operation::complete()
                                             reactive_socket_recv_op::do_complete()
@@ -129,7 +131,7 @@ read.hpp::async_read_until()
                                         operation::complete()
                                             descriptor_state::do_complete()
                                                 descriptor_state::perform_io() // loop op_queue[]
-                                                    op->perform()
+                                                    reactor_op::perform()
                                                         reactive_socket_recv_op_base::do_perform()
                                                             --->
                                                         ~perform_io_cleanup_on_block_exit()
@@ -171,12 +173,12 @@ boost::asio::async_write(m_socket, buffer, writeHandler);
                                             ssl::engin::write()
                                                 ::SSL_write()
 
-                    basic_stream_socket::async_write_some()
-                        reactive_socket_service_base::async_send()
-                            reactive_socket_service_base::start_op() // reactive_socket_send_op
+                    basic_stream_socket::async_write_some(buffer, handler/*write_op*/)
+                        reactive_socket_service_base::async_send() // construct reactive_socket_send_op
+                            reactive_socket_service_base::start_op()
                                 epoll_reactor::start_op(reactor::write_op)
                                     if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
-                                        operation::perform()
+                                        reactor_op::perform()
                                             reactive_socket_send_op::do_perform()
                                                     socket_ops::non_blocking_send()
                                                         socket_ops::sendmsg
@@ -192,7 +194,7 @@ boost::asio::async_write(m_socket, buffer, writeHandler);
                                                 operation::complete()
                                                     descriptor_state::do_complete()
                                                         descriptor_state::perform_io() // loop op_queue[]
-                                                            op->perform()
+                                                            reactor_op::perform()
                                                                 reactive_socket_send_op::do_perform()
                                                                     --->
                                                                 ~perform_io_cleanup_on_block_exit()
@@ -208,16 +210,14 @@ tricky switch
 struct write_op {
   void operator()(const boost::system::error_code& ec, std::size_t bytes_transferred, int start = 0) {
     std::size_t max_size;
-    switch (start_ = start)
-    {
+    switch (start_ = start) {
     case 1:
       max_size = this->check_for_completion(ec, buffers_.total_consumed());
-      do
-      {
+      do {
         stream_.async_write_some(buffers_.prepare(max_size), BOOST_ASIO_MOVE_CAST(write_op)(*this));
         return;
 
-        default:
+    default:
           buffers_.consume(bytes_transferred);
           if ((!ec && bytes_transferred == 0) || buffers_.empty())
             break;
