@@ -21,20 +21,13 @@ C++ Rest consists three components:
 ## Client
 ### Send Request
 ```C++
-overrideable::g_casablancaHttpRequestFunc // CB-> handel http response
+overrideable::g_casablancaHttpRequestFunc // CB-> handle http response
 
 pplx::task<http_response> http_client::request()
     http_pipeline::propagate()
         oauth2_handler::propagate()
             oauth2_config::_authenticate_request()
                 req.headers().add(header_names::authorization, "Bearer " + token().access_token());
-
-            winhttp_client::propagate   // window platform
-                _http_client_communicator::async_send_request()
-                    _http_client_communicator::open_and_send_request_async()
-                        _http_client_communicator::open_and_send_request()
-                            winhttp_client::send_request()
-                                winhttp_client::_start_request_send()
 
             asio_client::propagate // create asio_context, obtain a reused connection from pool
                 auto result_task = pplx::create_task(context->m_request_completion); // task_completion_event<http_response>
@@ -78,14 +71,14 @@ pplx::task<http_response> http_client::request()
                                                                     --->
                                     start_http_request_flow()
                                         // compose raw request stream, start timer: ctx->m_timer.start()
-                                        basic_resolver.hpp::async_resolve
+                                        basic_resolver.hpp::async_resolve()
                                             asio_context::handle_resolve()
                                                 asio_context::connect()
                                                     asio_connection_fast_ipv4_fallback::connect()
                                                         --->
                                         asio_context::write_request()
                                             if (m_connection->is_ssl() && !m_connection->is_reused())
-                                                asio_connection_fast_ipv4_fallback::async_handshake
+                                                asio_connection_fast_ipv4_fallback::async_handshake()
                                                     asio_connection::async_handshake()
                                                         stream.hpp::async_handshake()
                                                             ....
@@ -110,11 +103,16 @@ asio_context::handle_write_headers() // request header has sent, then send reque
                         ---> Boost.Asio
                     asio_context::handle_status_line()
                         asio_context::read_headers()
-                            asio_context::complete_headers()
+                            request_context::complete_headers()
                                 m_request.set_body(Concurrency::streams::istream());
                                 m_request_completion.set(m_response);
-                                    task_completion_event::set()
-                                        // notify client which is blocked at response.get()
+                                    task_completion_event<http_response>::set(m_response)
+                                        _Task_impl_base::_FinalizeAndRunContinuations(m_response); // while loops all tasks
+                                            _M_Result.Set(m_response);
+                                                _TaskCollectionImpl::_Complete()
+                                                    // 1. [notify] clients which are blocked at task<http_reponse>::wait/get()
+                                                    condition_variable.notify_all()
+                                                _Task_impl_base::_RunTaskContinuations() // while loops all continuations
                             if (!needChunked)
                                 asio_context::async_read_until_buffersize(asio_context::handle_read_content)
                             --->asio_context::handle_read_content()
@@ -122,11 +120,17 @@ asio_context::handle_write_headers() // request header has sent, then send reque
                                         asio_context::async_read_until_buffersize()
                                             boost::asio::async_read(m_socket, buffer, readCondition, asio_context::handle_read_content();
                                     else
-                                        request_context::complete_request()
+                                        request_context::complete_request(body_size)
                                             m_response._get_impl()->_complete(body_size);
-                                                http_msg_base::_complete()
+                                                http_msg_base::_complete(body_size)
                                                 m_data_available.set(body_size);
-                                                    // notify clients which are blocked at reponse.extract_string()
+                                                    task_completion_event<size64_t>::set(body_size)
+                                                    _Task_impl_base::_FinalizeAndRunContinuations(body_size); // while loops all tasks
+                                                        _M_Result.Set(body_size);
+                                                            _TaskCollectionImpl::_Complete()
+                                                                // 2. [notify] clients which are blocked at reponse.extract_string()
+                                                                condition_variable.notify_all()
+                                                            _Task_impl_base::_RunTaskContinuations() // while loops all continuations
                                             request_context::finish()
                                                 m_http_client->finish_request()
                                                 _http_client_communicator::finish_request()
@@ -163,8 +167,6 @@ boost::asio::scheduler::do_run_one()
                         _ContinuationTaskHandle::_Continue()
                             _Task_impl_base::_FinalizeAndRunContinuations()
                                 --->
-
-
                 --->                MercuryNetworkConnection::handleIncomingMercuryEvent()
 
 ws_client_wspp.cpp::connect_impl()
@@ -189,6 +191,9 @@ ws_client_wspp.cpp::connect_impl()
                                   MercuryConnectionManager::onMercuryEventArrived()
                                       MercuryConnectionManager::fireMercuryEventArrived()
 ```
+
+* Task wait-notify work flow
+    * ![](../../.Image/cpp-rest-task-flow.png)
 
 ## Server
 ### open listen socket
@@ -294,6 +299,39 @@ http_request::reply()
             // activate connection::do_response to run
 ```
 
+## Exception
+```c++
+request_context::report_error()
+    request_context::report_exception()
+        m_request_completion.set_exception(exceptionPtr)
+            _M_exceptionHolder = exceptionPtr
+                _CancelInternal()
+                    _CancelAndRunContinuations()
+                        _task_impl._M_exceptionHolder = _ExceptionHolder_arg
+                        _TaskCollectionImpl::set()
+                            condition_variable.notify_all()
+                        _ScheduleFuncWithAutoInline([=](){ _RunTaskContinuations(); }, details::_DefaultAutoInline)
+        response_impl->_complete(0, exceptionPtr)
+            http_msg_base::_complete()
+                m_data_available.set_exception(exceptionPtr) // task_completion_event
+                create_task(m_data_available)
+                    _TaskInitNoFunctor(task_completion_event<_ReturnType>& _Event)
+                        _Event._RegisterTask()
+                            task_completion_event::_RegisterTask(_TaskPram)
+                                if (_Event->HasUserException)
+                                    _Task_impl_base::CancelWithExceptionHolder()
+                                        _M_exceptionHolder = _ExceptionHolder_arg
+                                        _condition.notify_all()
+        request_context::finish()
+
+_Task_impl_base::_Wait()
+    if (_HasUserException())
+        _M_exceptionHolder->_RethrowUserException()
+            std::rethrow_exception(_M_stdException)
+    if (_IsCanceled())
+        return canceled
+```
+
 # PPLX
 PPLX is a special version of PPL for non-winodws platform.
 
@@ -335,8 +373,10 @@ public:
         _ValidateTaskConstructorArgs<_ReturnType,_Ty>(_Param);
 
         _CreateImpl(_TaskOptions.get_cancellation_token()._GetImplValue(), _TaskOptions.get_scheduler());
-        _SetTaskCreationCallstack(_get_internal_task_options(_TaskOptions)._M_hasPresetCreationCallstack
-            ? _get_internal_task_options(_TaskOptions)._M_presetCreationCallstack : _CAPTURE_CALLSTACK());
+        _SetTaskCreationCallstack(
+            _get_internal_task_options(_TaskOptions)._M_hasPresetCreationCallstack
+            ? _get_internal_task_options(_TaskOptions)._M_presetCreationCallstack
+            : _CAPTURE_CALLSTACK());
         _TaskInitMaybeFunctor(_Param, _IsCallable(_Param,0));
     }
 
@@ -506,10 +546,10 @@ private:
         _ContinuationTask._GetImpl()->_M_fUnwrappedTask = _Async_type_traits::_IsUnwrappedTaskOrAsync;
         _ContinuationTask._SetTaskCreationCallstack(_CreationStack);
 
-        _GetImpl()->_ScheduleContinuation(new _ContinuationTaskHandle<_InternalReturnType, _TaskType, _Function,
-            typename _Function_type_traits::_Takes_task, typename _Async_type_traits::_AsyncKind>
-                (_GetImpl(), _ContinuationTask._GetImpl(), std::forward<_Function>(_Func), _ContinuationContext,
-                _InliningMode)
+        _GetImpl()->_ScheduleContinuation(
+            new _ContinuationTaskHandle<_InternalReturnType, _TaskType, _Function,
+                typename _Function_type_traits::_Takes_task, typename _Async_type_traits::_AsyncKind>
+            (_GetImpl(), _ContinuationTask._GetImpl(), std::forward<_Function>(_Func), _ContinuationContext, _InliningMode)
         );
 
         return _ContinuationTask;
@@ -761,7 +801,7 @@ task::task()
         else
             _TaskInitNoFunctor(task_completion_event<_ReturnType>& _Event)
                 _Event._RegisterTask()
-                    task_completion_event::_RegisterTask()
+                    task_completion_event::_RegisterTask(_TaskPram)
                         if (_Event->HasUserException)
                             _Task_impl_base::CancelWithExceptionHolder()
                         else if (_Event->_M_fHasValue)
@@ -777,9 +817,10 @@ task::then()
   task::_ThenImpl()
     _Task_impl_base::_ScheduleContinuation()
         if (!_IsCompleted)
-            _ContinuationTaskHandleBase::_M_next = _M_Continuations;
+            _PThenTaskHandle->_M_next = _M_Continuations;
+            _M_Continuations = _PThenTaskHandle;
         else if (_IsCompleted)
-            _Task_impl_base::_ScheduleContinuationTask(_PTaskHandle);
+            _Task_impl_base::_ScheduleContinuationTask(_PThenTaskHandle);
                 --->
         else if (cancel)
             _Task_impl_base::_Cancel(true);
@@ -808,76 +849,82 @@ task_completion_event::set()
     _M_Result.Set(_Result);
         _TaskCollectionImpl::_Complete()
             condition_variable.notify_all()
-        _Task_impl_base::_RunTaskContinuations // while loops all continuations
+        _Task_impl_base::_RunTaskContinuations() // while loops all continuations
             _Task_impl_base::_RunContinuation()
-                _Task_impl_base::_ScheduleContinuationTask // _ContinuationTaskHandleBase * _PTaskHandle
-                    // _ScheduleFuncWithAutoInline([]() { });
+                _Task_impl_base::_ScheduleContinuationTask() // _ContinuationTaskHandleBase * _PTaskHandle
                     if (_HasCapturedContext)
-                        _Task_impl_base::_ScheduleFuncWithAutoInline
-                            _TaskCollection_t::_RunTask(&_TaskProcThunk::_Bridge, new _TaskProcThunk(_Func), _InliningMode);
+                        _ScheduleFuncWithAutoInline(const std::function<void ()> & _Func, _InliningMode)
+                            _TaskCollectionImpl::_RunTask(&_TaskProcThunk::_Bridge, new _TaskProcThunk(_Func), _InliningMode);
                                 if (__ForceInline)
                                     _TaskProcThunk::_Bridge(_ThunkFunc);
-                --->                    _Func = []() {
-                                            if (_M_continuationContext == _ContextCallback::_CaptureCurrent)
-                                                _Task_impl_base::_ScheduleTask
-                                            else
-                                                _ContextCallback::_CallInContext
-                                        }
+                                        _ThunkFunc->_M_func()
+                    --->                    _Func = []() {
+                                                if (_M_continuationContext == _ContextCallback::_CaptureCurrent)
+                                                    _Task_impl_base::_ScheduleTask()
+                                                        --->
+                                                else
+                                                    task_continuation_context::_CallInContext()
+                                            }
                                 else // not _ForceInline
                                     linux_scheduler::schedule(_Bridge, _ThunkFunc)
-                    else // not _HasCapturedContext
-                        _Task_impl_base::_ScheduleTask
+                                        crossplat::threadpool::shared_instance().schedule(boost::bind(proc, param))
+                                            threadpoll::schedule(T task)
+                                                boost::asio::io_service(task)
+                    else // no _HasCapturedContext
+                        _Task_impl_base::_ScheduleTask()
                             _TaskCollectionImpl::_ScheduleTask(_TaskProcHandle* _PTaskHandle, _TaskInliningMode _InliningMode)
                                 if (_ForceInline)
-                                    _TaskProcHandle_t::_RunChoreBridge(_PTaskHandle)
+                                    _TaskProcHandle::_RunChoreBridge(_PTaskHandle)
                                         _PTaskHandle->invoke()
                                             if (is_init_handle)
-                                                (this)->_Perform()
+                                                _InitialTaskHandle::_Perform()
                                                     if (NoAsync)
                                                         _Init(_TypeSelectorNoAsync)
                                                             _Task_impl_base::_FinalizeAndRunContinuations(_ReturnType _Result)
+                                                                --->
                                                     else // Async
                                                         _Init(_TypeSelectorAsyncOperationOrTask)
                                                             _Task_impl_base::_AsyncInit()
-                                            else // is conitnuation handle
-                                                (this)->_Perform()
-                                                    _ContinuationTaskHandle::_Perform()
-                                                        if (is_task_based && NoAsync)
-                                                            _ContinuationTaskHandle::_Continue(_IsTaskBased(), _TypeSelectorNoAsync)
-                                                                task<_InternalReturnType> ancestorTask;
-                                                                ancestorTask._SetImpl(std::move(_M_ancestorTaskImpl));
+                                            else // is continuation handle
+                                                _ContinuationTaskHandle::_Perform()
+                                                    if (is_task_based && NoAsync)
+                                                        _ContinuationTaskHandle::_Continue(_IsTaskBased(), _TypeSelectorNoAsync)
+                                                            task<_InternalReturnType> ancestorTask;
+                                                            ancestorTask._SetImpl(std::move(_M_ancestorTaskImpl));
 
-                                                                _Task_impl_base::_FinalizeAndRunContinuations(_ReturnType _Result)(
-                                                                    _LogWorkItemAndInvokeUserLambda(
-                                                                        _Continuation_func_transformer<_FuncInputType, _ContinuationReturnType>::_Perform(_M_function),
-                                                                        std::move(ancestorTask)
-                                                                    ) {
-                                                                        _func(std::forward<_Arg>(_value))
-                                                                    };
+                                                            _Task_impl_base::_FinalizeAndRunContinuations(_ReturnType _Result)(
+                                                                _LogWorkItemAndInvokeUserLambda(
+                                                                    _Continuation_func_transformer<_FuncInputType, _ContinuationReturnType>::_Perform(_M_function),
+                                                                    std::move(ancestorTask)
+                                                                ) {
+                                                                    _func(std::forward<_Arg>(_value))
+                                                                };
+                                                            );
+                                                    if (is_task_based && Async)
+                                                        _ContinuationTaskHandle::_Continue(_IsTaskBased(), _TypeSelectorAsyncOperationOrTask)
+                                                            _Task_impl_base::_AsyncInit<_NormalizedContinuationReturnType, _ContinuationReturnType>(
+                                                                this->_M_pTask,
+                                                                _LogWorkItemAndInvokeUserLambda(_M_function, std::move(ancestorTask))
+                                                            );
+                                                    if (not_task_based && NoAsync)
+                                                        _ContinuationTaskHandle::_Continue(!_IsTaskBased(), _TypeSelectorNoAsync)
+                                                            _Task_impl_base::_FinalizeAndRunContinuations(_ReturnType _Result)(
+                                                                _LogWorkItemAndInvokeUserLambda(
+                                                                    _Continuation_func_transformer<_FuncInputType, _FuncOutputType>::_Perform(_M_function),
+                                                                    _M_ancestorTaskImpl->_GetResult()
                                                                 );
-                                                        if (is_task_based && Async)
-                                                            _ContinuationTaskHandle::_Continue(_IsTaskBased(), _TypeSelectorAsyncOperationOrTask)
-                                                                _Task_impl_base::_AsyncInit<_NormalizedContinuationReturnType, _ContinuationReturnType>(
-                                                                    this->_M_pTask,
-                                                                    _LogWorkItemAndInvokeUserLambda(_M_function, std::move(ancestorTask))
-                                                                );
-                                                        if (not_task_based && NoAsync)
-                                                            _ContinuationTaskHandle::_Continue(!_IsTaskBased(), _TypeSelectorNoAsync)
-                                                                _Task_impl_base::_FinalizeAndRunContinuations(_ReturnType _Result)(
-                                                                    _LogWorkItemAndInvokeUserLambda(
-                                                                        _Continuation_func_transformer<_FuncInputType, _FuncOutputType>::_Perform(_M_function),
-                                                                        _M_ancestorTaskImpl->_GetResult()
-                                                                    );
-                                                                );
-                                                        if (not_task_based && Async)
-                                                            _ContinuationTaskHandle::_Continue(!_IsTaskBased(), _TypeSelectorNoAsync)
-                                                                _Task_impl_base::_AsyncInit<_NormalizedContinuationReturnType, _ContinuationReturnType>(
-                                                                    this->_M_pTask,
-                                                                    _LogWorkItemAndInvokeUserLambda(_M_function, _M_ancestorTaskImpl->_GetResult())
-                                                                );
+                                                            );
+                                                    if (not_task_based && Async)
+                                                        _ContinuationTaskHandle::_Continue(!_IsTaskBased(), _TypeSelectorNoAsync)
+                                                            _Task_impl_base::_AsyncInit<_NormalizedContinuationReturnType, _ContinuationReturnType>(
+                                                                this->_M_pTask,
+                                                                _LogWorkItemAndInvokeUserLambda(_M_function, _M_ancestorTaskImpl->_GetResult())
+                                                            );
                                 else // not _ForceInline
                                     linux_scheduler::schedule(_TaskProcHandle_t::_RunChoreBridge, _PTaskHandle);
-                                        crossplat::threadpool::shared_instance().schedule(boost::bind(proc, param));
+                                        crossplat::threadpool::shared_instance().schedule(boost::bind(proc, param))
+                                            threadpoll::schedule(T task)
+                                                boost::asio::io_service(task)
 ```
 
 # [Boost.Asio](../Boost/README.md)
