@@ -11,7 +11,7 @@ Features:
 * [Websocket Client](https://github.com/microsoft/cpprestsdk/wiki/Web-Socket)
 * OAuth Client
 
-C++ Rest consists three components:
+C++ Rest consists of three components:
 * [PPL](#PPLX)
 * [C++ Rest](#CppRest)
 * [Boost Asio](#BoostAsio)
@@ -37,11 +37,16 @@ pplx::task<http_response> http_client::request()
 
             asio_client::propagate() // create asio_context, obtain a reused connection from pool
                 auto context =asio_context::create_request_context()
+                    asio_client::obtain_connection()
+                        asio_connection_poll::acquire()
+                        conn = std::make_shared<asio_connection>(crossplat::threadpool::shared_instance().service());
+                        auto context = std::make_shared<asio_context>(client, request, connection)
                 auto result_task = pplx::create_task(context->m_request_completion) // task_completion_event<http_response>
                 _http_client_communicator::async_send_request(context)
                     _http_client_communicator::push_request()           // 1. gurantee order
                         m_requests_queue.push(request)
                     _http_client_communicator::open_and_send_request()  // 2. don't gurantee order
+                        _http_client_communicator::open_if_required()
                         asio_client::send_request()
                             asio_context::start_request()
                                 ssl_proxy_tunnel::start_proxy_connect()  // if it's ssl and not connected
@@ -78,24 +83,29 @@ pplx::task<http_response> http_client::request()
                                         std::ostream request_stream(&ctx->m_body_buf)
                                         request_stream << method << " " << encoded_resource << " " << "HTTP/1.1" << CRLF;
                                         request_stream << "Host: " << host << ":" << port << CRLF;
-                                    basic_resolver.hpp::async_resolve()
-                                        asio_context::handle_resolve()
-                                            asio_context::connect()
-                                                asio_connection_fast_ipv4_fallback::connect()
-                                                    --->
-                                    asio_context::write_request()
-                                        if (m_connection->is_ssl() && !m_connection->is_reused())
-                                            asio_connection_fast_ipv4_fallback::async_handshake()
-                                                asio_connection::async_handshake()
-                                                    stream.hpp::async_handshake()
-                                                        ....
-                                                    asio_context::handle_handshake()
-                                                        asio_connection::async_write(asio_context::handle_write_headers)
+                                    if (ctx->m_connection->is_reused() || proxy_type == http_proxy_type::ssl_tunnel)
+                                        asio_context::write_request()
+                                            if (m_connection->is_ssl() && !m_connection->is_reused())
+                                                asio_connection_fast_ipv4_fallback::async_handshake()
+                                                    asio_connection::async_handshake()
+                                                        stream.hpp::async_handshake()
+                                                            ....
+                                                        asio_context::handle_handshake()
+                                                            asio_connection::async_write(asio_context::handle_write_headers)
+                                                                --->
+                                            else
+                                                asio_connect::async_write(buffer, asio_context::handle_write_headers)
+                                                    boost::asio::async_write(asio_context::handle_write_large_body)
                                                             --->
-                                        else
-                                            asio_connect::async_write(buffer, asio_context::handle_write_headers)
-                                                boost::asio::async_write(asio_context::handle_write_large_body)
-                                                        --->
+                                    else
+                                        client->m_resolver.async_resolve()
+                                        --->asio_context::handle_resolve()
+                                                asio_context::connect()
+                                                    basic_socket.hpp::async_connect()
+                                                        ---> Boost.Asio
+                                                            epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev)
+                                                --->asio_context::handle_connect()
+                                                    asio_context::write_request()
                 return result_task; // return a async pplx::task<response> object to client, client then use response.extract_string() to get the real response string
 
 // write callback for asio_context::write_request()
@@ -247,37 +257,69 @@ hostport_listener::on_accept()
             boost::asio::async_read_until() // crlfcrlf_nonascii_searcher
                 ---> Boost.Asio
                 connection::handle_http_line()
-                    http_request::_create_request()
-                        // compose request object
-                        connection::handle_headers()
+                    m_request = http_request::_create_request(new linux_request_context())
+                    // parse m_request_buf to compose request object
+                    std::istream request_stream(&m_request_buf);
+                    connection::handle_headers()
+                        if (m_chunked)
                             connection::async_read_until() // CRLF
-                                boost::asio::async_read_until()
+                                boost::asio::async_read_until(*m_socket, m_request_buf, CRLF, connection::handle_chunked_header)
                                     ---> Boost.Asio
-                                connection::handle_chunked_header()
-                                    http_msg_base::_complete()
-                                        m_data_available.set(body_size);
-                                connection::dispatch_request_to_listener()
-                                    // find listern by request URI path
-                                    http_request::_set_listener_path()
-                                    connection::do_response(false)
-                                    http_listener_impl::handle_request()
-                                        m_supported_methods[mtd](request)
-                                            http_request::reply(const http_response &response)
-                                                _http_request::_reply_impl()
-                                                    http_response::_set_server_context(http_linux_context)
-                                                    http_linux_server::respond()
-                                                        return pplx::create_task(response->linux_request_context::m_response_completed)
-                                                    http_request::m_response::set_response() // task_completion_event<http_response> m_response
-                                                        task_completion_event::set(response)
-                                                        // activate connection::do_response to run
+                                --->connection::handle_chunked_header()
+                                        if (er || len == 0)
+                                            // 1.1 [client request] has been received
+                                            http_msg_base::_complete()
+                                                m_data_available.set(body_size)
+                                        else
+                                            connection::async_read_until_buffersize(len + 2, connection::handle_chunked_body)
+                                            --->connection::handle_chunked_body()
+                                                    auto writebuf = m_request._get_impl()->outstream().streambuf();
+                                                    writebuf.putn_nocopy(m_request_buf.data(), toWrite).then()
+                                                        connection::async_read_until()
+                            connection::dispatch_request_to_listener();
+                            return
+
+                        if (m_read_size == 0)
+                            m_request._get_impl()->_complete(0)
+                                http_msg_base::_complete()  // 1.2 [client request] has been received
+                                    m_data_available.set(body_size)
+                        else
+                            connection::async_read_until_buffersize(std::min(ChunkSize, m_read_size), connection::handle_body)
+                                connection::handle_body()
+                                    if (m_read < m_read_size)  // there is more to read
+                                        auto writebuf = m_request._get_impl()->outstream().streambuf();
+                                        writebuf.putn_nocopy(m_request_buf, std::min(m_request_buf.size(), m_read_size - m_read)).then()
+                                            connection::async_read_until_buffersize(std::min(ChunkSize, m_read_size - m_read), connection::handle_body)
+                                    else
+                                        m_request._get_impl()->_complete(m_read)
+                                            // 1.3 [client request] has been received
+                                            http_msg_base::_complete(m_read)
+                                                m_data_available.set(body_size)
+
+                        connection::dispatch_request_to_listener()
+                            // find listern by request URI path
+                            http_request::_set_listener_path(pListener->uri().path())
+                            connection::do_response(false)
+                                ---> //1. [m_response] link a task to m_response: task_completion_event<http_response>
+                            http_listener_impl::handle_request()
+                                m_supported_methods[mtd](request)
+                                    http_request::reply(const http_response &response)
+                                        _http_request::_reply_impl()
+                                            http_response::_set_server_context(http_linux_context)
+                                            http_linux_server::respond()
+                                                // 1. [m_response_completed] wait
+                                                return pplx::create_task(response->linux_request_context::m_response_completed)
+                                            http_request::m_response::set(response)
+                                                task_completion_event<http_response>::set(response)
+                                                // 2. [m_response] activate task linked with m_response: task_completion_event<http_response>
 ```
 ### write socket
 ```C++
 connection::do_response()
-    http_request::m_request.get_response() // task<task_completion_event<http_response>>
-        pplx::task<http_response>(m_response)
+    http_request::m_request.get_response()
+        pplx::task<http_response>(m_response) // 3. [m_response] wait for m_response data
     .then()
-        m_request.content_ready()
+        m_request.content_ready() // 2. [client request] wait for all request stream to be received
             pplx::create_task(m_data_available).then([req](utility::size64_t) { return req; }
         .then()
             connection::async_process_response(response)
@@ -291,7 +333,7 @@ connection::do_response()
                             --->
                         if (ec || m_write == m_write_size)
                             connection::handle_response_written()
-                                linux_request_context::m_response_completed.set()
+                                linux_request_context::m_response_completed.set() // 2. [m_response_completed] notify
                                 if (!close_connection)
                                     connection::start_request_response()
                                 else
@@ -396,13 +438,36 @@ public:
     }
 
     template<typename _Function>
+    void _TaskInitMaybeFunctor(_Function & _Func, std::true_type) {
+        _TaskInitWithFunctor<_ReturnType, _Function>(_Func);
+    }
+
+    template<typename _Ty>
+    void _TaskInitMaybeFunctor(_Ty & _Param, std::false_type) {
+        _TaskInitNoFunctor(_Param);
+    }
+
+    template<typename _InternalReturnType, typename _Function>
+    void _TaskInitWithFunctor(const _Function& _Func) {
+        typedef typename _InitFunctorTypeTraits<_InternalReturnType, decltype(_Func())> _Async_type_traits;
+
+        _M_Impl->_M_fFromAsync = _Async_type_traits::_IsAsyncTask;
+        _M_Impl->_M_fUnwrappedTask = _Async_type_traits::_IsUnwrappedTaskOrAsync;
+        _M_Impl->_M_taskEventLogger._LogScheduleTask(false);
+        _M_Impl->_ScheduleTask(new _InitialTaskHandle<_InternalReturnType, _Function, typename _Async_type_traits::_AsyncKind>(_GetImpl(), _Func), _NoInline);
+    }
+
+    void _TaskInitNoFunctor(task_completion_event<_ReturnType>& _Event) {
+        _Event._RegisterTask(_M_Impl);
+    }
+
+    template<typename _Function>
     auto then(_Function&& _Func) const -> typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
     {
         task_options _TaskOptions;
         _get_internal_task_options(_TaskOptions)._set_creation_callstack(_CAPTURE_CALLSTACK());
         return _ThenImpl<_ReturnType, _Function>(std::forward<_Function>(_Func), _TaskOptions);
     }
-
 
     template<typename _Function>
     typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
@@ -422,6 +487,71 @@ public:
         return _ThenImpl<_ReturnType, _Function>(std::forward<_Function>(_Func), _TaskOptions);
     }
 
+    template<typename _InternalReturnType, typename _Function>
+    typename _ContinuationTypeTraits<_Function, _InternalReturnType>::_TaskOfType()
+    _ThenImpl(_Function&& _Func, const task_options& _TaskOptions) const
+    {
+        if (!_M_Impl) {
+            throw invalid_operation("then() cannot be called on a default constructed task.");
+        }
+
+        _CancellationTokenState *_PTokenState = _TaskOptions.has_cancellation_token() ? _TaskOptions.get_cancellation_token()._GetImplValue() : nullptr;
+        auto _Scheduler = _TaskOptions.has_scheduler() ? _TaskOptions.get_scheduler() : _GetImpl()->_GetScheduler()
+        auto _CreationStack = _get_internal_task_options(_TaskOptions)._M_hasPresetCreationCallstack ? _get_internal_task_options(_TaskOptions)._M_presetCreationCallstack : _TaskCreationCallstack()
+        return _ThenImpl<_InternalReturnType, _Function>(std::forward<_Function>(_Func), _PTokenState, _TaskOptions.get_continuation_context(), _Scheduler, _CreationStack);
+    }
+
+    template<typename _Function>
+    typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
+    _Then(_Function&& _Func, _CancellationTokenState *_PTokenState, _TaskInliningMode_t _InliningMode = _ForceInline) const
+    {
+        // inherit from antecedent
+        auto _Scheduler = _GetImpl()->_GetScheduler()
+
+        return _ThenImpl<_ReturnType, _Function>(std::forward<_Function>(_Func), _PTokenState,
+            task_continuation_context::use_default(), _Scheduler, _CAPTURE_CALLSTACK(), _InliningMode);
+    }
+
+    template<typename _InternalReturnType, typename _Function>
+    typename _ContinuationTypeTraits<_Function, _InternalReturnType>::_TaskOfType
+    _ThenImpl(_Function&& _Func,
+      scheduler_ptr _Scheduler,
+      _TaskCreationCallstack _CreationStack,
+      _CancellationTokenState *_PTokenState,
+      const task_continuation_context& _ContinuationContext,
+      _TaskInliningMode_t _InliningMode = _NoInline
+    ) const {
+        if (!_M_Impl) {
+            throw invalid_operation("then() cannot be called on a default constructed task.");
+        }
+
+        typedef _FunctionTypeTraits<_Function, _InternalReturnType> _Function_type_traits;
+        typedef _TaskTypeTraits<typename _Function_type_traits::_FuncRetType> _Async_type_traits;
+        typedef typename _Async_type_traits::_TaskRetType _TaskType;
+
+        if (_PTokenState == nullptr) {
+            if (_Function_type_traits::_Takes_task::value) {
+              _PTokenState = _CancellationTokenState::_None()
+            } else {
+              _PTokenState = _GetImpl()->_M_pTokenState;
+            }
+        }
+
+        task<_TaskType> _ContinuationTask;
+        _ContinuationTask._CreateImpl(_PTokenState, _Scheduler);
+        _ContinuationTask._GetImpl()->_M_fFromAsync = (_GetImpl()->_M_fFromAsync || _Async_type_traits::_IsAsyncTask);
+        _ContinuationTask._GetImpl()->_M_fUnwrappedTask = _Async_type_traits::_IsUnwrappedTaskOrAsync;
+        _ContinuationTask._SetTaskCreationCallstack(_CreationStack);
+
+        _GetImpl()->_ScheduleContinuation(
+            new _ContinuationTaskHandle<_InternalReturnType, _TaskType, _Function,
+                typename _Function_type_traits::_Takes_task, typename _Async_type_traits::_AsyncKind>
+            (_GetImpl(), _ContinuationTask._GetImpl(), std::forward<_Function>(_Func), _ContinuationContext, _InliningMode)
+        );
+
+        return _ContinuationTask;
+    }
+
 
     task_status wait() const {
         if (!_M_Impl) {
@@ -430,7 +560,6 @@ public:
 
         return _M_Impl->_Wait()
     }
-
 
     _ReturnType get() const {
         if (!_M_Impl) {
@@ -480,96 +609,7 @@ public:
         _GetImpl()->_SetAsync(_Async);
     }
 
-    template<typename _Function>
-    typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
-    _Then(_Function&& _Func, _CancellationTokenState *_PTokenState, _TaskInliningMode_t _InliningMode = _ForceInline) const
-    {
-        // inherit from antecedent
-        auto _Scheduler = _GetImpl()->_GetScheduler()
-
-        return _ThenImpl<_ReturnType, _Function>(std::forward<_Function>(_Func), _PTokenState,
-            task_continuation_context::use_default(), _Scheduler, _CAPTURE_CALLSTACK(), _InliningMode);
-    }
-
 private:
-    template<typename _InternalReturnType, typename _Function>
-    void _TaskInitWithFunctor(const _Function& _Func) {
-        typedef typename _InitFunctorTypeTraits<_InternalReturnType, decltype(_Func())> _Async_type_traits;
-
-        _M_Impl->_M_fFromAsync = _Async_type_traits::_IsAsyncTask;
-        _M_Impl->_M_fUnwrappedTask = _Async_type_traits::_IsUnwrappedTaskOrAsync;
-        _M_Impl->_M_taskEventLogger._LogScheduleTask(false);
-        _M_Impl->_ScheduleTask(new _InitialTaskHandle<_InternalReturnType, _Function, typename _Async_type_traits::_AsyncKind>(_GetImpl(), _Func), _NoInline);
-    }
-
-    void _TaskInitNoFunctor(task_completion_event<_ReturnType>& _Event) {
-        _Event._RegisterTask(_M_Impl);
-    }
-
-    template<typename _Function>
-    void _TaskInitMaybeFunctor(_Function & _Func, std::true_type) {
-        _TaskInitWithFunctor<_ReturnType, _Function>(_Func);
-    }
-
-    template<typename _Ty>
-    void _TaskInitMaybeFunctor(_Ty & _Param, std::false_type) {
-        _TaskInitNoFunctor(_Param);
-    }
-
-    template<typename _InternalReturnType, typename _Function>
-    typename _ContinuationTypeTraits<_Function, _InternalReturnType>::_TaskOfType()
-    _ThenImpl(_Function&& _Func, const task_options& _TaskOptions) const
-    {
-        if (!_M_Impl) {
-            throw invalid_operation("then() cannot be called on a default constructed task.");
-        }
-
-        _CancellationTokenState *_PTokenState = _TaskOptions.has_cancellation_token() ? _TaskOptions.get_cancellation_token()._GetImplValue() : nullptr;
-        auto _Scheduler = _TaskOptions.has_scheduler() ? _TaskOptions.get_scheduler() : _GetImpl()->_GetScheduler()
-        auto _CreationStack = _get_internal_task_options(_TaskOptions)._M_hasPresetCreationCallstack ? _get_internal_task_options(_TaskOptions)._M_presetCreationCallstack : _TaskCreationCallstack()
-        return _ThenImpl<_InternalReturnType, _Function>(std::forward<_Function>(_Func), _PTokenState, _TaskOptions.get_continuation_context(), _Scheduler, _CreationStack);
-    }
-
-    template<typename _InternalReturnType, typename _Function>
-    typename _ContinuationTypeTraits<_Function, _InternalReturnType>::_TaskOfType
-    _ThenImpl(_Function&& _Func,
-      scheduler_ptr _Scheduler,
-      _TaskCreationCallstack _CreationStack,
-      _CancellationTokenState *_PTokenState,
-      const task_continuation_context& _ContinuationContext,
-      _TaskInliningMode_t _InliningMode = _NoInline
-    ) const {
-        if (!_M_Impl) {
-            throw invalid_operation("then() cannot be called on a default constructed task.");
-        }
-
-        typedef _FunctionTypeTraits<_Function, _InternalReturnType> _Function_type_traits;
-        typedef _TaskTypeTraits<typename _Function_type_traits::_FuncRetType> _Async_type_traits;
-        typedef typename _Async_type_traits::_TaskRetType _TaskType;
-
-        if (_PTokenState == nullptr) {
-            if (_Function_type_traits::_Takes_task::value) {
-              _PTokenState = _CancellationTokenState::_None()
-            } else {
-              _PTokenState = _GetImpl()->_M_pTokenState;
-            }
-        }
-
-        task<_TaskType> _ContinuationTask;
-        _ContinuationTask._CreateImpl(_PTokenState, _Scheduler);
-        _ContinuationTask._GetImpl()->_M_fFromAsync = (_GetImpl()->_M_fFromAsync || _Async_type_traits::_IsAsyncTask);
-        _ContinuationTask._GetImpl()->_M_fUnwrappedTask = _Async_type_traits::_IsUnwrappedTaskOrAsync;
-        _ContinuationTask._SetTaskCreationCallstack(_CreationStack);
-
-        _GetImpl()->_ScheduleContinuation(
-            new _ContinuationTaskHandle<_InternalReturnType, _TaskType, _Function,
-                typename _Function_type_traits::_Takes_task, typename _Async_type_traits::_AsyncKind>
-            (_GetImpl(), _ContinuationTask._GetImpl(), std::forward<_Function>(_Func), _ContinuationContext, _InliningMode)
-        );
-
-        return _ContinuationTask;
-    }
-
     // The underlying implementation for this task
     typename _Task_ptr<_ReturnType>::_Type _M_Impl;
 };
@@ -675,15 +715,6 @@ struct _TaskTypeTraits<void>
     static const bool _IsAsyncTask = false;
     static const bool _IsUnwrappedTaskOrAsync = false;
 };
-
-template <typename _Function>
-auto _IsCallable(_Function _Func, int) -> decltype(_Func(), std::true_type()) {
-    (void)(_Func);
-    return std::true_type()
-}
-
-template <typename _Function>
-std::false_type _IsCallable(_Function, ...) { return std::false_type() }
 ```
 
 ```C++
@@ -741,6 +772,15 @@ void _GetTaskType(std::function<void()>, std::true_type);
 ```
 
 ```C++
+template <typename _Function>
+auto _IsCallable(_Function _Func, int) -> decltype(_Func(), std::true_type()) {
+    (void)(_Func);
+    return std::true_type()
+}
+
+template <typename _Function>
+std::false_type _IsCallable(_Function, ...) { return std::false_type() }
+
 template<typename _Ty>
 auto _FilterValidTaskType(_Ty _Param, int) -> decltype(_GetTaskType(_Param, _IsCallable(_Param, 0)));
 
@@ -762,7 +802,7 @@ template<typename _Ty>
 task<typename _TaskTypeFromParam<_Ty>::_Type>
 create_task(_Ty _Param, task_options _TaskOptions = task_options())
 {
-    static_assert(!std::is_same<typename _TaskTypeFromParam<_Ty>::_Type,_BadArgType>::value,
+    static_assert(!std::is_same_v<typename _TaskTypeFromParam<_Ty>::_Type, _BadArgType>,
         "incorrect argument for create_task; can be a callable object or a task_completion_event"
     );
 
@@ -794,8 +834,7 @@ inline task<void> task_from_result(const task_options& _TaskOptions = task_optio
 }
 
 template<typename _TaskType, typename _ExType>
-task<_TaskType> task_from_exception(_ExType _Exception, const task_options& _TaskOptions = task_options())
-{
+task<_TaskType> task_from_exception(_ExType _Exception, const task_options& _TaskOptions = task_options()
     task_completion_event<_TaskType> _Tce;
     _Tce.set_exception(_Exception);
     return create_task(_Tce, _TaskOptions);
@@ -857,9 +896,10 @@ _Task_impl_base::_Wait()
 _InitialTaskHandle::_Perform()
     _Task_impl_base::_FinalizeAndRunContinuations()
 
-
 // 2. task_completion_event completed
 task_completion_event::set()
+    _M_Impl->_M_value.Set(_Result)
+    _M_Impl->_M_fHasValue = true // a task can be linked before or after event trigger
   _Task_impl_base::_FinalizeAndRunContinuations(_M_Impl->_M_value.Get()); // while loops all tasks
     _M_Result.Set(_Result);
         _TaskCollectionImpl::_Complete()
