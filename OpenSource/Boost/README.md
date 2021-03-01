@@ -49,12 +49,18 @@ basic_socket_acceptor::async_accept()
                                     basic_scoket::assign()
                                         reactive_descriptor_service::assign()
                                             epoll_reactor::register_descriptor()
+                                                epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev)
 ```
 
 # async_connect
+
 ```C++
 basic_stream_socket::async_connect()
     reactive_socket_service::async_connect()
+        if (!is_open())
+            reactive_socket_service_base::do_open()
+                epoll_reactor::register_descriptor()
+                    epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev)
         reactive_socket_service_base::start_connect_op() // construct reactive_socket_connect_op
             if (socket_ops::set_internal_non_blocking)
                 socket_ops::connect()
