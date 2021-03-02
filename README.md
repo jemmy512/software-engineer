@@ -89,7 +89,6 @@
 - [x] :orange_book: Inside C++ Object Model :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/inside-the-cpp-object-model.md)
 - [x] :orange_book: C++ Templates The Complete Guide :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-templates-the-complete-guid.md)
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
-- [x] [How std::any Works](https://www.fluentcpp.com/2021/02/05/how-stdany-works/)
 
 * OOB
     - [x] [Inheritance Without Pointers](https://www.fluentcpp.com/2021/01/29/inheritance-without-pointers/)
@@ -133,6 +132,7 @@
     - [x] [How to Reduce the Code Bloat of a Variadic CRTP](https://www.fluentcpp.com/2018/07/03/how-to-reduce-the-code-bloat-of-a-variadic-crtp/)
     - [x] [Variadic CRTP Packs: From Opt-in Skills to Opt-in Skillsets](https://www.fluentcpp.com/2018/06/26/variadic-crtp-packs-from-opt-in-skills-to-opt-in-skillsets/)
     - [x] [Variadic CRTP: An Opt-in for Class Features, at Compile Time](https://www.fluentcpp.com/2018/06/22/variadic-crtp-opt-in-for-class-features-at-compile-time/)
+
 * Template
     - [x] [One Trick with Private Names and Function Templates](https://www.cppstories.com/2020/12/private-names-trick)
     - [x] [Modern C++ Features – Class Template Argument Deduction](https://arne-mertz.de/2017/06/class-template-argument-deduction/)
@@ -140,8 +140,14 @@
     - [x] [Build Throughput Series: More Efficient Template Metaprogramming](https://devblogs.microsoft.com/cppblog/build-throughput-series-more-efficient-template-metaprogramming/)
     -[x] [How to Pass a Variadic Pack as a First Argument of a Function ](https://www.fluentcpp.com/2021/01/22/how-to-pass-a-variadic-pack-as-a-first-argument-of-a-function-in-cpp/)
 
+* C++17
+    -[x] [Table: C++17 Features](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp17-features.pdf)
+    -[x] [Runtime Polymorphism with std::variant and std::visit](https://www.bfilipek.com/2020/04/variant-virtual-polymorphism.html)
+    -[x] [How std::any Works](https://www.fluentcpp.com/2021/02/05/how-stdany-works/)
+
 * C++ 20
-    - [x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
+    -[x] [Table: C++20 Features](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp20-features.pdf)
+    -[x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
 
 </details>
 
