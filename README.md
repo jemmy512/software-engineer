@@ -138,16 +138,16 @@
     - [x] [Modern C++ Features – Class Template Argument Deduction](https://arne-mertz.de/2017/06/class-template-argument-deduction/)
     - [x] [Build Throughput Series: Template Metaprogramming Fundamentals](https://devblogs.microsoft.com/cppblog/build-throughput-series-template-metaprogramming-fundamentals/)
     - [x] [Build Throughput Series: More Efficient Template Metaprogramming](https://devblogs.microsoft.com/cppblog/build-throughput-series-more-efficient-template-metaprogramming/)
-    -[x] [How to Pass a Variadic Pack as a First Argument of a Function ](https://www.fluentcpp.com/2021/01/22/how-to-pass-a-variadic-pack-as-a-first-argument-of-a-function-in-cpp/)
+    - [x] [How to Pass a Variadic Pack as a First Argument of a Function](https://www.fluentcpp.com/2021/01/22/how-to-pass-a-variadic-pack-as-a-first-argument-of-a-function-in-cpp/)
 
 * C++17
-    -[x] [Table: C++17 Features](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp17-features.pdf)
-    -[x] [Runtime Polymorphism with std::variant and std::visit](https://www.bfilipek.com/2020/04/variant-virtual-polymorphism.html)
-    -[x] [How std::any Works](https://www.fluentcpp.com/2021/02/05/how-stdany-works/)
+    - [x] [Table: C++17 Features](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp17-features.pdf)
+    - [x] [Runtime Polymorphism with std::variant and std::visit](https://www.bfilipek.com/2020/04/variant-virtual-polymorphism.html)
+    - [x] [How std::any Works](https://www.fluentcpp.com/2021/02/05/how-stdany-works/)
 
 * C++ 20
-    -[x] [Table: C++20 Features](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp20-features.pdf)
-    -[x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
+    - [x] [Table: C++20 Features](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp20-features.pdf)
+    - [x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
 
 </details>
 
