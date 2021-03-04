@@ -142,12 +142,15 @@
 
 * C++17
     - [x] [Table: C++17 Features](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp17-features.pdf)
-    - [x] [Runtime Polymorphism with std::variant and std::visit](https://www.bfilipek.com/2020/04/variant-virtual-polymorphism.html)
     - [x] [How std::any Works](https://www.fluentcpp.com/2021/02/05/how-stdany-works/)
+    - [ ] [Everything You Need to Know About std::variant from C++17](https://www.bfilipek.com/2018/06/variant.html)
+    - [x] [Runtime Polymorphism with std::variant and std::visit](https://www.bfilipek.com/2020/04/variant-virtual-polymorphism.html)
+    - [ ] [Simplify code with ‘if constexpr’ in C++17](https://www.bfilipek.com/2018/03/ifconstexpr.html)
 
 * C++ 20
     - [x] [Table: C++20 Features](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp20-features.pdf)
     - [x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
+    - [x] [Notes on C++ SFINAE, Modern C++ and C++20 Concepts](https://www.cppstories.com/2016/02/notes-on-c-sfinae/)
 
 </details>
 
