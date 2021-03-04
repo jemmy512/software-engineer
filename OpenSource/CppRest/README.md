@@ -360,6 +360,7 @@ connection::do_response()
 ```c++
 request_context::report_error()
     request_context::report_exception()
+        exceptionPtr = std::make_exception_ptr();
         m_request_completion.set_exception(exceptionPtr)
             _M_exceptionHolder = exceptionPtr
                 _CancelInternal()
@@ -628,27 +629,6 @@ private:
 
 ## Type Traits
 ```C++
-template<typename _Type>
-task<_Type> _To_task(_Type t);
-
-template<typename _Func>
-task<void> _To_task_void(_Func f);
-```
-
-```C++
-struct _BadContinuationParamType{ };
-
-template <typename _Function, typename _Type>
-auto _ReturnTypeHelper(_Type t, _Function _Func, int, int) -> decltype(_Func(_To_task(t)));
-
-template <typename _Function, typename _Type>
-auto _ReturnTypeHelper(_Type t, _Function _Func, int, ...) -> decltype(_Func(t));
-
-template <typename _Function, typename _Type>
-auto _ReturnTypeHelper(_Type t, _Function _Func, ...) -> _BadContinuationParamType;
-```
-
-```C++
 template <typename _Function>
 auto _VoidReturnTypeHelper(_Function _Func, int, int) -> decltype(_Func(_To_task_void(_Func)));
 
@@ -671,6 +651,26 @@ auto _IsTaskHelper(_Type t, _Function _Func, int, int) -> decltype(_Func(_To_tas
 template <typename _Function, typename _Type>
 std::false_type _IsTaskHelper(_Type t, _Function _Func, int, ...);
 ```
+```C++
+template<typename _Type>
+task<_Type> _To_task(_Type t);
+
+template<typename _Func>
+task<void> _To_task_void(_Func f);
+```
+
+```C++
+struct _BadContinuationParamType{ };
+
+template <typename _Function, typename _Type>
+auto _ReturnTypeHelper(_Type t, _Function _Func, int, int) -> decltype(_Func(_To_task(t)));
+
+template <typename _Function, typename _Type>
+auto _ReturnTypeHelper(_Type t, _Function _Func, int, ...) -> decltype(_Func(t));
+
+template <typename _Function, typename _Type>
+auto _ReturnTypeHelper(_Type t, _Function _Func, ...) -> _BadContinuationParamType;
+```
 
 ```C++
 template<typename _Function, typename _ExpectedParameterType>
@@ -690,6 +690,27 @@ struct _FunctionTypeTraits<_Function, void>
 {
   typedef decltype(_VoidReturnTypeHelper(stdx::declval<_Function>(), 0, 0)) _FuncRetType;
   typedef decltype(_VoidIsTaskHelper(stdx::declval<_Function>(), 0, 0)) _Takes_task;
+};
+```
+
+```c++
+template <typename _T>
+_TypeSelectorAsyncTask _AsyncOperationKindSelector(task<_T>);
+
+_TypeSelectorNoAsync _AsyncOperationKindSelector(...);
+```
+
+```c++
+template <typename _Ty>
+struct _UnwrapTaskType
+{
+    typedef _Ty _Type;
+};
+
+template <typename _Ty>
+struct _UnwrapTaskType<task<_Ty>>
+{
+    typedef _Ty _Type;
 };
 ```
 
@@ -721,7 +742,9 @@ struct _TaskTypeTraits<void>
 template<typename _Function, typename _ReturnType>
 struct _ContinuationTypeTraits
 {
-  typedef task<typename _TaskTypeTraits<typename _FunctionTypeTraits<_Function, _ReturnType>::_FuncRetType>::_TaskRetType> _TaskOfType;
+    typedef task<typename _TaskTypeTraits<
+        typename _FunctionTypeTraits<_Function, _ReturnType>::_FuncRetType>
+    ::_TaskRetType> _TaskOfType;
 };
 
 template <typename _TaskType, typename _FuncRetType>
@@ -740,6 +763,7 @@ struct _InitFunctorTypeTraits<T, T>
   static const bool _IsUnwrappedTaskOrAsync = false;
 };
 ```
+* ![](../../.Image/task-func-type-traits.png)
 
 ```C++
 // Unwrap task<T>
@@ -795,6 +819,9 @@ struct _TaskTypeFromParam
     typedef decltype(_FilterValidTaskType(stdx::declval<_Ty>(), 0)) _Type;
 };
 ```
+
+* _TaskTypeFromParam
+    * ![](../../.Image/task-type-from-param.png)
 
 ## task::task()
 ```C++
@@ -869,6 +896,11 @@ task::task()
 ```C++
 task::then()
   task::_ThenImpl()
+    typedef details::_FunctionTypeTraits<_Function, _InternalReturnType> _Function_type_traits;
+    typedef details::_TaskTypeTraits<typename _Function_type_traits::_FuncRetType> _Async_type_traits;
+    typedef typename _Async_type_traits::_TaskRetType _TaskType;
+    task<_TaskType> _ContinuationTask;
+
     _Task_impl_base::_ScheduleContinuation()
         if (!_IsCompleted)
             _PThenTaskHandle->_M_next = _M_Continuations;
@@ -880,6 +912,8 @@ task::then()
             _Task_impl_base::_Cancel(true);
         else if (cancel_and_exception)
             _Task_impl_base::_CancelWithExceptionHolder(_GetExceptionHolder(), true);
+
+    return _ContinuationTask;
 ```
 
 ## task::wait()
