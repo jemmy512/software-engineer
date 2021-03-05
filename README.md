@@ -6,19 +6,22 @@
     3. [Safety Precaution](#Safety-Precaution)
     4. [Testing](#Testing)
     5. [Publishing](#Publishing)
-3. [Programming Language](#Programming-Language)
+3. [Computer Science](#Computer-Science)
+    1. [Operating System]()
+    2. [Network]()
+    3. [Data Structure]()
+    4. [Database]()
+4. [Programming Language](#Programming-Language)
     * [C/C++](#CC)
-4. [Theoretical Discipline](#Theoretical-Discipline)
-5. [System Knowledge](#System-Knowledge)
-6. [System Design](#System-Design)
-7. [Linux](#Linux)
+5. [System Design](#System-Design)
+6. [Linux](#Linux)
     1. [Kernel](#Kernel)
     2. [Network](#Network)
     3. [AIO](#AIO)
     4. [Lock-free](#Lock-free)
     5. [Memory Order](#Memory-Order)
     6. [CPU Cache](#CPU-Cache)
-8. [Distributed Architecture](#Distributed-Architecture)
+7. [Distributed Architecture](#Distributed-Architecture)
     1. [Distributed Messages System](#Distributed-Messages-System)
     2. [Logs & Data](#Logs--Data)
     3. [Distributed monitoring and tracking](#Distributed-monitoring-and-tracking)
@@ -34,7 +37,7 @@
     13. [Performance](#Performance)
     14. [Search](#Search)
     15. [Architecture Practices by Companies](#Architecture-Practices-by-Companies)
-9. [Microservice](#Microservice)
+8. [Microservice](#Microservice)
     1. [API Gatway](#API-Gatway)
     2. [Microservice VS SOA, IaaS, Paas, Monolithic](#Microservice-VS-SOA-IaaS-Paas-Monolithic)
     3. [Practice](#Practice)
@@ -72,6 +75,34 @@
 
 ### Publishing
 - [x] [Checklist](https://github.com/mtdvio/going-to-production)
+
+# Computer Science
+* Operating System
+    - [ ] :orange_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
+    - [ ] :orange_book: Modern Operating Systems :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/modern-operating-system.md)
+
+* Network
+    - [ ] :orange_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/tcp-ip-illustrated-volume-1.md)
+    - [ ] :orange_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-programming.md)
+    - [ ] :orange_book: UNIX Network Programming, Volume 2: Interprocess Communications
+    - [ ] :orange_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
+    - [ ] :orange_book: Computer Networking: A Top-Down Approach
+    - [ ] :orange_book: Advanced Programming in the UNIX Environment
+
+    - [ ] [Let’s Code a TCP/IP Stack, 1: Ethernet & ARP](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/#tuntap-devices)
+    - [ ] [Let’s Code a TCP/IP Stack, 2: IPV4 & ICMPv4](https://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4)
+    - [ ] [Let’s Code a TCP/IP Stack, 3: TCP Basics & Handshake](https://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake)
+    - [ ] [Let’s Code a TCP/IP Stack, 4: Tcp Data Flow & Socket API](https://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api)
+    - [ ] [Let’s Code a TCP/IP Stack, 5: TCP Retransaction](https://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission)
+
+    - [ ] [C10k Problem](http://www.kegel.com/c10k.html)
+    - [ ] [C10m Problem](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
+
+* Database
+    - [ ] :orange_book: Data Structures and Algorithm Analysis in C:Second Edition
+    - [ ] :orange_book: Database System Concepts(Fifth Edition)
+
+* Data Structure
 
 # Programming Language
 
@@ -154,30 +185,6 @@
 
 </details>
 
-# Theoretical Discipline
-- [ ] :orange_book: Data Structures and Algorithm Analysis in C:Second Edition
-- [ ] :orange_book: Database System Concepts(Fifth Edition)
-- [ ] :orange_book: Modern Operating Systems :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/modern-operating-system.md)
-- [ ] :orange_book: Computer Networking: A Top-Down Approach
-
-# System Knowledge
-- [ ] :orange_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
-- [ ] :orange_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/tcp-ip-illustrated-volume-1.md)
-- [ ] :orange_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-programming.md)
-- [ ] :orange_book: UNIX Network Programming, Volume 2: Interprocess Communications
-- [ ] :orange_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
-- [ ] :orange_book: Advanced Programming in the UNIX Environment
-
-- [ ] [Let’s Code a TCP/IP Stack, 1: Ethernet & ARP](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/#tuntap-devices)
-- [ ] [Let’s Code a TCP/IP Stack, 2: IPV4 & ICMPv4](https://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4)
-- [ ] [Let’s Code a TCP/IP Stack, 3: TCP Basics & Handshake](https://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake)
-- [ ] [Let’s Code a TCP/IP Stack, 4: Tcp Data Flow & Socket API](https://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api)
-- [ ] [Let’s Code a TCP/IP Stack, 5: TCP Retransaction](https://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission)
-
-- [ ] [C10k Problem](http://www.kegel.com/c10k.html)
-- [ ] [C10m Problem](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
-
-
 # System Design
 - [x] [Grokking System Design](https://www.educative.io/courses/grokking-the-system-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/grokking-the-system-design.md)
 - [ ] [System Design Primer](https://github.com/donnemartin/system-design-primer)
@@ -219,7 +226,6 @@
 - [x] [RCU]() [:link: Part 1](https://lwn.net/Articles/262464/) [:link: Part 2](https://lwn.net/Articles/263130/) [:link: Part 3](https://lwn.net/Articles/264090/)
 
 ### Network
-- [ ] :orange_book: Computer Networks, 5th Edition
 - [ ] :orange_book: [Linux High Performance Server Programming (CN)](https://book.douban.com/subject/24722611/) :pencil2:  [Linux Programmnig Noetes](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-programming.md) :pencil2: [Linux System Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxBasic.md)
 - [ ] :orange_book: Network tuning
 
