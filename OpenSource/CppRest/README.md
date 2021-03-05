@@ -763,7 +763,8 @@ struct _InitFunctorTypeTraits<T, T>
   static const bool _IsUnwrappedTaskOrAsync = false;
 };
 ```
-* ![](../../.Image/task-func-type-traits.png)
+### Check args compatibility
+![](../../.Image/task-func-type-traits.png)
 
 ```C++
 // Unwrap task<T>
@@ -820,8 +821,8 @@ struct _TaskTypeFromParam
 };
 ```
 
-* _TaskTypeFromParam
-    * ![](../../.Image/task-type-from-param.png)
+### Get task type from parameter
+![](../../.Image/task-type-from-param.png)
 
 ## task::task()
 ```C++
@@ -931,7 +932,7 @@ _InitialTaskHandle::_Perform()
     _Task_impl_base::_FinalizeAndRunContinuations()
 
 // 2. task_completion_event completed
-task_completion_event::set()
+task_completion_event::set(_Result)
     _M_Impl->_M_value.Set(_Result)
     _M_Impl->_M_fHasValue = true // a task can be linked before or after event trigger
   _Task_impl_base::_FinalizeAndRunContinuations(_M_Impl->_M_value.Get()); // while loops all tasks
