@@ -173,14 +173,14 @@
     - [x] [How to Pass a Variadic Pack as a First Argument of a Function](https://www.fluentcpp.com/2021/01/22/how-to-pass-a-variadic-pack-as-a-first-argument-of-a-function-in-cpp/)
 
 * C++17
-    - [x] [Table: C++17 Features](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp17-features.pdf)
+    - [x] [Table: C++17 Features.pdf](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp17-features.pdf)
     - [x] [How std::any Works](https://www.fluentcpp.com/2021/02/05/how-stdany-works/)
     - [ ] [Everything You Need to Know About std::variant from C++17](https://www.bfilipek.com/2018/06/variant.html)
     - [x] [Runtime Polymorphism with std::variant and std::visit](https://www.bfilipek.com/2020/04/variant-virtual-polymorphism.html)
     - [ ] [Simplify code with ‘if constexpr’ in C++17](https://www.bfilipek.com/2018/03/ifconstexpr.html)
 
 * C++ 20
-    - [x] [Table: C++20 Features](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp20-features.pdf)
+    - [x] [Table: C++20 Features.pdf](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp20-features.pdf)
     - [x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
     - [x] [Notes on C++ SFINAE, Modern C++ and C++20 Concepts](https://www.cppstories.com/2016/02/notes-on-c-sfinae/)
 
@@ -191,7 +191,7 @@
 - [x] [Grokking the Object Oriented Design](https://www.educative.io/courses/grokking-the-object-oriented-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/grokking-the-object-oriented-design.md)
 - [ ] [System Design Primer](https://github.com/donnemartin/system-design-primer)
 - [ ] [Six Programming Paradigm](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will)
-- [ ] [Programming Paradigms for Dummies](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)
+- [ ] [Programming Paradigms for Dummies.pdf](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)
 - [ ] [Stanford Programming Paradigm](https://see.stanford.edu/Course/CS107)
 
 - [ ] :orange_book: Domain-Driven Design: Tackling Complexity in the Heart of Software
@@ -218,12 +218,12 @@
 - [x] [RCU]() [:link: Part 1](https://lwn.net/Articles/262464/) [:link: Part 2](https://lwn.net/Articles/263130/) [:link: Part 3](https://lwn.net/Articles/264090/)
 
 ### Memory Management
-- [ ] [What Every Programmer Should Know About Memory](http://futuretech.blinkenlights.nl/misc/cpumemory.pdf)
-- [ ] [Memory Barriers: a Hardware View for Software Hackers](https://irl.cs.ucla.edu/~yingdi/web/paperreadingwhymb.2010.06.07c.pdf)
-- [ ] [A Tutorial Introduction to the ARM and POWER Relaxed Memory Models](https://www.cl.cam.ac.uk/~pes20/ppc-supplemental/test7.pdf)
+- [ ] [What Every Programmer Should Know About Memory.pdf](http://futuretech.blinkenlights.nl/misc/cpumemory.pdf)
+- [ ] [Memory Barriers: a Hardware View for Software Hackers.pdf](https://irl.cs.ucla.edu/~yingdi/web/paperreadingwhymb.2010.06.07c.pdf)
+- [ ] [A Tutorial Introduction to the ARM and POWER Relaxed Memory Models.pdf](https://www.cl.cam.ac.uk/~pes20/ppc-supplemental/test7.pdf)
 - [x] [ptmalloc](http://www.malloc.de/en/)
 - [x] [tcmalloc](https://github.com/google/tcmalloc) [:link: Ref](https://wallenwang.com/2018/11/tcmalloc/) [:link: Ref](https://www.programmersought.com/article/84461226079/)
-- [x] [jemalloc](http://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf)
+- [x] [jemalloc.pdf](http://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf)
 - [x] [C dynamic memory allocation](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation)
 - [x] [Research on ptmalloc, tcmalloc and jemalloc memory allocation strategies](https://owent.net/2013/867.html)
 - [x] [Memory optimization summary: ptmalloc, tcmalloc, and jemalloc](http://www.cnhalo.net/2016/06/13/memory-optimize)
@@ -234,15 +234,15 @@
 - [ ] :orange_book: Network tuning
 
 - [ ] [Linux Advanced Routing & Traffic Control HOWTO](https://lartc.org)
-- [ ] [Red Hat Enterprise Linux Network Performance Tuning Guide](https://access.redhat.com/sites/default/files/attachments/20150325_network_performance_tuning.pdf)
-- [ ] [Making Linux TCP Fast](https://netdevconf.info/1.2/papers/bbr-netdev-1.2.new.new.pdf)
+- [ ] [Red Hat Enterprise Linux Network Performance Tuning Guide.pdf](https://access.redhat.com/sites/default/files/attachments/20150325_network_performance_tuning.pdf)
+- [ ] [Making Linux TCP Fast.pdf](https://netdevconf.info/1.2/papers/bbr-netdev-1.2.new.new.pdf)
 
 ### AIO
 - [x] [Boost application performance using asynchronous I/O](https://developer.ibm.com/articles/l-async/)
 - [ ] [Lazy Asynchronous I/O For Event-Driven Servers](https://www.usenix.org/legacy/event/usenix04/tech/general/full_papers/elmeleegy/elmeleegy_html/html.html)
 - [ ] [IOCP](http://sysinternals.d4rk4.ru/Information/IoCompletionPorts.html)
 - [x] [Understanding Reactor Pattern: Thread-Based and Event-Driven](https://dzone.com/articles/understanding-reactor-pattern-thread-based-and-eve)
-- [ ] [The Design and Implementation of the Reactor](https://www.dre.vanderbilt.edu/~schmidt/PDF/Reactor2-93.pdf)
+- [ ] [The Design and Implementation of the Reactor.pdf](https://www.dre.vanderbilt.edu/~schmidt/PDF/Reactor2-93.pdf)
 - [ ] [The Secret To 10 Million Concurrent Connections -The Kernel Is The Problem, Not The Solution](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
 - [x] [Epoll is fundamentally broken 1/2](https://idea.popcount.org/2017-02-20-epoll-is-fundamentally-broken-12)
 - [x] [Epoll is fundamentally broken 2/2](https://idea.popcount.org/2017-03-20-epoll-is-fundamentally-broken-22)
@@ -251,13 +251,13 @@
 ### Lock-free
 - [x] [An Introduction to Lock-Free Programming](https://preshing.com/20120612/an-introduction-to-lock-free-programming/)
 - [ ] [Lock-Free Data Structures](https://www.drdobbs.com/lock-free-data-structures/184401865)
-- [ ] [Lock-Free Data Structures](https://erdani.com/publications/cuj-2004-10.pdf)
+- [ ] [Lock-Free Data Structures.pdf](https://erdani.com/publications/cuj-2004-10.pdf)
 - [ ] [Is Parallel Programming Hard, And, If So, What Can You Do About It?](https://mirrors.edge.kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook.html)
 - [ ] [Non-blocking Algorithm](https://en.wikipedia.org/wiki/Non-blocking_algorithm)
 - [ ] [Read Copy Update](https://en.wikipedia.org/wiki/Read-copy-update)
 - [ ] [Seqlock](https://en.wikipedia.org/wiki/Seqlock)
 - [ ] [Implementing Lock-Free Queues](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.53.8674&rep=rep1&type=pdf)
-- [ ] [Simple, Fast, and Practical Non-Blocking and Blocking Concurrent Queue Algorithms](https://www.cs.rochester.edu/~scott/papers/1996_PODC_queues.pdf)
+- [ ] [Simple, Fast, and Practical Non-Blocking and Blocking Concurrent Queue Algorithms.pdf](https://www.cs.rochester.edu/~scott/papers/1996_PODC_queues.pdf)
 - [ ] [Implementing a Recursive Mutex](https://preshing.com/20120305/implementing-a-recursive-mutex)
 
 ### Memory Order
@@ -291,10 +291,10 @@
 
 - [ ] [Byzantine fault](https://en.wikipedia.org/wiki/Byzantine_fault) [PDF](https://www.microsoft.com/en-us/research/uploads/prod/2016/12/The-Byzantine-Generals-Problem.pdf)
 - [ ] [The Byzantine Generals Problem](https://www.drdobbs.com/cpp/the-byzantine-generals-problem/206904396)
-- [ ] [Practical Byzantine Fault Tolerance](http://pmg.csail.mit.edu/papers/osdi99.pdf)
+- [ ] [Practical Byzantine Fault Tolerance.pdf](http://pmg.csail.mit.edu/papers/osdi99.pdf)
 - [ ] [CAP Theorem](https://en.wikipedia.org/wiki/CAP_theorem)
 - [ ] [A Brief Tour of FLP Impossibility](https://www.the-paper-trail.org/post/2008-08-13-a-brief-tour-of-flp-impossibility/)
-- [ ] [DLS](http://groups.csail.mit.edu/tds/papers/Lynch/jacm88.pdf)
+- [ ] [DLS.pdf](http://groups.csail.mit.edu/tds/papers/Lynch/jacm88.pdf)
 - [ ] [Introduction to Distributed System Priciples(CN)](http://guanzhou.pub/2018/06/04/Distributed/)
 
 - [ ] [CAP Twelve Years Later: How the "Rules" Have Changed](https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/)
@@ -304,41 +304,41 @@
 
 - [ ] :orange_book: [Distributed Systems for fun and profit](http://book.mixu.net/distsys/single-page.html)
 - [ ] :orange_book: Designing Data Intensive Applications
-- [ ] :orange_book: [Distributed Systems: Principles and Paradigms](http://barbie.uta.edu/~jli/Resources/MapReduce&Hadoop/Distributed%20Systems%20Principles%20and%20Paradigms.pdf)
+- [ ] :orange_book: [Distributed Systems: Principles and Paradigms.pdf](http://barbie.uta.edu/~jli/Resources/MapReduce&Hadoop/Distributed%20Systems%20Principles%20and%20Paradigms.pdf)
 - [ ] :orange_book: [Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services](https://azure.microsoft.com/en-us/resources/designing-distributed-systems/) :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/designing-distributed-systems.md)
-- [ ] :orange_book: [Principles of Distributed Systems](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
+- [ ] :orange_book: [Principles of Distributed Systems.pdf](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
 - [ ] :newspaper: [Transaction Across DataCenter](https://snarfed.org/transactions_across_datacenters_io.html)   [:tv: YouTuBe](https://www.youtube.com/watch?v=srOgpXECblk)
 
 ### Distributed Messages System
-- [ ] [Kafka: a Distributed Messaging System for Log Processing](http://notes.stephenholiday.com/Kafka.pdf)
-- [ ] [Wormhole: Reliable Pub-Sub to Support Geo-replicated Internet Services](https://www.usenix.org/system/files/conference/nsdi15/nsdi15-paper-sharma.pdf)
+- [ ] [Kafka: a Distributed Messaging System for Log Processing.pdf](http://notes.stephenholiday.com/Kafka.pdf)
+- [ ] [Wormhole: Reliable Pub-Sub to Support Geo-replicated Internet Services.pdf](https://www.usenix.org/system/files/conference/nsdi15/nsdi15-paper-sharma.pdf)
 - [ ] [board the Databus! LinkedIn's Scalable Consistent Change Data Capture Platform](https://engineering.linkedin.com/research/2012/all-aboard-the-databus-linkedlns-scalable-consistent-change-data-capture-platform)
 
 ### Logs & Data
 - [ ] [The Log: What every software engineer should know about real-time data's unifying abstraction](https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying)
-- [ ] [The Log-Structured Merge-Tree (LSM-Tree)](https://www.cs.umb.edu/~poneil/lsmtree.pdf)
-- [ ] [Immutability Changes Everything](http://cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf) [Video](https://vimeo.com/52831373)
-- [ ] [Tango: Distributed Data Structures over a Shared Log](https://www.microsoft.com/en-us/research/wp-content/uploads/2013/11/Tango.pdf)
+- [ ] [The Log-Structured Merge-Tree (LSM-Tree).pdf](https://www.cs.umb.edu/~poneil/lsmtree.pdf)
+- [ ] [Immutability Changes Everything.pdf](http://cidrdb.org/cidr2015/Papers/CIDR15_Paper16.pdf) [Video](https://vimeo.com/52831373)
+- [ ] [Tango: Distributed Data Structures over a Shared Log.pdf](https://www.microsoft.com/en-us/research/wp-content/uploads/2013/11/Tango.pdf)
 
 ### Distributed monitoring and tracking
-- [ ] [Dapper, a Large-Scale Distributed Systems Tracing Infrastructure](http://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36356.pdf)
+- [ ] [Dapper, a Large-Scale Distributed Systems Tracing Infrastructure.pdf](http://static.googleusercontent.com/media/research.google.com/en//pubs/archive/36356.pdf)
 
 ### Data Analysis
-- [ ] [The Unified Logging Infrastructure for Data Analytics at Twitter](http://vldb.org/pvldb/vol5/p1771_georgelee_vldb2012.pdf)
-- [ ] [Scaling Big Data Mining Infrastructure: The Twitter Experience](http://www.datascienceassn.org/sites/default/files/Scaling%20Big%20Data%20Mining%20Infrastructure%20-%20The%20Twitter%20Experience.pdf)
-- [ ] [Dremel: Interactive Analysis of Web-Scale Datasets](http://static.googleusercontent.com/media/research.google.com/en/us/pubs/archive/36632.pdf)
-- [ ] [Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing](https://www.usenix.org/system/files/conference/nsdi12/nsdi12-final138.pdf)
+- [ ] [The Unified Logging Infrastructure for Data Analytics at Twitter.pdf](http://vldb.org/pvldb/vol5/p1771_georgelee_vldb2012.pdf)
+- [ ] [Scaling Big Data Mining Infrastructure: The Twitter Experience.pdf](http://www.datascienceassn.org/sites/default/files/Scaling%20Big%20Data%20Mining%20Infrastructure%20-%20The%20Twitter%20Experience.pdf)
+- [ ] [Dremel: Interactive Analysis of Web-Scale Datasets.pdfd](http://static.googleusercontent.com/media/research.google.com/en/us/pubs/archive/36632.pdf)
+- [ ] [Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing.pdf](https://www.usenix.org/system/files/conference/nsdi12/nsdi12-final138.pdf)
 
-- [ ] [Distributed Programming Model](https://web.cs.ucdavis.edu/~pandey/Research/Papers/icdcs01.pdf)
-- [ ] [PSYNC: A partially synchronous language for fault-tolerant distributed algorithms](https://www.di.ens.fr/~cezarad/popl16.pdf)
-- [ ] [Logic and Lattices for Distributed Programming](https://dsf.berkeley.edu/papers/UCB-lattice-tr.pdf)
+- [ ] [Distributed Programming Model.pdf](https://web.cs.ucdavis.edu/~pandey/Research/Papers/icdcs01.pdf)
+- [ ] [PSYNC: A partially synchronous language for fault-tolerant distributed algorithms.pdf](https://www.di.ens.fr/~cezarad/popl16.pdf)
+- [ ] [Logic and Lattices for Distributed Programming.pdf](https://dsf.berkeley.edu/papers/UCB-lattice-tr.pdf)
 
 - [ ] [Services Engineering Reading List](https://github.com/mmcgrana/services-engineering)
 - [ ] [Readings in distributed systems](http://christophermeiklejohn.com/distributed/systems/2013/07/12/readings-in-distributed-systems.html)
 - [ ] [Google Research - Distributed Systems and Parallel Computing](https://research.google/pubs/)
 
 ### Distributed Architecture Engineering Design
-- [ ] [Designs, Lessons and Advice from Building Large Distributed Systems](https://www.cs.cornell.edu/projects/ladis2009/talks/dean-keynote-ladis2009.pdf)
+- [ ] [Designs, Lessons and Advice from Building Large Distributed Systems.pdf](https://www.cs.cornell.edu/projects/ladis2009/talks/dean-keynote-ladis2009.pdf)
 - [ ] [Building Software Systems At Google and Lessons Learned](https://www.youtube.com/watch?v=modXC5IWTJI)
 - [ ] [The Twelve-Factor App](https://12factor.net)
 - [ ] [Notes on Distributed Systems for Young Bloods](https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods/)
@@ -465,7 +465,7 @@
     </details>
 
 - [ ] [AWS Cloud Pattern](http://en.clouddesignpattern.org/index.php/Main_Page)
-- [ ] [Google: Design patterns for container-based distributed systems](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45406.pdf)
+- [ ] [Google: Design patterns for container-based distributed systems.pdf](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/45406.pdf)
 - [ ] [A pattern language for microservices](https://microservices.io/patterns/index.html)
 - [ ] [SOA Patterns](https://patterns.arcitura.com/soa-patterns)
 
@@ -494,7 +494,7 @@
 - [ ] [Life Beyond Distributed Transactions](https://queue.acm.org/detail.cfm?id=3025012)
 - [ ] [How Sharding Works](https://medium.com/@jeeyoungk/how-sharding-works-b4dec46b3f6)
 - [ ] [Why you don’t want to shard](https://www.percona.com/blog/2009/08/06/why-you-dont-want-to-shard/)
-- [ ] [How to Scale Big Data Applications](https://www.percona.com/sites/default/files/presentations/How%20to%20Scale%20Big%20Data%20Applications.pdf)
+- [ ] [How to Scale Big Data Applications.pdf](https://www.percona.com/sites/default/files/presentations/How%20to%20Scale%20Big%20Data%20Applications.pdf)
 - [ ] [MySQL Sharding with ProxySQL](https://www.percona.com/blog/2016/08/30/mysql-sharding-with-proxysql/)
 
 ### Cache
@@ -535,7 +535,7 @@
 
 ### Search
 - [ ] [Instagram: Search Architecture](https://instagram-engineering.com/search-architecture-eeb34a936d3a)
-- [ ] [eBay: The Architecture of eBay Search](http://www.cs.otago.ac.nz/homepages/andrew/papers/2017-8.pdf)
+- [ ] [eBay: The Architecture of eBay Search.pdf](http://www.cs.otago.ac.nz/homepages/andrew/papers/2017-8.pdf)
 - [ ] [eBay: Improving Search Engine Efficiency by over 25%](https://tech.ebayinc.com/research/making-e-commerce-search-faster/)
 - [ ] [LinkedIn: Introducing LinkedIn’s new search architecture](https://engineering.linkedin.com/search/did-you-mean-galene)
 - [ ] [LinkedIn: Search Federation Architecture at LinkedIn](https://engineering.linkedin.com/blog/2018/03/search-federation-architecture-at-linkedin)
@@ -578,7 +578,7 @@
 - [ ] [Uber: Designing Edge Gateway, Uber’s API Lifecycle Management Platform](https://eng.uber.com/gatewayuberapi/)
 - [ ] [Microservice Architecture](https://microservices.io)
 
-- [ ] :orange_book: [IBM: Microservices Best Practices for Java](https://www.redbooks.ibm.com/redbooks/pdfs/sg248357.pdf)
+- [ ] :orange_book: [IBM: Microservices Best Practices for Java.pdf](https://www.redbooks.ibm.com/redbooks/pdfs/sg248357.pdf)
 - [ ] :orange_book: [Building MicroService](https://www.amazon.com/Building-Microservices-Designing-Fine-Grained-Systems/dp/1491950358/ref=sr_1_2?crid=LWHLL3P5PIT6&dchild=1&keywords=building+microservices&qid=1610330674&sprefix=building+micros%2Caps%2C390&sr=8-2)
 
 - [ ] [Google: API Improvement Proposals](https://google.aip.dev)
@@ -637,6 +637,6 @@
 ## Design Pattern
 - [ ] [Microservice Architecture and its 10 Most Important Design Patterns](https://towardsdatascience.com/microservice-architecture-and-its-10-most-important-design-patterns-824952d7fa41)
     * `Database per Microservice`  `Event Sourcing` `CQRS` `Saga` `BFF` `API Gateway` `Strangler` `Circuit Breaker` `Externalize Configuration` `Consumer-Driven Contract Testing`
-- [ ] [Modularity and Information Hiding](https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf)
+- [ ] [Modularity and Information Hiding.pdf](https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf)
 - [ ] [Separation of Concern](https://www.cs.utexas.edu/users/EWD/transcriptions/EWD04xx/EWD447.html)
 - [ ] [Service Oriented Architecture](https://en.wikipedia.org/wiki/Service-oriented_architecture)
