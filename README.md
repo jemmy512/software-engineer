@@ -7,20 +7,21 @@
     4. [Testing](#Testing)
     5. [Publishing](#Publishing)
 3. [Computer Science](#Computer-Science)
-    1. [Operating System]()
-    2. [Network]()
-    3. [Data Structure]()
-    4. [Database]()
+    1. [Operating System](#Computer-Science)
+    2. [Network](#Computer-Science)
+    3. [Data Structure](#Computer-Science)
+    4. [Database](#Computer-Science)
 4. [Programming Language](#Programming-Language)
     * [C/C++](#CC)
 5. [System Design](#System-Design)
 6. [Linux](#Linux)
     1. [Kernel](#Kernel)
-    2. [Network](#Network)
-    3. [AIO](#AIO)
-    4. [Lock-free](#Lock-free)
-    5. [Memory Order](#Memory-Order)
-    6. [CPU Cache](#CPU-Cache)
+    2. [Memory Management](#Memory-Management)
+    3. [Network](#Network)
+    4. [AIO](#AIO)
+    5. [Lock-free](#Lock-free)
+    6. [Memory Order](#Memory-Order)
+    7. [CPU Cache](#CPU-Cache)
 7. [Distributed Architecture](#Distributed-Architecture)
     1. [Distributed Messages System](#Distributed-Messages-System)
     2. [Logs & Data](#Logs--Data)
@@ -80,6 +81,7 @@
 * Operating System
     - [ ] :orange_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
     - [ ] :orange_book: Modern Operating Systems :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/modern-operating-system.md)
+    - [ ] :orange_book: Advanced Programming in the UNIX Environment
 
 * Network
     - [ ] :orange_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/tcp-ip-illustrated-volume-1.md)
@@ -87,7 +89,6 @@
     - [ ] :orange_book: UNIX Network Programming, Volume 2: Interprocess Communications
     - [ ] :orange_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
     - [ ] :orange_book: Computer Networking: A Top-Down Approach
-    - [ ] :orange_book: Advanced Programming in the UNIX Environment
 
     - [ ] [Let’s Code a TCP/IP Stack, 1: Ethernet & ARP](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/#tuntap-devices)
     - [ ] [Let’s Code a TCP/IP Stack, 2: IPV4 & ICMPv4](https://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4)
@@ -99,10 +100,10 @@
     - [ ] [C10m Problem](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
 
 * Database
-    - [ ] :orange_book: Data Structures and Algorithm Analysis in C:Second Edition
     - [ ] :orange_book: Database System Concepts(Fifth Edition)
 
 * Data Structure
+    - [ ] :orange_book: Data Structures and Algorithm Analysis in C:Second Edition
 
 # Programming Language
 
@@ -187,6 +188,7 @@
 
 # System Design
 - [x] [Grokking System Design](https://www.educative.io/courses/grokking-the-system-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/grokking-the-system-design.md)
+- [x] [Grokking the Object Oriented Design](https://www.educative.io/courses/grokking-the-object-oriented-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/grokking-the-object-oriented-design.md)
 - [ ] [System Design Primer](https://github.com/donnemartin/system-design-primer)
 - [ ] [Six Programming Paradigm](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will)
 - [ ] [Programming Paradigms for Dummies](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)
@@ -206,17 +208,7 @@
 
 # Linux
 - [ ] [Red Hat Enterprise Linux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/)
-- [ ] [What Every Programmer Should Know About Memory](http://futuretech.blinkenlights.nl/misc/cpumemory.pdf)
-- [ ] [Memory Barriers: a Hardware View for Software Hackers](https://irl.cs.ucla.edu/~yingdi/web/paperreadingwhymb.2010.06.07c.pdf)
-- [ ] [A Tutorial Introduction to the ARM and POWER Relaxed Memory Models](https://www.cl.cam.ac.uk/~pes20/ppc-supplemental/test7.pdf)
 - [ ] [x86-TSO: A Rigorous and Usable Programmer’s Model for x86 Multiprocessors](https://www.cl.cam.ac.uk/~pes20/weakmemory/cacm.pdf)
-- [x] [ptmalloc](http://www.malloc.de/en/)
-- [x] [tcmalloc](https://github.com/google/tcmalloc) [:link: Ref](https://wallenwang.com/2018/11/tcmalloc/) [:link: Ref](https://www.programmersought.com/article/84461226079/)
-- [x] [jemalloc](http://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf)
-- [x] [C dynamic memory allocation](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation)
-- [x] [Research on ptmalloc, tcmalloc and jemalloc memory allocation strategies](https://owent.net/2013/867.html)
-- [x] [Memory optimization summary: ptmalloc, tcmalloc, and jemalloc](http://www.cnhalo.net/2016/06/13/memory-optimize)
-- [x] [Scalable memory allocation using jemalloc](https://www.facebook.com/notes/facebook-engineering/scalable-memory-allocation-using-jemalloc/480222803919)
 - [x] [Spurious wakeup](https://en.wikipedia.org/wiki/Spurious_wakeup)  [:link: C++ Condition Variable](https://www.modernescpp.com/index.php/c-core-guidelines-be-aware-of-the-traps-of-condition-variables)
 
 ### Kernel
@@ -224,6 +216,18 @@
 - [x] :pencil2: [Understanding Linux Kernel](https://github.com/Jemmy512/book-notes/blob/master/Linux/understanding-linux-kernel.md)
 - [x] :pencil2: [Linux Kernel Development](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-kernel-development.md)
 - [x] [RCU]() [:link: Part 1](https://lwn.net/Articles/262464/) [:link: Part 2](https://lwn.net/Articles/263130/) [:link: Part 3](https://lwn.net/Articles/264090/)
+
+### Memory Management
+- [ ] [What Every Programmer Should Know About Memory](http://futuretech.blinkenlights.nl/misc/cpumemory.pdf)
+- [ ] [Memory Barriers: a Hardware View for Software Hackers](https://irl.cs.ucla.edu/~yingdi/web/paperreadingwhymb.2010.06.07c.pdf)
+- [ ] [A Tutorial Introduction to the ARM and POWER Relaxed Memory Models](https://www.cl.cam.ac.uk/~pes20/ppc-supplemental/test7.pdf)
+- [x] [ptmalloc](http://www.malloc.de/en/)
+- [x] [tcmalloc](https://github.com/google/tcmalloc) [:link: Ref](https://wallenwang.com/2018/11/tcmalloc/) [:link: Ref](https://www.programmersought.com/article/84461226079/)
+- [x] [jemalloc](http://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf)
+- [x] [C dynamic memory allocation](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation)
+- [x] [Research on ptmalloc, tcmalloc and jemalloc memory allocation strategies](https://owent.net/2013/867.html)
+- [x] [Memory optimization summary: ptmalloc, tcmalloc, and jemalloc](http://www.cnhalo.net/2016/06/13/memory-optimize)
+- [x] [Scalable memory allocation using jemalloc](https://www.facebook.com/notes/facebook-engineering/scalable-memory-allocation-using-jemalloc/480222803919)
 
 ### Network
 - [ ] :orange_book: [Linux High Performance Server Programming (CN)](https://book.douban.com/subject/24722611/) :pencil2:  [Linux Programmnig Noetes](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-programming.md) :pencil2: [Linux System Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxBasic.md)
@@ -245,6 +249,7 @@
 
 
 ### Lock-free
+- [x] [An Introduction to Lock-Free Programming](https://preshing.com/20120612/an-introduction-to-lock-free-programming/)
 - [ ] [Lock-Free Data Structures](https://www.drdobbs.com/lock-free-data-structures/184401865)
 - [ ] [Lock-Free Data Structures](https://erdani.com/publications/cuj-2004-10.pdf)
 - [ ] [Is Parallel Programming Hard, And, If So, What Can You Do About It?](https://mirrors.edge.kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook.html)
@@ -263,7 +268,6 @@
 - [x] [Memory Ordering at Compile Time](https://preshing.com/20120625/memory-ordering-at-compile-time/)
 - [x] [The Happens-Before Relation](https://preshing.com/20130702/the-happens-before-relation)
 - [x] [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/)
-- [x] [An Introduction to Lock-Free Programming](https://preshing.com/20120612/an-introduction-to-lock-free-programming/)
 - [x] [Acquire and Release Fences Don't Work the Way You'd Expect](https://preshing.com/20131125/acquire-and-release-fences-dont-work-the-way-youd-expect/)
 - [x] [Acquire and Release Fences](https://preshing.com/20130922/acquire-and-release-fences)
 - [x] [Roll Your Own Lightweight Mutex](https://preshing.com/20120226/roll-your-own-lightweight-mutex/)
