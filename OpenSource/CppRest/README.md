@@ -16,7 +16,7 @@ C++ Rest consists of three components:
 * [C++ Rest](#CppRest)
 * [Boost Asio](#BoostAsio)
 
-![CppRest.png](../../.Image/cpp-rest.png)
+![CppRest.png](../Image/cpp-rest.png)
 
 ## Client
 ### Send Request
@@ -215,7 +215,7 @@ ws_client_wspp.cpp::connect_impl()
 ```
 
 * Task wait-notify work flow
-    * ![](../../.Image/cpp-rest-task-flow.png)
+    * ![](../Image/cpp-rest-task-flow.png)
 
 ## Server
 ### open listen socket
@@ -401,7 +401,7 @@ The PPL provides the following features:
 * [Parallel containers and objects](https://docs.microsoft.com/en-us/cpp/parallel/concrt/parallel-containers-and-objects?view=msvc-160): generic container types that provide safe concurrent access to their elements
 * [Cancellation in PPL](https://docs.microsoft.com/en-us/cpp/parallel/concrt/cancellation-in-the-ppl?view=msvc-160): Explains how to cancel the work that is being performed by a parallel algorithm.
 
-![pplx.png](../../.Image/Pplx.png)
+![pplx.png](../Image/Pplx.png)
 
 ## class task
 ```C++
@@ -764,7 +764,7 @@ struct _InitFunctorTypeTraits<T, T>
 };
 ```
 ### Check args compatibility
-![](../../.Image/task-func-type-traits.png)
+![](../Image/task-func-type-traits.png)
 
 ```C++
 // Unwrap task<T>
@@ -822,7 +822,7 @@ struct _TaskTypeFromParam
 ```
 
 ### Get task type from parameter
-![](../../.Image/task-type-from-param.png)
+![](../Image/task-type-from-param.png)
 
 ## task::task()
 ```C++

@@ -1,7 +1,7 @@
 # UML
-![boost-asio.png](../../.Image/boost-asio.png)
+![boost-asio.png](../Image/boost-asio.png)
 
-![](../../.Image/boost-asio-call-flow.png)
+![](../Image/boost-asio-call-flow.png)
 
 # async_accept
 ```C++
