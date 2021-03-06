@@ -23,12 +23,11 @@ using namespace std;
 class Solution {
 public:
     int longestValidParentheses(string s) {
-        int len = s.size();
+        int maxLen{0};
         stack<int> stk;
         stk.push(-1); // -1 0 1 2 3
-        int lenMax = 0;
 
-        for (int i = 0; i < len; ++i) {
+        for (int i = 0; i < s.size(); ++i) {
             if (s[i] == '(') {
                 stk.push(i);
             } else {
@@ -36,12 +35,12 @@ public:
                 if (stk.empty()) {
                     stk.push(i);
                 } else {
-                    lenMax = max(lenMax, i-stk.top());
+                    maxLen = max(maxLen, i-stk.top());
                 }
             }
         }
 
-        return lenMax;
+        return maxLen;
     }
 };
 
