@@ -32,28 +32,31 @@ class Solution {
 public:
     vector<string> generatePalindromes(string s) {
         unordered_map<char, int> hashMap;
-        vector<char> st(s.length() / 2, 0);
+        vector<char> chars;
+        chars.reserve(s.length()/2);
 
         if (!canPermutePalindrome(s, hashMap))
             return {};
 
         char ch = 0;
         int k = 0;
-        for (int i = 0; i < hashMap.size(); i++) {
-            if (hashMap[i] % 2 == 1)
-                ch = (char) i;
-            for (int j = 0; j < hashMap[i] / 2; j++) {
-                st[k++] = (char) i;
+        for (const auto& [key, cnt] : hashMap) {
+            if (cnt % 2 == 1) {
+                ch = (char)key;
             }
+            chars.insert(chars.end(), cnt/2, key);
         }
-        permute(st, 0, ch);
+        permute(chars, 0, ch);
         return vector<string>(hashSet.begin(), hashSet.end());
     }
 
 private:
     void permute(vector<char>& s, int l, char ch) {
         if (l == s.size()) {
-            hashSet.insert(string(s.begin(), s.end()).append(ch == 0 ? string("") : string(ch)).append(string(s.rbegin(), s.rend())));
+            hashSet.insert(
+                string(s.begin(), s.end())
+                .append(ch == 0 ? string() : string(1, ch))
+                .append(string(s.rbegin(), s.rend())));
         } else {
             for (int i = l; i < s.size(); i++) {
                 if (s[l] != s[i] || l == i) {
