@@ -214,9 +214,6 @@ ws_client_wspp.cpp::connect_impl()
                                       MercuryConnectionManager::fireMercuryEventArrived()
 ```
 
-* Task wait-notify work flow
-    * ![](../Image/cpp-rest-task-flow.png)
-
 ## Server
 ### open listen socket
 ```C++
@@ -402,6 +399,8 @@ The PPL provides the following features:
 * [Cancellation in PPL](https://docs.microsoft.com/en-us/cpp/parallel/concrt/cancellation-in-the-ppl?view=msvc-160): Explains how to cancel the work that is being performed by a parallel algorithm.
 
 ![pplx.png](../Image/Pplx.png)
+* Task wait-notify work flow
+    ![](../Image/cpp-rest-task-flow.png)
 
 ## class task
 ```C++
