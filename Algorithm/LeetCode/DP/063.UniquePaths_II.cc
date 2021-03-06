@@ -36,7 +36,14 @@ There is one obstacle in the middle of the 3x3 grid above.
 There are two ways to reach the bottom-right corner:
 1. Right -> Right -> Down -> Down
 2. Down -> Down -> Right -> Right
-*/
+
+Relatives:
+62. Unique Paths
+63. Unique Paths II
+980. Unique Paths III
+64. Minimum Path Sum
+174. Dungeon Game
+741. Cherry Pickup */
 
 class Solution {
 public:
