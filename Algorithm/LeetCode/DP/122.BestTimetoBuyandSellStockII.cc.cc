@@ -28,7 +28,14 @@ Explanation: In this case, no transaction is done, i.e. max profit = 0.
 
 Constraints:
 1 <= prices.length <= 3 * 10 ^ 4
-0 <= prices[i] <= 10 ^ 4 */
+0 <= prices[i] <= 10 ^ 4
+
+Relatives:
+121. Best Time to Buy and Sell Stock
+122. Best Time to Buy and Sell Stock II
+123. Best Time to Buy and Sell Stock III
+188. Best Time to Buy and Sell Stock IV
+309. Best Time to Buy and Sell Stock with Cooldown [TODO] */
 
 #include <vector>
 
