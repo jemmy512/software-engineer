@@ -27,13 +27,14 @@ slightly by giving the difference array of prices, Ex: for {1, 7, 4, 11}, if he 
 you might end up being confused.
 
 Here, the logic is to calculate the difference (maxCur += prices[i] - prices[i-1]) of the original
-array, and find a contiguous subarray giving maximum profit. If the difference falls below 0, reset it to zero. */
+array, and find a contiguous subarray giving maximum profit. If the difference falls below 0, reset it to zero.
 
-/* Relatives:
-* 121. Best Time to Buy and Sell Stock
-* 152. Maximum Product Subarry
-* 437. Path Sum III
-* 560. Sub array Sum Equals K */
+Relatives:
+121. Best Time to Buy and Sell Stock
+122. Best Time to Buy and Sell Stock II
+123. Best Time to Buy and Sell Stock III
+188. Best Time to Buy and Sell Stock IV
+309. Best Time to Buy and Sell Stock with Cooldown [TODO] */
 
 class Solution {
 public:
