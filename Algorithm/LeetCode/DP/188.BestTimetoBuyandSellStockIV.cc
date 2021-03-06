@@ -20,7 +20,14 @@ Then buy on day 5 (price = 0) and sell on day 6 (price = 3), profit = 3-0 = 3.
 Constraints:
 0 <= k <= 109
 0 <= prices.length <= 1000
-0 <= prices[i] <= 1000 */
+0 <= prices[i] <= 1000
+
+Relatives:
+121. Best Time to Buy and Sell Stock
+122. Best Time to Buy and Sell Stock II
+123. Best Time to Buy and Sell Stock III
+188. Best Time to Buy and Sell Stock IV
+309. Best Time to Buy and Sell Stock with Cooldown [TODO] */
 
 #include <climits>
 #include <vector>
