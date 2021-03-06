@@ -34,7 +34,15 @@ From the top-left corner, there are a total of 3 ways to reach the bottom-right 
 Example 2:
 
 Input: m = 7, n = 3
-Output: 28 */
+Output: 28
+
+Relatives:
+62. Unique Paths
+63. Unique Paths II
+980. Unique Paths III
+64. Minimum Path Sum
+174. Dungeon Game
+741. Cherry Pickup */
 
 class Solution {
 public:
