@@ -29,7 +29,14 @@ Output: 0
 
 Constraints:
 1 <= prices.length <= 105
-0 <= prices[i] <= 105 */
+0 <= prices[i] <= 105
+
+Relatives:
+121. Best Time to Buy and Sell Stock
+122. Best Time to Buy and Sell Stock II
+123. Best Time to Buy and Sell Stock III
+188. Best Time to Buy and Sell Stock IV
+309. Best Time to Buy and Sell Stock with Cooldown [TODO] */
 
 #include <climits>
 #include <vector>
