@@ -26,16 +26,15 @@ using namespace std;
 /* Acutally, we no need to allocate an additional array for DP.
  * we can only use several variables to record previous steps */
 int rob2(vector<int> &money) {
-    int secondPrev = 0; // dp[i-2];
-    int firstPrev = 0;   // dp[i-1];
+    std::vector dp{0, 0};
 
-    for (int i = 0; i < money.size(); ++i){
-        int current = max(firstPrev, secondPrev + money[i]);
-        secondPrev = firstPrev;
-        firstPrev = current;
+    for (const auto& mon : money) {
+        auto curMax = std::max(dp[1], dp[0] + mon);
+        dp[0] = dp[1];
+        dp[1] = curMax;
     }
 
-    return firstPrev;
+    return dp[1];
 }
 
 // 69 test 2ms, beat 100%
