@@ -34,6 +34,8 @@ Relatives:
 
 using namespace std;
 
+/* Time Complexity: O(nk) if 2k <= n, O(n) if 2k > n
+ * Space Complexity: O(k) */
 class Solution {
 public:
     int maxProfit(int k, vector<int>& prices) {
@@ -54,3 +56,9 @@ public:
         return costProfits.back().second;
     }
 };
+
+/* 3       2       6       5       0        3
+[3, 0]  [2, 0]  [2, 4]  [2, 4]  [0,  4]  [0,  4]
+[3, 0]  [2, 0]  [2, 4]  [1, 4]  [-4, 4]  [-4, 7]
+[3, 0]  [2, 0]  [2, 4]  [1, 4]  [-4, 4]  [-4, 7]
+[3, 0]  [2, 0]  [2, 4]  [1, 4]  [-4, 4]  [-4, 7] */
