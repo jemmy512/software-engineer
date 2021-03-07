@@ -40,19 +40,19 @@ Relatives:
 
 using namespace std;
 
-/* DP: bottom - up
+/* DP: dp[i] = min(dp[i], dp[i-coin]+1)
  * Time complexity: O(SN), coins.size() * amount
  * Space complexity: O(amount) */
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
-        vector<int> dp(amount+1, amount+1);
+        vector dp(amount+1, amount+1);
         dp[0] = 0;
 
-        for (int curAmount = 1; curAmount <= amount; ++curAmount) {
-            for (int i = 0; i < coins.size(); ++i) {
-                if (coins[i] <= curAmount) {
-                    dp[curAmount] = min(dp[curAmount], dp[curAmount-coins[i]] + 1);
+        for (int amnt = 1; amnt <= amount; ++amnt) {
+            for (const auto& co : coins) {
+                if (amnt >= co) {
+                    dp[amnt] = min(dp[amnt], dp[amnt-co] + 1);
                 }
             }
         }
