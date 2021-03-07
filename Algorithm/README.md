@@ -21,14 +21,13 @@ No | Title | Difficulty | Catogary | Notes
 136 | Single Number | :star: | Math | :trophy:
 179 | Largest Number | :star: :star: | Math | :trophy:
 190 | Roverse Bits | :star: | Math | :trophy:
-191 | Numberof 1 Bits | :star: | Math | :trophy:
+191 | Numberof 1 Bits | :star: | Math | :white_check_mark: :trophy:
 202 | Happy Number | :star: | Math | :trophy:
 204 | Count Primes | :star: | Math | :trophy:
 231 | Power Of Two | :star: | Math | :trophy:
-263 | Ugly Number | :star: | Math | :trophy:
-264 | Ugly Number II | :star: :star: | Math | :trophy:
+263 | Ugly Number | :star: | Math | :white_check_mark: :trophy:
 268 | Missing Number | :star: | Math | :trophy:
-287 | Findthe Duplicate Number | :star: :star: | Math | :trophy:
+287 | Find the Duplicate Number | :star: :star: | Math | :trophy:
 292 | Nim Game | :star: | Math | :trophy:
 326 | Power of Three | :star: | Math | :trophy:
 371 | Sum of Two Integers | :star: :star: | Math | :trophy:
@@ -52,12 +51,12 @@ No | Title | Difficulty | Catogary | Notes
 088 | Merge Sorted Array | :star:| Array | :trophy:
 169 | Majority Element | :star: | Array | :trophy:
 189 | Rotate Array | :star: :star: | Array
-209 | Minimum Size Sub array Sum | :star: :star: | Array | :trophy: `Two Pointers`
+209 | Minimum Size Subarray Sum | :star: :star: | Array | :trophy: `Two Pointers`
 215 | Kth Largest Element in an Array | :star: :star: | Array
 217 | Contains Duplicate I | :star: | Array
 219 | Contains Duplicate II | :star: | Array
 220 | Contains Duplicate III | :star: :star: | Array
-238 | Product of Array Except Self  | :star: :star: | Array | :trophy: `L-R Lists`
+238 | Product of Array Except Self  | :star: :star: | Array | :white_check_mark: :trophy: `Bidirectional Array`
 283 | Move Zeroes | :star: :star: | Array
 448 | Find All Numbers Disappeared in An Array | :star: | Array
 325 | Maximum Size Subarray Sum Equals k | :star: :star:| Array | :trophy: `Prefix Sum` `Map`
@@ -70,6 +69,7 @@ No | Title | Difficulty | Catogary | Notes
 25 | Reverse Nodes in K-Group | :star: :star: :star: | List | :trophy:
 61 | Roate List By K | :star: :star: | List
 86 | Partition List | :star: :star: | List
+206 | Reverse Linkded List | :star: | List
 92 | Reverse Linked List II | :star: :star: | List | :trophy:
 138 | Copy List With Random Pointer  | :star: | List | :trophy:
 141 | linked List Cycle | :star: | List | :trophy: `Fast Slow Pointers`
@@ -79,7 +79,6 @@ No | Title | Difficulty | Catogary | Notes
 148 | Sort List | :star: :star: | List
 160 | Intersection of Two Linked Lists | :star: | List
 203 | Remove Linked List Element | :star: | List
-206 | Reverse Linkded List | :star: | List
 234 | Palindrome Linked List | :star: | List
 237 | Delete Node In A Linked List | :star: | List
 328 | Odd Even Linked List | :star: :star: | List | :trophy:
@@ -128,8 +127,6 @@ No | Title | Difficulty | Catogary | Notes
 637 | Average of Levels in Binary Tree | :star: | Tree | :trophy: `Level Traversal`
 814 | Binary Tree Pruning | :star: | Tree | :trophy:
  | String | | |
-3 | Longest Sub string Without Repeating Characters | :star: :star: | String | :trophy: `Sliding Window`
-159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | String | :trophy: `Sliding Window`
 8 | atoi | :star: | String
 14 | Logst Common Prefix | :star: | String | :trophy:
 28 | Implement Strstr | :star: | String
@@ -150,8 +147,8 @@ No | Title | Difficulty | Catogary | Notes
 170 | Two Sum III - Data structure design | :star: | Map | :trophy:
 653 | Two Sum IV | :star: | Map | :trophy:
 1214 | Two Sum BSTs | :star: :star: | Map | :trophy: `Tree`
-266 | Palindrome Permutation | :star: | Map | :trophy:
-267 | Palindrome Permutation II | :star: :star: | Map | :trophy: `Backtracking`
+266 | Palindrome Permutation | :star: | Map | :white_check_mark: :trophy:
+267 | Palindrome Permutation II | :star: :star: | Map | :white_check_mark: :trophy: `Backtracking`
 516 | Longest Palindromic Subsequence | :star: :star: | Map | `TODO`
 647 | Palindromic Substrings | :star: :star: | Map | `TODO`
 290 | Word Pattern | :star: | Map | :trophy:
@@ -172,35 +169,35 @@ No | Title | Difficulty | Catogary | Notes
 253 | Meeting Rooms II | :star: :star: | Queue | :trophy:
 641 | Design Circular Deque | :star: :star: | Queue
  | DP |  | |
-5 | Longest Palindromic Substring | :star: :star: | DP | :trophy:
-32 | Longet Valid Paretheses | :star: :star: :star: |  DP | :trophy: `stack`
-53 | Maximum Subarray | :star: | DP | :trophy:
-62 | Unique Paths | :star: :star: | DP | :trophy:
-63 | Unique Paths II | :star: :star: | DP | :trophy:
+5 | Longest Palindromic Substring | :star: :star: | DP | :white_check_mark: :trophy:
+32 | Longet Valid Paretheses | :star: :star: :star: |  DP | :white_check_mark: :trophy: `stack`
+53 | Maximum Subarray | :star: | DP | :white_check_mark: :trophy: `kadane` `Divide Conquer`
+62 | Unique Paths | :star: :star: | DP | :white_check_mark: :trophy:
+63 | Unique Paths II | :star: :star: | DP | :white_check_mark: :trophy:
 980 | Unique Paths III | :star: :star: :star: | DP | `TODO`
-64 | Minimum Path Sum | :star: :star: | DP | :trophy:
-70 | Climbing Stairs | :star: | DP | :trophy:
+64 | Minimum Path Sum | :star: :star: | DP | :white_check_mark: :trophy:
+70 | Climbing Stairs | :star: | DP | :white_check_mark: :trophy:
+746 | MinCost Climb Stair | :star: | DP | :white_check_mark: :trophy:
 72 | Edit Distance | :star: :star: :star: | DP
-91 | Decode Ways | :star: :star: | DP | :trophy:
-121 | Best Time to Buy and Sell Stock | :star: | DP | :trophy: `Prefix Sum`
-122 | Best Time to Buy and Sell Stock II | :star: | DP | :trophy: `Greedy`
-123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | DP | :trophy: `Bidirectional DP`
-188 | Best Time to Buy and Sell Stock IV | :star: :star: :star:| DP | :trophy: :thinking:
-139 | Word Break | :star: :star: | DP | :trophy: :thinking: `Bottom Up`
-152 | Maximum Product Subarry | :star: :star: | DP | :trophy: `Prefix Sum`
-198 | House Robber | :star: | DP | :trophy:
-221 | Maximal Square | :star: :star: | DP | :trophy: :thinking:
-264 | Ugly Number II | :star: :star: | DP | :trophy:
-303 | Range Sum Query Immutable | :star: | DP | :trophy:
+91 | Decode Ways | :star: :star: | DP | :white_check_mark: :trophy:
+121 | Best Time to Buy and Sell Stock | :star: | DP | :white_check_mark: :trophy: `Prefix Sum`
+122 | Best Time to Buy and Sell Stock II | :star: | DP | :white_check_mark: :trophy: `Greedy`
+123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | DP | :white_check_mark: :trophy: `Bidirectional Arrary`
+188 | Best Time to Buy and Sell Stock IV | :star: :star: :star:| DP | :white_check_mark: :trophy: :thinking:
+139 | Word Break | :star: :star: | DP | :white_check_mark: :trophy: :thinking: `Bottom Up`
+152 | Maximum Product Subarry | :star: :star: | DP | :white_check_mark: :trophy: `Prefix Sum`
+198 | House Robber | :star: | DP | :white_check_mark: :trophy:
+221 | Maximal Square | :star: :star: | DP | :white_check_mark: :trophy: :thinking:
+264 | Ugly Number II | :star: :star: | DP | :white_check_mark: :trophy:
+303 | Range Sum Query Immutable | :star: | DP | :white_check_mark: :trophy:
 307 | Range Sum Query Mutable | :star: :star: | DP | :trophy: `Segment Tree`
-304 | Range Sum Query 2D Immutable | :star: :star: | DP | :trophy:
-322 | Coin Change | :star: :star: | DP | :trophy: `Bottom Up` `Top Down`
-518 | Coin Change 2 | :star: :star: | DP | :trophy: :thinking: `Bottom Up` `Top Down`
-338 | Counting Bits | :star: :star: | DP | :trophy: :thinking: `Bit`
-509 | Fibonacci Number| :star: | DP | :trophy:
+304 | Range Sum Query 2D Immutable | :star: :star: | DP | :white_check_mark: :trophy:
+322 | Coin Change | :star: :star: | DP | :white_check_mark: :trophy: `Bottom Up` `Top Down`
+518 | Coin Change 2 | :star: :star: | DP | :white_check_mark: :trophy: :thinking: `Bottom Up` `Top Down`
+338 | Counting Bits | :star: :star: | DP | :white_check_mark: :trophy: :thinking: `Bit`
+509 | Fibonacci Number| :star: | DP | :white_check_mark: :trophy:
 523 | Continuous Subarray Sum  | :star: :star: | DP | `Map`
 547 | Number of Provinces | :star: :star: | DP | :trophy:
-746 | MinCost Climb Stair | :star: | DP | :trophy:
 1137 | N-th Tribonacci Number | :star: | DP | :trophy:
  | Search | | |
 34 | Search For a Range | :star: :star: | Search | :trophy:
@@ -221,17 +218,17 @@ No | Title | Difficulty | Catogary | Notes
 022 | Generate Parenthesis | :star: :star: | BackTrack | :trophy: :thinking:
 046 | Permutations | :star: :star: | BackTrack | :trophy:
 047 | Permutations II | :star: :star: | BackTrack | `TODO`
-079 | Word Search | :star: :star: | BackTrack | :trophy `Matrix`
-212 | Word Search II | :star: :star: :star: | BackTrack | :trophy `Matrix`
+079 | Word Search | :star: :star: | BackTrack | :trophy: `Matrix`
+212 | Word Search II | :star: :star: :star: | BackTrack | :trophy: `Matrix`
  | Greedy | | |
 122 | Best Time to Buy and Sell Stock II | :star: | Greedy | :trophy:
 452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | Greedy | :trophy:
 763 | Partition Labels | :star: :star: | Greedy | :trophy:
  | Two Pointers, Sliding Window | | |
-3 | Longest Sub string Without Repeating Characters | :star: :star: | Two Pointers | :trophy:
-239 | Sliding Window Maximum | :star: :star: :star: | Two Pointers | :trophy: `DP` `deque`
+3 | Longest Substring Without Repeating Characters | :star: :star: | Two Pointers | :trophy:
 159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | Two Pointers | :trophy:
 340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | Two Pointers | :trophy:
+239 | Sliding Window Maximum | :star: :star: :star: | Two Pointers | :trophy: `DP` `deque`
 992 | Subarrays with K Different Integers | :star: :star: :star: | Two Pointers | `TODO`
  | Divide Conquer | | |
 23 | Merge K Sorted List | :star: :star: :star: | Divide Conquer | :trophy: `K-way Merge`
@@ -287,3 +284,121 @@ extract last bit | A&-A or A&~(A-1) or x^(x&(x-1))
 remove last bit | A & (A-1)
 get all | 1-bits ~0
 -A | ~A + 1
+
+# Patterns
+* Pattern: Sliding Window
+    * Maximum Sum Subarray of Size K (easy)
+    * Smallest Subarray with a given sum (easy)
+    * 340. Longest Substring with K Distinct Characters (medium)
+    * Fruits into Baskets (medium)
+    * 3. No-repeat Substring (hard)
+    * Longest Substring with Same Letters after Replacement (hard)
+    * Longest Subarray with Ones after Replacement (hard)
+
+* Pattern: Two Pointers
+    * Pair with Target Sum (easy)
+    * 26. Remove Duplicates (easy)
+    * Squaring a Sorted Array (easy)
+    * Triplet Sum to Zero (medium)
+    * Triplet Sum Close to Target (medium)
+    * Triplets with Smaller Sum (medium)
+    * Subarrays with Product Less than a Target (medium)
+    * Dutch National Flag Problem (medium)
+
+* Pattern: Fast & Slow pointers
+    * 141. Linked List Cycle (easy)
+    * Start of Linked List Cycle (medium)
+    * Middle of the Linked List (easy)
+    * Happy Number (medium)
+
+* Pattern: Merge Intervals
+    * 56. Merge Intervals (medium)
+    * 57. Insert Interval (medium)
+    * Intervals Intersection (medium)
+    * Conflicting Appointments (medium)
+
+* Pattern: Cyclic Sort
+    * Cyclic Sort (easy)
+    * 268. Find the Missing Number (easy)
+    * 287. Find the Duplicate Number (easy)
+    * Find all Duplicate Numbers (easy)
+
+* Pattern: In-place Reversal of a Linked List
+    * 206. Reverse a Linked List (easy)
+    * Reverse a Sub-list (medium)
+    * Reverse every K-element Sub-list (medium)
+
+* Pattern: Tree Breadth First Search
+    * 102. Binary Tree Level Order Traversal (easy)
+    * Reverse Level Order Traversal (easy)
+    * Zigzag Traversal (medium)
+    * Level Averages in a Binary Tree (easy)
+    * Minimum Depth of a Binary Tree (easy)
+    * Level Order Successor (easy)
+    * Connect Level Order Siblings (medium)
+
+* Pattern: Tree Depth First Search
+    * 124. Binary Tree Path Sum (easy)
+    * All Paths for a Sum (medium)
+    * Sum of Path Numbers (medium)
+    * Path With Given Sequence (medium)
+    * Count Paths for a Sum (medium)
+
+* Pattern: Two Heaps
+    * Find the Median of a Number Stream (medium)
+    * Sliding Window Median (hard)
+    * Maximize Capital (hard)
+
+* Pattern: Subsets
+    * Subsets (easy)
+    * Subsets With Duplicates (easy)
+    * Permutations (medium)
+    * String Permutations by changing case (medium)
+    * Balanced Parentheses (hard)
+    * Unique Generalized Abbreviations (hard)
+
+* Pattern: Modified Binary Search
+    * Order-agnostic Binary Search (easy)
+    * Ceiling of a Number (medium)
+    * Next Letter (medium)
+    * Number Range (medium)
+    * Search in a Sorted Infinite Array (medium)
+    * Minimum Difference Element (medium)
+    * Bitonic Array Maximum (easy)
+
+* Pattern: Bitwise XOR
+    * 136. Single Number (easy)
+    * Two Single Numbers (medium)
+    * Complement of Base 10 Number (medium)
+
+* Pattern: Top 'K' Elements
+    * Top 'K' Numbers (easy)
+    * Kth Smallest Number (easy)
+    * 'K' Closest Points to the Origin (easy)
+    * Connect Ropes (easy)
+    * 347. Top 'K' Frequent Numbers (medium)
+    * Frequency Sort (medium)
+    * 179. Kth Largest Number in a Stream (medium)
+    * 'K' Closest Numbers (medium)
+    * Maximum Distinct Elements (medium)
+    * Sum of Elements (medium)
+    * Rearrange String (hard)
+
+* Pattern: K-way merge
+    * 23. Merge K Sorted Lists (medium)
+    * Kth Smallest Number in M Sorted Lists (Medium)
+    * Kth Smallest Number in a Sorted Matrix (Hard)
+    * Smallest Number Range (Hard)
+
+* Pattern : 0/1 Knapsack (Dynamic Programming)
+    * 0/1 Knapsack (medium)
+    * Equal Subset Sum Partition (medium)
+    * Subset Sum (medium)
+    * Minimum Subset Sum Difference (hard)
+
+* Pattern: Topological Sort (Graph)
+    * Topological Sort (medium)
+    * 621. Tasks Scheduling (medium)
+    * Tasks Scheduling Order (medium)
+    * All Tasks Scheduling Orders (hard)
+    * Alien Dictionary (hard)
