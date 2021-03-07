@@ -19,7 +19,7 @@ C++ Rest consists of three components:
 ![CppRest.png](../Image/cpp-rest.png)
 
 ## Client
-### Send Request
+### write
 ```C++
 overrideable::g_casablancaHttpRequestFunc // CB-> handle http response
 
@@ -173,7 +173,7 @@ asio_context::handle_write_headers() // request header has sent, then send reque
                     --->
 ```
 
-### Receive Response
+### read
 ```C++
 boost::asio::scheduler::do_run_one()
     operation::complete()
@@ -215,7 +215,7 @@ ws_client_wspp.cpp::connect_impl()
 ```
 
 ## Server
-### open listen socket
+### listen
 ```C++
 http_listener::open()
     http_server_api::register_listener()
@@ -241,14 +241,14 @@ http_listener::open()
                     --->
             hostport_listener::add_listener(path, listener);
 ```
-### accept socket
+### accept
 ```C++
 hostport_listener::on_accept()
     basic_socket_acceptor::async_accept()
         ---> Boost.Asio
     m_connections.insert(new connection(std::move(socket), m_p_server, this, m_is_https, m_ssl_context_callback));
 ```
-### read socket
+### read
 ```C++
         connection::start_request_response()
             boost::asio::async_read_until() // crlfcrlf_nonascii_searcher
@@ -310,7 +310,7 @@ hostport_listener::on_accept()
                                                 task_completion_event<http_response>::set(response)
                                                 // 2. [m_response] activate task linked with m_response: task_completion_event<http_response>
 ```
-### write socket
+### write
 ```C++
 connection::do_response()
     http_request::m_request.get_response()
