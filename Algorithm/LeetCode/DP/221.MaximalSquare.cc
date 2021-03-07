@@ -35,7 +35,7 @@ public:
 
         int rowSize = matrix.size();
         int colSize = matrix[0].size();
-        vector<int> dp(colSize+1, 0);
+        vector dp(colSize+1, 0);
         int prev = 0;
         int maxLen = 0;
 
@@ -43,7 +43,7 @@ public:
             for (int col = 1; col <= colSize; ++col) {
                 int tmp = dp[col];
                 if (matrix[row-1][col-1] == '1') {
-                    dp[col] = min(std::initializer_list<int>{dp[col], dp[col-1], prev}) + 1;
+                    dp[col] = min({dp[col], dp[col-1], prev}) + 1;
                     maxLen = max(maxLen, dp[col]);
                 } else {
                     dp[col] = 0;
