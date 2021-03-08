@@ -18,10 +18,12 @@ Constraints:
 Relative:
 121. Best Time to Buy and Sell Stock
 152. Maximum Product Subarry
-437.PathSum_III
-523. Continuous Subarray Sum
+437. PathSum_III
+053. Maximum Subarray
+209. Minimum Size Subarray Sum
 325. Maximum Size Subarray Sum Equals k
-560. Sub array Sum Equals K */
+523. Continuous Subarray Sum
+560. Subarray Sum Equals K */
 
 #include <unordered_map>
 #include <vector>
