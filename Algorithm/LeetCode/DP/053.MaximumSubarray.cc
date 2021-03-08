@@ -12,7 +12,11 @@ If you have figured out the O(n) solution, try coding another solution using the
 divide and conquer approach, which is more subtle.
 
 Relatives:
-53. Maximum Subarray
+053. Maximum Subarray
+209. Minimum Size Subarray Sum
+325. Maximum Size Subarray Sum Equals k
+523. Continuous Subarray Sum
+560. Subarray Sum Equals K
 121. Best Time to Buy and Sell Stock
 124. Binary Tree Maximum Path Sum
 152. Maximum Product Subarray
