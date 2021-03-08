@@ -287,17 +287,17 @@ get all | 1-bits ~0
 
 # Patterns
 * Pattern: Sliding Window
-    * \325. Maximum Sum Subarray of Size K (easy)
+    * 325\. Maximum Sum Subarray of Size K (easy)
     * Smallest Subarray with a given sum (easy)
-    * \340. Longest Substring with K Distinct Characters (medium)
+    * 340\. Longest Substring with K Distinct Characters (medium)
     * Fruits into Baskets (medium)
-    * \3. No-repeat Substring (hard)
+    * 3\. No-repeat Substring (hard)
     * Longest Substring with Same Letters after Replacement (hard)
     * Longest Subarray with Ones after Replacement (hard)
 
 * Pattern: Two Pointers
     * Pair with Target Sum (easy)
-    * \26. Remove Duplicates (easy)
+    * 26\. Remove Duplicates (easy)
     * Squaring a Sorted Array (easy)
     * Triplet Sum to Zero (medium)
     * Triplet Sum Close to Target (medium)
@@ -306,30 +306,30 @@ get all | 1-bits ~0
     * Dutch National Flag Problem (medium)
 
 * Pattern: Fast & Slow pointers
-    * \141. Linked List Cycle (easy)
+    * 141\. Linked List Cycle (easy)
     * Start of Linked List Cycle (medium)
     * Middle of the Linked List (easy)
     * Happy Number (medium)
 
 * Pattern: Merge Intervals
-    * \56. Merge Intervals (medium)
-    * \57. Insert Interval (medium)
+    * 56\. Merge Intervals (medium)
+    * 57\. Insert Interval (medium)
     * Intervals Intersection (medium)
     * Conflicting Appointments (medium)
 
 * Pattern: Cyclic Sort
     * Cyclic Sort (easy)
-    * \268. Find the Missing Number (easy)
-    * \287. Find the Duplicate Number (easy)
+    * 268\. Find the Missing Number (easy)
+    * 287\. Find the Duplicate Number (easy)
     * Find all Duplicate Numbers (easy)
 
 * Pattern: In-place Reversal of a Linked List
-    * \206. Reverse a Linked List (easy)
+    * 206\. Reverse a Linked List (easy)
     * Reverse a Sub-list (medium)
     * Reverse every K-element Sub-list (medium)
 
 * Pattern: Tree Breadth First Search
-    * \102. Binary Tree Level Order Traversal (easy)
+    * 102\. Binary Tree Level Order Traversal (easy)
     * Reverse Level Order Traversal (easy)
     * Zigzag Traversal (medium)
     * Level Averages in a Binary Tree (easy)
@@ -338,7 +338,7 @@ get all | 1-bits ~0
     * Connect Level Order Siblings (medium)
 
 * Pattern: Tree Depth First Search
-    * \124. Binary Tree Path Sum (easy)
+    * 124\. Binary Tree Path Sum (easy)
     * All Paths for a Sum (medium)
     * Sum of Path Numbers (medium)
     * Path With Given Sequence (medium)
@@ -367,7 +367,7 @@ get all | 1-bits ~0
     * Bitonic Array Maximum (easy)
 
 * Pattern: Bitwise XOR
-    * \136. Single Number (easy)
+    * 136\. Single Number (easy)
     * Two Single Numbers (medium)
     * Complement of Base 10 Number (medium)
 
@@ -376,16 +376,16 @@ get all | 1-bits ~0
     * Kth Smallest Number (easy)
     * 'K' Closest Points to the Origin (easy)
     * Connect Ropes (easy)
-    * \347. Top 'K' Frequent Numbers (medium)
+    * 347\. Top 'K' Frequent Numbers (medium)
     * Frequency Sort (medium)
-    * \179. Kth Largest Number in a Stream (medium)
+    * 179\. Kth Largest Number in a Stream (medium)
     * 'K' Closest Numbers (medium)
     * Maximum Distinct Elements (medium)
     * Sum of Elements (medium)
     * Rearrange String (hard)
 
 * Pattern: K-way merge
-    * \23. Merge K Sorted Lists (medium)
+    * 23\. Merge K Sorted Lists (medium)
     * Kth Smallest Number in M Sorted Lists (Medium)
     * Kth Smallest Number in a Sorted Matrix (Hard)
     * Smallest Number Range (Hard)
