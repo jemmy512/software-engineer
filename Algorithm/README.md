@@ -398,7 +398,7 @@ get all | 1-bits ~0
 
 * Pattern: Topological Sort (Graph)
     * Topological Sort (medium)
-    * \621. Tasks Scheduling (medium)
+    * 621\. Tasks Scheduling (medium)
     * Tasks Scheduling Order (medium)
     * All Tasks Scheduling Orders (hard)
     * Alien Dictionary (hard)
