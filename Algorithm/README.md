@@ -51,8 +51,8 @@ No | Title | Difficulty | Catogary | Notes
 088 | Merge Sorted Array | :star:| Array | :trophy:
 169 | Majority Element | :star: | Array | :trophy:
 189 | Rotate Array | :star: :star: | Array
-209 | Minimum Size Subarray Sum | :star: :star: | Array | :trophy: `Two Pointers`
-325 | Maximum Size Subarray Sum Equals k | :star: :star:| Array | :trophy: `Prefix Sum` `Map`
+209 | Minimum Size Subarray Sum | :star: :star: | Array | :white_check_mark: :trophy: `Prefix Sum`
+325 | Maximum Size Subarray Sum Equals k | :star: :star:| Array | :white_check_mark: :trophy: `Prefix Sum` `Map`
 560 | Subarray Sum Equals K | :star: :star: | Array | :white_check_mark: :trophy: `Prefix Sum` `Map`
 215 | Kth Largest Element in an Array | :star: :star: | Array
 217 | Contains Duplicate I | :star: | Array
@@ -171,7 +171,7 @@ No | Title | Difficulty | Catogary | Notes
  | DP |  | |
 5 | Longest Palindromic Substring | :star: :star: | DP | :white_check_mark: :trophy:
 32 | Longet Valid Paretheses | :star: :star: :star: |  DP | :white_check_mark: :trophy: `stack`
-53 | Maximum Subarray | :star: | DP | :white_check_mark: :trophy: `kadane` `Divide Conquer`
+53 | Maximum Subarray | :star: | DP | :white_check_mark: :trophy: `Prefix Sum` `kadane` `Divide Conquer`
 62 | Unique Paths | :star: :star: | DP | :white_check_mark: :trophy:
 63 | Unique Paths II | :star: :star: | DP | :white_check_mark: :trophy:
 980 | Unique Paths III | :star: :star: :star: | DP | `TODO`
@@ -196,22 +196,22 @@ No | Title | Difficulty | Catogary | Notes
 518 | Coin Change 2 | :star: :star: | DP | :white_check_mark: :trophy: :thinking: `Bottom Up` `Top Down`
 338 | Counting Bits | :star: :star: | DP | :white_check_mark: :trophy: :thinking: `Bit`
 509 | Fibonacci Number| :star: | DP | :white_check_mark: :trophy:
-523 | Continuous Subarray Sum  | :star: :star: | DP | `Map`
-547 | Number of Provinces | :star: :star: | DP | :trophy:
+523 | Continuous Subarray Sum  | :star: :star: | DP | :white_check_mark: :thinking: `Prefix Sum` `Map`
+547 | Number of Provinces | :star: :star: | DP | :white_check_mark: :trophy: `Matrix`
 1137 | N-th Tribonacci Number | :star: | DP | :trophy:
  | Search | | |
-34 | Search For a Range | :star: :star: | Search | :trophy:
-35 | Search Insert Position | :star: | Search | :trophy:
-74 | Search a 2D Matrix | :star: :star: | Search | :trophy: `BS` `Matrix`
-240 | Search a 2D Matrix II | :star: :star: | Search | :trophy: :thinking: `BS` `Matrix`
-130 | Surrounded Regions | :star: :star: | Search | :trophy: `DFS` `BFS` `Opposite`
-200 | Number of Islands | :star: :star: | Search | :trophy: `DFS` `BFS`
-278 | First Bad Version | :star: | Search | :trophy:
-286 | Walls and Gates | :star: :star: | Search | :trophy: :thinking: `BFS`
-323 | Number of Connected Components in an Undirected Graph | :star: :star: | Search | :trophy: :thinking: `Union Find`
+34 | Search For a Range | :star: :star: | Search | :white_check_mark: :trophy: `BS`
+35 | Search Insert Position | :star: | Search | :white_check_mark: :trophy: `BS`
+74 | Search a 2D Matrix | :star: :star: | Search | :white_check_mark: :trophy: `BS` `Matrix`
+240 | Search a 2D Matrix II | :star: :star: | Search | :white_check_mark: :trophy: :thinking: `BS` `Matrix`
+278 | First Bad Version | :star: | Search | :white_check_mark: :trophy: `BS`
+130 | Surrounded Regions | :star: :star: | Search | :white_check_mark: :trophy: `DFS` `BFS` `Opposite` `Matrix`
+200 | Number of Islands | :star: :star: | Search | :white_check_mark: :trophy: `DFS` `BFS` `Matrix`
+286 | Walls and Gates | :star: :star: | Search | :trophy: :thinking: `BFS` `Matrix`
+323 | Number of Connected Components in an Undirected Graph | :star: :star: | Search | :trophy: :thinking: `Union Find` `Matrix`
+695 | Max Area of Island  | :star: :star: | Search | :trophy: `DFS` `Matrix`
 374 | Guess Number Higher Or Lower | :star: | Search | :trophy:
 378 | Kth Smallest Element in a Sorted Matrix  | :star: :star:| Search | :trophy: :thinking: `BS` `Matrix`
-695 | Max Area of Island  | :star: :star: | Search | :trophy: `DFS`
 973 | K Closest Points to Origin | :star: :star:| Search | :trophy: :thinking: `Quick Select` `BS`
  | BackTrack | | |
 017 | Letter Combination of a Phone Number | :star: :star: | BackTrack | :trophy:
