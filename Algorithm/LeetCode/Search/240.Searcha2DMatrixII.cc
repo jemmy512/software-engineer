@@ -27,7 +27,10 @@ All the integers in each column are sorted in ascending order.
 
 using namespace std;
 
-// binary search
+/* binary search
+ * asceding order:
+ *  1. top left -> bottom left -> bottom right
+ *  2. top left -> top right   -> bottom right */
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
