@@ -19,7 +19,16 @@ Example 2:
 
 [[0,0,0,0,0,0,0,0]]
 Given the above grid, return 0.
-Note: The length of each dimension in the given grid does not exceed 50. */
+Note: The length of each dimension in the given grid does not exceed 50.
+
+Relatives:
+130. Surrounded Regions
+200. Number of Islands
+286. Walls and Gates
+305. Number of Islands II
+323. Number of Connected Components in an Undirected Graph
+694. Number of Distinct Islands
+695. Max Area of Island */
 
 #include <vector>
 
