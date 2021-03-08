@@ -18,8 +18,40 @@ The length of the array won't exceed 10,000.
 You may assume the sum of all the numbers is in the range of a signed 32-bit integer.
 
 Realtives:
+053. Maximum Subarray
+209. Minimum Size Subarray Sum
+325. Maximum Size Subarray Sum Equals k
 523. Continuous Subarray Sum
 560. Subarray Sum Equals K */
+
+#include <vector>
+#include <unordered_set>
+#include <unordered_map>
+
+using namespace std;
+
+class Solution {
+public:
+    bool checkSubarraySum(vector<int>& nums, int k) {
+        int sum = 0;
+        unordered_map<int, int> hashMap;
+        hashMap.emplace(0, -1);
+
+        for (int i = 0; i < nums.size(); ++i) {
+            sum += nums[i];
+            if (k != 0)
+                sum = sum % k;
+            if (!hashMap.contains(sum)) {
+                if (i - hashMap[sum] > 1)
+                    return true;
+            } else {
+                hashMap.emplace(sum, i);
+            }
+        }
+
+        return false;
+    }
+};
 
 class Solution {
 public:
