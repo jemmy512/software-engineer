@@ -13,7 +13,7 @@ Note:
 Although the above answer is in lexicographical order, your answer could be in any order you want
 
 017. Letter Combination of a Phone Number
-020. validParentheses
+020. valid Parentheses
 022. Generate Parentheses */
 
 #include <string>
@@ -28,6 +28,7 @@ class Solution {
 public:
     vector<string> letterCombinations(string digits) {
         string curStr;
+        curStr.reserve(digits.size());
         combination(digits, 0, curStr);
         return result;
     }
@@ -37,9 +38,8 @@ private:
         if (idx >= digits.size())
             return;
 
-        string button = hashMap[digits[idx]];
-        for (int i = 0; i < button.size(); ++i) {
-            curStr += button[i];
+        for (const auto& chr : hashMap[digits[idx]]) {
+            curStr += chr;
             combination(digits, idx+1, curStr);
             if (idx == digits.size()-1)
                 result.emplace_back(curStr);
