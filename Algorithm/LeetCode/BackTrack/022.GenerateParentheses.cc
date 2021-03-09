@@ -26,22 +26,28 @@ using namespace std;
 class Solution {
 public:
     vector<string> generateParenthesis(int n) {
+        string str;
+        str.reserve(n*2);
         max = n;
-        backtrack("", 0, 0);
+        backtrack(str, 0, 0);
         return vec;
     }
 
 private:
-    void backtrack(string cur, int open, int close) {
+    void backtrack(string& cur, int open, int close) {
         if (cur.size() == 2 * max) {
             vec.push_back(cur);
             return;
         }
 
-        if (open < max)
-            backtrack(cur+"(", open+1, close);
-        if (close < open)
-            backtrack(cur+")", open, close+1);
+        if (open < max) {
+            backtrack(cur+="(", open+1, close);
+            cur.pop_back();
+        }
+        if (close < open) {
+            backtrack(cur+=")", open, close+1);
+            cur.pop_back();
+        }
     }
 
 private:
