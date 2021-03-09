@@ -41,10 +41,12 @@ points[i].length == 2
 
 Relatives:
 056. Merge Intervals
+057. Insert Interval
 252. Meeting Rooms
 253. Metting Rooms II
 452. Minimum Number of Arrows to Burst Balloons
-435. Non-overlapping Intervals */
+435. Non-overlapping Intervals
+763. Partition Labels */
 
 #include <vector>
 
