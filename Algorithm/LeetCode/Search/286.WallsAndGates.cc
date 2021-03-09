@@ -58,8 +58,7 @@ public:
         }
 
         while (!que.empty()) {
-            int row = que.front().first;
-            int col = que.front().second;
+            const auto [row, col] = que.front();
             que.pop();
 
             for (const auto& [r, c] : directions) {
