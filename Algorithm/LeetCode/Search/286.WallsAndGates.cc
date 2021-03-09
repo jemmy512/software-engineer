@@ -64,7 +64,7 @@ public:
             for (const auto& [r, c] : directions) {
                 int rowNew = row + r;
                 int colNew = col + c;
-                if (!isInvalidIndex(rooms, rowNew, colNew)) {
+                if (isValidIndex(rooms, rowNew, colNew)) {
                     rooms[rowNew][colNew] = rooms[row][col] + 1;
                     que.emplace(rowNew, colNew);
                 }
@@ -73,8 +73,8 @@ public:
     }
 
 private:
-    bool isInvalidIndex(vector<vector<int>>& rooms, int row, int col) {
-        return row < 0 || col < 0 || row >= _RowSize || col >= _ColSize || rooms[row][col] != Empty;
+    bool isValidIndex(vector<vector<int>>& rooms, int row, int col) {
+        return (row < 0 || col < 0 || row >= _RowSize || col >= _ColSize || rooms[row][col] != Empty) ? false : true;
     }
 
 private:
