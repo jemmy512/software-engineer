@@ -41,7 +41,7 @@ No | Title | Difficulty | Catogary | Notes
 027 | Remove Element | :star: | Array | :trophy:
 041 | First Missing Positive | :star: :star: :star: | Array
 054 | Spiral Matrix | :star: :star: | Array | :trophy: `Matrix`
-056 | Merge Intervals | :star: :star: | Array | :trophy:
+056 | Merge Intervals | :star: :star: | Array | :trophy: `Interval`
 057 | Insert Intervals | :star: :star: | Array | :trophy:
 026 | Remote Duplicates from Sorted Array | :star: | Array | :trophy:
 080 | Remove Duplicates from Sorted Array II | :star: :star: | Array | :trophy: `Can dup N`
@@ -158,15 +158,15 @@ No | Title | Difficulty | Catogary | Notes
 811 | Subdomain Visit Count | :star: | Map | :trophy:
 953 | Verifying an Alien Dictionary  | :star: | Map | :trophy:
  | Stack | | |
-020 | validParentheses | :star: | Stack
+020 | valid Parentheses | :star: | Stack | :white_check_mark:
 32 | Longet Valid Paretheses | :star: :star: :star: |  Stack | :trophy: `DP`
 155 | MinStack | :star: | Stack
 394 | DecodeString | :star: :star: | Stack | :trophy:
 1249 | Minimum Remove to Make Valid Parentheses| :star: :star: | Stack | :trophy: `Bit Set`
  | Queue |  | |
 239 | Sliding Window Maximum | :star: :star: :star: | Queue | :trophy: :thinking: `DP` `L-R Lists`
-252 | Meeting Rooms | :star: | Queue | :trophy:
-253 | Meeting Rooms II | :star: :star: | Queue | :trophy:
+252 | Meeting Rooms | :star: | Queue | :white_check_mark: :trophy: `Interval`
+253 | Meeting Rooms II | :star: :star: | Queue | :white_check_mark: :trophy: `Interval`
 641 | Design Circular Deque | :star: :star: | Queue
  | DP |  | |
 5 | Longest Palindromic Substring | :star: :star: | DP | :white_check_mark: :trophy:
@@ -199,6 +199,7 @@ No | Title | Difficulty | Catogary | Notes
 523 | Continuous Subarray Sum  | :star: :star: | DP | :white_check_mark: :thinking: `Prefix Sum` `Map`
 547 | Number of Provinces | :star: :star: | DP | :white_check_mark: :trophy: `Matrix`
 1137 | N-th Tribonacci Number | :star: | DP | :trophy:
+1143 | Longest Common Subsequence | :star: :star: | DP | `TODO`
  | Search | | |
 34 | Search For a Range | :star: :star: | Search | :white_check_mark: :trophy: `BS`
 35 | Search Insert Position | :star: | Search | :white_check_mark: :trophy: `BS`
@@ -207,23 +208,23 @@ No | Title | Difficulty | Catogary | Notes
 278 | First Bad Version | :star: | Search | :white_check_mark: :trophy: `BS`
 130 | Surrounded Regions | :star: :star: | Search | :white_check_mark: :trophy: `DFS` `BFS` `Opposite` `Matrix`
 200 | Number of Islands | :star: :star: | Search | :white_check_mark: :trophy: `DFS` `BFS` `Matrix`
-286 | Walls and Gates | :star: :star: | Search | :trophy: :thinking: `BFS` `Matrix`
+286 | Walls and Gates | :star: :star: | Search | :white_check_mark: :trophy: :thinking: `BFS` `Matrix`
 323 | Number of Connected Components in an Undirected Graph | :star: :star: | Search | :trophy: :thinking: `Union Find` `Matrix`
-695 | Max Area of Island  | :star: :star: | Search | :trophy: `DFS` `Matrix`
-374 | Guess Number Higher Or Lower | :star: | Search | :trophy:
+695 | Max Area of Island  | :star: :star: | Search | :white_check_mark: :trophy: `DFS` `Matrix`
+374 | Guess Number Higher Or Lower | :star: | Search | :white_check_mark:  :trophy:
 378 | Kth Smallest Element in a Sorted Matrix  | :star: :star:| Search | :trophy: :thinking: `BS` `Matrix`
-973 | K Closest Points to Origin | :star: :star:| Search | :trophy: :thinking: `Quick Select` `BS`
+973 | K Closest Points to Origin | :star: :star:| Search | :white_check_mark: :trophy: :thinking: `Quick Select` `BS`
  | BackTrack | | |
-017 | Letter Combination of a Phone Number | :star: :star: | BackTrack | :trophy:
-022 | Generate Parenthesis | :star: :star: | BackTrack | :trophy: :thinking:
-046 | Permutations | :star: :star: | BackTrack | :trophy:
+017 | Letter Combination of a Phone Number | :star: :star: | BackTrack | :white_check_mark: :trophy:
+022 | Generate Parenthesis | :star: :star: | BackTrack | :white_check_mark: :trophy: :thinking:
+046 | Permutations | :star: :star: | BackTrack | :white_check_mark: :trophy:
 047 | Permutations II | :star: :star: | BackTrack | `TODO`
-079 | Word Search | :star: :star: | BackTrack | :trophy: `Matrix`
-212 | Word Search II | :star: :star: :star: | BackTrack | :trophy: `Matrix`
+079 | Word Search | :star: :star: | BackTrack | :white_check_mark: :trophy: `Matrix`
+212 | Word Search II | :star: :star: :star: | BackTrack | :white_check_mark: :trophy: `Matrix`
  | Greedy | | |
-122 | Best Time to Buy and Sell Stock II | :star: | Greedy | :trophy:
-452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | Greedy | :trophy:
-763 | Partition Labels | :star: :star: | Greedy | :trophy:
+122 | Best Time to Buy and Sell Stock II | :star: | Greedy | :white_check_mark: :trophy:
+452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | Greedy | :white_check_mark: :trophy: `Interval`
+763 | Partition Labels | :star: :star: | Greedy | :white_check_mark: :trophy: `Interval`
  | Two Pointers, Sliding Window | | |
 3 | Longest Substring Without Repeating Characters | :star: :star: | Two Pointers | :trophy:
 159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | Two Pointers | :trophy:
@@ -312,8 +313,13 @@ get all | 1-bits ~0
     * Happy Number (medium)
 
 * Pattern: Merge Intervals
-    * 56\. Merge Intervals (medium)
-    * 57\. Insert Interval (medium)
+    * 056\. Merge Intervals
+    * 057\. Insert Interval
+    * 252\. Meeting Rooms
+    * 253\. Metting Rooms II
+    * 452\. Minimum Number of Arrows to Burst Balloons
+    * 435\. Non-overlapping Intervals
+    * 763\. Partition Labels
     * Intervals Intersection (medium)
     * Conflicting Appointments (medium)
 
