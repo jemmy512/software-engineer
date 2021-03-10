@@ -40,23 +40,23 @@ public:
         if (nums.size() < k)
             return {};
 
-        deque<int> deq;
+        deque<int> dque;
         vector<int> window;
         window.reserve(nums.size()-k+1);
 
         for (int i = 0; i < nums.size(); ++i) {
             // pop the most left ele which will leave the window
-            if (!deq.empty() && deq.front() == i - k)
-                deq.pop_front();
+            if (!dque.empty() && dque.front() == i - k)
+                dque.pop_front();
 
             // pop all eles less than current ele
-            while (!deq.empty() && nums[i] > nums[deq.back()])
-                deq.pop_back();
+            while (!dque.empty() && nums[i] > nums[dque.back()])
+                dque.pop_back();
 
-            deq.emplace_back(i);
+            dque.emplace_back(i);
 
             if (i >= k - 1)
-                window.emplace_back(nums[deq.front()]);
+                window.emplace_back(nums[dque.front()]);
         }
 
         return window;
