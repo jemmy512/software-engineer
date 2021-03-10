@@ -84,14 +84,14 @@ No | Title | Difficulty | Catogary | Notes
 328 | Odd Even Linked List | :star: :star: | List | :trophy:
 817 | Linked List Components | :star: :star: | List
  | Tree | | |
-98 | Validate Binary Search Tree | :star: | Tree | :trophy:
-100 | Same Tree | :star: | Tree | :trophy:
-101 | Symmetric Tree | :star: | Tree | :trophy:
-102 | Binary Tree Level Order Traversal | :star: :star: | Tree | :trophy:
-107 | Binary Tree Level Order Traversal II | :star: | Tree | :trophy:
-103 | Bianry Tree Zig Zag Level Tree Traverse | :star: :star: | Tree | :trophy:
-104 | Maximum Depth of Binary Tree | :star: | Tree | :trophy:
-111 | Minimum Depth of Binary Tree | :star: | Tree | :trophy:
+98 | Validate Binary Search Tree | :star: | Tree | :white_check_mark: :trophy:
+100 | Same Tree | :star: | Tree | :white_check_mark: :trophy:
+101 | Symmetric Tree | :star: | Tree | :white_check_mark: :trophy:
+102 | Binary Tree Level Order Traversal | :star: :star: | Tree | :white_check_mark: :trophy:
+107 | Binary Tree Level Order Traversal II | :star: | Tree | :white_check_mark: :trophy:
+103 | Bianry Tree Zig Zag Level Tree Traverse | :star: :star: | Tree | :white_check_mark: :trophy:
+104 | Maximum Depth of Binary Tree | :star: | Tree | :white_check_mark: :trophy:
+111 | Minimum Depth of Binary Tree | :star: | Tree | :white_check_mark: :trophy:
 105 | Construct Binary Tree from Preorder and Inorder Traversal | :star: :star: | Tree | :trophy: :thinking:
 106 | Construct Binary Tree from Inorder and Postorder Traversal | :star: :star: | Tree | :trophy:
 108 | Convert Sorted Array to Binary Search Tree | :star: :star: | Tree | :trophy:
@@ -164,7 +164,7 @@ No | Title | Difficulty | Catogary | Notes
 394 | DecodeString | :star: :star: | Stack | :trophy:
 1249 | Minimum Remove to Make Valid Parentheses| :star: :star: | Stack | :trophy: `Bit Set`
  | Queue |  | |
-239 | Sliding Window Maximum | :star: :star: :star: | Queue | :trophy: :thinking: `DP` `L-R Lists`
+239 | Sliding Window Maximum | :star: :star: :star: | Queue | :trophy: :thinking: `DP` `Bidirectional Array`
 252 | Meeting Rooms | :star: | Queue | :white_check_mark: :trophy: `Interval`
 253 | Meeting Rooms II | :star: :star: | Queue | :white_check_mark: :trophy: `Interval`
 641 | Design Circular Deque | :star: :star: | Queue
@@ -226,16 +226,16 @@ No | Title | Difficulty | Catogary | Notes
 452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | Greedy | :white_check_mark: :trophy: `Interval`
 763 | Partition Labels | :star: :star: | Greedy | :white_check_mark: :trophy: `Interval`
  | Two Pointers, Sliding Window | | |
-3 | Longest Substring Without Repeating Characters | :star: :star: | Two Pointers | :trophy:
-159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | Two Pointers | :trophy:
-340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | Two Pointers | :trophy:
-239 | Sliding Window Maximum | :star: :star: :star: | Two Pointers | :trophy: `DP` `deque`
+3 | Longest Substring Without Repeating Characters | :star: :star: | Two Pointers | :white_check_mark: :trophy:
+159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | Two Pointers | :white_check_mark: :trophy:
+340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | Two Pointers | :white_check_mark: :trophy:
+239 | Sliding Window Maximum | :star: :star: :star: | Two Pointers | :white_check_mark: :trophy: `DP` `deque`
 992 | Subarrays with K Different Integers | :star: :star: :star: | Two Pointers | `TODO`
  | Divide Conquer | | |
-23 | Merge K Sorted List | :star: :star: :star: | Divide Conquer | :trophy: `K-way Merge`
+23 | Merge K Sorted List | :star: :star: :star: | Divide Conquer | :white_check_mark: :trophy: `K-way Merge`
  | Sort | | |
-937 | Reorder Data in Log Files | :star: | Sort | :trophy:
-347 | Top K Frequent Elements | :star: :star: | Sort | :trophy: `Heap`
+937 | Reorder Data in Log Files | :star: | Sort | :white_check_mark: :trophy:
+347 | Top K Frequent Elements | :star: :star: | Sort | :trophy: `Heap` `TODO`
  | Design | | |
 146 | LRU Cache | :star: :star: | Design | :trophy: `Map + List (O(1) + Date Move)`
 380 | Insert Delete GetRandom O(1) | :star: :star: | Design | :trophy: `Map + Vec (O(1) + Random Access)`
