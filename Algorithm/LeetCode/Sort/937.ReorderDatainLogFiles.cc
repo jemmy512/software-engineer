@@ -23,8 +23,10 @@ Constraints:
 3 <= logs[i].length <= 100
 logs[i] is guaranteed to have an identifier, and a word after the identifier. */
 
+#include <cctype> // std::isalpha
 #include <vector>
 #include <string>
+#include <string_view>
 
 using namespace std;
 
@@ -34,7 +36,7 @@ class Solution {
 public:
     vector<string> reorderLogFiles(vector<string>& logs) {
         vector<string> digitLog, result;
-        vector<pair<string, string>> letterLog;
+        vector<pair<string_view, string_view>> letterLog;
         digitLog.reserve(logs.size());
         result.reserve(logs.size());
         letterLog.reserve(logs.size());
@@ -42,7 +44,12 @@ public:
         for (const auto& log : logs) {
             auto pos = log.find(" ");
             if (isalpha(log[pos+1])) {
-                letterLog.emplace_back(log.substr(0, pos), log.substr(pos+1));
+                letterLog.emplace_back(
+                    string_view(log.data(), pos+1),
+                    string_view(log.data()+pos+1, log.size()-pos));
+                // letterLog.emplace_back( // c++20
+                //     string_view(log.begin(), log.begin()+pos)),
+                //     string_view(log.begin()+pos, log.end()));
             } else {
                 digitLog.emplace_back(log);
             }
@@ -56,12 +63,10 @@ public:
             } else {
                 return lhs.first < rhs.first;
             }
-
-            // return (lhs.second + lhs.first) < (rhs.second + rhs.first);
         });
 
         std::transform(letterLog.begin(), letterLog.end(), std::back_inserter(result), [](const auto& log) {
-            return log.first + " " + log.second;
+            return string(log.first.begin(), log.first.begin() + log.first.size() + log.second.size());
         });
 
         result.insert(result.end(), digitLog.begin(), digitLog.end());
