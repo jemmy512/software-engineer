@@ -12,7 +12,7 @@ Output: 2
 Explanation: T is "aa" which its length is 2.
 
 Relatives:
-3. Longest Substring Without Repeating Characters
+003. Longest Substring Without Repeating Characters
 159. Longest Substring with At Most Two Distinct Characters
 340. Longest Substring with At Most K Distinct Characters
 239. Sliding Window Maximum
@@ -32,18 +32,19 @@ class Solution {
 public:
     int lengthOfLongestSubstringKDistinct(string s, int k) {
         unordered_map<char, int> hashMap; // <char, lastPos>
+        hashMap.reserve(s.size());
         int maxLen = 0;
 
-        for (int start = 0, end = 0; end < s.size(); ++end) {
+        for (int beg = 0, end = 0; end < s.size(); ++end) {
             hashMap[s[end]] = end;
             if (hashMap.size() > k) {
-                auto iter = min_element(hashMap.begin(), hashMap.end(), [](const auto& lhs, const auto& rhs) {
+                const auto& [key, pos] = *min_element(hashMap.begin(), hashMap.end(), [](const auto& lhs, const auto& rhs) {
                     return lhs.second < rhs.second;
                 });
-                start = iter->second + 1;
-                hashMap.erase(iter->first);
+                beg = pos + 1;
+                hashMap.erase(key);
             }
-            maxLen = max(maxLen, end - start + 1);
+            maxLen = max(maxLen, end - beg + 1);
         }
 
         return maxLen;
