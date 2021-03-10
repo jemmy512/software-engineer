@@ -65,7 +65,7 @@ public:
         vector<int> row;
         vector<vector<int>> rows;
         queue<TreeNode*> que;
-        TreeNode* cur, *preLast = root, *last;
+        TreeNode* cur, *levelEnd = root, *last;
 
         que.push(root);
         while (!que.empty()) {
@@ -81,10 +81,10 @@ public:
                 last = cur->right;
             }
 
-            if (cur == preLast) {
+            if (cur == levelEnd) {
                 rows.emplace_back(row);
                 row.clear();
-                preLast = last;
+                levelEnd = last;
             }
         }
 
