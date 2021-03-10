@@ -19,6 +19,10 @@ Given binary tree [3,9,20,null,null,15,7],
      8
 return its minimum depth = 3 [3, 9, 8]. */
 
+#include <algorithm>
+
+using namespace std;
+
 struct TreeNode {
     int val;
     TreeNode *left;
