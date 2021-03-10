@@ -37,38 +37,43 @@ using namespace std;
 
 class Solution {
 public:
-    ListNode *merge2List(ListNode *head1, ListNode *head2) {
-        if (!head1) return head2;
-        if (!head2) return head1;
-
-        static ListNode dummy{INT_MAX};
-        ListNode *tail = &dummy;
-        while (head1 && head2) {
-            if (head1->val < head2->val) {
-                tail = tail->next = head1;
-                head1 = head1->next;
-            } else {
-                tail = tail->next = head2;
-                head2 = head2->next;
-            }
-        }
-        tail->next = head1 ? head1 : head2;
-
-        return dummy.next;
-    }
-
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        if (lists.empty()) return NULL;
+        if (lists.empty())
+            return nullptr;
 
-        int len = lists.size();
-        int interval = 1;
+        auto len = lists.size();
+        auto interval = 1;
+
         while (interval < len) {
-            for (int i = 0; i < len - interval; i += interval * 2)
-                lists[i] = merge2List(lists[i], lists[i + interval]);
+            for (auto i = 0; i < len - interval; i += interval*2) {
+                lists[i] = merge2List(lists[i], lists[i+interval]);
+            }
             interval *= 2;
         }
 
         return lists[0];
+    }
+
+private:
+    ListNode* merge2List(ListNode* lhs, ListNode* rhs) {
+        if (!lhs || !rhs)
+            return lhs ? lhs : rhs;
+
+        ListNode dummy;
+        auto* tail = &dummy;
+
+        while (lhs && rhs) {
+            if (lhs->val < rhs->val) {
+                tail = tail->next = lhs;
+                lhs = lhs->next;
+            } else {
+                tail = tail->next = rhs;
+                rhs = rhs->next;
+            }
+        }
+        tail = tail->next = lhs ? lhs : rhs;
+
+        return dummy.next;
     }
 };
 
