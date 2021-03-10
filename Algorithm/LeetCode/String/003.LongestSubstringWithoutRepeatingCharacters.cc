@@ -8,7 +8,7 @@ Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer
 must be a substring, "pwke" is a subsequence and not a substring.
 
 Reletives:
-3. Longest Substring Without Repeating Characters
+003. Longest Substring Without Repeating Characters
 159. Longest Substring with At Most Two Distinct Characters
 340. Longest Substring with At Most K Distinct Characters
 239. Sliding Window Maximum
@@ -23,18 +23,24 @@ using namespace std;
 
 /* Sliding windown*/
 int lengthOfLongestSubstring(string str) {
-    constexpr int MAX_CHAR = 256;
-    std::array<int, MAX_CHAR> charSet;
-    charSet.fill(-1);
+    vector<int> index(256, -1);
     int maxLen = 0;
 
-    for (int start = -1, end = 0; end < str.size(); ++end) {
-        if (charSet[str[end]] != -1) {
-            start = max(start, charSet[str[end]]); // abcbade
+    for (auto beg = -1, end = 0; end < str.size(); ++end) {
+        if (index[str[end]] != -1) {
+            beg = max(beg, index[str[end]]); // abcbade
         }
-        charSet[str[end]] = end;
-        maxLen = max(maxLen, end - start);
+        index[str[end]] = end;
+        maxLen = max(maxLen, end - beg);
     }
+
+    // for (auto beg = 0, end = 0; end < str.size(); ++end) {
+    //     if (index[str[end]] != -1) {
+    //         beg = beg > index[str[end]] ? beg : index[str[end]] + 1;
+    //     }
+    //     index[str[end]] = end;
+    //     maxLen = max(maxLen, end - beg);
+    // }
 
     return maxLen;
 }
