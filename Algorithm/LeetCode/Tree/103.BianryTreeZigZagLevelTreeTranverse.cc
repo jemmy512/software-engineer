@@ -1,21 +1,20 @@
-/**
- Given a binary tree, return the zigzag level order traversal of its nodes' values.
- (ie, from left to right, then right to left for the next level and alternate between).
- *
- For example:
- Given binary tree [3,9,20,null,null,15,7],
+/* Medium
+Given a binary tree, return the zigzag level order traversal of its nodes' values.
+(ie, from left to right, then right to left for the next level and alternate between).
+
+For example:
+Given binary tree [3,9,20,null,null,15,7],
     3
    / \
   9  20
     /  \
    15   7
-   return its zigzag level order traversal as:
-   [
+return its zigzag level order traversal as:
+[
   [3],
   [20,9],
   [15,7]
-]
- */
+] */
 
 #include <vector>
 #include <queue>
@@ -39,7 +38,7 @@ public:
         deque<int> level;
         queue<TreeNode*> que;
         que.push(root);
-        TreeNode* preLast = root, *cur, *last;
+        TreeNode* levelEnd = root, *cur, *last;
 
         while (!que.empty()) {
             cur = que.front();
@@ -59,11 +58,11 @@ public:
                 last = cur->right;
             }
 
-            if (cur == preLast) {
+            if (cur == levelEnd) {
                 levels.push_back({level.begin(), level.end()});
                 level.clear();
                 isOrderRight = !isOrderRight;
-                preLast = last;
+                levelEnd = last;
             }
         }
 
