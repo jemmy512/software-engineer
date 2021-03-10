@@ -1,5 +1,6 @@
 /* Easy
-Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root).
+Given a binary tree, return the bottom-up level order traversal of its nodes' values.
+(ie, from left to right, level by level from leaf to root).
 
 For example:
 Given binary tree [3,9,20,null,null,15,7],
@@ -59,18 +60,20 @@ private:
 class Solution {
 public:
     vector<vector<int>> levelOrderBottom(TreeNode* root) {
-        vector<vector<int>> vvec;
+        vector<vector<int>> rows;
         if (!root)
-            return vvec;
+            return rows;
 
         queue<TreeNode *> nodes;
-        TreeNode *pre_last = root, *last, *cur;
+        TreeNode *levelEnd = root, *last, *cur;
         nodes.push(root);
         vector<int> row;
 
         while (!nodes.empty()) {
             cur = nodes.front();
+            nodes.pop();
             row.push_back(cur->val);
+
             if (cur->left) {
                 nodes.push(cur->left);
                 last = cur->left;
@@ -79,16 +82,15 @@ public:
                 nodes.push(cur->right);
                 last = cur->right;
             }
-            if (cur == pre_last) {
-                // vvec.insert(vvec.begin(), row);
-                vvec.push_back(row);
+            if (cur == levelEnd) {
+                // rows.insert(rows.begin(), row);
+                rows.push_back(row);
                 row.clear();
-                pre_last = last;
+                levelEnd = last;
             }
-            nodes.pop();
         }
 
-        reverse(vvec.begin(), vvec.end());
-        return vvec;
+        reverse(rows.begin(), rows.end());
+        return rows;
     }
 };
