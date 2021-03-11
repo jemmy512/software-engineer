@@ -22,6 +22,10 @@ Return:
 ]
 */
 
+#include <vector>
+
+using namespace std;
+
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -32,35 +36,35 @@ struct TreeNode {
 class Solution {
 public:
     vector<vector<int>> pathSum(TreeNode* root, int sum) {
-        vector<vector<int>> vvec;
-        vector<int> vec;
-        pathSum(root, 0, sum, vvec, vec);
+        vector<vector<int>> paths;
+        vector<int> path;
+        pathSum(root, 0, sum, paths, path);
 
-        return vvec;
+        return paths;
     }
 
 private:
-    void pathSum(TreeNode *root, int curSum, int sum, vector<vector<int>>& vvec, vector<int>& vec) {
+    void pathSum(TreeNode *root, int curSum, int sum, vector<vector<int>>& paths, vector<int>& path) {
         if (!root) return;
 
         curSum += root->val;
-        vec.push_back(root->val);
+        path.push_back(root->val);
 
         bool isLeaf = !root->left && !root->right;
         if (isLeaf && curSum == sum) {
-            vvec.push_back(vec);
-            vec.pop_back();
+            paths.push_back(path);
+            path.pop_back();
             return;
         }
 
         if (root->left) {
-            pathSum(root->left, curSum, sum, vvec, vec);
+            pathSum(root->left, curSum, sum, paths, path);
         }
         if (root->right) {
-            pathSum(root->right, curSum, sum, vvec, vec);
+            pathSum(root->right, curSum, sum, paths, path);
         }
 
         curSum -= root->val;
-        vec.pop_back();
+        path.pop_back();
     }
 };
