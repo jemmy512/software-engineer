@@ -31,6 +31,9 @@ Given the following tree [1,2,2,3,3,null,null,4,4]:
  4   4
 Return false. */
 
+#include <cmath>
+#include <algorithm>
+
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -56,7 +59,7 @@ private:
 
         int ll = levelCount(root->left, flag);
         int lr = levelCount(root->right, flag);
-        if (abs(ll - lr) > 1) {
+        if (std::abs(ll - lr) > 1) {
             flag = false;
             return 0;
         }
@@ -80,6 +83,6 @@ private:
     int height(TreeNode* node) {
         if (!node) // An empty tree has height -1
             return -1;
-        return max(height(node->left), height(node->right)) + 1;
+        return std::max(height(node->left), height(node->right)) + 1;
     }
 };
