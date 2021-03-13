@@ -1,11 +1,5 @@
 /* Medium
 Given a binary tree
-
-struct Node {
-  Node *left;
-  Node *right;
-  Node *next;
-}
 Populate each next pointer to point to its next right node.
 If there is no next right node, the next pointer should be set to NULL.
 
@@ -33,6 +27,10 @@ After calling your function, the tree should look like:
  / \  / \
 4->5->6->7 -> NULL */
 
+#include <queue>
+
+using namespace std;
+
 class Node {
 public:
     int val;
@@ -52,30 +50,32 @@ class Solution {
 public:
     Node* connect(Node* root) {
         if (!root)
-            return root;
+            return nullptr;
 
         queue<Node*> que;
-        que.push(root);
-        Node *cur, *last, *prev_next = root;
+        auto* cur = root, *levelEnd = root, *last = root;
+        que.emplace(root);
 
         while (!que.empty()) {
             cur = que.front();
             que.pop();
 
+
             if (cur->left) {
-                que.push(cur->left);
                 last = cur->left;
-            }
-            if (cur->right) {
-                que.push(cur->right);
-                last = cur->right;
+                que.emplace(cur->left);
             }
 
-            if (cur == prev_next) {
-                prev_next->next = nullptr;
-                prev_next = last;
+            if (cur->right) {
+                last = cur->right;
+                que.emplace(cur->right);
+            }
+
+            if (cur == levelEnd) {
+                levelEnd = last;
+                cur->next = nullptr;
             } else {
-                cur->next = que.front();
+                cur->next = que.empty() ? nullptr : que.front();
             }
         }
 
