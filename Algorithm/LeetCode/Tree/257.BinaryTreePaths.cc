@@ -21,6 +21,8 @@ Explanation: All root-to-leaf paths are: 1->2->5, 1->3 */
 #include <string>
 #include <algorithm>
 #include <stack>
+#include <sstream>
+#include <iterator>
 
 using namespace std;
 
@@ -74,25 +76,35 @@ public:
         if (!root)
             return {};
 
-        vector<string> vec;
-        traverse(root, vec, "");
+        traverse(root);
 
-        return vec;
+        return result;
     }
 
 private:
-    void traverse(TreeNode* root, vector<string>& vec, string path) {
-        if (!root) return;
+    void traverse(TreeNode* root) {
+        if (!root)
+            return;
 
-        if (!path.empty())
-            path +=  "->";
-        path += to_string(root->val);
+        if (pathQue.empty())
+           pathQue.emplace_back(to_string(root->val));
+        else
+            pathQue.emplace_back("->" + to_string(root->val));
 
         if (!root->left && !root->right) {
-            vec.emplace_back(path);
+            std::ostringstream oss;
+            std::copy(pathQue.begin(), pathQue.end(), std::ostream_iterator<string>(oss));
+            result.emplace_back(oss.str());
         } else {
-            traverse(root->left, vec, path);
-            traverse(root->right, vec, path);
+            traverse(root->left);
+            traverse(root->right);
         }
+
+        if (!pathQue.empty())
+            pathQue.pop_back();
     }
+
+private:
+    deque<string> pathQue;
+    vector<string> result;
 };
