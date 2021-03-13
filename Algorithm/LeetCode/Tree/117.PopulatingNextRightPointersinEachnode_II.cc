@@ -1,8 +1,8 @@
 /* Medium
 Given a binary tree
 
-Populate each next pointer to point to its next right node. If there is no next
-    right node, the next pointer should be set to NULL.
+Populate each next pointer to point to its next right node.
+If there is no next right node, the next pointer should be set to NULL.
 
 Initially, all next pointers are set to NULL.
 
@@ -27,6 +27,10 @@ After calling your function, the tree should look like:
 4-> 5 -> 7 -> NULL
 */
 
+#include <queue>
+
+using namespace std;
+
 class Node {
 public:
     int val;
@@ -44,60 +48,67 @@ public:
 
 class Solution {
 public:
-    void connect(Node *root) {
+    Node* connect(Node *root) {
         if (!root)  return ;
-        Node *cur, *left;
+        Node *cur, *next, *node = root;
 
-        while (root) {
-            cur = root;
-            root = left = nullptr;
+        while (node) {
+            cur = node;
+            node = next = nullptr;
             while (cur) {
                 if (cur->left){
-                    if (left)
-                        left = left->next = cur->left;
+                    if (next)
+                        next = next->next = cur->left;
                     else
-                        root = left = cur->left;
+                        node = next = cur->left;
                 }
                 if (cur->right){
-                    if (left)
-                        left = left->next = cur->right;
+                    if (next)
+                        next = next->next = cur->right;
                     else
-                        root = left= cur->right;
+                        node = next= cur->right;
                 }
                 cur = cur->next;
             }
         }
+
+        return root;
     }
 };
 
-class Solution_ {
+class Solution {
 public:
-    void connect(Node *root) {
-        if (!root) return;
+    Node* connect(Node* root) {
+        if (!root)
+            return;
 
-        queue<Node *> que;
-        Node *cur, *next, *prev_next = root;
-        que.push(root);
+        queue<Node*> que;
+        auto* cur = root, *levelEnd = root, *last = root;
+        que.emplace(root);
 
         while (!que.empty()) {
             cur = que.front();
             que.pop();
 
+
             if (cur->left) {
-                que.push(cur->left);
-                next = cur->left;
-            }
-            if (cur->right) {
-                que.push(cur->right);
-                next = cur->right;
+                last = cur->left;
+                que.emplace(cur->left);
             }
 
-            if (cur == prev_next) {
-                prev_next->next = NULL;
-                prev_next = next;
+            if (cur->right) {
+                last = cur->right;
+                que.emplace(cur->right);
+            }
+
+            if (cur == levelEnd) {
+                levelEnd = last;
+                cur->next = nullptr;
             } else {
-                cur->next = que.front();
+                cur->next = que.empty() ? nullptr : que.front();
             }
         }
+
+        return root;
     }
 };
