@@ -1,5 +1,7 @@
 /* Medium
-Given two binary search trees, return True if and only if there is a node in the first tree and a node in the second tree whose values sum up to a given integer target.
+Given two binary search trees, return True if and only if
+there is a node in the first tree and a node in the second tree
+whose values sum up to a given integer target.
 
 Example 1:
 Input: root1 = [2,1,4], root2 = [1,0,3], target = 5
@@ -15,7 +17,7 @@ Each tree has at most 5000 nodes.
 -10^9 <= target, node.val <= 10^9
 
 Relatives:
-1. Two Sum
+001. Two Sum
 167. Two Sum II - Input array is sorted
 170. Two Sum III - Data structure design
 653. Two Sum IV - Input is a BST
