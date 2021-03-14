@@ -6,6 +6,12 @@
  * Given nums = [2, 7, 11, 15], target = 9,
  * Because nums[0] + nums[1] = 2 + 7 = 9,return [0, 1].
  *
+ * Constraints:
+ * 2 <= nums.length <= 10^3
+ * -10^9 <= nums[i] <= 10^9
+ * -10^9 <= target <= 10^9
+ * Only one valid answer exists.
+ *
  * Relatives:
  * 1. Two Sum
  * 167. Two Sum II - Input array is sorted
