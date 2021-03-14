@@ -25,13 +25,19 @@ Input: root, p = 2, q = 4
 Output: 2
 Explanation: The LCA of nodes 2 and 4 is 2, since a node can be a descendant of itself
              according to the LCA definition.
+Constraints:
+The number of nodes in the tree is in the range [2, 10^5].
+-10^9 <= Node.val <= 10^9
+All Node.val are unique.
+p != q
+p and q will exist in the BST.
 
 Relatives:
 235.  Lowest Common Ancestor of a Binary Search Tree
 236.  Lowest Common Ancestor of a Binary Tree
 1644. Lowest Common Ancestor of a Binary Tree II
 1650. Lowest Common Ancestor of a Binary Tree III
-676.  Lowest Common Ancestor of a Binary Tree IV
+1676. Lowest Common Ancestor of a Binary Tree IV
 1123. Lowest Common Ancestor of Deepest Leaves
 1257. Smallest Common Region */
 
@@ -39,7 +45,7 @@ struct TreeNode {
     int val;
     TreeNode *left;
     TreeNode *right;
-    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
 };
 
 class Solution {
@@ -54,7 +60,7 @@ public:
                  return root;
          }
 
-        return NULL;
+        return nullptr;
     }
 };
 
