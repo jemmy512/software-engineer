@@ -1,4 +1,4 @@
-/*
+/* Medium
 Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
 
 According to the definition of LCA on Wikipedia: “The lowest common ancestor is
@@ -26,12 +26,19 @@ Output: 5
 Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of
 itself according to the LCA definition.
 
+Constraints:
+The number of nodes in the tree is in the range [2, 10^5].
+-10^9 <= Node.val <= 10^9
+All Node.val are unique.
+p != q
+p and q will exist in the BST.
+
 Relatives:
 235.  Lowest Common Ancestor of a Binary Search Tree
 236.  Lowest Common Ancestor of a Binary Tree
 1644. Lowest Common Ancestor of a Binary Tree II
 1650. Lowest Common Ancestor of a Binary Tree III
-676.  Lowest Common Ancestor of a Binary Tree IV
+1676. Lowest Common Ancestor of a Binary Tree IV
 1123. Lowest Common Ancestor of Deepest Leaves
 1257. Smallest Common Region */
 
@@ -53,12 +60,7 @@ public:
 
         /* left == NULL means both 'p' and 'q' are not in the left tree;
          * (left && right) means 'p' and 'q' are seperated in the left and right tree */
-        if (left == nullptr)
-            return right;
-        else if (right == nullptr)
-            return left;
-        else // (left && right)
-            return root;
+        return !left ? right : (!right ? left : root);
     }
 };
 
