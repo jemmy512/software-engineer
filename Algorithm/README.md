@@ -94,32 +94,32 @@ No | Title | Difficulty | Catogary | Notes
 111 | Minimum Depth of Binary Tree | :star: | Tree | :white_check_mark: :trophy:
 105 | Construct Binary Tree from Preorder and Inorder Traversal | :star: :star: | Tree | :trophy: :thinking:
 106 | Construct Binary Tree from Inorder and Postorder Traversal | :star: :star: | Tree | :trophy:
-108 | Convert Sorted Array to Binary Search Tree | :star: :star: | Tree | :trophy:
-109 | Convert Sorted List to Binary Search Tree | :star: | Tree | :trophy:
-110 | Balanced Bianry Tree | :star: | Tree | :trophy:
-112 | Path Sum | :star: | Tree | :trophy: `DFS`
-113 | Path Sum II | :star: :star: | Tree | :trophy: `DFS`
-437 | Path Sum III | :star: :star: | Tree | :trophy: `Prefix Sum`
-666 | Path Sum IV | :star: :star: | Tree | :trophy: `DFS`
-129 | Sum Root to Leaf Numbers | :star: :star: | Tree | :trophy:
+108 | Convert Sorted Array to Binary Search Tree | :star: :star: | Tree | :white_check_mark: :trophy:
+109 | Convert Sorted List to Binary Search Tree | :star: | Tree | :white_check_mark: :trophy:
+110 | Balanced Bianry Tree | :star: | Tree | :white_check_mark: :trophy: `DFS`
+112 | Path Sum | :star: | Tree | :white_check_mark: :trophy: `DFS`
+113 | Path Sum II | :star: :star: | Tree | :white_check_mark: :trophy: `DFS`
+437 | Path Sum III | :star: :star: | Tree | :white_check_mark: :trophy: `Prefix Sum`
+666 | Path Sum IV | :star: :star: | Tree | :white_check_mark: :trophy: `DFS`
+129 | Sum Root to Leaf Numbers | :star: :star: | Tree | :white_check_mark: :trophy:
 124 | Binary Tree Maximum Path Sum | :star: :star: :star: | Tree | `DP` `TODO`
-257 | Binary Tree Paths | :star: | Tree | :trophy:
-687 | LongestUnivaluePath | :star: :star: | Tree
-114 | Flatten Binary Tree To Linked List | :star: :star: | Tree | :trophy:
-116 | Populating Next Right Pointers in Each Node | :star: :star: | Tree | :trophy:
-117 | Populating Next Right Pointers in Each Node II  | :star: :star: | Tree | :trophy:
-173 | Binary Search Tree Iterator | :star: :star: | Tree | :trophy:
-199 | Binary Tree Right Side View | :star: :star: | Tree | :trophy:
-222 | CountCompleteTreeNodes | :star: :star: | Tree | :trophy:
-226 | Invert Binary Tree | :star: | Tree | :trophy:
-230 | kth Smallest Element In The BST | :star: :star: | Tree | :trophy:
-671 | Second Minimum Node in a Binary Tree | :star: | Tree | :trophy:
-235 | Lowest Common Ancestor of a Binary Search Tree | :star: | Tree | :trophy:
-236 | Lowest Common Ancestor of a Binary Tree | :star: :star: | Tree | :trophy: :thinking:
+257 | Binary Tree Paths | :star: | Tree | :white_check_mark: :trophy: `DFS`
+687 | Longest Univalue Path | :star: :star: | :white_check_mark: Tree `DFS`
+114 | Flatten Binary Tree To Linked List | :star: :star: | Tree | :white_check_mark: :trophy: `Preorder`
+116 | Populating Next Right Pointers in Each Node | :star: :star: | Tree | :white_check_mark: :trophy: `BFS`
+117 | Populating Next Right Pointers in Each Node II  | :star: :star: | Tree | :white_check_mark: :trophy: `BFS-non-queue`
+173 | Binary Search Tree Iterator | :star: :star: | Tree | :white_check_mark: :trophy: `Inorder`
+199 | Binary Tree Right Side View | :star: :star: | Tree | :white_check_mark: :trophy:
+222 | Count Complete Tree Nodes | :star: :star: | Tree | :white_check_mark: :trophy:
+226 | Invert Binary Tree | :star: | Tree | :white_check_mark: :trophy:
+230 | kth Smallest Element In The BST | :star: :star: | Tree | :white_check_mark: :trophy: `Inorder`
+671 | Second Minimum Node in a Binary Tree | :star: | Tree | :white_check_mark: :trophy:
+235 | Lowest Common Ancestor of a Binary Search Tree | :star: | Tree | :white_check_mark: :trophy:
+236 | Lowest Common Ancestor of a Binary Tree | :star: :star: | Tree | :white_check_mark: :trophy: :thinking:
 1644 | Lowest Common Ancestor of a Binary Tree II | :star: :star: | Tree | :trophy: `p, q may be null`
-1650 | Lowest Common Ancestor of a Binary Tree III | :star: :star: | Tree | `List Common Node`
-1676 | Lowest Common Ancestor of a Binary Tree IV | :star: :star: | Tree | `Multiple-nodes`
-1214 | Two Sum BSTs | :star: :star: | Tree | :trophy: `Map`
+1650 | Lowest Common Ancestor of a Binary Tree III | :star: :star: | Tree | :white_check_mark: `List Common Node`
+1676 | Lowest Common Ancestor of a Binary Tree IV | :star: :star: | Tree | :white_check_mark: `Multiple-nodes`
+1214 | Two Sum BSTs | :star: :star: | Tree | :white_check_mark: :trophy: `Inorder` `Complement Map`
 1123 | Lowest Common Ancestor of Deepest Leaves | :star: :star: | Tree | `TODO`
 1257 | Smallest Common Region | :star: :star: | Tree | `TODO`
 501 | FindModeinBinarySearchTree | :star: | Tree
@@ -142,11 +142,11 @@ No | Title | Difficulty | Catogary | Notes
 345 | Reverse Vowels of a String | :star: | String | :trophy:
 796 | Rotate String | :star: | String
  | Map | | |
-001 | Two Sum | :star: | Map | :trophy:
-167 | Two Sum II | :star: | Map | :trophy:
-170 | Two Sum III - Data structure design | :star: | Map | :trophy:
-653 | Two Sum IV | :star: | Map | :trophy:
-1214 | Two Sum BSTs | :star: :star: | Map | :trophy: `Tree`
+001 | Two Sum | :star: | Map | :white_check_mark: :trophy:
+167 | Two Sum II | :star: | Map | :white_check_mark: :trophy: `Two Pointers`
+170 | Two Sum III - Data structure design | :star: | Map | :white_check_mark: :trophy:
+653 | Two Sum IV | :star: | Map | :white_check_mark: :trophy: `Inorder + Two Pointers` `Complement Map`
+1214 | Two Sum BSTs | :star: :star: | Map | :white_check_mark: :trophy: `Inorder + Compleent Map` `Tree`
 266 | Palindrome Permutation | :star: | Map | :white_check_mark: :trophy:
 267 | Palindrome Permutation II | :star: :star: | Map | :white_check_mark: :trophy: `Backtracking`
 516 | Longest Palindromic Subsequence | :star: :star: | Map | `TODO`
