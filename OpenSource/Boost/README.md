@@ -62,7 +62,7 @@ basic_stream_socket::async_connect()
                 epoll_reactor::register_descriptor()
                     epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev)
         reactive_socket_service_base::start_connect_op() // construct reactive_socket_connect_op
-            if (socket_ops::set_internal_non_blocking)
+            if (socket_ops::set_internal_non_blocking())
                 socket_ops::connect()
                     ::connect(s, addr, (SockLenType)addrlen)
                 epoll_reactor::start_op(reactor::connect_op)
