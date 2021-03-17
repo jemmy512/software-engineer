@@ -877,7 +877,7 @@ task::task()
     _TaskInitMaybeFunctor(_Param, _IsCallable(_Param,0));
         if (_IsCallable)
             _TaskInitWithFunctor(const _Function& _Func)
-                _Task_impl_base::_ScheduleTask(new _InitialTaskHandle());
+                _Task_impl_base::_ScheduleTask(new _InitialTaskHandle(_Func) { _M_function = _Func;});
                     --->
         else
             _TaskInitNoFunctor(task_completion_event<_ReturnType>& _Event)
@@ -963,7 +963,7 @@ task_completion_event::set(_Result)
                         _Task_impl_base::_ScheduleTask()
                             _TaskCollectionImpl::_ScheduleTask(_TaskProcHandle* _PTaskHandle, _TaskInliningMode _InliningMode)
                                 if (_ForceInline)
-                                    _TaskProcHandle::_RunChoreBridge(_PTaskHandle)
+                                    static _TaskProcHandle::_RunChoreBridge(_PTaskHandle)
                                         _PTaskHandle->invoke()
                                             if (is_init_handle)
                                                 _InitialTaskHandle::_Perform()
