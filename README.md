@@ -8,16 +8,16 @@
     5. [Publishing](#Publishing)
 3. [Computer Science](#Computer-Science)
     1. [Operating System](#Computer-Science)
-    2. [Network](#Computer-Science)
-    3. [Data Structure](#Computer-Science)
-    4. [Database](#Computer-Science)
+    2. [Network](#Network)
+    3. [Data Structure](#Data-Structure)
+    4. [Database](#Database)
 4. [Programming Language](#Programming-Language)
     * [C/C++](#CC)
 5. [System Design](#System-Design)
 6. [Linux](#Linux)
     1. [Kernel](#Kernel)
     2. [Memory Management](#Memory-Management)
-    3. [Network](#Network)
+    3. [Linux Network](#Linux-Network)
     4. [AIO](#AIO)
     5. [Lock-free](#Lock-free)
     6. [Memory Order](#Memory-Order)
@@ -44,6 +44,7 @@
     3. [Practice](#Practice)
     4. [Authentication & Authorization](#Authentication--Authorization)
     5. [Design Pattern](#Design-Pattern)
+9. [Thanks](#Thanks)
 
 # Formal Entry
 - [ ] [The key to Accelerating Your Coding Skills](http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/)
@@ -78,32 +79,86 @@
 - [x] [Checklist](https://github.com/mtdvio/going-to-production)
 
 # Computer Science
-* Operating System
-    - [ ] :orange_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
-    - [ ] :orange_book: Modern Operating Systems :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/modern-operating-system.md)
-    - [ ] :orange_book: Advanced Programming in the UNIX Environment
+## Operating System
+- [ ] :orange_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
+- [ ] :orange_book: Modern Operating Systems :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/modern-operating-system.md)
+- [ ] :orange_book: Advanced Programming in the UNIX Environment
 
-* Network
-    - [ ] :orange_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/tcp-ip-illustrated-volume-1.md)
-    - [ ] :orange_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil2: [Book Notes: UNP](https://github.com/Jemmy512/book-notes/blob/master/Linux/unp.md) :pencil2: [Book Notes: Linux Programming](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-programming.md)
-    - [ ] :orange_book: UNIX Network Programming, Volume 2: Interprocess Communications
-    - [ ] :orange_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
-    - [ ] :orange_book: Computer Networking: A Top-Down Approach
+## Network
+- [ ] :orange_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/tcp-ip-illustrated-volume-1.md)
+- [ ] :orange_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil2: [Book Notes: UNP](https://github.com/Jemmy512/book-notes/blob/master/Linux/unp.md) :pencil2: [Book Notes: Linux Programming](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-programming.md)
+- [ ] :orange_book: UNIX Network Programming, Volume 2: Interprocess Communications
+- [ ] :orange_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
+- [ ] :orange_book: Computer Networking: A Top-Down Approach
+- [ ] :orange_book: Computer Networks, 5th Edition
+- [ ] :orange_book: Practical Packet Analysis: Using Wireshark to Solve Real-World Network Problems, 2nd Edition
 
-    - [ ] [Let’s Code a TCP/IP Stack, 1: Ethernet & ARP](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/#tuntap-devices)
-    - [ ] [Let’s Code a TCP/IP Stack, 2: IPV4 & ICMPv4](https://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4)
-    - [ ] [Let’s Code a TCP/IP Stack, 3: TCP Basics & Handshake](https://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake)
-    - [ ] [Let’s Code a TCP/IP Stack, 4: Tcp Data Flow & Socket API](https://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api)
-    - [ ] [Let’s Code a TCP/IP Stack, 5: TCP Retransaction](https://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission)
+- [ ] [Internet protocol suite (wikipedia)](https://en.wikipedia.org/wiki/Internet_protocol_suite)
+- [ ] [Let’s Code a TCP/IP Stack, 1: Ethernet & ARP](https://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/#tuntap-devices)
+- [ ] [Let’s Code a TCP/IP Stack, 2: IPV4 & ICMPv4](https://www.saminiir.com/lets-code-tcp-ip-stack-2-ipv4-icmpv4)
+- [ ] [Let’s Code a TCP/IP Stack, 3: TCP Basics & Handshake](https://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake)
+- [ ] [Let’s Code a TCP/IP Stack, 4: Tcp Data Flow & Socket API](https://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api)
+- [ ] [Let’s Code a TCP/IP Stack, 5: TCP Retransaction](https://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission)
 
-    - [ ] [C10k Problem](http://www.kegel.com/c10k.html)
-    - [ ] [C10m Problem](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
+- [ ] [C10k Problem](http://www.kegel.com/c10k.html)
+- [ ] [C10m Problem](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
+- [ ] [Congestion Avoidance and Control.pdf](https://ee.lbl.gov/papers/congavoid.pdf)
+- [ ] [Nginx HTTP/2](https://www.nginx.com/wp-content/uploads/2015/09/NGINX_HTTP2_White_Paper_v4.pdf)
 
-* Database
-    - [ ] :orange_book: Database System Concepts(Fifth Edition)
+* ARP
+    - [ ] RFC 826 - An Ethernet Address Resolution Protocol
 
-* Data Structure
-    - [ ] :orange_book: Data Structures and Algorithm Analysis in C:Second Edition
+* Tunnel
+    - [ ] RFC 1853 - IP in IP Tunneling
+    - [ ] RFC 2784 - Generic Routing Encapsulation (GRE)
+    - [ ] RFC 2661 - Layer Two Tunneling Protocol “L2TP”
+    - [ ] RFC 2637 - Point-to-Point Tunneling Protocol (PPTP)
+
+* TCP
+    - [ ] RFC 793 - Transmission Control Protocol
+    - [ ] RFC 813 - Window and Acknowledgement Strategy in TCP
+    - [ ] RFC 879 - The TCP Maximum Segment Size and Related Topics
+    - [ ] RFC 896 - Congestion Control in IP/TCP Internetworks
+    - [ ] RFC 2581 - TCP Congestion Control
+        - [ ] RFC 5681 - TCP Congestion Control
+        - [ ] RFC 6582 - The NewReno Modification to TCP’s Fast Recovery Algorithm
+    - [ ] RFC 2018 - TCP Selective Acknowledgment Options
+        - [ ] RFC 2883 - An Extension to the Selective Acknowledgement (SACK) Option for TCP
+    - [ ] RFC 2988 - Computing TCP’s Retransmission Timer
+    - [ ] RFC 6298 - Computing TCP’s Retransmission Timer
+
+* HTTP
+    - [ ] RFC 7230 - Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing
+    - [ ] RFC 7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
+    - [ ] RFC 7232 - Hypertext Transfer Protocol (HTTP/1.1): Conditional Requests
+    - [ ] RFC 7233 - Hypertext Transfer Protocol (HTTP/1.1): Range Requests
+    - [ ] RFC 7234 - Hypertext Transfer Protocol (HTTP/1.1): Caching
+    - [ ] RFC 7235 - Hypertext Transfer Protocol (HTTP/1.1): Authentication
+    - [ ] RFC 7540 - Hypertext Transfer Protocol Version 2 (HTTP/2)
+    - [ ] RFC 7541 - HPACK: Header Compression for HTTP/2
+
+## Database
+- [ ] :orange_book: Database System Concepts(Fifth Edition)
+- [ ] :orange_book: High Performance MySQL,3rd
+- [ ] :orange_book: Inside MySAQL: InnoDB Storage Engine
+- [ ] :orange_book: Relational Database Index Design and the Optimizers
+- [ ] [MySQL Internals Manual](https://dev.mysql.com/doc/internals/en/)
+- [ ] [How to Analyze and Tune MySQL Queries for Better Performance](https://www.mysql.com/cn/why-mysql/presentations/tune-mysql-queries-performance/)
+- [ ] [MySQL Performance Tuning 101](https://www.mysql.com/cn/why-mysql/presentations/mysql-performance-tuning101/)
+- [ ] [MySQL Performance Schema & Sys Schema](https://www.mysql.com/cn/why-mysql/presentations/mysql-performance-sys-schema/)
+- [ ] [MySQL Performance: Demystified Tuning & Best Practices](https://www.mysql.com/cn/why-mysql/presentations/mysql-performance-tuning-best-practices/)
+- [ ] [MySQL Security Best Practices](https://www.mysql.com/cn/why-mysql/presentations/mysql-performance-sys-schema//)
+- [ ] [MySQL Cluster Deployment Best Practices](https://www.mysql.com/cn/why-mysql/presentations/mysql-performance-tuning-best-practices/)
+- [ ] [MySQL High Availability with InnoDB Cluster](https://www.mysql.com/cn/why-mysql/presentations/mysql-high-availability-innodb-cluster/)
+
+## Data Structure
+- [ ] :orange_book: Data Structures and Algorithm Analysis in C:Second Edition
+
+## Algorithm
+- [ ] :orange_book: Algorithms，Fouth Edition
+- [ ] :orange_book: Grokking Algorithms: An illustrated guide for programmers and other curious people
+- [ ] :orange_book: Programming Pearls (2/e)
+- [ ] :orange_book: Data Structures and Algorithm Analysis in C:Second Edition
 
 # Programming Language
 
@@ -188,16 +243,16 @@
 </details>
 
 # System Design
+- [ ] :orange_book: Domain-Driven Design: Tackling Complexity in the Heart of Software
+- [ ] :orange_book: The Art of UNIX Programming
+- [ ] :orange_book: Clean Architecture
+
 - [x] [Grokking System Design](https://www.educative.io/courses/grokking-the-system-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/grokking-the-system-design.md)
 - [x] [Grokking the Object Oriented Design](https://www.educative.io/courses/grokking-the-object-oriented-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/grokking-the-object-oriented-design.md)
 - [ ] [System Design Primer](https://github.com/donnemartin/system-design-primer)
 - [ ] [Six Programming Paradigm](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will)
 - [ ] [Programming Paradigms for Dummies.pdf](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)
 - [ ] [Stanford Programming Paradigm](https://see.stanford.edu/Course/CS107)
-
-- [ ] :orange_book: Domain-Driven Design: Tackling Complexity in the Heart of Software
-- [ ] :orange_book: The Art of UNIX Programming
-- [ ] :orange_book: Clean Architecture
 - [ ] [The Twelve-Factor App](https://12factor.net)
 - [ ] [Avoid Over Engineering](https://medium.com/@rdsubhas/10-modern-software-engineering-mistakes-bc67fbef4fc8)
 
@@ -217,6 +272,14 @@
 - [x] :pencil2: [Understanding Linux Kernel](https://github.com/Jemmy512/book-notes/blob/master/Linux/understanding-linux-kernel.md)
 - [x] :pencil2: [Linux Kernel Development](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-kernel-development.md)
 - [x] [RCU]() [:link: Part 1](https://lwn.net/Articles/262464/) [:link: Part 2](https://lwn.net/Articles/263130/) [:link: Part 3](https://lwn.net/Articles/264090/)
+- [x] [Linux Insides](https://github.com/0xAX/linux-insides)
+- [x] [LWN’s kernel page](https://lwn.net/Kernel/Index/)
+- [x] [Learn Linux Kernel from Android Perspective](https://learnlinuxconcepts.blogspot.com/2014/10/this-blog-is-to-help-those-students-and.html)
+- [x] [Linux Kernel Doc](https://www.kernel.org/doc/)
+- [x] [Kernel Planet: Kernel Developers Doc](https://planet.kernel.org)
+- [x] [Linux Performance and Tuning Guidelines.pdf](https://lenovopress.com/redp4285.pdf)
+- [x] [Linux Performance](http://www.brendangregg.com/linuxperf.html)
+- [x] [Optimizing web servers for high throughput and low latency](https://dropbox.tech/infrastructure/optimizing-web-servers-for-high-throughput-and-low-latency)
 
 ### Memory Management
 - [ ] [What Every Programmer Should Know About Memory.pdf](http://futuretech.blinkenlights.nl/misc/cpumemory.pdf)
@@ -230,13 +293,16 @@
 - [x] [Memory optimization summary: ptmalloc, tcmalloc, and jemalloc](http://www.cnhalo.net/2016/06/13/memory-optimize)
 - [x] [Scalable memory allocation using jemalloc](https://www.facebook.com/notes/facebook-engineering/scalable-memory-allocation-using-jemalloc/480222803919)
 
-### Network
+### Linux Network
 - [ ] :orange_book: [Linux High Performance Server Programming (CN)](https://book.douban.com/subject/24722611/) :pencil2:  [Linux Programmnig Noetes](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-programming.md) :pencil2: [Linux System Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxBasic.md)
 - [ ] :orange_book: Network tuning
 
 - [ ] [Linux Advanced Routing & Traffic Control HOWTO](https://lartc.org)
 - [ ] [Red Hat Enterprise Linux Network Performance Tuning Guide.pdf](https://access.redhat.com/sites/default/files/attachments/20150325_network_performance_tuning.pdf)
+- [ ] [Awesome Pcap Tools](https://github.com/caesar0301/awesome-pcaptools)
 - [ ] [Making Linux TCP Fast.pdf](https://netdevconf.info/1.2/papers/bbr-netdev-1.2.new.new.pdf)
+- [ ] [Monitoring and Tuning the Linux Networking Stack: Receiving Data](https://blog.packagecloud.io/eng/2016/06/22/monitoring-tuning-linux-networking-stack-receiving-data/)
+- [ ] [Monitoring and Tuning the Linux Networking Stack: Sending Data](https://blog.packagecloud.io/eng/2017/02/06/monitoring-tuning-linux-networking-stack-sending-data/)
 
 ### AIO
 - [x] [Boost application performance using asynchronous I/O](https://developer.ibm.com/articles/l-async/)
@@ -641,3 +707,6 @@
 - [ ] [Modularity and Information Hiding.pdf](https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf)
 - [ ] [Separation of Concern](https://www.cs.utexas.edu/users/EWD/transcriptions/EWD04xx/EWD447.html)
 - [ ] [Service Oriented Architecture](https://en.wikipedia.org/wiki/Service-oriented_architecture)
+
+# Thanks
+This roadmap is highly inspired by course: https://time.geekbang.org/column/intro/48. Thanks [Hao Chen](https://github.com/haoel).
