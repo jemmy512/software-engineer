@@ -1,10 +1,18 @@
-/*
+/* Easy
 Merge two sorted linked lists and return it as a new list. The new list should
 be made by splicing together the nodes of the first two lists.
 Example:
 Input: 1->2->4, 1->3->4
 Output: 1->1->2->3->4->4
-*/
+
+Relatives:
+021. Merge Two Sorted List
+023. Merge k Sorted Lists
+088. Merge Sorted Array
+148. Sort List
+244. Shortest Word Distance II
+1634. Add Two Polynomials Represented as Linked Lists */
+
 #include<iostream>
 #include<vector>
 using namespace std;
