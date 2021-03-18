@@ -1,58 +1,56 @@
-/*
-Difficulty: Hard
-
+/* Hard
 Given a linked list, reverse the nodes of a linked list k at a time and return its modified list.
 
 k is a positive integer and is less than or equal to the length of the linked list.
-If the number of nodes is not a multiple of k then left-out nodes in the end should remain as it is.
+If the number of nodes is not a multiple of k then left-out nodes in the groupEnd should remain as it is.
 
 Example:
-
 Given this linked list: 1->2->3->4->5
-
 For k = 2, you should return: 2->1->4->3->5
-
 For k = 3, you should return: 3->2->1->4->5
 
 Note:
-
 Only constant extra memory is allowed.
 You may not alter the values in the list's nodes, only nodes itself may be changed.
-*/
+
+Relatives:
+024. Swap Nodes in Pairs
+025. Reverse Nodes in k-Group
+1721. Swapping Nodes in a Linked List */
 
 struct ListNode {
    int val;
    ListNode *next;
-   ListNode(int x) : val(x), next(NULL) {}
+   ListNode(int x) : val(x), next(nullptr) {}
 };
 
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
         ListNode dummy{0};
-        auto* start = head;
-        auto* end = head;
-        auto* prevTail = &dummy;
+        auto* groupBeg = head;
+        auto* groupEnd = head;
+        auto* listTail = &dummy;
 
         int i = 0;
-        while (end) {
+        while (groupEnd) {
             if (++i % k == 0) {
-                ListNode* prev = end->next;
-                auto* cur = start;
-                auto* next = start;
+                auto* slow = groupEnd->next;
+                auto* mid = groupBeg;
+                auto* fast = groupBeg;
 
-                while (prev != end) {
-                    next = cur->next;
-                    cur->next = prev;
-                    prev = cur;
-                    cur = next;
+                while (slow != groupEnd) {
+                    fast = mid->next;
+                    mid->next = slow;
+                    slow = mid;
+                    mid = fast;
                 }
 
-                prevTail->next = prev;
-                prevTail = start;
-                prevTail->next = end = start = next;
+                listTail->next = groupEnd;
+                listTail = groupBeg;
+                groupBeg = groupEnd = fast;
             } else {
-                end = end->next;
+                groupEnd = groupEnd->next;
             }
         }
 
