@@ -50,7 +50,7 @@ No | Title | Difficulty | Catogary | Notes
 048 | Rotate Image | :star: :star: | Array | :trophy:
 088 | Merge Sorted Array | :star:| Array | :trophy:
 169 | Majority Element | :star: | Array | :trophy:
-189 | Rotate Array | :star: :star: | Array
+189 | Rotate Array | :star: :star: | Array | :white_check_mark:
 209 | Minimum Size Subarray Sum | :star: :star: | Array | :white_check_mark: :trophy: `Prefix Sum`
 325 | Maximum Size Subarray Sum Equals k | :star: :star:| Array | :white_check_mark: :trophy: `Prefix Sum` `Map`
 560 | Subarray Sum Equals K | :star: :star: | Array | :white_check_mark: :trophy: `Prefix Sum` `Map`
@@ -65,15 +65,15 @@ No | Title | Difficulty | Catogary | Notes
 19 | Remove Nth Node From End of List | :star: :star: | List | :white_check_mark: :trophy:
 21 | Merge Two Sorted Lists | :star: | List | :white_check_mark:
 23 | Merge K Sorted List | :star: :star: :star: | List | :white_check_mark: :trophy: `K-way Merge` `Divide Conquer`
-24 | Swap Nodes in Pairs | :star: :star: | List
-25 | Reverse Nodes in K-Group | :star: :star: :star: | List | :trophy:
-61 | Roate List By K | :star: :star: | List
+24 | Swap Nodes in Pairs | :star: :star: | List | :white_check_mark: trophy:
+25 | Reverse Nodes in K-Group | :star: :star: :star: | List | :white_check_mark: :trophy:
+61 | Roate List By K | :star: :star: | List | :white_check_mark:
 86 | Partition List | :star: :star: | List
 206 | Reverse Linkded List | :star: | List
 92 | Reverse Linked List II | :star: :star: | List | :trophy:
 138 | Copy List With Random Pointer  | :star: | List | :trophy:
-141 | linked List Cycle | :star: | List | :trophy: `Fast Slow Pointers`
-142 | Linked List Cycle II | :star: :star: | List | :trophy: `Fast Slow Pointers`
+141 | linked List Cycle | :star: | List | :trophy: `Two Pointers`
+142 | Linked List Cycle II | :star: :star: | List | :trophy: `Two Pointers`
 143 | Reorder List | :star: :star: | List
 147 | Insertion Sorted List | :star: :star: | List
 148 | Sort List | :star: :star: | List | :white_check_mark: `Div-Conq`
