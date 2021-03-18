@@ -12,7 +12,11 @@ Given n will always be valid.
 
 Follow up:
 
-Could you do this in one pass? */
+Could you do this in one pass?
+
+Relative:
+1474. Delete N Nodes After M Nodes of a Linked List
+1721. Swapping Nodes in a Linked List */
 
 struct ListNode {
     int val;
