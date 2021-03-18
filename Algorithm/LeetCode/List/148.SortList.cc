@@ -1,30 +1,30 @@
-/*
-Difficulty: Medium
-
+/* Medium
 Sort a linked list in O(n log n) time using constant space complexity.
 
 Example 1:
-
 Input: 4->2->1->3
 Output: 1->2->3->4
-Example 2:
 
+Example 2:
 Input: -1->5->3->4->0
 Output: -1->0->3->4->5
 
-Soluion:
-    Divide and Conquer Algorithm
-    Time complexity: O(NlogN)
-*/
+Relatives:
+021. Merge Two Sorted List
+023. Merge k Sorted Lists
+088. Merge Sorted Array
+148. Sort List
+244. Shortest Word Distance II
+1634. Add Two Polynomials Represented as Linked Lists */
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+/* Divide and Conquer Algorithm
+ * Time complexity: O(NlogN) */
 class Solution {
 public:
     ListNode *mergeSortedList(ListNode *left, ListNode *right) {
