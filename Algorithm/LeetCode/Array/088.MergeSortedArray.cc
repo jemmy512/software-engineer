@@ -15,7 +15,15 @@ Output: [1,2,2,3,5,6]
 Constraints:
 -10^9 <= nums1[i], nums2[i] <= 10^9
 nums1.length == m + n
-nums2.length == n */
+nums2.length == n
+
+elatives:
+021. Merge Two Sorted List
+023. Merge k Sorted Lists
+088. Merge Sorted Array
+148. Sort List
+244. Shortest Word Distance II
+1634. Add Two Polynomials Represented as Linked Lists */
 
 #include <iostream>
 #include <vector>
