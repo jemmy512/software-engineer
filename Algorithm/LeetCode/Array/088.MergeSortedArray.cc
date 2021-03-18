@@ -79,7 +79,7 @@ int main() {
     cout << vec1.capacity() << endl;
     vector<int> vec2 = {2, 4 ,6, 8, 10};
     merge(vec1, vec1.size(), vec2, vec2.size());
-    for_each(vec1.begin(), vec1.end(), [](const int &n){
+    for_each(vec1.begin(), vec1.end(), [](const int &n) {
         cout << n << " ";
     });
     cout << endl;
