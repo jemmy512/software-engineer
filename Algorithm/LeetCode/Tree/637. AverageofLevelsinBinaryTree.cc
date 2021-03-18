@@ -18,6 +18,7 @@ The range of node's value is in the range of 32-bit signed integer. */
 #include <vector>
 #include <queue>
 #include <numeric>
+#include <cmath>
 
 using namespace std;
 
@@ -51,6 +52,13 @@ private:
         if (levels.size() == curLevel) {
             levels.push_back({});
         }
+
+        // ERROR: AddressSanitizer: allocator is out of memory trying to allocate 0x200000000 bytes
+        // if (levels.size() == curLevel) {
+        //     vector<int> vec;
+        //     vec.reserve(std::pow(2, curLevel));
+        //     levels.push_back(std::move(vec));
+        // }
 
         levels[curLevel].emplace_back(root->val);
 
