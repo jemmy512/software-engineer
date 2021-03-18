@@ -8,7 +8,20 @@ Input:
   1->3->4,
   2->6
 ]
-Output: 1->1->2->3->4->4->5->6 */
+Output: 1->1->2->3->4->4->5->6
+
+Relatives:
+021. Merge Two Sorted List
+023. Merge k Sorted Lists
+088. Merge Sorted Array
+148. Sort List
+244. Shortest Word Distance II
+1634. Add Two Polynomials Represented as Linked Lists */
+
+#include <climits>
+#include <vector>
+
+using namespace std;
 
 struct ListNode {
     int val;
@@ -18,23 +31,14 @@ struct ListNode {
 
 /*
 1. Pair up k lists and merge each pair.
-
 2. After the first pairing, k lists are merged into k/2 lists with average
     2N/k length, then k/4, k/8 and so on.
-
 3. Repeat this procedure until we get the final sorted linked list.
-
 Thus, we'll traverse almost NN nodes per pairing and merging, and repeat this procedure about \log_{2}{k}
 ​​ k times. */
 
 /* Merge with Divide And Conquer
  * Time Complexity: O(NlogK), merge two lists use N time complexity, divide use logK time complexity */
-
-#include <climits>
-#include <vector>
-
-using namespace std;
-
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
