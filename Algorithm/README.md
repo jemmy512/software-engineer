@@ -62,9 +62,9 @@ No | Title | Difficulty | Catogary | Notes
 283 | Move Zeroes | :star: :star: | Array
 448 | Find All Numbers Disappeared in An Array | :star: | Array
  | List |  |
-19 | Remove Nth Node From End of List | :star: :star: | List | :trophy:
-21 | Merge Two Sorted Lists | :star: | List
-23 | Merge K Sorted List | :star: :star: :star: | List | :trophy: `K-way Merge` `Divide Conquer`
+19 | Remove Nth Node From End of List | :star: :star: | List | :white_check_mark: :trophy:
+21 | Merge Two Sorted Lists | :star: | List | :white_check_mark:
+23 | Merge K Sorted List | :star: :star: :star: | List | :white_check_mark: :trophy: `K-way Merge` `Divide Conquer`
 24 | Swap Nodes in Pairs | :star: :star: | List
 25 | Reverse Nodes in K-Group | :star: :star: :star: | List | :trophy:
 61 | Roate List By K | :star: :star: | List
@@ -76,7 +76,7 @@ No | Title | Difficulty | Catogary | Notes
 142 | Linked List Cycle II | :star: :star: | List | :trophy: `Fast Slow Pointers`
 143 | Reorder List | :star: :star: | List
 147 | Insertion Sorted List | :star: :star: | List
-148 | Sort List | :star: :star: | List
+148 | Sort List | :star: :star: | List | :white_check_mark: `Div-Conq`
 160 | Intersection of Two Linked Lists | :star: | List
 203 | Remove Linked List Element | :star: | List
 234 | Palindrome Linked List | :star: | List
@@ -104,7 +104,7 @@ No | Title | Difficulty | Catogary | Notes
 129 | Sum Root to Leaf Numbers | :star: :star: | Tree | :white_check_mark: :trophy:
 124 | Binary Tree Maximum Path Sum | :star: :star: :star: | Tree | `DP` `TODO`
 257 | Binary Tree Paths | :star: | Tree | :white_check_mark: :trophy: `DFS`
-687 | Longest Univalue Path | :star: :star: | :white_check_mark: Tree `DFS`
+687 | Longest Univalue Path | :star: :star: | Tree | :white_check_mark: `DFS`
 114 | Flatten Binary Tree To Linked List | :star: :star: | Tree | :white_check_mark: :trophy: `Preorder`
 116 | Populating Next Right Pointers in Each Node | :star: :star: | Tree | :white_check_mark: :trophy: `BFS`
 117 | Populating Next Right Pointers in Each Node II  | :star: :star: | Tree | :white_check_mark: :trophy: `BFS-non-queue`
@@ -122,10 +122,10 @@ No | Title | Difficulty | Catogary | Notes
 1214 | Two Sum BSTs | :star: :star: | Tree | :white_check_mark: :trophy: `Inorder` `Complement Map`
 1123 | Lowest Common Ancestor of Deepest Leaves | :star: :star: | Tree | `TODO`
 1257 | Smallest Common Region | :star: :star: | Tree | `TODO`
-501 | FindModeinBinarySearchTree | :star: | Tree
-513 | Find Bottom Left Tree Value | :star: | Tree | :trophy: `Level Traversal`
-637 | Average of Levels in Binary Tree | :star: | Tree | :trophy: `Level Traversal`
-814 | Binary Tree Pruning | :star: | Tree | :trophy:
+501 | Find Mode in Binary Search Tree | :star: | Tree
+513 | Find Bottom Left Tree Value | :star: | Tree | :white_check_mark: :trophy: `BFS`
+637 | Average of Levels in Binary Tree | :star: | Tree | :white_check_mark: :trophy: `BFS` `BFS-Recursion`
+814 | Binary Tree Pruning | :star: | Tree | :white_check_mark: :trophy: `DFS`
  | String | | |
 8 | atoi | :star: | String
 14 | Logst Common Prefix | :star: | String | :trophy:
@@ -266,6 +266,9 @@ No | Title | Difficulty | Catogary | Notes
 # DFS BFS
 1. Recursion
 2. Deque
+
+# List
+* Add/delete head, middle or tail node
 
 # Union Find
 * [:link: Disjoint Set (Or Union-Find) | Set 1 (Detect Cycle in an Undirected Graph)](https://www.geeksforgeeks.org/union-find/)
