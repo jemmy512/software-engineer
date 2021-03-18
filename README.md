@@ -282,7 +282,7 @@
 - [x] [Optimizing web servers for high throughput and low latency](https://dropbox.tech/infrastructure/optimizing-web-servers-for-high-throughput-and-low-latency)
 
 ### Memory Management
-- [ ] [What Every Programmer Should Know About Memory.pdf](http://futuretech.blinkenlights.nl/misc/cpumemory.pdf)
+- [ ] [What Every Programmer Should Know About Memory.pdf](https://people.freebsd.org/~lstewart/articles/cpumemory.pdf)
 - [ ] [Memory Barriers: a Hardware View for Software Hackers.pdf](https://irl.cs.ucla.edu/~yingdi/web/paperreadingwhymb.2010.06.07c.pdf)
 - [ ] [A Tutorial Introduction to the ARM and POWER Relaxed Memory Models.pdf](https://www.cl.cam.ac.uk/~pes20/ppc-supplemental/test7.pdf)
 - [x] [ptmalloc](http://www.malloc.de/en/)
