@@ -36,30 +36,16 @@ Relatives:
 
 using namespace std;
 
-// 34 test case, 21ms, beat 85.77%
 class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
         int len = nums.size();
         int newK = len - k % len;
-        int lenTail = len - newK;
-        nums.insert(nums.begin(), nums.begin() + newK, nums.end());
-        nums.erase(nums.end() - lenTail, nums.end());
+
+        vector vec(nums.begin() + newK, nums.end());
+        nums.insert(nums.begin(), vec.begin(), vec.end());
+        nums.resize(len);
     }
-
-    void rotate(vector<int>& nums, int k) {
-        int len = nums.size();
-        int cnt = len - k % len;
-
-        while (cnt--) {
-            auto beg = nums.begin() + cnt - 1;
-            while (beg != nums.end()-1) {
-                std::swap(*beg, *(beg+1));
-                ++beg;
-            }
-        }
-    }
-
 };
 
 class Solution {
