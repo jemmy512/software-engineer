@@ -67,9 +67,9 @@ No | Title | Difficulty | Catogary | Notes
 23 | Merge K Sorted List | :star: :star: :star: | List | :white_check_mark: :trophy: `K-way Merge` `Divide Conquer`
 24 | Swap Nodes in Pairs | :star: :star: | List | :white_check_mark: trophy:
 25 | Reverse Nodes in K-Group | :star: :star: :star: | List | :white_check_mark: :trophy:
-61 | Roate List By K | :star: :star: | List | :white_check_mark:
-86 | Partition List | :star: :star: | List
-206 | Reverse Linkded List | :star: | List
+61 | Roate List By K | :star: :star: | List | :white_check_mark: :trophy:
+86 | Partition List | :star: :star: | List | :white_check_mark: :trophy:
+206 | Reverse Linkded List | :star: | List | :white_check_mark: :trophy:
 92 | Reverse Linked List II | :star: :star: | List | :trophy:
 138 | Copy List With Random Pointer  | :star: | List | :trophy:
 141 | linked List Cycle | :star: | List | :trophy: `Two Pointers`
@@ -82,6 +82,7 @@ No | Title | Difficulty | Catogary | Notes
 234 | Palindrome Linked List | :star: | List
 237 | Delete Node In A Linked List | :star: | List
 328 | Odd Even Linked List | :star: :star: | List | :trophy:
+725 | Split Linked List in Parts | :star: :star: | List | :trophy:
 817 | Linked List Components | :star: :star: | List
  | Tree | | |
 98 | Validate Binary Search Tree | :star: | Tree | :white_check_mark: :trophy:
@@ -269,6 +270,9 @@ No | Title | Difficulty | Catogary | Notes
 
 # List
 * Add/delete head, middle or tail node
+* Reverse
+    * solution one: 206. Reverse Linked List
+    * solution two: 092. Reverse Linked List II
 
 # Union Find
 * [:link: Disjoint Set (Or Union-Find) | Set 1 (Detect Cycle in an Undirected Graph)](https://www.geeksforgeeks.org/union-find/)
