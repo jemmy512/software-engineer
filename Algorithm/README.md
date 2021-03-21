@@ -27,7 +27,6 @@ No | Title | Difficulty | Catogary | Notes
 231 | Power Of Two | :star: | Math | :trophy:
 263 | Ugly Number | :star: | Math | :white_check_mark: :trophy:
 268 | Missing Number | :star: | Math | :trophy:
-287 | Find the Duplicate Number | :star: :star: | Math | :trophy:
 292 | Nim Game | :star: | Math | :trophy:
 326 | Power of Three | :star: | Math | :trophy:
 371 | Sum of Two Integers | :star: :star: | Math | :trophy:
@@ -69,11 +68,12 @@ No | Title | Difficulty | Catogary | Notes
 25 | Reverse Nodes in K-Group | :star: :star: :star: | List | :white_check_mark: :trophy:
 61 | Roate List By K | :star: :star: | List | :white_check_mark: :trophy:
 86 | Partition List | :star: :star: | List | :white_check_mark: :trophy:
-206 | Reverse Linkded List | :star: | List | :white_check_mark: :trophy:
+206 | Reverse Linkded List | :star: | List | :white_check_mark: :trophy: `3 solutions`
 92 | Reverse Linked List II | :star: :star: | List | :trophy:
-138 | Copy List With Random Pointer  | :star: | List | :trophy:
-141 | linked List Cycle | :star: | List | :trophy: `Two Pointers`
-142 | Linked List Cycle II | :star: :star: | List | :trophy: `Two Pointers`
+138 | Copy List With Random Pointer  | :star: | List | :white_check_mark: :trophy: :thinking:
+141 | linked List Cycle | :star: | List | :white_check_mark: :trophy: `Two Pointers` `Cycle`
+142 | Linked List Cycle II | :star: :star: | List | :white_check_mark: :trophy: `Two Pointers` `Cycle`
+287 | Find the Duplicate Number | :star: :star: | List | :white_check_mark: :trophy: `Two Pointers` `Cycle`
 143 | Reorder List | :star: :star: | List
 147 | Insertion Sorted List | :star: :star: | List
 148 | Sort List | :star: :star: | List | :white_check_mark: `Div-Conq`
@@ -127,6 +127,7 @@ No | Title | Difficulty | Catogary | Notes
 513 | Find Bottom Left Tree Value | :star: | Tree | :white_check_mark: :trophy: `BFS`
 637 | Average of Levels in Binary Tree | :star: | Tree | :white_check_mark: :trophy: `BFS` `BFS-Recursion`
 814 | Binary Tree Pruning | :star: | Tree | :white_check_mark: :trophy: `DFS`
+1803 | Count Pairs With XOR in a Range | :star: :star: :star: | Tree | :trophy: `XOR` `Prefix Sum`
  | String | | |
 8 | atoi | :star: | String
 14 | Logst Common Prefix | :star: | String | :trophy:
@@ -271,8 +272,11 @@ No | Title | Difficulty | Catogary | Notes
 # List
 * Add/delete head, middle or tail node
 * Reverse
-    * solution one: 206. Reverse Linked List
-    * solution two: 092. Reverse Linked List II
+    * solution one: 206. Reverse Linked List (reverse whole list)
+    * solution two: 092. Reverse Linked List II (reverse partial list)
+* Copy list
+    * 138. Copy List with Ramdom Pointer
+* Cycle in List
 
 # Union Find
 * [:link: Disjoint Set (Or Union-Find) | Set 1 (Detect Cycle in an Undirected Graph)](https://www.geeksforgeeks.org/union-find/)
