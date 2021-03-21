@@ -62,7 +62,7 @@ using namespace std;
 class Solution {
 public:
     int findDuplicate(vector<int> &nums) {
-        if (nums.size() < 1))
+        if (nums.size() < 1)
             return -1;
 
         int slow = nums[0];
