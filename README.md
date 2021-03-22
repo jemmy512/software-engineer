@@ -175,6 +175,7 @@
 - [x] :orange_book: Modern Effective C++ :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/effective-modern-cpp.md)
 - [x] :orange_book: Inside C++ Object Model :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/inside-the-cpp-object-model.md)
 - [x] :orange_book: C++ Templates The Complete Guide :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-templates-the-complete-guid.md)
+- [x] :orange_book: Modern C++ Design :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/modern-cpp-design.md)
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
 
 * OOB
