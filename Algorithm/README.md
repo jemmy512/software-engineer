@@ -18,7 +18,9 @@ No | Title | Difficulty | Catogary | Notes
 171 | Excel Sheet Colum Number | :star: | Math | :trophy:
 172 | Factorial Trailing Zeros | :star: :star: | Math | :trophy:
 367 | Valid Perfect Square | :star: | Math | :trophy:
-136 | Single Number | :star: | Math | :trophy:
+136 | Single Number | :star:| Math | :trophy:
+137 | Single Number II | :star: :star: | Math |
+260 | Single Number III | :star: :star: | Math |
 179 | Largest Number | :star: :star: | Math | :trophy:
 190 | Roverse Bits | :star: | Math | :trophy:
 191 | Numberof 1 Bits | :star: | Math | :white_check_mark: :trophy:
@@ -74,8 +76,8 @@ No | Title | Difficulty | Catogary | Notes
 141 | linked List Cycle | :star: | List | :white_check_mark: :trophy: `Two Pointers` `Cycle`
 142 | Linked List Cycle II | :star: :star: | List | :white_check_mark: :trophy: `Two Pointers` `Cycle`
 287 | Find the Duplicate Number | :star: :star: | List | :white_check_mark: :trophy: `Two Pointers` `Cycle`
-143 | Reorder List | :star: :star: | List
-147 | Insertion Sorted List | :star: :star: | List
+143 | Reorder List | :star: :star: | List | :white_check_mark: :trophy:
+147 | Insertion Sorted List | :star: :star: | List | :white_check_mark: :trophy:
 148 | Sort List | :star: :star: | List | :white_check_mark: `Div-Conq`
 160 | Intersection of Two Linked Lists | :star: | List
 203 | Remove Linked List Element | :star: | List
