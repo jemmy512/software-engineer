@@ -2,7 +2,6 @@
 Given a (0-indexed) integer array nums and two integers low and high, return the number of nice pairs.
 A nice pair is a pair (i, j) where 0 <= i < j < nums.length and low <= (nums[i] XOR nums[j]) <= high.
 
-
 Example 1:
 Input: nums = [1,4,2,7], low = 2, high = 6
 Output: 6
@@ -53,14 +52,17 @@ Relatives:
     since b ^ ~b = 1, so we add the count at child[~b].
 6. Then we repeatedly continue on the branch that makes the XOR result the same to lowerBound.
 
-Side note: to turn a bit at random position to 0/1 index - !!b.
-!!(0) => 0, !!(0b00...00100...0) => 1 */
+Side note:
+1. to turn a bit at random position to 0/1 index - !!b.
+    !!(0) => 0, !!(0b00...00100...0) => 1
+2. x ^ y == z equals z ^ x == y */
 
 #include <array>
 #include <vector>
 
 using namespace std;
 
+/* solution 1: [count > low-1] - [count > high] */
 class Solution {
 public:
     int countPairs(vector<int>& nums, int low, int high) {
@@ -74,26 +76,23 @@ public:
         return ret;
     }
 
+    // ~Solution() {
+    //     destructNode(&root);
+    // }
+
 private:
     const int BitNum = 14;
 
     struct TrieNode {
         int cnt{0};
         array<TrieNode*, 2> child{nullptr, nullptr};
-
-        ~TrieNode() {
-            for (const auto& ch : child) {
-                if (ch) {
-                    delete ch;
-                }
-            }
-        }
     };
 
     void add(int num) {
         auto* node = &root;
-        for (int bit = BitNum; bit >= 0; --bit) {
-            int idx = !!(num & (1 << bit));
+
+        for (int bit = 1 << BitNum; bit; bit >>= 1) {
+            int idx = !!(num & bit);
             if (!node->child[idx]) {
                 node->child[idx] = new TrieNode();
             }
@@ -104,7 +103,7 @@ private:
 
     int count(int num, int lowerBound) {
         int res = 0;
-        auto* node = &root;
+        const auto* node = &root;
 
         for (int bit = 1 << BitNum; node && bit; bit >>= 1) {
             int numBit = num & bit;
@@ -118,10 +117,80 @@ private:
         return res;
     };
 
+    void destructNode(TrieNode* node) {
+        if (!node) {
+            return;
+        }
+
+        destructNode(node->child[0]);
+        destructNode(node->child[1]);
+
+        if (node->child[0])
+            delete node->child[0];
+        if (node->child[1])
+            delete node->child[1];
+    }
+
 private:
     TrieNode root;
 };
 
+/* solution 2.0: [count < high+1] - [count < low] */
+class Solution {
+public:
+    int countPairs(vector<int>& nums, int low, int high) {
+        int cnt = 0;
+
+        for (const auto& num : nums) {
+            cnt += count(num, high+1) - count(num, low);
+            add(num);
+        }
+
+        return cnt;
+    }
+
+private:
+    const int BitNum = 14;
+
+    struct TrieNode {
+        int cnt{0};
+        array<TrieNode*, 2> child{nullptr, nullptr};
+    };
+
+    void add(int num) {
+        auto* node = &root;
+
+        for (int bit = 1 << BitNum; bit; bit >>= 1) {
+            int idx = !!(num & bit);
+            if (!node->child[idx]) {
+                node->child[idx] = new TrieNode();
+            }
+            node = node->child[idx];
+            ++(node->cnt);
+        }
+    }
+
+    int count(int num, int upperBound) {
+        int cnt = 0;
+        const auto* node = &root;
+
+        for (int bit = 1 << BitNum; node && bit; bit >>= 1) {
+            int numBit = num & bit;
+            int upBit = upperBound & bit;
+            if (upBit && node->child[!!numBit]) {
+                cnt += node->child[!!numBit]->cnt;
+            }
+            node = node->child[!!(numBit^upBit)];
+        }
+
+        return cnt;
+    }
+
+private:
+    TrieNode root;
+};
+
+/* solution 2.1: [count < high+1] - [count < low] */
 class Solution {
 public:
     int countPairs(vector<int>& nums, int low, int high) {
