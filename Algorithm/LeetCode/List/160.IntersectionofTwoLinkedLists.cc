@@ -1,4 +1,4 @@
-/*
+/* Easy
 Write a program to find the node at which the intersection of two singly linked lists begins.
 
 For example, the following two linked lists:
@@ -16,31 +16,48 @@ If the two linked lists have no intersection at all, return null.
 The linked lists must retain their original structure after the function returns.
 You may assume there are no cycles anywhere in the entire linked structure.
 Your code should preferably run in O(n) time and use only O(1) memory.
-*/
+
+Constraints:
+The number of nodes of listA is in the m.
+The number of nodes of listB is in the n.
+0 <= m, n <= 3 * 10^4
+1 <= Node.val <= 10^5
+0 <= skipA <= m
+0 <= skipB <= n
+intersectVal is 0 if listA and listB do not intersect.
+intersectVal == listA[skipA + 1] == listB[skipB + 1] if listA and listB intersect.
+
+Relatives:
+160. Internsection of Two Linked Lists
+599. Minimum Index Sum of Two Lists */
+
+#include <cmath>
+#include <unordered_set>
+
+using namespace std;
 
 struct ListNode {
     int val;
     ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
+    ListNode(int x) : val(x), next(nullptr) {}
 };
 
-// 36ms, beat 98.66%
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        auto* left = headA;
-        auto* right = headB;
-        while (left != right) {
-            left = left == nullptr ? headB : left->next;
-            right = right == nullptr ? headA : right->next;
+        while (headA != headB) {
+            headA = headA ? headA->next : headB;
+            headB = headB ? headB->next : headA;
         }
-        return left;
+
+        return headA;
     }
 
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         int lenA = getListLength(headA);
         int lenB = getListLength(headB);
-        if (lenA <= 0 || lenB <= 0) return NULL;
+        if (lenA <= 0 || lenB <= 0)
+            return nullptr;
 
         if (lenA < lenB)
             swap(headA, headB); // headA always points to the longer one.
@@ -53,7 +70,7 @@ public:
 
         return headA;
     }
-    // 41ms, beat 32.38%
+
     ListNode *getIntersectionNode_1(ListNode *headA, ListNode *headB) {
         unordered_set<ListNode*> hash;
 
@@ -62,15 +79,18 @@ public:
         for (auto b = headB; b; b = b-> next)
             if (hash.find(b) != hash.end())
                 return b;
-        return NULL;
+        return nullptr;
     }
+
 private:
     int getListLength(ListNode *head) {
         int len = 0;
-        while (head != NULL) {
+
+        while (head) {
             ++len;
             head = head->next;
         }
+
         return len;
     }
 };
