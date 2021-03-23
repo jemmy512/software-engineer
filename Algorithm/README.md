@@ -39,7 +39,7 @@ No | Title | Difficulty | Catogary | Notes
  | Array | | |
 004 | Median of Two Sorted Arrays | :star: :star: :star: | Array
 011 | Container With Most Water| :star: :star: :star: | Array | :trophy:
-027 | Remove Element | :star: | Array | :trophy:
+027 | Remove Element | :star: | Array | :white_check_mark: :trophy:
 041 | First Missing Positive | :star: :star: :star: | Array
 054 | Spiral Matrix | :star: :star: | Array | :trophy: `Matrix`
 056 | Merge Intervals | :star: :star: | Array | :trophy: `Interval`
@@ -60,7 +60,7 @@ No | Title | Difficulty | Catogary | Notes
 219 | Contains Duplicate II | :star: | Array
 220 | Contains Duplicate III | :star: :star: | Array
 238 | Product of Array Except Self  | :star: :star: | Array | :white_check_mark: :trophy: `Bidirectional Array`
-283 | Move Zeroes | :star: :star: | Array
+283 | Move Zeroes | :star: :star: | Array | :white_check_mark: :trophy:
 448 | Find All Numbers Disappeared in An Array | :star: | Array
  | List |  |
 19 | Remove Nth Node From End of List | :star: :star: | List | :white_check_mark: :trophy:
@@ -78,11 +78,11 @@ No | Title | Difficulty | Catogary | Notes
 287 | Find the Duplicate Number | :star: :star: | List | :white_check_mark: :trophy: `Two Pointers` `Cycle`
 143 | Reorder List | :star: :star: | List | :white_check_mark: :trophy:
 147 | Insertion Sorted List | :star: :star: | List | :white_check_mark: :trophy:
-148 | Sort List | :star: :star: | List | :white_check_mark: `Div-Conq`
-160 | Intersection of Two Linked Lists | :star: | List
-203 | Remove Linked List Element | :star: | List
+148 | Sort List | :star: :star: | List | :white_check_mark: :trophy: `Div-Conq`
+160 | Intersection of Two Linked Lists | :star: | List | :white_check_mark: :trophy:
+203 | Remove Linked List Element | :star: | List | :white_check_mark: :trophy:
 234 | Palindrome Linked List | :star: | List
-237 | Delete Node In A Linked List | :star: | List
+237 | Delete Node In A Linked List | :star: | List | :white_check_mark: :trophy:
 328 | Odd Even Linked List | :star: :star: | List | :trophy:
 725 | Split Linked List in Parts | :star: :star: | List | :trophy:
 817 | Linked List Components | :star: :star: | List
