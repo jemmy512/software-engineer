@@ -1,5 +1,6 @@
 /* Medium
-Given a singly linked list, group all odd nodes together followed by the even nodes. Please note here we are talking about the node number and not the value in the nodes.
+Given a singly linked list, group all odd nodes together followed by the even nodes.
+Please note here we are talking about the node number and not the value in the nodes.
 
 You should try to do it in place. The program should run in O(1) space complexity and O(nodes) time complexity.
 
@@ -23,61 +24,15 @@ public:
         if (!head)
             return nullptr;
 
-        ListNode* odd = head;
-        ListNode* even = head->next;
-        ListNode* evenHead = even;
+        auto* odd = head;
+        auto* even = head->next;
+        auto* evenHead = even;
 
         while (even && even->next) {
-            odd->next = even->next;
-            odd = odd->next;
-            even->next = odd->next;
-            even = even->next;
+            odd = odd->next = even->next;
+            even = even->next = odd->next;
         }
         odd->next = evenHead;
-
-        return head;
-    }
-};
-
-class Solution {
-public:
-    ListNode* oddEvenList(ListNode* head) {
-        if (!head)
-            return head;
-
-        ListNode* oddTail = head;
-        ListNode* evenHead = head->next;
-        ListNode* evenNext = nullptr;
-
-        while (evenHead && evenHead->next) {
-            evenNext = evenHead->next;
-            evenHead->next = evenNext->next;
-            evenNext->next = oddTail->next;
-            oddTail->next = evenNext;
-
-            evenHead = evenHead->next;
-            oddTail = oddTail->next;
-        }
-
-        return head;
-    }
-};
-
-class Solution {
-public:
-    ListNode* oddEvenList(ListNode* head) {
-        if (!head) return nullptr;
-
-        ListNode even(0);
-        ListNode *evenHead = head,  *te = &even;
-        te->next = head;
-        while (evenHead->next && te->next) {
-            te = te->next = evenHead->next;
-            if (te->next)
-                evenHead = evenHead->next = te->next;
-        }
-        te->next = nullptr;
-        evenHead->next = even.next;
 
         return head;
     }
