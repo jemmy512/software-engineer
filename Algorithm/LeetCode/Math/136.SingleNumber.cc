@@ -45,15 +45,6 @@ int singleNumber(vector<int>& nums) {
     return accumulate(nums.begin(), nums.end(), 0, bit_xor<int>());
 }
 
-// 15ms, 66.37%
-int singleNumber_1(vector<int>& nums) {
-    int len = nums.size();
-    int ret = 0;
-    for (int i = 0; i < len; ++i)
-        ret = ret ^ nums[i];
-
-    return ret;
-}
 
 /******************** there are two single nums ******************************/
 // get the location of the first 1 in the lower bits of num
@@ -86,10 +77,4 @@ void singleNumberTwo(vector<int> nums) {
 
 int singleNumberThree(vector<int> nums) {
 
-}
-
-int main() {
-    // vector<int> vec = {1, 2, 6, 2, 1};
-    // cout << singleNumber(vec) << endl;
-    cout << (1 | 2) << endl;
 }
