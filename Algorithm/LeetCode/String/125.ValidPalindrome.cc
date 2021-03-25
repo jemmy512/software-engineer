@@ -1,5 +1,5 @@
- /*
- Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+ /* Easy
+Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
 
 For example,
 "A man, a plan, a canal: Panama" is a palindrome.
@@ -9,13 +9,19 @@ Note:
 Have you consider that the string might be empty? This is a good question to ask during an interview.
 
 For the purpose of this problem, we define empty string as valid palindrome.
- */
 
-#include<iostream>
-#include<string>
+Relatives:
+009. Palindrome Number
+125. Valid Palindrome
+234. Palindrome Linked List
+680. Valid Palindrome II */
+
+#include <cctype>
+#include <iostream>
+#include <string>
+
 using namespace std;
 
-// passed 476 test cases using 10ms, beat 95.16%
 bool isPalindrome(string s) {
     bool result{true};
 
@@ -31,10 +37,4 @@ bool isPalindrome(string s) {
     }
 
     return result;
-}
-
-int main() {
-    cout << isPalindrome(",.") << endl; // trure
-    cout << isPalindrome("0P") << endl; // false
-    cout << isPalindrome("A man, a plan, a canal: Panama") << endl;;
 }
