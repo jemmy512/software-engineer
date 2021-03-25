@@ -38,6 +38,10 @@ Relatives:
 023. Merge k Sorted Lists
 061. Roate List By K
 189. Rotate Array
+725. Split Linked List in Parts
+
+Relatives:
+328. Odd Even Linked List
 725. Split Linked List in Parts */
 
 #include <vector>
