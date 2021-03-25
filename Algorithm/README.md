@@ -5,12 +5,12 @@ No | Title | Difficulty | Catogary | Notes
 445 | Add Two Numbers II | :star: :star: | Math | :trophy:
 6 | Zig Zag Conversion | :star: :star: | Math | :trophy:
 7 | Reverse Integer | :star: | Math | :trophy:
-9 | Palindrom Number | :star: | Math | :trophy:
+9 | Palindrom Number | :star: | Math | :white_check_mark: :trophy:
 15 | 3 Sum | :star: :star: | Math | :trophy:
 16 | 3 Sum Closest | :star: :star: | Math | :trophy:
 18 | 4 Sum | :star: :star:| Math | :trophy:
 50 | pow-x-n | :star: :star:| Math | `TODO`
-65 | Valid Number | :star: :star: :star: | Math
+65 | Valid Number | :star: :star: :star: | Math | :white_check_mark: :trophy:
 66 | Plus One | :star: | Math | :trophy:
 67 | Add Binary | :star: | Math | :trophy:
 69 | Sqrt(x) | :star: | Math | :trophy:
@@ -18,7 +18,7 @@ No | Title | Difficulty | Catogary | Notes
 171 | Excel Sheet Colum Number | :star: | Math | :trophy:
 172 | Factorial Trailing Zeros | :star: :star: | Math | :trophy:
 367 | Valid Perfect Square | :star: | Math | :trophy:
-136 | Single Number | :star:| Math | :trophy:
+136 | Single Number | :star:| Math | :white_check_mark: :trophy:
 137 | Single Number II | :star: :star: | Math |
 260 | Single Number III | :star: :star: | Math |
 179 | Largest Number | :star: :star: | Math | :trophy:
@@ -28,11 +28,10 @@ No | Title | Difficulty | Catogary | Notes
 204 | Count Primes | :star: | Math | :trophy:
 231 | Power Of Two | :star: | Math | :trophy:
 263 | Ugly Number | :star: | Math | :white_check_mark: :trophy:
-268 | Missing Number | :star: | Math | :trophy:
+268 | Missing Number | :star: | Math | :white_check_mark: :trophy:
 292 | Nim Game | :star: | Math | :trophy:
 326 | Power of Three | :star: | Math | :trophy:
 371 | Sum of Two Integers | :star: :star: | Math | :trophy:
-389 | Findthe Difference | :star: | Math | :trophy:
 400 | Nth Digit | :star: :star: | Math
 414 | Third Maximum Number | :star: | Math
 1041 | Robot Bounded In Circle | :star: :star: | Math | :trophy: :thinking:
@@ -81,11 +80,11 @@ No | Title | Difficulty | Catogary | Notes
 148 | Sort List | :star: :star: | List | :white_check_mark: :trophy: `Div-Conq`
 160 | Intersection of Two Linked Lists | :star: | List | :white_check_mark: :trophy:
 203 | Remove Linked List Element | :star: | List | :white_check_mark: :trophy:
-234 | Palindrome Linked List | :star: | List
+234 | Palindrome Linked List | :star: | List | :white_check_mark: :trophy:
 237 | Delete Node In A Linked List | :star: | List | :white_check_mark: :trophy:
-328 | Odd Even Linked List | :star: :star: | List | :trophy:
-725 | Split Linked List in Parts | :star: :star: | List | :trophy:
-817 | Linked List Components | :star: :star: | List
+328 | Odd Even Linked List | :star: :star: | List | :white_check_mark: :trophy:
+725 | Split Linked List in Parts | :star: :star: | List | :white_check_mark: :trophy:
+817 | Linked List Components | :star: :star: | List | :white_check_mark: :trophy:
  | Tree | | |
 98 | Validate Binary Search Tree | :star: | Tree | :white_check_mark: :trophy:
 100 | Same Tree | :star: | Tree | :white_check_mark: :trophy:
@@ -135,10 +134,12 @@ No | Title | Difficulty | Catogary | Notes
 14 | Logst Common Prefix | :star: | String | :trophy:
 28 | Implement Strstr | :star: | String
 58 | Length of Last Word | :star: | String
-125 | Valid Palindrome | :star: | String
+125 | Valid Palindrome | :star: | String | :white_check_mark: :trophy:
+680 | Valid Palindrome II | :star: | String | :white_check_mark: :trophy:
 151 | Reverse Words in a String | :star: :star: | String
 205 | Isomorphic Strings | :star: | String | :trophy:
-242 | Valid Anagram | :star: | String | :trophy:
+242 | Valid Anagra | :star: | String | :trophy:
+389 | Findthe Difference | :star: | String | :white_check_mark: :trophy:
 409 | Longest Palindrome | :star: | String | :trophy:
 415 | Adding Strings | :star: | String
 443 | String Compression | :star: :star: | String
