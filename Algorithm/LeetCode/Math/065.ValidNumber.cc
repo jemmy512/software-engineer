@@ -19,7 +19,12 @@ For example, all the following are valid numbers:
 "+6e-1", "53.5e93", "-123.456e789"],
 
 while the following are not valid numbers:
-["abc", "1a", "1e", "e3", "99e2.5", "--6", "-+3", "95a54e53"]. */
+["abc", "1a", "1e", "e3", "99e2.5", "--6", "-+3", "95a54e53"].
+
+Relatives:
+007. Reverse Integer
+008. String to Integer (atoi)
+065. Valid Number */
 
 #include <cctype>
 #include <iostream>
