@@ -4,7 +4,7 @@ No | Title | Difficulty | Catogary | Notes
 2 | Add Two Numbers | :star: :star: | Math | :trophy:
 445 | Add Two Numbers II | :star: :star: | Math | :trophy:
 6 | Zig Zag Conversion | :star: :star: | Math | :trophy:
-7 | Reverse Integer | :star: | Math | :trophy:
+7 | Reverse Integer | :star: | Math | :white_check_mark: :trophy:
 9 | Palindrom Number | :star: | Math | :white_check_mark: :trophy:
 15 | 3 Sum | :star: :star: | Math | :trophy:
 16 | 3 Sum Closest | :star: :star: | Math | :trophy:
@@ -22,11 +22,11 @@ No | Title | Difficulty | Catogary | Notes
 137 | Single Number II | :star: :star: | Math |
 260 | Single Number III | :star: :star: | Math |
 179 | Largest Number | :star: :star: | Math | :trophy:
-190 | Roverse Bits | :star: | Math | :trophy:
+190 | Reverse Bits | :star: | Math | :white_check_mark: :trophy:
 191 | Numberof 1 Bits | :star: | Math | :white_check_mark: :trophy:
 202 | Happy Number | :star: | Math | :trophy:
 204 | Count Primes | :star: | Math | :trophy:
-231 | Power Of Two | :star: | Math | :trophy:
+231 | Power Of Two | :star: | Math | :white_check_mark: :trophy:
 263 | Ugly Number | :star: | Math | :white_check_mark: :trophy:
 268 | Missing Number | :star: | Math | :white_check_mark: :trophy:
 292 | Nim Game | :star: | Math | :trophy:
@@ -130,10 +130,10 @@ No | Title | Difficulty | Catogary | Notes
 814 | Binary Tree Pruning | :star: | Tree | :white_check_mark: :trophy: `DFS`
 1803 | Count Pairs With XOR in a Range | :star: :star: :star: | Tree | :trophy: `XOR` `Prefix Sum`
  | String | | |
-8 | atoi | :star: | String
-14 | Logst Common Prefix | :star: | String | :trophy:
-28 | Implement Strstr | :star: | String
-58 | Length of Last Word | :star: | String
+008 | atoi | :star: | String | :white_check_mark: :trophy:
+014 | Longest Common Prefix | :star: | String | :trophy:
+028 | Implement Strstr | :star: | String
+058 | Length of Last Word | :star: | String
 125 | Valid Palindrome | :star: | String | :white_check_mark: :trophy:
 680 | Valid Palindrome II | :star: | String | :white_check_mark: :trophy:
 151 | Reverse Words in a String | :star: :star: | String
@@ -248,6 +248,10 @@ No | Title | Difficulty | Catogary | Notes
 
 
 # Dynamic Programming
+* There are two different techniques we can use to implement a dynamic programming solution:
+    * **Memoization** is where we add caching to a function (that has no side effects). In dynamic programming, it is typically used on `recursive` functions for a `top-down` solution that starts with the initial problem and then recursively calls itself to solve smaller problems.
+    * **Tabulation** uses a table to keep track of subproblem results and works in a `bottom-up` manner: solving the smallest subproblems before the large ones, in an `iterative` manner. Often, people use the words "tabulation" and "dynamic programming" interchangeably.
+
 ## For problems:
 1. Counting Problem
 2. Extreme value problem
