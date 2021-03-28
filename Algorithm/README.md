@@ -154,8 +154,6 @@ No | Title | Difficulty | Catogary | Notes
 1214 | Two Sum BSTs | :star: :star: | Map | :white_check_mark: :trophy: `Inorder + Compleent Map` `Tree`
 266 | Palindrome Permutation | :star: | Map | :white_check_mark: :trophy:
 267 | Palindrome Permutation II | :star: :star: | Map | :white_check_mark: :trophy: `Backtracking`
-516 | Longest Palindromic Subsequence | :star: :star: | Map | `TODO`
-647 | Palindromic Substrings | :star: :star: | Map | `TODO`
 290 | Word Pattern | :star: | Map | :trophy:
 383 | Ransom Note | :star: | Map | :trophy:
 412 | Fizz Buzz | :star: | Map | :trophy:
@@ -204,7 +202,11 @@ No | Title | Difficulty | Catogary | Notes
 523 | Continuous Subarray Sum  | :star: :star: | DP | :white_check_mark: :thinking: `Prefix Sum` `Map`
 547 | Number of Provinces | :star: :star: | DP | :white_check_mark: :trophy: `Matrix`
 1137 | N-th Tribonacci Number | :star: | DP | :trophy:
-1143 | Longest Common Subsequence | :star: :star: | DP | `TODO`
+647 | Palindromic Substrings | :star: :star: | DP | `TODO`
+300  | Longest Increasing Subsequence | :star: :star: | DP | :white_check_mark: :trophy:
+1048 | Longest String Chain | :star: :star: | DP | :white_check_mark:
+516 | Longest Palindromic Subsequence | :star: :star: | DP | :white_check_mark:
+1143 | Longest Common Subsequence | :star: :star: | DP | :white_check_mark: :trophy:
  | Search | | |
 34 | Search For a Range | :star: :star: | Search | :white_check_mark: :trophy: `BS`
 35 | Search Insert Position | :star: | Search | :white_check_mark: :trophy: `BS`
