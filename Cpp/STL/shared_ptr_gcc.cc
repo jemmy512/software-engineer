@@ -4,6 +4,13 @@ template<typename _Tp>
 class shared_ptr : public __shared_ptr<_Tp>
 {
 public:
+    constexpr shared_ptr() noexcept : __shared_ptr<_Tp>() { }
+
+    shared_ptr(const shared_ptr&) noexcept = default;
+
+    template<typename _Yp, typename = _Constructible<_Yp*>>
+    explicit shared_ptr(_Yp* __p) : __shared_ptr<_Tp>(__p) { }
+
     template<
         typename _Yp,
         typename _Deleter,
@@ -16,6 +23,10 @@ public:
     shared_ptr(_Sp_alloc_shared_tag<_Alloc> __tag, _Args&&... __args)
     : __shared_ptr<_Tp>(__tag, std::forward<_Args>(__args)...)
     { }
+
+    template<typename _Yp, typename _Del, typename = _Constructible<unique_ptr<_Yp, _Del>>>
+    shared_ptr(unique_ptr<_Yp, _Del>&& __r)
+    : __shared_ptr<_Tp>(std::move(__r)) { }
 };
 
 
@@ -39,27 +50,48 @@ public:
         _M_ptr = _M_refcount._M_get_use_count() ? __r._M_ptr : nullptr;
     }
 
+    template<typename _Yp, typename _Deleter, typename _Alloc, typename = _SafeConv<_Yp>>
+    __shared_ptr(_Yp* __p, _Deleter __d, _Alloc __a)
+    : _M_ptr(__p), _M_refcount(__p, std::move(__d), std::move(__a)) {
+        static_assert(__is_invocable<_Deleter&, _Yp*&>::value, "deleter expression d(p) is well-formed");
+        _M_enable_shared_from_this_with(__p);
+    }
+
     explicit operator bool() const noexcept
     { return _M_ptr != nullptr; }
 
     template<typename _Yp, typename _Yp2 = typename remove_cv<_Yp>::type>
-	typename enable_if<__has_esft_base<_Yp2>::value>::type
-	_M_enable_shared_from_this_with(_Yp* __p) noexcept {
-	  if (auto __base = __enable_shared_from_this_base(_M_refcount, __p))
-	    __base->_M_weak_assign(const_cast<_Yp2*>(__p), _M_refcount);
-	}
+    typename enable_if<__has_esft_base<_Yp2>::value>::type
+    _M_enable_shared_from_this_with(_Yp* __p) noexcept
+    {
+        if (auto __base = __enable_shared_from_this_base(_M_refcount, __p))
+            __base->_M_weak_assign(const_cast<_Yp2*>(__p), _M_refcount);
+    }
+
+    template<typename _Yp, typename _Yp2 = typename remove_cv<_Yp>::type>
+    typename enable_if<!__has_esft_base<_Yp2>::value>::type
+    _M_enable_shared_from_this_with(_Yp*) noexcept
+    { }
 
 private:
-    element_type*	   _M_ptr;           // Contained pointer.
-    __shared_count<_Lp>  _M_refcount;    // Reference counter.
+    element_type*       _M_ptr;         // Contained pointer.
+    __shared_count<_Lp> _M_refcount;    // Reference counter.
 };
+
+// Detect an accessible and unambiguous enable_shared_from_this base.
+template<typename _Yp, typename = void>
+struct __has_esft_base : false_type { };
+
+template<typename _Yp>
+struct __has_esft_base<_Yp, __void_t<__esft_base_t<_Yp>>>
+: __not_<is_array<_Tp>> { }; // No enable shared_from_this for arrays
 
 template<_Lock_policy _Lp>
 class __shared_count
 {
 public:
      template<typename _Tp, typename _Alloc, typename... _Args>
-	__shared_count(_Tp*& __p, _Sp_alloc_shared_tag<_Alloc> __a, _Args&&... __args) {
+    __shared_count(_Tp*& __p, _Sp_alloc_shared_tag<_Alloc> __a, _Args&&... __args) {
         typedef _Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp> _Sp_cp_type;
 
         typename _Sp_cp_type::__allocator_type __a2(__a._M_a);
@@ -69,11 +101,11 @@ public:
         __guard = nullptr;
         _M_pi = __pi;
         __p = __pi->_M_ptr();
-	}
+    }
 
     ~__shared_count() noexcept {
-	    if (_M_pi != nullptr)
-	        _M_pi->_M_release();
+        if (_M_pi != nullptr)
+            _M_pi->_M_release();
     }
 
 private:
@@ -84,31 +116,31 @@ template<typename _Tp, typename _Alloc, _Lock_policy _Lp>
 class _Sp_counted_ptr_inplace final : public _Sp_counted_base<_Lp>
 {
 public:
-      class _Impl : _Sp_ebo_helper<0, _Alloc>
-      {
-        public:
-            typedef  _Sp_ebo_helper<0, _Alloc>	_A_base;
-            explicit _Impl(_Alloc __a) noexcept : _A_base(__a) { }
-            _Alloc& _M_alloc() noexcept { return _A_base::_S_get(*this); }
-            __gnu_cxx::__aligned_buffer<_Tp> _M_storage;
+    class _Impl : _Sp_ebo_helper<0, _Alloc>
+    {
+    public:
+        typedef  _Sp_ebo_helper<0, _Alloc>    _A_base;
+        explicit _Impl(_Alloc __a) noexcept : _A_base(__a) { }
+        _Alloc& _M_alloc() noexcept { return _A_base::_S_get(*this); }
+        __gnu_cxx::__aligned_buffer<_Tp> _M_storage;
     };
 
     template<typename... _Args>
-	_Sp_counted_ptr_inplace(_Alloc __a, _Args&&... __args)
-	: _M_impl(__a)
-	{
-	  /* _GLIBCXX_RESOLVE_LIB_DEFECTS
-	   * 2070.  allocate_shared should use allocator_traits<A>::construct
+    _Sp_counted_ptr_inplace(_Alloc __a, _Args&&... __args)
+    : _M_impl(__a)
+    {
+      /* _GLIBCXX_RESOLVE_LIB_DEFECTS
+       * 2070.  allocate_shared should use allocator_traits<A>::construct
        *
        * ::new (static_cast<void*>(p)) T(std::forward<Args>(args)...) (until C++20)
        * std::construct_at(p, std::forward<Args>(args)...) (since C++20) */
-	  allocator_traits<_Alloc>::construct(__a, _M_ptr(), std::forward<_Args>(__args)...);
-	}
+      allocator_traits<_Alloc>::construct(__a, _M_ptr(), std::forward<_Args>(__args)...);
+    }
 
     ~_Sp_counted_ptr_inplace() noexcept { }
 
     virtual void _M_dispose() noexcept {
-	    allocator_traits<_Alloc>::destroy(_M_impl._M_alloc(), _M_ptr());
+        allocator_traits<_Alloc>::destroy(_M_impl._M_alloc(), _M_ptr());
     }
 
       // Override because the allocator needs to know the dynamic type
@@ -140,9 +172,9 @@ public:
     void _M_release() noexcept {
         // Be race-detector-friendly.  For more info see bits/c++config.
         _GLIBCXX_SYNCHRONIZATION_HAPPENS_BEFORE(&_M_use_count);
-	    if (__gnu_cxx::__exchange_and_add_dispatch(&_M_use_count, -1) == 1) {
+        if (__gnu_cxx::__exchange_and_add_dispatch(&_M_use_count, -1) == 1) {
             _GLIBCXX_SYNCHRONIZATION_HAPPENS_AFTER(&_M_use_count);
-	        _M_dispose();
+            _M_dispose();
             // There must be a memory barrier between dispose() and destroy()
             // to ensure that the effects of dispose() are observed in the
             // thread that runs destroy().
@@ -178,7 +210,6 @@ public:
         }
       }
 
-
 private:
     _Atomic_word  _M_use_count;     // #shared
     _Atomic_word  _M_weak_count;    // #weak + (#shared != 0)
@@ -207,6 +238,20 @@ private:
     }
 };
 
+template<typename _Tp, typename... _Args>
+inline shared_ptr<_Tp>
+make_shared(_Args&&... __args)
+{
+    typedef typename std::remove_cv<_Tp>::type _Tp_nc;
+    return std::allocate_shared<_Tp>(std::allocator<_Tp_nc>(), std::forward<_Args>(__args)...);
+}
+
+template<typename _Tp, typename _Alloc, typename... _Args>
+inline shared_ptr<_Tp>
+allocate_shared(const _Alloc& __a, _Args&&... __args)
+{
+    return shared_ptr<_Tp>(_Sp_alloc_shared_tag<_Alloc>{__a}, std::forward<_Args>(__args)...);
+}
 
 /********************************** weak_ptr **********************************/
 
@@ -216,7 +261,7 @@ class weak_ptr : public __weak_ptr<_Tp>
 public:
     template<typename _Yp, typename = _Constructible<const shared_ptr<_Yp>&>>
     weak_ptr(const shared_ptr<_Yp>& __r) noexcept
-	: __weak_ptr<_Tp>(__r) { }
+    : __weak_ptr<_Tp>(__r) { }
 
     __shared_ptr<_Tp, _Lp> lock() const noexcept {
         return __shared_ptr<element_type, _Lp>(*this, std::nothrow);
@@ -233,8 +278,8 @@ public:
     : _M_ptr(nullptr), _M_refcount() { }
 
     template<typename _Yp, typename = _Compatible<_Yp>>
-	__weak_ptr(const __shared_ptr<_Yp, _Lp>& __r) noexcept
-	: _M_ptr(__r._M_ptr), _M_refcount(__r._M_refcount) { }
+    __weak_ptr(const __shared_ptr<_Yp, _Lp>& __r) noexcept
+    : _M_ptr(__r._M_ptr), _M_refcount(__r._M_refcount) { }
 
     long use_count() const noexcept {
         return _M_refcount._M_get_use_count();
@@ -243,10 +288,18 @@ public:
     bool expired() const noexcept {
         return _M_refcount._M_get_use_count() == 0;
     }
+private:
+    // Used by __enable_shared_from_this.
+    void _M_assign(_Tp* __ptr, const __shared_count<_Lp>& __refcount) noexcept {
+        if (use_count() == 0) {
+            _M_ptr = __ptr;
+            _M_refcount = __refcount;
+        }
+    }
 
 private:
-    element_type*	 _M_ptr;         // Contained pointer.
-    __weak_count<_Lp>  _M_refcount;    // Reference counter.
+    element_type*     _M_ptr;            // Contained pointer.
+    __weak_count<_Lp>  _M_refcount;     // Reference counter.
 };
 
 template<_Lock_policy _Lp>
@@ -281,49 +334,48 @@ private:
     _Sp_counted_base<_Lp>*  _M_pi;
 };
 
-
-template<typename _Tp, typename... _Args>
-inline shared_ptr<_Tp>
-make_shared(_Args&&... __args)
-{
-    typedef typename std::remove_cv<_Tp>::type _Tp_nc;
-    return std::allocate_shared<_Tp>(std::allocator<_Tp_nc>(),
-                    std::forward<_Args>(__args)...);
-}
-
-template<typename _Tp, typename _Alloc, typename... _Args>
-inline shared_ptr<_Tp>
-allocate_shared(const _Alloc& __a, _Args&&... __args)
-{
-    return shared_ptr<_Tp>(_Sp_alloc_shared_tag<_Alloc>{__a},
-                std::forward<_Args>(__args)...);
-}
-
 /************************** enable_shared_from_this ***************************/
 
 template<typename _Tp>
 class enable_shared_from_this
 {
-public:
-    shared_ptr<_Tp> shared_from_this() {
-        return shared_ptr<_Tp>(this->_M_weak_this);
-    }
-
-    weak_ptr<const _Tp> weak_from_this() const noexcept {
-        return this->_M_weak_this;
-    }
-
 protected:
     constexpr enable_shared_from_this() noexcept { }
 
     enable_shared_from_this(const enable_shared_from_this&) noexcept { }
 
-    enable_shared_from_this&
-    operator=(const enable_shared_from_this&) noexcept
+    enable_shared_from_this& operator=(const enable_shared_from_this&) noexcept
     { return *this; }
 
     ~enable_shared_from_this() { }
 
+public:
+    shared_ptr<_Tp> shared_from_this()
+    { return shared_ptr<_Tp>(this->_M_weak_this); }
+
+    shared_ptr<const _Tp> shared_from_this() const
+    { return shared_ptr<const _Tp>(this->_M_weak_this); }
+
+    weak_ptr<_Tp> weak_from_this() noexcept
+    { return this->_M_weak_this; }
+
+    weak_ptr<const _Tp> weak_from_this() const noexcept
+    { return this->_M_weak_this; }
+
 private:
+    template<typename _Tp1>
+    void _M_weak_assign(_Tp1* __p, const __shared_count<>& __n) const noexcept
+    { _M_weak_this._M_assign(__p, __n); }
+
+    // Found by ADL when this is an associated class.
+    friend const enable_shared_from_this*
+    __enable_shared_from_this_base(
+        const __shared_count<>&,
+        const enable_shared_from_this* __p)
+    { return __p; }
+
+    template<typename, _Lock_policy>
+    friend class __shared_ptr;
+
     mutable weak_ptr<_Tp>  _M_weak_this;
 };
