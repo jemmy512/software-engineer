@@ -33,12 +33,25 @@ Relatives:
 1092. Shortest Common Supersequence
 1143. Longest Common Subsequence */
 
+/* Binary search by a substring length
+A naive solution would be to check all possible string length one by one starting from N - 1:
+if there is a duplicate substring of length N - 1, then of length N - 2, etc.
+Note that if there is a duplicate substring of length k,
+that means that there is a duplicate substring of length k - 1.
+Hence one could use a binary search by string length here,
+and have the first problem solved in O(logN) time. */
+
 #include <string>
 #include <functional>
 #include <unordered_set>
 
 using namespace std;
 
+/* Time complexity : O(NlogN) in the average case and O(N^2) in the worst case.
+    One needs O((N−L)L) for one duplicate check, and one does up to O(logN) checks.
+    Together that results in O(∑(N−L)L), i.e. in O(NlogN) in the average case
+    and in O(N^2) in the worst case of L close to N/2.
+   Space complexity : O(N^2) to keep the hashset. */
 class Solution {
 public:
     int longestRepeatingSubstring(string str) {
