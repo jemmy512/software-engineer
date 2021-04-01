@@ -45,7 +45,7 @@ public:
 
 public:
     static SortPtr getAlgorithm(const SortEnum& type);
-    static inline std::map<SortEnum, SortPtr> sortAlgorithmes;
+    static std::map<SortEnum, SortPtr> sortAlgorithmes;
 
 };
 
@@ -79,15 +79,13 @@ SortFactory<Iter>::getAlgorithm(const SortEnum& type) {
 
 /* 3. Use Strategy */
 int main() {
-    std::vector<int> data{3, 2, 5, 8, 4, 7, 6, 9, 1};
-    std::list<int> dataList{2, 3, 5, 8, 4, 7, 6, 1, 9};
+    std::vector data{3, 2, 5, 8, 4, 7, 6, 9, 1};
+    std::list dataList{2, 3, 5, 8, 4, 7, 6, 1, 9};
 
-    using VecIter = std::vector<int>::iterator;
-    auto quickSort = SortFactory<VecIter>::getAlgorithm(SortEnum::QuickSort);
+    auto quickSort = SortFactory<decltype(data)::iterator>::getAlgorithm(SortEnum::QuickSort);
     quickSort->sort(data.begin(), data.end());
 
-    using ListIter = std::list<int>::iterator;
-    auto insertSort = SortFactory<ListIter>::getAlgorithm(SortEnum::InsertSort);
+    auto insertSort = SortFactory<decltype(dataList)::iterator>::getAlgorithm(SortEnum::InsertSort);
     insertSort->sort(dataList.begin(), dataList.end());
 
     return 0;
@@ -97,6 +95,7 @@ int main() {
  * Define a family of algorithms, encapsulate each one, and make them interchangeable.
  * Strategy lets the algorithm vary independently from clients that use it.
  *
+ * Strategy decouples the definition, creation and usage of a strategy, avoid complexity of each part.
  *
  * * Strategy VS Command:
  * 1. A group Strategies have the same goal, but different implementation, they can interexchange
