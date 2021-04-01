@@ -78,7 +78,7 @@ public:
     { }
 
     void toString() {
-        std::cout << "Config Name: " << mName << "\nMax Total: " << mMaxTotal << "\nMax Idle: " << mMaxIdle << "\nMin Idle: " << mMinIdle << std::endl;  
+        std::cout << "Config Name: " << mName << "\nMax Total: " << mMaxTotal << "\nMax Idle: " << mMaxIdle << "\nMin Idle: " << mMinIdle << std::endl;
     }
 
 private:
@@ -103,7 +103,7 @@ int main() {
 
 /*
 Use:
-1. There are many paramters in the contrcutor. Some are mandatory, some are optional. 
+1. There are many paramters in the contrcutor. Some are mandatory, some are optional.
     It's error-prone to use the constructor with many parameters.
 2. The parameters has some relationship. With set method, relationship can't validate.
 3. We hope to new a const object
