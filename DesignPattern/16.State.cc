@@ -72,7 +72,7 @@ public:
     }
 
     void onObtainMushRoom() {
-        mMarioState->onObtainMushroom(shared_from_this());
+        mMarioState->onObtainMushRoom(shared_from_this());
     }
 
     void onObtainFireFlow() {
@@ -84,7 +84,7 @@ public:
     }
 
     void onMeetMonster() {
-        mMarioState->onMeetMonstrer(shared_from_this());
+        mMarioState->onMeetMonster(shared_from_this());
     }
 
 private:
@@ -99,10 +99,14 @@ int main() {
 
 
 /**
- * Allow an object to alter its behavior when its internal state changes.The object will appear to change its class.
+ * Allow an object to alter its behavior when its internal state changes.
+ * The object will appear to change its class.
+ *
+ * Finite State Machine: State, Event (Transition Condition), Action.
+ * State pattern decouples the transition of state from the execution of the action to avoid branch logic.
  *
  * Three Implementation ways:
  * 1. branch logic method
  * 2. look-up table
- * 3. state mode: avoids judging branch logic by dividing event-triggered state transitions and action execution
- *    into different state classes. */
+ * 3. state mode: avoids judging branch logic by dividing event-triggered state transitions
+ *  and action execution into different state classes. */
