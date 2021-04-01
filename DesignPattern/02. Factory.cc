@@ -1,11 +1,11 @@
 #include <iostream>
 #include <map>
 
-class IConfigParser;
-class JsonConfigParser;
-class XmlConfigParser;
-class YamlConfigParser;
-class PropertyConfigParser;
+class IConfigParser {};
+class JsonConfigParser : public IConfigParser {};
+class XmlConfigParser : public IConfigParser {};
+class YamlConfigParser : public IConfigParser {};
+class PropertyConfigParser : public IConfigParser {};
 
 namespace simpleFactory {
     class ConfigFactory {
@@ -103,3 +103,13 @@ int main() {
 
     return 0;
 }
+
+/* Functionality of Factory:
+ * 1. Encapsulate change
+ * 2. Reuseability
+ * 3. Encapsulate complxity of object creation
+ * 4. Control complxity of the use code
+ *
+ * Simple factory vs factory method:
+ * If the Object creation is complex, use factory meothod, encapsulate the complexity into each subfactory;
+ * otherwise, use simple factory */
