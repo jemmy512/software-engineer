@@ -63,40 +63,40 @@ public:
 
 
 
-class ResourceFile {
+class File {
 public:
-    ResourceFile(const std::string& filePath) : mFilePath(filePath) {}
+    File(const std::string& filePath) : mFilePath(filePath) {}
 
     virtual void accept(VisitorPtr visitor) = 0;
-    virtual ~ResourceFile() = default;
+    virtual ~File() = default;
 
 private:
     std::string mFilePath;
 };
 
-using ResourceFilePtr = std::shared_ptr<ResourceFile>;
+using FilePtr = std::shared_ptr<File>;
 
-class PdfFile : public ResourceFile, public std::enable_shared_from_this<PdfFile> {
+class PdfFile : public File, public std::enable_shared_from_this<PdfFile> {
 public:
-    PdfFile(const std::string& file) : ResourceFile(file) { }
+    PdfFile(const std::string& file) : File(file) { }
 
     void accept(VisitorPtr visitor) override {
         visitor->visit(shared_from_this());
     }
 };
 
-class PptFile : public ResourceFile, public std::enable_shared_from_this<PptFile>  {
+class PptFile : public File, public std::enable_shared_from_this<PptFile>  {
 public:
-    PptFile(const std::string& file) : ResourceFile(file) { }
+    PptFile(const std::string& file) : File(file) { }
 
     void accept(VisitorPtr visitor) override {
         visitor->visit(shared_from_this());
     }
 };
 
-class WordFile : public ResourceFile, public std::enable_shared_from_this<WordFile>  {
+class WordFile : public File, public std::enable_shared_from_this<WordFile>  {
 public:
-    WordFile(const std::string& file) : ResourceFile(file) { }
+    WordFile(const std::string& file) : File(file) { }
 
     void accept(VisitorPtr visitor) override {
         visitor->visit(shared_from_this());
@@ -104,10 +104,11 @@ public:
 };
 
 int main() {
-    std::vector<ResourceFilePtr> vec;
-    vec.emplace_back(std::make_shared<PdfFile>("a.pdf"));
-    vec.emplace_back(std::make_shared<PptFile>("b.ppt"));
-    vec.emplace_back(std::make_shared<WordFile>("c.word"));
+    std::vector<FilePtr> vec {
+        std::make_shared<PdfFile>("a.pdf"),
+        std::make_shared<PptFile>("b.ppt"),
+        std::make_shared<WordFile>("c.word")
+    };
 
     auto extractor = std::make_shared<Extractor>();
     auto compressor = std::make_shared<Compressor>();
@@ -116,7 +117,6 @@ int main() {
         file->accept(extractor);
         file->accept(compressor);
     }
-
 
     return 0;
 }
