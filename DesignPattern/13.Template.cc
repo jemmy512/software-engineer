@@ -5,8 +5,8 @@ int main() {
 }
 
 /**
- * Define the skeleton of an algorithm in an operation, deferring somesteps to
- * subclasses. Template Method lets subclasses redefinecertain steps of an algorithm
+ * Define the skeleton of an algorithm in an operation, deferring somesteps to subclasses.
+ * Template Method lets subclasses redefine certain steps of an algorithm
  * without changing the algorithm's structure.
  *
  * Functionalities:
@@ -15,6 +15,7 @@ int main() {
  *    customize framework functions through the extension points without modifiying the framework.
  *
  * Callbacks and templates:
+ * 0. Sync callbacks like template while async callbacks like observer
  * 1. Callbacks do not need to define new subclasses for new functions
  * 2. Callbacks do not need to implement unwanted template functions
  * 3. Callbacks are implemented by composition, transfor one object to another, are objects relationship
