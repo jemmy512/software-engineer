@@ -30,7 +30,7 @@ public:
 
 class EmailMsgSender : public MsgSender {
 public:
-    EmailMsgSender(std::initializer_list<std::string> emailAddresses)
+    EmailMsgSender(const std::string& emailAddresses...)
     :   mEmailAddresses{emailAddresses}
     { }
 
@@ -43,7 +43,7 @@ private:
 
 class TelephoneMsgSender : public MsgSender {
 public:
-    TelephoneMsgSender(std::initializer_list<std::string> numbers)
+    TelephoneMsgSender(const std::string& numbers...)
     :   mTelephoneNumbers{numbers}
     { }
 
@@ -57,7 +57,7 @@ private:
 
 class ImMsgSender : public MsgSender {
 public:
-    ImMsgSender(std::initializer_list<std::string> ids)
+    ImMsgSender(const std::string& ids...)
     : mImIds{ids}
     { }
 
@@ -109,16 +109,9 @@ public:
 
 
 int main() {
-    ImMsgSender sender({"123", "456"});
-    std::initializer_list<std::string> ids{"123", "456"};
-    auto imSender = std::make_shared<ImMsgSender>(std::move(ids));
-
-    std::initializer_list<std::string> numbers{"+86123", "+86456"};
-    auto telephoneSender = std::make_shared<TelephoneMsgSender>(std::move(numbers));
-
-    std::initializer_list<std::string> mails{"xxx@cisco.com", "xxx@cisco.com"};
-    auto emailSender = std::make_shared<EmailMsgSender>(std::move(mails));
-
+    auto imSender = std::make_shared<ImMsgSender>("123", "456");
+    auto telephoneSender = std::make_shared<TelephoneMsgSender>("+86123", "+86456");
+    auto emailSender = std::make_shared<EmailMsgSender>("xxx@cisco.com", "xxx@cisco.com");
 
     auto severeNotificaiton = std::make_shared<SevereNofitication>(telephoneSender);
     auto urgentNotification = std::make_shared<UrgentNotification>(imSender);
