@@ -85,7 +85,7 @@ int main() {
 }
 
 /**
- * The decorator pattern maily solves the complication problem of the inheritance relationship,
+ * The decorator pattern maily reduces the complexity of the inheritance relationship,
  * and replaces inheritance through combination. It's main role is to add enhancements to the original class.
  *
  * You can nest mutiple decorator classes to the original class, this requires the decorator classes need to
