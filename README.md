@@ -1,4 +1,5 @@
 # Table of Contents
+
 1. [Formal Entry](#Formal-Entry)
 2. [Programmer Cultivation](#Programmer-Cultivation)
     1. [Coding Cultivation](#Coding-Cultivation)
@@ -240,10 +241,23 @@
     - [x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
     - [x] [Notes on C++ SFINAE, Modern C++ and C++20 Concepts](https://www.cppstories.com/2016/02/notes-on-c-sfinae/)
     - [x] [std::index_sequence and its Improvement in C++20](https://www.fluentcpp.com/2021/03/05/stdindex_sequence-and-its-improvement-in-c20/)
+    - [ ] Creating a co_await awaitable signal that can be awaited multiple times [:link: part 1](https://devblogs.microsoft.com/oldnewthing/20210301-00/?p=104914)  [:link: part 2](https://devblogs.microsoft.com/oldnewthing/20210302-00/?p=104918)     [:link: part 3](https://devblogs.microsoft.com/oldnewthing/20210303-00/?p=104922)   [:link: part 4](https://devblogs.microsoft.com/oldnewthing/20210304-00/?p=104926)   [:link: part 5](https://devblogs.microsoft.com/oldnewthing/20210305-00/?p=104934)   [:link: part 6](https://devblogs.microsoft.com/oldnewthing/20210308-00/?p=104938)
+    - [ ] Creating other types of synchronization objects that can be used with co_await
+        * [:link: 1: The one-shot event](https://devblogs.microsoft.com/oldnewthing/20210309-00/?p=104942)
+        * [:link: 2: The basic library](https://devblogs.microsoft.com/oldnewthing/20210310-00/?p=104945)
+        * [:link: 3: Parallel resumption](https://devblogs.microsoft.com/oldnewthing/20210311-00/?p=104949)
+        * [:link: 4: The manual-reset event](https://devblogs.microsoft.com/oldnewthing/20210312-00/?p=104955)
+        * [:link: 5: The auto-reset event](https://devblogs.microsoft.com/oldnewthing/20210315-00/?p=104964)
+        * [:link: 6: The semaphore](https://devblogs.microsoft.com/oldnewthing/20210316-00/?p=104971)
+        * [:link: 7: The mutex and recursive](https://devblogs.microsoft.com/oldnewthing/20210317-00/?p=104973)
+        * [:link: 8: The shared mutex](https://devblogs.microsoft.com/oldnewthing/20210318-00/?p=104977)
+        * [:link: 9: The shared mutex (continued)](https://devblogs.microsoft.com/oldnewthing/20210319-00/?p=104979)
+        * [:link: 10: Wait for an event to clear](https://devblogs.microsoft.com/oldnewthing/20210322-00/?p=104981)
 
 </details>
 
 # System Design
+
 - [ ] :orange_book: Domain-Driven Design: Tackling Complexity in the Heart of Software
 - [ ] :orange_book: The Art of UNIX Programming
 - [ ] :orange_book: Clean Architecture
