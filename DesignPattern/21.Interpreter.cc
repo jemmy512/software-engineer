@@ -278,4 +278,4 @@ int main() {
  * The main purpose of the design pattern is to deal with the complexity of the code.
  *
  * The core idea of interpreting pattern is to split the work of parsing classes into
- * various small classes to avoid large and complete classes. */
+ * various small classes to avoid large and complex classes. */
