@@ -14,6 +14,14 @@
     3. Programmer make sure do not creat more than one instance
 
 ## Factory
+1. Functionality of Factory:
+    1. Encapsulate change
+    2. Reuseability
+    3. Encapsulate complxity of object creation
+    4. Control complxity of the use code
+
+2. Simple factory vs factory method:
+ * If the Object creation is complex, use factory meothod, encapsulate the complexity into each subfactory; otherwise, use simple factory.
 
 ## Builder
 1. Usage:
@@ -30,6 +38,16 @@
 # Structural Patterns
 
 ## Proxy
+1. Intent
+    1. add functionalities without changing the original class,
+    2. decouple the framework code with business code,
+    3. the purpose is access control rather than enhancement.
+
+2. Use cases: RPC, Cache, Monitor, Authentication, Rate limit, Transaction, logging
+
+3. Implementation:
+    1. implemnet same interface
+    2. inheritance
 
 ## Bridge
 1. Definition
@@ -39,7 +57,7 @@
 
 
 ## Decorator
-The decorator pattern maily solves the complication problem of the inheritance relationship, and replaces inheritance through composition. It's main role is to add enhancements to the original class.
+The decorator pattern maily solves the complexity problem of the inheritance, and replaces inheritance through composition. It's main role is to add enhancements to the original class.
 
 You can nest mutiple decorator classes to the original class, this requires the decorator classes need to inherit the same interface with the original class.
 
@@ -80,20 +98,21 @@ You can nest mutiple decorator classes to the original class, this requires the 
 
 ## Template
 1. Definition
-    * Define the skeleton of an algorithm in an operation, deferring some steps to subclasses. Template Method lets subclasses redefinecertain steps of an algorithm without changing the algorithm's structure.
+    * Define the skeleton of an algorithm in an operation, deferring some steps to subclasses. Template Method lets subclasses redefine certain steps of an algorithm without changing the algorithm's structure.
 2. Functionalities:
-    1. Reuse: All subclasses can reuse the code of template method provided by parent class.
-    2. Extension: Framework provides extension points through template method, so framework users can
-       customize framework functions through the extension points without modifiying the framework.
+    1. Reusability: All subclasses can reuse the code of template method provided by parent class.
+    2. Extension: Framework provides extension points through template method, so framework users can customize framework functions through the extension points without modifiying the framework.
 3. Callbacks and templates:
-    1. Callbacks do not need to define new subclasses for new functions
-    2. Callbacks do not need to implement unwanted template functions
-    3. Callbacks are implemented by composition, transfor one object to another, are objects relationship
-    4. Templates are implemented by inheritance, subclass overrides parent, are classes relationship
+    1. Sync callbacks like template while async callbacks like observer
+    2. Callbacks do not need to define new subclasses for new functions
+    3. Callbacks do not need to implement unwanted template functions
+    4. Callbacks are implemented by composition, transfor one object to another, are objects relationship
+    5. Templates are implemented by inheritance, subclass overrides parent, are classes relationship
 
 ## Strategy
 1. Definition
     * Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
+    * Strategy decouples the definition, creation and usage of a strategy, avoid complexity of each part.
 2. Strategy VS Command:
     1. A group Strategies have the same goal, but different implementation, they can interexchange
     2. A group commands have different goals, and they can't interexchange
@@ -104,21 +123,24 @@ You can nest mutiple decorator classes to the original class, this requires the 
 ## Chain
 1. Definition
     * Avoid coupling the sender of a request to its receiver by giving more than one object a chance to handle the request. Chain the receiving objects and pass the request along the chain until an object handles it.
+2. Applicability
+    * Implement filter, intercepter.
+    * Let user add new functionality without change the framework.
+
+## Iterator
 
 ## State
 1. Definition
-    * Allow an object to alter its behavior when its internal state changes.The object will appear to change its class.
+    * Allow an object to alter its behavior when its internal state changes. The object will appear to change its class.
 2. Three Implementation ways:
     1. branch logic method
     2. look-up table
     3. state mode: avoids judging branch logic by dividing event-triggered state transitions and action execution into different state classes.
 
-## Iterator
-
 ## Visitor
 1. Definition
     * Allows for one or more operation to be applied to a set of objects at runtime, decoupling the operations from the object structure.
-
+2. Intent
     * The visitor pattern aims at a group of objects inherited the same parent class, or implement the same interface.
     * In different application scenarios, we need to perform a group of unrelated operations on this group of objects, to avoid frequent code changes and classes are not single responsibility, we decouple the objects and operations, extract those operations into separate subdivided classes.
 ## Memoto
@@ -144,6 +166,9 @@ You can nest mutiple decorator classes to the original class, this requires the 
 ## Mediator
 1. Definition
     * Mediator pattern defines a separate (mediator) object that encapsulates the interaction between a set of objects and the objects delegate their interaction to a mediator object instead of interacting with each other directly.
+2. Mediator vs Observer
+    * The interaction between objects in Observer is one to many; in Mediator is many to many, it's much complex than observer.
+
 ## Delegation
 1. Definition
     * Delegation is a way to make composition as powerful for reuse as inheritance.
