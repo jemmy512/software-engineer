@@ -1,6 +1,7 @@
 #include <vector>
 #include <functional>
 #include <iostream>
+#include <optional>
 
 #include "../Components/Lockable.cc"
 
@@ -16,35 +17,30 @@ public:
     struct Entry
     {
         Entry(const Callback& _callback)
-        :   weak(),
-            hasPointer(false),
+        :   weak(std::nullopt),
             callback([_callback](const std::shared_ptr<void>&, Args... args) { _callback(args...); })
         {}
 
         Entry(const std::shared_ptr<void>& shared, const Callback& _callback)
         :   weak(shared),
-            hasPointer(true),
             callback([_callback](const std::shared_ptr<void>&, Args... args) { _callback(args...); })
         {}
 
         Entry(const std::shared_ptr<void>& shared, const std::function<void(const std::shared_ptr<void>&, Args...)>& _callback)
         :   weak(shared),
-            hasPointer(true),
             callback(_callback)
         {}
 
         Entry(const Entry& entry)
         :   weak(entry.weak),
-            hasPointer(entry.hasPointer),
             callback(entry.callback)
         {}
 
         bool isExpired() {
-            return hasPointer && weak.expired();
+            return weak && weak->expired();
         }
 
-        bool hasPointer;
-        std::weak_ptr<void> weak;
+        std::optional<std::weak_ptr<void>> weak;
         std::function<void(const std::shared_ptr<void>&, Args...)> callback;
     };
 
@@ -58,15 +54,9 @@ public:
     Delegator() = default;
     ~Delegator() = default;
 
-    void clear() {
-        if (auto entries = mEntries.lock()) {
-            entries->clear();
-        }
-    }
-
     void operator()(Args... args) const {
         for (auto& entry : getEntries()) {
-            entry.callback(entry.weak.lock(), args...);
+            entry.callback(entry.weak->lock(), args...);
         }
     }
 
@@ -76,7 +66,21 @@ public:
     }
 
     explicit operator bool() const {
-        return !getEntries().empty();
+        if (auto entries = mEntries.lock()) {
+            for (const auto& entry : entries) {
+                if (!entry->isExpired()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    void clear() {
+        if (auto entries = mEntries.lock()) {
+            entries->clear();
+        }
     }
 
     template <typename T>
@@ -100,8 +104,8 @@ public:
     template <typename T>
     static Entry entry_from_lambda(
         const std::shared_ptr<T>& shared,
-        const std::function<void(const std::shared_ptr<T>& shared, Args...)>& lambda) {
-
+        const std::function<void(const std::shared_ptr<T>& shared, Args...)>& lambda)
+    {
         return Entry(shared, [lambda](const std::shared_ptr<void>& _shared, Args... args) {
             if (auto sharedThis = *(const std::shared_ptr<T>*)(&_shared)) {
                 lambda(sharedThis, args...);
