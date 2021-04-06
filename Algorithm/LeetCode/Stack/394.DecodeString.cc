@@ -37,6 +37,7 @@ s consists of lowercase English letters, digits, and square brackets '[]'.
 s is guaranteed to be a valid input.
 All the integers in s are in the range [1, 300]. */
 
+#include <cctype>
 #include <string>
 #include <stack>
 
@@ -50,114 +51,60 @@ public:
     }
 
 private:
-    string decodeString(const string& s, int& index) {
+    string decodeString(const string& s, int& i) {
         string result;
-        while (index < s.size() && s[index] != ']') {
-            if (isdigit(s[index])) {
+        while (i < s.size() && s[i] != ']') {
+            if (isdigit(s[i])) {
                 int cnt = 0;
-                while (index < s.length() && isdigit(s[index])) {
-                    cnt = cnt * 10 + s[index++] - '0';
+                while (i < s.length() && isdigit(s[i])) {
+                    cnt = cnt * 10 + s[i++] - '0';
                 }
 
-                ++index; // ignore the opening bracket '['
-                string decodedString = decodeString(s, index);
-                ++index; // ignore the closing bracket ']'
+                ++i; // ignore the opening bracket '['
+                string decodedString = decodeString(s, i);
+                ++i; // ignore the closing bracket ']'
 
                 while (cnt--) {
                     result += decodedString;
                 }
             } else {
-                result += s[index++];
+                result += s[i++];
             }
         }
         return result;
     }
 };
 
-/* not work */
 class Solution {
 public:
     string decodeString(string s) {
-        // result.reserve(s.size()*2);
-
-        int i = 0;
-        while (i < s.size()) {
-            if (isalpha(s[i])) {
-                result += s[i++];
-            } else if (isdigit(s[i])) {
-                i = pushStack(s, i);
-            }
-        }
-
-        return result;
-    }
-
-private:
-    int pushStack(const string& s, int i) {
-        int end = i;
-
-        bool numPushed = false;
-        bool charPushed = false;
-
-        while (isdigit(s[i])) {
-            if (!numPushed) {
-                numPushed = true;
-                numStack.push(s[i] - '0');
-            } else {
-                int num = numStack.top() * 10 + s[i] - '0';
-                numStack.pop();
-                numStack.push(num);
-            }
-            ++i;
-        }
-
-        assert(s[i] == '[');
-        ++i;
-
-        while (isalpha(s[i])) {
-            if (!charPushed) {
-                charPushed = true;
-                charStack.push({s[i]});
-            } else {
-                string newStr = charStack.top() + s[i];
-                charStack.pop();
-                charStack.emplace(move(newStr));
-            }
-            ++i;
-        }
-
-        if (isdigit(s[i]))
-            i = pushStack(s, i);
-
-        if (s[i] == ']')
-            end = i + 1;
-
+        stack<int> countStk;
+        stack<string> strStk;
         string curStr;
-        for (int i = 0; i < numStack.top(); ++i) {
-            curStr += charStack.top();
-        }
-        numStack.pop();
-        charStack.pop();
+        int cnt = 0;
 
-        if (numStack.empty()) {
-            result += curStr;
-        } else {
-            string tmp = charStack.top() + curStr;
-            charStack.pop();
-            charStack.push(tmp);
+        for (const auto& chr : s) {
+            if (isdigit(chr)) {
+                cnt = cnt * 10 + chr - '0';
+            } else if (chr == '[') {
+                countStk.push(cnt);
+                cnt = 0;
+                strStk.push(curStr);
+                curStr.clear();
+            } else if (chr == ']') {
+                auto curCnt = countStk.top();
+                countStk.pop();
+                auto decodedStr = strStk.top();
+                strStk.pop();
+                while (curCnt--) {
+                    decodedStr += curStr;
+                }
+                curStr = decodedStr;
+            } else {
+                curStr += chr;
+            }
         }
 
-        return end;
+        return curStr;
     }
-
-private:
-    string result;
-    stack<int> numStack;
-    stack<string> charStack;
 };
-
-int main() {
-    string str{"3[z]2[2[y]pq4[2[jk]e1[f]]]ef"};
-    Solution s;
-    s.decodeString(str);
-}
