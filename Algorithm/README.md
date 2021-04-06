@@ -1,8 +1,6 @@
 # LeetCode Algorithm
 No | Title | Difficulty | Catogary | Notes
 -- | -- | --- | --- | ---
-2 | Add Two Numbers | :star: :star: | Math | :trophy:
-445 | Add Two Numbers II | :star: :star: | Math | :trophy:
 6 | Zig Zag Conversion | :star: :star: | Math | :trophy:
 7 | Reverse Integer | :star: | Math | :white_check_mark: :trophy:
 9 | Palindrom Number | :star: | Math | :white_check_mark: :trophy:
@@ -51,7 +49,7 @@ No | Title | Difficulty | Catogary | Notes
 088 | Merge Sorted Array | :star:| Array | :trophy:
 169 | Majority Element | :star: | Array | :trophy:
 189 | Rotate Array | :star: :star: | Array | :white_check_mark:
-209 | Minimum Size Subarray Sum | :star: :star: | Array | :white_check_mark: :trophy: `Prefix Sum`
+209 | Minimum Size Subarray Sum | :star: :star: | Array | :white_check_mark: :trophy: `Prefix Sum` `BS`
 325 | Maximum Size Subarray Sum Equals k | :star: :star:| Array | :white_check_mark: :trophy: `Prefix Sum` `Map`
 560 | Subarray Sum Equals K | :star: :star: | Array | :white_check_mark: :trophy: `Prefix Sum` `Map`
 215 | Kth Largest Element in an Array | :star: :star: | Array
@@ -62,6 +60,8 @@ No | Title | Difficulty | Catogary | Notes
 283 | Move Zeroes | :star: :star: | Array | :white_check_mark: :trophy:
 448 | Find All Numbers Disappeared in An Array | :star: | Array
  | List |  |
+2 | Add Two Numbers | :star: :star: | List | :white_check_mark: :trophy:
+445 | Add Two Numbers II | :star: :star: | List | :white_check_mark: :trophy:
 19 | Remove Nth Node From End of List | :star: :star: | List | :white_check_mark: :trophy:
 21 | Merge Two Sorted Lists | :star: | List | :white_check_mark:
 23 | Merge K Sorted List | :star: :star: :star: | List | :white_check_mark: :trophy: `K-way Merge` `Divide Conquer`
@@ -146,6 +146,7 @@ No | Title | Difficulty | Catogary | Notes
 344 | Reverse String | :star: | String
 345 | Reverse Vowels of a String | :star: | String | :trophy:
 796 | Rotate String | :star: | String
+1062 | Longest Repeating Substring | :star: :star: | String | :trophy: `BS` `Rabin-Karp`
  | Map | | |
 001 | Two Sum | :star: | Map | :white_check_mark: :trophy:
 167 | Two Sum II | :star: | Map | :white_check_mark: :trophy: `Two Pointers`
@@ -164,7 +165,7 @@ No | Title | Difficulty | Catogary | Notes
 020 | valid Parentheses | :star: | Stack | :white_check_mark:
 32 | Longet Valid Paretheses | :star: :star: :star: |  Stack | :trophy: `DP`
 155 | MinStack | :star: | Stack
-394 | DecodeString | :star: :star: | Stack | :trophy:
+394 | DecodeString | :star: :star: | Stack | :white_check_mark: :trophy:
 1249 | Minimum Remove to Make Valid Parentheses| :star: :star: | Stack | :trophy: `Bit Set`
  | Queue |  | |
 239 | Sliding Window Maximum | :star: :star: :star: | Queue | :trophy: :thinking: `DP` `Bidirectional Array`
@@ -201,6 +202,7 @@ No | Title | Difficulty | Catogary | Notes
 509 | Fibonacci Number| :star: | DP | :white_check_mark: :trophy:
 523 | Continuous Subarray Sum  | :star: :star: | DP | :white_check_mark: :thinking: `Prefix Sum` `Map`
 547 | Number of Provinces | :star: :star: | DP | :white_check_mark: :trophy: `Matrix`
+718 | Maximum Length of Repeated Subarray | :star: :star: | DP | :white_check_mark:
 1137 | N-th Tribonacci Number | :star: | DP | :trophy:
 647 | Palindromic Substrings | :star: :star: | DP | `TODO`
 300  | Longest Increasing Subsequence | :star: :star: | DP | :white_check_mark: :trophy:
