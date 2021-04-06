@@ -26,13 +26,14 @@ using namespace std;
 class Solution {
 public:
     int minSubArrayLen(int s, vector<int>& nums) {
+        int beg = 0;
+        int sum = 0;
         int minLen = INT_MAX;
-        int beg = 0, sum = 0;
 
-        for (int idx = 0; idx < nums.size(); ++idx) {
-            sum += nums[idx];
+        for (auto cur = 0; cur < nums.size(); ++cur) {
+            sum += nums[cur];
             while (sum >= s) {
-                minLen = min(minLen, idx - beg + 1);
+                minLen = min(minLen, cur-beg+1);
                 sum -= nums[beg++];
             }
         }
@@ -41,26 +42,23 @@ public:
     }
 };
 
-class Solution_ {
+class Solution {
 public:
     int minSubArrayLen(int s, vector<int>& nums) {
-        int len = nums.size();
-        int min = len;
-        bool has = false;
-        int begin = 0, end = 0, sum = 0;
+        auto len = nums.size();
+        auto ans = INT_MAX;
+        vector sums(len + 1, 0);
 
-        for (int i = 0; i < len; ++i, ++end) {
-            sum += nums[i];
-            while (sum >= s && begin <= end) { // '=' fix the case: 15 [1,2,3,4,5]
-                if (begin == end) return 1;
-                if (end - begin + 1 <= min) {
-                    has = true;
-                    min = end - begin + 1;
-                }
-                sum -= nums[begin++];
+        for (auto i = 1; i <= len; i++) {
+            sums[i] = sums[i - 1] + nums[i - 1];
+        }
+        for (auto i = 1; i <= len; i++) {
+            auto target = s + sums[i - 1];
+            auto pos = lower_bound(sums.begin(), sums.end(), target);
+            if (pos != sums.end()) {
+                ans = min(ans, static_cast<int>(pos - (sums.begin() + i - 1)));
             }
         }
-
-        return has ? min : 0;
+        return (ans != INT_MAX) ? ans : 0;
     }
 };
