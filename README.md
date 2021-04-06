@@ -377,6 +377,12 @@
 
 
 # Distributed Architecture
+- [ ] :orange_book: [Distributed Systems for fun and profit](http://book.mixu.net/distsys/single-page.html)
+- [ ] :orange_book: Designing Data Intensive Applications
+- [ ] :orange_book: [Distributed Systems: Principles and Paradigms.pdf](http://barbie.uta.edu/~jli/Resources/MapReduce&Hadoop/Distributed%20Systems%20Principles%20and%20Paradigms.pdf)
+- [ ] :orange_book: [Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services](https://azure.microsoft.com/en-us/resources/designing-distributed-systems/) :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/designing-distributed-systems.md)
+- [ ] :orange_book: [Principles of Distributed Systems.pdf](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
+- [ ] :newspaper: [Transaction Across DataCenter](https://snarfed.org/transactions_across_datacenters_io.html)   [:tv: YouTuBe](https://www.youtube.com/watch?v=srOgpXECblk)
 - [ ] [Scalable Web Architecture and Distributed Systems](http://www.aosabook.org/en/distsys.html)
 - [ ] [Scalability, Availability & Stability Patterns](https://www.slideshare.net/jboner/scalability-availability-stability-patterns)
 - [ ] [System Design Primer](https://github.com/donnemartin/system-design-primer)
@@ -394,13 +400,6 @@
 - [ ] [Harvest, yield, and scalable tolerant systems](https://www.semanticscholar.org/paper/9c9ceb29a358149e9617d103f5624f325bf08b1e?p2df)
 - [ ] [Base: An Acid Alternative](https://queue.acm.org/detail.cfm?id=1394128)
 - [ ] [Eventually Consistent](https://www.allthingsdistributed.com/2008/12/eventually_consistent.html)
-
-- [ ] :orange_book: [Distributed Systems for fun and profit](http://book.mixu.net/distsys/single-page.html)
-- [ ] :orange_book: Designing Data Intensive Applications
-- [ ] :orange_book: [Distributed Systems: Principles and Paradigms.pdf](http://barbie.uta.edu/~jli/Resources/MapReduce&Hadoop/Distributed%20Systems%20Principles%20and%20Paradigms.pdf)
-- [ ] :orange_book: [Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services](https://azure.microsoft.com/en-us/resources/designing-distributed-systems/) :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/designing-distributed-systems.md)
-- [ ] :orange_book: [Principles of Distributed Systems.pdf](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
-- [ ] :newspaper: [Transaction Across DataCenter](https://snarfed.org/transactions_across_datacenters_io.html)   [:tv: YouTuBe](https://www.youtube.com/watch?v=srOgpXECblk)
 
 ### Distributed Messages System
 - [ ] [Kafka: a Distributed Messaging System for Log Processing.pdf](http://notes.stephenholiday.com/Kafka.pdf)
