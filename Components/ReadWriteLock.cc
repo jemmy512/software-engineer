@@ -34,13 +34,13 @@ private:
     int mReaders{0};
 };
 
-class sharedLock {
+class SharedLock {
 public:
-    sharedLock(ReadWriteLock& lock) : mLock(lock) {
+    SharedLock(ReadWriteLock& lock) : mLock(lock) {
         mLock.lockRead();
     }
 
-    ~sharedLock() {
+    ~SharedLock() {
         mLock.unlockRead();
     }
 
@@ -48,13 +48,13 @@ private:
     ReadWriteLock& mLock;
 };
 
-class uniqueLock {
+class UniqueLock {
 public:
-    uniqueLock(ReadWriteLock& lock) : mLock(lock) {
+    UniqueLock(ReadWriteLock& lock) : mLock(lock) {
         mLock.lockWrite();
     }
 
-    ~uniqueLock() {
+    ~UniqueLock() {
         mLock.unlockWrite();
     }
 
