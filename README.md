@@ -178,11 +178,14 @@
 - [x] :orange_book: C++ Templates The Complete Guide :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-templates-the-complete-guid.md)
 - [x] :orange_book: Modern C++ Design :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/modern-cpp-design.md)
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
+- [x] [How C++ Resolves a Function Call](https://preshing.com/20210315/how-cpp-resolves-a-function-call/)
+- [x] [How to Use C++ for Cross-Platform Development](https://gusc.lv/2021/03/how-to-use-c-for-cross-platform-development/)
+- [x] [Paramter Passing in C and C++](https://wolchok.org/posts/parameter-passing/)
 
-* OOB
+* OOP
     - [x] [Inheritance Without Pointers](https://www.fluentcpp.com/2021/01/29/inheritance-without-pointers/)
     - [x] [Runtime Polymorphism Without Objects or Virtual Functions](https://www.fluentcpp.com/2020/05/15/runtime-polymorphism-without-virtual-functions/)
-    - [x] [C ++ virtual function table analysis(CN)](https://coolshell.cn/articles/12165.html)
+    - [x] [coolshell: C++ virtual function table analysis (CN)](https://coolshell.cn/articles/12165.html)
     - [x] [The cost of dynamic (virtual calls) vs. static (CRTP) dispatch in C++](https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c)
 
 * Const & Mutable
@@ -241,8 +244,8 @@
     - [x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
     - [x] [Notes on C++ SFINAE, Modern C++ and C++20 Concepts](https://www.cppstories.com/2016/02/notes-on-c-sfinae/)
     - [x] [std::index_sequence and its Improvement in C++20](https://www.fluentcpp.com/2021/03/05/stdindex_sequence-and-its-improvement-in-c20/)
-    - [ ] Creating a co_await awaitable signal that can be awaited multiple times [:link: part 1](https://devblogs.microsoft.com/oldnewthing/20210301-00/?p=104914)  [:link: part 2](https://devblogs.microsoft.com/oldnewthing/20210302-00/?p=104918)     [:link: part 3](https://devblogs.microsoft.com/oldnewthing/20210303-00/?p=104922)   [:link: part 4](https://devblogs.microsoft.com/oldnewthing/20210304-00/?p=104926)   [:link: part 5](https://devblogs.microsoft.com/oldnewthing/20210305-00/?p=104934)   [:link: part 6](https://devblogs.microsoft.com/oldnewthing/20210308-00/?p=104938)
-    - [ ] Creating other types of synchronization objects that can be used with co_await
+    - [ ] [Creating a co_await awaitable signal that can be awaited multiple times](https://devblogs.microsoft.com/oldnewthing/20210301-00/?p=104914) [:link: part 1](https://devblogs.microsoft.com/oldnewthing/20210301-00/?p=104914)  [:link: part 2](https://devblogs.microsoft.com/oldnewthing/20210302-00/?p=104918)     [:link: part 3](https://devblogs.microsoft.com/oldnewthing/20210303-00/?p=104922)   [:link: part 4](https://devblogs.microsoft.com/oldnewthing/20210304-00/?p=104926)   [:link: part 5](https://devblogs.microsoft.com/oldnewthing/20210305-00/?p=104934)   [:link: part 6](https://devblogs.microsoft.com/oldnewthing/20210308-00/?p=104938)
+    - [ ] [Creating other types of synchronization objects that can be used with co_await](https://devblogs.microsoft.com/oldnewthing/20210309-00/?p=104942)
         * [1: The one-shot event](https://devblogs.microsoft.com/oldnewthing/20210309-00/?p=104942)
         * [2: The basic library](https://devblogs.microsoft.com/oldnewthing/20210310-00/?p=104945)
         * [3: Parallel resumption](https://devblogs.microsoft.com/oldnewthing/20210311-00/?p=104949)
@@ -264,6 +267,7 @@
         * [Understanding operator co_await](https://lewissbaker.github.io/2017/11/17/understanding-operator-co-await)
         * [Understanding the promise type](https://lewissbaker.github.io/2018/09/05/understanding-the-promise-type)
         * [Understanding Symmetric Transfer](https://lewissbaker.github.io/2020/05/11/understanding_symmetric_transfer)
+    - [x] [constexpr Dynamic Memory Allocation, C++20](https://www.cppstories.com/2021/constexpr-new-cpp20/)
 
 </details>
 
