@@ -12,11 +12,15 @@ Input: numbers={2, 7, 11, 15}, target=9
 Output: index1=1, index2=2
 
 Relatives:
-1. Two Sum
+001. Two Sum
 167. Two Sum II - Input array is sorted
 170. Two Sum III - Data structure design
 653. Two Sum IV - Input is a BST
-1214. Two Sum BSTs */
+1214. Two Sum BSTs
+
+015. 3 Sum
+016. 3 Sum Closest
+018. 4 Sum */
 
 #include<iostream>
 #include<vector>
