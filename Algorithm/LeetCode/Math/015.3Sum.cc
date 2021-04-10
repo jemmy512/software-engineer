@@ -1,62 +1,78 @@
-/*
-Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+/* Medium
+Given an integer array nums, return all the triplets
+[nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k,
+and nums[i] + nums[j] + nums[k] == 0.
 
-Note:
+Notice that the solution set must not contain duplicate triplets.
 
-The solution set must not contain duplicate triplets.
+Example 1:
+Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]
 
-Example:
+Example 2:
+Input: nums = []
+Output: []
 
-Given array nums = [-1, 0, 1, 2, -1, -4],
+Example 3:
+Input: nums = [0]
+Output: []
 
-A solution set is:
-[
-  [-1, 0, 1],
-  [-1, -1, 2]
-]
-*/
+Constraints:
+0 <= nums.length <= 3000
+-10^5 <= nums[i] <= 10^5
+
+Relatives:
+001. Two Sum
+167. Two Sum II - Input array is sorted
+170. Two Sum III - Data structure design
+653. Two Sum IV - Input is a BST
+1214. Two Sum BSTs
+
+015. 3 Sum
+016. 3 Sum Closest
+018. 4 Sum */
+
 #include<iostream>
 #include<vector>
 using namespace std;
 
 
-// 313 test cases, 131 ms, beast 37.42% -> 56.15%
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        int len = nums.size();
-        vector<vector<int>> vec;
-        int sum, low, high;
+        std::sort(nums.begin(), nums.end());
 
-        sort(nums.begin(), nums.end());
-        for (int i = 0; i < len-2; ++i) {
-            low = i + 1;
-            high = len - 1;
-            while (low < high) {
-                sum = nums[i] + nums[low] + nums[high];
-                if (sum == 0) {
-                    vec.push_back({nums[i], nums[low], nums[high]});
-                    while (low < high && nums[low] == nums[low + 1]) ++low;
-                    while (low < high && nums[high-1] == nums[high]) -- high;
-                    ++low;
-                    --high;
-                } else if (sum > 0) {
-                    while (low < high && nums[high-1] == nums[high])
-                        -- high;
-                    --high;
-                } else {
-                    while (low < high && nums[low] == nums[low + 1])
-                        ++low;
-                    ++low;
-                }
+        for (int i = 0; i < nums.size() && nums[i] <= 0; ++i) {
+            if (i == 0 || nums[i-1] != nums[i]) {
+                twoSum(nums, i);
             }
-            while (i + 1 < nums.size() && nums[i+1] == nums[i])
-                ++i;
         }
-        return vec;
+
+        return result;
     }
+
+private:
+    void twoSum(const vector<int>& nums, int i) {
+        int low = i + 1;
+        int high = nums.size() - 1;
+
+        while (low < high) {
+            int sum = nums[i] + nums[low] + nums[high];
+            if (sum == 0) {
+                result.push_back({nums[i], nums[low++], nums[high--]});
+            } else if (sum < 0) {
+                ++low;
+            } else {
+                --high;
+            }
+
+            while (low < high && low > i+1 && nums[low-1] == nums[low])
+                ++low;
+            while (low < high && high < nums.size()-1 && nums[high] == nums[high+1])
+                --high;
+        }
+    }
+
+private:
+    vector<vector<int>> result;
 };
-
-int main() {
-
-}
