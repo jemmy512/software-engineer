@@ -21,7 +21,11 @@ Relatives:
 167. Two Sum II - Input array is sorted
 170. Two Sum III - Data structure design
 653. Two Sum IV - Input is a BST
-1214. Two Sum BSTs */
+1214. Two Sum BSTs
+
+015. 3 Sum
+016. 3 Sum Closest
+018. 4 Sum */
 
 #include <stack>
 #include <unordered_set>
