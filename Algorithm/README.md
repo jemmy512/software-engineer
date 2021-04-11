@@ -137,6 +137,7 @@ No | Title | Difficulty | Catogary | Notes
 125 | Valid Palindrome | :star: | String | :white_check_mark: :trophy:
 680 | Valid Palindrome II | :star: | String | :white_check_mark: :trophy:
 151 | Reverse Words in a String | :star: :star: | String
+161 | One Edit Distance | :star: :star: | String | :white_check_mark: :trophy:
 205 | Isomorphic Strings | :star: | String | :trophy:
 242 | Valid Anagra | :star: | String | :trophy:
 389 | Findthe Difference | :star: | String | :white_check_mark: :trophy:
@@ -199,6 +200,7 @@ No | Title | Difficulty | Catogary | Notes
 322 | Coin Change | :star: :star: | DP | :white_check_mark: :trophy: `Bottom Up` `Top Down`
 518 | Coin Change 2 | :star: :star: | DP | :white_check_mark: :trophy: :thinking: `Bottom Up` `Top Down`
 338 | Counting Bits | :star: :star: | DP | :white_check_mark: :trophy: :thinking: `Bit`
+392 | Is Subsequence | :star: :star: | DP | :white_check_mark: :trophy:
 509 | Fibonacci Number| :star: | DP | :white_check_mark: :trophy:
 523 | Continuous Subarray Sum  | :star: :star: | DP | :white_check_mark: :thinking: `Prefix Sum` `Map`
 547 | Number of Provinces | :star: :star: | DP | :white_check_mark: :trophy: `Matrix`
@@ -208,6 +210,7 @@ No | Title | Difficulty | Catogary | Notes
 300  | Longest Increasing Subsequence | :star: :star: | DP | :white_check_mark: :trophy:
 1048 | Longest String Chain | :star: :star: | DP | :white_check_mark:
 516 | Longest Palindromic Subsequence | :star: :star: | DP | :white_check_mark:
+1025 | Divisor Game | :star: | DP | :white_check_mark: :trophy:
 1143 | Longest Common Subsequence | :star: :star: | DP | :white_check_mark: :trophy:
  | Search | | |
 34 | Search For a Range | :star: :star: | Search | :white_check_mark: :trophy: `BS`
