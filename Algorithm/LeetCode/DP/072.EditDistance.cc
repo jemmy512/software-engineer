@@ -25,6 +25,10 @@ enention -> exention (replace 'n' with 'x')
 exention -> exection (replace 'n' with 'c')
 exection -> execution (insert 'u')
 
+Constraints:
+0 <= word1.length, word2.length <= 500
+word1 and word2 consist of lowercase English letters.
+
 Refer: https://www.youtube.com/watch?v=q6OWnp9cteA
 Well, you may have noticed that each time when we update dp[i][j],
 we only need dp[i - 1][j - 1], dp[i][j - 1], dp[i - 1][j].
