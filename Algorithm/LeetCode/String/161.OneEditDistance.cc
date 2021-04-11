@@ -38,6 +38,7 @@ Relatives:
 
 #include <string>
 #include <vector>
+#include <string_view>
 
 using namespace std;
 
@@ -53,13 +54,18 @@ public:
         for (int i = 0; i < src.size(); ++i) {
             if (src[i] != dst[i]) {
                 if (src.size() == dst.size())
-                    return src.substr(i+1) == dst.substr(i+1);
+                    return stringView(src, i+1) == stringView(dst, i+1);
                 else
-                    return src.substr(i) == dst.substr(i+1);
+                    return stringView(src, i) == stringView(dst, i+1);
             }
         }
 
         return src.size() + 1 == dst.size();
+    }
+
+private:
+    string_view stringView(const string& src, int beg) {
+        return string_view(src.data()+beg, src.size()-beg);
     }
 };
 
