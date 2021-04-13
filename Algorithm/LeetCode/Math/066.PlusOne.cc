@@ -1,52 +1,53 @@
-/*
-Given a non-negative integer represented as a non-empty array of digits, plus one to the integer.
+/* Easy
+Given a non-empty array of decimal digits representing a non-negative integer,
+increment one to the integer.
 
-You may assume the integer do not contain any leading zero, except the number 0 itself.
+The digits are stored such that the most significant digit is at the head of the list,
+and each element in the array contains a single digit.
 
-The digits are stored such that the most significant digit is at the head of the list.
-*/
-#include<iostream>
-#include<vector>
+You may assume the integer does not contain any leading zero, except the number 0 itself.
+
+Example 1:
+Input: digits = [1,2,3]
+Output: [1,2,4]
+Explanation: The array represents the integer 123.
+
+Example 2:
+Input: digits = [4,3,2,1]
+Output: [4,3,2,2]
+Explanation: The array represents the integer 4321.
+
+Example 3:
+Input: digits = [0]
+Output: [1]
+
+
+Constraints:
+1 <= digits.length <= 100
+0 <= digits[i] <= 9
+
+Relatives:
+002. Add Two Numbers
+043. Multiply Strings
+066. Plus One
+067. Add Binary
+989. Add to Array-Form of Integer */
+
+#include <iostream>
+#include <vector>
+
 using namespace std;
 
-// beats 99.68%, 99.68%, 99.68% submissions
-vector<int> plusOne(vector<int>& digits) {
-    int len = digits.size();
-    bool carry = true;
-    
-    for (int i = len - 1; i >=0 && carry; --i)
-        carry = (++digits[i] %= 10) == 0;
-    if (carry)
-        digits.insert(digits.begin(), 1);
-    return digits;
-}
+class Solution {
+public:
+    vector<int> plusOne(vector<int>& digits) {
+        int len = digits.size();
+        bool carry = true;
 
-// beats 99.68%, 99.68%, 99.68% submissions
-vector<int> plusOne_1(vector<int>& digits) {
-    if (digits.empty()) {
-        digits.push_back(1);
+        for (int i = len - 1; i >=0 && carry; --i)
+            carry = (++digits[i] %= 10) == 0;
+        if (carry)
+            digits.insert(digits.begin(), 1);
         return digits;
     }
-    
-    digits.push_back(0);
-    int len = digits.size();
-    int i = len - 1;
-    int x = 0;
-    ++digits[i - 1];
-    for (; i != 0; --i) {
-        x = digits[i - 1] += x;
-        digits[i] = x % 10;
-        x /= 10;
-    }
-    if (x)
-        digits[0] = x;
-    else 
-        digits.erase(digits.begin());
-    return digits;
-}
-
-int main() {
-    cout << 10 % 10 << endl;
-    
-    return 0;
-}
+};
