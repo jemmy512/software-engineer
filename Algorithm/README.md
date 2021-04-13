@@ -1,16 +1,16 @@
 # LeetCode Algorithm
 No | Title | Difficulty | Catogary | Notes
 -- | -- | --- | --- | ---
-6 | Zig Zag Conversion | :star: :star: | Math | :trophy:
+6 | Zig Zag Conversion | :star: :star: | Math | :white_check_mark: :trophy:
 7 | Reverse Integer | :star: | Math | :white_check_mark: :trophy:
 9 | Palindrom Number | :star: | Math | :white_check_mark: :trophy:
-15 | 3 Sum | :star: :star: | Math | :trophy:
-16 | 3 Sum Closest | :star: :star: | Math | :trophy:
-18 | 4 Sum | :star: :star:| Math | :trophy:
+15 | 3 Sum | :star: :star: | Math | :white_check_mark: :trophy:
+16 | 3 Sum Closest | :star: :star: | Math | :white_check_mark: :trophy:
+18 | 4 Sum | :star: :star:| Math | :white_check_mark: :trophy:
 50 | pow-x-n | :star: :star:| Math | `TODO`
 65 | Valid Number | :star: :star: :star: | Math | :white_check_mark: :trophy:
-66 | Plus One | :star: | Math | :trophy:
-67 | Add Binary | :star: | Math | :trophy:
+66 | Plus One | :star: | Math | :white_check_mark:  :trophy:
+67 | Add Binary | :star: | Math | :white_check_mark: :trophy:
 69 | Sqrt(x) | :star: | Math | :trophy:
 168 | Excel Sheet Colum Title | :star: | Math | :trophy:
 171 | Excel Sheet Colum Number | :star: | Math | :trophy:
@@ -142,7 +142,7 @@ No | Title | Difficulty | Catogary | Notes
 242 | Valid Anagra | :star: | String | :trophy:
 389 | Findthe Difference | :star: | String | :white_check_mark: :trophy:
 409 | Longest Palindrome | :star: | String | :trophy:
-415 | Adding Strings | :star: | String
+415 | Adding Strings | :star: | :white_check_mark: String
 443 | String Compression | :star: :star: | String
 344 | Reverse String | :star: | String
 345 | Reverse Vowels of a String | :star: | String | :trophy:
@@ -183,7 +183,9 @@ No | Title | Difficulty | Catogary | Notes
 64 | Minimum Path Sum | :star: :star: | DP | :white_check_mark: :trophy:
 70 | Climbing Stairs | :star: | DP | :white_check_mark: :trophy:
 746 | MinCost Climb Stair | :star: | DP | :white_check_mark: :trophy:
-72 | Edit Distance | :star: :star: :star: | DP
+72 | Edit Distance | :star: :star: :star: | DP | :white_check_mark: :trophy:
+583 | Delete Operation for Two Strings | :star: :star: | DP | :white_check_mark: :trophy:
+712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: | DP | :white_check_mark: :trophy:
 91 | Decode Ways | :star: :star: | DP | :white_check_mark: :trophy:
 121 | Best Time to Buy and Sell Stock | :star: | DP | :white_check_mark: :trophy: `Prefix Sum`
 122 | Best Time to Buy and Sell Stock II | :star: | DP | :white_check_mark: :trophy: `Greedy`
