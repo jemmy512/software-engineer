@@ -57,39 +57,3 @@ public:
         return dp[src.size()][dst.size()];
     }
 };
-
-class Solution {
-public:
-    int minimumDeleteSum(const string& s1, const string& s2) {
-        const int len1 = static_cast<int>(s1.length());
-        const int len2 = static_cast<int>(s2.length());
-        if (len2 > len1) {
-            return minimumDeleteSum(s2, s1);
-        }
-
-        int dp[len2 + 1];
-        memset(dp, 0, sizeof(dp));
-
-        dp[0] = 0;
-        int i, j;
-        for (j = 1; j <= len2; ++j) {
-            dp[j] = s2[j - 1] + dp[j - 1];
-        }
-
-        char c1, c2;
-        int topLeft, tmp;
-        for (i = 1; i <= len1; ++i) {
-            topLeft = dp[0];
-            c1 = s1[i - 1];
-            dp[0] += c1;
-            for (j = 1; j <= len2; ++j) {
-                tmp = dp[j];
-                c2 = s2[j - 1];
-                dp[j] = (c1 == c2) ? topLeft : min(c1 + dp[j], c2 + dp[j - 1]);  // topLeft or min(top, left)
-                topLeft = tmp;
-            }
-        }
-
-        return dp[len2];
-    }
-};
