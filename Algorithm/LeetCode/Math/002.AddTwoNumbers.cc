@@ -26,6 +26,12 @@ It is guaranteed that the list represents a number that does not have leading ze
 Relatives:
 002. Add Two Numbers
 445. Add Two Numbers II
+415. Add Strings
+043. Multiply Strings
+066. Plus One
+067. Add Binary
+371. Sum of Two Integers
+989. Add to Array-Form of Integer
 1634. Add Two Polynomials Represented as Linked Lists */
 
 struct ListNode {
