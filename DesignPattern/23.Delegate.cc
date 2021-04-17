@@ -66,11 +66,9 @@ public:
     }
 
     explicit operator bool() const {
-        if (auto entries = mEntries.lock()) {
-            for (const auto& entry : entries) {
-                if (!entry->isExpired()) {
-                    return true;
-                }
+        for (const auto& entry : *mEntries.lock()) {
+            if (!entry.isExpired()) {
+                return true;
             }
         }
 
@@ -144,11 +142,9 @@ public:
 protected:
     mutable Lockable<std::vector<Entry>> mEntries;
 
-    std::vector<Entry> getEntries() const
-    {
+    std::vector<Entry> getEntries() const {
         std::vector<Entry> validEntries;
 
-        // this logic below does a lazzy clean-up of expired entries
         if (auto entries = mEntries.lock()) {
             for (auto it = entries->begin(); it != entries->end();) {
                 if (it->isExpired()) {
