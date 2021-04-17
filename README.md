@@ -259,6 +259,7 @@
     - [ ] [Raymond Chen: C++ coroutines]()
         <details>
         <summary>Open/Close</summary>
+
         * [Getting started with awaitable objects](https://devblogs.microsoft.com/oldnewthing/20191209-00/?p=103195)
         * [The mental model for coroutine promises](https://devblogs.microsoft.com/oldnewthing/20210329-00/?p=105015)
         * [Basic implementation of a promise type](https://devblogs.microsoft.com/oldnewthing/20210330-00/?p=105019)
@@ -275,6 +276,7 @@
         * [Making it impossible to co_await a task twice](https://devblogs.microsoft.com/oldnewthing/20210414-00/?p=105095)
         * [Getting rid of our mutex](https://devblogs.microsoft.com/oldnewthing/20210415-00/?p=105109)
         * [Getting rid of our reference count](https://devblogs.microsoft.com/oldnewthing/20210416-00/?p=105115)
+
         </details>
     - [ ] [Asymmetric Transfer: C++ coroutines]()
         * [Coroutine Theory](https://lewissbaker.github.io/2017/09/25/coroutine-theory)
