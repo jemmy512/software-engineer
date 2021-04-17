@@ -257,6 +257,8 @@
         * [9: The shared mutex (continued)](https://devblogs.microsoft.com/oldnewthing/20210319-00/?p=104979)
         * [10: Wait for an event to clear](https://devblogs.microsoft.com/oldnewthing/20210322-00/?p=104981)
     - [ ] [Raymond Chen: C++ coroutines]()
+        <details>
+        <summary>Open/Close</summary>
         * [Getting started with awaitable objects](https://devblogs.microsoft.com/oldnewthing/20191209-00/?p=103195)
         * [The mental model for coroutine promises](https://devblogs.microsoft.com/oldnewthing/20210329-00/?p=105015)
         * [Basic implementation of a promise type](https://devblogs.microsoft.com/oldnewthing/20210330-00/?p=105019)
@@ -268,6 +270,12 @@
         * [Accepting types via return_void and return_value](https://devblogs.microsoft.com/oldnewthing/20210407-00/?p=105061)
         * [Awaiting the simple_task](https://devblogs.microsoft.com/oldnewthing/20210408-00/?p=105063)
         * [Managing the reference count of the coroutine state](https://devblogs.microsoft.com/oldnewthing/20210409-00/?p=105065)
+        * [The lifetime of objects involved in the coroutine function](https://devblogs.microsoft.com/oldnewthing/20210412-00/?p=105078)
+        * [Tradeoffs of making the promise be the shared state](https://devblogs.microsoft.com/oldnewthing/20210413-00/?p=105093)
+        * [Making it impossible to co_await a task twice](https://devblogs.microsoft.com/oldnewthing/20210414-00/?p=105095)
+        * [Getting rid of our mutex](https://devblogs.microsoft.com/oldnewthing/20210415-00/?p=105109)
+        * [Getting rid of our reference count](https://devblogs.microsoft.com/oldnewthing/20210416-00/?p=105115)
+        </details>
     - [ ] [Asymmetric Transfer: C++ coroutines]()
         * [Coroutine Theory](https://lewissbaker.github.io/2017/09/25/coroutine-theory)
         * [Understanding operator co_await](https://lewissbaker.github.io/2017/11/17/understanding-operator-co-await)
