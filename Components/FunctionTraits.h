@@ -195,7 +195,7 @@ typename function_traits<Lambda>::helper::function_type weak_handler(T* t, const
 }
 
 
-namespace FunctionUtil {
+namespace FunctionTraits {
     template <typename T>
     T move(T& t) {
         auto temp = t;
@@ -204,3 +204,54 @@ namespace FunctionUtil {
         return temp;
     }
 }
+
+/********************************** is_continuable **********************************/
+
+namespace detail
+{
+    template<typename C> // detect operator()
+    static char has_call_operator(decltype(&C::operator()));
+
+    template<typename C> // worst match
+    static char(&has_call_operator(...))[2];
+}
+
+template <typename C>
+struct is_functor
+{
+    static const bool value = sizeof(detail::has_call_operator<C>(0)) == 1;
+};
+
+// const specialization
+template <typename C>
+struct is_functor<C&> : public is_functor<C>
+{
+};
+
+namespace detail
+{
+    template <typename C, bool isFunctor>
+    struct is_continuable;
+
+    template <typename C>
+    struct is_continuable<C, false> : public std::false_type
+    {
+    };
+
+    // a continuable is a functor that has as a first argument another functor
+    template <typename C>
+    struct is_continuable<C, true>
+    {
+        static constexpr bool value = is_functor<typename function_traits<C>::argument_0>::value;
+    };
+}
+
+template <typename C>
+struct is_continuable : public detail::is_continuable<C, is_functor<C>::value>
+{
+};
+
+template <typename C>
+struct is_continuable<C&> : public is_continuable<C>
+{
+};
