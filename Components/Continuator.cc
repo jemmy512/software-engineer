@@ -35,6 +35,23 @@ struct Continuator
             continuable(function_traits<Callable>::helper::bind(callable, continuation));
         };
     }
+
+    template <typename Callable, typename... Args>
+    std::enable_if_t<is_continuable<Callable>::value, continuator<typename function_traits<Callable>::argument_0>>
+    then(const Callable& callable, Args... args) {
+        return [continuable = FunctionTraits::move(action), callable, args...]
+            (const typename function_traits<Callable>::argument_0& continuation) {
+                continuable(function_traits<Callable>::helper::bind(callable, continuation));
+            };
+    }
+
+    template <typename Lamdba>
+    std::enable_if_t<!is_continuable<Lamdba>::value>
+    then(const Lamdba& continuation) {
+        if (auto continuable = FunctionTraits::move(action)) {
+            continuable(continuation);
+        }
+    }
 };
 
 class Successor : std::enable_shared_from_this<Successor> {
