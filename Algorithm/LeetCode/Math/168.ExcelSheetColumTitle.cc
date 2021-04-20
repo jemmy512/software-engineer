@@ -4,16 +4,37 @@ Related to question 171.Excel Sheet Column Number
 Given a positive integer, return its corresponding column title as appear in an Excel sheet.
 
 For example:
+1 -> A
+2 -> B
+3 -> C
+...
 
-    1 -> A
-    2 -> B
-    3 -> C
-    ...
-    26 -> Z
-    27 -> AA
-*/
-#include<iostream>
-#include<stack>
+26 -> Z
+27 -> AA
+
+Example 1:
+Input: columnNumber = 1
+Output: "A"
+
+Example 2:
+Input: columnNumber = 28
+Output: "AB"
+
+Example 3:
+Input: columnNumber = 701
+Output: "ZY"
+
+Example 4:
+Input: columnNumber = 2147483647
+Output: "FXSHRXW"
+
+
+Constraints:
+1 <= columnNumber <= 2^31 - 1 */
+
+#include <iostream>
+#include <stack>
+
 using namespace std;
 
 // 18 test caes, 2ms, beat 100%
@@ -28,11 +49,11 @@ private:
         string str;
         while (n > 0) {
             char ch = 'A' + (n - 1) % 26;
-            str.insert(str.begin(), ch);
+            str += ch;
             n -= (n - 1) % 26; // n = 26
             n /= 26;
         }
-        return str;
+        return string(str.rbegin(), str.rend());
     }
 
     long long base26_str2int(string s) {
