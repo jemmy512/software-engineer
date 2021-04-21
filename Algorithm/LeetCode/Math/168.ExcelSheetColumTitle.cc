@@ -30,14 +30,17 @@ Output: "FXSHRXW"
 
 
 Constraints:
-1 <= columnNumber <= 2^31 - 1 */
+1 <= columnNumber <= 2^31 - 1
+
+Relatives:
+168. Excel Sheet Column Title
+171. Excel Sheet Column Number */
 
 #include <iostream>
 #include <stack>
 
 using namespace std;
 
-// 18 test caes, 2ms, beat 100%
 class Solution {
 public:
     string convertToTitle(int n) {
