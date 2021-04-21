@@ -15,6 +15,23 @@ using namespace std;
 class Solution {
 public:
     int maxArea(vector<int>& height) {
+        int maxArea = 0, left = 0, right = height.size() - 1;
+
+        while (left < right) {
+            int curArea = std::min(height[left], height[right]) * (right - left);
+            maxArea = std::max(maxArea, curArea);
+            if (height[left] < height[right])
+                left++;
+            else
+                right--;
+        }
+        return maxArea;
+    }
+};
+
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
         int maxArea = 0;
         int area;
         int left = 0;
@@ -48,22 +65,3 @@ public:
         return maxArea;
     }
 };
-
-class Solution {
-public:
-    int maxArea(vector<int>& height) {
-        int maxarea = 0, left = 0, right = height.size() - 1;
-        while (left < right) {
-            maxarea = std::max(maxarea, std::min(height[left], height[right]) * (right - left));
-            if (height[left] < height[right])
-                left++;
-            else
-                right--;
-        }
-        return maxarea;
-    }
-};
-
-int main() {
-
-}
