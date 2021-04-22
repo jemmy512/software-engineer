@@ -1,58 +1,63 @@
-/*
-Difficulty: Hard
-
-Given an unsorted integer array, find the smallest missing positive integer.
+/* Hard
+Given an unsorted integer array nums, find the smallest missing positive integer.
 
 Example 1:
-
-Input: [1,2,0]
+Input: nums = [1,2,0]
 Output: 3
+
 Example 2:
-
-Input: [3,4,-1,1]
+Input: nums = [3,4,-1,1]
 Output: 2
+
 Example 3:
-
-Input: [7,8,9,11,12]
+Input: nums = [7,8,9,11,12]
 Output: 1
-Note:
 
-Your algorithm should run in O(n) time and uses constant extra space.
-*/
+Constraints:
+0 <= nums.length <= 300
+-2^31 <= nums[i] <= 2^31 - 1 */
 
 /*
  *  Idea:
- * 
- *    We can move the num to the place whcih the index is the num. 
- *   
+ *
+ *    We can move the num to the place whcih the index is the num.
+ *
  *    for example,  (considering the array is zero-based.
  *       1 => A[0], 2 => A[1], 3=>A[2]
- *   
+ *
  *    Then, we can go through the array check the i+1 == A[i], if not ,just return i+1;
- *   
+ *
  *    This solution comes from StackOverflow.com
  *    http://stackoverflow.com/questions/1586858/find-the-smallest-integer-not-in-a-list
 */
-int firstMissingPositive_move(int A[], int n) {
-    if (n <= 0) return 1;
-    int num;
-    for(int i = 0; i < n; i++) {
-        num = A[i];
-        while (num > 0 && num < n && A[num-1] != num) {
-            swap(A[i], A[num-1]);
-            num = A[i];
+
+#include <vector>
+#include <utility>
+
+using namespace std;
+
+int firstMissingPositive_move(vector<int>& nums) {
+    if (nums.empty())
+        return 1;
+
+    for (int i = 0; i < nums.size(); i++) {
+        int num = nums[i];
+        while (num > 0 && num < nums.size() && nums[num-1] != num) {
+            swap(nums[i], nums[num-1]);
+            num = nums[i];
         }
     }
-    for (int i = 0; i < n; i++){
-        if (i+1 != A[i]){
+    for (int i = 0; i < nums.size(); i++) {
+        if (i+1 != nums[i]){
             return i+1;
         }
     }
-    return n+1;
+
+    return nums.size()+1;
 }
 
 /*
- *    The idea is simple: 
+ *    The idea is simple:
  *
  *    1) put all of number into a map.
  *    2) for each number a[i] in array, remove its continous number in the map
@@ -60,7 +65,7 @@ int firstMissingPositive_move(int A[], int n) {
  *        2.2)  remove a[i]+1, a[i]+2, a[i]+3,...
  *    3) during the removeing process, if some number cannot be found, which means it's missed.
  *
- *    considering a case [-2, -1, 4,5,6], 
+ *    considering a case [-2, -1, 4,5,6],
  *        [-2, -1] => missed 0
  *        [4,5,6]  => missed 3
  *
@@ -88,7 +93,7 @@ int firstMissingPositive_map(int A[], int n) {
             x = 0; //checking dummy
         }else{
             x = A[i];
-        } 
+        }
 
         if (cache.find(x) == cache.end()){
             continue;
@@ -112,19 +117,3 @@ int firstMissingPositive_map(int A[], int n) {
     }
     return miss;
 }
-
-class Solution {
-public:
-    int firstMissingPositive(vector<int>& nums) {
-        bitset<1024> bset;
-        int len = nums.size();
-        for (int i = 0; i < len; ++i) {
-            if (nums[i] >= 0)
-                bset.set(nums[i]);
-        }
-        for (int i = 1; i < 1024; ++i) {
-            if (!bset.test(i))
-                return i;
-        }
-    }
-};
