@@ -187,6 +187,7 @@
     - [x] [Runtime Polymorphism Without Objects or Virtual Functions](https://www.fluentcpp.com/2020/05/15/runtime-polymorphism-without-virtual-functions/)
     - [x] [coolshell: C++ virtual function table analysis (CN)](https://coolshell.cn/articles/12165.html)
     - [x] [The cost of dynamic (virtual calls) vs. static (CRTP) dispatch in C++](https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c)
+    - [x] [The Sad True about C++ Copy Elision](https://wolchok.org/posts/sad-truth-about-cxx-copy-elision/)
 
 * Const & Mutable
     - [x] [Const Correctness](https://arne-mertz.de/2016/07/const-correctness/)
@@ -241,6 +242,7 @@
 
 * C++ 20
     - [x] [Table: C++20 Features.pdf](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp20-features.pdf)
+    - [ ] [All C++20 core language features with examples](https://oleksandrkvl.github.io/2021/04/02/cpp-20-overview.html)
     - [x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
     - [x] [Notes on C++ SFINAE, Modern C++ and C++20 Concepts](https://www.cppstories.com/2016/02/notes-on-c-sfinae/)
     - [x] [std::index_sequence and its Improvement in C++20](https://www.fluentcpp.com/2021/03/05/stdindex_sequence-and-its-improvement-in-c20/)
@@ -276,6 +278,10 @@
         * [Making it impossible to co_await a task twice](https://devblogs.microsoft.com/oldnewthing/20210414-00/?p=105095)
         * [Getting rid of our mutex](https://devblogs.microsoft.com/oldnewthing/20210415-00/?p=105109)
         * [Getting rid of our reference count](https://devblogs.microsoft.com/oldnewthing/20210416-00/?p=105115)
+        * [Allowing the awaiter to be destroyed while suspended](https://devblogs.microsoft.com/oldnewthing/20210419-00/?p=105119)
+        * [Getting rid of our atomic variant discriminator](https://devblogs.microsoft.com/oldnewthing/20210420-28/?p=105128)
+        * [Cold-start coroutines](https://devblogs.microsoft.com/oldnewthing/20210421-00/?p=105135)
+        * [Improving cold-start coroutines which complete synchronously](https://devblogs.microsoft.com/oldnewthing/20210422-00/?p=105139)
 
         </details>
     - [ ] [Asymmetric Transfer: C++ coroutines]()
