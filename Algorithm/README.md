@@ -11,9 +11,9 @@ No | Title | Difficulty | Catogary | Notes
 65 | Valid Number | :star: :star: :star: | Math | :white_check_mark: :trophy:
 66 | Plus One | :star: | Math | :white_check_mark:  :trophy:
 67 | Add Binary | :star: | Math | :white_check_mark: :trophy:
-69 | Sqrt(x) | :star: | Math | :trophy:
-168 | Excel Sheet Colum Title | :star: | Math | :trophy:
-171 | Excel Sheet Colum Number | :star: | Math | :trophy:
+69 | Sqrt(x) | :star: | Math | :white_check_mark: :trophy:
+168 | Excel Sheet Colum Title | :star: | Math | :white_check_mark: :trophy:
+171 | Excel Sheet Colum Number | :star: | Math | :white_check_mark: :trophy:
 172 | Factorial Trailing Zeros | :star: :star: | Math | :trophy:
 367 | Valid Perfect Square | :star: | Math | :trophy:
 136 | Single Number | :star:| Math | :white_check_mark: :trophy:
@@ -34,8 +34,8 @@ No | Title | Difficulty | Catogary | Notes
 414 | Third Maximum Number | :star: | Math
 1041 | Robot Bounded In Circle | :star: :star: | Math | :trophy: :thinking:
  | Array | | |
-004 | Median of Two Sorted Arrays | :star: :star: :star: | Array
-011 | Container With Most Water| :star: :star: :star: | Array | :trophy:
+004 | Median of Two Sorted Arrays | :star: :star: :star: | Array | :white_check_mark: :trophy:
+011 | Container With Most Water| :star: :star: :star: | Array | :white_check_mark: :trophy: `Two Pointers`
 027 | Remove Element | :star: | Array | :white_check_mark: :trophy:
 041 | First Missing Positive | :star: :star: :star: | Array
 054 | Spiral Matrix | :star: :star: | Array | :trophy: `Matrix`
