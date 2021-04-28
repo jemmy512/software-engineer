@@ -15,7 +15,14 @@ Output: 1
 
 Constraints:
 0 <= nums.length <= 300
--2^31 <= nums[i] <= 2^31 - 1 */
+-2^31 <= nums[i] <= 2^31 - 1 
+
+Relatives:
+041. First Missing Positive
+268. Missing Number 
+287. Find the Duplicate Number 
+448. Find All Numbers Disappeared in an Array 
+765. Couples Holding Hands */
 
 /*
  *  Idea:
@@ -41,10 +48,8 @@ int firstMissingPositive_move(vector<int>& nums) {
         return 1;
 
     for (int i = 0; i < nums.size(); i++) {
-        int num = nums[i];
-        while (num > 0 && num < nums.size() && nums[num-1] != num) {
-            swap(nums[i], nums[num-1]);
-            num = nums[i];
+        while (nums[i] > 0 && nums[i] < nums.size() && nums[nums[i]-1] != nums[i]) {
+            swap(nums[i], nums[nums[i]-1]);
         }
     }
     for (int i = 0; i < nums.size(); i++) {
