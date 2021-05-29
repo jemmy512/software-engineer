@@ -194,6 +194,9 @@
     - [x] [Mutable](https://arne-mertz.de/2017/10/mutable/)
     - [x] [How to Share Code with Const and Non-Const Functions in C++](https://www.cppstories.com/2020/11/share-code-const-nonconst.html)
 
+* STL
+    - [x] [Creating STL Containers in Shared Memory](https://www.drdobbs.com/creating-stl-containers-in-shared-memory/184401639)
+
 * C++ Memory Model
     - [x] [Memory layout of C ++ objects (CN)](https://coolshell.cn/articles/12176.html)
     - [x] [C++ objects Memory layout (CN)](https://mp.weixin.qq.com/s/I3mQAZAycd5KJnbfywYT8g)
@@ -233,6 +236,11 @@
     - [x] [Build Throughput Series: More Efficient Template Metaprogramming](https://devblogs.microsoft.com/cppblog/build-throughput-series-more-efficient-template-metaprogramming/)
     - [x] [How to Pass a Variadic Pack as a First Argument of a Function](https://www.fluentcpp.com/2021/01/22/how-to-pass-a-variadic-pack-as-a-first-argument-of-a-function-in-cpp/)
 
+* C++11
+    - [x] [Herb Sutter: Move Simply](https://herbsutter.com/2020/02/17/move-simply/)
+    - [x] [C++ Move Semantics - The Complete Guide](http://cppmove.com/)
+    - [x] [Andreas: Can I touch a moved-from object](https://andreasfertig.blog/2021/04/can-i-touch-a-moved-from-object/)
+
 * C++17
     - [x] [Table: C++17 Features.pdf](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp17-features.pdf)
     - [x] [How std::any Works](https://www.fluentcpp.com/2021/02/05/how-stdany-works/)
@@ -259,6 +267,7 @@
         * [9: The shared mutex (continued)](https://devblogs.microsoft.com/oldnewthing/20210319-00/?p=104979)
         * [10: Wait for an event to clear](https://devblogs.microsoft.com/oldnewthing/20210322-00/?p=104981)
     - [ ] [Raymond Chen: C++ coroutines]()
+        * [A map through the three major coroutine series](https://devblogs.microsoft.com/oldnewthing/20210504-01/?p=105178)
         <details>
         <summary>Open/Close</summary>
 
@@ -282,6 +291,16 @@
         * [Getting rid of our atomic variant discriminator](https://devblogs.microsoft.com/oldnewthing/20210420-28/?p=105128)
         * [Cold-start coroutines](https://devblogs.microsoft.com/oldnewthing/20210421-00/?p=105135)
         * [Improving cold-start coroutines which complete synchronously](https://devblogs.microsoft.com/oldnewthing/20210422-00/?p=105139)
+        * [Associating multiple task types with the same promise type](https://devblogs.microsoft.com/oldnewthing/20210423-00/?p=105146)
+        * [What does it mean when I declare my coroutine as noexcept?](https://devblogs.microsoft.com/oldnewthing/20210426-00/?p=105153)
+        * [How do I create a coroutine that terminates on an unhandled exception?](https://devblogs.microsoft.com/oldnewthing/20210427-00/?p=105157)
+        * [Snooping in on the coroutine body](https://devblogs.microsoft.com/oldnewthing/20210428-00/?p=105160)
+        * [Adding COM context support to our awaiter](https://devblogs.microsoft.com/oldnewthing/20210429-00/?p=105165)
+        * [Waiting synchronously for our coroutine to complete](https://devblogs.microsoft.com/oldnewthing/20210430-00/?p=105171)
+        * [Converting among tasks that use the same promise](https://devblogs.microsoft.com/oldnewthing/20210503-00/?p=105173)
+        * [Promise constructors](https://devblogs.microsoft.com/oldnewthing/20210504-00/?p=105176)
+        * [Why is coroutine_handle::resume() potentially-throwing?](https://devblogs.microsoft.com/oldnewthing/20210505-00/?p=105186)
+        * [A subtle way your await_suspend can access the coroutine frame when it shouldn’t](https://devblogs.microsoft.com/oldnewthing/20210507-00/?p=105196)
 
         </details>
     - [ ] [Asymmetric Transfer: C++ coroutines]()
@@ -299,8 +318,9 @@
 - [ ] :orange_book: The Art of UNIX Programming
 - [ ] :orange_book: Clean Architecture
 
-- [x] [Grokking System Design](https://www.educative.io/courses/grokking-the-system-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/grokking-the-system-design.md)
-- [x] [Grokking the Object Oriented Design](https://www.educative.io/courses/grokking-the-object-oriented-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/grokking-the-object-oriented-design.md)
+- [x] [Grokking System Design](https://www.educative.io/courses/grokking-the-system-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/object-oriented-design.md)
+- [ ] [Grokking Advanced System Design](https://github.com/Jemmy512/book-notes/blob/master/Arch/system-design-advanced.md)
+- [x] [Grokking the Object Oriented Design](https://www.educative.io/courses/grokking-the-object-oriented-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/object-oriented-design.md)
 - [ ] [System Design Primer](https://github.com/donnemartin/system-design-primer)
 - [ ] [Six Programming Paradigm](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will)
 - [ ] [Programming Paradigms for Dummies.pdf](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)
