@@ -762,6 +762,7 @@
 
 ## API Gatway
 - [ ] [Kubernetes api gateway](https://k8s-it.medium.com/kubernetes-api-gateway-cac310589f4d)
+- [ ] [Uber: Designing Edge Gateway, Uber’s API Lifecycle Management Platform](https://eng.uber.com/gatewayuberapi/)
 - [ ] [Uber: The Architecture of API gateway](https://eng.uber.com/architecture-api-gateway/)
 
 ## Microservice VS SOA, IaaS, Paas, Monolithic
