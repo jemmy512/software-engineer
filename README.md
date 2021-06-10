@@ -1,21 +1,21 @@
 # Table of Contents
 
-1. [Formal Entry](#Formal-Entry)
-2. [Programmer Cultivation](#Programmer-Cultivation)
+* [Formal Entry](#Formal-Entry)
+* [Programmer Cultivation](#Programmer-Cultivation)
     1. [Coding Cultivation](#Coding-Cultivation)
     2. [Code Review](#Code-Review)
     3. [Safety Precaution](#Safety-Precaution)
     4. [Testing](#Testing)
     5. [Publishing](#Publishing)
-3. [Computer Science](#Computer-Science)
+* [Computer Science](#Computer-Science)
     1. [Operating System](#Computer-Science)
     2. [Network](#Network)
     3. [Data Structure](#Data-Structure)
     4. [Database](#Database)
-4. [Programming Language](#Programming-Language)
+* [Programming Language](#Programming-Language)
     * [C/C++](#CC)
-5. [System Design](#System-Design)
-6. [Linux](#Linux)
+* [System Design](#System-Design)
+* [Linux](#Linux)
     1. [Kernel](#Kernel)
     2. [Memory Management](#Memory-Management)
     3. [Linux Network](#Linux-Network)
@@ -23,7 +23,7 @@
     5. [Lock-free](#Lock-free)
     6. [Memory Order](#Memory-Order)
     7. [CPU Cache](#CPU-Cache)
-7. [Distributed Architecture](#Distributed-Architecture)
+* [Distributed Architecture](#Distributed-Architecture)
     1. [Distributed Messages System](#Distributed-Messages-System)
     2. [Logs & Data](#Logs--Data)
     3. [Distributed monitoring and tracking](#Distributed-monitoring-and-tracking)
@@ -39,13 +39,13 @@
     13. [Performance](#Performance)
     14. [Search](#Search)
     15. [Architecture Practices by Companies](#Architecture-Practices-by-Companies)
-8. [Microservice](#Microservice)
+* [Microservice](#Microservice)
     1. [API Gatway](#API-Gatway)
     2. [Microservice VS SOA, IaaS, Paas, Monolithic](#Microservice-VS-SOA-IaaS-Paas-Monolithic)
     3. [Practice](#Practice)
     4. [Authentication & Authorization](#Authentication--Authorization)
     5. [Design Pattern](#Design-Pattern)
-9. [Thanks](#Thanks)
+* [Thanks](#Thanks)
 
 # Formal Entry
 - [ ] [The key to Accelerating Your Coding Skills](http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/)
@@ -264,17 +264,17 @@
                 * [Constructible awaitable or function returning awaitable?](https://devblogs.microsoft.com/oldnewthing/20191210-00/?p=103197)
                 * [Framework interop](https://devblogs.microsoft.com/oldnewthing/20191211-00/?p=103201)
                 * [Awaiting an IAsyncAction without preserving thread context](https://devblogs.microsoft.com/oldnewthing/20191212-00/?p=103207)
-            * [Short-circuiting suspension, part 1](https://devblogs.microsoft.com/oldnewthing/20191213-00/?p=103210) 
-            * [Short-circuiting suspension, part 2](https://devblogs.microsoft.com/oldnewthing/20191216-00/?p=103217) 
+            * [Short-circuiting suspension, part 1](https://devblogs.microsoft.com/oldnewthing/20191213-00/?p=103210)
+            * [Short-circuiting suspension, part 2](https://devblogs.microsoft.com/oldnewthing/20191216-00/?p=103217)
                 * [no callable ‘await_resume’ function found for type](https://devblogs.microsoft.com/oldnewthing/20191217-00/?p=103219)
             * [Defining the co_await operator](https://devblogs.microsoft.com/oldnewthing/20191218-00/?p=103221)
                 * [The co_await operator and the function search algorithm](https://devblogs.microsoft.com/oldnewthing/20191219-00/?p=103230)
                 * [The problem of the synchronous apartment-changing callback](https://devblogs.microsoft.com/oldnewthing/20191220-00/?p=103232)
                 * [The problem of the DispatcherQueue task that runs too soon, part1](https://devblogs.microsoft.com/oldnewthing/20191223-00/?p=103255) [:link: Part 2](https://devblogs.microsoft.com/oldnewthing/20191224-00/?p=103262) [:link: Part 3](https://devblogs.microsoft.com/oldnewthing/20191225-00/?p=103265) [:link: Part 4](https://devblogs.microsoft.com/oldnewthing/20191226-00/?p=103268)
-            
+
         * Awaitable Signals
             * Creating a co_await awaitable signal that can be awaited multiple times
-                * [:link: part 1](https://devblogs.microsoft.com/oldnewthing/20210301-00/?p=104914) [:link: part 2](https://devblogs.microsoft.com/oldnewthing/20210302-00/?p=104918) [:link: part 3](https://devblogs.microsoft.com/oldnewthing/20210303-00/?p=104922) [:link: part 4](https://devblogs.microsoft.com/oldnewthing/20210304-00/?p=104926) [:link: part 5](https://devblogs.microsoft.com/oldnewthing/20210305-00/?p=104934)   
+                * [:link: part 1](https://devblogs.microsoft.com/oldnewthing/20210301-00/?p=104914) [:link: part 2](https://devblogs.microsoft.com/oldnewthing/20210302-00/?p=104918) [:link: part 3](https://devblogs.microsoft.com/oldnewthing/20210303-00/?p=104922) [:link: part 4](https://devblogs.microsoft.com/oldnewthing/20210304-00/?p=104926) [:link: part 5](https://devblogs.microsoft.com/oldnewthing/20210305-00/?p=104934)
                 * [:link: part 6](https://devblogs.microsoft.com/oldnewthing/20210308-00/?p=104938)
                     * Creating other types of synchronization objects that can be used with co_await
                         * [1: The one-shot event](https://devblogs.microsoft.com/oldnewthing/20210309-00/?p=104942)
@@ -292,7 +292,7 @@
                 * [Producing a result with references](https://devblogs.microsoft.com/oldnewthing/20210324-00/?p=104995)
                 * [Producing nothing](https://devblogs.microsoft.com/oldnewthing/20210325-00/?p=105002)
                 * [Failing to produce a result](https://devblogs.microsoft.com/oldnewthing/20210326-00/?p=105009)
-            
+
         * Coroutine Promises
             * [The mental model for coroutine promises](https://devblogs.microsoft.com/oldnewthing/20210329-00/?p=105015)
             * [Basic implementation of a promise type](https://devblogs.microsoft.com/oldnewthing/20210330-00/?p=105019)
