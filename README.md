@@ -235,6 +235,7 @@
     - [x] [Build Throughput Series: Template Metaprogramming Fundamentals](https://devblogs.microsoft.com/cppblog/build-throughput-series-template-metaprogramming-fundamentals/)
     - [x] [Build Throughput Series: More Efficient Template Metaprogramming](https://devblogs.microsoft.com/cppblog/build-throughput-series-more-efficient-template-metaprogramming/)
     - [x] [How to Pass a Variadic Pack as a First Argument of a Function](https://www.fluentcpp.com/2021/01/22/how-to-pass-a-variadic-pack-as-a-first-argument-of-a-function-in-cpp/)
+    - [x] [Dependent Name: Inheritance and Member Functions of Class Templates](http://www.modernescpp.com/index.php/surprise-included-inheritance-and-member-functions-of-class-templates)
 
 * C++11
     - [x] [Herb Sutter: Move Simply](https://herbsutter.com/2020/02/17/move-simply/)
@@ -517,19 +518,20 @@
 - [ ] [Martin Fowler: Patterns of Distributed Systems](https://martinfowler.com/articles/patterns-of-distributed-systems/)
     - [ ] [Consistent Core](https://martinfowler.com/articles/patterns-of-distributed-systems/consistent-core.html)
     - [ ] [Generation Clock](https://martinfowler.com/articles/patterns-of-distributed-systems/generation.html)
+    - [ ] [Gossip Dissemination](https://martinfowler.com/articles/patterns-of-distributed-systems/gossip-dissemination.html)
     - [ ] [Hear Beat](https://martinfowler.com/articles/patterns-of-distributed-systems/heartbeat.html)
     - [ ] [High-Water Mark](https://martinfowler.com/articles/patterns-of-distributed-systems/high-watermark.html)
     - [ ] [Low-Water Mark](https://martinfowler.com/articles/patterns-of-distributed-systems/low-watermark.html)
+    - [ ] [Idempotent Receiver](https://martinfowler.com/articles/patterns-of-distributed-systems/idempotent-receiver.html)
     - [ ] [Leader Follwers](https://martinfowler.com/articles/patterns-of-distributed-systems/leader-follower.html)
+    - [ ] [Lease](https://martinfowler.com/articles/patterns-of-distributed-systems/time-bound-lease.html)
     - [ ] [Quorum](https://martinfowler.com/articles/patterns-of-distributed-systems/quorum.html)
     - [ ] [Request Pipeline](https://martinfowler.com/articles/patterns-of-distributed-systems/request-pipeline.html)
     - [ ] [Segemented Log](https://martinfowler.com/articles/patterns-of-distributed-systems/log-segmentation.html)
     - [ ] [Single Scoekt Channel](https://martinfowler.com/articles/patterns-of-distributed-systems/single-socket-channel.html)
     - [ ] [Singular Update Queue](https://martinfowler.com/articles/patterns-of-distributed-systems/singular-update-queue.html)
-    - [ ] [Write-Ahead Log](https://martinfowler.com/articles/patterns-of-distributed-systems/wal.html)
-    - [ ] [Lease](https://martinfowler.com/articles/patterns-of-distributed-systems/time-bound-lease.html)
     - [ ] [State Watch](https://martinfowler.com/articles/patterns-of-distributed-systems/state-watch.html)
-    - [ ] [Idempotent Receiver](https://martinfowler.com/articles/patterns-of-distributed-systems/idempotent-receiver.html)
+    - [ ] [Write-Ahead Log](https://martinfowler.com/articles/patterns-of-distributed-systems/wal.html)
 
 - [ ] [MicroSoft Cloud Design Patterns](https://docs.microsoft.com/en-us/azure/architecture/patterns/)
     <details>
