@@ -2,6 +2,49 @@
 #include <iostream>
 #include <list>
 
+namespace STD {
+/* STL List Version */
+class LRUCache {
+public:
+    explicit LRUCache(int capacity) {
+        assert(capacity > 0);
+        _Capacity = capacity;
+        _Index.reserve(capacity);
+    }
+
+    int get(int key) {
+        auto iter = _Index.find(key);
+        if (iter == _Index.end()) {
+            return -1;
+        }
+
+        _Cache.splice(_Cache.begin(), _Cache, iter->second);
+        return iter->second->second;
+    }
+
+    void put(int key, int value) {
+        auto iter = _Index.find(key);
+        if (iter != _Index.end()) {
+            iter->second->second = value;
+            _Cache.splice(_Cache.begin(), _Cache, iter->second);
+        } else {
+            if (_Cache.size() >= _Capacity) {
+                _Index.erase(std::prev(_Cache.end())->first);
+                _Cache.erase(std::prev(_Cache.end()));
+            }
+            _Cache.emplace_front(key, value);
+            _Index.emplace(key, _Cache.begin());
+        }
+    }
+
+private:
+    int _Capacity;
+    std::list<std::pair<int, int>> _Cache;
+    std::unordered_map<int, decltype(_Cache)::iterator> _Index;
+};
+
+}
+
 template<typename Key, typename Value>
 struct CacheEntry {
     Key _Key;
