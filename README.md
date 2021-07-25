@@ -59,7 +59,7 @@
 ### Coding Cultivation
 - [ ] :orange_book: Refactoring: Improving the Design of Existing Code
 - [ ] :orange_book: Working Effectively with Legacy Code
-- [ ] :orange_book: Clean Code: A Handbook of Agile Software Craftsmanship :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/clean-code.md)
+- [ ] :orange_book: Clean Code: A Handbook of Agile Software Craftsmanship :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/SE/clean-code.md)
 - [ ] :orange_book: The Clean Coder：A Code of Conduct for Professional Programmers
 
 ### Code Review
@@ -236,6 +236,7 @@
     - [x] [Build Throughput Series: More Efficient Template Metaprogramming](https://devblogs.microsoft.com/cppblog/build-throughput-series-more-efficient-template-metaprogramming/)
     - [x] [How to Pass a Variadic Pack as a First Argument of a Function](https://www.fluentcpp.com/2021/01/22/how-to-pass-a-variadic-pack-as-a-first-argument-of-a-function-in-cpp/)
     - [x] [Dependent Name: Inheritance and Member Functions of Class Templates](http://www.modernescpp.com/index.php/surprise-included-inheritance-and-member-functions-of-class-templates)
+    - [ ] [CppCon 2019: Jorg Brown “Reducing Template Compilation Overhead, Using C++11, 14, 17, and 20.”n](https://www.youtube.com/watch?v=TyiiNVA1syk&list=PLHTh1InhhwT6KhvViwRiTR7I5s09dLCSw&index=11)
 
 * C++11
     - [x] [Herb Sutter: Move Simply](https://herbsutter.com/2020/02/17/move-simply/)
@@ -388,6 +389,7 @@
 - [x] [Research on ptmalloc, tcmalloc and jemalloc memory allocation strategies](https://owent.net/2013/867.html)
 - [x] [Memory optimization summary: ptmalloc, tcmalloc, and jemalloc](http://www.cnhalo.net/2016/06/13/memory-optimize)
 - [x] [Scalable memory allocation using jemalloc](https://www.facebook.com/notes/facebook-engineering/scalable-memory-allocation-using-jemalloc/480222803919)
+- [ ] Linux Kernel Vs. Memory Fragmentation [Part I](http://highscalability.com/blog/2021/6/8/linux-kernel-vs-memory-fragmentation-part-i.html)
 
 ### Linux Network
 - [ ] :orange_book: [Linux High Performance Server Programming (CN)](https://book.douban.com/subject/24722611/) :pencil2:  [Linux Programmnig Noetes](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-programming.md) :pencil2: [Linux System Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxBasic.md)
@@ -766,6 +768,7 @@
 - [ ] [Kubernetes api gateway](https://k8s-it.medium.com/kubernetes-api-gateway-cac310589f4d)
 - [ ] [Uber: Designing Edge Gateway, Uber’s API Lifecycle Management Platform](https://eng.uber.com/gatewayuberapi/)
 - [ ] [Uber: The Architecture of API gateway](https://eng.uber.com/architecture-api-gateway/)
+- [ ] [Uber: Scaling of Uber’s API gateway](https://eng.uber.com/scaling-api-gateway/)
 
 ## Microservice VS SOA, IaaS, Paas, Monolithic
 - [ ] :orange_book: [Microservices vs. Service-Oriented Architecture](https://www.nginx.com/resources/library/microservices-vs-soa/)
