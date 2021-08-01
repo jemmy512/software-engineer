@@ -99,6 +99,11 @@ int main() {
 
 
 /**
+ * Components:
+    1. State Definition
+    2. Transition Condition
+    3. State Action
+ *
  * Allow an object to alter its behavior when its internal state changes.
  * The object will appear to change its class.
  *
