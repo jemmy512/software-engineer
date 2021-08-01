@@ -52,12 +52,12 @@
 - [ ] [Character Encoding](https://en.wikipedia.org/wiki/Character_encoding)
 
 # Programmer Cultivation
-- [ ] https://www.quora.com/What-are-some-of-the-most-basic-things-every-programmer-should-know
-- [ ] https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/index.html
+- [ ] [What are some of the most basic things every programmer should know?](https://www.quora.com/What-are-some-of-the-most-basic-things-every-programmer-should-know)
+- [ ] [97 things every programmer should know?](https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/index.html)
 - [ ] [How to Ask Question The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html)
 
 ### Coding Cultivation
-- [ ] :orange_book: Refactoring: Improving the Design of Existing Code
+- [ ] :orange_book: Refactoring: Improving the Design of Existing Code :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/SE/SE/refactoring-2.md)
 - [ ] :orange_book: Working Effectively with Legacy Code
 - [ ] :orange_book: Clean Code: A Handbook of Agile Software Craftsmanship :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/SE/clean-code.md)
 - [ ] :orange_book: The Clean Coder：A Code of Conduct for Professional Programmers
@@ -162,6 +162,10 @@
 - [ ] :orange_book: Data Structures and Algorithm Analysis in C:Second Edition
 
 # Programming Language
+
+### The Essence of Programming
+- [Niklaus Emil Wirth: Algorithms + Data Structures = Programs .pdf](http://www.ethoberon.ethz.ch/WirthPubl/AD.pdf)
+- [Robert Kowalski: Algorithm = Logic + Control .pdf](https://www.doc.ic.ac.uk/~rak/papers/algorithm%20=%20logic%20+%20control.pdf)
 
 ### C/C++
 <details>
