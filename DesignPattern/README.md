@@ -132,7 +132,11 @@ You can nest mutiple decorator classes to the original class, this requires the 
 ## State
 1. Definition
     * Allow an object to alter its behavior when its internal state changes. The object will appear to change its class.
-2. Three Implementation ways:
+2. Components:
+    * State Definition
+    * Transition Condition
+    * State Action
+3. Three Implementation ways:
     1. branch logic method
     2. look-up table
     3. state mode: avoids judging branch logic by dividing event-triggered state transitions and action execution into different state classes.
