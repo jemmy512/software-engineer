@@ -411,7 +411,7 @@
 - [ ] [The Secret To 10 Million Concurrent Connections -The Kernel Is The Problem, Not The Solution](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
 - [x] [Epoll is fundamentally broken 1/2](https://idea.popcount.org/2017-02-20-epoll-is-fundamentally-broken-12)
 - [x] [Epoll is fundamentally broken 2/2](https://idea.popcount.org/2017-03-20-epoll-is-fundamentally-broken-22)
-
+- [ ] The implementation of epoll [:link: 1 ](https://idndx.com/the-implementation-of-epoll-1/) [:link: 2 ](https://idndx.com/the-implementation-of-epoll-2/) [:link: 3 ](https://idndx.com/the-implementation-of-epoll-3/) [:link: 4 ](https://idndx.com/the-implementation-of-epoll-4/)
 
 ### Lock-free
 - [x] [An Introduction to Lock-Free Programming](https://preshing.com/20120612/an-introduction-to-lock-free-programming/)
