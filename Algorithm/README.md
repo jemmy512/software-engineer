@@ -1,5 +1,5 @@
 # LeetCode Algorithm
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 6 | Zig Zag Conversion | :star: :star: | :white_check_mark: :trophy:
 7 | Reverse Integer | :star: | :white_check_mark: :trophy:
@@ -35,7 +35,7 @@ No | Title | Difficulty | Catogary | Notes
 1041 | Robot Bounded In Circle | :star: :star: | :trophy: :thinking:
 
 ## Array
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 004 | Median of Two Sorted Arrays | :star: :star: :star: | :white_check_mark: :trophy:
 011 | Container With Most Water| :star: :star: :star: | :white_check_mark: :trophy: `Two Pointers`
@@ -64,7 +64,7 @@ No | Title | Difficulty | Catogary | Notes
 448 | Find All Numbers Disappeared in An Array | :star:
 
 ## List
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 2 | Add Two Numbers | :star: :star: | :white_check_mark: :trophy:
 445 | Add Two Numbers II | :star: :star: | :white_check_mark: :trophy:
@@ -93,7 +93,7 @@ No | Title | Difficulty | Catogary | Notes
 817 | Linked List Components | :star: :star: | :white_check_mark: :trophy:
 
 ## Tree
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 98 | Validate Binary Search Tree | :star: | :white_check_mark: :trophy:
 100 | Same Tree | :star: | :white_check_mark: :trophy:
@@ -140,7 +140,7 @@ No | Title | Difficulty | Catogary | Notes
 1803 | Count Pairs With XOR in a Range | :star: :star: :star: | :trophy: `XOR` `Prefix Sum`
 
 ## String
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 008 | atoi | :star: | :white_check_mark: :trophy:
 014 | Longest Common Prefix | :star: | :trophy:
@@ -162,7 +162,7 @@ No | Title | Difficulty | Catogary | Notes
 1062 | Longest Repeating Substring | :star: :star: | :trophy: `BS` `Rabin-Karp`
 
 ## Map
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 001 | Two Sum | :star: | :white_check_mark: :trophy:
 167 | Two Sum II | :star: | :white_check_mark: :trophy: `Two Pointers`
@@ -179,7 +179,7 @@ No | Title | Difficulty | Catogary | Notes
 953 | Verifying an Alien Dictionary  | :star: | :trophy:
 
 ## Stack
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 020 | valid Parentheses | :star: | :white_check_mark:
 32 | Longet Valid Paretheses | :star: :star: :star: |  Stack | :trophy: `DP`
@@ -188,7 +188,7 @@ No | Title | Difficulty | Catogary | Notes
 1249 | Minimum Remove to Make Valid Parentheses| :star: :star: | :trophy: `Bit Set`
 
 ## Queue
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 239 | Sliding Window Maximum | :star: :star: :star: | :trophy: :thinking: `DP` `Bidirectional Array`
 252 | Meeting Rooms | :star: | :white_check_mark: :trophy: `Interval`
@@ -196,7 +196,7 @@ No | Title | Difficulty | Catogary | Notes
 641 | Design Circular Deque | :star: :star:
 
 ## DP
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 5 | Longest Palindromic Substring | :star: :star: | :white_check_mark: :trophy:
 32 | Longet Valid Paretheses | :star: :star: :star: |  DP | :white_check_mark: :trophy: `stack`
@@ -240,7 +240,7 @@ No | Title | Difficulty | Catogary | Notes
 1143 | Longest Common Subsequence | :star: :star: | :white_check_mark: :trophy:
 
 ## Search
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 34 | Search For a Range | :star: :star: | :white_check_mark: :trophy: `BS`
 35 | Search Insert Position | :star: | :white_check_mark: :trophy: `BS`
@@ -257,7 +257,7 @@ No | Title | Difficulty | Catogary | Notes
 973 | K Closest Points to Origin | :star: :star:| Search | :white_check_mark: :trophy: :thinking: `Quick Select` `BS`
 
 ## BackTrack
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 017 | Letter Combination of a Phone Number | :star: :star: | :white_check_mark: :trophy:
 022 | Generate Parenthesis | :star: :star: | :white_check_mark: :trophy: :thinking:
@@ -267,7 +267,7 @@ No | Title | Difficulty | Catogary | Notes
 212 | Word Search II | :star: :star: :star: | :white_check_mark: :trophy: `Matrix`
 
 ## Greedy
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 122 | Best Time to Buy and Sell Stock II | :star: | :white_check_mark: :trophy:
 452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :white_check_mark: :trophy: `Interval`
@@ -280,18 +280,18 @@ No | Title | Difficulty | Catogary | Notes
 992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
 
 ## Divide Conquer
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 23 | Merge K Sorted List | :star: :star: :star: | :white_check_mark: :trophy: `K-way Merge`
 
 ## Sort
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 937 | Reorder Data in Log Files | :star: | :white_check_mark: :trophy:
 347 | Top K Frequent Elements | :star: :star: | :trophy: `Heap` `TODO`
 
 ## Design
-No | Title | Difficulty | Catogary | Notes
+No | Title | Difficulty  | Notes
 -- | -- | --- | --- | ---
 146 | LRU Cache | :star: :star: | :trophy: `Map + List (O(1) + Date Move)`
 380 | Insert Delete GetRandom O(1) | :star: :star: | :trophy: `Map + Vec (O(1) + Random Access)`
