@@ -1,48 +1,37 @@
-#include<iostream>
-#include<vector>
-#include<iterator>
-#include <chrono>
-#include <random>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-template<typename Size = int>
-Size getRandom(Size min, Size max) {
-    std::random_device dev;
-    std::default_random_engine engine(dev());
-    std::uniform_int_distribution<Size> distribution(min, max);
+template<typename T>
+int partition(T& data, int beg, int end) {
+    int i = beg + 1;
+    int pivot = data[beg];
 
-    return distribution(engine);
+    for (int j = i; j < end; ++j) {
+        if (data[j] < pivot) {
+            swap(data[i++], data[j]);
+        }
+    }
+
+    swap(data[beg], data[i-1]);
+
+    return i-1;
 }
 
-
 template<typename T>
-void quickSort(T& data, int beg, int end) { // [begin, end}
-    if (data.size() == 0 || beg + 1 >= end) {
-        return;
+void quickSort(T& data, int beg, int end) {
+    if (beg < end) {
+        auto pivot = partition(data, beg, end);
+        quickSort(data, beg, pivot);
+        quickSort(data, pivot+1, end);
     }
-
-    int open = beg;
-    int close = end-1;
-    int pivot = data[getRandom(open, close)];
-    while (open <= close) {
-        while (data[open] < pivot)
-            ++open;
-        while (data[close] > pivot)
-            --close;
-        if (open <= close)
-            std::swap(data[open++], data[close--]);
-    }
-
-    quickSort(data, beg, open);
-    quickSort(data, open+1, end);
 }
 
 int main(void) {
-    vector<int> data = {3, 2, 5, 8, 4, 7, 6, 9};
+    vector data{3, 3, 2, 5, 3, 3, 8, 4, 7, 6, 9, 3, 3};
     quickSort(data, 0, data.size());
     copy(data.begin(), data.end(), ostream_iterator<int>(cout," "));
-    return 0;
 }
 
 /*
