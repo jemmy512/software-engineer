@@ -14,19 +14,25 @@ Example 3:
 Input: matrix = [["0"]]
 Output: 0
 
-
 Constraints:
 m == matrix.length
 n == matrix[i].length
 1 <= m, n <= 300
-matrix[i][j] is '0' or '1'. */
+matrix[i][j] is '0' or '1'.
+
+Rlatives:
+085. Maximal Rectangle
+764. Largest Plus Sign */
 
 #include <vector>
 #include <initializer_list>
 
 using namespace std;
 
-/* dp(i,j) = min(dp(i−1,j), dp(i−1,j−1), dp(i,j−1))+1 */
+/* dp(i,j) = min(dp(i−1,j), dp(i−1,j−1), dp(i,j−1))+1
+ * dp(i,j) represents the side length of the maximum square
+ * whose bottom right corner is the cell with index (i,j) */
+
 class Solution {
 public:
     int maximalSquare(vector<vector<char>>& matrix) {
