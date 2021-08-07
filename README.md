@@ -338,6 +338,7 @@
         * [Understanding the promise type](https://lewissbaker.github.io/2018/09/05/understanding-the-promise-type)
         * [Understanding Symmetric Transfer](https://lewissbaker.github.io/2020/05/11/understanding_symmetric_transfer)
     - [x] [constexpr Dynamic Memory Allocation, C++20](https://www.cppstories.com/2021/constexpr-new-cpp20/)
+    - [ ] [C++20 Dynamic Allocations at Compile-time](https://andreasfertig.blog/2021/08/cpp20-dynamic-allocations-at-compile-time/)
 
 </details>
 
