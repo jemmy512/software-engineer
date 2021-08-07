@@ -17,7 +17,14 @@ Explanation: Return true because "applepenapple" can be segmented as "apple pen 
              Note that you are allowed to reuse a dictionary word.
 Example 3:
 Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
-Output: false */
+Output: false
+
+Constraints:
+1 <= s.length <= 300
+1 <= wordDict.length <= 1000
+1 <= wordDict[i].length <= 20
+s and wordDict[i] consist of only lowercase English letters.
+All the strings of wordDict are unique. */
 
 #include <vector>
 #include <string>
@@ -39,6 +46,7 @@ public:
         _MaxLen = std::max_element(wordDict.cbegin(), wordDict.cend(), [](const auto& lhs, const auto& rhs) {
             return lhs.size() < rhs.size();
         })->size();
+
         _Dict.insert(wordDict.cbegin(), wordDict.cend());
         vector<bool> dp(s.size()+1, false);
         dp[0] = true;
