@@ -21,7 +21,16 @@ Relatives:
 161. One Edit Distance
 583. Delete Operation for Two Strings
 712. Minimum ASCII Delete Sum for Two Strings
-1035. Uncrossed Lines */
+1035. Uncrossed Lines
+
+    ""  a   c   b   b   d
+""  0   1   2   3   4   5
+a   1   0   1   2   3   4
+a   2   1   2   3   4   5
+b   3   2   3   2   3   4
+c   4   3   2   3   4   5
+d   5   4   3   4   5   4
+*/
 
 #include <vector>
 #include <string>
@@ -41,7 +50,7 @@ public:
                     if (src[i-1] == dst[j-1]) {
                         dp[i][j] = dp[i-1][j-1];
                     } else {
-                        dp[i][j] = min(dp[i-1][j-1] + 2, 1 + min(dp[i-1][j], dp[i][j-1]));
+                        dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1]);
                     }
                 }
             }
