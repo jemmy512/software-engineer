@@ -14,6 +14,7 @@ Explanation: The longest valid parentheses substring is "()()" */
 
 #include <string>
 #include <stack>
+#include <vector>
 #include <algorithm>
 
 using namespace std;
@@ -50,7 +51,7 @@ class Solution {
 public:
     int longestValidParentheses(string s) {
         int result = 0;
-        int dp[s.size()];
+        vector dp(s.size(), 0);
 
         for (int i = 1; i < s.size(); i++) {
             if (s[i] == ')') {
