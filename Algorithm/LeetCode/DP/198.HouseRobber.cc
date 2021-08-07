@@ -17,10 +17,29 @@ We can easy find the recurive fomulary:
 
 The initalization is obvious:
     dp[1] = money[1]
-    dp[2] = max(money[1], money[2]) */
+    dp[2] = max(money[1], money[2])
 
-#include<iostream>
-#include<vector>
+Relatives:
+* 053. Maximum Subarray
+* 121. Best Time to Buy and Sell Stock
+* 152. Maximum Product Subarry
+* 198. House Robber
+* 213. House Robber II
+* 337. House Robber III
+* 238. Product of Array Except Self
+* 256. Paint House
+* 276. Paint Fence
+* 437. Path Sum III
+* 560. Sub array Sum Equals K
+* 600. Non-negative Integers without Consecutive Ones
+* 628. Maximum Product of Three Numbers
+* 656. Coin Path
+* 713. Subarray Product Less Than K
+* 740. Delete and Earn */
+
+#include <iostream>
+#include <vector>
+
 using namespace std;
 
 /* Acutally, we no need to allocate an additional array for DP.
