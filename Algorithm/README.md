@@ -34,6 +34,7 @@ No | Title | Difficulty | Notes
 371 | Sum of Two Integers | :star: :star: | :trophy: |
 400 | Nth Digit | :star: :star: |
 414 | Third Maximum Number | :star: |
+780 | Reaching Points | :star: :star: :star: | :trophy: |
 1041 | Robot Bounded In Circle | :star: :star: | :trophy: :thinking:
 
 ## Array
@@ -200,27 +201,27 @@ No | Title | Difficulty | Notes
 ## DP
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-5 | Longest Palindromic Substring | :star: :star: | :white_check_mark: :trophy:
-32 | Longet Valid Paretheses | :star: :star: :star: | :white_check_mark: :trophy: `stack`
-53 | Maximum Subarray | :star: | :white_check_mark: :trophy: `Prefix Sum` `kadane` `Divide Conquer`
-62 | Unique Paths | :star: :star: | :white_check_mark: :trophy:
-63 | Unique Paths II | :star: :star: | :white_check_mark: :trophy:
+5 | Longest Palindromic Substring | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+32 | Longet Valid Paretheses | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `stack`
+53 | Maximum Subarray | :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `kadane` `Divide Conquer`
+62 | Unique Paths | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+63 | Unique Paths II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 980 | Unique Paths III | :star: :star: :star: | `TODO`
-64 | Minimum Path Sum | :star: :star: | :white_check_mark: :trophy:
-70 | Climbing Stairs | :star: | :white_check_mark: :trophy:
-746 | MinCost Climb Stair | :star: | :white_check_mark: :trophy:
+64 | Minimum Path Sum | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+70 | Climbing Stairs | :star: | :white_check_mark: :white_check_mark: :trophy:
+746 | MinCost Climb Stair | :star: | :white_check_mark: :white_check_mark: :trophy:
 72 | Edit Distance | :star: :star: :star: | :white_check_mark: :trophy:
-583 | Delete Operation for Two Strings | :star: :star: | :white_check_mark: :trophy:
-712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: | :white_check_mark: :trophy:
-91 | Decode Ways | :star: :star: | :white_check_mark: :trophy:
-121 | Best Time to Buy and Sell Stock | :star: | :white_check_mark: :trophy: `Prefix Sum`
-122 | Best Time to Buy and Sell Stock II | :star: | :white_check_mark: :trophy: `Greedy`
+583 | Delete Operation for Two Strings | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+91 | Decode Ways | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+121 | Best Time to Buy and Sell Stock | :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum`
+122 | Best Time to Buy and Sell Stock II | :star: | :white_check_mark: :white_check_mark: :trophy: `Greedy`
 123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | :white_check_mark: :trophy: `Bidirectional Arrary`
 188 | Best Time to Buy and Sell Stock IV | :star: :star: :star:|    :white_check_mark: :trophy: :thinking:
-139 | Word Break | :star: :star: | :white_check_mark: :trophy: :thinking: `Bottom Up`
-152 | Maximum Product Subarry | :star: :star: | :white_check_mark: :trophy: `Prefix Sum`
-198 | House Robber | :star: | :white_check_mark: :trophy:
-221 | Maximal Square | :star: :star: | :white_check_mark: :trophy: :thinking:
+139 | Word Break | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `Bottom Up`
+152 | Maximum Product Subarry | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum`
+198 | House Robber | :star: | :white_check_mark: :white_check_mark: :trophy:
+221 | Maximal Square | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking:
 264 | Ugly Number II | :star: :star: | :white_check_mark: :trophy:
 303 | Range Sum Query Immutable | :star: | :white_check_mark: :trophy:
 307 | Range Sum Query Mutable | :star: :star: | :trophy: `Segment Tree`
