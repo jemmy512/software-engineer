@@ -44,7 +44,7 @@ public:
         vector<int> dp(amount+1, 0);
         dp[0] = 1;
 
-        for (const auto& coin:  coins) {
+        for (const auto& coin : coins) {
             for (int curAmount = coin; curAmount <= amount; ++curAmount) {
                 dp[curAmount] += dp[curAmount-coin];
             }
