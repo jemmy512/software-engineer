@@ -35,13 +35,14 @@ public:
     bool checkSubarraySum(vector<int>& nums, int k) {
         int sum = 0;
         unordered_map<int, int> hashMap;
+        hashMap.reserve(nums.size());
         hashMap.emplace(0, -1);
 
         for (int i = 0; i < nums.size(); ++i) {
             sum += nums[i];
             if (k != 0)
                 sum = sum % k;
-            if (!hashMap.contains(sum)) {
+            if (hashMap.contains(sum)) {
                 if (i - hashMap[sum] > 1)
                     return true;
             } else {
