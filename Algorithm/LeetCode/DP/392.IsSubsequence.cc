@@ -24,11 +24,13 @@ and you want to check one by one to see if t has its subsequence.
 In this scenario, how would you change your code?
 
 Relatives:
+072. Edit Distance
+161. One Edit Distance
 392. Is Subsequence
+583. Delete Operation for Two Strings
+712. Minimum ASCII Delete Sum for Two Strings
 792. Number of Matching Subsequences
-1055. Shortest Way to Form String
-
-072. Edit Distance */
+1055. Shortest Way to Form String */
 
 #include <string>
 #include <vector>
@@ -38,22 +40,17 @@ using namespace std;
 class Solution {
 public:
     bool isSubsequence(string s, string t) {
-        if (s.empty())
-            return true;
+        int beg = 0;
 
-        vector dp(s.size()+1, vector(t.size()+1, 0));
-
-        for (int row = s.size()-1; row >= 0; --row) {
-            for (int col = t.size()-1; col >= 0; --col) {
-                if (s[row] == t[col]) {
-                    dp[row][col] = dp[row+1][col+1] + 1;
-                } else {
-                    dp[row][col] = max(dp[row+1][col], dp[row][col+1]);
-                }
+        for (const auto& chr : s) {
+            beg = t.find(chr, beg);
+            if (beg == string::npos) {
+                return false;
             }
+            ++beg;
         }
 
-        return dp[0][0] == s.size();
+        return true;
     }
 };
 
@@ -82,16 +79,21 @@ public:
 class Solution {
 public:
     bool isSubsequence(string s, string t) {
-        int beg = 0;
+        if (s.empty())
+            return true;
 
-        for (const auto& chr : s) {
-            beg = t.find(chr, beg);
-            if (beg == string::npos) {
-                return false;
+        vector dp(s.size()+1, vector(t.size()+1, 0));
+
+        for (int row = s.size()-1; row >= 0; --row) {
+            for (int col = t.size()-1; col >= 0; --col) {
+                if (s[row] == t[col]) {
+                    dp[row][col] = dp[row+1][col+1] + 1;
+                } else {
+                    dp[row][col] = max(dp[row+1][col], dp[row][col+1]);
+                }
             }
-            ++beg;
         }
 
-        return true;
+        return dp[0][0] == s.size();
     }
 };
