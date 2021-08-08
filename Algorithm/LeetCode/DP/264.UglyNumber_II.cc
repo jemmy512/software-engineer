@@ -10,10 +10,19 @@ Example:
 Input: n = 10
 Output: 12
 Explanation: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12 is the sequence of the first 10 ugly numbers.
-Note:
 
+Note:
 1 is typically treated as an ugly number.
-n does not exceed 1690. */
+n does not exceed 1690.
+
+Relatives:
+263. Ugly Number
+264. Ugly Number II
+1201. Ugly Number III
+023. Merge k Sorted Lists
+204. Count Primes
+279. Perfect Squares
+313. Super Ugly Number */
 
 /* The idea is we generate the ugly number instead of checking every number.
  *
@@ -39,7 +48,9 @@ n does not exceed 1690. */
  * So, we can see we need to maintain three indics in ugly number list,
  * each one represents the place need be mulipied by 2,3,5.
  *
- * And we increase the index who's multiplication is the minimal. */
+ * And we increase the index who's multiplication is the minimal.
+ *
+ * Be careful about the cases such as 6, in which we need to forward both pointers of 2 and 3. */
 
 #include <vector>
 #include <algorithm>
@@ -57,10 +68,15 @@ public:
         int i2 = 0, i3 = 0, i5 = 0;
 
         for (int i = 1; i < n; ++i) {
-            ugly[i] = std::min({ugly[i2]*2, ugly[i3]*3, ugly[i5]*5});
-            if (ugly[i] == ugly[i2]*2) ++i2;
-            if (ugly[i] == ugly[i3]*3) ++i3;
-            if (ugly[i] == ugly[i5]*5) ++i5;
+            auto m2 = ugly[i2]*2;
+            auto m3 = ugly[i3]*3;
+            auto m5 = ugly[i5]*5;
+
+            ugly[i] = std::min({m2, m3, m5});
+
+            if (ugly[i] == m2) ++i2;
+            if (ugly[i] == m3) ++i3;
+            if (ugly[i] == m5) ++i5;
         }
 
         return ugly[n-1];
