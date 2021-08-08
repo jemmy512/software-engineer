@@ -17,13 +17,19 @@ Example 3:
 Input: 14
 Output: false
 Explanation: 14 is not ugly since it includes another prime factor 7.
-Note:
 
+Note:
 1 is typically treated as an ugly number.
 Input is within the 32-bit signed integer range: [−231,  231 − 1].
 
-Reletive:
-264.UglyNumber_II.cc */
+Relatives:
+263. Ugly Number
+264. Ugly Number II
+1201. Ugly Number III
+023. Merge k Sorted Lists
+204. Count Primes
+279. Perfect Squares
+313. Super Ugly Number */
 
 #include <vector>
 #include <algorithm>
@@ -34,12 +40,11 @@ public:
         if (num < 1)
             return false;
 
-        auto divisors = {2, 3, 5};
-        std::for_each(divisors.begin(), divisors.end(), [&num](const auto& div) {
+        for (const auto& div : {2, 3, 5}) {
             while (num % div == 0) {
                 num /= div;
             }
-        });
+        };
 
         return num == 1;
     }
