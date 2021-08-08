@@ -47,9 +47,9 @@ gcc -o p2 main2.c ./libvector.so
     clang -Xclang -fdump-record-layouts -stdlib=libc++ -c model.cc
     clang -Xclang -fdump-vtable-layouts -stdlib=libc++ -c model.cc
     ```
-* ![gcc-shared-ptr.png](../BookNotes/Images/gcc-shared-ptr.png)
+* ![gcc-shared-ptr.png](https://github.com/Jemmy512/book-notes/blob/master/Images/gcc-shared-ptr.png)
 
 # C++
 ## OOP
 ### Inheritance
-![Inheritance](../BookNotes/Images/cpp-virtual-inheritance.png)
+![Inheritance](https://github.com/Jemmy512/book-notes/blob/master/Images/cpp-virtual-inheritance.png)
