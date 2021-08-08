@@ -56,7 +56,7 @@ public:
         for (int i = 2; i < s.size(); ++i) {
             int path = 0;
             if (isValid(s[i])) {
-                path = prevOneStep;
+                path += prevOneStep;
             }
             if (isValid(s[i-1], s[i])) {
                 path += prevTwoSteps;
