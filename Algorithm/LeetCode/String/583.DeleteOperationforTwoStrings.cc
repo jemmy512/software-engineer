@@ -18,9 +18,12 @@ Constraints:
 word1 and word2 consist of only lowercase English letters.
 
 Relatives:
+072. Edit Distance
 161. One Edit Distance
+392. Is Subsequence
 583. Delete Operation for Two Strings
 712. Minimum ASCII Delete Sum for Two Strings
+792. Number of Matching Subsequences
 1035. Uncrossed Lines
 
     ""  a   c   b   b   d
