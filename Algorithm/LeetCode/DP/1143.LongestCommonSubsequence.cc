@@ -32,7 +32,15 @@ Relatives:
 1682. Longest Palindromic Subsequence II
 1062. Longest Repeating Substring
 1092. Shortest Common Supersequence
-1143. Longest Common Subsequence */
+1143. Longest Common Subsequence
+
+072. Edit Distance
+161. One Edit Distance
+392. Is Subsequence
+583. Delete Operation for Two Strings
+712. Minimum ASCII Delete Sum for Two Strings
+792. Number of Matching Subsequences
+1035. Uncrossed Lines */
 
 #include <string>
 #include <vector>
@@ -40,6 +48,31 @@ Relatives:
 
 using namespace std;
 
+// bottom -> up
+class Solution {
+public:
+    int longestCommonSubsequence(string strShort, string strLong) {
+        if (strLong.size() < strShort.size()) {
+            std::swap(strShort, strLong);
+        }
+
+        vector prev(strShort.size()+1, 0);
+        vector cur(strShort.size()+1, 0);
+
+        for (int col = 1; col <= strLong.size(); ++col) {
+            for (int row = 1; row <= strShort.size(); ++row) {
+                cur[row] = (strShort[row-1] == strLong[col-1])
+                    ? (1+prev[row-1])
+                    : std::max(prev[row], cur[row-1]);
+            }
+            std::swap(cur, prev);
+        }
+
+        return prev[strShort.size()];
+    }
+};
+
+// top -> down
 class Solution {
 public:
     int longestCommonSubsequence(string strShort, string strLong) {
