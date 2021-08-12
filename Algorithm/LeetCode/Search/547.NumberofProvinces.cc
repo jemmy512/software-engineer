@@ -45,6 +45,7 @@ public:
         if (isConnected.empty())
             return 0;
 
+        int count = 0;
         visited = vector<bool>(isConnected.size(), false);
 
         for (int row = 0; row < isConnected.size(); ++row) {
@@ -68,7 +69,6 @@ private:
     }
 
 private:
-    int count{0};
     vector<bool> visited;
 };
 
