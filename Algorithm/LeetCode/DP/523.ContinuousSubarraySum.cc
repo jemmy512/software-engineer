@@ -22,7 +22,13 @@ Realtives:
 209. Minimum Size Subarray Sum
 325. Maximum Size Subarray Sum Equals k
 523. Continuous Subarray Sum
-560. Subarray Sum Equals K */
+560. Subarray Sum Equals K
+
+0516. Longest Palindromic Subsequence
+1682. Longest Palindromic Subsequence II
+1062. Longest Repeating Substring
+1092. Shortest Common Supersequence
+1143. Longest Common Subsequence */
 
 #include <vector>
 #include <unordered_set>
