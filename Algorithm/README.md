@@ -27,7 +27,7 @@ No | Title | Difficulty | Notes
 202 | Happy Number | :star: | :trophy: |
 204 | Count Primes | :star: | :trophy: |
 231 | Power Of Two | :star: | :white_check_mark: :trophy: |
-263 | Ugly Number | :star: | :white_check_mark: :trophy: |
+263 | Ugly Number | :star: | :white_check_mark: :white_check_mark: :trophy: |
 268 | Missing Number | :star: | :white_check_mark: :trophy: |
 292 | Nim Game | :star: | :trophy: |
 326 | Power of Three | :star: | :trophy: |
@@ -55,7 +55,7 @@ No | Title | Difficulty | Notes
 088 | Merge Sorted Array | :star: |  :trophy:
 169 | Majority Element | :star: | :trophy:
 189 | Rotate Array | :star: :star: | :white_check_mark:
-209 | Minimum Size Subarray Sum | :star: :star: | :white_check_mark: :trophy: `Prefix Sum` `BS`
+209 | Minimum Size Subarray Sum | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `BS`
 325 | Maximum Size Subarray Sum Equals k | :star: :star: |  :white_check_mark: :trophy: `Prefix Sum` `Map`
 560 | Subarray Sum Equals K | :star: :star: | :white_check_mark: :trophy: `Prefix Sum` `Map`
 215 | Kth Largest Element in an Array | :star: :star: | :white_check_mark: :trophy: `Heap Sort` `Quick Sort`
@@ -222,17 +222,16 @@ No | Title | Difficulty | Notes
 152 | Maximum Product Subarry | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum`
 198 | House Robber | :star: | :white_check_mark: :white_check_mark: :trophy:
 221 | Maximal Square | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking:
-264 | Ugly Number II | :star: :star: | :white_check_mark: :trophy:
-303 | Range Sum Query Immutable | :star: | :white_check_mark: :trophy:
-307 | Range Sum Query Mutable | :star: :star: | :trophy: `Segment Tree`
-304 | Range Sum Query 2D Immutable | :star: :star: | :white_check_mark: :trophy:
-322 | Coin Change | :star: :star: | :white_check_mark: :trophy: `Bottom Up` `Top Down`
-518 | Coin Change 2 | :star: :star: | :white_check_mark: :trophy: :thinking: `Bottom Up` `Top Down`
-338 | Counting Bits | :star: :star: | :white_check_mark: :trophy: :thinking: `Bit`
-392 | Is Subsequence | :star: :star: | :white_check_mark: :trophy:
-509 | Fibonacci Number| :star: | :white_check_mark: :trophy:
-523 | Continuous Subarray Sum  | :star: :star: | :white_check_mark: :thinking: `Prefix Sum` `Map`
-547 | Number of Provinces | :star: :star: | :white_check_mark: :trophy: `Matrix`
+264 | Ugly Number II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+303 | Range Sum Query Immutable | :star: | :white_check_mark: :white_check_mark: :trophy:
+307 | Range Sum Query Mutable | :star: :star: | :white_check_mark: :trophy: `Segment Tree`
+304 | Range Sum Query 2D Immutable | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+322 | Coin Change | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Bottom Up` `Top Down`
+518 | Coin Change 2 | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `Bottom Up` `Top Down`
+338 | Counting Bits | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `Bit`
+392 | Is Subsequence | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+509 | Fibonacci Number| :star: | :white_check_mark: :white_check_mark: :trophy:
+523 | Continuous Subarray Sum  | :star: :star: | :white_check_mark: :white_check_mark: :thinking: `Prefix Sum` `Map`
 718 | Maximum Length of Repeated Subarray | :star: :star: | :white_check_mark:
 1137 | N-th Tribonacci Number | :star: | :trophy:
 647 | Palindromic Substrings | :star: :star: | `TODO`
@@ -240,7 +239,7 @@ No | Title | Difficulty | Notes
 1048 | Longest String Chain | :star: :star: | :white_check_mark:
 516 | Longest Palindromic Subsequence | :star: :star: | :white_check_mark:
 1025 | Divisor Game | :star: | :white_check_mark: :trophy:
-1143 | Longest Common Subsequence | :star: :star: | :white_check_mark: :trophy:
+1143 | Longest Common Subsequence | :star: :star: | :white_check_mark: :white_check_mark: :trophy:  `Matrix`
 
 ## Search
 No | Title | Difficulty | Notes
@@ -254,6 +253,7 @@ No | Title | Difficulty | Notes
 200 | Number of Islands | :star: :star: | :white_check_mark: :trophy: `DFS` `BFS` `Matrix`
 286 | Walls and Gates | :star: :star: | :white_check_mark: :trophy: :thinking: `BFS` `Matrix`
 323 | Number of Connected Components in an Undirected Graph | :star: :star: | :trophy: :thinking: `Union Find` `Matrix`
+547 | Number of Provinces | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `DFS` `Matrix`
 695 | Max Area of Island  | :star: :star: | :white_check_mark: :trophy: `DFS` `Matrix`
 374 | Guess Number Higher Or Lower | :star: | :white_check_mark:  :trophy:
 378 | Kth Smallest Element in a Sorted Matrix  | :star: :star:| :trophy: :thinking: `BS` `Matrix`
