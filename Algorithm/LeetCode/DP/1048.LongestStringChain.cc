@@ -30,10 +30,12 @@ Relatives:
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <unordered_set>
 #include <unordered_map>
 
 using namespace std;
 
+// bottom-up solution
 class Solution {
 public:
     int longestStrChain(vector<string>& words) {
@@ -55,5 +57,47 @@ public:
         }
 
         return maxLen;
+    }
+};
+
+// top-down, dfs: recurstion + memorization
+class Solution {
+public:
+    int longestStrChain(vector<string> &words) {
+        unordered_set<string> wordSet{words.cbegin(), words.cend()};
+        unordered_map<string, int> dp;
+        dp.reserve(wrodsPresent.sisze());
+
+        int manLen = 0;
+
+        for (const auto& word : words) {
+            manLen = max(manLen, dfs(wordSet, dp, word));
+        }
+
+        return manLen;
+    }
+
+private:
+    int dfs(const unordered_set<string>& words, unordered_map<string, int>& dp, const string& word) {
+        // If the word is encountered previously we just return its value present in the map (dpization).
+        if (dp.find(word) != dp.end()) {
+            return dp[word];
+        }
+
+        // This stores the maximum length of word sequence possible with the 'word' as the
+        auto maxLength = 1;
+
+        // creating all possible strings taking out one character at a time from the `word`
+        for (auto i = 0; i < word.length(); i++) {
+            auto pred = word.substr(0, i) + word.substr(i + 1);
+            // If the new word formed is present in the list, we do a dfs search with this pred.
+            if (words.find(pred) != words.end()) {
+                auto predLen = 1 + dfs(words, dp, pred);
+                maxLength = max(maxLength, predLen);
+            }
+        }
+        dp[word] = maxLength;
+
+        return maxLength;
     }
 };
