@@ -51,8 +51,8 @@ public:
         for (int i = 0; i < nums.size(); ++i) {
             /* Pitfall: if no element statifies the requirement, max_element returns the first element
              * reutrn the end() only if the range [begin, end) is empty */
-            auto pos = max_element(lenVec.cbegin(), lenVec.cend(), [&tar = nums[i]](const auto& lhs, const auto& rhs) {
-                return lhs.first < tar && rhs.first < tar && lhs.second < rhs.second;
+            auto pos = max_element(lenVec.cbegin(), lenVec.cend(), [&tar = nums[i]](const auto& largest, const auto& item) {
+                return largest.first < tar && item.first < tar && largest.second < item.second;
             });
 
             auto len = pos != lenVec.cbegin() && pos != lenVec.cend() ? (pos->second + 1) : 1;
