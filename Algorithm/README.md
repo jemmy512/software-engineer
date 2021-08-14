@@ -11,8 +11,8 @@ No | Title | Difficulty | Notes
 18 | 4 Sum | :star: :star: | :white_check_mark: :trophy: |
 50 | pow-x-n | :star: :star: | `TODO`
 65 | Valid Number | :star: :star: :star: | :white_check_mark: :trophy: |
-66 | Plus One | :star: | :white_check_mark:  :trophy: |
-67 | Add Binary | :star: | :white_check_mark: :trophy: |
+66 | Plus One | :star: | :white_check_mark: :white_check_mark: :trophy: |
+67 | Add Binary | :star: | :white_check_mark: :white_check_mark: :trophy: |
 69 | Sqrt(x) | :star: | :white_check_mark: :trophy: |
 168 | Excel Sheet Colum Title | :star: | :white_check_mark: :trophy: |
 171 | Excel Sheet Colum Number | :star: | :white_check_mark: :trophy: |
@@ -31,7 +31,7 @@ No | Title | Difficulty | Notes
 268 | Missing Number | :star: | :white_check_mark: :trophy: |
 292 | Nim Game | :star: | :trophy: |
 326 | Power of Three | :star: | :trophy: |
-371 | Sum of Two Integers | :star: :star: | :trophy: |
+371 | Sum of Two Integers | :star: :star: | :white_check_mark: :trophy: |
 400 | Nth Digit | :star: :star: |
 414 | Third Maximum Number | :star: |
 780 | Reaching Points | :star: :star: :star: | :trophy: |
@@ -69,9 +69,9 @@ No | Title | Difficulty | Notes
 ## List
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-2 | Add Two Numbers | :star: :star: | :white_check_mark: :trophy:
-445 | Add Two Numbers II | :star: :star: | :white_check_mark: :trophy:
-19 | Remove Nth Node From End of List | :star: :star: | :white_check_mark: :trophy:
+2 | Add Two Numbers | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+445 | Add Two Numbers II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+19 | Remove Nth Node From End of List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 21 | Merge Two Sorted Lists | :star: | :white_check_mark:
 23 | Merge K Sorted List | :star: :star: :star: | :white_check_mark: :trophy: `K-way Merge` `Divide Conquer`
 24 | Swap Nodes in Pairs | :star: :star: | :white_check_mark: trophy:
@@ -157,7 +157,7 @@ No | Title | Difficulty | Notes
 242 | Valid Anagra | :star: | :trophy:
 389 | Findthe Difference | :star: | :white_check_mark: :trophy:
 409 | Longest Palindrome | :star: | :trophy:
-415 | Adding Strings | :star: | :white_check_mark: String
+415 | Adding Strings | :star: | :white_check_mark: :white_check_mark: String
 443 | String Compression | :star: :star:
 344 | Reverse String | :star:
 345 | Reverse Vowels of a String | :star: | :trophy:
@@ -232,14 +232,14 @@ No | Title | Difficulty | Notes
 392 | Is Subsequence | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 509 | Fibonacci Number| :star: | :white_check_mark: :white_check_mark: :trophy:
 523 | Continuous Subarray Sum  | :star: :star: | :white_check_mark: :white_check_mark: :thinking: `Prefix Sum` `Map`
-718 | Maximum Length of Repeated Subarray | :star: :star: | :white_check_mark:
-1137 | N-th Tribonacci Number | :star: | :trophy:
+718 | Maximum Length of Repeated Subarray | :star: :star: | :white_check_mark: :white_check_mark:
+1137 | N-th Tribonacci Number | :star: | :white_check_mark: :trophy:
 647 | Palindromic Substrings | :star: :star: | `TODO`
-300  | Longest Increasing Subsequence | :star: :star: | :white_check_mark: :trophy:
-1048 | Longest String Chain | :star: :star: | :white_check_mark:
-516 | Longest Palindromic Subsequence | :star: :star: | :white_check_mark:
-1025 | Divisor Game | :star: | :white_check_mark: :trophy:
-1143 | Longest Common Subsequence | :star: :star: | :white_check_mark: :white_check_mark: :trophy:  `Matrix`
+300  | Longest Increasing Subsequence | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+1048 | Longest String Chain | :star: :star: | :white_check_mark: :white_check_mark:
+516 | Longest Palindromic Subsequence | :star: :star: | :white_check_mark: :white_check_mark:
+1025 | Divisor Game | :star: | :white_check_mark: :white_check_mark: :trophy:
+1143 | Longest Common Subsequence | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Matrix`
 
 ## Search
 No | Title | Difficulty | Notes
@@ -312,10 +312,10 @@ No | Title | Difficulty | Notes
 3. Existing Problem
 
 ## Steps:
-1. Determine last step status and subproblems
-2. Determine the state transition equation
-3. Determine initializers and boundary check
-4. Determine calculating order
+1. Defining last step status and subproblems
+2. Defining the state transition equation
+3. Defining initializers and boundary check
+4. Defining calculating order
 
 ## Catogories
 1. Coordinate
@@ -357,6 +357,9 @@ extract last bit | A&-A or A&~(A-1) or x^(x&(x-1))
 remove last bit | A & (A-1)
 get all | 1-bits ~0
 -A | ~A + 1
+
+* XOR is a sum of two integers in the binary form without taking carry into account
+* Carry is logical AND of two input numbers, shifted one bit to the left: carry=(x&y)<<1.
 
 # Patterns
 * Pattern: Sliding Window
