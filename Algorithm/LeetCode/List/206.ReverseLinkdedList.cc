@@ -6,9 +6,17 @@ click to show more hints.
 Hint:
 A linked list can be reversed either iteratively or recursively. Could you implement both?
 
+onstraints:
+The number of nodes in the list is the range [0, 5000].
+-5000 <= Node.val <= 5000
+
 Relatives:
 206. Reverse Linked List
-092. Reverse Linked List II */
+092. Reverse Linked List II
+
+024. Swap Nodes in Pairs
+025. Reverse Nodes in k-Group
+1721. Swapping Nodes in a Linked List */
 
 struct ListNode {
     int val{0};
@@ -16,7 +24,7 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
 };
 
-/* solution 1 */
+/* solution 1: reverse */
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
@@ -35,7 +43,11 @@ public:
     }
 };
 
-/* solution 2 */
+/* solution 2: insert
+ * Suitable for range based reserve problem:
+ *  092. Reverse Linked List II
+ *  024. Swap Nodes in Pairs
+ *  025. Reverse Nodes in k-Group */
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
