@@ -1,5 +1,5 @@
 /* Medium
-Given a (singly) linked list with head node root,
+Given a (singly) linked list with node node root,
 write a function to split the linked list into k consecutive linked list "parts".
 
 The length of each part should be as equal as possible:
@@ -60,26 +60,26 @@ class Solution {
 public:
     vector<ListNode*> splitListToParts(ListNode* root, int k) {
         auto len = 0;
-        auto* head = root;
-        while (head) {
+        auto* node = root;
+        while (node) {
             ++len;
-            head = head->next;
+            node = node->next;
         }
 
         auto remainder = len < k ? 0 : len % k;
         auto split = len < k ? 1 : len / k;
         auto i = 0;
+        node = root;
         vector<ListNode*> result(k, nullptr);
 
-        head = root;
-        while (head) {
-            result[i++] = head;
+        while (node) {
+            result[i++] = node;
             auto size = remainder ? (--remainder, split + 1) : split;
-            auto* prev = head;
-            while (size && head) {
+            auto* prev = node;
+            while (size && node) {
                 --size;
-                prev = head;
-                head = head->next;
+                prev = node;
+                node = node->next;
             }
             prev->next = nullptr;
         }
