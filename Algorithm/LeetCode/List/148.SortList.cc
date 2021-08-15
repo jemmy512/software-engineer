@@ -36,7 +36,10 @@ public:
         if (!head || !head->next)
             return head;
 
-        ListNode *beg = head, *mid = head->next;
+        auto* beg = head;
+        /* auto* mid = head;
+         * [4, 2] can cause dead loop */
+        auto* mid = head->next->next;
         while (mid && mid->next) {
             beg = beg->next;
             mid = mid->next->next;
@@ -44,6 +47,7 @@ public:
 
         mid = beg->next;
         beg->next = nullptr;
+
         beg = sortList(head);
         mid = sortList(mid);
 
