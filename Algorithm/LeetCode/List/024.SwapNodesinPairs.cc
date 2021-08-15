@@ -9,6 +9,9 @@ Your algorithm should use only constant extra space.
 You may not modify the values in the list's nodes, only nodes itself may be changed.
 
 Relatives:
+206. Reverse Linked List
+092. Reverse Linked List II
+
 024. Swap Nodes in Pairs
 025. Reverse Nodes in k-Group
 1721. Swapping Nodes in a Linked List */
@@ -16,20 +19,69 @@ Relatives:
 struct ListNode {
     int val;
     ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
- };
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
 
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
         if (!head) return head;
 
-        ListNode *node = head;
-        while (node && node->next) {
-            swap(node->val, node->next->val);
-            node = node->next->next;
+        ListNode dummy;
+        dummy.next = head;
+        auto* prev = &dummy;
+
+        while (head && head->next) {
+            auto* next = head->next;
+            head->next = next->next;
+            next->next = head;
+            prev->next = next;
+            prev = head;
+            head = head->next;
         }
 
-        return head;
+        return dummy.next;
     }
 };
+
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        return reverseKGrpu(head, 2);
+    }
+
+private:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        ListNode dummy{0};
+        dummy.next = head;
+        auto* groupBeg = head; // [groupBeg, groupEnd]
+        auto* groupEnd = head;
+        auto* listTail = &dummy;
+
+        int i = 0;
+        while (groupEnd) {
+            if (++i % k == 0) {
+                auto* slow = groupEnd->next;
+                auto* mid = groupBeg;
+                auto* fast = groupBeg;
+
+                while (slow != groupEnd) {
+                    fast = mid->next;
+                    mid->next = slow;
+                    slow = mid;
+                    mid = fast;
+                }
+
+                listTail->next = groupEnd;
+                listTail = groupBeg;
+                groupBeg = groupEnd = fast;
+            } else {
+                groupEnd = groupEnd->next;
+            }
+        }
+
+        return dummy.next;
+    }
+}
