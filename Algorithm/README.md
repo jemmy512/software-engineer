@@ -42,7 +42,7 @@ No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 004 | Median of Two Sorted Arrays | :star: :star: :star: | :white_check_mark: :trophy:
 011 | Container With Most Water| :star: :star: :star: | :white_check_mark: :trophy: `Two Pointers`
-027 | Remove Element | :star: | :white_check_mark: :trophy:
+027 | Remove Element | :star: | :white_check_mark: :white_check_mark: :trophy:
 041 | First Missing Positive | :star: :star: :star: | :white_check_mark: :trophy:
 054 | Spiral Matrix | :star: :star: | :trophy: `Matrix`
 056 | Merge Intervals | :star: :star: | :trophy: `Interval`
@@ -72,28 +72,28 @@ No | Title | Difficulty | Notes
 2 | Add Two Numbers | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 445 | Add Two Numbers II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 19 | Remove Nth Node From End of List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-21 | Merge Two Sorted Lists | :star: | :white_check_mark:
-23 | Merge K Sorted List | :star: :star: :star: | :white_check_mark: :trophy: `K-way Merge` `Divide Conquer`
-24 | Swap Nodes in Pairs | :star: :star: | :white_check_mark: trophy:
-25 | Reverse Nodes in K-Group | :star: :star: :star: | :white_check_mark: :trophy:
-61 | Roate List By K | :star: :star: | :white_check_mark: :trophy:
-86 | Partition List | :star: :star: | :white_check_mark: :trophy:
-206 | Reverse Linkded List | :star: | :white_check_mark: :trophy: `3 solutions`
-92 | Reverse Linked List II | :star: :star: | :trophy:
-138 | Copy List With Random Pointer  | :star: | :white_check_mark: :trophy: :thinking:
-141 | linked List Cycle | :star: | :white_check_mark: :trophy: `Two Pointers` `Cycle`
-142 | Linked List Cycle II | :star: :star: | :white_check_mark: :trophy: `Two Pointers` `Cycle`
-287 | Find the Duplicate Number | :star: :star: | :white_check_mark: :trophy: `Two Pointers` `Cycle`
-143 | Reorder List | :star: :star: | :white_check_mark: :trophy:
-147 | Insertion Sorted List | :star: :star: | :white_check_mark: :trophy:
-148 | Sort List | :star: :star: | :white_check_mark: :trophy: `Div-Conq`
-160 | Intersection of Two Linked Lists | :star: | :white_check_mark: :trophy:
-203 | Remove Linked List Element | :star: | :white_check_mark: :trophy:
-234 | Palindrome Linked List | :star: | :white_check_mark: :trophy:
-237 | Delete Node In A Linked List | :star: | :white_check_mark: :trophy:
-328 | Odd Even Linked List | :star: :star: | :white_check_mark: :trophy:
-725 | Split Linked List in Parts | :star: :star: | :white_check_mark: :trophy:
-817 | Linked List Components | :star: :star: | :white_check_mark: :trophy:
+21 | Merge Two Sorted Lists | :star: | :white_check_mark: :white_check_mark:
+23 | Merge K Sorted List | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `K-way Merge` `Divide Conquer`
+24 | Swap Nodes in Pairs | :star: :star: | :white_check_mark: :white_check_mark: trophy:
+25 | Reverse Nodes in K-Group | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+61 | Roate List By K | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+86 | Partition List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+206 | Reverse Linkded List | :star: | :white_check_mark: :white_check_mark: :trophy: `3 solutions`
+92 | Reverse Linked List II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+138 | Copy List With Random Pointer  | :star: | :white_check_mark: :white_check_mark: :trophy: :thinking:
+141 | linked List Cycle | :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers` `Cycle`
+142 | Linked List Cycle II | :star: :star: | :white_check_mark: white_check_mark: :trophy: `Two Pointers` `Cycle`
+287 | Find the Duplicate Number | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers` `Cycle`
+143 | Reorder List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+147 | Insertion Sorted List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+148 | Sort List | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Div-Conq`
+160 | Intersection of Two Linked Lists | :star: | :white_check_mark: :white_check_mark: :trophy:
+203 | Remove Linked List Element | :star: | :white_check_mark: :white_check_mark: :trophy:
+234 | Palindrome Linked List | :star: | :white_check_mark: :white_check_mark: :trophy:
+237 | Delete Node In A Linked List | :star: | :white_check_mark: :white_check_mark: :trophy:
+328 | Odd Even Linked List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+725 | Split Linked List in Parts | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+817 | Linked List Components | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 
 ## Tree
 No | Title | Difficulty | Notes
@@ -232,6 +232,7 @@ No | Title | Difficulty | Notes
 392 | Is Subsequence | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 509 | Fibonacci Number| :star: | :white_check_mark: :white_check_mark: :trophy:
 523 | Continuous Subarray Sum  | :star: :star: | :white_check_mark: :white_check_mark: :thinking: `Prefix Sum` `Map`
+546 | Remove Boxes | :star: :star: :star: |
 718 | Maximum Length of Repeated Subarray | :star: :star: | :white_check_mark: :white_check_mark:
 1137 | N-th Tribonacci Number | :star: | :white_check_mark: :trophy:
 647 | Palindromic Substrings | :star: :star: | `TODO`
@@ -285,7 +286,7 @@ No | Title | Difficulty | Notes
 ## Divide Conquer
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-23 | Merge K Sorted List | :star: :star: :star: | :white_check_mark: :trophy: `K-way Merge`
+23 | Merge K Sorted List | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `K-way Merge`
 
 ## Sort
 No | Title | Difficulty | Notes
