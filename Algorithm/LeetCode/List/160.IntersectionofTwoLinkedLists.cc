@@ -44,13 +44,16 @@ struct ListNode {
 
 class Solution {
 public:
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        while (headA != headB) {
-            headA = headA ? headA->next : headB;
-            headB = headB ? headB->next : headA;
+    ListNode* getIntersectionNode(ListNode *headA, ListNode *headB) {
+        auto* nodeA = headA;
+        auto* nodeB = headB;
+
+        while (nodeA != nodeB) {
+            nodeA = nodeA ? nodeA->next : headB;
+            nodeB = nodeB ? nodeB->next : headA;
         }
 
-        return headA;
+        return nodeA;
     }
 
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
