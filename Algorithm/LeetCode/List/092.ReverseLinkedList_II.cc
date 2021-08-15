@@ -16,19 +16,24 @@ The number of nodes in the list is n.
 
 Relatives:
 206. Reverse Linked List
-092. Reverse Linked List II */
+092. Reverse Linked List II
+
+024. Swap Nodes in Pairs
+025. Reverse Nodes in k-Group
+1721. Swapping Nodes in a Linked List */
 
 struct ListNode {
     int val;
     ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
  };
 
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int m, int n) {
-        if (!head) {
-            return nullptr;
+        if (!head || m >= n) {
+            return head;
         }
 
         ListNode dummy(0);
