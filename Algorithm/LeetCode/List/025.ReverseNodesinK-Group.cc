@@ -13,7 +13,16 @@ Note:
 Only constant extra memory is allowed.
 You may not alter the values in the list's nodes, only nodes itself may be changed.
 
+Constraints:
+The number of nodes in the list is in the range sz.
+1 <= sz <= 5000
+0 <= Node.val <= 1000
+1 <= k <= sz
+
 Relatives:
+206. Reverse Linked List
+092. Reverse Linked List II
+
 024. Swap Nodes in Pairs
 025. Reverse Nodes in k-Group
 1721. Swapping Nodes in a Linked List */
@@ -28,10 +37,12 @@ class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
         ListNode dummy{0};
-        auto* groupBeg = head;
+        dummy.next = head;
+        auto* groupBeg = head; // [groupBeg, groupEnd]
         auto* groupEnd = head;
         auto* listTail = &dummy;
 
+        /* only works when 1 <= k <= sz */
         int i = 0;
         while (groupEnd) {
             if (++i % k == 0) {
