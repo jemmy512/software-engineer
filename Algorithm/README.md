@@ -74,7 +74,7 @@ No | Title | Difficulty | Notes
 19 | Remove Nth Node From End of List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 21 | Merge Two Sorted Lists | :star: | :white_check_mark: :white_check_mark:
 23 | Merge K Sorted List | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `K-way Merge` `Divide Conquer`
-24 | Swap Nodes in Pairs | :star: :star: | :white_check_mark: :white_check_mark: trophy:
+24 | Swap Nodes in Pairs | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 25 | Reverse Nodes in K-Group | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 61 | Roate List By K | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 86 | Partition List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
@@ -82,7 +82,7 @@ No | Title | Difficulty | Notes
 92 | Reverse Linked List II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 138 | Copy List With Random Pointer  | :star: | :white_check_mark: :white_check_mark: :trophy: :thinking:
 141 | linked List Cycle | :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers` `Cycle`
-142 | Linked List Cycle II | :star: :star: | :white_check_mark: white_check_mark: :trophy: `Two Pointers` `Cycle`
+142 | Linked List Cycle II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers` `Cycle`
 287 | Find the Duplicate Number | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers` `Cycle`
 143 | Reorder List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 147 | Insertion Sorted List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
@@ -98,18 +98,18 @@ No | Title | Difficulty | Notes
 ## Tree
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-98 | Validate Binary Search Tree | :star: | :white_check_mark: :trophy:
-100 | Same Tree | :star: | :white_check_mark: :trophy:
-101 | Symmetric Tree | :star: | :white_check_mark: :trophy:
-102 | Binary Tree Level Order Traversal | :star: :star: | :white_check_mark: :trophy:
+98 | Validate Binary Search Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
+100 | Same Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
+101 | Symmetric Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
+102 | Binary Tree Level Order Traversal | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 107 | Binary Tree Level Order Traversal II | :star: | :white_check_mark: :trophy:
-103 | Bianry Tree Zig Zag Level Tree Traverse | :star: :star: | :white_check_mark: :trophy:
-104 | Maximum Depth of Binary Tree | :star: | :white_check_mark: :trophy:
-111 | Minimum Depth of Binary Tree | :star: | :white_check_mark: :trophy:
+103 | Bianry Tree Zig Zag Level Tree Traverse | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+104 | Maximum Depth of Binary Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
+111 | Minimum Depth of Binary Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
 105 | Construct Binary Tree from Preorder and Inorder Traversal | :star: :star: | :trophy: :thinking:
 106 | Construct Binary Tree from Inorder and Postorder Traversal | :star: :star: | :trophy:
-108 | Convert Sorted Array to Binary Search Tree | :star: :star: | :white_check_mark: :trophy:
-109 | Convert Sorted List to Binary Search Tree | :star: | :white_check_mark: :trophy:
+108 | Convert Sorted Array to Binary Search Tree | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+109 | Convert Sorted List to Binary Search Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
 110 | Balanced Bianry Tree | :star: | :white_check_mark: :trophy: `DFS`
 112 | Path Sum | :star: | :white_check_mark: :trophy: `DFS`
 113 | Path Sum II | :star: :star: | :white_check_mark: :trophy: `DFS`
@@ -169,9 +169,9 @@ No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 001 | Two Sum | :star: | :white_check_mark: :trophy:
 167 | Two Sum II | :star: | :white_check_mark: :trophy: `Two Pointers`
-170 | Two Sum III - Data structure :star: | :white_check_mark: :trophy:
+170 | Two Sum III - Data structure ｜ :star: | :white_check_mark: :trophy:
 653 | Two Sum IV | :star: | :white_check_mark: :trophy: `Inorder + Two Pointers` `Complement Map`
-1214 | Two Sum BSTs | :star: :star: | :white_check_mark: :trophy: `Inorder + Compleent Map` `Tree`
+1214 | Two Sum BSTs | :star: :star: | :white_check_mark: :trophy: `Inorder + Complement Map` `Tree`
 266 | Palindrome Permutation | :star: | :white_check_mark: :trophy:
 267 | Palindrome Permutation II | :star: :star: | :white_check_mark: :trophy: `Backtracking`
 290 | Word Pattern | :star: | :trophy:
