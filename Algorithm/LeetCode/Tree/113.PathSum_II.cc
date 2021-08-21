@@ -36,35 +36,29 @@ struct TreeNode {
 class Solution {
 public:
     vector<vector<int>> pathSum(TreeNode* root, int sum) {
-        vector<vector<int>> paths;
         vector<int> path;
-        pathSum(root, 0, sum, paths, path);
-
-        return paths;
+        pathSum(root, sum, path);
+        
+        return result;
     }
-
+    
 private:
-    void pathSum(TreeNode *root, int curSum, int sum, vector<vector<int>>& paths, vector<int>& path) {
-        if (!root) return;
-
-        curSum += root->val;
-        path.push_back(root->val);
-
-        bool isLeaf = !root->left && !root->right;
-        if (isLeaf && curSum == sum) {
-            paths.push_back(path);
-            path.pop_back();
+    void pathSum(TreeNode* node, int sum, vector<int>& path) {
+        if (!node)
             return;
-        }
-
-        if (root->left) {
-            pathSum(root->left, curSum, sum, paths, path);
-        }
-        if (root->right) {
-            pathSum(root->right, curSum, sum, paths, path);
-        }
-
-        curSum -= root->val;
+        
+        sum -= node->val;
+        path.emplace_back(node->val);
+        
+        if (!node->left && !node->right && !sum)
+            result.push_back(path);
+        
+        pathSum(node->left, sum, path);
+        pathSum(node->right, sum, path);
+        
         path.pop_back();
     }
+    
+private:
+    vector<vector<int>> result;
 };
