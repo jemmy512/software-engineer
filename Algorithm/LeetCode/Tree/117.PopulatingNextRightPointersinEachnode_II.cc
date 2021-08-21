@@ -49,24 +49,26 @@ public:
 class Solution {
 public:
     Node* connect(Node *root) {
-        if (!root)  return ;
-        Node *cur, *next, *node = root;
+        if (!root)  
+            return nullptr;
+            
+        Node *cur, *next, *levelBeg = root;
 
-        while (node) {
-            cur = node;
-            node = next = nullptr;
+        while (levelBeg) {
+            cur = levelBeg;
+            levelBeg = next = nullptr;
             while (cur) {
                 if (cur->left){
                     if (next)
                         next = next->next = cur->left;
                     else
-                        node = next = cur->left;
+                        levelBeg = next = cur->left;
                 }
                 if (cur->right){
                     if (next)
                         next = next->next = cur->right;
                     else
-                        node = next= cur->right;
+                        levelBeg = next= cur->right;
                 }
                 cur = cur->next;
             }
