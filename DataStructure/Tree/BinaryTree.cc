@@ -53,7 +53,7 @@ BTNode *insert(BTNode *root, int key) {
 
 /************* Level Tranversal ***********************************************/
 
-void levelOrder(BTNode *root) {
+void bfs(BTNode *root) {
     deque<BTNode *> deq;
     vector<int> vec;
     
@@ -71,7 +71,7 @@ void levelOrder(BTNode *root) {
     cout << endl;
 }
 
-vector<vector<int>> levelOrder(TreeNode* root) {
+vector<vector<int>> bfs(TreeNode* root) {
     vector<vector<int>> vvec;
     if (!root) return vvec;
     
@@ -239,7 +239,7 @@ int main() {
     insertBTree(root, 1);
     
     cout << "\ntraverse tree by level: \n";
-    levelOrder(root);
+    bfs(root);
     
     cout << "\nMirror reverse Tree: \n";
     //mirrorReversal(root);
