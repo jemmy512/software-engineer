@@ -44,25 +44,29 @@ struct TreeNode {
 class Solution {
 public:
     int sumNumbers(TreeNode* root) {
-        int sumCur = 0, sumRet = 0;
-        preOrderRecursieve(root, sumCur, sumRet);
+        result = 0;
+        
+        dfs(root, 0);
 
-        return sumRet;
+        return result;
     }
 
 private:
-    void preOrderRecursieve(TreeNode *root, int sumCur, int &sumRet) {
-        if (!root) {
+    void dfs(TreeNode *node, int sumCur) {
+        if (!node) {
             return;
         }
 
-        sumCur = sumCur * 10 + root->val;
-        preOrderRecursieve(root->left, sumCur, sumRet);
-        preOrderRecursieve(root->right, sumCur, sumRet);
-
-        if (!root->left && !root->right) {
-            sumRet += sumCur;
-            return;
+        sumCur = sumCur * 10 + node->val;
+    
+        if (!node->left && !node->right) {
+            result += sumCur;
+        } else {
+            dfs(node->left, sumCur);
+            dfs(node->right, sumCur);
         }
     }
+    
+private:
+    int result{0};
 };
