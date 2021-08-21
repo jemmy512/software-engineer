@@ -66,10 +66,9 @@ private:
             return;
 
         curSum += node->val;
-        if (curSum == _Sum)
-            ++_Cnt;
 
-        /* can't reorder: sum may 0, so curSum-_Sum == curSum */
+        _Cnt += curSum == _Sum ? 1 : 0;
+        /* can't reorder following two lines: sum may 0, so curSum-_Sum == curSum */
         _Cnt += _HashMap[curSum-_Sum];
         ++_HashMap[curSum];
 
