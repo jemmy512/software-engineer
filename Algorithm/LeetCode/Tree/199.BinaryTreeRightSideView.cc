@@ -13,8 +13,12 @@ Explanation:
  \     \
   5     4       <---
 
-
 Solution: Level Traversal */
+
+#include <vector>
+#include <queue>
+
+using namespace std;
 
 struct TreeNode {
     int val;
@@ -29,7 +33,7 @@ public:
         vector<int> vec;
         if (!root) return vec;
 
-        queue<TreeNode *> que;
+        queue<TreeNode*> que;
         que.push(root);
         TreeNode *node = root, *prevLast = root, *last = root;
 
