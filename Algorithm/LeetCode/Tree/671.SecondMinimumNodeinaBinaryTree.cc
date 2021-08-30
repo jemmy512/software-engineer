@@ -35,7 +35,10 @@ root.val == min(root.left.val, root.right.val) for each internal node of the tre
 
 Note: not a binary search tree */
 
+#include <queue>
 #include <algorithm>
+
+using namespace std;
 
 struct TreeNode {
     int val;
@@ -78,10 +81,11 @@ public:
 
         int min = root->val;
         long min_second = LONG_MAX;
-        queue<TreeNode *> que;
+        queue<TreeNode*> que;
         que.push(root->left);
         que.push(root->right);
         TreeNode *cur = NULL;
+
         while (!que.empty()) {
             cur = que.front();
             que.pop();
@@ -92,8 +96,8 @@ public:
             if (cur->right)
                 que.push(cur->right);
         }
-        if (min < min_second && min_second != LONG_MAX)
-            return min_second;
-        return -1;
+
+        return (min < min_second && min_second != LONG_MAX)
+            ? min_second : -1;
     }
 };
