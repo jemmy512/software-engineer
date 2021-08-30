@@ -4,7 +4,7 @@ Given a complete binary tree, count the number of nodes.
 Note:
 Definition of a complete binary tree from Wikipedia:
 In a complete binary tree every level, except possibly the last, is completely filled,
-and all nodes in the last level are as far left as possible. 
+and all nodes in the last level are as far left as possible.
 It can have between 1 and 2h nodes inclusive at the last level h.
 
 Example:
@@ -31,8 +31,22 @@ struct TreeNode {
 
 class Solution {
 public:
+    int countNodes(TreeNode* root) {
+        if (!root)
+            return 0;
+
+        if (const auto cnt = getCompleteTreeCnt(root)) {
+            return cnt.value();
+        }
+
+        int leftCnt = countNodes(root->left);
+        int rightCnt = countNodes(root->right);
+        return leftCnt + rightCnt + 1;
+    }
+
+private:
     std::optional<int> getCompleteTreeCnt(TreeNode* root) {
-        if (!root) 
+        if (!root)
             return {};
 
         int cnt = 1;
@@ -45,18 +59,5 @@ public:
             return {};
         }
         return {cnt-1};
-    }
-
-    int countNodes(TreeNode* root) {
-        if (!root)
-            return 0;
-
-        if (const auto cnt = getCompleteTreeCnt(root); cnt) {
-            return cnt.value();
-        }
-        
-        int leftCnt = countNodes(root->left);
-        int rightCnt = countNodes(root->right);
-        return leftCnt + rightCnt + 1;
     }
 };
