@@ -124,15 +124,15 @@ No | Title | Difficulty | Notes
 117 | Populating Next Right Pointers in Each Node II  | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `BFS-non-queue`
 173 | Binary Search Tree Iterator | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Inorder`
 199 | Binary Tree Right Side View | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-222 | Count Complete Tree Nodes | :star: :star: | :white_check_mark: :trophy:
-226 | Invert Binary Tree | :star: | :white_check_mark: :trophy:
-230 | kth Smallest Element In The BST | :star: :star: | :white_check_mark: :trophy: `Inorder`
-671 | Second Minimum Node in a Binary Tree | :star: | :white_check_mark: :trophy:
-235 | Lowest Common Ancestor of a Binary Search Tree | :star: | :white_check_mark: :trophy:
-236 | Lowest Common Ancestor of a Binary Tree | :star: :star: | :white_check_mark: :trophy: :thinking:
-1644 | Lowest Common Ancestor of a Binary Tree II | :star: :star: | :trophy: `p, q may be null`
-1650 | Lowest Common Ancestor of a Binary Tree III | :star: :star: | :white_check_mark: `List Common Node`
-1676 | Lowest Common Ancestor of a Binary Tree IV | :star: :star: | :white_check_mark: `Multiple-nodes`
+222 | Count Complete Tree Nodes | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+226 | Invert Binary Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
+230 | kth Smallest Element In The BST | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Inorder`
+671 | Second Minimum Node in a Binary Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
+235 | Lowest Common Ancestor of a Binary Search Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
+236 | Lowest Common Ancestor of a Binary Tree | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking:
+1644 | Lowest Common Ancestor of a Binary Tree II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `p, q may be null`
+1650 | Lowest Common Ancestor of a Binary Tree III | :star: :star: | :white_check_mark: :white_check_mark: `List Common Node`
+1676 | Lowest Common Ancestor of a Binary Tree IV | :star: :star: | :white_check_mark: :white_check_mark: `Multiple-nodes`
 1214 | Two Sum BSTs | :star: :star: | :white_check_mark: :trophy: `Inorder` `Complement Map`
 1123 | Lowest Common Ancestor of Deepest Leaves | :star: :star: | `TODO`
 1257 | Smallest Common Region | :star: :star: | `TODO`
