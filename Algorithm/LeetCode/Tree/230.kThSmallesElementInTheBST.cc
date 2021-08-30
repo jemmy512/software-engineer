@@ -25,6 +25,7 @@ Input: root = [5,3,6,2,4,null,null,1], k = 3
 Output: 3 */
 
 #include <stack>
+#include <optional>
 
 using namespace std;
 
@@ -54,5 +55,33 @@ public:
         }
 
         return -1;
+    }
+};
+
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        int init = 0;
+        auto opt = dfs(root, k, init);
+
+        return opt ? opt.value() : -1;
+    }
+
+private:
+    optional<int> dfs(TreeNode* node, int k, int& cur) {
+        if (!node)
+            return {};
+
+        if (auto opt = dfs(node->left, k, cur))
+            return opt;
+
+        if (++cur == k) {
+            return { node->val };
+        }
+
+        if (auto opt = dfs(node->right, k, cur))
+            return opt;
+
+        return {};
     }
 };
