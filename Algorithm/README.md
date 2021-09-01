@@ -170,7 +170,7 @@ No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 001 | Two Sum | :star: | :white_check_mark: :white_check_mark: :trophy:
 167 | Two Sum II | :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers`
-170 | Two Sum III - Data structure ｜ :star: | :white_check_mark: :white_check_mark: :trophy:
+170 | Two Sum III - Data structure | :star: | :white_check_mark: :white_check_mark: :trophy:
 653 | Two Sum IV | :star: | :white_check_mark: :white_check_mark: :trophy: `Inorder + Two Pointers` `Complement Map`
 1214 | Two Sum BSTs | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Inorder + Complement Map` `Tree`
 266 | Palindrome Permutation | :star: | :white_check_mark: :white_check_mark: :trophy:
