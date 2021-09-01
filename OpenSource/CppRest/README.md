@@ -36,7 +36,7 @@ pplx::task<http_response> http_client::request()
                 req.headers().add(header_names::authorization, "Bearer " + token().access_token());
 
         asio_client::propagate() // create asio_context, obtain a reused connection from pool
-            auto context =asio_context::create_request_context()
+            auto context = asio_context::create_request_context()
                 asio_client::obtain_connection()
                     asio_connection_poll::acquire()
                     conn = std::make_shared<asio_connection>(crossplat::threadpool::shared_instance().service());
