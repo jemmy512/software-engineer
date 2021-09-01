@@ -133,8 +133,8 @@ No | Title | Difficulty | Notes
 1644 | Lowest Common Ancestor of a Binary Tree II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `p, q may be null`
 1650 | Lowest Common Ancestor of a Binary Tree III | :star: :star: | :white_check_mark: :white_check_mark: `List Common Node`
 1676 | Lowest Common Ancestor of a Binary Tree IV | :star: :star: | :white_check_mark: :white_check_mark: `Multiple-nodes`
-1214 | Two Sum BSTs | :star: :star: | :white_check_mark: :trophy: `Inorder` `Complement Map`
 1123 | Lowest Common Ancestor of Deepest Leaves | :star: :star: | `TODO`
+1214 | Two Sum BSTs | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Inorder` `Complement Map`
 1257 | Smallest Common Region | :star: :star: | `TODO`
 501 | Find Mode in Binary Search Tree | :star:
 513 | Find Bottom Left Tree Value | :star: | :white_check_mark: :trophy: `BFS`
@@ -145,7 +145,7 @@ No | Title | Difficulty | Notes
 ## String
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-008 | atoi | :star: | :white_check_mark: :trophy:
+008 | atoi | :star: | :white_check_mark: :white_check_mark: :trophy:
 014 | Longest Common Prefix | :star: | :trophy:
 028 | Implement Strstr | :star:
 058 | Length of Last Word | :star:
@@ -168,14 +168,14 @@ No | Title | Difficulty | Notes
 ## Map
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-001 | Two Sum | :star: | :white_check_mark: :trophy:
-167 | Two Sum II | :star: | :white_check_mark: :trophy: `Two Pointers`
-170 | Two Sum III - Data structure ｜ :star: | :white_check_mark: :trophy:
-653 | Two Sum IV | :star: | :white_check_mark: :trophy: `Inorder + Two Pointers` `Complement Map`
-1214 | Two Sum BSTs | :star: :star: | :white_check_mark: :trophy: `Inorder + Complement Map` `Tree`
-266 | Palindrome Permutation | :star: | :white_check_mark: :trophy:
-267 | Palindrome Permutation II | :star: :star: | :white_check_mark: :trophy: `Backtracking`
-290 | Word Pattern | :star: | :trophy:
+001 | Two Sum | :star: | :white_check_mark: :white_check_mark: :trophy:
+167 | Two Sum II | :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers`
+170 | Two Sum III - Data structure ｜ :star: | :white_check_mark: :white_check_mark: :trophy:
+653 | Two Sum IV | :star: | :white_check_mark: :white_check_mark: :trophy: `Inorder + Two Pointers` `Complement Map`
+1214 | Two Sum BSTs | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Inorder + Complement Map` `Tree`
+266 | Palindrome Permutation | :star: | :white_check_mark: :white_check_mark: :trophy:
+267 | Palindrome Permutation II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Backtracking`
+290 | Word Pattern | :star: | :white_check_mark: :white_check_mark: :trophy:
 383 | Ransom Note | :star: | :trophy:
 412 | Fizz Buzz | :star: | :trophy:
 771 | Jewelsand Stones | :star: | :trophy:
