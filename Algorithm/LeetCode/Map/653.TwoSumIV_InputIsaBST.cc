@@ -41,7 +41,7 @@ Relatives:
 016. 3 Sum Closest
 018. 4 Sum */
 
-#include <unordered_set>
+#include <set>
 #include <vector>
 #include <stack>
 
@@ -60,7 +60,8 @@ public:
     bool findTarget(TreeNode* root, int k) {
         if (!root)
             return false;
-        if (hashSet.find(k-root->val) != hashSet.end())
+
+        if (hashSet.find(k - root->val) != hashSet.end())
             return true;
 
         hashSet.insert(root->val);
@@ -69,7 +70,7 @@ public:
     }
 
 private:
-    unordered_set<int> hashSet;
+    std::set<int> hashSet;
 };
 
 /* Approach: inorder and two pointers */
