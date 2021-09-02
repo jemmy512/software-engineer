@@ -137,7 +137,7 @@ No | Title | Difficulty | Notes
 1214 | Two Sum BSTs | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Inorder` `Complement Map`
 1257 | Smallest Common Region | :star: :star: | `TODO`
 501 | Find Mode in Binary Search Tree | :star:
-513 | Find Bottom Left Tree Value | :star: | :white_check_mark: :trophy: `BFS`
+513 | Find Bottom Left Tree Value | :star: | :white_check_mark: :white_check_mark: :trophy: `BFS-Queue`
 637 | Average of Levels in Binary Tree | :star: | :white_check_mark: :trophy: `BFS` `BFS-Recursion`
 814 | Binary Tree Pruning | :star: | :white_check_mark: :trophy: `DFS`
 1803 | Count Pairs With XOR in a Range | :star: :star: :star: | :trophy: `XOR` `Prefix Sum`
