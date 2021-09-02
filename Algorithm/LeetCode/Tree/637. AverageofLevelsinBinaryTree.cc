@@ -13,7 +13,11 @@ Explanation:
 The average value of nodes on level 0 is 3,  on level 1 is 14.5, and on level 2
     is 11. Hence return [3, 14.5, 11].
 Note:
-The range of node's value is in the range of 32-bit signed integer. */
+The range of node's value is in the range of 32-bit signed integer. 
+
+Constraints:
+The number of nodes in the tree is in the range [1, 10^4].
+-2^31 <= Node.val <= 2^31 - 1 */
 
 #include <vector>
 #include <queue>
@@ -54,6 +58,7 @@ private:
         }
 
         // ERROR: AddressSanitizer: allocator is out of memory trying to allocate 0x200000000 bytes
+        // The node number is [1, 10^4] which is a little big
         // if (levels.size() == curLevel) {
         //     vector<int> vec;
         //     vec.reserve(std::pow(2, curLevel));
