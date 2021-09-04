@@ -185,6 +185,7 @@
 - [x] [How C++ Resolves a Function Call](https://preshing.com/20210315/how-cpp-resolves-a-function-call/)
 - [x] [How to Use C++ for Cross-Platform Development](https://gusc.lv/2021/03/how-to-use-c-for-cross-platform-development/)
 - [x] [Paramter Passing in C and C++](https://wolchok.org/posts/parameter-passing/)
+- [ ] [Type Erasure](http://davekilian.com/cpp-type-erasure.html)
 
 * OOP
     - [x] [Inheritance Without Pointers](https://www.fluentcpp.com/2021/01/29/inheritance-without-pointers/)
