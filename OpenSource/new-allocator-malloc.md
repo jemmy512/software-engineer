@@ -1,6 +1,8 @@
 # new
 ```c++
-//libsupc++/new_op.cc
+// gcc master Sep 5 2021
+
+// libstdc++-v3/libsupc++/new
 void* operator new (std::size_t sz) _GLIBCXX_THROW (std::bad_alloc) {
   void *p;
 
@@ -40,6 +42,9 @@ inline void operator delete[](void*, void*) noexcept { }
 # allocator
 ## allocator
 ```c++
+// gcc master Sep 5 2021
+
+// libstdc++-v3/include/bits/allocator.h
 template<typename _Tp>
 class allocator : public __allocator_base<_Tp> {
 public:
@@ -84,6 +89,8 @@ public:
 
 ## new_allocator
 ```c++
+// libstdc++-v3/include/ext/new_allocator.h
+
 # define __allocator_base  __gnu_cxx::new_allocator
 
 template<typename _Tp>
@@ -187,6 +194,8 @@ private:
 
 ## malloc_allocator
 ```c++
+// libstdc++-v3/include/ext/malloc_allocator.h
+
 # define __allocator_base  __gnu_cxx::malloc_allocator
 
 template<typename _Tp>
@@ -278,6 +287,8 @@ private:
 ## pool_allocator
 ### __pool_alloc_base
 ```c++
+// libstdc++-v3/include/ext/pool_allocator.h
+
 # define __allocator_base  __gnu_cxx::__pool_alloc_base
 
 template<typename _Tp>
@@ -567,6 +578,8 @@ void __pool_alloc<_Tp>::deallocate(pointer __p, size_type __n) {
 # malloc
 ## public_mALLOc
 ```c++
+// glibc 2.3.1
+
 #define public_mALLOc    malloc
 
 static struct malloc_state main_arena;
@@ -581,13 +594,13 @@ void* public_mALLOc(size_t bytes) {
         return (*hook)(bytes, RETURN_ADDRESS (0));
 
     arena_get(ar_ptr, bytes);
-    if(!ar_ptr)
+    if (!ar_ptr)
         return 0;
         
     victim = _int_malloc(ar_ptr, bytes);
-    if(!victim) {
+    if (!victim) {
         /* Maybe the failure is due to running out of mmapped areas. */
-        if(ar_ptr != &main_arena) {
+        if (ar_ptr != &main_arena) {
             (void)mutex_unlock(&ar_ptr->mutex);
             (void)mutex_lock(&main_arena.mutex);
             victim = _int_malloc(&main_arena, bytes);
@@ -597,7 +610,7 @@ void* public_mALLOc(size_t bytes) {
                 /* ... or sbrk() has failed and there is still a chance to mmap() */
                 ar_ptr = arena_get2(ar_ptr->next ? ar_ptr : 0, bytes);
                 (void)mutex_unlock(&main_arena.mutex);
-                if(ar_ptr) {
+                if (ar_ptr) {
                     victim = _int_malloc(ar_ptr, bytes);
                     (void)mutex_unlock(&ar_ptr->mutex);
                 }
@@ -637,7 +650,7 @@ static mstate arena_get2(mstate a_tsd, size_t size) {
         a = a_tsd = &main_arena;
     } else {
         a = a_tsd->next;
-        if(!a) {
+        if (!a) {
             /* This can only happen while initializing the new arena. */
             (void)mutex_lock(&main_arena.mutex);
             THREAD_STAT(++(main_arena.stat_lock_wait));
@@ -648,7 +661,7 @@ static mstate arena_get2(mstate a_tsd, size_t size) {
     /* Check the global, circularly linked list for available arenas. */
 repeat:
     do {
-        if(!mutex_trylock(&a->mutex)) {
+        if (!mutex_trylock(&a->mutex)) {
             THREAD_STAT(++(a->stat_lock_loop));
             tsd_setspecific(arena_key, (Void_t *)a);
             return a;
@@ -660,7 +673,7 @@ repeat:
         happen during `atfork', or for example on systems where thread
         creation makes it temporarily impossible to obtain _any_
         locks. */
-    if(mutex_trylock(&list_lock)) {
+    if (mutex_trylock(&list_lock)) {
         a = a_tsd;
         goto repeat;
     }
@@ -668,7 +681,7 @@ repeat:
 
     /* Nothing immediately available, so generate a new arena.  */
     a = _int_new_arena(size);
-    if(!a)
+    if (!a)
         return 0;
 
     tsd_setspecific(arena_key, (Void_t *)a);
@@ -681,7 +694,7 @@ repeat:
     main_arena.next = a;
     (void)mutex_unlock(&list_lock);
 
-    if(err) /* locking failed; keep arena for further attempts later */
+    if (err) /* locking failed; keep arena for further attempts later */
         return 0;
 
     THREAD_STAT(++(a->stat_lock_loop));
@@ -1035,7 +1048,7 @@ static struct malloc_par mp_;
 
 static void* sYSMALLOc(size_t nb, mstate av) {
     mchunkptr       old_top;        /* incoming value of av->top */
-    size_t old_size;       /* its size */
+    size_t          old_size;       /* its size */
     char*           old_end;        /* its end address */
 
     long            size;           /* arg to first MORECORE or mmap call */
@@ -1044,8 +1057,8 @@ static void* sYSMALLOc(size_t nb, mstate av) {
     long            correction;     /* arg to 2nd MORECORE call */
     char*           snd_brk;        /* 2nd return val */
 
-    size_t front_misalign; /* unusable bytes at front of new space */
-    size_t end_misalign;   /* partial page left at end of new space */
+    size_t          front_misalign; /* unusable bytes at front of new space */
+    size_t          end_misalign;   /* partial page left at end of new space */
     char*           aligned_brk;    /* aligned offset into brk */
 
     mchunkptr       p;              /* the allocated/returned chunk */
@@ -1413,6 +1426,7 @@ static void* sYSMALLOc(size_t nb, mstate av) {
 ```
 
 ## struct
+### malloc_state
 ```c++
 struct malloc_state {
     /* Serialize access.  */
@@ -1449,6 +1463,12 @@ struct malloc_state {
 };
 typedef struct malloc_state* mstate;
 
+static struct malloc_state main_arena;
+static struct malloc_par mp_;
+```
+
+### malloc_chunk
+```c++
 struct malloc_chunk {
     size_t                  prev_size;  /* Size of previous chunk (if free).  */
     size_t                  size;       /* Size in bytes, including overhead. */
@@ -1456,7 +1476,203 @@ struct malloc_chunk {
     struct malloc_chunk*    fd;         /* double links -- used only if free. */
     struct malloc_chunk*    bk;
 };
+typedef struct malloc_chunk* mbinptr;
+typedef struct malloc_chunk* mfastbinptr;
 
+#define INTERNAL_SIZE_T        size_t
+#define SIZE_SZ                (sizeof(INTERNAL_SIZE_T))
+#define MALLOC_ALIGNMENT       (2 * SIZE_SZ)
+#define MALLOC_ALIGN_MASK      (MALLOC_ALIGNMENT - 1)
+
+#define NBINS             128
+#define NSMALLBINS         64
+#define SMALLBIN_WIDTH      8
+#define MIN_LARGE_SIZE    512
+
+#define chunk2mem(p)   ((Void_t*)((char*)(p) + 2*SIZE_SZ))
+#define mem2chunk(mem) ((mchunkptr)((char*)(mem) - 2*SIZE_SZ))
+#define MIN_CHUNK_SIZE (sizeof(struct malloc_chunk))
+#define MINSIZE (unsigned long)(((MIN_CHUNK_SIZE+MALLOC_ALIGN_MASK) & ~MALLOC_ALIGN_MASK))
+#define aligned_OK(m)  (((unsigned long)((m)) & (MALLOC_ALIGN_MASK)) == 0)
+```
+
+```c++
+/* malloc_chunk details:
+
+    (The following includes lightly edited explanations by Colin Plumb.)
+
+    Chunks of memory are maintained using a `boundary tag' method as
+    described in e.g., Knuth or Standish.  (See the paper by Paul
+    Wilson ftp://ftp.cs.utexas.edu/pub/garbage/allocsrv.ps for a
+    survey of such techniques.)  Sizes of free chunks are stored both
+    in the front of each chunk and at the end.  This makes
+    consolidating fragmented chunks into bigger chunks very fast.  The
+    size fields also hold bits representing whether chunks are free or
+    in use.
+
+    An allocated chunk looks like this:
+
+    chunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+            |             Size of previous chunk, if allocated            | |
+            +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+            |             Size of chunk, in bytes                         |P|
+      mem-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+            |             User data starts here...                          .
+            .                                                               .
+            .             (malloc_usable_space() bytes)                     .
+            .                                                               |
+nextchunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+            |             Size of chunk                                     |
+            +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+    Where "chunk" is the front of the chunk for the purpose of most of
+    the malloc code, but "mem" is the pointer that is returned to the
+    user.  "Nextchunk" is the beginning of the next contiguous chunk.
+
+    Chunks always begin on even word boundries, so the mem portion
+    (which is returned to the user) is also on an even word boundary, and
+    thus at least double-word aligned.
+
+    Free chunks are stored in circular doubly-linked lists, and look like this:
+
+    chunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+            |             Size of previous chunk                            |
+            +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    `head:' |             Size of chunk, in bytes                         |P|
+      mem-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+            |             Forward pointer to next chunk in list             |
+            +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+            |             Back pointer to previous chunk in list            |
+            +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+            |             Unused space (may be 0 bytes long)                .
+            .                                                               .
+            .                                                               |
+nextchunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    `foot:' |             Size of chunk, in bytes                           |
+            +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+    The P (PREV_INUSE) bit, stored in the unused low-order bit of the
+    chunk size (which is always a multiple of two words), is an in-use
+    bit for the *previous* chunk.  If that bit is *clear*, then the
+    word before the current chunk size contains the previous chunk
+    size, and can be used to find the front of the previous chunk.
+    The very first chunk allocated always has this bit set,
+    preventing access to non-existent (or non-owned) memory. If
+    prev_inuse is set for any given chunk, then you CANNOT determine
+    the size of the previous chunk, and might even get a memory
+    addressing fault when trying to do so.
+
+    Note that the `foot' of the current chunk is actually represented
+    as the prev_size of the NEXT chunk. This makes it easier to
+    deal with alignments etc but can be very confusing when trying
+    to extend or adapt this code.
+
+    The two exceptions to all this are
+    1. The special chunk `top' doesn't bother using the
+        trailing size field since there is no next contiguous chunk
+        that would have to index off it. After initialization, `top'
+        is forced to always exist.  If it would become less than
+        MINSIZE bytes long, it is replenished.
+
+    2. Chunks allocated via mmap, which have the second-lowest-order
+        bit (IS_MMAPPED) set in their size fields.  Because they are
+        allocated one-by-one, each must contain its own trailing size field. 
+*/
+```
+
+```c++
+/*
+  Bins
+    An array of bin headers for free chunks. Each bin is doubly
+    linked.  The bins are approximately proportionally (log) spaced.
+    There are a lot of these bins (128). This may look excessive, but
+    works very well in practice.  Most bins hold sizes that are
+    unusual as malloc request sizes, but are more usual for fragments
+    and consolidated sets of chunks, which is what these bins hold, so
+    they can be found quickly.  All procedures maintain the invariant
+    that no consolidated chunk physically borders another one, so each
+    chunk in a list is known to be preceeded and followed by either
+    inuse chunks or the ends of memory.
+
+    Chunks in bins are kept in size order, with ties going to the
+    approximately least recently used chunk. Ordering isn't needed
+    for the small bins, which all contain the same-sized chunks, but
+    facilitates best-fit allocation for larger chunks. These lists
+    are just sequential. Keeping them in order almost never requires
+    enough traversal to warrant using fancier ordered data
+    structures.
+
+    Chunks of the same size are linked with the most
+    recently freed at the front, and allocations are taken from the
+    back.  This results in LRU (FIFO) allocation order, which tends
+    to give each chunk an equal opportunity to be consolidated with
+    adjacent freed chunks, resulting in larger free chunks and less
+    fragmentation.
+
+    To simplify use in double-linked lists, each bin header acts
+    as a malloc_chunk. This avoids special-casing for headers.
+    But to conserve space and improve locality, we allocate
+    only the fd/bk pointers of bins, and then use repositioning tricks
+    to treat these as the fields of a malloc_chunk*.
+*/
+typedef struct malloc_chunk* mbinptr;
+
+/* addressing -- note that bin_at(0) does not exist */
+#define bin_at(m, i) ((mbinptr)((char*)&((m)->bins[(i)<<1]) - (SIZE_SZ<<1)))
+
+/* analog of ++bin */
+#define next_bin(b)  ((mbinptr)((char*)(b) + (sizeof(mchunkptr)<<1)))
+
+/* Reminders about list directionality within bins */
+#define first(b)     ((b)->fd)
+#define last(b)      ((b)->bk)
+```
+
+```c++
+/* Fastbins
+    An array of lists holding recently freed small chunks.  Fastbins
+    are not doubly linked.  It is faster to single-link them, and
+    since chunks are never removed from the middles of these lists,
+    double linking is not necessary. Also, unlike regular bins, they
+    are not even processed in FIFO order (they use faster LIFO) since
+    ordering doesn't much matter in the transient contexts in which
+    fastbins are normally used.
+
+    Chunks in fastbins keep their inuse bit set, so they cannot
+    be consolidated with other free chunks. malloc_consolidate
+    releases all chunks in fastbins and consolidates them with
+    other free chunks.
+*/
+typedef struct malloc_chunk* mfastbinptr;
+```
+
+```c++
+/* Binmap
+    To help compensate for the large number of bins, a one-level index
+    structure is used for bin-by-bin searching.  `binmap' is a
+    bitvector recording whether bins are definitely empty so they can
+    be skipped over during during traversals.  The bits are NOT always
+    cleared as soon as bins are empty, but instead only
+    when they are noticed to be empty during traversal in malloc.
+*/
+
+/* Conservatively use 32 bits per map word, even if on 64bit system */
+#define BINMAPSHIFT      5
+#define BITSPERMAP       (1U << BINMAPSHIFT)
+#define BINMAPSIZE       (NBINS / BITSPERMAP)
+
+#define idx2block(i)     ((i) >> BINMAPSHIFT)
+#define idx2bit(i)       ((1U << ((i) & ((1U << BINMAPSHIFT)-1))))
+
+#define mark_bin(m,i)    ((m)->binmap[idx2block(i)] |=  idx2bit(i))
+#define unmark_bin(m,i)  ((m)->binmap[idx2block(i)] &= ~(idx2bit(i)))
+#define get_binmap(m,i)  ((m)->binmap[idx2block(i)] &   idx2bit(i))
+```
+
+### malloc_par
+```c++
+/* There is only one instance of the malloc parameters.  */
 struct malloc_par {
     /* Tunable parameters */
     unsigned long       trim_threshold;
