@@ -49,6 +49,9 @@ gcc -o p2 main2.c ./libvector.so
     ```
 * ![gcc-shared-ptr.png](https://github.com/Jemmy512/book-notes/blob/master/Images/gcc-shared-ptr.png)
 
+## GCC
+* [GCC: new allocator malloc](../OpenSource/new-allocator-malloc.md)
+
 # C++
 ## OOP
 ### Inheritance
