@@ -623,7 +623,10 @@ void* public_mALLOc(size_t bytes) {
 
     return victim;
 }
+```
 
+## arena_get
+```c++
 /* Thread specific data */
 static tsd_key_t arena_key;
 static mutex_t list_lock;
@@ -638,8 +641,9 @@ typedef void *tsd_key_t;
     ptr = (mstate)tsd_getspecific(arena_key, vptr); \
     if (ptr && !mutex_trylock(&ptr->mutex)) { \
         THREAD_STAT(++(ptr->stat_lock_direct)); \
-    } else \
+    } else {\
         ptr = arena_get2(ptr, (size)); \
+    }\
 } while(0)
 
 static mstate arena_get2(mstate a_tsd, size_t size) {
@@ -669,7 +673,7 @@ repeat:
         a = a->next;
     } while(a != a_tsd);
 
-    /* If not even the list_lock can be obtained, try again.  This can
+    /* If not even the list_lock can be obtained, try again. This can
         happen during `atfork', or for example on systems where thread
         creation makes it temporarily impossible to obtain _any_
         locks. */
@@ -700,10 +704,108 @@ repeat:
     THREAD_STAT(++(a->stat_lock_loop));
     return a;
 }
+
+mstate _int_new_arena(size_t size)
+{
+    mstate a;
+    heap_info *h;
+    char *ptr;
+    unsigned long misalign;
+
+    h = new_heap(size + (sizeof(*h) + sizeof(*a) + MALLOC_ALIGNMENT), mp_.top_pad);
+    if(!h) {
+        /* Maybe size is too large to fit in a single heap.  So, just try
+        to create a minimally-sized arena and let _int_malloc() attempt
+        to deal with the large request via mmap_chunk().  */
+        h = new_heap(sizeof(*h) + sizeof(*a) + MALLOC_ALIGNMENT, mp_.top_pad);
+        if(!h)
+        return 0;
+    }
+    a = h->ar_ptr = (mstate)(h+1);
+    malloc_init_state(a);
+    /*a->next = NULL;*/
+    a->system_mem = a->max_system_mem = h->size;
+    arena_mem += h->size;
+    #ifdef NO_THREADS
+    if((unsigned long)(mp_.mmapped_mem + arena_mem + main_arena.system_mem) >
+        mp_.max_total_mem)
+        mp_.max_total_mem = mp_.mmapped_mem + arena_mem + main_arena.system_mem;
+    #endif
+
+    /* Set up the top chunk, with proper alignment. */
+    ptr = (char *)(a + 1);
+    misalign = (unsigned long)chunk2mem(ptr) & MALLOC_ALIGN_MASK;
+    if (misalign > 0)
+        ptr += MALLOC_ALIGNMENT - misalign;
+    top(a) = (mchunkptr)ptr;
+    set_head(top(a), (((char*)h + h->size) - ptr) | PREV_INUSE);
+
+    return a;
+}
+
+static heap_info* new_heap(size_t size, size_t top_pad) {
+    size_t page_mask = malloc_getpagesize - 1;
+    char *p1, *p2;
+    unsigned long ul;
+    heap_info *h;
+
+    if (size + top_pad < HEAP_MIN_SIZE)
+        size = HEAP_MIN_SIZE;
+    else if (size + top_pad <= HEAP_MAX_SIZE)
+        size += top_pad;
+    else if (size > HEAP_MAX_SIZE)
+        return 0;
+    else
+        size = HEAP_MAX_SIZE;
+    size = (size + page_mask) & ~page_mask;
+
+    /* A memory region aligned to a multiple of HEAP_MAX_SIZE is needed.
+        No swap space needs to be reserved for the following large
+        mapping (on Linux, this is the case for all non-writable mappings
+        anyway). */
+    p1 = (char *)MMAP(0, HEAP_MAX_SIZE<<1, PROT_NONE, MAP_PRIVATE|MAP_NORESERVE);
+    if (p1 != MAP_FAILED) {
+        p2 = (char *)(((unsigned long)p1 + (HEAP_MAX_SIZE-1)) & ~(HEAP_MAX_SIZE-1));
+        ul = p2 - p1;
+        munmap(p1, ul);
+        munmap(p2 + HEAP_MAX_SIZE, HEAP_MAX_SIZE - ul);
+    } else {
+        /* Try to take the chance that an allocation of only HEAP_MAX_SIZE
+        is already aligned. */
+        p2 = (char*)MMAP(0, HEAP_MAX_SIZE, PROT_NONE, MAP_PRIVATE|MAP_NORESERVE);
+        if (p2 == MAP_FAILED)
+            return 0;
+        if ((unsigned long)p2 & (HEAP_MAX_SIZE-1)) {
+            munmap(p2, HEAP_MAX_SIZE);
+            return 0;
+        }
+    }
+    if (mprotect(p2, size, PROT_READ|PROT_WRITE) != 0) {
+        munmap(p2, HEAP_MAX_SIZE);
+        return 0;
+    }
+    h = (heap_info *)p2;
+    h->size = size;
+    THREAD_STAT(stat_n_heaps++);
+    return h;
+}
+
+/* A heap is a single contiguous memory region holding (coalesceable)
+   malloc_chunks.  It is allocated with mmap() and always starts at an
+   address aligned to HEAP_MAX_SIZE.  Not used unless compiling with
+   USE_ARENAS. */
+
+typedef struct _heap_info {
+    mstate      ar_ptr; /* Arena for this heap. */
+    struct      _heap_info *prev; /* Previous heap. */
+    size_t      size;   /* Current size in bytes. */
+    size_t      pad;    /* Make sure the following data is properly aligned. */
+} heap_info;
 ```
 
 ## _int_malloc
 ```c++
+// fast bin -> unsorted bin -> small bin -> large bin -> top chunk -> heap
 void* _int_malloc(mstate av, size_t bytes) {
     size_t          nb;               /* normalized request size */
     unsigned int    idx;              /* associated bin index */
@@ -819,8 +921,7 @@ void* _int_malloc(mstate av, size_t bytes) {
                 av->last_remainder = remainder;
                 remainder->bk = remainder->fd = unsorted_chunks(av);
 
-                set_head(victim, nb | PREV_INUSE |
-                    (av != &main_arena ? NON_MAIN_ARENA : 0));
+                set_head(victim, nb | PREV_INUSE | (av != &main_arena ? NON_MAIN_ARENA : 0));
                 set_head(remainder, remainder_size | PREV_INUSE);
                 set_foot(remainder, remainder_size);
 
@@ -1276,22 +1377,17 @@ static void* sYSMALLOc(size_t nb, mstate av) {
                 assert(0);
             }
             /* Otherwise, make adjustments:
-
             * If the first time through or noncontiguous, we need to call sbrk
                 just to find out where the end of memory lies.
-
             * We need to ensure that all returned chunks from malloc will meet
                 MALLOC_ALIGNMENT
-
             * If there was an intervening foreign sbrk, we need to adjust sbrk
                 request size to account for fact that we will not be able to
                 combine new space with existing space in old_top.
-
             * Almost all systems internally allocate whole pages at a time, in
                 which case we might as well use the whole last page of request.
                 So we allocate enough more memory to hit a page boundary now,
                 which in turn causes future contiguous calls to page-align. */
-
             else {
                 /* Count foreign sbrk as system_mem.  */
                 if (old_size) {
@@ -1421,6 +1517,47 @@ static void* sYSMALLOc(size_t nb, mstate av) {
 
     /* catch all failure paths */
     MALLOC_FAILURE_ACTION;
+    return 0;
+}
+```
+
+## sbrk
+```c++
+#define MORECORE sbrk
+
+void* __sbrk (intptr_t increment)
+{
+    void *oldbrk;
+
+    if (__curbrk == NULL || __libc_multiple_libcs) {
+        if (__brk (0) < 0)		/* Initialize the break.  */
+            return (void *) -1;
+    }
+
+    if (increment == 0)
+        return __curbrk;
+
+    oldbrk = __curbrk;
+    if (__brk (oldbrk + increment) < 0)
+        return (void *) -1;
+
+    return oldbrk;
+}
+
+/* This must be initialized data because commons can't have aliases.  */
+void *__curbrk = 0;
+
+int __brk (void *addr) {
+    void *newbrk;
+
+    __curbrk = newbrk = (void *) INLINE_SYSCALL (brk, 1, addr);
+
+    if (newbrk < addr)
+    {
+        __set_errno (ENOMEM);
+        return -1;
+    }
+
     return 0;
 }
 ```
@@ -1630,21 +1767,89 @@ typedef struct malloc_chunk* mbinptr;
 ```
 
 ```c++
-/* Fastbins
-    An array of lists holding recently freed small chunks.  Fastbins
-    are not doubly linked.  It is faster to single-link them, and
-    since chunks are never removed from the middles of these lists,
-    double linking is not necessary. Also, unlike regular bins, they
-    are not even processed in FIFO order (they use faster LIFO) since
-    ordering doesn't much matter in the transient contexts in which
-    fastbins are normally used.
+/*
+  Indexing
 
-    Chunks in fastbins keep their inuse bit set, so they cannot
-    be consolidated with other free chunks. malloc_consolidate
-    releases all chunks in fastbins and consolidates them with
-    other free chunks.
+    Bins for sizes < 512 bytes contain chunks of all the same size, spaced
+    8 bytes apart. Larger bins are approximately logarithmically spaced:
+
+    64 bins of size       8
+    32 bins of size      64
+    16 bins of size     512
+     8 bins of size    4096
+     4 bins of size   32768
+     2 bins of size  262144
+     1 bin  of size what's left
+
+    There is actually a little bit of slop in the numbers in bin_index
+    for the sake of speed. This makes no difference elsewhere.
+
+    The bins top out around 1MB because we expect to service large
+    requests via mmap.
 */
-typedef struct malloc_chunk* mfastbinptr;
+
+#define NBINS             128
+#define NSMALLBINS         64
+#define SMALLBIN_WIDTH      8
+#define MIN_LARGE_SIZE    512
+
+#define in_smallbin_range(sz)  \
+  ((unsigned long)(sz) < (unsigned long)MIN_LARGE_SIZE)
+
+#define smallbin_index(sz)     (((unsigned)(sz)) >> 3)
+
+#define largebin_index(sz)                                                   \
+(((((unsigned long)(sz)) >>  6) <= 32)?  56 + (((unsigned long)(sz)) >>  6): \
+ ((((unsigned long)(sz)) >>  9) <= 20)?  91 + (((unsigned long)(sz)) >>  9): \
+ ((((unsigned long)(sz)) >> 12) <= 10)? 110 + (((unsigned long)(sz)) >> 12): \
+ ((((unsigned long)(sz)) >> 15) <=  4)? 119 + (((unsigned long)(sz)) >> 15): \
+ ((((unsigned long)(sz)) >> 18) <=  2)? 124 + (((unsigned long)(sz)) >> 18): \
+                                        126)
+
+#define bin_index(sz) \
+ ((in_smallbin_range(sz)) ? smallbin_index(sz) : largebin_index(sz))
+```
+
+```c++
+/*
+  Unsorted chunks
+
+    All remainders from chunk splits, as well as all returned chunks,
+    are first placed in the "unsorted" bin. They are then placed
+    in regular bins after malloc gives them ONE chance to be used before
+    binning. So, basically, the unsorted_chunks list acts as a queue,
+    with chunks being placed on it in free (and malloc_consolidate),
+    and taken off (to be either used or placed in bins) in malloc.
+
+    The NON_MAIN_ARENA flag is never set for unsorted chunks, so it
+    does not have to be taken into account in size comparisons.
+*/
+
+/* The otherwise unindexable 1-bin is used to hold unsorted chunks. */
+#define unsorted_chunks(M)          (bin_at(M, 1))
+```
+
+```c++
+/*
+  Top
+
+    The top-most available chunk (i.e., the one bordering the end of
+    available memory) is treated specially. It is never included in
+    any bin, is used only if no other chunk is available, and is
+    released back to the system if it is very large (see
+    M_TRIM_THRESHOLD).  Because top initially
+    points to its own bin with initial zero size, thus forcing
+    extension on the first malloc request, we avoid having any special
+    code in malloc to check whether it even exists yet. But we still
+    need to do so when getting memory from system, so we make
+    initial_top treat the bin as a legal but unusable chunk during the
+    interval between initialization and the first call to
+    sYSMALLOc. (This is somewhat delicate, since it relies on
+    the 2 preceding words to be zero during this interval as well.)
+*/
+
+/* Conveniently, the unsorted bin can be used as dummy top on first call */
+#define initial_top(M)              (unsorted_chunks(M))
 ```
 
 ```c++
@@ -1668,6 +1873,48 @@ typedef struct malloc_chunk* mfastbinptr;
 #define mark_bin(m,i)    ((m)->binmap[idx2block(i)] |=  idx2bit(i))
 #define unmark_bin(m,i)  ((m)->binmap[idx2block(i)] &= ~(idx2bit(i)))
 #define get_binmap(m,i)  ((m)->binmap[idx2block(i)] &   idx2bit(i))
+```
+
+```c++
+/* Fastbins
+    An array of lists holding recently freed small chunks.  Fastbins
+    are not doubly linked.  It is faster to single-link them, and
+    since chunks are never removed from the middles of these lists,
+    double linking is not necessary. Also, unlike regular bins, they
+    are not even processed in FIFO order (they use faster LIFO) since
+    ordering doesn't much matter in the transient contexts in which
+    fastbins are normally used.
+
+    Chunks in fastbins keep their inuse bit set, so they cannot
+    be consolidated with other free chunks. malloc_consolidate
+    releases all chunks in fastbins and consolidates them with
+    other free chunks.
+*/
+typedef struct malloc_chunk* mfastbinptr;
+
+/* offset 2 to use otherwise unindexable first 2 bins */
+#define fastbin_index(sz)        ((((unsigned int)(sz)) >> 3) - 2)
+
+/* The maximum fastbin request size we support */
+#define MAX_FAST_SIZE     80
+
+#define NFASTBINS  (fastbin_index(request2size(MAX_FAST_SIZE))+1)
+
+/*
+  FASTCHUNKS_BIT held in max_fast indicates that there are probably
+  some fastbin chunks. It is set true on entering a chunk into any
+  fastbin, and cleared only in malloc_consolidate.
+
+  The truth value is inverted so that have_fastchunks will be true
+  upon startup (since statics are zero-filled), simplifying
+  initialization checks.
+*/
+
+#define FASTCHUNKS_BIT        (1U)
+
+#define have_fastchunks(M)     (((M)->max_fast &  FASTCHUNKS_BIT) == 0)
+#define clear_fastchunks(M)    ((M)->max_fast |=  FASTCHUNKS_BIT)
+#define set_fastchunks(M)      ((M)->max_fast &= ~FASTCHUNKS_BIT)
 ```
 
 ### malloc_par
