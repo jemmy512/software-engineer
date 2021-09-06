@@ -392,7 +392,7 @@
 - [x] [tcmalloc](https://github.com/google/tcmalloc) [:link: Ref](https://wallenwang.com/2018/11/tcmalloc/) [:link: Ref](https://www.programmersought.com/article/84461226079/)
 - [x] [jemalloc.pdf](http://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf)
 - [x] [C dynamic memory allocation](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation)
-- [x] [Research on ptmalloc, tcmalloc and jemalloc memory allocation strategies](https://owent.net/2013/867.html)
+- [x] [Research on ptmalloc, tcmalloc and jemalloc memory allocation strategies (CN)](https://owent.net/2013/867.html)
 - [x] [Memory optimization summary: ptmalloc, tcmalloc, and jemalloc](http://www.cnhalo.net/2016/06/13/memory-optimize)
 - [x] [Scalable memory allocation using jemalloc](https://www.facebook.com/notes/facebook-engineering/scalable-memory-allocation-using-jemalloc/480222803919)
 - [ ] Linux Kernel Vs. Memory Fragmentation [Part I](http://highscalability.com/blog/2021/6/8/linux-kernel-vs-memory-fragmentation-part-i.html)
