@@ -1809,6 +1809,7 @@ typedef struct malloc_chunk* mbinptr;
 #define bin_index(sz) \
  ((in_smallbin_range(sz)) ? smallbin_index(sz) : largebin_index(sz))
 ```
+![](./Image/malloc-free-list.png)
 
 ```c++
 /*
