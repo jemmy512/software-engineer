@@ -713,13 +713,13 @@ mstate _int_new_arena(size_t size)
     unsigned long misalign;
 
     h = new_heap(size + (sizeof(*h) + sizeof(*a) + MALLOC_ALIGNMENT), mp_.top_pad);
-    if(!h) {
+    if (!h) {
         /* Maybe size is too large to fit in a single heap.  So, just try
         to create a minimally-sized arena and let _int_malloc() attempt
         to deal with the large request via mmap_chunk().  */
         h = new_heap(sizeof(*h) + sizeof(*a) + MALLOC_ALIGNMENT, mp_.top_pad);
-        if(!h)
-        return 0;
+        if (!h)
+            return 0;
     }
     a = h->ar_ptr = (mstate)(h+1);
     malloc_init_state(a);
@@ -727,8 +727,7 @@ mstate _int_new_arena(size_t size)
     a->system_mem = a->max_system_mem = h->size;
     arena_mem += h->size;
     #ifdef NO_THREADS
-    if((unsigned long)(mp_.mmapped_mem + arena_mem + main_arena.system_mem) >
-        mp_.max_total_mem)
+    if ((unsigned long)(mp_.mmapped_mem + arena_mem + main_arena.system_mem) > mp_.max_total_mem)
         mp_.max_total_mem = mp_.mmapped_mem + arena_mem + main_arena.system_mem;
     #endif
 
@@ -794,7 +793,6 @@ static heap_info* new_heap(size_t size, size_t top_pad) {
    malloc_chunks.  It is allocated with mmap() and always starts at an
    address aligned to HEAP_MAX_SIZE.  Not used unless compiling with
    USE_ARENAS. */
-
 typedef struct _heap_info {
     mstate      ar_ptr; /* Arena for this heap. */
     struct      _heap_info *prev; /* Previous heap. */
@@ -805,7 +803,7 @@ typedef struct _heap_info {
 
 ## _int_malloc
 ```c++
-// fast bin -> unsorted bin -> small bin -> large bin -> top chunk -> heap
+// fast bin ->  small bin -> unsorted bin -> large bin -> top chunk -> heap
 void* _int_malloc(mstate av, size_t bytes) {
     size_t          nb;               /* normalized request size */
     unsigned int    idx;              /* associated bin index */
@@ -832,7 +830,6 @@ void* _int_malloc(mstate av, size_t bytes) {
     size. Also, checked_request2size traps (returning 0) request sizes
     that are so large that they wrap around zero when padded and
     aligned. */
-
     checked_request2size(bytes, nb);
 
     /* If the size qualifies as a fastbin, first check corresponding bin.
@@ -1564,6 +1561,8 @@ int __brk (void *addr) {
 
 ## struct
 ### malloc_state
+![](./Image/malloc-free-list.png)
+
 ```c++
 struct malloc_state {
     /* Serialize access.  */
@@ -1809,7 +1808,6 @@ typedef struct malloc_chunk* mbinptr;
 #define bin_index(sz) \
  ((in_smallbin_range(sz)) ? smallbin_index(sz) : largebin_index(sz))
 ```
-![](./Image/malloc-free-list.png)
 
 ```c++
 /*
