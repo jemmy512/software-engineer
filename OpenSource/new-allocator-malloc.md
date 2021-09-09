@@ -803,7 +803,7 @@ typedef struct _heap_info {
 
 ## _int_malloc
 ```c++
-// fast bin ->  small bin -> unsorted bin -> large bin -> top chunk -> heap
+// fast bin -> small bin -> unsorted bin -> large bin -> top chunk -> heap
 void* _int_malloc(mstate av, size_t bytes) {
     size_t          nb;               /* normalized request size */
     unsigned int    idx;              /* associated bin index */
@@ -896,6 +896,7 @@ void* _int_malloc(mstate av, size_t bytes) {
     otherwise need to expand memory to service a "small" request. */
 
     for(;;) {
+        /* place unsorted chunks which do not satisfy the request into bins */
         while ((victim = unsorted_chunks(av)->bk) != unsorted_chunks(av)) {
             bck = victim->bk;
             size = chunksize(victim);
@@ -906,11 +907,11 @@ void* _int_malloc(mstate av, size_t bytes) {
                 exception to best-fit, and applies only when there is
                 no exact fit for a small chunk. */
 
-            if (in_smallbin_range(nb) &&
-                bck == unsorted_chunks(av) &&
-                victim == av->last_remainder &&
-                (unsigned long)(size) > (unsigned long)(nb + MINSIZE)) {
-
+            if (in_smallbin_range(nb) 
+                && bck == unsorted_chunks(av) 
+                && victim == av->last_remainder 
+                && (unsigned long)(size) > (unsigned long)(nb + MINSIZE))
+            {
                 /* split and reattach remainder */
                 remainder_size = size - nb;
                 remainder = chunk_at_offset(victim, nb);
@@ -981,15 +982,15 @@ void* _int_malloc(mstate av, size_t bytes) {
             sorted order to find smallest that fits.  This is the only step
             where an unbounded number of chunks might be scanned without doing
             anything useful with them. However the lists tend to be short. */
-
         if (!in_smallbin_range(nb)) {
             bin = bin_at(av, idx);
 
             /* skip scan if empty or largest chunk is too small */
             if ((victim = last(bin)) != bin && (unsigned long)(first(bin)->size) >= (unsigned long)(nb)) {
 
-                while (((unsigned long)(size = chunksize(victim)) < (unsigned long)(nb)))
+                while (((unsigned long)(size = chunksize(victim)) < (unsigned long)(nb))) {
                     victim = victim->bk;
+                }
 
                 remainder_size = size - nb;
                 unlink(victim, bck, fwd);
@@ -1002,14 +1003,11 @@ void* _int_malloc(mstate av, size_t bytes) {
                     check_malloced_chunk(av, victim, nb);
                     
                     return chunk2mem(victim);
-                }
-                /* Split */
-                else {
+                } else {  /* Split */
                     remainder = chunk_at_offset(victim, nb);
                     unsorted_chunks(av)->bk = unsorted_chunks(av)->fd = remainder;
                     remainder->bk = remainder->fd = unsorted_chunks(av);
-                    set_head(victim, nb | PREV_INUSE |
-                    (av != &main_arena ? NON_MAIN_ARENA : 0));
+                    set_head(victim, nb | PREV_INUSE | (av != &main_arena ? NON_MAIN_ARENA : 0));
                     set_head(remainder, remainder_size | PREV_INUSE);
                     set_foot(remainder, remainder_size);
                     check_malloced_chunk(av, victim, nb);
@@ -1100,7 +1098,7 @@ void* _int_malloc(mstate av, size_t bytes) {
             }
         }
 
-        use_top:
+use_top:
         /* If large enough, split off the chunk bordering the end of memory
             (held in av->top). Note that this is in accord with the best-fit
             search rule.  In effect, av->top is treated as larger (and thus
@@ -1325,7 +1323,7 @@ static void* sYSMALLOc(size_t nb, mstate av) {
         if (brk != (char*)(MORECORE_FAILURE)) {
             /* Call the `morecore' hook if necessary.  */
             if (__after_morecore_hook)
-            (*__after_morecore_hook) ();
+                (*__after_morecore_hook) ();
         } else {
             /* If have mmap, try using it as a backup when MORECORE fails or
             cannot be used. This is worth doing on systems that have "holes" in
@@ -1522,6 +1520,9 @@ static void* sYSMALLOc(size_t nb, mstate av) {
 ```c++
 #define MORECORE sbrk
 
+/* This must be initialized data because commons can't have aliases.  */
+void *__curbrk = 0;
+
 void* __sbrk (intptr_t increment)
 {
     void *oldbrk;
@@ -1541,9 +1542,6 @@ void* __sbrk (intptr_t increment)
     return oldbrk;
 }
 
-/* This must be initialized data because commons can't have aliases.  */
-void *__curbrk = 0;
-
 int __brk (void *addr) {
     void *newbrk;
 
@@ -1560,9 +1558,9 @@ int __brk (void *addr) {
 ```
 
 ## struct
-### malloc_state
 ![](./Image/malloc-free-list.png)
 
+### malloc_state
 ```c++
 struct malloc_state {
     /* Serialize access.  */
