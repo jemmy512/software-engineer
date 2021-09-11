@@ -48,9 +48,6 @@ using namespace std;
 class Solution {
 public:
     vector<string> subdomainVisits(vector<string>& cpdomains) {
-        if (cpdomains.empty())
-            return {};
-
         for (const auto& countDomain : cpdomains) {
             size_t pos;
             auto count = std::stoi(countDomain, &pos);
@@ -67,6 +64,7 @@ public:
 private:
     vector<string> composeResult() const {
         vector<string> result;
+        result.reserve(_DomainCount.size());
 
         for (const auto& [domain, count] : _DomainCount) {
             result.emplace_back(std::to_string(count) + " " + domain);
