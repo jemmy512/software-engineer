@@ -16,6 +16,11 @@ e
 Explanation:
 'e' is the letter that was added.
 
+Constraints:
+0 <= s.length <= 1000
+t.length == s.length + 1
+s and t consist of lower-case English letters.
+
 Relatives:
 136. Single Number
 137. Single Number II
@@ -32,7 +37,7 @@ using namespace std;
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        char chr = 0;
+        char chr = 0;   // 0 ^ X = X
 
         for (int i = 0; i < s.size(); ++i)
             chr ^= s[i] ^ t[i];
@@ -45,29 +50,19 @@ public:
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        int ascii[128] = {0};
-
-        for (int beg = 0, end = s.size()-1; beg <= end; ++beg, --end) {
-            ++ascii[s[beg]];
-            ++ascii[s[end]];
+        int ascii[256] = { 0 };
+        
+        for (auto i = 0; i < s.size(); ++i) {
+            ++ascii[s[i]];
+            --ascii[t[i]];
         }
-        if (s.size() % 2) {
-            --ascii[s[s.size()/2]];
-        }
-
-        for (int beg = 0, end = t.size()-1; beg <= end; ++beg, --end) {
-            --ascii[t[beg]];
-            --ascii[t[end]];
-        }
-        if (t.size() % 2) {
-            ++ascii[t[t.size()/2]];
-        }
-
-        for (int i = 0; i < 128; ++i) {
-            if (ascii[i])
+        --ascii[t.back()];
+                
+        for (auto i = 0; i < 256; ++i) {
+            if (ascii[i] != 0)
                 return i;
         }
-
-        return ' ';
+                
+        return 0;
     }
 };
