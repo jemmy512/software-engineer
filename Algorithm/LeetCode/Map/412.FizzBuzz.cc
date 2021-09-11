@@ -33,6 +33,7 @@ class Solution {
 public:
     vector<string> fizzBuzz(int n) {
         vector<string> vec;
+        vec.reserve(n);
 
         for (int i = 1; i <= n; ++i) {
             string str;
@@ -61,6 +62,7 @@ class Solution {
 public:
     vector<string> fizzBuzz(int n) {
         vector<string> vec;
+        vec.reserve(n);
 
         for (int i = 1; i <= n; ++i) {
             if (i % 15 == 0) {
