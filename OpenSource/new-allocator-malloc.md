@@ -1949,27 +1949,25 @@ struct malloc_par {
 
 void public_fREe(Void_t* mem)
 {
-  mstate ar_ptr;
-  mchunkptr p;  /* chunk corresponding to mem */
+    mstate ar_ptr;
+    mchunkptr p;  /* chunk corresponding to mem */
 
-  if (mem == 0) /* free(0) has no effect */
-    return;
+    if (mem == 0) /* free(0) has no effect */
+        return;
 
-  p = mem2chunk(mem);
+    p = mem2chunk(mem);
 
-#if HAVE_MMAP
-  if (chunk_is_mmapped(p)) {
-    munmap_chunk(p);
-    return;
-  }
-#endif
+    if (chunk_is_mmapped(p)) {
+        munmap_chunk(p);
+        return;
+    }
 
-  ar_ptr = arena_for_chunk(p);
+    ar_ptr = arena_for_chunk(p);
 
 
-  (void)mutex_lock(&ar_ptr->mutex);
-  _int_free(ar_ptr, mem);
-  (void)mutex_unlock(&ar_ptr->mutex);
+    (void)mutex_lock(&ar_ptr->mutex);
+    _int_free(ar_ptr, mem);
+    (void)mutex_unlock(&ar_ptr->mutex);
 }
 
 void _int_free(mstate av, Void_t* mem)
