@@ -7,7 +7,11 @@ Output: 2
 Example 2:
 
 Input: haystack = "aaaaa", needle = "bba"
-Output: -1 */
+Output: -1 
+
+Constraints:
+0 <= haystack.length, needle.length <= 5 * 10^4
+haystack and needle consist of only lower-case English characters. */
 
 #include <string>
 #include <vector>
