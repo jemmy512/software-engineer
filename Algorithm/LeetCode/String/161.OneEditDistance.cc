@@ -54,18 +54,13 @@ public:
         for (int i = 0; i < src.size(); ++i) {
             if (src[i] != dst[i]) {
                 if (src.size() == dst.size())
-                    return stringView(src, i+1) == stringView(dst, i+1);
+                    return string_view(&src[i+1]) == string_view(&dst[i+1]);
                 else
-                    return stringView(src, i) == stringView(dst, i+1);
+                    return string_view(&src[i]) == string_view(&dst[i+1]);
             }
         }
 
         return src.size() + 1 == dst.size();
-    }
-
-private:
-    string_view stringView(const string& src, int beg) {
-        return string_view(src.data()+beg, src.size()-beg);
     }
 };
 
