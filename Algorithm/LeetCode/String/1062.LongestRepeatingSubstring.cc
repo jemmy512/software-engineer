@@ -44,6 +44,7 @@ and have the first problem solved in O(logN) time. */
 #include <string>
 #include <functional>
 #include <unordered_set>
+#include <string_view>
 
 using namespace std;
 
@@ -51,7 +52,7 @@ using namespace std;
     One needs O((N−L)L) for one duplicate check, and one does up to O(logN) checks.
     Together that results in O(∑(N−L)L), i.e. in O(NlogN) in the average case
     and in O(N^2) in the worst case of L close to N/2.
-   Space complexity : O(N^2) to keep the hashset. */
+    Space complexity : O(N^2) to keep the _HashSet. */
 class Solution {
 public:
     int longestRepeatingSubstring(string str) {
@@ -73,13 +74,12 @@ private:
         auto ret = false;
 
         for (int beg = 0; beg < str.size() - len + 1; ++beg) {
-            auto subStr = str.substr(beg, len);
-            auto hashCode = std::hash<string>{}(subStr);
-            if (hashSet.find(hashCode) != hashSet.end()) {
+            const auto hashCode = _Hasher(string_view(&str[beg], len));
+            if (_HashSet.find(hashCode) != _HashSet.end()) {
                 ret = true;
                 break;
             } else {
-                hashSet.emplace(std::move(hashCode));
+                _HashSet.emplace(std::move(hashCode));
             }
         }
 
@@ -87,5 +87,6 @@ private:
     }
 
 private:
-    unordered_set<std::size_t> hashSet;
+    std::hash<string_view> _Hasher{};
+    unordered_set<std::size_t> _HashSet;
 };
