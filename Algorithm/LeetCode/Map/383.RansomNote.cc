@@ -24,16 +24,16 @@ public:
             return false;
 
         int ascii[128] = {0};
-        int len = magazine.size();
-        for (int i = 0; i < len; ++i) {
+
+        for (int i = 0; i < magazine.size(); ++i) {
             ++ascii[magazine[i]];
         }
 
-        len = ransomNote.size();
-        for (int i = 0; i < len; ++i) {
+        for (int i = 0; i < ransomNote.size(); ++i) {
             if (--ascii[ransomNote[i]] < 0)
                 return false;
         }
+        
         return true;
     }
 };
