@@ -261,6 +261,7 @@
     - [x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
     - [x] [Notes on C++ SFINAE, Modern C++ and C++20 Concepts](https://www.cppstories.com/2016/02/notes-on-c-sfinae/)
     - [x] [std::index_sequence and its Improvement in C++20](https://www.fluentcpp.com/2021/03/05/stdindex_sequence-and-its-improvement-in-c20/)
+    - [x] [constexpr vector and string in C++20 and One Big Limitation](https://www.cppstories.com/2021/constexpr-vecstr-cpp20/) 
     - [ ] [Raymond Chen: C++ coroutines]()
         * [A map through the three major coroutine series](https://devblogs.microsoft.com/oldnewthing/20210504-01/?p=105178)
         <details>
