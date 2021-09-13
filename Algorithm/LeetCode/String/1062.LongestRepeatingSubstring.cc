@@ -73,13 +73,13 @@ private:
     bool search(const string& str, int len) {
         auto ret = false;
 
-        for (int beg = 0; beg < str.size() - len + 1; ++beg) {
-            const auto hashCode = _Hasher(string_view(&str[beg], len));
+        for (int i = 0; i < str.size() - len + 1; ++i) {
+            const auto hashCode = _Hasher(string_view(&str[i], len));
             if (_HashSet.find(hashCode) != _HashSet.end()) {
                 ret = true;
                 break;
             } else {
-                _HashSet.emplace(std::move(hashCode));
+                _HashSet.emplace(hashCode);
             }
         }
 
