@@ -146,24 +146,24 @@ No | Title | Difficulty | Notes
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 008 | atoi | :star: | :white_check_mark: :white_check_mark: :trophy:
-014 | Longest Common Prefix | :star: | :trophy:
-028 | Implement Strstr | :star:
-058 | Length of Last Word | :star:
-125 | Valid Palindrome | :star: | :white_check_mark: :trophy:
-680 | Valid Palindrome II | :star: | :white_check_mark: :trophy:
-151 | Reverse Words in a String | :star: :star:
-161 | One Edit Distance | :star: :star: | :white_check_mark: :trophy:
-205 | Isomorphic Strings | :star: | :trophy:
-242 | Valid Anagra | :star: | :trophy:
-389 | Findthe Difference | :star: | :white_check_mark: :trophy:
-409 | Longest Palindrome | :star: | :trophy:
-415 | Adding Strings | :star: | :white_check_mark: :white_check_mark: String
-443 | String Compression | :star: :star:
+014 | Longest Common Prefix | :star: | :white_check_mark: :white_check_mark: | :trophy:
+028 | Implement Strstr | :star: | `KMP`
+058 | Length of Last Word | :star: | :white_check_mark: :white_check_mark:
+125 | Valid Palindrome | :star: | :white_check_mark: :white_check_mark: :trophy:
+680 | Valid Palindrome II | :star: | :white_check_mark: :white_check_mark:
+151 | Reverse Words in a String | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+161 | One Edit Distance | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+205 | Isomorphic Strings | :star: | :white_check_mark: :white_check_mark: :trophy:
+242 | Valid Anagra | :star: | :white_check_mark: :white_check_mark: :trophy:  
+389 | Find the Difference | :star: | :white_check_mark: :white_check_mark: :trophy:
+409 | Longest Palindrome | :star: | :white_check_mark: :white_check_mark: :trophy:
+415 | Adding Strings | :star: | :white_check_mark: :white_check_mark: :trophy:
+443 | String Compression | :star: :star: | :white_check_mark: :white_check_mark:
 468 | Validate IP Address | :star: :star: | `TODO`
-344 | Reverse String | :star:
-345 | Reverse Vowels of a String | :star: | :trophy:
-796 | Rotate String | :star:
-1062 | Longest Repeating Substring | :star: :star: | :trophy: `BS` `Rabin-Karp`
+344 | Reverse String | :star: | :white_check_mark: :white_check_mark:
+345 | Reverse Vowels of a String | :star: | :white_check_mark: :white_check_mark: :trophy:
+796 | Rotate String | :star: | :white_check_mark: :white_check_mark:
+1062 | Longest Repeating Substring | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `BS + Hash` `Rabin-Karp`
 
 ## Map
 No | Title | Difficulty | Notes
@@ -176,11 +176,11 @@ No | Title | Difficulty | Notes
 266 | Palindrome Permutation | :star: | :white_check_mark: :white_check_mark: :trophy:
 267 | Palindrome Permutation II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Backtracking`
 290 | Word Pattern | :star: | :white_check_mark: :white_check_mark: :trophy:
-383 | Ransom Note | :star: | :trophy:
-412 | Fizz Buzz | :star: | :trophy:
-771 | Jewelsand Stones | :star: | :trophy:
-811 | Subdomain Visit Count | :star: | :trophy:
-953 | Verifying an Alien Dictionary  | :star: | :trophy:
+383 | Ransom Note | :star: | :white_check_mark: :white_check_mark: | :trophy:
+412 | Fizz Buzz | :star: | :white_check_mark: :white_check_mark: | :trophy:
+771 | Jewelsand Stones | :star: | :white_check_mark: :white_check_mark: | :trophy:
+811 | Subdomain Visit Count | :star: | :white_check_mark: :white_check_mark: | :trophy:
+953 | Verifying an Alien Dictionary  | :star: | :white_check_mark: :white_check_mark: | :trophy:
 
 ## Stack
 No | Title | Difficulty | Notes
