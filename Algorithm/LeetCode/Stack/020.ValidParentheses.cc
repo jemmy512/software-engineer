@@ -19,22 +19,20 @@ using namespace std;
 bool isValid(string s) {
     std::stack<char> stack;
 
-    for (int i = 0; i < s.size(); ++i) {
-        /* Calling top(back) on an empty container causes undefined behavior. */
-        if (s[i] == ']' && !stack.empty() && '[' ==  stack.top())
-            stack.pop();
-        else if (s[i] == '}' && !stack.empty() && '{' ==  stack.top())
-            stack.pop();
-        else if (s[i] == ')' && !stack.empty() && '(' ==  stack.top())
-            stack.pop();
-        else
-            stack.push(s[i]);
+    for (const auto& chr : s) {
+        if (stack.empty()) {
+            stack.push(chr);
+        } else {
+            if (stack.top() == '[' && chr == ']')
+                stack.pop();
+            else if (stack.top() == '{' && chr == '}')
+                stack.pop();
+            else if (stack.top() == '(' && chr == ')')
+                stack.pop();
+            else
+                stack.push(chr);
+        }
     }
 
-    return  stack.empty();
-}
-
-int main() {
-    cout << isValid("([{}])") << endl;
-    return 0;
+    return stack.empty();
 }
