@@ -11,28 +11,62 @@
 
 #include <iostream>
 #include <iterator>
+#include <unordered_map>
 #include <stack>
 
 using namespace std;
 
-// 4ms, beat 95.53% submissions
-bool isValid(string s) {
-    std::stack<char> stack;
-
-    for (const auto& chr : s) {
-        if (stack.empty()) {
-            stack.push(chr);
-        } else {
-            if (stack.top() == '[' && chr == ']')
-                stack.pop();
-            else if (stack.top() == '{' && chr == '}')
-                stack.pop();
-            else if (stack.top() == '(' && chr == ')')
-                stack.pop();
-            else
-                stack.push(chr);
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> stk;
+        
+        for (const auto& chr : s) {
+            if (_HashMap.find(chr) != _HashMap.end()) {
+                const auto top = stk.empty() ? '#' : stk.top();
+                if (top != _HashMap.at(chr)) {
+                    return false;
+                } else if (top == '#') {
+                    stk.push(chr);
+                } else {
+                    stk.pop();
+                }
+            } else {
+                stk.push(chr);
+            }
         }
+        
+        return stk.empty();
     }
+    
+private:
+    const unordered_map<char, char> _HashMap {
+      {')', '('},
+      {'}', '{'},
+      {']', '['}  
+    };
+};
 
-    return stack.empty();
-}
+class Solution {
+public:
+    bool isValid(string s) {
+        std::stack<char> stack;
+
+        for (const auto& chr : s) {
+            if (stack.empty()) {
+                stack.push(chr);
+            } else {
+                if (stack.top() == '[' && chr == ']')
+                    stack.pop();
+                else if (stack.top() == '{' && chr == '}')
+                    stack.pop();
+                else if (stack.top() == '(' && chr == ')')
+                    stack.pop();
+                else
+                    stack.push(chr);
+            }
+        }
+
+        return stack.empty();
+    }
+};
