@@ -32,7 +32,10 @@ public:
         vector<vector<int>> result;
         result.reserve(intervals.size() + 1);
 
-        int& start = newInterval[0], &end = newInterval[1], i = 0;
+        int i = 0;
+        int& start = newInterval[0];
+        int& end = newInterval[1];
+
         while (i < intervals.size() && intervals[i][1] < start) {
             result.emplace_back(intervals[i]);
             ++i;
@@ -46,10 +49,7 @@ public:
 
         result.emplace_back(newInterval);
 
-        while (i < intervals.size()) {
-            result.emplace_back(intervals[i]);
-            ++i;
-        }
+        result.insert(result.end(), std::next(intervals.begin(), i), intervals.end());
 
         return result;
     }
