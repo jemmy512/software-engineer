@@ -45,8 +45,10 @@ No | Title | Difficulty | Notes
 027 | Remove Element | :star: | :white_check_mark: :white_check_mark: :trophy:
 041 | First Missing Positive | :star: :star: :star: | :white_check_mark: :trophy:
 054 | Spiral Matrix | :star: :star: | :trophy: `Matrix`
-056 | Merge Intervals | :star: :star: | :trophy: `Interval`
-057 | Insert Intervals | :star: :star: | :trophy:
+056 | Merge Intervals | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
+057 | Insert Intervals | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
+252 | Meeting Rooms | :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
+253 | Meeting Rooms II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
 026 | Remote Duplicates from Sorted Array | :star: | :trophy:
 080 | Remove Duplicates from Sorted Array II | :star: :star: | :trophy: `Can dup N`
 083 | Remove Duplicates from Sorted List | :star: | :trophy:
@@ -154,7 +156,7 @@ No | Title | Difficulty | Notes
 151 | Reverse Words in a String | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 161 | One Edit Distance | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 205 | Isomorphic Strings | :star: | :white_check_mark: :white_check_mark: :trophy:
-242 | Valid Anagra | :star: | :white_check_mark: :white_check_mark: :trophy:  
+242 | Valid Anagra | :star: | :white_check_mark: :white_check_mark: :trophy:
 389 | Find the Difference | :star: | :white_check_mark: :white_check_mark: :trophy:
 409 | Longest Palindrome | :star: | :white_check_mark: :white_check_mark: :trophy:
 415 | Adding Strings | :star: | :white_check_mark: :white_check_mark: :trophy:
@@ -185,8 +187,8 @@ No | Title | Difficulty | Notes
 ## Stack
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-020 | valid Parentheses | :star: | :white_check_mark:
-32 | Longet Valid Paretheses | :star: :star: :star: | :trophy: `DP`
+020 | valid Parentheses | :star: | :white_check_mark: :white_check_mark: | :trophy:
+032 | Longet Valid Paretheses | :star: :star: :star: | :trophy: `DP`
 155 | MinStack | :star:
 394 | DecodeString | :star: :star: | :white_check_mark: :trophy:
 1249 | Minimum Remove to Make Valid Parentheses| :star: :star: | :trophy: `Bit Set`
@@ -195,8 +197,6 @@ No | Title | Difficulty | Notes
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 239 | Sliding Window Maximum | :star: :star: :star: | :trophy: :thinking: `DP` `Bidirectional Array`
-252 | Meeting Rooms | :star: | :white_check_mark: :trophy: `Interval`
-253 | Meeting Rooms II | :star: :star: | :white_check_mark: :trophy: `Interval`
 641 | Design Circular Deque | :star: :star:
 
 ## DP
@@ -264,18 +264,18 @@ No | Title | Difficulty | Notes
 ## BackTrack
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-017 | Letter Combination of a Phone Number | :star: :star: | :white_check_mark: :trophy:
-022 | Generate Parenthesis | :star: :star: | :white_check_mark: :trophy: :thinking:
-046 | Permutations | :star: :star: | :white_check_mark: :trophy:
+017 | Letter Combination of a Phone Number | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+022 | Generate Parenthesis | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking:
+046 | Permutations | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking:
 047 | Permutations II | :star: :star: | `TODO`
-079 | Word Search | :star: :star: | :white_check_mark: :trophy: `Matrix`
-212 | Word Search II | :star: :star: :star: | :white_check_mark: :trophy: `Matrix`
+079 | Word Search | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Matrix`
+212 | Word Search II | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Matrix`
 
 ## Greedy
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-122 | Best Time to Buy and Sell Stock II | :star: | :white_check_mark: :trophy:
-452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :white_check_mark: :trophy: `Interval`
+122 | Best Time to Buy and Sell Stock II | :star: | :white_check_mark: :white_check_mark: :trophy:
+452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
 763 | Partition Labels | :star: :star: | :white_check_mark: :trophy: `Interval`
  | Two Pointers, Sliding Window | | |
 3 | Longest Substring Without Repeating Characters | :star: :star: | :white_check_mark: :trophy:
