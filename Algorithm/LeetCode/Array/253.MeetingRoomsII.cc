@@ -37,16 +37,16 @@ public:
             return lhs[0] < rhs[0];
         });
 
-        std::priority_queue<int, vector<int>, std::greater<int>> que;
+        std::priority_queue<int, vector<int>, std::greater<int>> minHeap;
 
         for (const auto& inter : intervals) {
-            if (!que.empty() && inter[0] >= que.top()) {
-                que.pop();
+            if (!minHeap.empty() && inter[0] >= minHeap.top()) {
+                minHeap.pop();
             }
-            que.emplace(inter[1]);
+            minHeap.emplace(inter[1]);
         }
 
-        return que.size();
+        return minHeap.size();
     }
 };
 
@@ -121,17 +121,3 @@ public:
         return rooms.size();
     }
 };
-
-int main() {
-    vector<vector<int>> intervals{
-        {1, 10},
-        {2, 7},
-        {3, 19},
-        {8, 12},
-        {10, 20},
-        {11, 30}
-    };
-
-    Solution s;
-    s.minMeetingRooms(intervals);
-}
