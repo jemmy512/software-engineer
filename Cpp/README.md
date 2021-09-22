@@ -48,6 +48,7 @@ gcc -o p2 main2.c ./libvector.so
     clang -Xclang -fdump-vtable-layouts -stdlib=libc++ -c model.cc
     ```
 * ![gcc-shared-ptr.png](https://github.com/Jemmy512/book-notes/blob/master/Images/gcc-shared-ptr.png)
+* [Gcc source code](./STL/shared-ptr-gcc.md)
 
 ## GCC
 * [GCC: new allocator malloc](../OpenSource/new-allocator-malloc.md)
