@@ -1,3 +1,5 @@
+![](./gcc-shared-ptr.png)
+
 # shared_ptr
 ```c++
 template<typename _Tp>
@@ -42,10 +44,32 @@ class __shared_ptr : public __shared_ptr_access<_Tp, _Lp>
 public:
     using element_type = typename remove_extent<_Tp>::type;
     
-    // waek_ptr::lock
+    // weak_ptr::lock
     __shared_ptr(const __weak_ptr<_Tp, _Lp>& __r, std::nothrow_t) noexcept
     : _M_refcount(__r._M_refcount, std::nothrow) {
         _M_ptr = _M_refcount._M_get_use_count() ? __r._M_ptr : nullptr;
+    }
+    
+    template<typename _Yp, typename = _SafeConv<_Yp>>
+    explicit __shared_ptr(_Yp* __p)
+    : _M_ptr(__p), _M_refcount(__p, typename is_array<_Tp>::type()) {
+      static_assert( !is_void<_Yp>::value, "incomplete type" );
+      static_assert( sizeof(_Yp) > 0, "incomplete type" );
+      _M_enable_shared_from_this_with(__p);
+    }
+
+    template<typename _Yp, typename _Deleter, typename = _SafeConv<_Yp>>
+    __shared_ptr(_Yp* __p, _Deleter __d)
+    : _M_ptr(__p), _M_refcount(__p, std::move(__d)) {
+      static_assert(__is_invocable<_Deleter&, _Yp*&>::value, "deleter expression d(p) is well-formed");
+      _M_enable_shared_from_this_with(__p);
+    }
+
+    template<typename _Yp, typename _Deleter, typename _Alloc, typename = _SafeConv<_Yp>>
+    __shared_ptr(_Yp* __p, _Deleter __d, _Alloc __a)
+    : _M_ptr(__p), _M_refcount(__p, std::move(__d), std::move(__a)) {
+      static_assert(__is_invocable<_Deleter&, _Yp*&>::value, "deleter expression d(p) is well-formed");
+      _M_enable_shared_from_this_with(__p);
     }
 
     // This constructor is non-standard, it is used by allocate_shared, by used by std::make_shared
@@ -69,6 +93,19 @@ public:
     explicit operator bool() const noexcept { 
         return _M_ptr != nullptr; 
     }
+    
+    template<typename _Yp>
+    using __esft_base_t = decltype(__enable_shared_from_this_base(
+        std::declval<const __shared_count<_Lp>&>(),
+        std::declval<_Yp*>()));
+
+    // Detect an accessible and unambiguous enable_shared_from_this base.
+    template<typename _Yp, typename = void>
+    struct __has_esft_base : false_type { };
+
+    template<typename _Yp>
+    struct __has_esft_base<_Yp, __void_t<__esft_base_t<_Yp>>>
+    : __not_<is_array<_Tp>> { }; // No enable shared_from_this for arrays
 
     template<typename _Yp, typename _Yp2 = typename remove_cv<_Yp>::type>
     typename enable_if<__has_esft_base<_Yp2>::value>::type
@@ -111,14 +148,6 @@ private:
         return static_cast<const __shared_ptr<_Tp, _Lp>*>(this)->get();
     }
 };
-
-// Detect an accessible and unambiguous enable_shared_from_this base.
-template<typename _Yp, typename = void>
-struct __has_esft_base : false_type { };
-
-template<typename _Yp>
-struct __has_esft_base<_Yp, __void_t<__esft_base_t<_Yp>>>
-: __not_<is_array<_Tp>> { }; // No enable shared_from_this for arrays
 ```
 
 ## __shared_count
@@ -193,7 +222,7 @@ public:
         // _GLIBCXX_RESOLVE_LIB_DEFECTS
         // 2415. Inconsistency between unique_ptr and shared_ptr
         if (__r.get() == nullptr)
-        return;
+            return;
 
         using _Ptr = typename unique_ptr<_Tp, _Del>::pointer;
         using _Del2 = typename conditional<is_reference<_Del>::value,
@@ -485,14 +514,17 @@ class _Sp_counted_ptr final : public _Sp_counted_base<_Lp>
 public:
     explicit _Sp_counted_ptr(_Ptr __p) noexcept : _M_ptr(__p) { }
 
-    virtual void _M_dispose() noexcept
-    { delete _M_ptr; }
+    virtual void _M_dispose() noexcept { 
+        delete _M_ptr; 
+    }
 
-    virtual void _M_destroy() noexcept
-    { delete this; }
+    virtual void _M_destroy() noexcept { 
+        delete this; 
+    }
 
-    virtual void* _M_get_deleter(const std::type_info&) noexcept
-    { return nullptr; }
+    virtual void* _M_get_deleter(const std::type_info&) noexcept { 
+        return nullptr; 
+    }
 
     _Sp_counted_ptr(const _Sp_counted_ptr&) = delete;
     _Sp_counted_ptr& operator=(const _Sp_counted_ptr&) = delete;
@@ -613,9 +645,8 @@ private:
     }
 
     // Found by ADL when this is an associated class.
-    friend const enable_shared_from_this* __enable_shared_from_this_base(
-        const __shared_count<>&,
-        const enable_shared_from_this* __p)
+    friend const enable_shared_from_this*
+    __enable_shared_from_this_base( const __shared_count<>&, const enable_shared_from_this* __p)
     { return __p; }
 
     template<typename, _Lock_policy>
