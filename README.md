@@ -186,6 +186,7 @@
 - [x] [How to Use C++ for Cross-Platform Development](https://gusc.lv/2021/03/how-to-use-c-for-cross-platform-development/)
 - [x] [Paramter Passing in C and C++](https://wolchok.org/posts/parameter-passing/)
 - [x] [Type Erasure](http://davekilian.com/cpp-type-erasure.html)
+- [x] [Lambdas: From C++11 to C++20]() [:link: Part 1](https://www.cppstories.com/2019/02/lambdas-story-part1/) [:link: Part 2](https://www.cppstories.com/2019/03/lambdas-story-part2/)
 
 * OOP
     - [x] [Inheritance Without Pointers](https://www.fluentcpp.com/2021/01/29/inheritance-without-pointers/)
