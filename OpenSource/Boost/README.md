@@ -3,6 +3,77 @@
 
 ![](../Image/boost-asio-call-flow.png)
 
+# io_context::run
+```c++
+io_context::run()
+    scheduler::run()
+        thread_info this_thread;
+        this_thread.private_outstanding_work = 0;
+
+        for (do_run_one(&this_thread)) {
+            while (!Stop) {
+                if (!op_queue_.empty()) {
+                    operation* o = op_queue_.front()
+                    if (o == &task_operation_) {
+                        if (more_handlers && !one_thread_)
+                            wakeup_event_.unlock_and_signal_one(lock);
+                        else
+                            lock.unlock();
+
+                        epoll_reactor::run(this_thread.private_op_queue)
+                            epoll_wait()
+                            for (int i = 0; i < num_events; ++i) {
+                                void* ptr = events[i].data.ptr;
+                                if (ptr == &interrupter_) {
+
+                                } else if (ptr == &timer_fd_) {
+                                    check_timers = true;
+                                } else {
+                                    descriptor_state* descriptor_data = static_cast<descriptor_state*>(ptr);
+                                    if (!ops.is_enqueued(descriptor_data)) {
+                                        descriptor_data->set_ready_events(events[i].events);
+                                            task_result_ = events;
+                                        ops.push(descriptor_data);
+                                    } else {
+                                        descriptor_data->add_ready_events(events[i].events);
+                                            task_result_ |= events;
+                                    }
+                                }
+                            }
+                    } else {
+                        o->complete(this, ec, task_result)
+                    }
+                } else {
+                    wakeup_event_.clear(lock);
+                    wakeup_event_.wait(lock);
+                        ::pthread_cond_wait()
+                }
+            }
+        }
+
+        ~thread_info_base()
+            ~op_queue()
+                op_queue_access::destroy(op);
+                    op->destroy()
+                        scheduler_operation::destroy()
+                            func_(0, this, boost::system::error_code(), 0)
+```
+
+# scheduler::wait_one
+```c++
+scheduler::wait_one()
+    operation* o = op_queue_.front()
+    if (o == 0) {
+        wakeup_event_.wait_for_usec(lock, usec)
+            posix_event::wait_for_usec()
+                ::pthread_cond_timedwait()
+    }
+
+    if (o == &task_operation_) {
+
+    }
+```
+
 # async_accept
 ```C++
 basic_socket_acceptor::async_accept()
@@ -49,6 +120,7 @@ basic_socket_acceptor::async_accept()
                                     basic_scoket::assign()
                                         reactive_descriptor_service::assign()
                                             epoll_reactor::register_descriptor()
+                                                ev.events = EPOLLIN | EPOLLERR | EPOLLHUP | EPOLLPRI | EPOLLET;
                                                 epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev)
 ```
 
@@ -60,6 +132,7 @@ basic_stream_socket::async_connect()
         if (!is_open())
             reactive_socket_service_base::do_open()
                 epoll_reactor::register_descriptor()
+                    ev.events = EPOLLIN | EPOLLERR | EPOLLHUP | EPOLLPRI | EPOLLET;
                     epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev)
         reactive_socket_service_base::start_connect_op() // construct reactive_socket_connect_op
             if (socket_ops::set_internal_non_blocking())
@@ -303,5 +376,12 @@ void scheduler::post_immediate_completion(scheduler::operation* op, bool is_cont
   mutex::scoped_lock lock(mutex_);
   op_queue_.push(op);
   wake_one_thread_and_unlock(lock);
+    scheduler::wake_one_thread_and_unlock()
+        epoll_reactor::interrupt() {
+            epoll_event ev = { 0, { 0 } };
+            ev.events = EPOLLIN | EPOLLERR | EPOLLET;
+            ev.data.ptr = &interrupter_;
+            epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, interrupter_.read_descriptor(), &ev);
+        }
 }
 ```
