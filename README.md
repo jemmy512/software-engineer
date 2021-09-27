@@ -1,5 +1,5 @@
 # Table of Contents
-
+* [Road Map](https://roadmap.sh)
 * [Formal Entry](#Formal-Entry)
 * [Programmer Cultivation](#Programmer-Cultivation)
     1. [Coding Cultivation](#Coding-Cultivation)
@@ -84,6 +84,7 @@
 - [ ] :orange_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
 - [ ] :orange_book: Modern Operating Systems :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/modern-operating-system.md)
 - [ ] :orange_book: Advanced Programming in the UNIX Environment
+- [x] [CPU Registers x86](https://wiki.osdev.org/CPU_Registers_x86#General_Purpose_Registers)
 
 ## Network
 - [ ] :orange_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/tcp-ip-illustrated-volume-1.md)
@@ -138,6 +139,9 @@
     - [ ] RFC 7540 - Hypertext Transfer Protocol Version 2 (HTTP/2)
     - [ ] RFC 7541 - HPACK: Header Compression for HTTP/2
 
+* Other
+    - [ ] [STUN Traceroute](https://datatracker.ietf.org/doc/html/draft-martinsen-tram-stuntrace-01)
+
 ## Database
 - [ ] :orange_book: Database System Concepts(Fifth Edition)
 - [ ] :orange_book: High Performance MySQL,3rd
@@ -184,6 +188,7 @@
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
 - [x] [How C++ Resolves a Function Call](https://preshing.com/20210315/how-cpp-resolves-a-function-call/)
 - [x] [How to Use C++ for Cross-Platform Development](https://gusc.lv/2021/03/how-to-use-c-for-cross-platform-development/)
+- [x] [trivial_abi](https://quuxplusone.github.io/blog/2018/05/02/trivial-abi-101/)
 - [x] [Paramter Passing in C and C++](https://wolchok.org/posts/parameter-passing/)
 - [x] [Type Erasure](http://davekilian.com/cpp-type-erasure.html)
 - [x] [Lambdas: From C++11 to C++20]() [:link: Part 1](https://www.cppstories.com/2019/02/lambdas-story-part1/) [:link: Part 2](https://www.cppstories.com/2019/03/lambdas-story-part2/)
@@ -262,7 +267,7 @@
     - [x] [C++20: Aggregate, POD, trivial type, standard layout class, what is what](https://andreasfertig.blog/2021/01/cpp20-aggregate-pod-trivial-type-standard-layout-class-what-is-what/)
     - [x] [Notes on C++ SFINAE, Modern C++ and C++20 Concepts](https://www.cppstories.com/2016/02/notes-on-c-sfinae/)
     - [x] [std::index_sequence and its Improvement in C++20](https://www.fluentcpp.com/2021/03/05/stdindex_sequence-and-its-improvement-in-c20/)
-    - [x] [constexpr vector and string in C++20 and One Big Limitation](https://www.cppstories.com/2021/constexpr-vecstr-cpp20/) 
+    - [x] [constexpr vector and string in C++20 and One Big Limitation](https://www.cppstories.com/2021/constexpr-vecstr-cpp20/)
     - [ ] [Raymond Chen: C++ coroutines]()
         * [A map through the three major coroutine series](https://devblogs.microsoft.com/oldnewthing/20210504-01/?p=105178)
         <details>
