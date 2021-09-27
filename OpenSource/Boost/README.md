@@ -20,7 +20,9 @@ io_context::run()
                         else
                             lock.unlock();
 
-                        epoll_reactor::run(this_thread.private_op_queue)
+                        task_cleanup on_exit = { this, &lock, &this_thread };
+
+                        epoll_reactor::run(this_thread.private_op_queue) {
                             epoll_wait()
                             for (int i = 0; i < num_events; ++i) {
                                 void* ptr = events[i].data.ptr;
@@ -40,6 +42,28 @@ io_context::run()
                                     }
                                 }
                             }
+                        }
+
+                        /* when complete the epoll task add it back again into the op_queue
+                         * so there always is a thead runs task_operation_.
+                         *
+                         * If there's no other tasks and epoll events,
+                         * this thread blocks at epoll_wait. When add a new task [1]
+                         * into op_queue, scheduler::wake_one_thread_and_unlock wakes up the
+                         * epoll_wait, but there's no epoll_event, epoll_reactor::run returns
+                         * immediately and add task_operation_ [2] again into op_queue.
+                         * The thead continues its next `while` loop, gets task [1] from op_queue,
+                         * since op_queue has task[2], this thread `unlock_and_signal_one`
+                         * another thread to run task_operation_ [2], it runs task [1]
+                         *
+                         * The other thread will block at epoll_wait,
+                         * task_operation_ ran by every thread in turn. */
+
+                        ~task_cleanup() {
+                            scheduler_->task_interrupted_ = true;
+                            scheduler_->op_queue_.push(this_thread_->private_op_queue);
+                            scheduler_->op_queue_.push(&scheduler_->task_operation_);
+                        }
                     } else {
                         o->complete(this, ec, task_result)
                     }
@@ -57,21 +81,6 @@ io_context::run()
                     op->destroy()
                         scheduler_operation::destroy()
                             func_(0, this, boost::system::error_code(), 0)
-```
-
-# scheduler::wait_one
-```c++
-scheduler::wait_one()
-    operation* o = op_queue_.front()
-    if (o == 0) {
-        wakeup_event_.wait_for_usec(lock, usec)
-            posix_event::wait_for_usec()
-                ::pthread_cond_timedwait()
-    }
-
-    if (o == &task_operation_) {
-
-    }
 ```
 
 # async_accept
