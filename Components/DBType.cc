@@ -1,6 +1,7 @@
 #include <iostream>
 #include <variant>
 #include <vector>
+#include <optional>
 
 struct Column {
     using Columns = std::vector<Column>;
@@ -93,13 +94,11 @@ public:
     }
 
     template<typename T>
-    const T& getValue() const {
+    std::optional<const T&> getValue() const {
         if (const auto data = std::get_if<T>(&mData)) {
-            return *data;
+            return { *data };
         }
-
-        static T dummy{};
-        return dummy;
+        return {};
     }
 
     template<typename T>
