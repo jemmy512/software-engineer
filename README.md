@@ -259,7 +259,8 @@
     - [x] [How std::any Works](https://www.fluentcpp.com/2021/02/05/how-stdany-works/)
     - [ ] [Everything You Need to Know About std::variant from C++17](https://www.bfilipek.com/2018/06/variant.html)
     - [x] [Runtime Polymorphism with std::variant and std::visit](https://www.bfilipek.com/2020/04/variant-virtual-polymorphism.html)
-    - [ ] [Simplify code with ‘if constexpr’ in C++17](https://www.bfilipek.com/2018/03/ifconstexpr.html)
+    - [x] [Visiting a std::variant with the Overload Pattern](https://www.modernescpp.com/index.php/visiting-a-std-variant-with-the-overload-pattern)
+    - [x] [Simplify code with ‘if constexpr’ in C++17](https://www.bfilipek.com/2018/03/ifconstexpr.html)
 
 * C++ 20
     - [x] [Table: C++20 Features.pdf](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp20-features.pdf)
