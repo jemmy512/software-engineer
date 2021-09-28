@@ -44,20 +44,24 @@ There will be at least one element in the data structure when getRandom is calle
  * Hash Map supports O(1) access to specific key, which can do O(1) insert, remove */
 class RandomizedSet {
 public:
+    using value_type = int;
+    using size_type = typename std::vector<value_type>::size_type;
+
+public:
     RandomizedSet() = default;
 
-    bool insert(int val) {
+    bool insert(value_type val) {
         if (hashMap.find(val) != hashMap.end())
             return false;
 
         vec.emplace_back(val);
-        hashMap.emplace(val, vec.size()-1);
+        hashMap.emplace(vec.back(), vec.size()-1);
         return true;
     }
 
     /* remove ith element from vec will cause all indcies in hashMap invalide
      * swap the ith elem and back elem of vec, then delete the back elem */
-    bool remove(int val) {
+    bool remove(value_type val) {
         auto iter = hashMap.find(val);
         if (iter == hashMap.end())
             return false;
@@ -70,20 +74,23 @@ public:
     }
 
     int getRandom() {
-        return *(vec.begin() + getRandom<int>(0, vec.size()-1));
+        return *(vec.begin() + getRandom<value_type>(0, vec.size()-1));
     }
 
 private:
-    std::vector<int> vec;
-    std::unordered_map<int, int> hashMap;
+    std::vector<value_type> vec;
+    std::unordered_map<value_type, size_type> hashMap;
+
+    // hashMap default constructor is deleted since std::reference_wrapper is deleted default construct,
+    // std::unordered_map<std::reference_wrapper<const value_type>, size_type> hashMap;
 
     template<typename Size = int>
     Size getRandom(Size min, Size max) {
-        std::random_device dev;
-        std::default_random_engine engine(dev());
-        std::uniform_int_distribution<Size> distribution(min, max);
+        static std::random_device dev;
+        static std::default_random_engine engine(dev());
+        static std::uniform_int_distribution<Size> distribute(min, max);
 
-        return distribution(engine);
+        return distribute(engine);
     }
 };
 
