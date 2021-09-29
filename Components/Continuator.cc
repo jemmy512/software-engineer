@@ -80,3 +80,24 @@ int main() {
         std::cout << str << std::endl;
     });
 }
+
+/*
+[](argument<0>& continuation) {
+
+    [](argument<0>& continuation) { // then 2
+
+        [](argument<0>& continuation) { // then 1
+
+            [](argument<0>& continuation) { // Continuator
+                // logic 
+                if (lambda1) {
+                    lambda1(rest...);
+                }
+
+            }(bind(lambda1, continuation)); [](Rest... rest) -> continuator { lambda1(lambda2, rest...); }
+
+        }(bind(lambda2, continuation)); []((Rest... rest)) -> continuator { lambda2(lambda3, rest...); }
+
+    }(nullptr);
+
+}(nullptr); */
