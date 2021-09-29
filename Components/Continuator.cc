@@ -31,16 +31,16 @@ struct Continuator
 
     template <typename Callable, typename Arg0 = typename function_traits<Callable>::template argument<0>>
     Continuator<Arg0> then(const Callable& callable) {
-        return [continuable = FunctionUtil::move(action), callable](const Arg0& continuation) {
+        return [continuable = FunctionTraits::move(action), callable](const Arg0& continuation) {
             continuable(function_traits<Callable>::helper::bind(callable, continuation));
         };
     }
 
     template <typename Callable, typename... Args>
-    std::enable_if_t<is_continuable<Callable>::value, continuator<typename function_traits<Callable>::argument_0>>
+    std::enable_if_t<is_continuable<Callable>::value, Continuator<typename function_traits<Callable>::template argument<0>>>
     then(const Callable& callable, Args... args) {
         return [continuable = FunctionTraits::move(action), callable, args...]
-            (const typename function_traits<Callable>::argument_0& continuation) {
+            (const typename function_traits<Callable>::template argument<0>& continuation) {
                 continuable(function_traits<Callable>::helper::bind(callable, continuation));
             };
     }
