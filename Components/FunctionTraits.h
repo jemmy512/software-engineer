@@ -242,7 +242,7 @@ namespace detail
     template <typename C>
     struct is_continuable<C, true>
     {
-        static constexpr bool value = is_functor<typename function_traits<C>::argument_0>::value;
+        static constexpr bool value = is_functor<typename function_traits<C>::template argument<0>>::value;
     };
 }
 
