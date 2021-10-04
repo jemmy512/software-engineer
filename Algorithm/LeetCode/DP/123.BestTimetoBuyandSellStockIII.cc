@@ -36,7 +36,10 @@ Relatives:
 122. Best Time to Buy and Sell Stock II
 123. Best Time to Buy and Sell Stock III
 188. Best Time to Buy and Sell Stock IV
-309. Best Time to Buy and Sell Stock with Cooldown [TODO] */
+309. Best Time to Buy and Sell Stock with Cooldown [TODO] 
+
+238. Product of Array Except Self
+239. Sliding Window Maximum */
 
 #include <climits>
 #include <vector>
