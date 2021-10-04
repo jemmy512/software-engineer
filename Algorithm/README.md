@@ -3,17 +3,17 @@
 ## Math
 No | Title | Difficulty | Notes
 -- | -- | --- | ---
-6 | Zig Zag Conversion | :star: :star: | :white_check_mark: :trophy:
-7 | Reverse Integer | :star: | :white_check_mark: :trophy:
-9 | Palindrom Number | :star: | :white_check_mark: :trophy:
-15 | 3 Sum | :star: :star: | :white_check_mark: :trophy:
-16 | 3 Sum Closest | :star: :star: | :white_check_mark: :trophy: |
-18 | 4 Sum | :star: :star: | :white_check_mark: :trophy: |
-50 | pow-x-n | :star: :star: | `TODO`
-65 | Valid Number | :star: :star: :star: | :white_check_mark: :trophy: |
-66 | Plus One | :star: | :white_check_mark: :white_check_mark: :trophy: |
-67 | Add Binary | :star: | :white_check_mark: :white_check_mark: :trophy: |
-69 | Sqrt(x) | :star: | :white_check_mark: :trophy: |
+006 | Zig Zag Conversion | :star: :star: | :white_check_mark: :trophy:
+007 | Reverse Integer | :star: | :white_check_mark: :trophy:
+009 | Palindrom Number | :star: | :white_check_mark: :trophy:
+015 | 3 Sum | :star: :star: | :white_check_mark: :trophy:
+016 | 3 Sum Closest | :star: :star: | :white_check_mark: :trophy: |
+018 | 4 Sum | :star: :star: | :white_check_mark: :trophy: |
+050 | pow-x-n | :star: :star: | `TODO`
+065 | Valid Number | :star: :star: :star: | :white_check_mark: :trophy: |
+066 | Plus One | :star: | :white_check_mark: :white_check_mark: :trophy: |
+067 | Add Binary | :star: | :white_check_mark: :white_check_mark: :trophy: |
+069 | Sqrt(x) | :star: | :white_check_mark: :trophy: |
 168 | Excel Sheet Colum Title | :star: | :white_check_mark: :trophy: |
 171 | Excel Sheet Colum Number | :star: | :white_check_mark: :trophy: |
 172 | Factorial Trailing Zeros | :star: :star: | :trophy: |
@@ -64,24 +64,25 @@ No | Title | Difficulty | Notes
 217 | Contains Duplicate I | :star:
 219 | Contains Duplicate II | :star:
 220 | Contains Duplicate III | :star: :star:
-238 | Product of Array Except Self  | :star: :star: | :white_check_mark: :trophy: `Bidirectional Array`
+238 | Product of Array Except Self  | :star: :star: | :white_check_mark: :trophy: `L-R vec`
+239 | Sliding Window Maximum | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `DP` `L-R vec`
 283 | Move Zeroes | :star: :star: | :white_check_mark: :trophy:
 448 | Find All Numbers Disappeared in An Array | :star:
 
 ## List
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-2 | Add Two Numbers | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+002 | Add Two Numbers | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 445 | Add Two Numbers II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-19 | Remove Nth Node From End of List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-21 | Merge Two Sorted Lists | :star: | :white_check_mark: :white_check_mark:
-23 | Merge K Sorted List | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `K-way Merge` `Divide Conquer`
-24 | Swap Nodes in Pairs | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-25 | Reverse Nodes in K-Group | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-61 | Roate List By K | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-86 | Partition List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+019 | Remove Nth Node From End of List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+021 | Merge Two Sorted Lists | :star: | :white_check_mark: :white_check_mark:
+023 | Merge K Sorted List | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `K-way Merge` `Divide Conquer`
+024 | Swap Nodes in Pairs | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+025 | Reverse Nodes in K-Group | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+061 | Roate List By K | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+086 | Partition List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 206 | Reverse Linkded List | :star: | :white_check_mark: :white_check_mark: :trophy: `3 solutions`
-92 | Reverse Linked List II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+092 | Reverse Linked List II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 138 | Copy List With Random Pointer  | :star: | :white_check_mark: :white_check_mark: :trophy: :thinking:
 141 | linked List Cycle | :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers` `Cycle`
 142 | Linked List Cycle II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers` `Cycle`
@@ -100,7 +101,7 @@ No | Title | Difficulty | Notes
 ## Tree
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-98 | Validate Binary Search Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
+098 | Validate Binary Search Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
 100 | Same Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
 101 | Symmetric Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
 102 | Binary Tree Level Order Traversal | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
@@ -189,35 +190,34 @@ No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 020 | valid Parentheses | :star: | :white_check_mark: :white_check_mark: | :trophy:
 032 | Longet Valid Paretheses | :star: :star: :star: | :trophy: `DP`
-155 | MinStack | :star:
+155 | MinStack | :star: | :white_check_mark: :white_check_mark: | :trophy:
 394 | DecodeString | :star: :star: | :white_check_mark: :trophy:
 1249 | Minimum Remove to Make Valid Parentheses| :star: :star: | :trophy: `Bit Set`
 
 ## Queue
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-239 | Sliding Window Maximum | :star: :star: :star: | :trophy: :thinking: `DP` `Bidirectional Array`
 641 | Design Circular Deque | :star: :star:
 
 ## DP
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-5 | Longest Palindromic Substring | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-32 | Longet Valid Paretheses | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `stack`
-53 | Maximum Subarray | :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `kadane` `Divide Conquer`
-62 | Unique Paths | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-63 | Unique Paths II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+005 | Longest Palindromic Substring | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+032 | Longet Valid Paretheses | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `stack`
+053 | Maximum Subarray | :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `kadane` `Divide Conquer`
+062 | Unique Paths | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+063 | Unique Paths II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 980 | Unique Paths III | :star: :star: :star: | `TODO`
-64 | Minimum Path Sum | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-70 | Climbing Stairs | :star: | :white_check_mark: :white_check_mark: :trophy:
+064 | Minimum Path Sum | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+070 | Climbing Stairs | :star: | :white_check_mark: :white_check_mark: :trophy:
 746 | MinCost Climb Stair | :star: | :white_check_mark: :white_check_mark: :trophy:
-72 | Edit Distance | :star: :star: :star: | :white_check_mark: :trophy:
+072 | Edit Distance | :star: :star: :star: | :white_check_mark: :trophy:
 583 | Delete Operation for Two Strings | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-91 | Decode Ways | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+091 | Decode Ways | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 121 | Best Time to Buy and Sell Stock | :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum`
 122 | Best Time to Buy and Sell Stock II | :star: | :white_check_mark: :white_check_mark: :trophy: `Greedy`
-123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | :white_check_mark: :trophy: `Bidirectional Arrary`
+123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | :white_check_mark: :trophy: `L-R vec`
 188 | Best Time to Buy and Sell Stock IV | :star: :star: :star:|    :white_check_mark: :trophy: :thinking:
 139 | Word Break | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `Bottom Up`
 152 | Maximum Product Subarry | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum`
@@ -246,9 +246,9 @@ No | Title | Difficulty | Notes
 ## Search
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-34 | Search For a Range | :star: :star: | :white_check_mark: :trophy: `BS`
-35 | Search Insert Position | :star: | :white_check_mark: :trophy: `BS`
-74 | Search a 2D Matrix | :star: :star: | :white_check_mark: :trophy: `BS` `Matrix`
+034 | Search For a Range | :star: :star: | :white_check_mark: :trophy: `BS`
+035 | Search Insert Position | :star: | :white_check_mark: :trophy: `BS`
+074 | Search a 2D Matrix | :star: :star: | :white_check_mark: :trophy: `BS` `Matrix`
 240 | Search a 2D Matrix II | :star: :star: | :white_check_mark: :trophy: :thinking: `BS` `Matrix`
 278 | First Bad Version | :star: | :white_check_mark: :trophy: `BS`
 130 | Surrounded Regions | :star: :star: | :white_check_mark: :trophy: `DFS` `BFS` `Opposite` `Matrix`
@@ -276,31 +276,33 @@ No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 122 | Best Time to Buy and Sell Stock II | :star: | :white_check_mark: :white_check_mark: :trophy:
 452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
-763 | Partition Labels | :star: :star: | :white_check_mark: :trophy: `Interval`
- | Two Pointers, Sliding Window | | |
-3 | Longest Substring Without Repeating Characters | :star: :star: | :white_check_mark: :trophy:
-159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | :white_check_mark: :trophy:
-340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | :white_check_mark: :trophy:
-239 | Sliding Window Maximum | :star: :star: :star: | :white_check_mark: :trophy: `DP` `deque`
+763 | Partition Labels | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
+
+##  Two Pointers 
+No | Title | Difficulty | Notes
+003 | Longest Substring Without Repeating Characters | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+239 | Sliding Window Maximum | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `DP` `deque` `L-R vec`
 992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
 
 ## Divide Conquer
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-23 | Merge K Sorted List | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `K-way Merge`
+023 | Merge K Sorted List | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `K-way Merge`
 
 ## Sort
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-937 | Reorder Data in Log Files | :star: | :white_check_mark: :trophy:
+937 | Reorder Data in Log Files | :star: | :white_check_mark: :white_check_mark: :trophy:
 347 | Top K Frequent Elements | :star: :star: | :trophy: `Heap` `TODO`
 
 ## Design
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-146 | LRU Cache | :star: :star: | :trophy: `Map + List (O(1) + Date Move)`
-380 | Insert Delete GetRandom O(1) | :star: :star: | :trophy: `Map + Vec (O(1) + Random Access)`
-1396 | Design Underground System | :star: :star: | :trophy:
+146 | LRU Cache | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Map + List (O(1) + Date Move)`
+380 | Insert Delete GetRandom O(1) | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Map + Vec (O(1) + Random Access)`
+1396 | Design Underground System | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 
 
 # Dynamic Programming
