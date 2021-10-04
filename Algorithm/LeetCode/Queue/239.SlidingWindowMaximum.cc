@@ -24,12 +24,52 @@ Window position                Max
 Constraints:
 1 <= nums.length <= 10^5
 -10^4 <= nums[i] <= 10^4
-1 <= k <= nums.length */
+1 <= k <= nums.length 
+
+Relatives:
+076. Minimum Window Substring
+155. Min Stack
+239. Sliding Window Maximum
+1696. Jump Game VI 
+
+123. Best Time to Buy and Sell Stock III
+238. Product of Array Except Self */
 
 #include <vector>
 #include <deque>
 
 using namespace std;
+
+/* dp solution 
+ * Time complexity: O(N), since all we do is 3 passes along the array of length N.
+ * Space complexity: O(N) to keep left and right arrays of length N, and output array of length N - k + 1.*/
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        if (nums.size() * k == 0)
+            return {};
+        if (k == 1)
+            return nums;
+
+        const auto size = nums.size();
+        vector<int> left(size, nums[0]);
+        vector<int> right(size, nums[size-1]);
+        vector<int> result(size-k+1);
+
+        for (auto i = 1; i < size; ++i) {
+            left[i] = (i % k == 0) ? nums[i] : max(left[i-1], nums[i]);
+
+            auto j = size - i - 1;
+            right[j] = ((j+1) % k == 0) ? nums[j] : max(right[j+1], nums[j]);
+        }
+
+        for (auto i = 0; i < size-k+1; ++i) {
+            result[i] = max(left[i+k-1], right[i]);
+        }
+
+        return result;
+    }
+};
 
 /* deque solution
  * Time complexity: O(N), since each element is processed exactly twice - it's index added and then removed from the deque.
@@ -60,37 +100,5 @@ public:
         }
 
         return window;
-    }
-};
-
-/* dp solution */
-class Solution {
-public:
-    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        if (nums.size() * k == 0)
-            return {};
-        if (k == 1)
-            return nums;
-
-        int size = nums.size();
-        vector<int> left, right;
-        left.reserve(size);
-        right.reserve(size);
-        left[0] = nums[0];
-        right[size-1] = nums[size-1];
-
-        for (int i = 1; i < size; ++i) {
-            left[i] = (i % k == 0) ? nums[i] : max(left[i-1], nums[i]);
-
-            int j = size - i - 1;
-            right[j] = ((j+1) % k == 0) ? nums[j] : max(right[j+1], nums[j]);
-        }
-
-        vector<int> result(size-k+1, 0);
-        for (int i = 0; i < size-k+1; ++i) {
-            result[i] = max(left[i+k-1], right[i]);
-        }
-
-        return result;
     }
 };
