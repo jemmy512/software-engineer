@@ -15,9 +15,8 @@ Reletives:
 992. Subarrays with K Different Integers */
 
 #include <iostream>
-#include <cstring>
+#include <vector>
 #include <string>
-#include <array>
 
 using namespace std;
 
