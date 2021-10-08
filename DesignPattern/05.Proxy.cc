@@ -5,7 +5,7 @@
 using namespace std;
 using std::chrono::microseconds;
 
-/* Proxy:
+/* Proxy: Provide a surrogate or placeholder for another object to control access to it.
  * 1. add functionalities without changing the original class,
  * 2. decouple the framework code with business code,
  * 3. the purpose is access control rather than enhancement.
@@ -45,34 +45,35 @@ using MetricsCollectorSP = std::shared_ptr<MetricsCollector>;
 
 class UserControllerProxy : public IUserController {
 public:
-    UserControllerProxy(const UserControllerSP& ucSP) {
-        userControllerSP = ucSP;
-        metricsCollectorSP = std::make_shared<MetricsCollector>();
-    }
+    UserControllerProxy(const UserControllerSP& ucSP) 
+    :   _UserControllerSP(ucSP), 
+        _MetricsCollectorSP(std::make_shared<MetricsCollector>()) 
+    {}
 
     void login(const string& telephone, const string& password) override {
         auto startTimePoint = std::chrono::system_clock::now();
 
-        userControllerSP->login(telephone, password);
+        _UserControllerSP->login(telephone, password);
 
         auto endTimePoint = std::chrono::system_clock::now();
         long responseTime = std::chrono::duration_cast<microseconds>(endTimePoint - startTimePoint).count();
-        metricsCollectorSP->recordRequest("login", startTimePoint.time_since_epoch().count(), responseTime);
+        _MetricsCollectorSP->recordRequest("login", startTimePoint.time_since_epoch().count(), responseTime);
     }
 
     void signup(const string& telephone, const string& password) override {
         auto startTimePoint = std::chrono::system_clock::now();
 
-        userControllerSP->signup(telephone, password);
+        _UserControllerSP->signup(telephone, password);
 
         auto endTimePoint = std::chrono::system_clock::now();
         auto responseTime = std::chrono::duration_cast<microseconds>(endTimePoint - startTimePoint).count();
-        metricsCollectorSP->recordRequest("register", startTimePoint.time_since_epoch().count(), responseTime);
+        _MetricsCollectorSP->recordRequest("register", startTimePoint.time_since_epoch().count(), responseTime);
 
     }
+
 private:
-    MetricsCollectorSP metricsCollectorSP;
-    IUserControllerSP userControllerSP;
+    const MetricsCollectorSP _MetricsCollectorSP;
+    const IUserControllerSP _UserControllerSP;
 };
 
 int main() {
