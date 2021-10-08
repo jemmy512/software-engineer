@@ -43,9 +43,11 @@ public:
         int col = 0; // also can search from top right corner
 
         while (row >= 0 && col < colSize) {
-            if (matrix[row][col] == target) {
+            const auto& coordinate = matrix[row][col];
+
+            if (coordinate == target) {
                 return true;
-            } else if (matrix[row][col] < target) {
+            } else if (coordinate < target) {
                 ++col;
             } else {
                 --row;
