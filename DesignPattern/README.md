@@ -39,9 +39,10 @@
 
 ## Proxy
 1. Intent
-    1. add functionalities without changing the original class,
-    2. decouple the framework code with business code,
-    3. the purpose is access control rather than enhancement.
+    * Provide a surrogate or placeholder for another object to control access to it.
+        1. add functionalities without changing the original class,
+        2. decouple the framework code with business code,
+        3. the purpose is access control rather than enhancement.
 
 2. Use cases: RPC, Cache, Monitor, Authentication, Rate limit, Transaction, logging
 
