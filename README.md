@@ -80,6 +80,9 @@
 - [x] [Checklist](https://github.com/mtdvio/going-to-production)
 
 # Computer Science
+
+* [Teach Yourself Computer Science](https://teachyourselfcs.com)
+
 ## Operating System
 - [ ] :orange_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
 - [ ] :orange_book: Modern Operating Systems :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/modern-operating-system.md)
@@ -141,6 +144,7 @@
 
 * Other
     - [ ] [STUN Traceroute](https://datatracker.ietf.org/doc/html/draft-martinsen-tram-stuntrace-01)
+    - [ ] [Implementing Remote Procedure Calls](https://www.cs.cmu.edu/~dga/15-712/F07/papers/birrell842.pdf)
 
 ## Database
 - [ ] :orange_book: Database System Concepts(Fifth Edition)
