@@ -25,25 +25,28 @@ using namespace std;
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        if (matrix.empty())
+        if (matrix.empty()) {
             return false;
-
-        int rowSize = matrix.size();
-        int colSize = matrix[0].size();
-        int beg = 0, end = rowSize * colSize;
-
-        while (beg < end) {
-            int midIdx = beg + (end - beg) / 2;
-            auto mid = matrix[midIdx/colSize][midIdx%colSize];
+        }
+        
+        auto rowSize = matrix.size();
+        auto colSize = matrix[0].size();
+        int beg = 0;
+        int end = rowSize * colSize - 1;
+        
+        while (beg <= end) {
+            auto pivot = beg + (end - beg) / 2;
+            auto mid = matrix[pivot/colSize][pivot%colSize];
+            
             if (mid == target) {
                 return true;
-            } else if (mid > target) {
-                end = midIdx;
+            } else if (mid < target) {
+                beg = pivot + 1;
             } else {
-                beg = midIdx + 1;
+                end = pivot - 1;
             }
         }
-
+        
         return false;
     }
 };
