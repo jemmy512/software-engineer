@@ -28,7 +28,15 @@ isConnected[i][i] == 1
 isConnected[i][j] == isConnected[j][i]
 
 Relatives:
-Number of Connected Components in an Undirected Graph
+Relatives:
+130. Surrounded Regions
+200. Number of Islands
+286. Walls and Gates
+305. Number of Islands II
+323. Number of Connected Components in an Undirected Graph
+694. Number of Distinct Islands
+695. Max Area of Island
+
 Robot Return to Origin
 Sentence Similarity
 Sentence Similarity II
