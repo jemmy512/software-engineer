@@ -352,7 +352,12 @@
         * [Understanding Symmetric Transfer](https://lewissbaker.github.io/2020/05/11/understanding_symmetric_transfer)
     - [x] [constexpr Dynamic Memory Allocation, C++20](https://www.cppstories.com/2021/constexpr-new-cpp20/)
     - [ ] [C++20 Dynamic Allocations at Compile-time](https://andreasfertig.blog/2021/08/cpp20-dynamic-allocations-at-compile-time/)
-
+    - [ ] [Ordering asynchronous updates with coroutines]()
+        * [:link: Part 1: Mutual exclusion](https://devblogs.microsoft.com/oldnewthing/20210906-00/?p=105653)
+        * [:link: Part 2: Restart with hand-off](https://devblogs.microsoft.com/oldnewthing/20210907-00/?p=105659)
+        * [:link: Part 3: Let them all compete, but only one wins](https://devblogs.microsoft.com/oldnewthing/20210908-00/?p=105662)
+        * [:link: Part 4: Bowing out, explicit version](https://devblogs.microsoft.com/oldnewthing/20210909-00/?p=105666)
+        * [:link: Part 5: Bowing out via cancellation](https://devblogs.microsoft.com/oldnewthing/20210910-00/?p=105669)
 </details>
 
 # System Design
