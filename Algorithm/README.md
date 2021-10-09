@@ -246,18 +246,18 @@ No | Title | Difficulty | Notes
 ## Search
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-034 | Search For a Range | :star: :star: | :white_check_mark: :trophy: `BS`
-035 | Search Insert Position | :star: | :white_check_mark: :trophy: `BS`
-074 | Search a 2D Matrix | :star: :star: | :white_check_mark: :trophy: `BS` `Matrix`
-240 | Search a 2D Matrix II | :star: :star: | :white_check_mark: :trophy: :thinking: `BS` `Matrix`
-278 | First Bad Version | :star: | :white_check_mark: :trophy: `BS`
-130 | Surrounded Regions | :star: :star: | :white_check_mark: :trophy: `DFS` `BFS` `Opposite` `Matrix`
-200 | Number of Islands | :star: :star: | :white_check_mark: :trophy: `DFS` `BFS` `Matrix`
-286 | Walls and Gates | :star: :star: | :white_check_mark: :trophy: :thinking: `BFS` `Matrix`
-323 | Number of Connected Components in an Undirected Graph | :star: :star: | :trophy: :thinking: `Union Find` `Matrix`
+034 | Search For a Range | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `BS`
+035 | Search Insert Position | :star: | :white_check_mark: :white_check_mark: :trophy: `BS`
+074 | Search a 2D Matrix | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `BS` `Matrix`
+240 | Search a 2D Matrix II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `BS` `Matrix`
+278 | First Bad Version | :star: | :white_check_mark: :white_check_mark: :trophy: `BS`
+130 | Surrounded Regions | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `DFS` `BFS` `Opposite` `Matrix`
+200 | Number of Islands | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `DFS` `BFS` `Matrix`
+286 | Walls and Gates | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `BFS` `Matrix`
+323 | Number of Connected Components in an Undirected Graph | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `Union Find` `DFS` `Matrix`
 547 | Number of Provinces | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `DFS` `Matrix`
-695 | Max Area of Island  | :star: :star: | :white_check_mark: :trophy: `DFS` `Matrix`
-374 | Guess Number Higher Or Lower | :star: | :white_check_mark:  :trophy:
+695 | Max Area of Island  | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `DFS` `Matrix`
+374 | Guess Number Higher Or Lower | :star: | :white_check_mark: :white_check_mark: :trophy:
 378 | Kth Smallest Element in a Sorted Matrix  | :star: :star:| :trophy: :thinking: `BS` `Matrix`
 973 | K Closest Points to Origin | :star: :star:| :white_check_mark: :trophy: :thinking: `Quick Select` `BS`
 
