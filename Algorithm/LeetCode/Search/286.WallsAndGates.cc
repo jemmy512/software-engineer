@@ -21,6 +21,13 @@ After running your function, the 2D grid should be:
   1  -1   2  -1
   0  -1   3   4
 
+Constraints:
+
+m == rooms.length
+n == rooms[i].length
+1 <= m, n <= 250
+rooms[i][j] is -1, 0, or 2^31 - 1.
+
 Relatives:
 130. Surrounded Regions
 200. Number of Islands
@@ -43,51 +50,58 @@ using namespace std;
 class Solution {
 public:
     void wallsAndGates(vector<vector<int>>& rooms) {
-        _RowSize = rooms.size();
-        if (_RowSize == 0)
+        if (rooms.empty())
             return;
+        
+        _RowSize = rooms.size();
         _ColSize = rooms[0].size();
-
+        
         queue<pair<int, int>> que;
-        for (int row = 0; row < _RowSize; ++row) {
-            for (int col = 0; col < _ColSize; ++col) {
+        
+        for (auto row = 0; row < _RowSize; ++row) {
+            for (auto col = 0; col < _ColSize; ++col) {
                 if (rooms[row][col] == Gate) {
                     que.emplace(row, col);
                 }
             }
         }
-
+        
         while (!que.empty()) {
+            // ERROR: AddressSanitizer: heap-use-after-free on address 0x615000004878
+            // const auto& [row, col] = que.front();
             const auto [row, col] = que.front();
             que.pop();
-
-            for (const auto& [r, c] : directions) {
-                int rowNew = row + r;
-                int colNew = col + c;
-                if (isValidIndex(rooms, rowNew, colNew)) {
+            
+            for (const auto& [r, c] : _Directions) {
+                const auto rowNew = row + r;
+                const auto colNew = col + c;
+                
+                if (isValid(rooms, rowNew, colNew)) {
                     rooms[rowNew][colNew] = rooms[row][col] + 1;
                     que.emplace(rowNew, colNew);
                 }
             }
         }
     }
-
+    
 private:
-    bool isValidIndex(vector<vector<int>>& rooms, int row, int col) {
-        return (row < 0 || col < 0 || row >= _RowSize || col >= _ColSize || rooms[row][col] != Empty) ? false : true;
+    bool isValid(const vector<vector<int>>& rooms, int row, int col) {
+        return (row >= 0 && row < _RowSize && col >= 0 && col < _ColSize && rooms[row][col] == Empty);
     }
-
+    
 private:
     int _RowSize{0};
     int _ColSize{0};
-    const int Gate = 0;
-    const int Empty = 2147483647;
-    vector<pair<int, int>> directions{
+    const vector<pair<int, int>> _Directions {
         {1, 0},
         {-1, 0},
         {0, 1},
         {0, -1}
     };
+
+    // non-static data member cannot be constexpr
+    static constexpr auto Gate = 0;
+    static constexpr auto Empty = 2147483647;
 };
 
 int main() {
