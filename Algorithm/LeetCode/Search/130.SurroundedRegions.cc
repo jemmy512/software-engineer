@@ -20,6 +20,12 @@ any 'O' on the border of the board are not flipped to 'X'.
 Any 'O' that is not on the border and it is not connected to an 'O' on the border will be flipped to 'X'.
 Two cells are connected if they are adjacent cells connected horizontally or vertically.
 
+Constraints:
+m == board.length
+n == board[i].length
+1 <= m, n <= 200
+board[i][j] is 'X' or 'O'.
+
 Relatives:
 130. Surrounded Regions
 200. Number of Islands
@@ -43,45 +49,54 @@ public:
     void solve(vector<vector<char>>& board) {
         if (board.empty())
             return;
-
-        int rowSize= board.size();
-        int colSize = board[0].size();
-
-        for (int row = 0; row < rowSize; ++row) {
+        
+        _RowSize = board.size();
+        _ColSize = board[0].size();
+        
+        for (auto row = 0; row < _RowSize; ++row) {
             dfs(board, row, 0);
-            dfs(board, row, colSize-1);
+            dfs(board, row, _ColSize - 1);
         }
-        for (int col = 0; col < colSize; ++col) {
+        
+        for (auto col = 0; col < _ColSize; ++col) {
             dfs(board, 0, col);
-            dfs(board, rowSize-1, col);
+            dfs(board, _RowSize - 1, col);
         }
-
-        for (int row = 0; row < rowSize; ++row) {
-            for (int col = 0; col < colSize; ++col) {
-                if (board[row][col] == 'O')
+        
+        for (auto row = 0; row < _RowSize; ++row) {
+            for (auto col = 0; col < _ColSize; ++col) {
+                if (board[row][col] == 'O') {
                     board[row][col] = 'X';
-                if (board[row][col] == 'M')
+                } else if (board[row][col] == 'M') {
                     board[row][col] = 'O';
+                }
             }
         }
     }
-
+    
 private:
     void dfs(vector<vector<char>>& board, int row, int col) {
-        int rowSize= board.size();
-        int colSize = board[0].size();
-
-        if (row < 0 || col < 0 || row >= rowSize || col >= colSize)
+        if (row < 0 || col < 0 || row >= _RowSize || col >= _ColSize)
             return;
-
         if (board[row][col] != 'O')
             return;
-
+        
         board[row][col] = 'M';
-        for (const auto& [r, c] : vector<pair<int, int>>{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}) {
+        
+        for (const auto& [r, c] : _Directions) {
             dfs(board, row + r, col + c);
         }
     }
+    
+private:
+    int _RowSize{0};
+    int _ColSize{0};
+    vector<pair<int, int>> _Directions {
+        {1, 0},
+        {-1, 0},
+        {0, 1},
+        {0, -1}
+    };
 };
 
 class Solution {
