@@ -21,6 +21,12 @@ Example 2:
 Given the above grid, return 0.
 Note: The length of each dimension in the given grid does not exceed 50.
 
+Constraints:
+m == grid.length
+n == grid[i].length
+1 <= m, n <= 50
+grid[i][j] is either 0 or 1.
+
 Relatives:
 130. Surrounded Regions
 200. Number of Islands
@@ -37,47 +43,49 @@ using namespace std;
 class Solution {
 public:
     int maxAreaOfIsland(vector<vector<int>>& grid) {
+        int result = 0;
+    
         if (grid.empty())
-            return 0;
+            return result;
 
-        int ret = 0;
-        rowSize = grid.size();
-        colSize = grid[0].size();
+        _RowSize = grid.size();
+        _ColSize = grid[0].size();
 
-        for (int row = 0; row < rowSize; ++row) {
-            for (int col = 0; col < colSize; ++col) {
+        for (auto row = 0; row < _RowSize; ++row) {
+            for (auto col = 0; col < _ColSize; ++col) {
                 if (grid[row][col]) {
-                    ret = max(ret, dfs(grid, row, col));
+                    result = max(result, dfs(grid, row, col));
                 }
             }
         }
 
-        return ret;
+        return result;
     }
 
 private:
     int dfs(vector<vector<int>>& grid, int row, int col) {
-        if (row < 0 || col < 0 || row >= rowSize || col >= colSize || !grid[row][col])
-            return 0;
+        int result = 0;
+    
+        if (row < 0 || row >= _RowSize || col < 0 || col >= _ColSize || grid[row][col] == 0)
+            return result;
 
+        result = 1;
         grid[row][col] = 0;
-        int ret = 1;
 
-        for (const auto& [r, c] : directions) {
-            ret += dfs(grid, row + r, col + c);
+        for (const auto& [r, c] : _Directions) {
+            result += dfs(grid, row+r, col+c);
         }
 
-        return ret;
+        return result;
     }
 
 private:
-    int rowSize{0};
-    int colSize{0};
-
-    vector<pair<int, int>> directions {
+    int _RowSize{0};
+    int _ColSize{0};
+    const vector<pair<int, int>> _Directions {
         {0, 1},
         {0, -1},
-        {1, 0},
-        {-1, 0}
+        {-1, 0},
+        {1, 0}
     };
 };
