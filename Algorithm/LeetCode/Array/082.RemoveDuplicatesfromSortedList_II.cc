@@ -8,7 +8,21 @@ Output: 1->2->5
 
 Example 2:
 Input: 1->1->1->2->3
-Output: 2->3 */
+Output: 2->3 
+
+Relatives:
+019. Remove Nth Node From End of List
+027. Remove Element
+026. Remove Duplicates from Sorted Array
+080. Remove Duplicates from Sorted Array II
+083. Remove Duplicates from Sorted List
+082. Remove Duplicates from Sorted List II 
+203. Remove Linked List Elements
+237. Delete Node In A Linked List
+283. Move Zeroes
+1474. Delete N Nodes After M Nodes of a Linked List
+1721. Swapping Nodes in a Linked List 
+1836. Remove Duplicates From an Unsorted Linked List */
 
 struct ListNode {
     int val;
@@ -16,6 +30,29 @@ struct ListNode {
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode sentinel(0, head);
+        auto* pred = &sentinel;
+        
+        while (head) {
+            if (head->next && head->val == head->next->val) {
+                while (head->next && head->val == head->next->val) {
+                    head = head->next;
+                }
+                pred->next = head->next;
+            } else {
+                pred = pred->next;
+            }
+            
+            head = head->next;
+        }
+        
+        return sentinel.next;
+    }
 };
 
 class Solution {
@@ -40,31 +77,6 @@ public:
         }
         if (dup->next != nullptr) // [1, 1]
             pre->next = nullptr;
-
-        return dummy.next;
-    }
-};
-
-class Solution {
-public:
-    ListNode* deleteDuplicates(ListNode* head) {
-        if (!head) return head;
-
-        long duplicate;
-        ListNode dummy(0);
-        ListNode *first = &dummy, *second = head;
-        first->next = head;
-        while (second) {
-            if (second->next && (second->val == second->next->val || second->val == duplicate)) {
-                if (second->val != duplicate)
-                    duplicate = second->val;
-            } else {
-                if (second->val != duplicate)
-                    first = first->next = second;
-            }
-            second = second->next;
-        }
-        first->next = second;
 
         return dummy.next;
     }
