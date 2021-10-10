@@ -1,0 +1,81 @@
+/* Hard
+Given two sorted arrays nums1 and nums2 of size m and n respectively,
+return the median of the two sorted arrays.
+
+Example 1:
+Input: nums1 = [1,3], nums2 = [2]
+Output: 2.00000
+Explanation: merged array = [1,2,3] and median is 2.
+
+Example 2:
+Input: nums1 = [1,2], nums2 = [3,4]
+Output: 2.50000
+Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
+
+Example 3:
+Input: nums1 = [0,0], nums2 = [0,0]
+Output: 0.00000
+
+Example 4:
+Input: nums1 = [], nums2 = [1]
+Output: 1.00000
+
+Example 5:
+Input: nums1 = [2], nums2 = []
+Output: 2.00000
+
+Constraints:
+nums1.length == m
+nums2.length == n
+0 <= m <= 1000
+0 <= n <= 1000
+1 <= m + n <= 2000
+-10^6 <= nums1[i], nums2[i] <= 10^6 */
+
+#include <iostream>
+#include <iterator>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+class Solution {
+public:
+    // O(logN) approch : binary search for partition
+    double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
+        if (a.size() > b.size()) {
+            swap(a, b);
+        }
+
+        const auto sizeA = a.size();
+        const auto sizeB = b.size();
+        const auto halfSize = (sizeA + sizeB + 1) / 2;
+        const auto isOddArray = (sizeA + sizeB) % 2 == 1;
+        int beg = 0;
+        int end = sizeA;
+
+        while (beg <= end) {
+            int posA = (beg + end) / 2;
+            int posB = halfSize - posA;
+
+            int maxALeft = (posA == 0) ? INT_MIN : a[posA-1];
+            int minARight = (posA == sizeA) ? INT_MAX : a[posA];
+
+            int maxBLeft = (posB == 0) ? INT_MIN : b[posB-1];
+            int minBRight = (posB == sizeB) ? INT_MAX : b[posB];
+
+            if (maxALeft <= minBRight && maxBLeft <= minARight) {
+                if (isOddArray)
+                    return double(max(maxALeft, maxBLeft));
+                else
+                    return double(max(maxALeft, maxBLeft) + min(minARight, minBRight))/2;
+            } else if (maxALeft > minBRight) {
+                end = posA-1;
+            } else {
+                beg = posA+1;
+            }
+        }
+
+        return 0;
+    }
+};
