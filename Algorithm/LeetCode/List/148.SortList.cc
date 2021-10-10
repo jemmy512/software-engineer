@@ -25,7 +25,9 @@ Relatives:
 struct ListNode {
     int val;
     ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
 /* Divide and Conquer Algorithm
@@ -36,26 +38,15 @@ public:
         if (!head || !head->next)
             return head;
 
-        auto* beg = head;
-        /* auto* mid = head;
-         * [4, 2] can cause dead loop */
-        auto* mid = head->next->next;
-        while (mid && mid->next) {
-            beg = beg->next;
-            mid = mid->next->next;
-        }
+        auto* mid = getMid(head);
+        auto* left = sortList(head);
+        auto* right = sortList(mid);
 
-        mid = beg->next;
-        beg->next = nullptr;
-
-        beg = sortList(head);
-        mid = sortList(mid);
-
-        return mergeSortedList(beg, mid);
+        return merge(left, right);
     }
 
 private:
-    ListNode* mergeSortedList(ListNode *left, ListNode *right) {
+    ListNode* merge(ListNode *left, ListNode *right) {
         ListNode dummy(0);
         dummy.next = left;
         ListNode *tail = &dummy;
@@ -69,5 +60,20 @@ private:
         tail->next = left ? left : right;
 
         return dummy.next;
+    }
+
+    ListNode* getMid(ListNode* head) {
+        ListNode dummy(0, head);
+        auto* prev = &dummy;
+
+        while (head && head->next) {
+            prev = prev->next;
+            head = head->next->next;
+        }
+
+        auto* mid = prev->next;
+        prev->next = nullptr;
+
+        return mid;
     }
 };
