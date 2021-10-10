@@ -17,6 +17,11 @@ Explanation: The subarray [-1, 2] sums to 1 and is the longest.
 Follow Up:
 Can you do it in O(n) time?
 
+Constraints:
+1 <= nums.length <= 2 * 10^5
+-10^4 <= nums[i] <= 10^4
+-10^9 <= k <= 10^9
+
 Relatives:
 053. Maximum Subarray
 209. Minimum Size Subarray Sum
@@ -35,8 +40,7 @@ public:
         unordered_map<int, int> hashMap;
         hashMap[0] = -1;  // sum == k
         int sum = 0;
-        int cnt = 0;
-        int maxLen = INT_MIN;
+        int maxLen = 0;
 
         for (int i = 0; i < nums.size(); ++i) {
             sum += nums[i];
@@ -50,6 +54,6 @@ public:
             }
         }
 
-        return maxLen == INT_MIN ? 0 : maxLen;
+        return maxLen;
     }
 };
