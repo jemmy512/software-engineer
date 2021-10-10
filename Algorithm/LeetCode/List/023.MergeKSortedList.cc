@@ -25,7 +25,16 @@ struct ListNode {
 3. Repeat this procedure until we get the final sorted linked list.
 
 Thus, we'll traverse almost NN nodes per pairing and merging, and repeat this procedure about \log_{2}{k}
-​​ k times. */
+​​ k times. 
+
+Relatives:
+021. Merge Two Sorted List
+023. Merge k Sorted Lists
+088. Merge Sorted Array
+148. Sort List
+244. Shortest Word Distance II
+725. Split Linked List in Parts
+1634. Add Two Polynomials Represented as Linked Lists */
 
 #include <climits>
 #include <vector>
