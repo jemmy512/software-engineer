@@ -40,27 +40,26 @@ No | Title | Difficulty | Notes
 ## Array
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-004 | Median of Two Sorted Arrays | :star: :star: :star: | :white_check_mark: :trophy:
-011 | Container With Most Water| :star: :star: :star: | :white_check_mark: :trophy: `Two Pointers`
-027 | Remove Element | :star: | :white_check_mark: :white_check_mark: :trophy:
+011 | Container With Most Water| :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers`
 041 | First Missing Positive | :star: :star: :star: | :white_check_mark: :trophy:
-054 | Spiral Matrix | :star: :star: | :trophy: `Matrix`
+054 | Spiral Matrix | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Matrix`
 056 | Merge Intervals | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
 057 | Insert Intervals | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
 252 | Meeting Rooms | :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
 253 | Meeting Rooms II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
-026 | Remote Duplicates from Sorted Array | :star: | :trophy:
-080 | Remove Duplicates from Sorted Array II | :star: :star: | :trophy: `Can dup N`
-083 | Remove Duplicates from Sorted List | :star: | :trophy:
-082 | Remove Duplicates from Sorted List II | :star: :star: | :trophy:
+027 | Remove Element | :star: | :white_check_mark: :white_check_mark: :trophy:
+026 | Remove Duplicates from Sorted Array | :star: | :white_check_mark: :white_check_mark: :trophy:
+080 | Remove Duplicates from Sorted Array II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Can dup N`
+083 | Remove Duplicates from Sorted List | :star: | :white_check_mark: :white_check_mark: :trophy:
+082 | Remove Duplicates from Sorted List II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 048 | Rotate Image | :star: :star: | :trophy:
-088 | Merge Sorted Array | :star: |  :trophy:
-169 | Majority Element | :star: | :trophy:
+088 | Merge Sorted Array | :star: | :white_check_mark: :white_check_mark: :trophy:
+169 | Majority Element | :star: | :white_check_mark: :white_check_mark: :trophy: [:link: Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html)
 189 | Rotate Array | :star: :star: | :white_check_mark:
 209 | Minimum Size Subarray Sum | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `BS`
-325 | Maximum Size Subarray Sum Equals k | :star: :star: |  :white_check_mark: :trophy: `Prefix Sum` `Map`
-560 | Subarray Sum Equals K | :star: :star: | :white_check_mark: :trophy: `Prefix Sum` `Map`
-215 | Kth Largest Element in an Array | :star: :star: | :white_check_mark: :trophy: `Heap Sort` `Quick Sort`
+325 | Maximum Size Subarray Sum Equals k | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `Map`
+560 | Subarray Sum Equals K | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `Map`
+215 | Kth Largest Element in an Array | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Heap Sort` `Quick Sort`
 217 | Contains Duplicate I | :star:
 219 | Contains Duplicate II | :star:
 220 | Contains Duplicate III | :star: :star:
@@ -89,7 +88,7 @@ No | Title | Difficulty | Notes
 287 | Find the Duplicate Number | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers` `Cycle`
 143 | Reorder List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 147 | Insertion Sorted List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-148 | Sort List | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Div-Conq`
+148 | Sort List | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Div-Conq` `Merge sort`
 160 | Intersection of Two Linked Lists | :star: | :white_check_mark: :white_check_mark: :trophy:
 203 | Remove Linked List Element | :star: | :white_check_mark: :white_check_mark: :trophy:
 234 | Palindrome Linked List | :star: | :white_check_mark: :white_check_mark: :trophy:
@@ -246,6 +245,7 @@ No | Title | Difficulty | Notes
 ## Search
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
+004 | Median of Two Sorted Arrays | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `BS`
 034 | Search For a Range | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `BS`
 035 | Search Insert Position | :star: | :white_check_mark: :white_check_mark: :trophy: `BS`
 074 | Search a 2D Matrix | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `BS` `Matrix`
