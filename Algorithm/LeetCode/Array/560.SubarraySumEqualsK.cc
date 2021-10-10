@@ -41,7 +41,9 @@ public:
 
         for (const auto& num : nums) {
             sum += num;
-            cnt += hashMap[sum-k];
+            if (hashMap.find(sum-k) != hashMap.end()) {
+                cnt += hashMap[sum-k];
+            }
             ++hashMap[sum];
         }
 
