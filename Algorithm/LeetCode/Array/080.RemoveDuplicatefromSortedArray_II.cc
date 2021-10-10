@@ -28,7 +28,25 @@ int len = removeDuplicates(nums);
 // using the length returned by your function, it prints the first len elements.
 for (int i = 0; i < len; i++) {
     print(nums[i]);
-} */
+} 
+
+Constraints:
+1 <= nums.length <= 3 * 10^4
+-10^4 <= nums[i] <= 10^4 
+
+Relatives:
+019. Remove Nth Node From End of List
+027. Remove Element
+026. Remove Duplicates from Sorted Array
+080. Remove Duplicates from Sorted Array II
+083. Remove Duplicates from Sorted List
+082. Remove Duplicates from Sorted List II 
+203. Remove Linked List Elements
+237. Delete Node In A Linked List
+283. Move Zeroes
+1474. Delete N Nodes After M Nodes of a Linked List
+1721. Swapping Nodes in a Linked List 
+1836. Remove Duplicates From an Unsorted Linked List */
 
 #include <vector>
 
@@ -40,15 +58,11 @@ public:
         int newIdx = 1;
         int count = 1;
 
-        for (int idx = 1; idx < nums.size(); ++idx) {
-            if (nums[idx] == nums[idx-1]) {
-                ++count;
-            } else {
-                count = 1;
-            }
+        for (int i = 1; i < nums.size(); ++i) {
+            count = (nums[i-1] == nums[i]) ? count + 1 : 1;
 
             if (count <= 2) {
-                nums[newIdx++] = nums[idx];
+                nums[newIdx++] = nums[i];
             }
         }
 
