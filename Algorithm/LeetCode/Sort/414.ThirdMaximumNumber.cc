@@ -1,27 +1,39 @@
-/*
+/* Easy
 Given a non-empty array of integers, return the third maximum number in this array.
- If it does not exist, return the maximum number. The time complexity must be in O(n).
+If it does not exist, return the maximum number. The time complexity must be in O(n).
 
 Example 1:
 Input: [3, 2, 1]
 
 Output: 1
-
 Explanation: The third maximum is 1.
+
 Example 2:
 Input: [1, 2]
 
 Output: 2
-
 Explanation: The third maximum does not exist, so the maximum (2) is returned instead.
+
 Example 3:
 Input: [2, 2, 3, 1]
 
 Output: 1
-
 Explanation: Note that the third maximum here means the third maximum distinct number.
 Both numbers with value 2 are both considered as second maximum.
-*/
+
+Constraints:
+1 <= nums.length <= 10^4
+-2^31 <= nums[i] <= 2^31 - 1
+
+Relatives:
+215. Kth Largest Element in an Array
+324. Wiggle Sort II
+347. Top K Frequent Elements
+414. Third Maximum Number
+703. Kth Largest Element in a Stream
+973. K Closest Points to Origin
+1985. Find the Kth Largest Integer in the Array */
+
 #include <vector>
 
 using std::vector;
