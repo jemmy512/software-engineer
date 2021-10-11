@@ -1,5 +1,5 @@
 /* Easy
-Find the kth largest element in an unsorted array. 
+Find the kth largest element in an unsorted array.
 Note that it is the kth largest element in the sorted order, not the kth distinct element.
 
 Example 1:
@@ -11,7 +11,20 @@ Input: [3,2,3,1,2,4,5,5,6] and k = 4
 Output: 4
 
 Note:
-You may assume k is always valid, 1 ≤ k ≤ array's length. */
+You may assume k is always valid, 1 ≤ k ≤ array's length.
+
+Constraints:
+1 <= k <= nums.length <= 10^4
+-10^4 <= nums[i] <= 10^4
+
+Relatives:
+215. Kth Largest Element in an Array
+324. Wiggle Sort II
+347. Top K Frequent Elements
+414. Third Maximum Number
+703. Kth Largest Element in a Stream
+973. K Closest Points to Origin
+1985. Find the Kth Largest Integer in the Array */
 
 #include <iostream>
 #include <vector>
@@ -70,7 +83,7 @@ int partition(vector<int> &nums, int left, int right) {
 int findKthLargest_qsort(vector<int> &nums, int k) {
     int len = nums.size(), pos;
     int left = 0, right = len - 1;
-    while (true) {
+    while (left <= right) {
         pos = partition(nums, left, right);
         if (pos == k - 1)
             return nums[pos];
@@ -79,4 +92,6 @@ int findKthLargest_qsort(vector<int> &nums, int k) {
         else
             right = pos - 1;
     }
+
+    return 0;
 }
