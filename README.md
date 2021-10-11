@@ -366,10 +366,10 @@
 - [ ] :orange_book: The Art of UNIX Programming
 - [ ] :orange_book: Clean Architecture
 
+- [ ] [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer)
 - [x] [Grokking System Design](https://www.educative.io/courses/grokking-the-system-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/object-oriented-design.md)
 - [ ] [Grokking Advanced System Design](https://github.com/Jemmy512/book-notes/blob/master/Arch/system-design-advanced.md)
 - [x] [Grokking the Object Oriented Design](https://www.educative.io/courses/grokking-the-object-oriented-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/object-oriented-design.md)
-- [ ] [System Design Primer](https://github.com/donnemartin/system-design-primer)
 - [ ] [Six Programming Paradigm](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will)
 - [ ] [Programming Paradigms for Dummies.pdf](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)
 - [ ] [Stanford Programming Paradigm](https://see.stanford.edu/Course/CS107)
