@@ -1,3 +1,25 @@
+## Agenda
+* [CppRest](#CppRest)
+    * [Client](#Client)
+        * [write](#write-client)
+        * [read](#read-client)
+    * [Server](#Server)
+        * [listen](#listen)
+        * [accept](#accept)
+        * [read](#read-server)
+        * [write](#write-server)
+    * [Exception](#Exception)
+* [PPLX](#PPLX)
+    * [Task](#class-task)
+    * [Type Traits](#Type-Traits)
+        * [Check args compatibility](#Check-args-compatibility)
+        * [Get task type from parameter](#Get-task-type-from-parameter)
+    * [task::task()](#task::task())
+    * [task::then()](#task::then())
+    * [task::wait()](#task::wait())
+    * [Run continuation](#Run-continuation)
+* [BoostAsio](#BoostAsio)
+
 # CppRest
 The [C++ REST SDK](https://github.com/microsoft/cpprestsdk) is a Microsoft project for cloud-based client-server communication in native code using a modern asynchronous C++ API design. This project aims to help C++ developers connect to and interact with services.
 
@@ -19,7 +41,7 @@ C++ Rest consists of three components:
 ![CppRest.png](../Image/cpp-rest.png)
 
 ## Client
-### write
+### write-client
 ```C++
 overrideable::g_casablancaHttpRequestFunc // CB-> handle http response
 
@@ -173,7 +195,7 @@ asio_context::handle_write_headers() // request header has sent, then send reque
                     --->
 ```
 
-### read
+### read-client
 ```C++
 boost::asio::scheduler::do_run_one()
     operation::complete()
@@ -215,6 +237,13 @@ ws_client_wspp.cpp::connect_impl()
 ```
 
 ## Server
+
+```c++
+typedef basic_stream_socket<tcp>    socket;
+typedef basic_socket_acceptor<tcp>  acceptor;
+typedef basic_resolver<tcp>         resolver;
+```
+
 ### listen
 ```C++
 http_listener::open()
@@ -231,6 +260,7 @@ http_listener::open()
                             // set reuse address
                             reactive_socket_service::bind()
                             reactive_socket_service::listen()
+                    auto socket = new ip::tcp::socket(service);
                     m_acceptor->async_accept(*socket, &hostport_listener::on_accept);
                         --->
         http_linux_server::register_listener()
@@ -247,8 +277,13 @@ hostport_listener::on_accept()
     basic_socket_acceptor::async_accept()
         ---> Boost.Asio
     m_connections.insert(new connection(std::move(socket), m_p_server, this, m_is_https, m_ssl_context_callback));
+    if (m_acceptor) {
+        // spin off another async accept
+        auto newSocket = new ip::tcp::socket(crossplat::threadpool::shared_instance().service());
+        m_acceptor->async_accept(*newSocket, &hostport_listener::on_accept);
+    }
 ```
-### read
+### read-server
 ```C++
         connection::start_request_response()
             boost::asio::async_read_until() // crlfcrlf_nonascii_searcher
@@ -310,7 +345,7 @@ hostport_listener::on_accept()
                                                 task_completion_event<http_response>::set(response)
                                                 // 2. [m_response] activate task linked with m_response: task_completion_event<http_response>
 ```
-### write
+### write-server
 ```C++
 connection::do_response()
     http_request::m_request.get_response()
@@ -1016,4 +1051,4 @@ task_completion_event::set(_Result)
                                                 boost::asio::io_service(task)
 ```
 
-# [Boost.Asio](../Boost/README.md)
+# [BoostAsio](../Boost/README.md)
