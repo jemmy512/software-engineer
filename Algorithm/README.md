@@ -18,9 +18,9 @@ No | Title | Difficulty | Notes
 171 | Excel Sheet Colum Number | :star: | :white_check_mark: :trophy: |
 172 | Factorial Trailing Zeros | :star: :star: | :trophy: |
 367 | Valid Perfect Square | :star: | :trophy: |
-136 | Single Number | :star: | :white_check_mark: :trophy: |
-137 | Single Number II | :star: :star: |
-260 | Single Number III | :star: :star: |
+136 | Single Number | :star: | :white_check_mark: :trophy: | :white_check_mark: :white_check_mark: :trophy:
+137 | Single Number II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+260 | Single Number III | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 179 | Largest Number | :star: :star: | :trophy: |
 190 | Reverse Bits | :star: | :white_check_mark: :trophy: |
 191 | Numberof 1 Bits | :star: | :white_check_mark: :trophy: |
@@ -28,12 +28,11 @@ No | Title | Difficulty | Notes
 204 | Count Primes | :star: | :trophy: |
 231 | Power Of Two | :star: | :white_check_mark: :trophy: |
 263 | Ugly Number | :star: | :white_check_mark: :white_check_mark: :trophy: |
-268 | Missing Number | :star: | :white_check_mark: :trophy: |
+268 | Missing Number | :star: | :white_check_mark: :trophy: | :white_check_mark: :white_check_mark: :trophy:
 292 | Nim Game | :star: | :trophy: |
 326 | Power of Three | :star: | :trophy: |
 371 | Sum of Two Integers | :star: :star: | :white_check_mark: :trophy: |
 400 | Nth Digit | :star: :star: |
-414 | Third Maximum Number | :star: |
 780 | Reaching Points | :star: :star: :star: | :trophy: |
 1041 | Robot Bounded In Circle | :star: :star: | :trophy: :thinking:
 
@@ -41,7 +40,7 @@ No | Title | Difficulty | Notes
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 011 | Container With Most Water| :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers`
-041 | First Missing Positive | :star: :star: :star: | :white_check_mark: :trophy:
+041 | First Missing Positive | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 054 | Spiral Matrix | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Matrix`
 056 | Merge Intervals | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
 057 | Insert Intervals | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
@@ -59,14 +58,13 @@ No | Title | Difficulty | Notes
 209 | Minimum Size Subarray Sum | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `BS`
 325 | Maximum Size Subarray Sum Equals k | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `Map`
 560 | Subarray Sum Equals K | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `Map`
-215 | Kth Largest Element in an Array | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Heap Sort` `Quick Sort`
 217 | Contains Duplicate I | :star:
 219 | Contains Duplicate II | :star:
 220 | Contains Duplicate III | :star: :star:
 238 | Product of Array Except Self  | :star: :star: | :white_check_mark: :trophy: `L-R vec`
 239 | Sliding Window Maximum | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `DP` `L-R vec`
 283 | Move Zeroes | :star: :star: | :white_check_mark: :trophy:
-448 | Find All Numbers Disappeared in An Array | :star:
+448 | Find All Numbers Disappeared in An Array | :star: | :white_check_mark: :white_check_mark: :trophy:
 
 ## List
 No | Title | Difficulty | Notes
@@ -278,8 +276,9 @@ No | Title | Difficulty | Notes
 452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
 763 | Partition Labels | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
 
-##  Two Pointers 
+## Two Pointers
 No | Title | Difficulty | Notes
+-- | -- | ---  | ---
 003 | Longest Substring Without Repeating Characters | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
@@ -294,8 +293,10 @@ No | Title | Difficulty | Notes
 ## Sort
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
+215 | Kth Largest Element in an Array | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Heap Sort` `Quick Sort`
+347 | Top K Frequent Elements | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Heap Sort` `Quick Sort` `??`
+414 | Third Maximum Number | :star: | :white_check_mark: :white_check_mark: :trophy: `Heap Sort`
 937 | Reorder Data in Log Files | :star: | :white_check_mark: :white_check_mark: :trophy:
-347 | Top K Frequent Elements | :star: :star: | :trophy: `Heap` `TODO`
 
 ## Design
 No | Title | Difficulty | Notes
