@@ -1,3 +1,11 @@
+# Agenda
+* [io_context::run](#io_context::run)
+* [async_accept](#async_accept)
+* [async_connect](#async_connect)
+* [async_read](#async_read)
+* [async_write](#async_write)
+* [io_context::post](#io_context::post)
+
 # UML
 ![boost-asio.png](../Image/boost-asio.png)
 
@@ -87,11 +95,12 @@ io_context::run()
 ```C++
 basic_socket_acceptor::async_accept()
     reactive_socket_service::async_accept()
-        reactive_socket_service_base::start_accept_op() // construct reactive_socket_accept_op
+        reactive_socket_accept_op op()
+        reactive_socket_service_base::start_accept_op(op) 
             if (!peer_is_open)
-                reactive_socket_service_base::start_op()
+                reactive_socket_service_base::start_op(reactor::read_op)
                     if (socket_ops::set_internal_non_blocking())
-                        epoll_reactor::start_op(reactor::read_op)
+                        epoll_reactor::start_op(op, reactor::read_op)
                             if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
                                 reactor_op::perform()
                                     reactive_socket_accept_op_base::do_perform()
@@ -143,11 +152,12 @@ basic_stream_socket::async_connect()
                 epoll_reactor::register_descriptor()
                     ev.events = EPOLLIN | EPOLLERR | EPOLLHUP | EPOLLPRI | EPOLLET;
                     epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev)
-        reactive_socket_service_base::start_connect_op() // construct reactive_socket_connect_op
+        reactive_socket_connect_op<Handler> op();
+        reactive_socket_service_base::start_connect_op(op)
             if (socket_ops::set_internal_non_blocking())
                 socket_ops::connect()
                     ::connect(s, addr, (SockLenType)addrlen)
-                epoll_reactor::start_op(reactor::connect_op)
+                epoll_reactor::start_op(op, reactor::connect_op)
                     if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
                         operation::perform()
                             reactive_socket_connect_op_base::do_perform()
@@ -200,9 +210,9 @@ read.hpp::async_read_until()
         read.hpp::read_op()
             basic_stream_socket::async_read_some()
                 this->get_service().async_receive(this->get_implementation(), buffers, 0, init.completion_handler)
-                reactive_socket_service_base::async_receive() // construct reactive_socket_recv_op
-                    reactive_socket_service_base::start_op()
-                        reactive_socket_recv_op<ConstBufferSequence, Handler> op
+                reactive_socket_service_base::async_receive()
+                    reactive_socket_recv_op op()
+                    reactive_socket_service_base::start_op(op)
                         epoll_reactor::start_op(op, reactor::read_op)
                             if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
                                 operation::perform()
@@ -264,8 +274,8 @@ boost::asio::async_write(m_socket, buffer, writeHandler);
                                                 ::SSL_write()
 
                     basic_stream_socket::async_write_some(buffer, handler/*write_op*/)
-                        reactive_socket_service_base::async_send() // construct reactive_socket_send_op
-                            reactive_socket_send_op<ConstBufferSequence, Handler> op
+                        reactive_socket_service_base::async_send()
+                            reactive_socket_send_op<ConstBufferSequence, Handler> op()
                             reactive_socket_service_base::start_op(op, reactor::write_o)
                                 epoll_reactor::start_op(op, reactor::write_op)
                                     if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
