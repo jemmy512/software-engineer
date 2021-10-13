@@ -81,7 +81,7 @@ public:
         for (const auto& [num, cnt] : _HashMap) {
             if (top.size() < k) {
                 top.emplace_back(num);
-                heapifyDown(top, top.size()/2, top.size());
+                heapifyDown(top, top.size()/2-1, top.size());
             } else {
                 if (cnt > _HashMap[top[0]]) {
                     top[0] = num;
@@ -95,7 +95,7 @@ public:
 
 private:
     void heapifyDown(vector<int>& nums, int beg, int end) {
-        for (auto parent = beg, child = 2 * parent + 1; child < end; child = 2 * child + 1) {
+        for (auto parent = beg, child = 2 * parent + 1; child >= 0 && child < end; child = 2 * child + 1) {
             if (child + 1 < end && _HashMap[nums[child+1]] < _HashMap[nums[child]])
                 ++child;
 
@@ -109,5 +109,4 @@ private:
 
 private:
     unordered_map<int, int> _HashMap;
-
 };
