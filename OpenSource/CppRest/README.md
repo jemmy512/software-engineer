@@ -1,4 +1,4 @@
-## Agenda
+# Agenda
 * [CppRest](#CppRest)
     * [Client](#Client)
         * [write](#write-client)
@@ -9,16 +9,19 @@
         * [read](#read-server)
         * [write](#write-server)
     * [Exception](#Exception)
+
 * [PPLX](#PPLX)
     * [Task](#class-task)
     * [Type Traits](#Type-Traits)
         * [Check args compatibility](#Check-args-compatibility)
         * [Get task type from parameter](#Get-task-type-from-parameter)
-    * [task::task()](#task::task())
-    * [task::then()](#task::then())
-    * [task::wait()](#task::wait())
-    * [Run continuation](#Run-continuation)
-* [BoostAsio](#BoostAsio)
+    * [task::task](#tasktask)
+    * [task::then](#taskthen)
+    * [task::wait](#taskwait)
+    * [Run Continuation](#Run-Continuation)
+
+
+* [Boost.Asio](#BoostAsio)
 
 # CppRest
 The [C++ REST SDK](https://github.com/microsoft/cpprestsdk) is a Microsoft project for cloud-based client-server communication in native code using a modern asynchronous C++ API design. This project aims to help C++ developers connect to and interact with services.
@@ -237,7 +240,6 @@ ws_client_wspp.cpp::connect_impl()
 ```
 
 ## Server
-
 ```c++
 typedef basic_stream_socket<tcp>    socket;
 typedef basic_socket_acceptor<tcp>  acceptor;
@@ -271,6 +273,7 @@ http_listener::open()
                     --->
             hostport_listener::add_listener(path, listener);
 ```
+
 ### accept
 ```C++
 hostport_listener::on_accept()
@@ -283,6 +286,7 @@ hostport_listener::on_accept()
         m_acceptor->async_accept(*newSocket, &hostport_listener::on_accept);
     }
 ```
+
 ### read-server
 ```C++
         connection::start_request_response()
@@ -345,6 +349,7 @@ hostport_listener::on_accept()
                                                 task_completion_event<http_response>::set(response)
                                                 // 2. [m_response] activate task linked with m_response: task_completion_event<http_response>
 ```
+
 ### write-server
 ```C++
 connection::do_response()
@@ -423,6 +428,7 @@ _Task_impl_base::_Wait()
 ```
 
 # PPLX
+
 PPLX is a special version of PPL for non-winodws platform.
 
 The [Parallel Patterns Library (PPL)](https://docs.microsoft.com/en-us/cpp/parallel/concrt/parallel-patterns-library-ppl?view=msvc-160) provides an imperative programming model that promotes scalability and ease-of-use for developing concurrent applications. The PPL builds on the scheduling and resource management components of the [Concurrency Runtime](https://docs.microsoft.com/en-us/cpp/parallel/concrt/concurrency-runtime?view=msvc-160). It raises the level of abstraction between your application code and the underlying threading mechanism by providing generic, type-safe algorithms and containers that act on data in parallel. The PPL also lets you develop applications that scale by providing alternatives to shared state.
@@ -797,7 +803,9 @@ struct _InitFunctorTypeTraits<T, T>
   static const bool _IsUnwrappedTaskOrAsync = false;
 };
 ```
+
 ### Check args compatibility
+
 ![](../Image/task-func-type-traits.png)
 
 ```C++
@@ -856,6 +864,7 @@ struct _TaskTypeFromParam
 ```
 
 ### Get task type from parameter
+
 ![](../Image/task-type-from-param.png)
 
 ## task::task()
@@ -927,7 +936,7 @@ task::task()
                             _M_Impl->_M_tasks.push_back(_TaskParam)
 ```
 
-## task::then()
+## task::then
 ```C++
 task::then()
   task::_ThenImpl()
@@ -951,7 +960,7 @@ task::then()
     return _ContinuationTask;
 ```
 
-## task::wait()
+## task::wait
 ```C++
 _Task_impl_base::_Wait()
     _TaskCollection_impl::_Wait()
