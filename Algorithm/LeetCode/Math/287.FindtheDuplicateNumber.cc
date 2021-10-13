@@ -40,6 +40,12 @@ Reference:
 https://en.wikipedia.org/wiki/Cycle_detection
 https://blog.csdn.net/thestoryofsnow/article/details/6822576
 
+Constraints:
+1 <= n <= 10^5
+nums.length == n + 1
+1 <= nums[i] <= n
+All the integers in nums appear only once except for precisely one integer which appears two or `more` times.
+
 Relative:
 141. Linked List Cycle
 142. Linked List Cycle II
