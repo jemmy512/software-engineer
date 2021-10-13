@@ -23,6 +23,11 @@ Extract last bit A&-A or A&~(A-1) or x^(x&(x-1))
 Remove last bit A&(A-1)
 Get all 1-bits ~0
 
+Constraints:
+1 <= nums.length <= 3 * 10^4
+-3 * 10^4 <= nums[i] <= 3 * 10^4
+Each element in the array appears twice except for one element which appears only once.
+
 Relatives:
 136. Single Number
 137. Single Number II
@@ -32,18 +37,33 @@ Relatives:
 389. Find the Difference
 645. Set Mismatch */
 
-#include<iostream>
-#include<vector>
-#include<numeric>    // accumulate
-#include<functional> // bit_xor
-#include<assert.h>
+#include <iostream>
+#include <vector>
+#include <numeric>    // accumulate
+#include <functional> // bit_xor
+#include <assert.h>
 
 using namespace std;
 
-// 14ms, beat 85.23%
-int singleNumber(vector<int>& nums) {
-    return accumulate(nums.begin(), nums.end(), 0, bit_xor<int>());
-}
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        auto single = 0;
+
+        for (auto i = 0; i < nums.size(); ++i) {
+            single ^= nums[i];
+        }
+
+        return  single;
+    }
+};
+
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        return std::accumulate(nums.cbegin(), nums.cend(), 0, bit_xor<int>());
+    }
+};
 
 
 /******************** there are two single nums ******************************/
