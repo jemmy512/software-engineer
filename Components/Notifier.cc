@@ -1,5 +1,5 @@
 #include <iostream>
-#include <vector>
+#include <list>
 #include <mutex>
 
 class IMessageObserver {
@@ -10,82 +10,73 @@ public:
 };
 
 template<typename Observer>
-class Notification {
+class Notifier {
 public:
     using ObserverWPtr = std::weak_ptr<Observer>;
     using ObserverPtr = std::shared_ptr<Observer>;
-    using ObserverList = std::vector<ObserverWPtr>;
+    using ObserverList = std::list<ObserverWPtr>;
 
     void registerObserver(ObserverPtr observer) {
-        std::scoped_lock lock(mMutex);
+        std::scoped_lock lock(_Mutex);
 
-        if (findObserver(observer) == mObservers.cend()) {
-            mObservers.emplace_back(observer);
+        if (findObserver(observer) == _Observers.cend()) {
+            _Observers.emplace_back(observer);
         }
     }
 
     void unregisterObserver(ObserverPtr observer) {
-        std::scoped_lock lock(mMutex);
+        std::scoped_lock lock(_Mutex);
 
-        mObservers.erase(findObserver(observer));
+        _Observers.remove_if([target = observer](const auto& weakObserver) {
+            const auto observer = weakObserver.lock();
+            return observer && observer == target;
+        })
     }
 
     template<typename Func, typename... Args>
     void notify(Func func, Args&&... args) {
-        ObserverList liveObservers;
-        liveObservers.reserve(mObservers.size());
+        _Observers.remove_if([](const auto& weakObserver) {
+            return weakObserver.lock() == nullptr;
+        });
 
-        for (const auto& wob : mObservers) {
-            if (auto ob = wob.lock()) {
-                std::invoke(func, ob, std::forward<Args>(args)...);
-
-                liveObservers.emplace_back(wob);
+       for (const auto& weakObserver : _Observers) {
+            if (auto observer = weakObserver.lock()) {
+                std::invoke(func, observer, std::forward<Args>(args)...);
             }
         }
-
-        // for (auto iter = mObservers.begin(); iter != mObservers.end();) {
-        //     if (iter->expired()) {
-        //         iter = mObservers.erase(iter);
-        //     } else {
-        //         std::invoke(func, iter->lock(); std::forward<Args>(args)...);
-        //         ++iter;
-        //     }
-        // }
-
-        removeExpiredObservers(std::move(liveObservers));
     }
 
 private:
-    auto findObserver(ObserverPtr observer) {
-        return std::find_if(mObservers.cbegin(), mObservers.cend(), [observer](auto& wob) {
-                if (auto ob = wob.lock()) {
-                    return ob == observer;
-                } else {
-                    return false;
-                }
-            });
+    auto findObserver(ObserverPtr target) {
+        return std::find_if(_Observers.cbegin(), _Observers.cend(), [&target](const auto& weakObserver) {
+            if (auto observer = weakObserver.lock()) {
+                return observer == target;
+            } else {
+                return false;
+            }
+        });
     }
 
     /**
      * std::weak_ptr doesn't suppport compare operation, there's no way to get the
      * iterator of a weak_ptr and then use erase to delete it from vector.
      *
-     * auto ite = std::remove_if(mObservers.begin(), mObservers.end(), [](const auto& wob){
-     *  return (auto ob = wob.lock()) ? true : false;
+     * auto ite = std::remove_if(_Observers.begin(), _Observers.end(), [](const auto& weakObserver){
+     *  return (auto ob = weakObserver.lock()) ? true : false;
      * });
-     * mObservers.erase(ite, mObservers.end());
+     * _Observers.erase(ite, _Observers.end());
      */
     void removeExpiredObservers(ObserverList&& liveObservers) {
-        std::scoped_lock lock(mMutex);
+        std::scoped_lock lock(_Mutex);
 
-        if (liveObservers.size() < mObservers.size() / 3) {
-            mObservers = std::move(liveObservers);
+        if (liveObservers.size() < _Observers.size() / 3) {
+            _Observers = std::move(liveObservers);
         }
     }
 
 private:
-    std::mutex mMutex;
-    ObserverList mObservers;
+    std::mutex _Mutex;
+    ObserverList _Observers;
 };
 
 class MessageManager : public IMessageObserver {
@@ -99,7 +90,7 @@ public:
     }
 };
 
-class Server : public Notification<IMessageObserver> {
+class Server : public Notifier<IMessageObserver> {
 public:
     Server() {
         mMsgManager = std::make_shared<MessageManager>();
