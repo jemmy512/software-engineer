@@ -58,10 +58,10 @@ No | Title | Difficulty | Notes
 209 | Minimum Size Subarray Sum | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `BS`
 325 | Maximum Size Subarray Sum Equals k | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `Map`
 560 | Subarray Sum Equals K | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `Map`
-217 | Contains Duplicate I | :star:
-219 | Contains Duplicate II | :star:
-220 | Contains Duplicate III | :star: :star:
-238 | Product of Array Except Self  | :star: :star: | :white_check_mark: :trophy: `L-R vec`
+217 | Contains Duplicate I | :star: | :white_check_mark: :white_check_mark: :trophy:
+219 | Contains Duplicate II | :star: | :white_check_mark: :white_check_mark: :trophy:
+220 | Contains Duplicate III | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `bucket sort`
+238 | Product of Array Except Self  | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `L-R vec`
 239 | Sliding Window Maximum | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `DP` `L-R vec`
 283 | Move Zeroes | :star: :star: | :white_check_mark: :trophy:
 448 | Find All Numbers Disappeared in An Array | :star: | :white_check_mark: :white_check_mark: :trophy:
