@@ -6,10 +6,16 @@
 * [async_write](#async_write)
 * [io_context::post](#io_contextpost)
 
-# UML
 ![boost-asio.png](../Image/boost-asio.png)
+---
 
 ![](../Image/boost-asio-call-flow.png)
+---
+
+![](../Image/reactor.png)
+---
+
+![](../Image/proactor.png)
 
 # io_context::run
 ```c++
@@ -30,7 +36,7 @@ io_context::run()
 
                         task_cleanup on_exit = { this, &lock, &this_thread };
 
-                        epoll_reactor::run(this_thread.private_op_queue) {
+                        epoll_reactor::run(ops = this_thread.private_op_queue) {
                             epoll_wait()
                             for (int i = 0; i < num_events; ++i) {
                                 void* ptr = events[i].data.ptr;
@@ -96,7 +102,7 @@ io_context::run()
 basic_socket_acceptor::async_accept()
     reactive_socket_service::async_accept()
         reactive_socket_accept_op op()
-        reactive_socket_service_base::start_accept_op(op) 
+        reactive_socket_service_base::start_accept_op(op)
             if (!peer_is_open)
                 reactive_socket_service_base::start_op(reactor::read_op)
                     if (socket_ops::set_internal_non_blocking())
@@ -118,15 +124,32 @@ basic_socket_acceptor::async_accept()
                                         operation::complete()
                                             descriptor_state::do_complete()
                                                 descriptor_state::perform_io() // loop op_queue[]
-                                                    reactor_op::perform()
+                                                    perform_io_cleanup_on_block_exit io_cleanup(reactor_)
+                                                    static const int flag[max_ops] = { EPOLLIN, EPOLLOUT, EPOLLPRI };
+                                                    for (int j = max_ops - 1; j >= 0; --j) {
+                                                        if (events & (flag[j] | EPOLLERR | EPOLLHUP)) {
+                                                            while (reactor_op* op = op_queue_[j].front()) {
+                                                                if (reactor_op::status status = op->perform()) {
+                                                                    op_queue_[j].pop();
+                                                                    io_cleanup.ops_.push(op);
+                                                                } else {
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                    op->perform()
+                                                        reactor_op::perform()
                                                         reactive_socket_accept_op_base::do_perform()
                                                             --->
-                                                        ~perform_io_cleanup_on_block_exit()
-                                                            schedueler::post_deferred_completions()
-                                                                schedule::do_run_one()
-                                                                    operation::complete()
-                                                                        reactive_socket_accept_op::do_complete()
-                                                                            --->
+
+                                                    ~perform_io_cleanup_on_block_exit()
+                                                        schedueler::post_deferred_completions()
+                                                            schedule::do_run_one()
+                                                                operation::complete()
+                                                                    reactive_socket_accept_op::do_complete()
+                                                                        --->
                     else // blocking io
                         epoll_reactor::post_immediate_completion()
             else // peer_is_open
@@ -170,15 +193,32 @@ basic_stream_socket::async_connect()
                                 operation::complete()
                                     descriptor_state::do_complete()
                                         descriptor_state::perform_io() // loop op_queue[]
-                                            operation::perform()
+                                            perform_io_cleanup_on_block_exit io_cleanup(reactor_)
+                                            static const int flag[max_ops] = { EPOLLIN, EPOLLOUT, EPOLLPRI };
+                                            for (int j = max_ops - 1; j >= 0; --j) {
+                                                if (events & (flag[j] | EPOLLERR | EPOLLHUP)) {
+                                                    while (reactor_op* op = op_queue_[j].front()) {
+                                                        if (reactor_op::status status = op->perform()) {
+                                                            op_queue_[j].pop();
+                                                            io_cleanup.ops_.push(op);
+                                                        } else {
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            op->perform()
+                                                reactor_op::perform()
                                                 reactive_socket_connect_op_base::do_perform()
                                                     --->
-                                                ~perform_io_cleanup_on_block_exit()
-                                                    schedule::post_deferred_completions(op)
-                                                        schedule::do_run_one()
-                                                            operation::complete()
-                                                                reactive_socket_connect_op::do_complete()
-                                                                    user_callback()
+
+                                            ~perform_io_cleanup_on_block_exit()
+                                                schedule::post_deferred_completions(op)
+                                                    schedule::do_run_one()
+                                                        operation::complete()
+                                                            reactive_socket_connect_op::do_complete()
+                                                                user_callback()
             else
                 schedule::post_immediate_completion(op, is_continuation);
                     schedule::do_run_one()
@@ -231,15 +271,33 @@ read.hpp::async_read_until()
                                         operation::complete()
                                             descriptor_state::do_complete()
                                                 descriptor_state::perform_io() // loop op_queue[]
-                                                    reactor_op::perform()
+                                                    perform_io_cleanup_on_block_exit io_cleanup(reactor_)
+                                                    static const int flag[max_ops] = { EPOLLIN, EPOLLOUT, EPOLLPRI };
+                                                    for (int j = max_ops - 1; j >= 0; --j) {
+                                                        if (events & (flag[j] | EPOLLERR | EPOLLHUP)) {
+                                                            while (reactor_op* op = op_queue_[j].front()) {
+                                                                if (reactor_op::status status = op->perform()) {
+                                                                    op_queue_[j].pop();
+                                                                    io_cleanup.ops_.push(op);
+                                                                } else {
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                    op->perform()
+                                                        reactor_op::perform()
                                                         reactive_socket_recv_op_base::do_perform()
                                                             --->
-                                                        ~perform_io_cleanup_on_block_exit()
-                                                            scheduler::post_deferred_completions()
-                                                                schedule::do_run_one()
-                                                                    operation::complete()
-                                                                        reactive_socket_recv_op::do_complete()
-                                                                            user_callback()
+
+                                                    ~perform_io_cleanup_on_block_exit()
+                                                        scheduler::post_deferred_completions(io_cleanup.ops)
+                                                            schedule::do_run_one()
+                                                                operation::complete()
+                                                                    reactive_socket_recv_op::do_complete()
+                                                                        user_callback()
+
 ```
 
 # async_write
@@ -295,15 +353,32 @@ boost::asio::async_write(m_socket, buffer, writeHandler);
                                                 operation::complete()
                                                     descriptor_state::do_complete()
                                                         descriptor_state::perform_io() // loop op_queue[]
-                                                            reactor_op::perform()
+                                                            perform_io_cleanup_on_block_exit io_cleanup(reactor_)
+                                                            static const int flag[max_ops] = { EPOLLIN, EPOLLOUT, EPOLLPRI };
+                                                            for (int j = max_ops - 1; j >= 0; --j) {
+                                                                if (events & (flag[j] | EPOLLERR | EPOLLHUP)) {
+                                                                    while (reactor_op* op = op_queue_[j].front()) {
+                                                                        if (reactor_op::status status = op->perform()) {
+                                                                            op_queue_[j].pop();
+                                                                            io_cleanup.ops_.push(op);
+                                                                        } else {
+                                                                            break;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+
+                                                            op->perform()
+                                                                reactor_op::perform()
                                                                 reactive_socket_send_op::do_perform()
                                                                     --->
-                                                                ~perform_io_cleanup_on_block_exit()
-                                                                    scheduler::post_deferred_completions()
-                                                                        schedule::do_run_one()
-                                                                            operation::complete()
-                                                                                reactive_socket_send_op::do_complete()
-                                                                                    user_callback()
+
+                                                            ~perform_io_cleanup_on_block_exit()
+                                                                scheduler::post_deferred_completions()
+                                                                    schedule::do_run_one()
+                                                                        operation::complete()
+                                                                            reactive_socket_send_op::do_complete()
+                                                                                user_callback()
 ```
 
 tricky switch
