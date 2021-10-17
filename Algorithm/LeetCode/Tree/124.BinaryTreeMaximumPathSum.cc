@@ -16,8 +16,20 @@ The number of nodes in the tree is in the range [0, 3104].
 -1000 <= Node.val <= 1000
 
 Relatives:
-53. Maximum Subarray
-124. Binary Tree Maximum Path Sum */
+053. Maximum Subarray
+112. Path Sum
+113. Path Sum II
+437. Path Sum III
+666. Path Sum IV
+124. Binary Tree Maximum Path Sum
+129. Sum Root to Leaf Numbers
+687. Longest Univalue Path
+1376. Time Needed to Inform All Employees */
+
+#include <climits>
+#include <algorithm>
+
+using std::max;
 
 struct TreeNode {
     int val;
@@ -31,6 +43,24 @@ struct TreeNode {
 class Solution {
 public:
     int maxPathSum(TreeNode* root) {
+        dfs(root);
 
+        return _Result;
     }
+
+private:
+    int dfs(TreeNode* root) {
+        if (!root)
+            return 0;
+
+        auto left = max(0, dfs(root->left));
+        auto right = max(0, dfs(root->right));
+
+        _Result = max(_Result, left + right + root->val);
+
+        return max(left, right) + root->val;
+    }
+
+private:
+    int _Result = INT_MIN;
 };
