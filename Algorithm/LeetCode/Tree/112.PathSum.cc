@@ -1,10 +1,10 @@
 /* Easy
-Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
+Given a binary tree and a sum, determine if the tree has a root-to-leaf path
+such that adding up all the values along the path equals the given sum.
 
 Note: A leaf is a node with no children.
 
 Example:
-
 Given the below binary tree and sum = 22,
 
       5
@@ -14,7 +14,18 @@ Given the below binary tree and sum = 22,
   11  13  4
  /  \      \
 7    2      1
-return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22. */
+return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
+
+Relatives:
+053. Maximum Subarray
+112. Path Sum
+113. Path Sum II
+437. Path Sum III
+666. Path Sum IV
+124. Binary Tree Maximum Path Sum
+129. Sum Root to Leaf Numbers
+687. Longest Univalue Path
+1376. Time Needed to Inform All Employees */
 
 struct TreeNode {
     int val;
@@ -25,16 +36,21 @@ struct TreeNode {
 
 class Solution {
 public:
-    bool hasPathSum(TreeNode* root, int sum) {
-        if (!root)
+    bool hasPathSum(TreeNode* root, int targetSum) {
+        return dfs(root, targetSum);
+    }
+
+private:
+    bool dfs(TreeNode* node, int targetSum) {
+        if (!node)
             return false;
 
-        sum -= root->val;
+        targetSum -= node->val;
 
-        if (root->left == nullptr && root->right == nullptr)
-            return sum == 0;
+        if (!node->left && !node->right)
+            return targetSum == 0;
 
-        return hasPathSum(root->left, sum) || hasPathSum(root->right, sum);
+        return dfs(node->left, targetSum) || dfs(node->right, targetSum);
     }
 };
 
@@ -42,9 +58,9 @@ class Solution {
 public:
     bool hasPathSum(TreeNode* root, int sum) {
 
-        if (root==NULL) return false;
+        if (root == NULL) return false;
 
-        if (root->left==NULL && root->right==NULL ){
+        if (root->left == NULL  && root->right == NULL  ){
             return (root->val==sum);
         }
 
