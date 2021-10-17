@@ -27,13 +27,15 @@ Return 3. The paths that sum to 8 are:
 3. -3 -> 11
 
 Relatives:
-560. Subarray Sum Equals K
-
-1. Two Sum
-167. Two Sum II - Input array is sorted
-170. Two Sum III - Data structure design
-653. Two Sum IV - Input is a BST
-1214. Two Sum BSTs */
+053. Maximum Subarray
+112. Path Sum
+113. Path Sum II
+437. Path Sum III
+666. Path Sum IV
+124. Binary Tree Maximum Path Sum
+129. Sum Root to Leaf Numbers
+687. Longest Univalue Path
+1376. Time Needed to Inform All Employees */
 
 #include <unordered_map>
 
@@ -55,25 +57,28 @@ public:
     int pathSum(TreeNode* root, int sum) {
         _Sum = sum;
 
-        preOrder(root, 0);
+        dfs(root, 0);
 
         return _Cnt;
     }
 
 private:
-    void preOrder(TreeNode* node, int curSum) {
+    void dfs(TreeNode* node, int curSum) {
         if (!node)
             return;
 
         curSum += node->val;
 
+        /* case 1: curSum == _Sum */
         _Cnt += curSum == _Sum ? 1 : 0;
-        /* can't reorder following two lines: sum may 0, so curSum-_Sum == curSum */
+        /* case 2: curSum + x == _Sum */
+        /* can't reorder following two lines: _Sum may 0, so curSum-_Sum == curSum */
         _Cnt += _HashMap[curSum-_Sum];
+
         ++_HashMap[curSum];
 
-        preOrder(node->left, curSum);
-        preOrder(node->right, curSum);
+        dfs(node->left, curSum);
+        dfs(node->right, curSum);
 
         --_HashMap[curSum];
     }
@@ -84,22 +89,22 @@ private:
     unordered_map<int, int> _HashMap;
 };
 
-class Solution_ {
+class Solution {
 public:
     int pathSum(TreeNode* root, int sum) {
         if (!root)
             return 0;
 
-        return path(root, sum) + pathSum(root->left, sum) + pathSum(root->right, sum);
+        return dfs(root, sum) + pathSum(root->left, sum) + pathSum(root->right, sum);
     }
 
 private:
-    int path(TreeNode *root, int curSum) {
+    int dfs(TreeNode *root, int curSum) {
         if (!root)
             return 0;
 
         curSum -= root->val;
 
-        return (curSum == 0) + path(root->left, curSum) + path(root->right, curSum);
+        return (curSum == 0) + dfs(root->left, curSum) + dfs(root->right, curSum);
     }
 };
