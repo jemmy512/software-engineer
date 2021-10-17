@@ -15,6 +15,7 @@ Constraints:
 #include <algorithm>
 #include <functional>
 #include <map>
+#include <set>
 
 using namespace std;
 
@@ -86,6 +87,38 @@ public:
         //         return true;
         //     umap[nums[i]] = i;
         // }
+        return false;
+    }
+};
+
+class Solution {
+public:
+    using ll = long long;
+
+    bool containsNearbyAlmostDuplicate(vector<int>& nums, ll k, ll t) {
+        vector<pair<ll, ll>> vec;
+        vec.reserve(nums.size());
+
+        for(ll i = 0; i < nums.size() ; i++){
+            vec.emplace_back(nums[i], i);
+        }
+
+        sort(vec.begin(), vec.end(), [](const auto& lhs, const auto& rhs) {
+            return lhs.first < rhs.first;
+        });
+
+        for (ll i = 0; i < nums.size(); i++) {
+            for (ll j = i + 1; j < nums.size(); j++) {
+                if (abs(vec[i].first - vec[j].first) <= t) {
+                    if (abs(vec[i].second - vec[j].second) <= k) {
+                        return true;
+                    }
+                } else {
+                    break;
+                }
+            }
+        }
+
         return false;
     }
 };
