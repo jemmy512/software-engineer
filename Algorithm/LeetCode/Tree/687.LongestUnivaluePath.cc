@@ -5,26 +5,38 @@ path has the same value. This path may or may not pass through the root.
 Note: The length of path between two nodes is represented by the number of edges between them.
 
 Example 1:
-
 Input:
       5
     /  \
     4   5
-    / \   \
-    1   1   5
+   / \   \
+  1   1   5
 Output: 2 [5-5-5]
 
 Example 2:
-
 Input:
       1
     /  \
-    4   5
-    / \   \
-    4   4   5
+   4    5
+  / \   \
+ 4   4   5
 Output: 2 [4-4-4]
 
-Note: The given binary tree has not more than 10000 nodes. The height of the tree is not more than 1000. */
+Constraints:
+The number of nodes in the tree is in the range [0, 10^4].
+-1000 <= Node.val <= 1000
+The depth of the tree will not exceed 1000.
+
+Relatives:
+053. Maximum Subarray
+112. Path Sum
+113. Path Sum II
+437. Path Sum III
+666. Path Sum IV
+124. Binary Tree Maximum Path Sum
+129. Sum Root to Leaf Numbers
+687. Longest Univalue Path
+1376. Time Needed to Inform All Employees */
 
 #include <algorithm>
 #include <climits>
@@ -44,18 +56,18 @@ public:
         if (!root)
             return 0;
 
-        path(root, root->val);
+        dfs(root, root->val);
 
         return pathMax;
     }
 
 private:
-    int path(TreeNode *node, int parentVal) {
+    int dfs(TreeNode *node, int parentVal) {
         if (!node)
             return 0;
 
-        int left = path(node->left, node->val);
-        int right = path(node->right, node->val);
+        int left = dfs(node->left, node->val);
+        int right = dfs(node->right, node->val);
         pathMax = max(pathMax, left + right);
 
         if (node->val == parentVal)
