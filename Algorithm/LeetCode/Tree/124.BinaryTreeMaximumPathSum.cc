@@ -6,10 +6,12 @@ For this problem, a path is defined as any node sequence from some starting node
 Example 1:
 Input: root = [1,2,3]
 Output: 6
+Explanation: The optimal path is 2 -> 1 -> 3 with a path sum of 2 + 1 + 3 = 6.
 
 Example 2:
 Input: root = [-10,9,20,null,null,15,7]
 Output: 42
+The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 42.
 
 Constraints:
 The number of nodes in the tree is in the range [0, 3104].
