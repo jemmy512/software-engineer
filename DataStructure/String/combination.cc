@@ -4,8 +4,40 @@
  */
 #include <iostream>
 #include <string>
+#include <vector>
 
-using std::string, std::cout, std::endl;
+using namespace std;
+
+/* Given n and k, return the combination of k numbers from [1, ..., n] */
+class Solution {
+public:
+    vector<vector<int>> combine(int n, int k) {
+        if (n <= 0 || k <= 0)
+            return _Result;
+
+        backtrack(n, k, 1);
+
+        return _Result;
+    }
+
+private:
+    void backtrack(int n, int k, int beg) {
+        if (_Track.size() == k) {
+            _Result.push_back(_Track);
+        } else {
+            for (auto i = beg; i <= n; ++i) {
+                _Track.emplace_back(i);
+                backtrack(n, k, i + 1);
+                _Track.pop_back();
+            }
+        }
+    }
+
+private:
+    vector<int> _Track;
+    vector<vector<int>> _Result;
+};
+
 
 void stringCombination(const string& str) {
     int n = 1 << str.size();
