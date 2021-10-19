@@ -18,7 +18,6 @@ Output: [[1]]
 
 
 Constraints:
-
 1 <= nums.length <= 6
 -10 <= nums[i] <= 10
 All the integers of nums are unique. */
@@ -31,19 +30,19 @@ class Solution {
 public:
     vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int>> result;
-        _permute(nums, 0, result);
+        backtrack(nums, 0, result);
 
         return result;
     }
 
 private:
-    void _permute(vector<int>& nums, int idx, vector<vector<int>>& result) {
+    void backtrack(vector<int>& nums, int idx, vector<vector<int>>& result) {
         if (idx + 1 == nums.size()) {
             result.emplace_back(nums);
         } else {
             for (int i = idx; i < nums.size(); ++i) {
                 swap(nums[idx], nums[i]);
-                _permute(nums, idx+1, result);
+                backtrack(nums, idx+1, result);
                 swap(nums[idx], nums[i]);
             }
         }
