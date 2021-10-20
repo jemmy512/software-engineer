@@ -28,6 +28,15 @@ Relatives:
 
 using namespace std;
 
+/*             [              ]
+              /        |       \
+            /          |        \
+          [1]         [2]       [3]
+         /   \        |
+    [1, 2]  [1, 3]  [2, 3]
+     /
+ [1, 2, 3] */
+
 class Solution {
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
