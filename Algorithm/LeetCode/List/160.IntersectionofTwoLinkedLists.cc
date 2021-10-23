@@ -5,7 +5,7 @@ For example, the following two linked lists:
 
 A:          a1 → a2
                    ↘
-                     c1 → c2 → c3
+                     c1 → c2
                    ↗
 B:     b1 → b2 → b3
 begin to intersect at node c1.
@@ -41,6 +41,18 @@ struct ListNode {
     ListNode *next;
     ListNode(int x) : val(x), next(nullptr) {}
 };
+
+
+/*
+A:          a1 → a2
+                   ↘
+                     c1 → c2
+                   ↗
+B:     b1 → b2 → b3
+
+A: a1 → a2 → c1 → c2 → b1 → b2 → b3 → c1
+
+B: b1 → b2 → b3 → c1 → c2 → a1 → a2 → c1 */
 
 class Solution {
 public:
