@@ -70,27 +70,27 @@ public:
         if (amount < 1)
             return 0;
 
-        vector<int> count(amount+1, 0);
-        return change(coins, amount, count);
+        vector<int> dp(amount+1, 0);
+        return change(coins, amount, dp);
     }
 
 private:
-    int change(vector<int>& coins, int remain, vector<int>& count) {
+    int change(vector<int>& coins, int remain, vector<int>& dp) {
         if (remain < 0)
             return -1;
         if (remain == 0)
             return 0;
-        if (count[remain] != 0) // use previously calculated result
-            return count[remain];
+        if (dp[remain] != 0) // use previously calculated result
+            return dp[remain];
 
         int min = INT_MAX;
         for (auto const& coin : coins) {
-            int res = change(coins, remain - coin, count);
+            int res = change(coins, remain - coin, dp);
             if (res >= 0 && res < min)
                 min = 1 + res;
         }
-        count[remain] = min == INT_MAX ? -1 : min;
+        dp[remain] = min == INT_MAX ? -1 : min;
 
-        return count[remain];
+        return dp[remain];
     }
 };
