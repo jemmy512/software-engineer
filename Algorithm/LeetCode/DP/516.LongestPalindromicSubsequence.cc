@@ -17,7 +17,7 @@ Constraints:
 s consists only of lowercase English letters.
 
 Relatives:
-5. Longest Palindromic Substring
+005. Longest Palindromic Substring
 266. Palindrome Permutation
 267. Palindrome Permutation II
 516. Longest Palindromic Subsequence
@@ -66,20 +66,22 @@ public:
             return 0;
         }
 
-        vector dp(s.size(), 0);
+        vector dp(s.size(), 1);
 
-        for (int i = s.size()-1; i >= 0; --i) {
-            int j_1 = dp[i];
-            dp[i] = 1;
+        for (int i = s.size()-2; i >= 0; --i) {
+            int pre = 0;
             for (int j = i+1; j < s.size(); ++j) {
+                int temp = dp[j];
+
                 if (s[i] == s[j]) {
-                    int tmp = (j_1 + 2);
-                    j_1 = dp[j];
-                    dp[j] = tmp;
+                    // dp[i][j] = dp[i+1][j-1] + 2;
+                    dp[j] = pre + 2
                 } else {
-                    j_1 = dp[j];
+                    // dp[i][j] = max(dp[i+1][j], dp[i][j-1]);
                     dp[j] = max(dp[j-1], dp[j]);
                 }
+
+                pre = temp;
             }
         }
 
@@ -98,7 +100,7 @@ public:
         vector dp(s.size(), vector(s.size(), 0));
 
         /* the deduced type of `auto i` is unsigned long [0 to 4,294,967,295], when i is 0, --i will rewind */
-        for (int i = s.size()-1; i >= 0; --i) {
+        for (int i = s.size()-2; i >= 0; --i) {
             dp[i][i] = 1;
             for (int j = i+1; j < s.size(); ++j) {
                 dp[i][j] = (s[i] == s[j])
