@@ -17,17 +17,16 @@ enum class SearchPolicy {
 template<typename Iter,
     typename T = typename std::iterator_traits<Iter>::value_type,
     typename Compare = std::less<T>>
-Iter binarySearch(Iter begin, Iter end, const T& val, Compare comp = Compare())
-{
+Iter binarySearch(Iter begin, Iter end, const T& val, Compare comp = Compare()) {
     auto result = end;
 
-    while (std::distance(begin, end) > 0) {
+    while (std::distance(begin, end) > 0) {                 // [begin, end)
         auto mid = begin + std::distance(begin, end) / 2;
         if (comp(*mid, val)) {
-            begin = mid + 1;
+            begin = mid + 1;                                // [mid+1, end)
         } else if (comp(val, *mid)) {
             end = mid;
-        } else {
+        } else {                                            // [begin, mid)
             result = mid;
             break;
         }
