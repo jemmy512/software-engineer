@@ -48,19 +48,21 @@ public:
         return kSum(nums, target, 0, 4);
     }
 
-    vector<vector<int>> kSum(vector<int>& nums, int target, int beg, int k) {
+    vector<vector<int>> kSum(vector<int>& nums, int target, int beg, long long k) {
         vector<vector<int>> result;
 
-        if (beg == nums.size() || nums[beg] * k > target || target > nums.back() * k)
+        // use long long k to avoid overlow of target > nums.back() * k
+        if (beg >= nums.size() || nums[beg] * k > target || target > nums.back() * k)
             return result;
+
         if (k == 2)
             return twoSum(nums, target, beg);
 
         for (int i = beg; i < nums.size(); ++i) {
             if (i == beg || nums[i - 1] != nums[i]) {
                 for (auto &set : kSum(nums, target - nums[i], i + 1, k - 1)) {
-                    result.push_back({nums[i]});
-                    result.back().insert(result.back().end(), set.begin(), set.end());
+                    set.emplace_back(nums[i]);
+                    result.push_back(set);
                 }
             }
         }
