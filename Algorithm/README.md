@@ -349,14 +349,21 @@ No | Title | Difficulty | Notes
 763 | Partition Labels | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
 
 ## Two Pointers
+**Fast Slow Pointers**
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
+992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
+
+**Sliding Window**
+No | Title | Difficulty | Notes
+-- | -- | ---  |
+076 | Minimum Window Substring | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 003 | Longest Substring Without Repeating Characters | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-076 | Minimum Window Substring | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `SW`
 159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 239 | Sliding Window Maximum | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `DP` `deque` `L-R vec`
-992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
+438 | Find All Anagrams in a String | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+567 | Permutation in String | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 
 ```c++
 void slidingWindow(string src, string tar) {
@@ -365,19 +372,22 @@ void slidingWindow(string src, string tar) {
     unordered_map<char, int> dict, window;
 
     for (char chr : tar) {
-        need[c]++;
+        need[chr]++;
     }
 
     while (end < src.size()) {
         char chr = src[end];
         ++end;
-        // rigt shift, update data
+        // 1. rigt shift, expanding, update data
 
+        // 2. when to shrink
         while (window needs shrink) {
             chr = src[beg];
             ++beg;
-            // left shift, upate data
+            // 3. left shift, shrinking, upate data
         }
+
+        // 4. update the reuslt: at expanding or shrinking?
     }
 }
 ```
