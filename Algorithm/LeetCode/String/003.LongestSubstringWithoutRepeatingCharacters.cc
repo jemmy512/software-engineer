@@ -17,10 +17,11 @@ Reletives:
 #include <iostream>
 #include <vector>
 #include <string>
+#include <unordered_map>
 
 using namespace std;
 
-/* Sliding windown*/
+/* Sliding windown */
 int lengthOfLongestSubstring(string str) {
     vector<int> index(256, -1);
     int maxLen = 0;
@@ -40,6 +41,29 @@ int lengthOfLongestSubstring(string str) {
     //     index[str[end]] = end;
     //     maxLen = max(maxLen, end - beg);
     // }
+
+    return maxLen;
+}
+
+/* Sliding windown */
+int lengthOfLongestSubstring(string str) {
+    int beg = 0, end = 0;
+    int maxLen = 0;
+    unordered_map<char, int> window;
+
+    while (end < str.size()) {
+        auto chrEnd = str[end];
+        ++end;
+        ++window[chrEnd];
+
+        while (window[chrEnd] > 1) {
+            auto chrBeg = str[beg];
+            ++beg;
+            --window[chrBeg];
+        }
+
+        maxLen = max(maxLen, end - beg);
+    }
 
     return maxLen;
 }
