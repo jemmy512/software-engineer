@@ -351,15 +351,13 @@ No | Title | Difficulty | Notes
 ## Two Pointers
 
 **Fast Slow Pointers**
-
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
 
 **Sliding Window**
-
 No | Title | Difficulty | Notes
--- | -- | ---  |
+-- | -- | ---  | ---
 076 | Minimum Window Substring | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 003 | Longest Substring Without Repeating Characters | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
 159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
