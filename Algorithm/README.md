@@ -349,12 +349,15 @@ No | Title | Difficulty | Notes
 763 | Partition Labels | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
 
 ## Two Pointers
+
 **Fast Slow Pointers**
+
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
 
 **Sliding Window**
+
 No | Title | Difficulty | Notes
 -- | -- | ---  |
 076 | Minimum Window Substring | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
