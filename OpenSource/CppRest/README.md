@@ -141,7 +141,7 @@ asio_context::handle_write_headers() // request header has sent, then send reque
         // continue write request payload untill completed
         if (ec || m_uploaded >= m_content_length)
             asio_context::handle_write_body() // both request header and body sent, wait & handle reponse
-                boost::asio::async_read_until() // CRLF + CRLF
+                boost::asio::async_read_until(CRLF + CRLF)
                         ---> Boost.Asio
                     asio_context::handle_status_line()
                         asio_context::read_headers()
@@ -905,7 +905,7 @@ inline task<void> task_from_result(const task_options& _TaskOptions = task_optio
 }
 
 template<typename _TaskType, typename _ExType>
-task<_TaskType> task_from_exception(_ExType _Exception, const task_options& _TaskOptions = task_options()
+task<_TaskType> task_from_exception(_ExType _Exception, const task_options& _TaskOptions = task_options()) {
     task_completion_event<_TaskType> _Tce;
     _Tce.set_exception(_Exception);
     return create_task(_Tce, _TaskOptions);
@@ -978,11 +978,13 @@ _InitialTaskHandle::_Perform()
 task_completion_event::set(_Result)
     _M_Impl->_M_value.Set(_Result)
     _M_Impl->_M_fHasValue = true // a task can be linked before or after event trigger
-  _Task_impl_base::_FinalizeAndRunContinuations(_M_Impl->_M_value.Get()); // while loops all tasks
+  // while loops all tasks
+  _Task_impl_base::_FinalizeAndRunContinuations(_M_Impl->_M_value.Get()); 
     _M_Result.Set(_Result);
         _TaskCollectionImpl::_Complete()
             condition_variable.notify_all()
-        _Task_impl_base::_RunTaskContinuations() // while loops all continuations
+        // while loops all continuations
+        _Task_impl_base::_RunTaskContinuations() 
             _Task_impl_base::_RunContinuation()
                 _Task_impl_base::_ScheduleContinuationTask() // _ContinuationTaskHandleBase * _PTaskHandle
                     if (_HasCapturedContext)
@@ -1028,7 +1030,7 @@ task_completion_event::set(_Result)
                                                             _Task_impl_base::_FinalizeAndRunContinuations(_ReturnType _Result)(
                                                                 _LogWorkItemAndInvokeUserLambda(
                                                                     _Continuation_func_transformer<_FuncInputType, _ContinuationReturnType>::_Perform(_M_function),
-                                                                    std::move(ancestorTask)
+                                                                    std::move(ancestorTaskResult)
                                                                 ) {
                                                                     _func(std::forward<_Arg>(_value))
                                                                 };
