@@ -14,7 +14,13 @@ return its level order traversal as:
   [3],
   [9,20],
   [15,7]
-] */
+]
+
+Relatives:
+102. Binary Tree Level Order Traversal
+104. Maximum Depth of Binary Tree
+111. Minimum Depth of Binary Tree
+752. Open the Lock */
 
 #include <queue>
 #include <vector>
@@ -28,6 +34,7 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
+// recursion
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
@@ -56,6 +63,38 @@ private:
     vector<vector<int>> rows;
 };
 
+// level loop
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        if (!root)
+            return {};
+
+        vector<vector<int>> rows;
+        queue<TreeNode*> que;
+        que.push(root);
+
+        while (!que.empty()) {
+            rows.push_back({});
+
+            auto size = que.size();
+            while (size-- > 0) {
+                auto* node = que.front();
+                que.pop();
+                rows.back().emplace_back(node->val);
+
+                if (node->left)
+                    que.push(node->left);
+                if (node->right)
+                    que.push(node->right);
+            }
+        }
+
+        return rows;
+    }
+};
+
+// sentinal
 class Solution {
 public:
     vector<vector<int>> levelOrder(TreeNode* root) {
