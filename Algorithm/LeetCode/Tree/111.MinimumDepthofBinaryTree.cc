@@ -17,7 +17,13 @@ Given binary tree [3,9,20,null,null,15,7],
     8 15   7
      |
      8
-return its minimum depth = 3 [3, 9, 8]. */
+return its minimum depth = 3 [3, 9, 8].
+
+Relatives:
+102. Binary Tree Level Order Traversal
+104. Maximum Depth of Binary Tree
+111. Minimum Depth of Binary Tree
+752. Open the Lock */
 
 #include <queue>
 #include <algorithm>
