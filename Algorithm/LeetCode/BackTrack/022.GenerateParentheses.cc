@@ -22,6 +22,10 @@ Relatives:
 
 using namespace std;
 
+/* key points:
+ * 1. the number of '(' is the same as ')' in a well-formed parentheses
+ * 2. 0 <= i < size, [0, i] has much '(' than ')' */
+
 /* Approach: backtrack */
 class Solution {
 public:
@@ -41,11 +45,11 @@ private:
         }
 
         if (open < max) {
-            backtrack(cur+="(", open+1, close);
+            backtrack(cur += "(", open + 1, close);
             cur.pop_back();
         }
         if (close < open) {
-            backtrack(cur+=")", open, close+1);
+            backtrack(cur += ")", open, close + 1);
             cur.pop_back();
         }
     }
