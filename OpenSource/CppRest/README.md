@@ -66,7 +66,7 @@ pplx::task<http_response> http_client::request()
                     asio_connection_poll::acquire()
                     conn = std::make_shared<asio_connection>(crossplat::threadpool::shared_instance().service());
                     auto context = std::make_shared<asio_context>(client, request, connection)
-            auto result_task = pplx::create_task(context->m_request_completion) // task_completion_event<http_response>
+            auto result_task = pplx::create_task(request_context::m_request_completion) // task_completion_event<http_response>
             _http_client_communicator::async_send_request(context)
                 _http_client_communicator::push_request()           // 1. gurantee order
                     m_requests_queue.push(request)
@@ -141,38 +141,49 @@ asio_context::handle_write_headers() // request header has sent, then send reque
         // continue write request payload untill completed
         if (ec || m_uploaded >= m_content_length)
             asio_context::handle_write_body() // both request header and body sent, wait & handle reponse
-                boost::asio::async_read_until(CRLF + CRLF)
-                        ---> Boost.Asio
-                    asio_context::handle_status_line()
+                asio_connection::async_read_until(asio_context.m_body_buf, CRLF + CRLF, asio_context::handle_status_line)
+                    boost::asio::async_read_until(CRLF + CRLF)
+                            ---> Boost.Asio
+                --->asio_context::handle_status_line()
                         asio_context::read_headers()
+// [complete 2-1] complete_headers
                             request_context::complete_headers()
                                 m_request.set_body(Concurrency::streams::istream());
-                                m_request_completion.set(m_response);
+                                m_request_completion.set(request_context::m_response);
                                     task_completion_event<http_response>::set(m_response)
                                         _Task_impl_base::_FinalizeAndRunContinuations(m_response); // while loops all tasks
                                             _M_Result.Set(m_response);
                                                 _TaskCollectionImpl::_Complete()
-                                                    // 1. [notify] clients which are blocked at task<http_reponse>::wait/get()
+// [notify 2-1] clients which are blocked at task<http_reponse>::wait/get()
                                                     condition_variable.notify_all()
                                                 _Task_impl_base::_RunTaskContinuations() // while loops all continuations
+                                                    --->
                             if (!needChunked)
-                                asio_context::async_read_until_buffersize(asio_context::handle_read_content)
+                                asio_context::async_read_until_buffersize(asio_context::m_body_buf, Content-Length, asio_context::handle_read_content)
                             --->asio_context::handle_read_content()
                                     if (m_downloaded < m_content_length)
+// [data copy 2-2] asio_context::m_body_buf -> http_msg_base::m_outStream
+                                        auto writeBuffer = _get_writebuffer()
+                                            m_response._get_impl()->outstream.streambuf()
+                                                return http_msg_base::m_ostream
+                                        writeBuffer.putn_nocopy(m_body_buf.data(), m_body_buf.size(), m_content_length - m_downloaded)
+
                                         asio_context::async_read_until_buffersize()
                                             boost::asio::async_read(m_socket, buffer, readCondition, asio_context::handle_read_content();
                                     else
-                                        request_context::complete_request(body_size)
+// [complete 2-2] complete_request
+                                        request_context::complete_request(request_context::m_downloaded)
                                             m_response._get_impl()->_complete(body_size);
                                                 http_msg_base::_complete(body_size)
-                                                m_data_available.set(body_size);
-                                                    task_completion_event<size64_t>::set(body_size)
-                                                    _Task_impl_base::_FinalizeAndRunContinuations(body_size); // while loops all tasks
-                                                        _M_Result.Set(body_size);
-                                                            _TaskCollectionImpl::_Complete()
-                                                                // 2. [notify] clients which are blocked at reponse.extract_string()
-                                                                condition_variable.notify_all()
-                                                            _Task_impl_base::_RunTaskContinuations() // while loops all continuations
+                                                    http_msg_base::m_data_available.set(body_size);
+                                                        task_completion_event<size64_t>::set(body_size)
+                                                            _Task_impl_base::_FinalizeAndRunContinuations(body_size); // while loops all tasks
+                                                                _M_Result.Set(body_size);
+                                                                    _TaskCollectionImpl::_Complete()
+// [notify 2-2] clients which are blocked at reponse.extract_string()
+                                                                        condition_variable.notify_all()
+                                                                    _Task_impl_base::_RunTaskContinuations() // while loops all continuations
+                                                                        --->
                                             request_context::finish()
                                                 m_http_client->finish_request()
                                                 _http_client_communicator::finish_request()
@@ -188,10 +199,10 @@ asio_context::handle_write_headers() // request header has sent, then send reque
                                     request_context::complete_request()
                                         --->
         else
+// [data copy 2-1] http_msg_base::m_instream -> asio_context::m_body_buf
             auto readbuf = _get_readbuffer()
                 m_request.body()
                     m_instream;
-            // get readSize data from m_instream to m_body_buf, and send it out
             readbuf.getn(boost::asio::buffer_cast<uint8_t *>(m_body_buf.prepare(readSize)), readSize)
             asio_connect::async_write(m_body_buf, asio_context::handle_write_large_body)
                 boost::asio::async_write(m_body_buf, asio_context::handle_write_large_body)
@@ -921,7 +932,7 @@ task::task()
     _TaskInitMaybeFunctor(_Param, _IsCallable(_Param,0));
         if (_IsCallable)
             _TaskInitWithFunctor(const _Function& _Func)
-                _Task_impl_base::_ScheduleTask(new _InitialTaskHandle(_Func) { _M_function = _Func;});
+                _Task_impl_base::_ScheduleTask(new _InitialTaskHandle(_Task_impl, _Func) { _M_function = _Func;});
                     --->
         else
             _TaskInitNoFunctor(task_completion_event<_ReturnType>& _Event)
@@ -979,12 +990,12 @@ task_completion_event::set(_Result)
     _M_Impl->_M_value.Set(_Result)
     _M_Impl->_M_fHasValue = true // a task can be linked before or after event trigger
   // while loops all tasks
-  _Task_impl_base::_FinalizeAndRunContinuations(_M_Impl->_M_value.Get()); 
+  _Task_impl_base::_FinalizeAndRunContinuations(_M_Impl->_M_value.Get());
     _M_Result.Set(_Result);
         _TaskCollectionImpl::_Complete()
             condition_variable.notify_all()
         // while loops all continuations
-        _Task_impl_base::_RunTaskContinuations() 
+        _Task_impl_base::_RunTaskContinuations()
             _Task_impl_base::_RunContinuation()
                 _Task_impl_base::_ScheduleContinuationTask() // _ContinuationTaskHandleBase * _PTaskHandle
                     if (_HasCapturedContext)
