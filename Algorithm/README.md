@@ -3,193 +3,193 @@
 ## Math
 No | Title | Difficulty | Notes
 -- | -- | --- | ---
-006 | Zig Zag Conversion | :star: :star: | :white_check_mark: :trophy:
-007 | Reverse Integer | :star: | :white_check_mark: :trophy:
-009 | Palindrom Number | :star: | :white_check_mark: :trophy:
-015 | 3 Sum | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-016 | 3 Sum Closest | :star: :star: | :white_check_mark: :trophy: |
-018 | 4 Sum | :star: :star: | :white_check_mark: :white_check_mark: :trophy: |
+006 | Zig Zag Conversion | :star: :star: |
+007 | Reverse Integer | :star: |
+009 | Palindrom Number | :star: |
+015 | 3 Sum | :star: :star: |
+016 | 3 Sum Closest | :star: :star: |
+018 | 4 Sum | :star: :star: |
 050 | pow-x-n | :star: :star: | `TODO`
-065 | Valid Number | :star: :star: :star: | :white_check_mark: :trophy: |
-066 | Plus One | :star: | :white_check_mark: :white_check_mark: :trophy: |
-067 | Add Binary | :star: | :white_check_mark: :white_check_mark: :trophy: |
-069 | Sqrt(x) | :star: | :white_check_mark: :trophy: |
-168 | Excel Sheet Colum Title | :star: | :white_check_mark: :trophy: |
-171 | Excel Sheet Colum Number | :star: | :white_check_mark: :trophy: |
-172 | Factorial Trailing Zeros | :star: :star: | :trophy: |
-367 | Valid Perfect Square | :star: | :trophy: |
-136 | Single Number | :star: | :white_check_mark: :trophy: | :white_check_mark: :white_check_mark: :trophy:
-137 | Single Number II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-260 | Single Number III | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-179 | Largest Number | :star: :star: | :trophy: |
-190 | Reverse Bits | :star: | :white_check_mark: :trophy: |
-191 | Numberof 1 Bits | :star: | :white_check_mark: :trophy: |
-202 | Happy Number | :star: | :trophy: |
-204 | Count Primes | :star: | :trophy: |
-231 | Power Of Two | :star: | :white_check_mark: :trophy: |
-263 | Ugly Number | :star: | :white_check_mark: :white_check_mark: :trophy: |
-268 | Missing Number | :star: | :white_check_mark: :trophy: | :white_check_mark: :white_check_mark: :trophy:
-292 | Nim Game | :star: | :trophy: |
-326 | Power of Three | :star: | :trophy: |
-371 | Sum of Two Integers | :star: :star: | :white_check_mark: :trophy: |
+065 | Valid Number | :star: :star: :star: |
+066 | Plus One | :star: |
+067 | Add Binary | :star: |
+069 | Sqrt(x) | :star: |
+168 | Excel Sheet Colum Title | :star: |
+171 | Excel Sheet Colum Number | :star: |
+172 | Factorial Trailing Zeros | :star: :star: |
+367 | Valid Perfect Square | :star: |
+136 | Single Number | :star: |
+137 | Single Number II | :star: :star: |
+260 | Single Number III | :star: :star: |
+179 | Largest Number | :star: :star: |
+190 | Reverse Bits | :star: |
+191 | Numberof 1 Bits | :star: |
+202 | Happy Number | :star: |
+204 | Count Primes | :star: |
+231 | Power Of Two | :star: |
+263 | Ugly Number | :star: |
+268 | Missing Number | :star: |
+292 | Nim Game | :star: |
+326 | Power of Three | :star: |
+371 | Sum of Two Integers | :star: :star: |
 400 | Nth Digit | :star: :star: |
-780 | Reaching Points | :star: :star: :star: | :trophy: |
-1041 | Robot Bounded In Circle | :star: :star: | :trophy: :thinking:
+780 | Reaching Points | :star: :star: :star: |
+1041 | Robot Bounded In Circle | :star: :star: | :thinking:
 
 ## Array
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-011 | Container With Most Water| :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers`
-041 | First Missing Positive | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-054 | Spiral Matrix | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Matrix`
-056 | Merge Intervals | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
-057 | Insert Intervals | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
-252 | Meeting Rooms | :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
-253 | Meeting Rooms II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
-027 | Remove Element | :star: | :white_check_mark: :white_check_mark: :trophy:
-026 | Remove Duplicates from Sorted Array | :star: | :white_check_mark: :white_check_mark: :trophy:
-080 | Remove Duplicates from Sorted Array II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Can dup N`
-083 | Remove Duplicates from Sorted List | :star: | :white_check_mark: :white_check_mark: :trophy:
-082 | Remove Duplicates from Sorted List II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-048 | Rotate Image | :star: :star: | :trophy:
-088 | Merge Sorted Array | :star: | :white_check_mark: :white_check_mark: :trophy:
-169 | Majority Element | :star: | :white_check_mark: :white_check_mark: :trophy: [:link: Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html)
-189 | Rotate Array | :star: :star: | :white_check_mark:
-209 | Minimum Size Subarray Sum | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `BS`
-325 | Maximum Size Subarray Sum Equals k | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `Map`
-560 | Subarray Sum Equals K | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `Map`
-217 | Contains Duplicate I | :star: | :white_check_mark: :white_check_mark: :trophy:
-219 | Contains Duplicate II | :star: | :white_check_mark: :white_check_mark: :trophy:
-220 | Contains Duplicate III | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `bucket sort`
-238 | Product of Array Except Self  | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `L-R vec`
-239 | Sliding Window Maximum | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `DP` `L-R vec`
-283 | Move Zeroes | :star: :star: | :white_check_mark: :trophy:
-448 | Find All Numbers Disappeared in An Array | :star: | :white_check_mark: :white_check_mark: :trophy:
+011 | Container With Most Water| :star: :star: :star: | `Two Pointers`
+041 | First Missing Positive | :star: :star: :star: |
+054 | Spiral Matrix | :star: :star: | `Matrix`
+056 | Merge Intervals | :star: :star: | `Interval`
+057 | Insert Intervals | :star: :star: | `Interval`
+252 | Meeting Rooms | :star: | `Interval`
+253 | Meeting Rooms II | :star: :star: | `Interval`
+027 | Remove Element | :star: |
+026 | Remove Duplicates from Sorted Array | :star: |
+080 | Remove Duplicates from Sorted Array II | :star: :star: | `Can dup N`
+083 | Remove Duplicates from Sorted List | :star: |
+082 | Remove Duplicates from Sorted List II | :star: :star: |
+048 | Rotate Image | :star: :star: |
+088 | Merge Sorted Array | :star: |
+169 | Majority Element | :star: | [:link: Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html)
+189 | Rotate Array | :star: :star: |
+209 | Minimum Size Subarray Sum | :star: :star: | `Prefix Sum` `BS`
+325 | Maximum Size Subarray Sum Equals k | :star: :star: | `Prefix Sum` `Map`
+560 | Subarray Sum Equals K | :star: :star: | `Prefix Sum` `Map`
+217 | Contains Duplicate I | :star: |
+219 | Contains Duplicate II | :star: |
+220 | Contains Duplicate III | :star: :star: | `bucket sort`
+238 | Product of Array Except Self  | :star: :star: | `L-R vec`
+239 | Sliding Window Maximum | :star: :star: :star: | :thinking: `DP` `L-R vec`
+283 | Move Zeroes | :star: :star: |
+448 | Find All Numbers Disappeared in An Array | :star: |
 
 ## List
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-002 | Add Two Numbers | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-445 | Add Two Numbers II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-019 | Remove Nth Node From End of List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-021 | Merge Two Sorted Lists | :star: | :white_check_mark: :white_check_mark:
-023 | Merge K Sorted List | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `K-way Merge` `Divide Conquer`
-024 | Swap Nodes in Pairs | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-025 | Reverse Nodes in K-Group | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-061 | Roate List By K | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-086 | Partition List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-206 | Reverse Linkded List | :star: | :white_check_mark: :white_check_mark: :trophy: `3 solutions`
-092 | Reverse Linked List II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-138 | Copy List With Random Pointer  | :star: | :white_check_mark: :white_check_mark: :trophy: :thinking:
-141 | linked List Cycle | :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers` `Cycle`
-142 | Linked List Cycle II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers` `Cycle`
-287 | Find the Duplicate Number | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers` `Cycle`
-143 | Reorder List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-147 | Insertion Sorted List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-148 | Sort List | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Div-Conq` `Merge sort`
-160 | Intersection of Two Linked Lists | :star: | :white_check_mark: :white_check_mark: :trophy:
-203 | Remove Linked List Element | :star: | :white_check_mark: :white_check_mark: :trophy:
-234 | Palindrome Linked List | :star: | :white_check_mark: :white_check_mark: :trophy:
-237 | Delete Node In A Linked List | :star: | :white_check_mark: :white_check_mark: :trophy:
-328 | Odd Even Linked List | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-725 | Split Linked List in Parts | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-817 | Linked List Components | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+002 | Add Two Numbers | :star: :star: |
+445 | Add Two Numbers II | :star: :star: |
+019 | Remove Nth Node From End of List | :star: :star: |
+021 | Merge Two Sorted Lists | :star: |
+023 | Merge K Sorted List | :star: :star: :star: | `K-way Merge` `Divide Conquer`
+024 | Swap Nodes in Pairs | :star: :star: |
+025 | Reverse Nodes in K-Group | :star: :star: :star: |
+061 | Roate List By K | :star: :star: |
+086 | Partition List | :star: :star: |
+206 | Reverse Linkded List | :star: | `3 solutions`
+092 | Reverse Linked List II | :star: :star: |
+138 | Copy List With Random Pointer  | :star: | :thinking:
+141 | linked List Cycle | :star: | `Two Pointers` `Cycle`
+142 | Linked List Cycle II | :star: :star: | `Two Pointers` `Cycle`
+287 | Find the Duplicate Number | :star: :star: | `Two Pointers` `Cycle`
+143 | Reorder List | :star: :star: |
+147 | Insertion Sorted List | :star: :star: |
+148 | Sort List | :star: :star: | `Div-Conq` `Merge sort`
+160 | Intersection of Two Linked Lists | :star: |
+203 | Remove Linked List Element | :star: |
+234 | Palindrome Linked List | :star: |
+237 | Delete Node In A Linked List | :star: |
+328 | Odd Even Linked List | :star: :star: |
+725 | Split Linked List in Parts | :star: :star: |
+817 | Linked List Components | :star: :star: |
 
 ## Tree
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-098 | Validate Binary Search Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
-100 | Same Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
-101 | Symmetric Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
-102 | Binary Tree Level Order Traversal | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-107 | Binary Tree Level Order Traversal II | :star: | :white_check_mark: :trophy:
-103 | Bianry Tree Zig Zag Level Tree Traverse | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-104 | Maximum Depth of Binary Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
-111 | Minimum Depth of Binary Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
-105 | Construct Binary Tree from Preorder and Inorder Traversal | :star: :star: | :trophy: :thinking:
-106 | Construct Binary Tree from Inorder and Postorder Traversal | :star: :star: | :trophy:
-108 | Convert Sorted Array to Binary Search Tree | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-109 | Convert Sorted List to Binary Search Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
-110 | Balanced Bianry Tree | :star: | :white_check_mark: :white_check_mark: :trophy: `DFS`
-112 | Path Sum | :star: | :white_check_mark: :white_check_mark: :white_check_mark: :trophy: `DFS`
-113 | Path Sum II | :star: :star: | :white_check_mark: :white_check_mark: :white_check_mark: :trophy: `DFS`
-437 | Path Sum III | :star: :star: | :white_check_mark: :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `DFS`
-666 | Path Sum IV | :star: :star: | :white_check_mark: :white_check_mark: :white_check_mark: :trophy: `DFS`
-129 | Sum Root to Leaf Numbers | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+098 | Validate Binary Search Tree | :star: |
+100 | Same Tree | :star: |
+101 | Symmetric Tree | :star: |
+102 | Binary Tree Level Order Traversal | :star: :star: | `BFS: recursion, level loop, sentinel`
+107 | Binary Tree Level Order Traversal II | :star: |
+103 | Bianry Tree Zig Zag Level Tree Traverse | :star: :star: |
+104 | Maximum Depth of Binary Tree | :star: |
+111 | Minimum Depth of Binary Tree | :star: | `DFS` `BFS`
+105 | Construct Binary Tree from Preorder and Inorder Traversal | :star: :star: | :thinking:
+106 | Construct Binary Tree from Inorder and Postorder Traversal | :star: :star: |
+108 | Convert Sorted Array to Binary Search Tree | :star: :star: |
+109 | Convert Sorted List to Binary Search Tree | :star: |
+110 | Balanced Bianry Tree | :star: | `DFS`
+112 | Path Sum | :star: | `DFS`
+113 | Path Sum II | :star: :star: | `DFS`
+437 | Path Sum III | :star: :star: | `Prefix Sum` `DFS`
+666 | Path Sum IV | :star: :star: | `DFS`
+129 | Sum Root to Leaf Numbers | :star: :star: |
 124 | Binary Tree Maximum Path Sum | :star: :star: :star: | `DFS` `Prefix Sum`
-257 | Binary Tree Paths | :star: | :white_check_mark: :white_check_mark: :white_check_mark: :trophy: `DFS`
-687 | Longest Univalue Path | :star: :star: | :white_check_mark: :white_check_mark: :white_check_mark: `DFS`
-114 | Flatten Binary Tree To Linked List | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Preorder`
-116 | Populating Next Right Pointers in Each Node | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `BFS`
-117 | Populating Next Right Pointers in Each Node II  | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `BFS-non-queue`
-173 | Binary Search Tree Iterator | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Inorder`
-199 | Binary Tree Right Side View | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-222 | Count Complete Tree Nodes | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-226 | Invert Binary Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
-230 | kth Smallest Element In The BST | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Inorder`
-671 | Second Minimum Node in a Binary Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
-235 | Lowest Common Ancestor of a Binary Search Tree | :star: | :white_check_mark: :white_check_mark: :trophy:
-236 | Lowest Common Ancestor of a Binary Tree | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking:
-1644 | Lowest Common Ancestor of a Binary Tree II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `p, q may be null`
-1650 | Lowest Common Ancestor of a Binary Tree III | :star: :star: | :white_check_mark: :white_check_mark: `List Common Node`
-1676 | Lowest Common Ancestor of a Binary Tree IV | :star: :star: | :white_check_mark: :white_check_mark: `Multiple-nodes`
+257 | Binary Tree Paths | :star: | `DFS`
+687 | Longest Univalue Path | :star: :star: | `DFS`
+114 | Flatten Binary Tree To Linked List | :star: :star: | `Preorder`
+116 | Populating Next Right Pointers in Each Node | :star: :star: | `BFS`
+117 | Populating Next Right Pointers in Each Node II  | :star: :star: | `BFS-non-queue`
+173 | Binary Search Tree Iterator | :star: :star: | `Inorder`
+199 | Binary Tree Right Side View | :star: :star: |
+222 | Count Complete Tree Nodes | :star: :star: |
+226 | Invert Binary Tree | :star: |
+230 | kth Smallest Element In The BST | :star: :star: | `Inorder`
+671 | Second Minimum Node in a Binary Tree | :star: |
+235 | Lowest Common Ancestor of a Binary Search Tree | :star: |
+236 | Lowest Common Ancestor of a Binary Tree | :star: :star: | :thinking:
+1644 | Lowest Common Ancestor of a Binary Tree II | :star: :star: | `p, q may be null`
+1650 | Lowest Common Ancestor of a Binary Tree III | :star: :star: | `List Common Node`
+1676 | Lowest Common Ancestor of a Binary Tree IV | :star: :star: | `Multiple-nodes`
 1123 | Lowest Common Ancestor of Deepest Leaves | :star: :star: | `TODO`
-1214 | Two Sum BSTs | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Inorder` `Complement Map`
+1214 | Two Sum BSTs | :star: :star: | `Inorder` `Complement Map`
 1257 | Smallest Common Region | :star: :star: | `TODO`
 501 | Find Mode in Binary Search Tree | :star:
-513 | Find Bottom Left Tree Value | :star: | :white_check_mark: :white_check_mark: :trophy: `BFS-Queue`
-637 | Average of Levels in Binary Tree | :star: | :white_check_mark: :trophy: `BFS` `BFS-Recursion`
-814 | Binary Tree Pruning | :star: | :white_check_mark: :trophy: `DFS`
-1803 | Count Pairs With XOR in a Range | :star: :star: :star: | :trophy: `XOR` `Prefix Sum`
+513 | Find Bottom Left Tree Value | :star: | `BFS-Queue`
+637 | Average of Levels in Binary Tree | :star: | `BFS` `BFS-Recursion`
+814 | Binary Tree Pruning | :star: | `DFS`
+1803 | Count Pairs With XOR in a Range | :star: :star: :star: | `XOR` `Prefix Sum`
 
 ## String
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-008 | atoi | :star: | :white_check_mark: :white_check_mark: :trophy:
-014 | Longest Common Prefix | :star: | :white_check_mark: :white_check_mark: | :trophy:
+008 | atoi | :star: |
+014 | Longest Common Prefix | :star: |
 028 | Implement Strstr | :star: | `KMP`
-058 | Length of Last Word | :star: | :white_check_mark: :white_check_mark:
-125 | Valid Palindrome | :star: | :white_check_mark: :white_check_mark: :trophy:
-680 | Valid Palindrome II | :star: | :white_check_mark: :white_check_mark:
-151 | Reverse Words in a String | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-161 | One Edit Distance | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-205 | Isomorphic Strings | :star: | :white_check_mark: :white_check_mark: :trophy:
-242 | Valid Anagra | :star: | :white_check_mark: :white_check_mark: :trophy:
-389 | Find the Difference | :star: | :white_check_mark: :white_check_mark: :trophy:
-409 | Longest Palindrome | :star: | :white_check_mark: :white_check_mark: :trophy:
-415 | Adding Strings | :star: | :white_check_mark: :white_check_mark: :trophy:
-443 | String Compression | :star: :star: | :white_check_mark: :white_check_mark:
+058 | Length of Last Word | :star: |
+125 | Valid Palindrome | :star: |
+680 | Valid Palindrome II | :star: |
+151 | Reverse Words in a String | :star: :star: |
+161 | One Edit Distance | :star: :star: |
+205 | Isomorphic Strings | :star: |
+242 | Valid Anagra | :star: |
+389 | Find the Difference | :star: |
+409 | Longest Palindrome | :star: |
+415 | Adding Strings | :star: |
+443 | String Compression | :star: :star: |
 468 | Validate IP Address | :star: :star: | `TODO`
-344 | Reverse String | :star: | :white_check_mark: :white_check_mark:
-345 | Reverse Vowels of a String | :star: | :white_check_mark: :white_check_mark: :trophy:
-796 | Rotate String | :star: | :white_check_mark: :white_check_mark:
-1062 | Longest Repeating Substring | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `BS + Hash` `Rabin-Karp`
+344 | Reverse String | :star: |
+345 | Reverse Vowels of a String | :star: |
+796 | Rotate String | :star: |
+1062 | Longest Repeating Substring | :star: :star: | `BS + Hash` `Rabin-Karp`
 
 ## Map
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-001 | Two Sum | :star: | :white_check_mark: :white_check_mark: :trophy:
-167 | Two Sum II | :star: | :white_check_mark: :white_check_mark: :trophy: `Two Pointers`
-170 | Two Sum III - Data structure | :star: | :white_check_mark: :white_check_mark: :trophy:
-653 | Two Sum IV | :star: | :white_check_mark: :white_check_mark: :trophy: `Inorder + Two Pointers` `Complement Map`
-1214 | Two Sum BSTs | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Inorder + Complement Map` `Tree`
-266 | Palindrome Permutation | :star: | :white_check_mark: :white_check_mark: :trophy:
-267 | Palindrome Permutation II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Backtracking`
-290 | Word Pattern | :star: | :white_check_mark: :white_check_mark: :trophy:
-383 | Ransom Note | :star: | :white_check_mark: :white_check_mark: | :trophy:
-412 | Fizz Buzz | :star: | :white_check_mark: :white_check_mark: | :trophy:
-771 | Jewelsand Stones | :star: | :white_check_mark: :white_check_mark: | :trophy:
-811 | Subdomain Visit Count | :star: | :white_check_mark: :white_check_mark: | :trophy:
-953 | Verifying an Alien Dictionary  | :star: | :white_check_mark: :white_check_mark: | :trophy:
+001 | Two Sum | :star: |
+167 | Two Sum II | :star: | `Two Pointers`
+170 | Two Sum III - Data structure | :star: |
+653 | Two Sum IV | :star: | `Inorder + Two Pointers` `Complement Map`
+1214 | Two Sum BSTs | :star: :star: | `Inorder + Complement Map` `Tree`
+266 | Palindrome Permutation | :star: |
+267 | Palindrome Permutation II | :star: :star: | `Backtracking`
+290 | Word Pattern | :star: |
+383 | Ransom Note | :star: |
+412 | Fizz Buzz | :star: |
+771 | Jewelsand Stones | :star: |
+811 | Subdomain Visit Count | :star: |
+953 | Verifying an Alien Dictionary  | :star: |
 
 ## Stack
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-020 | valid Parentheses | :star: | :white_check_mark: :white_check_mark: | :trophy:
-032 | Longet Valid Paretheses | :star: :star: :star: | :trophy: `DP`
-155 | MinStack | :star: | :white_check_mark: :white_check_mark: | :trophy:
-394 | DecodeString | :star: :star: | :white_check_mark: :trophy:
-1249 | Minimum Remove to Make Valid Parentheses| :star: :star: | :trophy: `Bit Set`
+020 | valid Parentheses | :star: |
+032 | Longet Valid Paretheses | :star: :star: :star: | `DP`
+155 | MinStack | :star: |
+394 | DecodeString | :star: :star: |
+1249 | Minimum Remove to Make Valid Parentheses| :star: :star: | `Bit Set`
 
 ## Queue
 No | Title | Difficulty | Notes
@@ -199,67 +199,157 @@ No | Title | Difficulty | Notes
 ## DP
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-005 | Longest Palindromic Substring | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-032 | Longet Valid Paretheses | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `stack`
-053 | Maximum Subarray | :star: | :white_check_mark: :white_check_mark: :white_check_mark: :trophy: `Prefix Sum` `kadane` `Divide Conquer`
-062 | Unique Paths | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-063 | Unique Paths II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+005 | Longest Palindromic Substring | :star: :star: |
+032 | Longet Valid Paretheses | :star: :star: :star: | `stack`
+053 | Maximum Subarray | :star: | `Prefix Sum` `kadane` `Divide Conquer`
+062 | Unique Paths | :star: :star: |
+063 | Unique Paths II | :star: :star: |
 980 | Unique Paths III | :star: :star: :star: | `TODO`
-064 | Minimum Path Sum | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-070 | Climbing Stairs | :star: | :white_check_mark: :white_check_mark: :trophy:
-746 | MinCost Climb Stair | :star: | :white_check_mark: :white_check_mark: :trophy:
-072 | Edit Distance | :star: :star: :star: | :white_check_mark: :trophy:
-583 | Delete Operation for Two Strings | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-091 | Decode Ways | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-121 | Best Time to Buy and Sell Stock | :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum`
-122 | Best Time to Buy and Sell Stock II | :star: | :white_check_mark: :white_check_mark: :trophy: `Greedy`
-123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | :white_check_mark: :trophy: `L-R vec`
-188 | Best Time to Buy and Sell Stock IV | :star: :star: :star:|    :white_check_mark: :trophy: :thinking:
-139 | Word Break | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `Bottom Up`
-152 | Maximum Product Subarry | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Prefix Sum`
-198 | House Robber | :star: | :white_check_mark: :white_check_mark: :trophy:
-221 | Maximal Square | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking:
-264 | Ugly Number II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-303 | Range Sum Query Immutable | :star: | :white_check_mark: :white_check_mark: :trophy:
-307 | Range Sum Query Mutable | :star: :star: | :white_check_mark: :trophy: `Segment Tree`
-304 | Range Sum Query 2D Immutable | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-322 | Coin Change | :star: :star: | :white_check_mark: :white_check_mark: :white_check_mark: :trophy: `Bottom Up` `Top Down`
-518 | Coin Change 2 | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `Bottom Up` `Top Down`
-338 | Counting Bits | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `Bit`
-392 | Is Subsequence | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-509 | Fibonacci Number| :star: | :white_check_mark: :white_check_mark: :trophy:
-523 | Continuous Subarray Sum  | :star: :star: | :white_check_mark: :white_check_mark: :thinking: `Prefix Sum` `Map`
+064 | Minimum Path Sum | :star: :star: |
+070 | Climbing Stairs | :star: |
+746 | MinCost Climb Stair | :star: |
+072 | Edit Distance | :star: :star: :star: |
+583 | Delete Operation for Two Strings | :star: :star: |
+712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: |
+091 | Decode Ways | :star: :star: |
+121 | Best Time to Buy and Sell Stock | :star: | `Prefix Sum`
+122 | Best Time to Buy and Sell Stock II | :star: | `Greedy`
+123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | `L-R vec`
+188 | Best Time to Buy and Sell Stock IV | :star: :star: :star: | :thinking:
+309 | Best Time to Buy and Sell Stock with Cooldown | :star: :star: | [Stock Problems Solution](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems)
+714 | Best Time to Buy and Sell Stock with Transaction Fee | :star: :star: |
+139 | Word Break | :star: :star: | :thinking: `Bottom Up`
+152 | Maximum Product Subarry | :star: :star: | `Prefix Sum`
+198 | House Robber | :star: |
+221 | Maximal Square | :star: :star: | :thinking:
+264 | Ugly Number II | :star: :star: |
+303 | Range Sum Query Immutable | :star: |
+307 | Range Sum Query Mutable | :star: :star: | `Segment Tree`
+304 | Range Sum Query 2D Immutable | :star: :star: |
+322 | Coin Change | :star: :star: | `Bottom Up` `Top Down`
+518 | Coin Change 2 | :star: :star: | :thinking: `Bottom Up` `Top Down`
+338 | Counting Bits | :star: :star: | :thinking: `Bit`
+392 | Is Subsequence | :star: :star: |
+509 | Fibonacci Number| :star: |
+523 | Continuous Subarray Sum  | :star: :star: | :thinking: `Prefix Sum` `Map`
 546 | Remove Boxes | :star: :star: :star: | `TODO`
-718 | Maximum Length of Repeated Subarray | :star: :star: | :white_check_mark: :white_check_mark:
-1137 | N-th Tribonacci Number | :star: | :white_check_mark: :trophy:
+718 | Maximum Length of Repeated Subarray | :star: :star: |
+1137 | N-th Tribonacci Number | :star: |
 647 | Palindromic Substrings | :star: :star: | `TODO`
-300  | Longest Increasing Subsequence | :star: :star: | :white_check_mark: :white_check_mark: :white_check_mark: :trophy:
-1048 | Longest String Chain | :star: :star: | :white_check_mark: :white_check_mark:
-516 | Longest Palindromic Subsequence | :star: :star: | :white_check_mark: :white_check_mark: :white_check_mark:
-1025 | Divisor Game | :star: | :white_check_mark: :white_check_mark: :trophy:
-1143 | Longest Common Subsequence | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Matrix`
+300  | Longest Increasing Subsequence | :star: :star: |
+1048 | Longest String Chain | :star: :star: |
+516 | Longest Palindromic Subsequence | :star: :star: |
+1025 | Divisor Game | :star: |
+1143 | Longest Common Subsequence | :star: :star: | `Matrix`
+
+## BackTrack
+No | Title | Difficulty | Notes
+-- | -- | ---  | ---
+017 | Letter Combination of a Phone Number | :star: :star: |
+022 | Generate Parenthesis | :star: :star: | :thinking:
+046 | Permutations | :star: :star: | :thinking:
+047 | Permutations II | :star: :star: | `TODO`
+078 | Subsets  | :star: :star: |
+090 | Subsets II  | :star: :star: |
+079 | Word Search | :star: :star: | `Matrix`
+212 | Word Search II | :star: :star: :star: | `Matrix`
+
+```c++
+void backtrack(path, options) {
+    if (reach_boundary) {
+        result.emplace_back(path);
+    } else {
+        for (const auto& option : options) {
+            do_select(option);
+            backtrack(path + 1, options);
+            undo_select(option);
+        }
+    }
+}
+```
+
+## Greedy
+No | Title | Difficulty | Notes
+-- | -- | ---  | ---
+055 | Jump Game | :star: :star: |
+045 | Jump Game II | :star: :star: |
+122 | Best Time to Buy and Sell Stock II | :star: |
+134 | Gas Station | :star: :star: |
+452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | `Interval`
+763 | Partition Labels | :star: :star: | `Interval`
+
+## Divide Conquer
+No | Title | Difficulty | Notes
+-- | -- | ---  | ---
+023 | Merge K Sorted List | :star: :star: :star: | `K-way Merge`
+241 | Different Ways to Add Parentheses | :star: :star: |
+
+## Two Pointers
+
+**Fast Slow Pointers**
+No | Title | Difficulty | Notes
+-- | -- | ---  | ---
+992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
+
+**Sliding Window**
+No | Title | Difficulty | Notes
+-- | -- | ---  | ---
+076 | Minimum Window Substring | :star: :star: :star: |
+003 | Longest Substring Without Repeating Characters | :star: :star: |
+159 | Longest Substring with At Most Two Distinct Characters | :star: :star: |
+340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: |
+239 | Sliding Window Maximum | :star: :star: :star: | `DP` `deque` `L-R vec`
+438 | Find All Anagrams in a String | :star: :star: |
+567 | Permutation in String | :star: :star: |
+
+```c++
+void slidingWindow(string src, string tar) {
+    int beg = 0, end = 0;
+    int winSize = 0;
+    unordered_map<char, int> dict, window;
+
+    for (char chr : tar) {
+        ++dict[chr];
+    }
+
+    while (end < src.size()) {
+        char chr = src[end];
+        ++end;
+        // 1. rigt shift, expanding, update data
+
+        // 2. when to shrink
+        while (window needs shrink) {
+            chr = src[beg];
+            ++beg;
+            // 3. left shift, shrinking, upate data
+        }
+
+        // 4. update the reuslt: at expanding or shrinking?
+    }
+}
+```
 
 ## Search
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-004 | Median of Two Sorted Arrays | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `BS`
-034 | Search For a Range | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `BS`
-035 | Search Insert Position | :star: | :white_check_mark: :white_check_mark: :trophy: `BS`
-074 | Search a 2D Matrix | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `BS` `Matrix`
-240 | Search a 2D Matrix II | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `BS` `Matrix`
-278 | First Bad Version | :star: | :white_check_mark: :white_check_mark: :trophy: `BS`
-130 | Surrounded Regions | :star: :star: | :white_check_mark: :white_check_mark: :white_check_mark: :trophy: `DFS` `BFS` `Opposite` `Matrix`
-200 | Number of Islands | :star: :star: | :white_check_mark: :white_check_mark: :white_check_mark: :trophy: `DFS` `BFS` `Matrix`
-286 | Walls and Gates | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking: `BFS` `Matrix`
-323 | Number of Connected Components in an Undirected Graph | :star: :star: | :white_check_mark: :white_check_mark: :white_check_mark: :trophy: :thinking: `Union Find` `DFS` `Matrix`
-547 | Number of Provinces | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `DFS` `Matrix`
-695 | Max Area of Island  | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `DFS` `Matrix`
-374 | Guess Number Higher Or Lower | :star: | :white_check_mark: :white_check_mark: :trophy:
-378 | Kth Smallest Element in a Sorted Matrix  | :star: :star:| :trophy: :thinking: `BS` `Matrix`
-973 | K Closest Points to Origin | :star: :star:| :white_check_mark: :trophy: :thinking: `Quick Select` `BS`
-875 | Koko Eating Bananas | :star: :star:| :white_check_mark: :trophy: :thinking: `BS`
-1011 |  Capacity To Ship Packages Within D Days | :star: :star:| :white_check_mark: :trophy: :thinking: `BS`
+004 | Median of Two Sorted Arrays | :star: :star: :star: | `BS`
+034 | Search For a Range | :star: :star: | `BS`
+035 | Search Insert Position | :star: | `BS`
+074 | Search a 2D Matrix | :star: :star: | `BS` `Matrix`
+240 | Search a 2D Matrix II | :star: :star: | :thinking: `BS` `Matrix`
+278 | First Bad Version | :star: | `BS`
+130 | Surrounded Regions | :star: :star: | `DFS` `BFS` `Opposite` `Matrix`
+200 | Number of Islands | :star: :star: | `DFS` `BFS` `Matrix`
+286 | Walls and Gates | :star: :star: | :thinking: `BFS` `Matrix`
+323 | Number of Connected Components in an Undirected Graph | :star: :star: | :thinking: `Union Find` `DFS` `Matrix`
+547 | Number of Provinces | :star: :star: | `DFS` `Matrix`
+695 | Max Area of Island  | :star: :star: | `DFS` `Matrix`
+374 | Guess Number Higher Or Lower | :star: |
+378 | Kth Smallest Element in a Sorted Matrix  | :star: :star:| :thinking: `BS` `Matrix`
+973 | K Closest Points to Origin | :star: :star:| :thinking: `Quick Select` `BS`
+752 | Open the Lock | :star: :star:| `BFS`
+875 | Koko Eating Bananas | :star: :star:| :thinking: `BS`
+1011 |  Capacity To Ship Packages Within D Days | :star: :star:| :thinking: `BS`
 
 ```c++
 int f(int x, int[] nums) {
@@ -312,106 +402,52 @@ int end_bound(int[] nums, int target) {
 }
 ```
 
-## BackTrack
-No | Title | Difficulty | Notes
--- | -- | ---  | ---
-017 | Letter Combination of a Phone Number | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-022 | Generate Parenthesis | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking:
-046 | Permutations | :star: :star: | :white_check_mark: :white_check_mark: :trophy: :thinking:
-047 | Permutations II | :star: :star: | `TODO`
-078 | Subsets  | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-090 | Subsets II  | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-079 | Word Search | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Matrix`
-212 | Word Search II | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Matrix`
-
 ```c++
-void backtrack(path, options) {
-    if (reach_boundary) {
-        result.emplace_back(path);
-    } else {
-        for (const auto& option : options) {
-            do_select(option);
-            backtrack(path + 1, options);
-            undo_select(option);
+int bfs(Node start, Node target) {
+    Queue<Node> que;
+
+    que.push(start);
+    visited.add(start);
+    int step = 0;
+
+    while (que not empty) {
+        // search current line
+        int sz = que.size();
+        for (int i = 0; i < sz; i++) {
+            Node cur = que.pop();
+
+            // can return
+            if (cur is target)
+                return step;
+
+            // add children of current node
+            for (Node x : cur.children()) {
+                if (x not in visited) {
+                    que.push(x);
+                    visited.add(x);
+                }
+            }
         }
+
+        ++step;
     }
 }
 ```
-
-## Greedy
-No | Title | Difficulty | Notes
--- | -- | ---  | ---
-055 | Jump Game | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-045 | Jump Game II | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-122 | Best Time to Buy and Sell Stock II | :star: | :white_check_mark: :white_check_mark: :trophy:
-134 | Gas Station | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
-763 | Partition Labels | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Interval`
-
-## Two Pointers
-
-**Fast Slow Pointers**
-No | Title | Difficulty | Notes
--- | -- | ---  | ---
-992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
-
-**Sliding Window**
-No | Title | Difficulty | Notes
--- | -- | ---  | ---
-076 | Minimum Window Substring | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-003 | Longest Substring Without Repeating Characters | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-239 | Sliding Window Maximum | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `DP` `deque` `L-R vec`
-438 | Find All Anagrams in a String | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-567 | Permutation in String | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
-
-```c++
-void slidingWindow(string src, string tar) {
-    int beg = 0, end = 0;
-    int winSize = 0;
-    unordered_map<char, int> dict, window;
-
-    for (char chr : tar) {
-        need[chr]++;
-    }
-
-    while (end < src.size()) {
-        char chr = src[end];
-        ++end;
-        // 1. rigt shift, expanding, update data
-
-        // 2. when to shrink
-        while (window needs shrink) {
-            chr = src[beg];
-            ++beg;
-            // 3. left shift, shrinking, upate data
-        }
-
-        // 4. update the reuslt: at expanding or shrinking?
-    }
-}
-```
-
-## Divide Conquer
-No | Title | Difficulty | Notes
--- | -- | ---  | ---
-023 | Merge K Sorted List | :star: :star: :star: | :white_check_mark: :white_check_mark: :trophy: `K-way Merge`
 
 ## Sort
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-215 | Kth Largest Element in an Array | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Heap Sort` `Quick Sort`
-347 | Top K Frequent Elements | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Heap Sort` `Quick Sort` `??`
-414 | Third Maximum Number | :star: | :white_check_mark: :white_check_mark: :trophy: `Heap Sort`
-937 | Reorder Data in Log Files | :star: | :white_check_mark: :white_check_mark: :trophy:
+215 | Kth Largest Element in an Array | :star: :star: | `Heap Sort` `Quick Sort`
+347 | Top K Frequent Elements | :star: :star: | `Heap Sort` `Quick Sort` `??`
+414 | Third Maximum Number | :star: | `Heap Sort`
+937 | Reorder Data in Log Files | :star: |
 
 ## Design
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-146 | LRU Cache | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Map + List (O(1) + Date Move)`
-380 | Insert Delete GetRandom O(1) | :star: :star: | :white_check_mark: :white_check_mark: :trophy: `Map + Vec (O(1) + Random Access)`
-1396 | Design Underground System | :star: :star: | :white_check_mark: :white_check_mark: :trophy:
+146 | LRU Cache | :star: :star: | `Map + List (O(1) + Date Move)`
+380 | Insert Delete GetRandom O(1) | :star: :star: | `Map + Vec (O(1) + Random Access)`
+1396 | Design Underground System | :star: :star: |
 
 
 # Dynamic Programming
