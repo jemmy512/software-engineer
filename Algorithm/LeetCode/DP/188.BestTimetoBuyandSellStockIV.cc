@@ -27,12 +27,64 @@ Relatives:
 122. Best Time to Buy and Sell Stock II
 123. Best Time to Buy and Sell Stock III
 188. Best Time to Buy and Sell Stock IV
-309. Best Time to Buy and Sell Stock with Cooldown [TODO] */
+309. Best Time to Buy and Sell Stock with Cooldown
+714. Best Time to Buy and Sell Stock with Transaction Fee */
 
 #include <climits>
 #include <vector>
 
 using namespace std;
+
+/* https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems
+
+ * T[i][k][0], denotes the maximum profit
+    at the end of the i-th day with at most k transactions and with 0 stock in our hand AFTER taking the action
+ * T[i][k][1], denotes the maximum profit
+    at the end of the i-th day with at most k transactions and with 1 stock in our hand AFTER taking the action
+ * Base cases:
+    T[-1][k][0] = 0, T[-1][k][1] = -Infinity
+    T[i][0][0] = 0, T[i][0][1] = -Infinity
+
+ * Recurrence relations:
+    T[i][k][0] = max(T[i-1][k][0], T[i-1][k][1] + prices[i])
+    T[i][k][1] = max(T[i-1][k][1], T[i-1][k-1][0] - prices[i])
+
+    For T[i][k][0] in the recurrence relations, the actions taken on the i-th day can only be rest and sell,
+    since we have 0 stock in our hand at the end of the day.
+
+    For T[i][k][1] in the recurrence relations, the actions taken on the i-th day can only be rest and buy,
+    since we have 1 stock in our hand at the end of the day. */
+
+/* unified solution */
+class Solution {
+public:
+    int maxProfit(int N, vector<int>& prices) {
+        if (prices.empty())
+            return 0;
+
+        // optimization
+        // if (N > prices.size() / 2) {
+        //     // It menas N is infinite
+        //     return maxProfit_k_inf(prices);
+        // }
+
+        vector<vector<vector<int>>> dp(prices.size(), vector(N + 1, vector(2, 0)));
+
+        for (auto i = 0; i < prices.size(); ++i) {
+            for (auto k = 1; k <= N; ++k) {
+                if (i == 0 || k == 0) {
+                    dp[i][k][0] = 0;
+                    dp[i][k][1] = -prices[i];
+                } else {
+                    dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]);
+                    dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i]);
+                }
+            }
+        }
+
+        return dp[prices.size()-1][N][0];
+    }
+};
 
 /* Time Complexity: O(nk) if 2k <= n, O(n) if 2k > n
  * Space Complexity: O(k) */
