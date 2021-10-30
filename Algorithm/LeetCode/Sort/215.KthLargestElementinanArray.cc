@@ -30,68 +30,96 @@ Relatives:
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 
-/******************************* Heap Sort Solution ***************************/
-void heapifyDown(vector<int> &nums, int b, int e) {
-    for (int i = 2 * b + 1; i < e; i = 2 * i + 1) {
-        if (i + 1 < e && nums[i + 1] < nums[i])
-            ++i;
-        if (nums[b] <= nums[i])
-            break;
-        swap(nums[b], nums[i]);
-        b = i;
+// STL Heap Sort Solution
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        std::priority_queue<int, vector<int>, std::greater<int>> minHeap;
+
+        for (const auto& num : nums) {
+            minHeap.emplace(num);
+            if (minHeap.size() > k)
+                minHeap.pop();
+        }
+
+        return minHeap.top();
     }
-}
+};
 
-int findKthLargest(vector<int>& nums, int k) {
-    for (int i = k/2-1; i >=0; --i)
-        heapifyDown(nums, i, k);
+// Heap Sort Solution
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        for (int i = k/2-1; i >=0; --i)
+            heapifyDown(nums, i, k);
 
-    for (int i = k; i < nums.size(); ++i) {
-        if (nums[i] > nums[0]) {
-            swap(nums[i], nums[0]);
-            heapifyDown(nums, 0, k);
+        for (int i = k; i < nums.size(); ++i) {
+            if (nums[i] > nums[0]) {
+                swap(nums[i], nums[0]);
+                heapifyDown(nums, 0, k);
+            }
+        }
+
+        return nums[0];
+    }
+
+private:
+    void heapifyDown(vector<int> &nums, int b, int e) {
+        for (int i = 2 * b + 1; i < e; i = 2 * i + 1) {
+            if (i + 1 < e && nums[i + 1] < nums[i])
+                ++i;
+            if (nums[b] <= nums[i])
+                break;
+            swap(nums[b], nums[i]);
+            b = i;
         }
     }
+};
 
-    return nums[0];
-}
-
-/******************************* STL Build in Solution ************************/
-int findKthLargest_buildin(vector<int>& nums, int k) {
-    int len = nums.size();
-    nth_element(nums.begin(), nums.end() - k, nums.end());
-    return nums[len - k];
-}
-
-/******************************* Qiuck Sort Solution **************************/
-int partition(vector<int> &nums, int left, int right) {
-    int pivot = nums[left];
-    int l = left + 1, r = right;
-    while (l <= r) {
-        if (nums[l] < pivot && nums[r] > pivot)
-            swap(nums[l], nums[r]);
-        if (nums[l] >= pivot) ++l;
-        if (nums[r] <= pivot) --r;
+// STL Build in Solution
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        int len = nums.size();
+        nth_element(nums.begin(), nums.end() - k, nums.end());
+        return nums[len - k];
     }
-    swap(nums[left], nums[r]);
-    return r;
-}
+};
 
-int findKthLargest_qsort(vector<int> &nums, int k) {
-    int len = nums.size(), pos;
-    int left = 0, right = len - 1;
-    while (left <= right) {
-        pos = partition(nums, left, right);
-        if (pos == k - 1)
-            return nums[pos];
-        else if (pos < k - 1)
-            left = pos + 1;
-        else
-            right = pos - 1;
+// Qiuck Sort Solution
+class Solution {
+public:
+    int findKthLargest_qsort(vector<int> &nums, int k) {
+        int len = nums.size(), pos;
+        int left = 0, right = len - 1;
+        while (left <= right) {
+            pos = partition(nums, left, right);
+            if (pos == k - 1)
+                return nums[pos];
+            else if (pos < k - 1)
+                left = pos + 1;
+            else
+                right = pos - 1;
+        }
+
+        return 0;
     }
 
-    return 0;
-}
+private:
+    int partition(vector<int> &nums, int left, int right) {
+        int pivot = nums[left];
+        int l = left + 1, r = right;
+        while (l <= r) {
+            if (nums[l] < pivot && nums[r] > pivot)
+                swap(nums[l], nums[r]);
+            if (nums[l] >= pivot) ++l;
+            if (nums[r] <= pivot) --r;
+        }
+        swap(nums[left], nums[r]);
+        return r;
+    }
+};
