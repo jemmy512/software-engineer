@@ -36,7 +36,8 @@ Relatives:
 122. Best Time to Buy and Sell Stock II
 123. Best Time to Buy and Sell Stock III
 188. Best Time to Buy and Sell Stock IV
-309. Best Time to Buy and Sell Stock with Cooldown [TODO] 
+309. Best Time to Buy and Sell Stock with Cooldown
+714. Best Time to Buy and Sell Stock with Transaction Fee
 
 238. Product of Array Except Self
 239. Sliding Window Maximum */
@@ -45,6 +46,29 @@ Relatives:
 #include <vector>
 
 using namespace std;
+
+/* unified solution */
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        const auto N = 2;
+        vector<vector<vector<int>>> dp(prices.size(), vector(N + 1, vector(2, 0)));
+
+        for (auto i = 0; i < prices.size(); ++i) {
+            for (auto k = 1; k <= N; ++k) {
+                if (i == 0 || k == 0) {
+                    dp[i][k][0] = 0;
+                    dp[i][k][1] = -prices[i];
+                } else {
+                    dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]);
+                    dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i]);
+                }
+            }
+        }
+
+        return dp[prices.size()-1][N][0];
+    }
+};
 
 class Solution {
 public:
