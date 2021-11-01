@@ -25,7 +25,15 @@ After calling your function, the tree should look like:
   2 -> 3 -> NULL
  / \    \
 4-> 5 -> 7 -> NULL
-*/
+
+Constraints:
+The number of nodes in the tree is in the range [0, 6000].
+-100 <= Node.val <= 100
+
+
+Follow-up:
+You may only use constant extra space.
+The recursive approach is fine. You may assume implicit stack space does not count as extra space for this problem. */
 
 #include <queue>
 
@@ -49,9 +57,9 @@ public:
 class Solution {
 public:
     Node* connect(Node *root) {
-        if (!root)  
+        if (!root)
             return nullptr;
-            
+
         Node *cur, *next, *levelBeg = root;
 
         while (levelBeg) {
@@ -68,7 +76,7 @@ public:
                     if (next)
                         next = next->next = cur->right;
                     else
-                        levelBeg = next= cur->right;
+                        levelBeg = next = cur->right;
                 }
                 cur = cur->next;
             }
@@ -82,33 +90,30 @@ class Solution {
 public:
     Node* connect(Node* root) {
         if (!root)
-            return;
+            return nullptr;
 
         queue<Node*> que;
-        auto* cur = root, *levelEnd = root, *last = root;
+        auto* cur = root;
         que.emplace(root);
 
         while (!que.empty()) {
-            cur = que.front();
-            que.pop();
+            auto size = que.size();
 
+            while (size--) {
+                cur = que.front();
+                que.pop();
 
-            if (cur->left) {
-                last = cur->left;
-                que.emplace(cur->left);
-            }
+                if (cur->left) {
+                    que.emplace(cur->left);
+                }
+                if (cur->right) {
+                    que.emplace(cur->right);
+                }
 
-            if (cur->right) {
-                last = cur->right;
-                que.emplace(cur->right);
-            }
-
-            if (cur == levelEnd) {
-                levelEnd = last;
-                cur->next = nullptr;
-            } else {
                 cur->next = que.empty() ? nullptr : que.front();
             }
+
+            cur->next = nullptr;
         }
 
         return root;
