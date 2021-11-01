@@ -24,6 +24,17 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
 };
 
+/*
+ * Even nodes
+    Node -> Node -> Node -> Ndoe ->   ^
+                      |               |
+                    slow            fast
+
+ * Odd nodes
+    Node -> Node -> Node -> Ndoe -> Node
+                     |               |
+                    slow            fast */
+
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
@@ -71,4 +82,35 @@ private:
 
         return tail;
     }
+};
+
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        Beg = head;
+        auto* fast = head;
+        auto* slow = head;
+
+        while (fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        return traverse(slow);
+    }
+
+private:
+    bool traverse(ListNode* node) {
+        if (!node)
+            return true;
+
+        auto ret = traverse(node->next);
+        ret = ret && (node->val == Beg->val);
+        Beg = Beg->next;
+
+        return ret;
+    }
+
+private:
+    ListNode* Beg = nullptr;
 };
