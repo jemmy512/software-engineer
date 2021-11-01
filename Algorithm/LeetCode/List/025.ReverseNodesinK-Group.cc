@@ -30,9 +30,44 @@ Relatives:
 struct ListNode {
    int val;
    ListNode *next;
+   ListNode() : val(0), next(nullptr) {}
    ListNode(int x) : val(x), next(nullptr) {}
+   ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+// insert solution
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        ListNode dummy;
+        dummy.next = head;
+
+        auto i = 0;
+        auto* tail = &dummy;
+        auto* beg = head;
+        auto* end = head;
+
+        while (end) {
+            if (++i % k == 0) {
+                while (tail->next != end) {
+                    auto* node = beg->next;
+                    beg->next = node->next;
+                    node->next = tail->next;
+                    tail->next = node;
+                }
+
+                tail = beg;
+                end = beg = beg->next;
+            } else {
+                end = end->next;
+            }
+        }
+
+        return dummy.next;
+    }
+};
+
+// recursion solution
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
