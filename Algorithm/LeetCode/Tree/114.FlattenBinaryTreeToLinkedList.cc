@@ -42,6 +42,29 @@ public:
         if (!root)
             return;
 
+        flatten(root->left);
+        flatten(root->right);
+
+        auto* left = root->left;
+        auto* right = root->right;
+
+        root->left = nullptr;
+        root->right = left;
+
+        auto* cur = root;
+        while (cur->right) {
+            cur = cur->right;
+        }
+        cur->right = right;
+    }
+};
+
+class Solution {
+public:
+    void flatten(TreeNode* root) {
+        if (!root)
+            return;
+
         stack<TreeNode*> stk;
         vector<TreeNode*> vec;
         TreeNode *cur = root;
