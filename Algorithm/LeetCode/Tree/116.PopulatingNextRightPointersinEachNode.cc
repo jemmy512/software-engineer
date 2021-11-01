@@ -1,16 +1,10 @@
 /* Medium
-Given a binary tree
+You are given a perfect binary tree where all leaves are on the same level, and every parent has two children.
+
 Populate each next pointer to point to its next right node.
 If there is no next right node, the next pointer should be set to NULL.
 
 Initially, all next pointers are set to NULL.
-
-Note:
-
-You may only use constant extra space.
-Recursive approach is fine, implicit stack space does not count as extra space for this problem.
-You may assume that it is a perfect binary tree (ie, all leaves are at the same level, and every parent has two children).
-Example:
 
 Given the following perfect binary tree,
 
@@ -25,7 +19,16 @@ After calling your function, the tree should look like:
    /  \
   2 -> 3 -> NULL
  / \  / \
-4->5->6->7 -> NULL */
+4->5->6->7 -> NULL
+
+Constraints:
+The number of nodes in the tree is in the range [0, 2^12 - 1].
+-1000 <= Node.val <= 1000
+
+Relatives:
+116. Populating Next Right Pointers in Each Node
+117. Populating Next Right Pointers in Each Node II
+199. Binary Tree Right Side View */
 
 #include <queue>
 
@@ -53,30 +56,27 @@ public:
             return nullptr;
 
         queue<Node*> que;
-        auto* cur = root, *levelEnd = root, *last = root;
         que.emplace(root);
+        auto* cur = root;
 
         while (!que.empty()) {
-            cur = que.front();
-            que.pop();
+            auto size = que.size();
 
+            while (size--) {
+                cur = que.front();
+                que.pop();
 
-            if (cur->left) {
-                last = cur->left;
-                que.emplace(cur->left);
-            }
+                if (cur->left) {
+                    que.emplace(cur->left);
+                }
+                if (cur->right) {
+                    que.emplace(cur->right);
+                }
 
-            if (cur->right) {
-                last = cur->right;
-                que.emplace(cur->right);
-            }
-
-            if (cur == levelEnd) {
-                levelEnd = last;
-                cur->next = nullptr;
-            } else {
                 cur->next = que.empty() ? nullptr : que.front();
             }
+
+            cur->next = nullptr;
         }
 
         return root;
@@ -91,7 +91,7 @@ public:
 
         if (root->left) {
             root->left->next = root->right;
-            if(root->next){
+            if (root->next) {
                 root->right->next = root->next->left;
             }
         }
@@ -100,5 +100,29 @@ public:
         connect(root->right);
 
         return root;
+    }
+};
+
+class Solution {
+public:
+    Node* connect(Node *root) {
+        if(!root)
+            return root;
+
+        connect(root->left, root->right);
+
+        return root;
+    }
+
+private:
+   void connect(Node* lhs, Node* rhs) {
+        if (!lhs || !rhs)
+            return;
+
+        lhs->next = rhs;
+
+        connect(lhs->left, lhs->right);
+        connect(rhs->left, rhs->right);
+        connect(lhs->right, rhs->left);
     }
 };
