@@ -23,33 +23,36 @@ Example 2:
 Output: false
 Explanation: The input is: [5,1,4,null,null,3,6]. The root node's value
              is 5 but its right child's value is 4.
-*/
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+Constraints:
+The number of nodes in the tree is in the range [1, 10^4].
+-2^31 <= Node.val <= 2^31 - 1 */
 
-// 75 test cases, 11ms, beat 72.74%
-// Recursive Version
+#include <climits>
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
 class Solution {
 public:
-	bool isValidBST(TreeNode* root) {
-		return validateBST(root, LLONG_MIN, LLONG_MAX);
-	}
+    bool isValidBST(TreeNode* root) {
+        return validateBST(root, LLONG_MIN, LLONG_MAX);
+    }
 
 private:
-	bool validateBST(TreeNode* node, long min, long max) {
-		if(!node) return true;
-		if(node->val <= min || node->val >= max) return false;
-		return validateBST(node->left, min, node->val)
-				&& validateBST(node->right, node->val, max);
-	}
+    bool validateBST(TreeNode* node, long min, long max) {
+        if (!node)
+            return true;
+        if (node->val <= min || node->val >= max)
+            return false;
+        return validateBST(node->left, min, node->val) && validateBST(node->right, node->val, max);
+    }
 };
 
 // 75 test cases, 13ms, beat 26.77%
