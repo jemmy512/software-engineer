@@ -18,6 +18,8 @@ Return the following binary tree:
 
 #include <vector>
 #include <stack>
+#include <iterator>
+#include <algorithm>
 
 using namespace std;
 
@@ -56,35 +58,27 @@ class Solution {
 };
 
 // Recursive Version
-class Solution_ {
+class Solution {
 public:
-    TreeNode *buildTree(vector<int> &inorder, int in_offset, vector<int> &postorder, int post_offset, int n ) {
-        if ( n<=0 || postorder.size()<=0 || inorder.size()<=0 ) return NULL;
-
-        TreeNode *root = new TreeNode(postorder[post_offset+n-1]);
-        if ( n==1 ){
-            return root;
-        }
-
-        //searching in inorder -- can be optimized by using <map>
-        int i;
-        for(i=in_offset; i<in_offset+n; i++){
-            if (inorder[i] == postorder[post_offset+n-1])
-                break;
-        }
-
-        //error: not found
-        if (i == inorder.size()) return NULL;
-
-        int left_n = i - in_offset;
-        int right_n = in_offset + n - i - 1;
-        root->left = buildTree(inorder, in_offset, postorder, post_offset, left_n );
-        root->right = buildTree(inorder, i+1, postorder, post_offset+left_n, right_n);
-
-        return root;
+    TreeNode *buildTree(vector<int>& inorder, vector<int>& post) {
+        return build(inorder, inorder.rbegin(), inorder.rend(), post, post.rbegin(), post.rend());
     }
 
-    TreeNode *buildTree(vector<int> &inorder, vector<int> &postorder) {
-        return buildTree(inorder, 0, postorder, 0, postorder.size());
+private:
+    template<typename Iter>
+    TreeNode* build(const vector<int>& inorder, Iter inBeg, Iter inEnd, const vector<int>& postorder, Iter postBeg, Iter postEnd) {
+        if (postBeg >= postEnd)
+            return nullptr;
+
+        const auto rootIter = std::find_if(inBeg, inEnd, [postBeg](const auto& val) {
+            return val == *postBeg;
+        });
+        const auto rightSize = std::distance(inBeg, rootIter);
+
+        auto* node = new TreeNode(*postBeg);
+        node->right = build(inorder, inBeg, rootIter, postorder, postBeg + 1, postBeg + rightSize + 1);
+        node->left = build(inorder, rootIter + 1, inEnd, postorder, postBeg + rightSize + 1, postEnd);
+
+        return node;
     }
 };
