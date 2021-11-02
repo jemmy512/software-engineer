@@ -72,14 +72,15 @@ No | Title | Difficulty | Notes
 002 | Add Two Numbers | :star: :star: |
 445 | Add Two Numbers II | :star: :star: |
 019 | Remove Nth Node From End of List | :star: :star: |
+203 | Remove Linked List Element | :star: |
 021 | Merge Two Sorted Lists | :star: |
 023 | Merge K Sorted List | :star: :star: :star: | `K-way Merge` `Divide Conquer`
-024 | Swap Nodes in Pairs | :star: :star: |
 025 | Reverse Nodes in K-Group | :star: :star: :star: |
-061 | Roate List By K | :star: :star: |
-086 | Partition List | :star: :star: |
 206 | Reverse Linkded List | :star: | `3 solutions`
 092 | Reverse Linked List II | :star: :star: |
+024 | Swap Nodes in Pairs | :star: :star: |
+061 | Roate List By K | :star: :star: |
+086 | Partition List | :star: :star: |
 138 | Copy List With Random Pointer  | :star: | :thinking:
 141 | linked List Cycle | :star: | `Two Pointers` `Cycle`
 142 | Linked List Cycle II | :star: :star: | `Two Pointers` `Cycle`
@@ -88,7 +89,6 @@ No | Title | Difficulty | Notes
 147 | Insertion Sorted List | :star: :star: |
 148 | Sort List | :star: :star: | `Div-Conq` `Merge sort`
 160 | Intersection of Two Linked Lists | :star: |
-203 | Remove Linked List Element | :star: |
 234 | Palindrome Linked List | :star: |
 237 | Delete Node In A Linked List | :star: |
 328 | Odd Even Linked List | :star: :star: |
@@ -98,6 +98,8 @@ No | Title | Difficulty | Notes
 ## Tree
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
+095 | Unique Binary Search Trees  | :star: :star: |
+096 | Unique Binary Search Trees  | :star: :star: |
 098 | Validate Binary Search Tree | :star: |
 100 | Same Tree | :star: |
 101 | Symmetric Tree | :star: |
@@ -108,6 +110,7 @@ No | Title | Difficulty | Notes
 111 | Minimum Depth of Binary Tree | :star: | `DFS` `BFS`
 105 | Construct Binary Tree from Preorder and Inorder Traversal | :star: :star: | :thinking:
 106 | Construct Binary Tree from Inorder and Postorder Traversal | :star: :star: |
+654 | Maximum Binary Tree | :star: :star: |
 108 | Convert Sorted Array to Binary Search Tree | :star: :star: |
 109 | Convert Sorted List to Binary Search Tree | :star: |
 110 | Balanced Bianry Tree | :star: | `DFS`
@@ -138,7 +141,12 @@ No | Title | Difficulty | Notes
 1257 | Smallest Common Region | :star: :star: | `TODO`
 501 | Find Mode in Binary Search Tree | :star:
 513 | Find Bottom Left Tree Value | :star: | `BFS-Queue`
+652 | Find Duplicate Subtrees | :star: :star: |
+538 | Convert BST to Greater Tree | :star: :star: | `Inorder` `Descending`
 637 | Average of Levels in Binary Tree | :star: | `BFS` `BFS-Recursion`
+450 | Delete Node in a BST | :star: :star: |
+700 | Search in a Binary Search Tree | :star: |
+701 | Insert into a Binary Search Tree | :star: :star: |
 814 | Binary Tree Pruning | :star: | `DFS`
 1803 | Count Pairs With XOR in a Range | :star: :star: :star: | `XOR` `Prefix Sum`
 
@@ -221,6 +229,8 @@ No | Title | Difficulty | Notes
 139 | Word Break | :star: :star: | :thinking: `Bottom Up`
 152 | Maximum Product Subarry | :star: :star: | `Prefix Sum`
 198 | House Robber | :star: |
+213 | House Robber II | :star: :star: |
+337 | House Robber III | :star: :star: |
 221 | Maximal Square | :star: :star: | :thinking:
 264 | Ugly Number II | :star: :star: |
 303 | Range Sum Query Immutable | :star: |
@@ -343,8 +353,12 @@ No | Title | Difficulty | Notes
 286 | Walls and Gates | :star: :star: | :thinking: `BFS` `Matrix`
 323 | Number of Connected Components in an Undirected Graph | :star: :star: | :thinking: `Union Find` `DFS` `Matrix`
 547 | Number of Provinces | :star: :star: | `DFS` `Matrix`
-695 | Max Area of Island  | :star: :star: | `DFS` `Matrix`
-374 | Guess Number Higher Or Lower | :star: |
+694 | Number of Distinct Islands | :star: :star: | `DFS` `Matrix` `Serialization`
+695 | Max Area of Island | :star: :star: | `DFS` `Matrix`
+1020 | Number of Enclaves | :star: :star: | `DFS` `Matrix`
+1254 | Number of Closed Islands | :star: :star: | `DFS` `Matrix`
+1905 | Count Sub Islands | :star: :star: | `DFS` `Matrix`
+374 | Guess Number Higher Or Lower | :star: | `BS`
 378 | Kth Smallest Element in a Sorted Matrix  | :star: :star:| :thinking: `BS` `Matrix`
 973 | K Closest Points to Origin | :star: :star:| :thinking: `Quick Select` `BS`
 752 | Open the Lock | :star: :star:| `BFS`
