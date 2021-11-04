@@ -16,12 +16,12 @@
         * [Check args compatibility](#Check-args-compatibility)
         * [Get task type from parameter](#Get-task-type-from-parameter)
     * [task::task](#tasktask)
-    * [task::then](#taskthen)
     * [task::wait](#taskwait)
+    * [Run Task](#run-task)
+    * [task::then](#taskthen)
     * [Run Continuation](#Run-Continuation)
 
-
-* [Boost.Asio](#BoostAsio)
+* [Boost.Asio](../Boost/README.md)
 
 # CppRest
 The [C++ REST SDK](https://github.com/microsoft/cpprestsdk) is a Microsoft project for cloud-based client-server communication in native code using a modern asynchronous C++ API design. This project aims to help C++ developers connect to and interact with services.
@@ -70,6 +70,7 @@ pplx::task<http_response> http_client::request()
             _http_client_communicator::async_send_request(context)
                 _http_client_communicator::push_request()           // 1. gurantee order
                     m_requests_queue.push(request)
+
                 _http_client_communicator::open_and_send_request()  // 2. don't gurantee order
                     _http_client_communicator::open_if_required()
                     asio_client::send_request()
@@ -119,7 +120,7 @@ pplx::task<http_response> http_client::request()
                                                         asio_connection::async_write(asio_context::handle_write_headers)
                                                             --->
                                         else
-                                            asio_connect::async_write(buffer, asio_context::handle_write_headers)
+                                            asio_connect::async_write(m_body_buf, asio_context::handle_write_headers)
                                                 boost::asio::async_write(asio_context::handle_write_large_body)
                                                         --->
                                 else
@@ -257,6 +258,8 @@ typedef basic_socket_acceptor<tcp>  acceptor;
 typedef basic_resolver<tcp>         resolver;
 ```
 
+![](../Image/cpp-rest-server.png)
+
 ### listen
 ```C++
 http_listener::open()
@@ -300,6 +303,7 @@ hostport_listener::on_accept()
 
 ### read-server
 ```C++
+    connection::connection()
         connection::start_request_response()
             boost::asio::async_read_until() // crlfcrlf_nonascii_searcher
                 ---> Boost.Asio
@@ -307,6 +311,7 @@ hostport_listener::on_accept()
                     m_request = http_request::_create_request(new linux_request_context())
                     // parse m_request_buf to compose request object
                     std::istream request_stream(&m_request_buf);
+
                     connection::handle_headers()
                         if (m_chunked)
                             connection::async_read_until() // CRLF
@@ -314,7 +319,7 @@ hostport_listener::on_accept()
                                     ---> Boost.Asio
                                 --->connection::handle_chunked_header()
                                         if (er || len == 0)
-                                            // 1.1 [client request] has been received
+// [http_request::m_data_available 2-1-1] notify
                                             http_msg_base::_complete()
                                                 m_data_available.set(body_size)
                                         else
@@ -323,12 +328,14 @@ hostport_listener::on_accept()
                                                     auto writebuf = m_request._get_impl()->outstream().streambuf();
                                                     writebuf.putn_nocopy(m_request_buf.data(), toWrite).then()
                                                         connection::async_read_until()
+
                             connection::dispatch_request_to_listener();
                             return
 
                         if (m_read_size == 0)
+// [http_request::m_data_available 2-1-2] notify
                             m_request._get_impl()->_complete(0)
-                                http_msg_base::_complete()  // 1.2 [client request] has been received
+                                http_msg_base::_complete()
                                     m_data_available.set(body_size)
                         else
                             connection::async_read_until_buffersize(std::min(ChunkSize, m_read_size), connection::handle_body)
@@ -338,8 +345,8 @@ hostport_listener::on_accept()
                                         writebuf.putn_nocopy(m_request_buf, std::min(m_request_buf.size(), m_read_size - m_read)).then()
                                             connection::async_read_until_buffersize(std::min(ChunkSize, m_read_size - m_read), connection::handle_body)
                                     else
+// [http_request::m_data_available 2-1-3] notify
                                         m_request._get_impl()->_complete(m_read)
-                                            // 1.3 [client request] has been received
                                             http_msg_base::_complete(m_read)
                                                 m_data_available.set(body_size)
 
@@ -347,27 +354,31 @@ hostport_listener::on_accept()
                             // find listern by request URI path
                             http_request::_set_listener_path(pListener->uri().path())
                             connection::do_response(false)
-                                ---> //1. [m_response] link a task to m_response: task_completion_event<http_response>
+                                --->
                             http_listener_impl::handle_request()
                                 m_supported_methods[mtd](request)
                                     http_request::reply(const http_response &response)
                                         _http_request::_reply_impl()
                                             http_response::_set_server_context(http_linux_context)
                                             http_linux_server::respond()
-                                                // 1. [m_response_completed] wait
-                                                return pplx::create_task(response->linux_request_context::m_response_completed)
+// [linux_request_context::m_response_completed 2-2] wait
+                                                pplx::create_task(response->linux_request_context::m_response_completed).then([](){
+                                                    task.wait();
+                                                });
                                             http_request::m_response::set(response)
                                                 task_completion_event<http_response>::set(response)
-                                                // 2. [m_response] activate task linked with m_response: task_completion_event<http_response>
+// [http_request::m_response 2-2] notify
 ```
 
 ### write-server
 ```C++
-connection::do_response()
+connection::do_response(isBadRequest)
+// [http_request::m_response 2-1] wait
     http_request::m_request.get_response()
-        pplx::task<http_response>(m_response) // 3. [m_response] wait for m_response data
+        pplx::task<http_response>(m_response)
     .then()
-        m_request.content_ready() // 2. [client request] wait for all request stream to be received
+        m_request.content_ready()
+// [http_request::m_data_available 2-2] wait
             pplx::create_task(m_data_available).then([req](utility::size64_t) { return req; }
         .then()
             connection::async_process_response(response)
@@ -381,7 +392,9 @@ connection::do_response()
                             --->
                         if (ec || m_write == m_write_size)
                             connection::handle_response_written()
-                                linux_request_context::m_response_completed.set() // 2. [m_response_completed] notify
+// [linux_request_context::m_response_completed 2-1] notify
+                                linux_request_context::m_response_completed.set()
+
                                 if (!close_connection)
                                     connection::start_request_response()
                                 else
@@ -467,7 +480,6 @@ public:
         // task is not usable and should throw if any wait(), get() or then() APIs are used.
     }
 
-
     template<typename _Ty>
     explicit task(_Ty _Param) {
         task_options _TaskOptions;
@@ -506,7 +518,9 @@ public:
         _M_Impl->_M_fFromAsync = _Async_type_traits::_IsAsyncTask;
         _M_Impl->_M_fUnwrappedTask = _Async_type_traits::_IsUnwrappedTaskOrAsync;
         _M_Impl->_M_taskEventLogger._LogScheduleTask(false);
-        _M_Impl->_ScheduleTask(new _InitialTaskHandle<_InternalReturnType, _Function, typename _Async_type_traits::_AsyncKind>(_GetImpl(), _Func), _NoInline);
+        _M_Impl->_ScheduleTask(
+            new _InitialTaskHandle<_InternalReturnType, _Function, typename _Async_type_traits::_AsyncKind>
+                (_GetImpl(), _Func), _NoInline);
     }
 
     void _TaskInitNoFunctor(task_completion_event<_ReturnType>& _Event) {
@@ -528,7 +542,6 @@ public:
         _get_internal_task_options(_TaskOptions)._set_creation_callstack(_CAPTURE_CALLSTACK());
         return _ThenImpl<_ReturnType, _Function>(std::forward<_Function>(_Func), _TaskOptions);
     }
-
 
     template<typename _Function>
     typename _ContinuationTypeTraits<_Function, _ReturnType>::_TaskOfType()
@@ -994,7 +1007,7 @@ _PTaskHandle->invoke()
             else // Async
                 _Init(_TypeSelectorAsyncOperationOrTask)
                     _Task_impl_base::_AsyncInit()
-    else // is continuation handle
+    else if (is_continuation_handle)
         _ContinuationTaskHandle::_Perform()
             if (is_task_based && NoAsync)
                 _ContinuationTaskHandle::_Continue(_IsTaskBased(), _TypeSelectorNoAsync)
@@ -1129,4 +1142,4 @@ task_completion_event::set(_Result)
 ```
 ![CppRest.png](../Image/task.png)
 
-# [BoostAsio](../Boost/README.md)
+# [Boost.Asio](../Boost/README.md)
