@@ -1,4 +1,5 @@
 # Agenda
+* [Official Doc](https://www.boost.org/doc/libs/1_77_0/doc/html/boost_asio.html)
 * [io_context::run](#io_contextrun)
 * [async_accept](#async_accept)
 * [async_connect](#async_connect)
@@ -107,49 +108,57 @@ basic_socket_acceptor::async_accept()
                 reactive_socket_service_base::start_op(reactor::read_op)
                     if (socket_ops::set_internal_non_blocking())
                         epoll_reactor::start_op(op, reactor::read_op)
-                            if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
-                                reactor_op::perform()
+                            if (descriptor_data->op_queue_[op_type].empty())
+                                if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
+                                    reactor_op::perform()
                                     reactive_socket_accept_op_base::do_perform()
                                         socket_ops::non_blocking_accept()
-                                            ::poll() // fd writable means it is connected
-                                schedueler::post_immediate_completion()
-                                    schedule::do_run_one()
-                                        operation::complete()
-                                            reactive_socket_accept_op::do_complete()
-                                                --->
-                            else
-                                descriptor_data->op_queue_[op_type].push(op)
-                                    // when client request connect, listen socket wake up from epoll
-                                    scheduler::do_run_one()
-                                        operation::complete()
-                                            descriptor_state::do_complete()
-                                                descriptor_state::perform_io() // loop op_queue[]
-                                                    perform_io_cleanup_on_block_exit io_cleanup(reactor_)
-                                                    static const int flag[max_ops] = { EPOLLIN, EPOLLOUT, EPOLLPRI };
-                                                    for (int j = max_ops - 1; j >= 0; --j) {
-                                                        if (events & (flag[j] | EPOLLERR | EPOLLHUP)) {
-                                                            while (reactor_op* op = op_queue_[j].front()) {
-                                                                if (reactor_op::status status = op->perform()) {
-                                                                    op_queue_[j].pop();
-                                                                    io_cleanup.ops_.push(op);
-                                                                } else {
-                                                                    break;
-                                                                }
+                                            ::accept()
+                                    schedueler::post_immediate_completion()
+                                        schedule::do_run_one()
+                                            operation::complete()
+                                                reactive_socket_accept_op::do_complete()
+                                                    --->
+                                    return
+                                else if (descriptor_data->registered_events_ == 0)
+                                    op->ec_ = boost::asio::error::operation_not_supported;
+                                    scheduler_.post_immediate_completion(op, is_continuation);
+                                    return
+                                else
+                                    epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev)
+
+                            descriptor_data->op_queue_[op_type].push(op)
+                                // when client request connect, listen socket wake up from epoll
+                                scheduler::do_run_one()
+                                    operation::complete()
+                                        descriptor_state::do_complete()
+                                            descriptor_state::perform_io() // loop op_queue[]
+                                                perform_io_cleanup_on_block_exit io_cleanup(reactor_)
+                                                static const int flag[max_ops] = { EPOLLIN, EPOLLOUT, EPOLLPRI };
+                                                for (int j = max_ops - 1; j >= 0; --j) {
+                                                    if (events & (flag[j] | EPOLLERR | EPOLLHUP)) {
+                                                        while (reactor_op* op = op_queue_[j].front()) {
+                                                            if (reactor_op::status status = op->perform()) {
+                                                                op_queue_[j].pop();
+                                                                io_cleanup.ops_.push(op);
+                                                            } else {
+                                                                break;
                                                             }
                                                         }
                                                     }
+                                                }
 
-                                                    op->perform()
-                                                        reactor_op::perform()
-                                                        reactive_socket_accept_op_base::do_perform()
-                                                            --->
+                                                op->perform()
+                                                    reactor_op::perform()
+                                                    reactive_socket_accept_op_base::do_perform()
+                                                        --->
 
-                                                    ~perform_io_cleanup_on_block_exit()
-                                                        schedueler::post_deferred_completions()
-                                                            schedule::do_run_one()
-                                                                operation::complete()
-                                                                    reactive_socket_accept_op::do_complete()
-                                                                        --->
+                                                ~perform_io_cleanup_on_block_exit()
+                                                    schedueler::post_deferred_completions()
+                                                        schedule::do_run_one()
+                                                            operation::complete()
+                                                                reactive_socket_accept_op::do_complete()
+                                                                    --->
                     else // blocking io
                         epoll_reactor::post_immediate_completion()
             else // peer_is_open
@@ -181,44 +190,53 @@ basic_stream_socket::async_connect()
                 socket_ops::connect()
                     ::connect(s, addr, (SockLenType)addrlen)
                 epoll_reactor::start_op(op, reactor::connect_op)
-                    if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
-                        operation::perform()
-                            reactive_socket_connect_op_base::do_perform()
-                                socket_ops::non_blocking_connect()
-                                    ::poll(&fds, 1, 0); // fd writable means it's connected
-                        schedueler::post_immediate_completion()
-                    else
-                        descriptor_data->op_queue_[op_type].push(op)
-                            schedule::do_run_one()
-                                operation::complete()
-                                    descriptor_state::do_complete()
-                                        descriptor_state::perform_io() // loop op_queue[]
-                                            perform_io_cleanup_on_block_exit io_cleanup(reactor_)
-                                            static const int flag[max_ops] = { EPOLLIN, EPOLLOUT, EPOLLPRI };
-                                            for (int j = max_ops - 1; j >= 0; --j) {
-                                                if (events & (flag[j] | EPOLLERR | EPOLLHUP)) {
-                                                    while (reactor_op* op = op_queue_[j].front()) {
-                                                        if (reactor_op::status status = op->perform()) {
-                                                            op_queue_[j].pop();
-                                                            io_cleanup.ops_.push(op);
-                                                        } else {
-                                                            break;
-                                                        }
+                    if (descriptor_data->op_queue_[op_type].empty())
+                        if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
+                            operation::perform()
+                                reactive_socket_connect_op_base::do_perform()
+                                    socket_ops::non_blocking_connect()
+                                        ::poll(&fds, 1, 0); // fd writable means it's connected
+                            schedueler::post_immediate_completion()
+                                --->
+                            return
+                        else if (descriptor_data->registered_events_ == 0)
+                            op->ec_ = boost::asio::error::operation_not_supported;
+                            scheduler_.post_immediate_completion(op, is_continuation);
+                            return
+                        else
+                            epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev)
+
+                    descriptor_data->op_queue_[op_type].push(op)
+                        schedule::do_run_one()
+                            operation::complete()
+                                descriptor_state::do_complete()
+                                    descriptor_state::perform_io() // loop op_queue[]
+                                        perform_io_cleanup_on_block_exit io_cleanup(reactor_)
+                                        static const int flag[max_ops] = { EPOLLIN, EPOLLOUT, EPOLLPRI };
+                                        for (int j = max_ops - 1; j >= 0; --j) {
+                                            if (events & (flag[j] | EPOLLERR | EPOLLHUP)) {
+                                                while (reactor_op* op = op_queue_[j].front()) {
+                                                    if (reactor_op::status status = op->perform()) {
+                                                        op_queue_[j].pop();
+                                                        io_cleanup.ops_.push(op);
+                                                    } else {
+                                                        break;
                                                     }
                                                 }
                                             }
+                                        }
 
-                                            op->perform()
-                                                reactor_op::perform()
-                                                reactive_socket_connect_op_base::do_perform()
-                                                    --->
+                                        op->perform()
+                                            reactor_op::perform()
+                                            reactive_socket_connect_op_base::do_perform()
+                                                --->
 
-                                            ~perform_io_cleanup_on_block_exit()
-                                                schedule::post_deferred_completions(op)
-                                                    schedule::do_run_one()
-                                                        operation::complete()
-                                                            reactive_socket_connect_op::do_complete()
-                                                                user_callback()
+                                        ~perform_io_cleanup_on_block_exit()
+                                            schedule::post_deferred_completions(op)
+                                                schedule::do_run_one()
+                                                    operation::complete()
+                                                        reactive_socket_connect_op::do_complete()
+                                                            user_callback()
             else
                 schedule::post_immediate_completion(op, is_continuation);
                     schedule::do_run_one()
@@ -248,23 +266,33 @@ template <typename AsyncReadStream, typename MutableBufferSequence,typename Comp
 read.hpp::async_read_until()
     read.hpp::start_read_buffer_sequence_op()
         read.hpp::read_op()
-            basic_stream_socket::async_read_some()
-                this->get_service().async_receive(this->get_implementation(), buffers, 0, init.completion_handler)
-                reactive_socket_service_base::async_receive()
-                    reactive_socket_recv_op op()
-                    reactive_socket_service_base::start_op(op)
-                        epoll_reactor::start_op(op, reactor::read_op)
-                            if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
-                                operation::perform()
-                                    reactive_socket_recv_op_base::do_perform()
-                                        socket_ops::non_blocking_recv()
-                                            socket_ops::recv
-                                scheduler::post_immediate_completion()
-                                    schedule::do_run_one()
-                                        operation::complete()
-                                            reactive_socket_recv_op::do_complete()
-                                                user_callback()
-                            else
+            do {
+                basic_stream_socket::async_read_some(buffer, read.hpp::read_op)
+                    this->get_service().async_receive(this->get_implementation(), buffers, 0, init.completion_handler)
+                    reactive_socket_service_base::async_receive()
+                        reactive_socket_recv_op op()
+                        reactive_socket_service_base::start_op(op)
+                            epoll_reactor::start_op(op, reactor::read_op)
+                                if (descriptor_data->op_queue_[op_type].empty())
+                                    if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
+                                        operation::perform()
+                                            reactive_socket_recv_op_base::do_perform()
+                                                socket_ops::non_blocking_recv()
+                                                    socket_ops::recv
+                                        scheduler::post_immediate_completion()
+                                            schedule::do_run_one()
+                                                operation::complete()
+                                                    reactive_socket_recv_op::do_complete()
+                                                        user_callback()
+                                                            read.hpp::read_op()
+                                        return
+                                    else if (descriptor_data->registered_events_ == 0)
+                                        op->ec_ = boost::asio::error::operation_not_supported;
+                                        scheduler_.post_immediate_completion(op, is_continuation);
+                                        return
+                                    else
+                                        epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev)
+
                                 descriptor_data->op_queue_[op_type].push(op)
                                     // when client request connect, listen socket wake up from epoll
                                     scheduler::do_run_one()
@@ -297,7 +325,9 @@ read.hpp::async_read_until()
                                                                 operation::complete()
                                                                     reactive_socket_recv_op::do_complete()
                                                                         user_callback()
-
+                                                                            read.hpp::read_op()
+            } while (max_size > 0)
+            completion_handler()
 ```
 
 # async_write
@@ -315,38 +345,47 @@ template <typename AsyncWriteStream, typename Allocator, typename WriteHandler>
 template <typename AsyncWriteStream, typename Allocator, typename CompletionCondition, typename WriteHandler>
 
 
-boost::asio::async_write(m_socket, buffer, writeHandler);
-    write.hpp::async_write(stream, buffer, completion, handler)
-        write.hpp::start_write_buffer_sequence_op(stream, buffer, bufferIterator, completion_condition, handler)
+boost::asio::async_write(m_socket, buffer, completion_handler);
+    write.hpp::async_write(stream, buffer, completion, completion_handler)
+        write.hpp::start_write_buffer_sequence_op(stream, buffer, bufferIterator, completion_condition, completion_handler)
             write_op<AsyncWriteStream, ConstBufferSequence, ConstBufferIterator, CompletionCondition, WriteHandler>(
                 stream, buffers, completion_condition, handler
             )(boost::system::error_code(), 0, 1); // (error_code, bytes_transferred, start)
-                write.hpp::write_op::operator()             // while loop until write completed
-                    ssl::stream.hpp::async_write_some       // while loop until write completed
-                        ssl::io.hpp::async_io()
-                            ssl::io.hpp::io_op::operator()  // while loop until write completed
-                                ssl::write_op.hpp::operator()
-                                    ssl::engine::write()
-                                        ssl::engine::perform()
-                                            ssl::engin::write()
-                                                ::SSL_write()
+                do {
+                    write.hpp::write_op::operator()             // while loop until write completed
+                        ssl::stream.hpp::async_write_some       // while loop until write completed
+                            ssl::io.hpp::async_io()
+                                ssl::io.hpp::io_op::operator()  // while loop until write completed
+                                    ssl::write_op.hpp::operator()
+                                        ssl::engine::write()
+                                            ssl::engine::perform()
+                                                ssl::engin::write()
+                                                    ::SSL_write()
 
-                    basic_stream_socket::async_write_some(buffer, handler/*write_op*/)
-                        reactive_socket_service_base::async_send()
-                            reactive_socket_send_op<ConstBufferSequence, Handler> op()
-                            reactive_socket_service_base::start_op(op, reactor::write_o)
-                                epoll_reactor::start_op(op, reactor::write_op)
-                                    if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
-                                        reactor_op::perform()
-                                            reactive_socket_send_op::do_perform()
-                                                    socket_ops::non_blocking_send()
-                                                        socket_ops::sendmsg
-                                        epoll_reactor::post_immediate_completion()
-                                            schedule::do_run_one()
-                                                operation::complete()
-                                                    reactive_socket_send_op::do_complete()
-                                                        user_callback()
-                                    else
+                        basic_stream_socket::async_write_some(buffer, handler/*write_op*/)
+                            reactive_socket_service_base::async_send()
+                                reactive_socket_send_op<ConstBufferSequence, Handler> op()
+                                reactive_socket_service_base::start_op(op, reactor::write_o)
+                                    epoll_reactor::start_op(op, reactor::write_op)
+                                        if (descriptor_data->op_queue_[op_type].empty())
+                                            if (allow_speculative && (op_type != read_op || descriptor_data->op_queue_[except_op].empty()))
+                                                reactor_op::perform()
+                                                    reactive_socket_send_op::do_perform()
+                                                            socket_ops::non_blocking_send()
+                                                                socket_ops::sendmsg
+                                                epoll_reactor::post_immediate_completion()
+                                                    schedule::do_run_one()
+                                                        operation::complete()
+                                                            reactive_socket_send_op::do_complete()
+                                                                write.hpp::write_op()
+                                                return
+                                            else if (descriptor_data->registered_events_ == 0)
+                                                op->ec_ = boost::asio::error::operation_not_supported;
+                                                scheduler_.post_immediate_completion(op, is_continuation);
+                                                return
+                                            else
+                                                epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev)
+
                                         descriptor_data->op_queue_[op_type].push(op)
                                             // when client request connect, listen socket wake up from epoll
                                             scheduler::do_run_one()
@@ -379,6 +418,9 @@ boost::asio::async_write(m_socket, buffer, writeHandler);
                                                                         operation::complete()
                                                                             reactive_socket_send_op::do_complete()
                                                                                 user_callback()
+                                                                                    write.hpp::write_op()
+                } while (max_size > 0)
+                completion_handler()
 ```
 
 tricky switch
@@ -387,17 +429,17 @@ struct write_op {
   void operator()(const boost::system::error_code& ec, std::size_t bytes_transferred, int start = 0) {
     std::size_t max_size;
     switch (start_ = start) {
-    case 1:
-      max_size = this->check_for_completion(ec, buffers_.total_consumed());
-      do {
-        stream_.async_write_some(buffers_.prepare(max_size), BOOST_ASIO_MOVE_CAST(write_op)(*this));
-        return;
+        case 1:
+        max_size = this->check_for_completion(ec, buffers_.total_consumed());
+        do {
+            stream_.async_write_some(buffers_.prepare(max_size), BOOST_ASIO_MOVE_CAST(write_op)(*this));
+            return;
 
-    default:
-          buffers_.consume(bytes_transferred);
-          if ((!ec && bytes_transferred == 0) || buffers_.empty())
-            break;
-          max_size = this->check_for_completion(ec, buffers_.total_consumed());
+        default:
+            buffers_.consume(bytes_transferred);
+            if ((!ec && bytes_transferred == 0) || buffers_.empty())
+                break;
+            max_size = this->check_for_completion(ec, buffers_.total_consumed());
       } while (max_size > 0);
 
       handler_(ec, buffers_.total_consumed());
