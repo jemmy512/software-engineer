@@ -196,6 +196,7 @@
 - [x] [Paramter Passing in C and C++](https://wolchok.org/posts/parameter-passing/)
 - [x] [Type Erasure](http://davekilian.com/cpp-type-erasure.html)
 - [x] [Lambdas: From C++11 to C++20]() [:link: Part 1](https://www.cppstories.com/2019/02/lambdas-story-part1/) [:link: Part 2](https://www.cppstories.com/2019/03/lambdas-story-part2/)
+- [ ] [Eli Bendersky: How debuggers work]() [:link: Part 1](https://eli.thegreenplace.net/2011/01/23/how-debuggers-work-part-1/) [:link: Part 2](https://eli.thegreenplace.net/2011/01/27/how-debuggers-work-part-2-breakpoints) [:link: Part 3](https://eli.thegreenplace.net/2011/02/07/how-debuggers-work-part-3-debugging-information)
 
 * OOP
     - [x] [Inheritance Without Pointers](https://www.fluentcpp.com/2021/01/29/inheritance-without-pointers/)
