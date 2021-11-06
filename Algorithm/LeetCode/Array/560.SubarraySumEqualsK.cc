@@ -21,6 +21,9 @@ Relative:
 437. PathSum_III
 053. Maximum Subarray
 209. Minimum Size Subarray Sum
+303. Range Sum Query Immutable
+307. Range Sum Query Mutable
+304. Range Sum Query 2D Immutable
 325. Maximum Size Subarray Sum Equals k
 523. Continuous Subarray Sum
 560. Subarray Sum Equals K */
