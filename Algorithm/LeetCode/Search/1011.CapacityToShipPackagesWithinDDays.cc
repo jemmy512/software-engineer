@@ -41,7 +41,13 @@ Explanation:
 
 Constraints:
 1 <= days <= weights.length <= 5 * 10^4
-1 <= weights[i] <= 500 */
+1 <= weights[i] <= 500
+
+Relatives:
+410. Split Array Largest Sum
+1011. Capacity To Ship Packages Within D Days
+1231. Divide Chocolate
+1891. Cutting Ribbons */
 
 #include <vector>
 #include <algorithm>
