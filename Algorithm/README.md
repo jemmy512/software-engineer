@@ -39,32 +39,43 @@ No | Title | Difficulty | Notes
 ## Array
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-011 | Container With Most Water| :star: :star: :star: | `Two Pointers`
+011 | Container With Most Water | :star: :star: :star: | `Two Pointers`
 041 | First Missing Positive | :star: :star: :star: |
 054 | Spiral Matrix | :star: :star: | `Matrix`
 056 | Merge Intervals | :star: :star: | `Interval`
 057 | Insert Intervals | :star: :star: | `Interval`
 252 | Meeting Rooms | :star: | `Interval`
 253 | Meeting Rooms II | :star: :star: | `Interval`
-027 | Remove Element | :star: |
-026 | Remove Duplicates from Sorted Array | :star: |
+986 | Interval List Intersections | :star: :star: | `Interval`
+1288 | Remove Covered Intervals | :star: :star: | `Interval`
+027 | Remove Element | :star: | `Two Pointers`
+026 | Remove Duplicates from Sorted Array | :star: | `Two Pointers`
 080 | Remove Duplicates from Sorted Array II | :star: :star: | `Can dup N`
-083 | Remove Duplicates from Sorted List | :star: |
+083 | Remove Duplicates from Sorted List | :star: | `Two Pointers`
 082 | Remove Duplicates from Sorted List II | :star: :star: |
+316 | Remove Duplicate Letters | :star: :star: :star: |
 048 | Rotate Image | :star: :star: |
 088 | Merge Sorted Array | :star: |
 169 | Majority Element | :star: | [:link: Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html)
 189 | Rotate Array | :star: :star: |
 209 | Minimum Size Subarray Sum | :star: :star: | `Prefix Sum` `BS`
+303 | Range Sum Query Immutable | :star: | `Prefix Sum`
+307 | Range Sum Query Mutable | :star: :star: | `Segment Tree`
+304 | Range Sum Query 2D Immutable | :star: :star: | `Prefix Sum`
 325 | Maximum Size Subarray Sum Equals k | :star: :star: | `Prefix Sum` `Map`
+370 | Range Addition | :start: :start: | `Diff Array` `Prefix Sum`
+598 | Range Addition II | :start: | `Diff Array`
+1094 | Car Pooling | :star: :star: | `Diff Array`
+1109 | Corporate Flight Bookings | :start: :start: | `Diff Array` `Prefix Sum`
 560 | Subarray Sum Equals K | :star: :star: | `Prefix Sum` `Map`
 217 | Contains Duplicate I | :star: |
 219 | Contains Duplicate II | :star: |
 220 | Contains Duplicate III | :star: :star: | `bucket sort`
 238 | Product of Array Except Self  | :star: :star: | `L-R vec`
 239 | Sliding Window Maximum | :star: :star: :star: | :thinking: `DP` `L-R vec`
-283 | Move Zeroes | :star: :star: |
+283 | Move Zeroes | :star: :star: | `Two Pointers`
 448 | Find All Numbers Disappeared in An Array | :star: |
+870 | Advantage Shuffle | :star: :star: |
 
 ## List
 No | Title | Difficulty | Notes
@@ -139,6 +150,8 @@ No | Title | Difficulty | Notes
 1123 | Lowest Common Ancestor of Deepest Leaves | :star: :star: | `TODO`
 1214 | Two Sum BSTs | :star: :star: | `Inorder` `Complement Map`
 1257 | Smallest Common Region | :star: :star: | `TODO`
+297 | Serialize and Deserialize Binary Tree | :star: :star: :star: | `preorder` `postorder` `level`
+341 | Flatten Nested List Iterator | `Lazy Evaluation` `Iterator`
 501 | Find Mode in Binary Search Tree | :star:
 513 | Find Bottom Left Tree Value | :star: | `BFS-Queue`
 652 | Find Duplicate Subtrees | :star: :star: |
@@ -196,7 +209,13 @@ No | Title | Difficulty | Notes
 020 | valid Parentheses | :star: |
 032 | Longet Valid Paretheses | :star: :star: :star: | `DP`
 155 | MinStack | :star: |
+316 | Remove Duplicate Letters | :star: :star: :star: | `Monotonic Stack`
 394 | DecodeString | :star: :star: |
+496 | Next Greater Element I | :star: | `Monotonic Stack`
+503 | Next Greater Element II | :star: :star: | `Monotonic Stack`
+556 | Next Greater Element III | :star: :star: | `Monotonic Stack`
+739 | Daily Temperatures | :star: :star: | `Monotonic Stack`
+921 | Minimum Add to Make Parentheses Valid | :star: :star: |
 1249 | Minimum Remove to Make Valid Parentheses| :star: :star: | `Bit Set`
 
 ## Queue
@@ -233,9 +252,6 @@ No | Title | Difficulty | Notes
 337 | House Robber III | :star: :star: |
 221 | Maximal Square | :star: :star: | :thinking:
 264 | Ugly Number II | :star: :star: |
-303 | Range Sum Query Immutable | :star: |
-307 | Range Sum Query Mutable | :star: :star: | `Segment Tree`
-304 | Range Sum Query 2D Immutable | :star: :star: |
 322 | Coin Change | :star: :star: | `Bottom Up` `Top Down`
 518 | Coin Change 2 | :star: :star: | :thinking: `Bottom Up` `Top Down`
 338 | Counting Bits | :star: :star: | :thinking: `Bit`
@@ -299,6 +315,14 @@ No | Title | Difficulty | Notes
 **Fast Slow Pointers**
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
+011 | Container With Most Water | :star: :star: :star: |
+027 | Remove Element | :star: |
+026 | Remove Duplicates from Sorted Array | :star: |
+083 | Remove Duplicates from Sorted List | :star: |
+141 | linked List Cycle | :star: |  `Cycle`
+142 | Linked List Cycle II | :star: :star: |  `Cycle`
+283 | Move Zeroes | :star: :star: |
+287 | Find the Duplicate Number | :star: :star: | `Cycle`
 992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
 
 **Sliding Window**
@@ -354,6 +378,7 @@ No | Title | Difficulty | Notes
 323 | Number of Connected Components in an Undirected Graph | :star: :star: | :thinking: `Union Find` `DFS` `Matrix`
 547 | Number of Provinces | :star: :star: | `DFS` `Matrix`
 694 | Number of Distinct Islands | :star: :star: | `DFS` `Matrix` `Serialization`
+410 | Split Array Largest Sum | :star: :star: :star: | `BS`
 695 | Max Area of Island | :star: :star: | `DFS` `Matrix`
 1020 | Number of Enclaves | :star: :star: | `DFS` `Matrix`
 1254 | Number of Closed Islands | :star: :star: | `DFS` `Matrix`
@@ -366,7 +391,7 @@ No | Title | Difficulty | Notes
 1011 |  Capacity To Ship Packages Within D Days | :star: :star:| :thinking: `BS`
 
 ```c++
-int f(int x, int[] nums) {
+int fn(int x, int[] nums) {
     return nums[x];
 }
 
@@ -378,11 +403,11 @@ int beg_bound(int[] nums, int target) {
 
     while (beg < end) {
         int mid = beg + (end - beg) / 2;
-        if (f(mid, nums) == target) {
+        if (fn(mid, nums) == target) {
             end = mid;
-        } else if (f(mid, nums) < target) {
+        } else if (fn(mid, nums) < target) {
             beg = mid + 1;
-        } else if (f(mid, nums) > target) {
+        } else if (fn(mid, nums) > target) {
             end = mid;
         }
     }
@@ -400,11 +425,11 @@ int end_bound(int[] nums, int target) {
 
     while (beg < end) {
         int mid = (beg + end) / 2;
-        if (f(mid, nums) == target) {
+        if (fn(mid, nums) == target) {
             beg = mid + 1;
-        } else if (f(mid, nums) < target) {
+        } else if (fn(mid, nums) < target) {
             beg = mid + 1;
-        } else if (f(mid, nums) > target) {
+        } else if (fn(mid, nums) > target) {
             end = mid;
         }
     }
