@@ -10,7 +10,7 @@ You can assume that you can always reach the last index.
 Example 1:
 Input: nums = [2,3,1,1,4]
 Output: 2
-Explanation: The minimum number of jumps to reach the last index is 2. 
+Explanation: The minimum number of jumps to reach the last index is 2.
 Jump 1 step from index 0 to 1, then 3 steps to the last index.
 
 Example 2:
@@ -29,18 +29,18 @@ class Solution {
 public:
     int jump(vector<int>& nums) {
         int jumps = 0;
-        int jumpEnd = 0;
+        int sentinel = 0;
         int farthest = 0;
-        
+
         for (auto i = 0; i < nums.size()-1; ++i) {
             farthest = max(farthest, i + nums[i]);
-            
-            if (i == jumpEnd) {
+
+            if (i == sentinel) {
                 ++jumps;
-                jumpEnd = farthest;
+                sentinel = farthest;
             }
         }
-        
+
         return jumps;
     }
 };
