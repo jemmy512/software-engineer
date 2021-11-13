@@ -45,17 +45,17 @@ sum(A) - sum(B) = target
 sum(A) = target + sum(B)
 sum(A) + sum(A) = target + sum(B) + sum(A)
 2 * sum(A) = target + sum(nums) */
+
 class Solution {
 public:
     int findTargetSumWays(vector<int>& nums, int target) {
         int sum = std::accumulate(nums.cbegin(), nums.cend(), 0);
 
-        if (sum < target || target < 0 || (sum + target) % 2 == 1) {
+        if (sum < target || (sum + target) % 2 == 1) {
             return 0;
         }
 
-        sum  = (sum + target) / 2;
-        return subsets(nums, sum > 0 ? sum : 0);
+        return subsets(nums, (sum + target) / 2);
     }
 
 private:
