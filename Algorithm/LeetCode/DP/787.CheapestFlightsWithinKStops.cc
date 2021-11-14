@@ -30,5 +30,102 @@ There will not be any multiple flights between two cities.
 src != dst */
 
 #include <vector>
+#include <map>
+#include <utility>
 
 using namespace std;
+
+// top down
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        ++k;
+        Src = src;
+        Memo.resize(n, vector(k+1, -1));
+
+        for (const auto& f : flights) {
+            Indegree[f[1]].emplace_back(f[0], f[2]);
+        }
+
+        return dp(dst, k);
+   }
+
+private:
+    int dp(int pos, int k) {
+        if (pos == Src)
+            return 0;
+        if (k == 0)
+            return -1;
+        if (Memo[pos][k] != -1)
+            return Memo[pos][k];
+
+        auto ret = INT_MAX;
+
+        if (Indegree.find(pos) != Indegree.end()) {
+            for (const auto& [from, price] : Indegree[pos]) {
+                auto subproblem = dp(from, k - 1);
+                if (subproblem != -1) {
+                    ret = min(ret, subproblem + price);
+                }
+            }
+        }
+
+        Memo[pos][k] = ret == INT_MAX ? -1 : ret;
+
+        return Memo[pos][k];
+    }
+
+private:
+    int Src{0};
+    vector<vector<int>> Memo; //the price from src to pos
+    map<int, vector<pair<int, int>>> Indegree;
+};
+
+// bottom up
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        Dst = dst;
+        Memo.resize(n, vector(k+1, -1));
+
+        for (const auto& f : flights) {
+            Outdegree[f[0]].emplace_back(f[1], f[2]);
+        }
+
+        auto ret = dp(src, k);
+
+        return ret == INT_MAX ? -1 : ret;
+    }
+
+private:
+    int dp(int from, int to, int k) {
+        if (to == Dst)
+            return 0;
+
+        if (k < 0)
+            return -1;
+
+        if (Memo[from][to] != -1)
+            return Memo[from][to];
+
+        auto ret = INT_MAX;
+
+        if (Outdegree.find(to) != Outdegree.end()) {
+            for (const auto& [next, price] : Outdegree[to]) {
+                auto subproblem = dp(to, next, k - 1);
+                if (subproblem != -1) {
+                    ret = min(ret, subproblem + price);
+                }
+            }
+        }
+
+        Memo[from][to] = ret == INT_MAX ? -1 : ret;
+
+        return Memo[from][to];
+    }
+
+private:
+    int Dst{0};
+    vector<vector<int>> Memo;
+    map<int, vector<pair<int, int>>> Outdegree;
+};
