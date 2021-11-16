@@ -111,6 +111,7 @@ For deletion, we are actually converting word1[0..i - 2] to word2[0..j - 1],
 which costs dp[i - 1][j], and then deleting the word1[i - 1],
 which costs 1. The case is similar for insertion. */
 
+// bottom up
 class Solution {
 public:
     int minDistance(string src, string dst) {
@@ -132,4 +133,42 @@ public:
 
         return dp[lenSrc][lenDst];
     }
+};
+
+// top down
+class Solution {
+public:
+    int minDistance(string src, string dst) {
+        Memo.resize(src.size()+1, vector(dst.size()+1, -1));
+
+        return dp(src, src.size()-1, dst, dst.size()-1);
+    }
+
+private:
+    int dp(const string& src, int i, const string& dst, int j) {
+        if (i == -1)
+            return j + 1;
+        if (j == -1)
+            return i + 1;
+
+        if (Memo[i][j] != -1)
+            return Memo[i][j];
+
+        if (src[i] == dst[j]) {
+            Memo[i][j] = dp(src, i - 1, dst, j - 1);
+        } else {
+            Memo[i][j] =  1 + min(
+                dp(src, i, dst, j - 1),         // insert
+                min(
+                    dp(src, i - 1, dst, j),     // delete
+                    dp(src, i - 1, dst, j - 1)  // replace
+                )
+            );
+        }
+
+        return Memo[i][j];
+    }
+
+private:
+    vector<vector<int>> Memo;
 };
