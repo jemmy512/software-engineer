@@ -53,6 +53,25 @@ public:
     }
 };
 
+// dp
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int maxSum = nums[0];
+
+        // dp[i]: maximum subarray which ends with ith elem of nums
+        vector<int> dp(nums.size(), 0);
+        dp[0] = nums[0];
+
+        for (auto i = 1; i < nums.size(); ++i) {
+            dp[i] = max(nums[i], nums[i] + dp[i-1]);
+            maxSum = max(maxSum, dp[i]);
+        }
+
+        return maxSum;
+    }
+};
+
 // Kadane's_algorithm
 class Solution {
 public:
