@@ -28,7 +28,12 @@ Could you improve it to O(n log(n)) time complexity?
 
 Relatives:
 300. Longest Increasing Subsequence
-1048. Longest String Chain */
+354. Russian Doll Envelopes
+583. Delete Operation for Two Strings
+712. Minimum ASCII Delete Sum for Two Strings
+1035. Uncrossed Lines
+1048. Longest String Chain
+1996. The Number of Weak Characters in the Game */
 
 #include <algorithm>
 #include <climits>
@@ -69,6 +74,7 @@ class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
         int maxLen = 1;
+        // dp[i] LIS which ends at ith elem of nums
         vector dp(nums.size(), 1);
 
         for (int i = 1; i < dp.size(); ++i) {
