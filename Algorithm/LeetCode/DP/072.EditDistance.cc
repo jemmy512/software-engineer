@@ -139,12 +139,13 @@ public:
 class Solution {
 public:
     int minDistance(string src, string dst) {
-        Memo.resize(src.size()+1, vector(dst.size()+1, -1));
+        Memo.resize(src.size(), vector(dst.size(), -1));
 
         return dp(src, src.size()-1, dst, dst.size()-1);
     }
 
 private:
+    // return min edit distance between src[0..i] and dst[0..j]
     int dp(const string& src, int i, const string& dst, int j) {
         if (i == -1)
             return j + 1;
@@ -170,5 +171,6 @@ private:
     }
 
 private:
+    // min edit distance between src[0..i] and dst[0..j]
     vector<vector<int>> Memo;
 };
