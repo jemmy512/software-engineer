@@ -133,6 +133,10 @@
     - [ ] RFC 2988 - Computing TCP’s Retransmission Timer
     - [ ] RFC 6298 - Computing TCP’s Retransmission Timer
 
+* TLS
+    - [ ] [RFC 8446 - The Transport Layer Security (TLS) Protocol Version 1.3](https://www.rfc-editor.org/rfc/rfc8446)
+    - [ ] [RFC 8449 - Record Size Limit Extension for TLS](https://www.rfc-editor.org/rfc/rfc8449)
+
 * HTTP
     - [ ] RFC 7230 - Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing
     - [ ] RFC 7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
@@ -142,6 +146,9 @@
     - [ ] RFC 7235 - Hypertext Transfer Protocol (HTTP/1.1): Authentication
     - [ ] RFC 7540 - Hypertext Transfer Protocol Version 2 (HTTP/2)
     - [ ] RFC 7541 - HPACK: Header Compression for HTTP/2
+
+* QUIC
+    - [ ] [RFC 9000 - QUIC: A UDP-Based Multiplexed and Secure Transport](https://www.rfc-editor.org/rfc/rfc9000)
 
 * Other
     - [ ] [STUN Traceroute](https://datatracker.ietf.org/doc/html/draft-martinsen-tram-stuntrace-01)
@@ -470,9 +477,16 @@
 - [x] [Gallery of Processor Cache Effects](http://igoro.com/archive/gallery-of-processor-cache-effects/) [TODO:?]()
 - [x] [coolshell: CPU Cache](https://coolshell.cn/articles/20793.html)
 - [x] [L1 cache lines](https://vorbrodt.blog/2019/02/02/cache-lines/)
+- [ ] [Scott Meyers: CPU Caches and Why You Care ](https://www.youtube.com/watch?v=WDIkqP4JbkE) [PPT](https://www.youtube.com/watch?v=WDIkqP4JbkE)
+- [ ] [Cache Architecture and Design](https://www.cs.swarthmore.edu/~kwebb/cs31/f18/memhierarchy/caching.html)
+- [ ] [Nonblocking Algorithms and Scalable Multicore Programming ](https://queue.acm.org/detail.cfm?id=2492433)
+- [ ] [Optimizing for instruction caches Part 1](https://www.eetimes.com/optimizing-for-instruction-caches-part-1/) [Part 2](https://www.eetimes.com/optimizing-for-instruction-caches-part-2/) [Part 3](https://www.eetimes.com/optimizing-for-instruction-caches-part-3/)
+- [ ] [Latency Numbers Every Programmer Should Know](https://gist.github.com/jboner/2841832)
 
 
 # Distributed Architecture
+- [ ] [Distributed Systems Reading Group](http://dsrg.pdos.csail.mit.edu/papers/)
+- [ ] :orange_book: [Distributed Systems, 3rd Edition](https://www.distributed-systems.net/index.php/books/ds3/)
 - [ ] :orange_book: [Distributed Systems for fun and profit](http://book.mixu.net/distsys/single-page.html)
 - [ ] :orange_book: Designing Data Intensive Applications
 - [ ] :orange_book: [Distributed Systems: Principles and Paradigms.pdf](http://barbie.uta.edu/~jli/Resources/MapReduce&Hadoop/Distributed%20Systems%20Principles%20and%20Paradigms.pdf)
