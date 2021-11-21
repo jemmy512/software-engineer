@@ -77,3 +77,27 @@ public:
         return dp[len][amount];
     }
 };
+
+class Solution {
+public:
+    int change(int amount, vector<int>& coins) {
+        const auto len = coins.size();
+        vector<vector<int>> dp(amount + 1, vector(len + 1, 0));
+
+        for (auto i = 0; i <= len; ++i) {
+            dp[0][i] = 1;
+        }
+
+        for (auto i = 1; i <= amount; ++i) {
+            for (auto j = 1; j <= len; ++j) {
+                if (i >= coins[j-1]) {
+                    dp[i][j] = dp[i][j-1] + dp[i-coins[j-1]][j];
+                } else {
+                    dp[i][j] = dp[i][j-1];
+                }
+            }
+        }
+
+        return dp[amount][len];
+    }
+};
