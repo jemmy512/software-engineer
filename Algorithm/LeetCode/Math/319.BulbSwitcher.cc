@@ -25,13 +25,24 @@ Input: n = 1
 Output: 1
 
 Constraints:
-0 <= n <= 10^9
-
-IF a bulb is on that means it is switched odd times:
-6 = 1 * 6 = 2 * 3 // 4 times, on
-16 = 1 * 16  = 2 * 8 = 4 * 4 // 5 times, off */
+0 <= n <= 10^9 */
 
 #include <cmath>
+
+/* A bulb ends up on if it is switched an odd number of times.
+
+Call them bulb 1 to bulb n. Bulb i is switched in round d if and only if d divides i.
+So bulb i ends up on if and only if it has an odd number of divisors.
+
+Divisors come in pairs, like i = 6 = 1 * 6 = 2 * 3.
+Except when i is a square, like 16 = 1 * 16  = 2 * 8 = 4 * 4, and double divisor 4.
+So bulb i ends up on if and only if i is a square.
+
+So just count the square numbers.
+
+Let R = int(sqrt(n)). That's the root of the largest square in the range [1,n].
+And 1 is the smallest root. So you have the roots from 1 to R, that's R roots.
+Which correspond to the R squares. So int(sqrt(n)) is the answer. */
 
 class Solution {
 public:
