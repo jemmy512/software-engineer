@@ -28,7 +28,11 @@ A, A, A, Ctrl A, Ctrl C, Ctrl V, Ctrl V
 
 Note:
 1 <= N <= 50
-Answers will be in the range of 32-bit signed integer. */
+Answers will be in the range of 32-bit signed integer.
+
+Relatives:
+650. 2 Keys Keyboard
+651. 4 Keys Keyboard */
 
 #include <vector>
 
@@ -46,7 +50,7 @@ public:
 
         for (auto i = 1; i <= N; ++i) {
             dp[i] = dp[i-1] + 1;
-            for (auto j = 2; j <= i; ++j) {
+            for (auto j = 2; j < i; ++j) {
                 // Ctrl-A & Ctrl-C dp[j-2] (i-j) times + dp[j-2] itself
                 dp[i] = max(dp[i], dp[j-2] * (i-j+1));
             }
