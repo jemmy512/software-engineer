@@ -63,10 +63,10 @@ No | Title | Difficulty | Notes
 307 | Range Sum Query Mutable | :star: :star: | `Segment Tree`
 304 | Range Sum Query 2D Immutable | :star: :star: | `Prefix Sum`
 325 | Maximum Size Subarray Sum Equals k | :star: :star: | `Prefix Sum` `Map`
-370 | Range Addition | :start: :start: | `Diff Array` `Prefix Sum`
-598 | Range Addition II | :start: | `Diff Array`
+370 | Range Addition | :star: :star: | `Diff Array` `Prefix Sum`
+598 | Range Addition II | :star: | `Diff Array`
 1094 | Car Pooling | :star: :star: | `Diff Array`
-1109 | Corporate Flight Bookings | :start: :start: | `Diff Array` `Prefix Sum`
+1109 | Corporate Flight Bookings | :star: :star: | `Diff Array` `Prefix Sum`
 560 | Subarray Sum Equals K | :star: :star: | `Prefix Sum` `Map`
 217 | Contains Duplicate I | :star: |
 219 | Contains Duplicate II | :star: |
@@ -151,7 +151,7 @@ No | Title | Difficulty | Notes
 1214 | Two Sum BSTs | :star: :star: | `Inorder` `Complement Map`
 1257 | Smallest Common Region | :star: :star: | `TODO`
 297 | Serialize and Deserialize Binary Tree | :star: :star: :star: | `preorder` `postorder` `level`
-341 | Flatten Nested List Iterator | `Lazy Evaluation` `Iterator`
+341 | Flatten Nested List Iterator | :star: :star: | `Lazy Evaluation` `Iterator`
 501 | Find Mode in Binary Search Tree | :star:
 513 | Find Bottom Left Tree Value | :star: | `BFS-Queue`
 652 | Find Duplicate Subtrees | :star: :star: |
@@ -226,18 +226,14 @@ No | Title | Difficulty | Notes
 ## DP
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-005 | Longest Palindromic Substring | :star: :star: |
 032 | Longet Valid Paretheses | :star: :star: :star: | `stack`
-053 | Maximum Subarray | :star: | `Prefix Sum` `kadane` `Divide Conquer`
+010 | Regular Expression Matching | :star: :star: :star: |
 062 | Unique Paths | :star: :star: |
 063 | Unique Paths II | :star: :star: |
 980 | Unique Paths III | :star: :star: :star: | `TODO`
 064 | Minimum Path Sum | :star: :star: |
 070 | Climbing Stairs | :star: |
 746 | MinCost Climb Stair | :star: |
-072 | Edit Distance | :star: :star: :star: |
-583 | Delete Operation for Two Strings | :star: :star: |
-712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: |
 091 | Decode Ways | :star: :star: |
 121 | Best Time to Buy and Sell Stock | :star: | `Prefix Sum`
 122 | Best Time to Buy and Sell Stock II | :star: | `Greedy`
@@ -247,26 +243,61 @@ No | Title | Difficulty | Notes
 714 | Best Time to Buy and Sell Stock with Transaction Fee | :star: :star: |
 139 | Word Break | :star: :star: | :thinking: `Bottom Up`
 152 | Maximum Product Subarry | :star: :star: | `Prefix Sum`
+174 | Dungeon Game | :star: :star: |
 198 | House Robber | :star: |
 213 | House Robber II | :star: :star: |
 337 | House Robber III | :star: :star: |
 221 | Maximal Square | :star: :star: | :thinking:
 264 | Ugly Number II | :star: :star: |
-322 | Coin Change | :star: :star: | `Bottom Up` `Top Down`
-518 | Coin Change 2 | :star: :star: | :thinking: `Bottom Up` `Top Down`
+292 | Nim Gaem | :star: |
 338 | Counting Bits | :star: :star: | :thinking: `Bit`
 392 | Is Subsequence | :star: :star: |
 509 | Fibonacci Number| :star: |
+514 | Freedom Trail  | :star: :star: :star: |
 523 | Continuous Subarray Sum  | :star: :star: | :thinking: `Prefix Sum` `Map`
 546 | Remove Boxes | :star: :star: :star: | `TODO`
+650 | 2 Keys Keyboard | :star: :star: |
+651 | 4 Keys Keyboard | :star: :star: |
 718 | Maximum Length of Repeated Subarray | :star: :star: |
+787 | Cheapest Flights Within K Stops | :star: :star: | ??
 1137 | N-th Tribonacci Number | :star: |
+005 | Longest Palindromic Substring | :star: :star: |
 647 | Palindromic Substrings | :star: :star: | `TODO`
-300  | Longest Increasing Subsequence | :star: :star: |
-1048 | Longest String Chain | :star: :star: |
-516 | Longest Palindromic Subsequence | :star: :star: |
+1312 | Minimum Insertion Steps to Make a String Palindrome
 1025 | Divisor Game | :star: |
-1143 | Longest Common Subsequence | :star: :star: | `Matrix`
+887 | Super Egg Drop | :star: :star: :star: |
+931 | Minimum Falling Path Sum | :star: :star: |
+1289 | Minimum Falling Path Sum II | :star: :star: :star: |
+877 | Stone Game | :star: :star: |
+
+### knapsack
+No | Title | Difficulty | Notes
+-- | -- | ---  | ---
+knapsack | :star: :star: |
+322 | Coin Change | :star: :star: |
+518 | Coin Change 2 | :star: :star: | :thinking:
+416 | Partition Equal Subset Sum | :star: :star: |
+494 | Target Sum  | :star: :star: |
+
+### substring
+No | Title | Difficulty | Notes
+-- | -- | ---  | ---
+053 | Maximum Subarray | :star: | `Prefix Sum` `kadane` `Divide Conquer`
+072 | Edit Distance | :star: :star: :star: |
+300 | Longest Increasing Subsequence | :star: :star: |
+354 | Russian Doll Envelopes | :star: :star: :star: |
+516 | Longest Palindromic Subsequence | :star: :star: |
+1143 | Longest Common Subsequence | :star: :star: |
+1048 | Longest String Chain | :star: :star: |
+583 | Delete Operation for Two Strings | :star: :star: |
+712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: |
+
+```c++
+for (state1 : state1_options)
+    for (state2 : state2_options)
+        for (... : ...)
+            dp[state1][state2][...] = max(state1, state2, ...)
+```
 
 ## BackTrack
 No | Title | Difficulty | Notes
@@ -301,8 +332,10 @@ No | Title | Difficulty | Notes
 045 | Jump Game II | :star: :star: |
 122 | Best Time to Buy and Sell Stock II | :star: |
 134 | Gas Station | :star: :star: |
+435 | Non-overlapping Intervals | :star: :star: | `Interval`
 452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | `Interval`
 763 | Partition Labels | :star: :star: | `Interval`
+1024 | Video Stitching | :star: :star: | `Interval`
 
 ## Divide Conquer
 No | Title | Difficulty | Notes
@@ -500,10 +533,16 @@ No | Title | Difficulty | Notes
 3. Existing Problem
 
 ## Steps:
-1. Defining last step status and subproblems
-2. Defining the state transition equation
-3. Defining initializers and boundary check
-4. Defining calculating order
+1. Define last step status and subproblems
+2. Define the state transition equation
+3. Define initializers and boundary check
+4. Define calculating order
+
+## Solution
+1. Define state and selection
+2. Define the meaning of dp array
+3. Define transition equation from selection
+4. Define initializers and boundary check
 
 ## Catogories
 1. Coordinate
@@ -671,3 +710,21 @@ get all | 1-bits ~0
     * Tasks Scheduling Order (medium)
     * All Tasks Scheduling Orders (hard)
     * Alien Dictionary (hard)
+
+* Palindrome
+    * 005\. Longest Palindromic Substring
+    * 009\. Palindrom Number
+    * 125\. Valid Palindrome
+    * 680\. Valid Palindrome II
+    * 409\. Longest Palindrome
+    * 234\. Palindrome Linked List
+    * 266\. Palindrome Permutation
+    * 267\. Palindrome Permutation II
+    * 516\. Longest Palindromic Subsequence
+    * 647\. Palindromic Substrings
+    * 214\. Shortest Palindrome
+    * 336\. Palindrome Pairs
+    * 1312\. Minimum Insertion Steps to Make a String Palindrome
+
+# Reference
+* [labuladong (CN)](https://mp.weixin.qq.com/s/AWsL7G89RtaHyHjRPNJENA)
