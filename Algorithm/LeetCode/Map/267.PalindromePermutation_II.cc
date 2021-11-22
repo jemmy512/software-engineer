@@ -12,14 +12,20 @@ Input: "abc"
 Output: []
 
 Relatives:
-5. Longest Palindromic Substring
+005. Longest Palindromic Substring
+009. Palindrom Number
+125. Valid Palindrome
+680. Valid Palindrome II
+409. Longest Palindrome
+234. Palindrome Linked List
 266. Palindrome Permutation
 267. Palindrome Permutation II
 516. Longest Palindromic Subsequence
 647. Palindromic Substrings
 
 214. Shortest Palindrome
-336. Palindrome Pairs */
+336. Palindrome Pairs
+1312. Minimum Insertion Steps to Make a String Palindrome */
 
 #include <vector>
 #include <string>
@@ -38,31 +44,29 @@ public:
         if (!canPermutePalindrome(s, hashMap))
             return {};
 
-        char ch = 0;
-        int k = 0;
+        char chr = 0;
         for (const auto& [key, cnt] : hashMap) {
-            if (cnt % 2 == 1) {
-                ch = (char)key;
-            }
+            chr = (cnt % 2 == 1) ? key : chr;
             chars.insert(chars.end(), cnt/2, key);
         }
-        permute(chars, 0, ch);
+        permute(chars, 0, chr);
+
         return vector<string>(hashSet.begin(), hashSet.end());
     }
 
 private:
-    void permute(vector<char>& s, int l, char ch) {
-        if (l == s.size()) {
+    void permute(vector<char>& s, int pos, char chr) {
+        if (pos == s.size()) {
             hashSet.insert(
                 string(s.begin(), s.end())
-                .append(ch == 0 ? string() : string(1, ch))
-                .append(string(s.rbegin(), s.rend())));
+                .append(chr == 0 ? string() : string(1, chr))
+                .append(s.rbegin(), s.rend()));
         } else {
-            for (int i = l; i < s.size(); i++) {
-                if (s[l] != s[i] || l == i) {
-                    swap(s[l], s[i]);
-                    permute(s, l + 1, ch);
-                    swap(s[l], s[i]);
+            for (int i = pos; i < s.size(); i++) {
+                if (s[pos] != s[i] || pos == i) {
+                    swap(s[pos], s[i]);
+                    permute(s, pos + 1, chr);
+                    swap(s[pos], s[i]);
                 }
             }
         }
