@@ -274,6 +274,7 @@
     - [x] [Runtime Polymorphism with std::variant and std::visit](https://www.bfilipek.com/2020/04/variant-virtual-polymorphism.html)
     - [x] [Visiting a std::variant with the Overload Pattern](https://www.modernescpp.com/index.php/visiting-a-std-variant-with-the-overload-pattern)
     - [x] [Simplify code with ‘if constexpr’ in C++17](https://www.bfilipek.com/2018/03/ifconstexpr.html)
+    - [x] [Pass string_view by value](https://quuxplusone.github.io/blog/2021/11/09/pass-string-view-by-value/)
 
 * C++ 20
     - [x] [Table: C++20 Features.pdf](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp20-features.pdf)
@@ -414,6 +415,7 @@
 - [ ] [What Every Programmer Should Know About Memory.pdf](https://people.freebsd.org/~lstewart/articles/cpumemory.pdf)
 - [ ] [Memory Barriers: a Hardware View for Software Hackers.pdf](https://irl.cs.ucla.edu/~yingdi/web/paperreadingwhymb.2010.06.07c.pdf)
 - [ ] [A Tutorial Introduction to the ARM and POWER Relaxed Memory Models.pdf](https://www.cl.cam.ac.uk/~pes20/ppc-supplemental/test7.pdf)
+- [ ] [Understanding glibc malloc](https://sploitfun.wordpress.com/2015/02/10/understanding-glibc-malloc/comment-page-1/?blogsub=confirming#subscribe-blog%E3%80%82)
 - [x] [ptmalloc](http://www.malloc.de/en/)
 - [x] [tcmalloc](https://github.com/google/tcmalloc) [:link: Ref](https://wallenwang.com/2018/11/tcmalloc/) [:link: Ref](https://www.programmersought.com/article/84461226079/)
 - [x] [jemalloc.pdf](http://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf)
@@ -438,6 +440,7 @@
 - [x] [Boost application performance using asynchronous I/O](https://developer.ibm.com/articles/l-async/)
 - [ ] [Lazy Asynchronous I/O For Event-Driven Servers](https://www.usenix.org/legacy/event/usenix04/tech/general/full_papers/elmeleegy/elmeleegy_html/html.html)
 - [ ] [IOCP](http://sysinternals.d4rk4.ru/Information/IoCompletionPorts.html)
+- [ ] [Reactor: An Object Behavioral Pattern for Demultiplexing and Dispatching Handles for Synchronous Events.pdf](http://www.dre.vanderbilt.edu/~schmidt/PDF/reactor-siemens.pdf)
 - [x] [Understanding Reactor Pattern: Thread-Based and Event-Driven](https://dzone.com/articles/understanding-reactor-pattern-thread-based-and-eve)
 - [ ] [The Design and Implementation of the Reactor.pdf](https://www.dre.vanderbilt.edu/~schmidt/PDF/Reactor2-93.pdf)
 - [ ] [The Secret To 10 Million Concurrent Connections -The Kernel Is The Problem, Not The Solution](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
