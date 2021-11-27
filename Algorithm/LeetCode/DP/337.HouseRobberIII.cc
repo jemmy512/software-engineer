@@ -67,11 +67,11 @@ private:
         if (!node)
             return { 0, 0 };
 
-        const auto left = dp(node->left);
-        const auto right = dp(node->right);
+        const auto [robLeft, dontRobLeft] = dp(node->left);
+        const auto [robRight, dontRobRight] = dp(node->right);
 
-        auto doRob = node->val + left.second + right.second;
-        auto dontRob = max(left.first, left.second) + max(right.first, right.second);
+        const auto doRob = node->val + dontRobLeft + dontRobRight;
+        const auto dontRob = max(robLeft, dontRobLeft) + max(robRight, dontRobRight);
 
         return { doRob, dontRob };
     }
