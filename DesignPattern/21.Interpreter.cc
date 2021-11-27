@@ -6,6 +6,8 @@
 #include <sstream>
 #include <vector>
 #include <map>
+#include <algorithm>
+#include <memory>
 
 namespace util::string {
     using std::string;
@@ -254,11 +256,12 @@ void TestInterpreter() {
     std::string rule = "key1 > 100 && key2 < 30 || key3 < 100 || key4 == 88";
     AlertRuleInterpreter interpreter{rule};
 
-    std::map<std::string, long> states;
-    states.emplace("key1", 101);
-    states.emplace("key2", 10);
-    states.emplace("key3", 121);
-    states.emplace("key4", 880);
+    std::map<std::string, long> states {
+        {"key1", 101},
+        {"key2", 10},
+        {"key3", 121},
+        {"key4", 880}
+    };
 
     std::cout << "Alert: " << interpreter.interpret(states) << std::endl;
 }
