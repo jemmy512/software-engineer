@@ -45,6 +45,8 @@
     3. [Practice](#Practice)
     4. [Authentication & Authorization](#Authentication--Authorization)
     5. [Design Pattern](#Design-Pattern)
+* [Cloud Native](#cloud-native)
+
 * [Thanks](#Thanks)
 
 # Formal Entry
@@ -368,7 +370,7 @@
         * [:link: Part 3: Let them all compete, but only one wins](https://devblogs.microsoft.com/oldnewthing/20210908-00/?p=105662)
         * [:link: Part 4: Bowing out, explicit version](https://devblogs.microsoft.com/oldnewthing/20210909-00/?p=105666)
         * [:link: Part 5: Bowing out via cancellation](https://devblogs.microsoft.com/oldnewthing/20210910-00/?p=105669)
-</details>
+        </details>
 
 # System Design
 
@@ -559,10 +561,13 @@
 
 ### Design Pattern
 - [ ] [Martin Fowler: Patterns of Distributed Systems](https://martinfowler.com/articles/patterns-of-distributed-systems/)
+    <details>
+    <summary>Open/Close</summary>
+
     - [ ] [Consistent Core](https://martinfowler.com/articles/patterns-of-distributed-systems/consistent-core.html)
     - [ ] [Generation Clock](https://martinfowler.com/articles/patterns-of-distributed-systems/generation.html)
     - [ ] [Gossip Dissemination](https://martinfowler.com/articles/patterns-of-distributed-systems/gossip-dissemination.html)
-    - [ ] [Hear Beat](https://martinfowler.com/articles/patterns-of-distributed-systems/heartbeat.html)
+    - [ ] [Heart Beat](https://martinfowler.com/articles/patterns-of-distributed-systems/heartbeat.html)
     - [ ] [High-Water Mark](https://martinfowler.com/articles/patterns-of-distributed-systems/high-watermark.html)
     - [ ] [Low-Water Mark](https://martinfowler.com/articles/patterns-of-distributed-systems/low-watermark.html)
     - [ ] [Idempotent Receiver](https://martinfowler.com/articles/patterns-of-distributed-systems/idempotent-receiver.html)
@@ -575,6 +580,19 @@
     - [ ] [Singular Update Queue](https://martinfowler.com/articles/patterns-of-distributed-systems/singular-update-queue.html)
     - [ ] [State Watch](https://martinfowler.com/articles/patterns-of-distributed-systems/state-watch.html)
     - [ ] [Write-Ahead Log](https://martinfowler.com/articles/patterns-of-distributed-systems/wal.html)
+    - [ ] [Fixed Partitions `TODO`]()
+    - [ ] [Follower Reads `TODO`]()
+    - [ ] [Hybrid Clock `TODO`]()
+    - [ ] [Key And Value `TODO`]()
+    - [ ] [Lamport Clock `TODO`]()
+    - [ ] [Paxos `TODO`]()
+    - [ ] [Replicated Log `TODO`]()
+    - [ ] [Request Batch `TODO`]()
+    - [ ] [Two Phase Commit `TODO`]()
+    - [ ] [Version Vector `TODO`]()
+    - [ ] [Versioned Value `TODO`]()
+
+    </details>
 
 - [ ] [MicroSoft Cloud Design Patterns](https://docs.microsoft.com/en-us/azure/architecture/patterns/)
     <details>
@@ -849,6 +867,9 @@
 - [ ] [Modularity and Information Hiding.pdf](https://www.win.tue.nl/~wstomv/edu/2ip30/references/criteria_for_modularization.pdf)
 - [ ] [Separation of Concern](https://www.cs.utexas.edu/users/EWD/transcriptions/EWD04xx/EWD447.html)
 - [ ] [Service Oriented Architecture](https://en.wikipedia.org/wiki/Service-oriented_architecture)
+
+# Cloud Native
+- [ ] (Architecting Cloud Native .NET Applications for Azure)[https://docs.microsoft.com/en-us/dotnet/architecture/cloud-native/]
 
 # Thanks
 This roadmap is highly inspired by course: https://time.geekbang.org/column/intro/48. Thanks [Hao Chen](https://github.com/haoel).
