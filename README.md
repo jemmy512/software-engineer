@@ -380,7 +380,7 @@
 
 - [ ] [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer)
 - [x] [Grokking System Design](https://www.educative.io/courses/grokking-the-system-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/object-oriented-design.md)
-- [ ] [Grokking Advanced System Design](https://github.com/Jemmy512/book-notes/blob/master/Arch/system-design-advanced.md)
+- [ ] [Grokking Advanced System Design](https://www.educative.io/courses/grokking-adv-system-design-intvw) [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/system-design-advanced.md)
 - [x] [Grokking the Object Oriented Design](https://www.educative.io/courses/grokking-the-object-oriented-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/object-oriented-design.md)
 - [ ] [Six Programming Paradigm](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will)
 - [ ] [Programming Paradigms for Dummies.pdf](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)
@@ -576,7 +576,7 @@
     - [ ] [Quorum](https://martinfowler.com/articles/patterns-of-distributed-systems/quorum.html)
     - [ ] [Request Pipeline](https://martinfowler.com/articles/patterns-of-distributed-systems/request-pipeline.html)
     - [ ] [Segemented Log](https://martinfowler.com/articles/patterns-of-distributed-systems/log-segmentation.html)
-    - [ ] [Single Scoekt Channel](https://martinfowler.com/articles/patterns-of-distributed-systems/single-socket-channel.html)
+    - [ ] [Single Scoket Channel](https://martinfowler.com/articles/patterns-of-distributed-systems/single-socket-channel.html)
     - [ ] [Singular Update Queue](https://martinfowler.com/articles/patterns-of-distributed-systems/singular-update-queue.html)
     - [ ] [State Watch](https://martinfowler.com/articles/patterns-of-distributed-systems/state-watch.html)
     - [ ] [Write-Ahead Log](https://martinfowler.com/articles/patterns-of-distributed-systems/wal.html)
@@ -800,7 +800,7 @@
 - [ ] [Pivotal: Microservices](https://tanzu.vmware.com/microservices)
 - [ ] [Uber: Introducing Domain-Oriented Microservice Architecture](https://eng.uber.com/microservice-architecture/)
 - [ ] [Uber: Designing Edge Gateway, Uber’s API Lifecycle Management Platform](https://eng.uber.com/gatewayuberapi/)
-- [ ] [Microservice Architecture](https://microservices.io)
+- [ ] [Microservice Architecture https://microservices.io](https://microservices.io)
 
 - [ ] :orange_book: [IBM: Microservices Best Practices for Java.pdf](https://www.redbooks.ibm.com/redbooks/pdfs/sg248357.pdf)
 - [ ] :orange_book: [Building MicroService](https://www.amazon.com/Building-Microservices-Designing-Fine-Grained-Systems/dp/1491950358/ref=sr_1_2?crid=LWHLL3P5PIT6&dchild=1&keywords=building+microservices&qid=1610330674&sprefix=building+micros%2Caps%2C390&sr=8-2)
@@ -849,7 +849,6 @@
     - [ ] [Part 5 - Using Eureka Naming Server](http://www.springboottutorial.com/microservices-with-spring-boot-part-5-eureka-naming-server)
 
 - [ ] [The Hidden Costs Of Microservices](https://www.stackbuilders.com/news/the-hidden-costs-of-microservices)
-- [ ] [Microservice Architecture (https://microservices.io)](https://microservices.io)
 - [ ] [Microservice Antipatterns and Pitfalls](https://www.oreilly.com/content/microservices-antipatterns-and-pitfalls/)
 - [ ] [Microservice Architecture: All The Best Practices You Need To Kno](https://codingsans.com/blog/microservice-architecture-best-practices)
 - [ ] [Best Practices for Building a Microservice Architecture](https://www.vinaysahni.com/best-practices-for-building-a-microservice-architecture)
