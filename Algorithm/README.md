@@ -39,7 +39,7 @@ No | Title | Difficulty | Notes
 400 | Nth Digit | :star: :star: |
 780 | Reaching Points | :star: :star: :star: |
 1041 | Robot Bounded In Circle | :star: :star: | :thinking:
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ## Array
 No | Title | Difficulty | Notes
@@ -81,7 +81,7 @@ No | Title | Difficulty | Notes
 283 | Move Zeroes | :star: :star: | `Two Pointers`
 448 | Find All Numbers Disappeared in An Array | :star: |
 870 | Advantage Shuffle | :star: :star: |
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ## List
 No | Title | Difficulty | Notes
@@ -111,7 +111,7 @@ No | Title | Difficulty | Notes
 328 | Odd Even Linked List | :star: :star: |
 725 | Split Linked List in Parts | :star: :star: |
 817 | Linked List Components | :star: :star: |
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ## Tree
 No | Title | Difficulty | Notes
@@ -169,7 +169,7 @@ No | Title | Difficulty | Notes
 701 | Insert into a Binary Search Tree | :star: :star: |
 814 | Binary Tree Pruning | :star: | `DFS`
 1803 | Count Pairs With XOR in a Range | :star: :star: :star: | `XOR` `Prefix Sum`
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ## String
 No | Title | Difficulty | Notes
@@ -193,7 +193,7 @@ No | Title | Difficulty | Notes
 345 | Reverse Vowels of a String | :star: |
 796 | Rotate String | :star: |
 1062 | Longest Repeating Substring | :star: :star: | `BS + Hash` `Rabin-Karp`
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ## Map
 No | Title | Difficulty | Notes
@@ -211,7 +211,7 @@ No | Title | Difficulty | Notes
 771 | Jewelsand Stones | :star: |
 811 | Subdomain Visit Count | :star: |
 953 | Verifying an Alien Dictionary  | :star: |
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ## Stack
 No | Title | Difficulty | Notes
@@ -229,13 +229,13 @@ No | Title | Difficulty | Notes
 739 | Daily Temperatures | :star: :star: | `Monotonic Stack`
 921 | Minimum Add to Make Parentheses Valid | :star: :star: |
 1249 | Minimum Remove to Make Valid Parentheses| :star: :star: | `Bit Set`
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ## Queue
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 641 | Design Circular Deque | :star: :star:
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ## DP
 No | Title | Difficulty | Notes
@@ -283,7 +283,7 @@ No | Title | Difficulty | Notes
 931 | Minimum Falling Path Sum | :star: :star: |
 1289 | Minimum Falling Path Sum II | :star: :star: :star: |
 877 | Stone Game | :star: :star: |
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ### knapsack
 No | Title | Difficulty | Notes
@@ -293,7 +293,7 @@ knapsack | :star: :star: |
 518 | Coin Change 2 | :star: :star: | :thinking:
 416 | Partition Equal Subset Sum | :star: :star: |
 494 | Target Sum  | :star: :star: |
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ### substring
 No | Title | Difficulty | Notes
@@ -307,7 +307,7 @@ No | Title | Difficulty | Notes
 1048 | Longest String Chain | :star: :star: |
 583 | Delete Operation for Two Strings | :star: :star: |
 712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: |
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ```c++
 for (state1 : state1_options)
@@ -357,14 +357,14 @@ No | Title | Difficulty | Notes
 452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | `Interval`
 763 | Partition Labels | :star: :star: | `Interval`
 1024 | Video Stitching | :star: :star: | `Interval`
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ## Divide Conquer
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 023 | Merge K Sorted List | :star: :star: :star: | `K-way Merge`
 241 | Different Ways to Add Parentheses | :star: :star: |
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ## Two Pointers
 
@@ -380,7 +380,7 @@ No | Title | Difficulty | Notes
 283 | Move Zeroes | :star: :star: |
 287 | Find the Duplicate Number | :star: :star: | `Cycle`
 992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 **Sliding Window**
 No | Title | Difficulty | Notes
@@ -392,7 +392,7 @@ No | Title | Difficulty | Notes
 239 | Sliding Window Maximum | :star: :star: :star: | `Monotonic stack` `DP` `L-R vec`
 438 | Find All Anagrams in a String | :star: :star: |
 567 | Permutation in String | :star: :star: |
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ```c++
 void slidingWindow(string src, string tar) {
@@ -447,7 +447,7 @@ No | Title | Difficulty | Notes
 752 | Open the Lock | :star: :star:| `BFS`
 875 | Koko Eating Bananas | :star: :star:| :thinking: `BS`
 1011 |  Capacity To Ship Packages Within D Days | :star: :star:| :thinking: `BS`
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ```c++
 int fn(int x, int[] nums) {
@@ -540,7 +540,7 @@ No | Title | Difficulty | Notes
 347 | Top K Frequent Elements | :star: :star: | `Heap Sort` `Quick Sort` `??`
 414 | Third Maximum Number | :star: | `Heap Sort`
 937 | Reorder Data in Log Files | :star: |
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
 
 ## Design
 No | Title | Difficulty | Notes
@@ -549,7 +549,9 @@ No | Title | Difficulty | Notes
 460 | LFU Cache  | :star: :star: :star: |
 380 | Insert Delete GetRandom O(1) | :star: :star: | `Map + Vec (O(1) + Random Access)`
 1396 | Design Underground System | :star: :star: |
---- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
+--- | +                                                             + | :star: :star: :star: |
+
+--- | +                                                             + | :star: :star: :star: |
 
 # Dynamic Programming
 * There are two different techniques we can use to implement a dynamic programming solution:
