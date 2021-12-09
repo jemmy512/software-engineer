@@ -9,6 +9,7 @@ No | Title | Difficulty | Notes
 015 | 3 Sum | :star: :star: |
 016 | 3 Sum Closest | :star: :star: |
 018 | 4 Sum | :star: :star: |
+043 | Multiply Strings | :star: :star: |
 050 | pow-x-n | :star: :star: | `TODO`
 065 | Valid Number | :star: :star: :star: |
 066 | Plus One | :star: |
@@ -26,6 +27,9 @@ No | Title | Difficulty | Notes
 191 | Numberof 1 Bits | :star: |
 202 | Happy Number | :star: |
 204 | Count Primes | :star: |
+224 | Basic Calculator | :star: :star: :star: | `stack`
+227 | Basic Calculator II | :star: :star: |
+772 | Basic Calculator II  | :star: :star: |
 231 | Power Of Two | :star: |
 263 | Ugly Number | :star: |
 268 | Missing Number | :star: |
@@ -35,6 +39,7 @@ No | Title | Difficulty | Notes
 400 | Nth Digit | :star: :star: |
 780 | Reaching Points | :star: :star: :star: |
 1041 | Robot Bounded In Circle | :star: :star: | :thinking:
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ## Array
 No | Title | Difficulty | Notes
@@ -76,6 +81,7 @@ No | Title | Difficulty | Notes
 283 | Move Zeroes | :star: :star: | `Two Pointers`
 448 | Find All Numbers Disappeared in An Array | :star: |
 870 | Advantage Shuffle | :star: :star: |
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ## List
 No | Title | Difficulty | Notes
@@ -105,6 +111,7 @@ No | Title | Difficulty | Notes
 328 | Odd Even Linked List | :star: :star: |
 725 | Split Linked List in Parts | :star: :star: |
 817 | Linked List Components | :star: :star: |
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ## Tree
 No | Title | Difficulty | Notes
@@ -162,6 +169,7 @@ No | Title | Difficulty | Notes
 701 | Insert into a Binary Search Tree | :star: :star: |
 814 | Binary Tree Pruning | :star: | `DFS`
 1803 | Count Pairs With XOR in a Range | :star: :star: :star: | `XOR` `Prefix Sum`
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ## String
 No | Title | Difficulty | Notes
@@ -185,6 +193,7 @@ No | Title | Difficulty | Notes
 345 | Reverse Vowels of a String | :star: |
 796 | Rotate String | :star: |
 1062 | Longest Repeating Substring | :star: :star: | `BS + Hash` `Rabin-Karp`
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ## Map
 No | Title | Difficulty | Notes
@@ -202,6 +211,7 @@ No | Title | Difficulty | Notes
 771 | Jewelsand Stones | :star: |
 811 | Subdomain Visit Count | :star: |
 953 | Verifying an Alien Dictionary  | :star: |
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ## Stack
 No | Title | Difficulty | Notes
@@ -209,6 +219,8 @@ No | Title | Difficulty | Notes
 020 | valid Parentheses | :star: |
 032 | Longet Valid Paretheses | :star: :star: :star: | `DP`
 155 | MinStack | :star: |
+225 | Implement Stack using Queues | :star: |
+232 | Implement Queue using Stacks | :star: |
 316 | Remove Duplicate Letters | :star: :star: :star: | `Monotonic Stack`
 394 | DecodeString | :star: :star: |
 496 | Next Greater Element I | :star: | `Monotonic Stack`
@@ -217,11 +229,13 @@ No | Title | Difficulty | Notes
 739 | Daily Temperatures | :star: :star: | `Monotonic Stack`
 921 | Minimum Add to Make Parentheses Valid | :star: :star: |
 1249 | Minimum Remove to Make Valid Parentheses| :star: :star: | `Bit Set`
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ## Queue
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 641 | Design Circular Deque | :star: :star:
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ## DP
 No | Title | Difficulty | Notes
@@ -259,7 +273,7 @@ No | Title | Difficulty | Notes
 650 | 2 Keys Keyboard | :star: :star: |
 651 | 4 Keys Keyboard | :star: :star: |
 718 | Maximum Length of Repeated Subarray | :star: :star: |
-787 | Cheapest Flights Within K Stops | :star: :star: | ??
+787 | Cheapest Flights Within K Stops | :star: :star: | `??`
 1137 | N-th Tribonacci Number | :star: |
 005 | Longest Palindromic Substring | :star: :star: |
 647 | Palindromic Substrings | :star: :star: | `TODO`
@@ -269,6 +283,7 @@ No | Title | Difficulty | Notes
 931 | Minimum Falling Path Sum | :star: :star: |
 1289 | Minimum Falling Path Sum II | :star: :star: :star: |
 877 | Stone Game | :star: :star: |
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ### knapsack
 No | Title | Difficulty | Notes
@@ -278,6 +293,7 @@ knapsack | :star: :star: |
 518 | Coin Change 2 | :star: :star: | :thinking:
 416 | Partition Equal Subset Sum | :star: :star: |
 494 | Target Sum  | :star: :star: |
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ### substring
 No | Title | Difficulty | Notes
@@ -291,6 +307,7 @@ No | Title | Difficulty | Notes
 1048 | Longest String Chain | :star: :star: |
 583 | Delete Operation for Two Strings | :star: :star: |
 712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: |
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ```c++
 for (state1 : state1_options)
@@ -304,12 +321,16 @@ No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 017 | Letter Combination of a Phone Number | :star: :star: |
 022 | Generate Parenthesis | :star: :star: | :thinking:
+036 | Valid Sudoku | :star: :star: |
+037 | Sudoku Solver | :star: :star: :star: |
 046 | Permutations | :star: :star: | :thinking:
 047 | Permutations II | :star: :star: | `TODO`
+077 | Combinations | :star: :star: |
 078 | Subsets  | :star: :star: |
 090 | Subsets II  | :star: :star: |
 079 | Word Search | :star: :star: | `Matrix`
 212 | Word Search II | :star: :star: :star: | `Matrix`
+698. Partition to K Equal Sum Subsets
 
 ```c++
 void backtrack(path, options) {
@@ -336,12 +357,14 @@ No | Title | Difficulty | Notes
 452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | `Interval`
 763 | Partition Labels | :star: :star: | `Interval`
 1024 | Video Stitching | :star: :star: | `Interval`
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ## Divide Conquer
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 023 | Merge K Sorted List | :star: :star: :star: | `K-way Merge`
 241 | Different Ways to Add Parentheses | :star: :star: |
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ## Two Pointers
 
@@ -357,6 +380,7 @@ No | Title | Difficulty | Notes
 283 | Move Zeroes | :star: :star: |
 287 | Find the Duplicate Number | :star: :star: | `Cycle`
 992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 **Sliding Window**
 No | Title | Difficulty | Notes
@@ -365,9 +389,10 @@ No | Title | Difficulty | Notes
 003 | Longest Substring Without Repeating Characters | :star: :star: |
 159 | Longest Substring with At Most Two Distinct Characters | :star: :star: |
 340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: |
-239 | Sliding Window Maximum | :star: :star: :star: | `DP` `deque` `L-R vec`
+239 | Sliding Window Maximum | :star: :star: :star: | `Monotonic stack` `DP` `L-R vec`
 438 | Find All Anagrams in a String | :star: :star: |
 567 | Permutation in String | :star: :star: |
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ```c++
 void slidingWindow(string src, string tar) {
@@ -417,11 +442,12 @@ No | Title | Difficulty | Notes
 1254 | Number of Closed Islands | :star: :star: | `DFS` `Matrix`
 1905 | Count Sub Islands | :star: :star: | `DFS` `Matrix`
 374 | Guess Number Higher Or Lower | :star: | `BS`
-378 | Kth Smallest Element in a Sorted Matrix  | :star: :star:| :thinking: `BS` `Matrix`
+378 | Kth Smallest Element in a Sorted Matrix | :star: :star:| :thinking: `BS` `Matrix`
 973 | K Closest Points to Origin | :star: :star:| :thinking: `Quick Select` `BS`
 752 | Open the Lock | :star: :star:| `BFS`
 875 | Koko Eating Bananas | :star: :star:| :thinking: `BS`
 1011 |  Capacity To Ship Packages Within D Days | :star: :star:| :thinking: `BS`
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ```c++
 int fn(int x, int[] nums) {
@@ -510,17 +536,20 @@ int bfs(Node start, Node target) {
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 215 | Kth Largest Element in an Array | :star: :star: | `Heap Sort` `Quick Sort`
+295 | Find Median from Data Stream | :star: :star: :star: | `Heap Sort`
 347 | Top K Frequent Elements | :star: :star: | `Heap Sort` `Quick Sort` `??`
 414 | Third Maximum Number | :star: | `Heap Sort`
 937 | Reorder Data in Log Files | :star: |
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 ## Design
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 146 | LRU Cache | :star: :star: | `Map + List (O(1) + Date Move)`
+460 | LFU Cache  | :star: :star: :star: |
 380 | Insert Delete GetRandom O(1) | :star: :star: | `Map + Vec (O(1) + Random Access)`
 1396 | Design Underground System | :star: :star: |
-
+--- | + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + | :star: :star: :star: |
 
 # Dynamic Programming
 * There are two different techniques we can use to implement a dynamic programming solution:
@@ -535,14 +564,14 @@ No | Title | Difficulty | Notes
 ## Steps:
 1. Define last step status and subproblems
 2. Define the state transition equation
-3. Define initializers and boundary check
+3. Define initializers and boundary
 4. Define calculating order
 
 ## Solution
 1. Define state and selection
 2. Define the meaning of dp array
 3. Define transition equation from selection
-4. Define initializers and boundary check
+4. Define initializers and boundary
 
 ## Catogories
 1. Coordinate
