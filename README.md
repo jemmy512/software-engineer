@@ -199,6 +199,9 @@
 - [x] :orange_book: Inside C++ Object Model :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/inside-the-cpp-object-model.md)
 - [x] :orange_book: C++ Templates The Complete Guide :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/cpp-templates-the-complete-guid.md)
 - [x] :orange_book: Modern C++ Design :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Cpp/modern-cpp-design.md)
+- [ ] [Agner Fog: Optimizing Software in C++.pdf](https://time.geekbang.org/dashboard/course)
+- [ ] [Software optimization resources](https://www.agner.org/optimize/)
+
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
 - [x] [How C++ Resolves a Function Call](https://preshing.com/20210315/how-cpp-resolves-a-function-call/)
 - [x] [How to Use C++ for Cross-Platform Development](https://gusc.lv/2021/03/how-to-use-c-for-cross-platform-development/)
@@ -207,6 +210,8 @@
 - [x] [Type Erasure](http://davekilian.com/cpp-type-erasure.html)
 - [x] [Lambdas: From C++11 to C++20]() [:link: Part 1](https://www.cppstories.com/2019/02/lambdas-story-part1/) [:link: Part 2](https://www.cppstories.com/2019/03/lambdas-story-part2/)
 - [ ] [Eli Bendersky: How debuggers work]() [:link: Part 1](https://eli.thegreenplace.net/2011/01/23/how-debuggers-work-part-1/) [:link: Part 2](https://eli.thegreenplace.net/2011/01/27/how-debuggers-work-part-2-breakpoints) [:link: Part 3](https://eli.thegreenplace.net/2011/02/07/how-debuggers-work-part-3-debugging-information)
+- [ ] [GNU Compiler Collection (GCC) Internals](https://gcc.gnu.org/onlinedocs/gccint/index.html#SEC_Contents)
+- [x] [Linux x86 Program Start Up or How do we get to main?](http://www.dbp-consulting.com/tutorials/debugging/linuxProgramStartup.html)
 
 * OOP
     - [x] [Inheritance Without Pointers](https://www.fluentcpp.com/2021/01/29/inheritance-without-pointers/)
@@ -868,7 +873,7 @@
 - [ ] [Service Oriented Architecture](https://en.wikipedia.org/wiki/Service-oriented_architecture)
 
 # Cloud Native
-- [ ] (Architecting Cloud Native .NET Applications for Azure)[https://docs.microsoft.com/en-us/dotnet/architecture/cloud-native/]
+- [ ] [Architecting Cloud Native .NET Applications for Azure](https://docs.microsoft.com/en-us/dotnet/architecture/cloud-native/)
 
 # Thanks
 This roadmap is highly inspired by course: https://time.geekbang.org/column/intro/48. Thanks [Hao Chen](https://github.com/haoel).
