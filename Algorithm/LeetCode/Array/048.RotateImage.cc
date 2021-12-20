@@ -20,7 +20,6 @@ Output: [[3,1],[4,2]]
 
 
 Constraints:
-
 matrix.length == size
 matrix[i].length == size
 1 <= size <= 20
@@ -30,11 +29,20 @@ matrix[i].length == size
 
 using namespace std;
 
+/*
+- x - - - [i, j]
+- - - - x [j, n-1-i]
+- - - - -
+x - - - - [n-1-j, i]
+- - - x - [n-1-i, n-1-j]
+*/
+
 class Solution {
 public:
     void rotate(vector<vector<int>>& matrix) {
-        int size = matrix.size();
-        for (int i = 0; i < (size + 1) / 2; i++) {
+        const auto size = matrix.size();
+        // for (int i = 0; i < (size + 1) / 2; i++) {
+        for (int i = 0; i < (size / 2 + size % 2); i++) {
             for (int j = 0; j < size / 2; j++) {
                 int temp = matrix[size - 1 - j][i];
                 matrix[size - 1 - j][i] = matrix[size - 1 - i][size - 1 - j];
