@@ -29,7 +29,7 @@ void* operator new(std::size_t, void* __p) { return __p; }
 void* operator new[](std::size_t, void* __p) { return __p; }
 ```
 
-```c++ 
+```c++
 void operator delete(void* ptr, std::size_t) noexcept {
   ::operator delete (ptr);
 }
@@ -95,7 +95,7 @@ public:
 
 template<typename _Tp>
 using __allocator_base = __gnu_cxx::new_allocator<_Tp>;
-    
+
 template<typename _Tp>
 class new_allocator {
 public:
@@ -144,7 +144,7 @@ public:
             std::align_val_t __al = std::align_val_t(alignof(_Tp));
             return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp), __al));
         }
-    
+
         return static_cast<_Tp*>(::operator new(__n * sizeof(_Tp)));
     }
 
@@ -163,7 +163,7 @@ public:
             return;
         }
         #endif
-        
+
         ::operator delete(_GLIBCXX_SIZED_DEALLOC(__p, __n));
     }
 
@@ -230,10 +230,10 @@ public:
 
     const_pointer address(const_reference __x) const
     { return std::__addressof(__x); }
-    
+
     _Tp* allocate(size_type __n, const void* = 0) {
         static_assert(sizeof(_Tp) != 0, "cannot allocate incomplete types");
-        
+
         if (__builtin_expect(__n > this->_M_max_size(), false)) {
             // _GLIBCXX_RESOLVE_LIB_DEFECTS
             // 3190. allocator::allocate sometimes returns too little storage
@@ -243,7 +243,7 @@ public:
           }
 
         _Tp* __ret = 0;
-        
+
         if (alignof(_Tp) > alignof(std::max_align_t)) {
           __ret = static_cast<_Tp*>(::aligned_alloc(alignof(_Tp), __n * sizeof(_Tp)));
         }
@@ -252,7 +252,7 @@ public:
           __ret = static_cast<_Tp*>(std::malloc(__n * sizeof(_Tp)));
         if (!__ret)
           std::__throw_bad_alloc();
-      
+
       if (reinterpret_cast<std::size_t>(__ret) % alignof(_Tp)) {
         // Memory returned by malloc is not suitably aligned for _Tp.
         deallocate(__ret, __n);
@@ -296,27 +296,27 @@ using __allocator_base = __gnu_cxx::__pool_alloc_base<_Tp>;
 
 class __pool_alloc_base {
     typedef std::size_t size_t;
-        
+
 protected:
     enum { _S_align = 8 };
     enum { _S_max_bytes = 128 };
     enum { _S_free_list_size = (size_t)_S_max_bytes / (size_t)_S_align };
-    
+
     union _Obj {
         union _Obj* _M_free_list_link;
         char        _M_client_data[1];    // The client sees this.
     };
-        
+
     static _Obj* volatile         _S_free_list[_S_free_list_size];
 
     // Chunk allocation state.
     static char*                  _S_start_free;
     static char*                  _S_end_free;
-    static size_t                 _S_heap_size;     
-    
+    static size_t                 _S_heap_size;
+
     size_t _M_round_up(size_t __bytes)
     { return ((__bytes + (size_t)_S_align - 1) & ~((size_t)_S_align - 1)); }
-    
+
     const _Obj* volatile* _M_get_free_list(size_t __bytes) throw ();
 
     __mutex& _M_get_mutex() throw ();
@@ -324,7 +324,7 @@ protected:
     // Returns an object of size __n, and optionally adds to size __n
     // free list.
     void* _M_refill(size_t __n);
-    
+
     // Allocates a chunk for nobjs of size size.  nobjs may be reduced
     // if it is inconvenient to allocate the requested number.
     char* _M_allocate_chunk(size_t __n, int& __nobjs);
@@ -382,7 +382,7 @@ char* __pool_alloc_base::_M_allocate_chunk(size_t __n, int& __nobjs) {
             for (; __i <= (size_t) _S_max_bytes; __i += (size_t) _S_align) {
                 _Obj* volatile* __free_list = _M_get_free_list(__i);
                 _Obj* __p = *__free_list;
-                
+
                 if (__p != 0) {
                     *__free_list = __p->_M_free_list_link;
                     _S_start_free = (char*)__p;
@@ -420,7 +420,7 @@ void* __pool_alloc_base::_M_refill(size_t __n) {
     // Build free list in chunk.
     __result = (_Obj*)(void*)__chunk;
     *__free_list = __next_obj = (_Obj*)(void*)(__chunk + __n);
-    
+
     for (int __i = 1; ; __i++) {
         __current_obj = __next_obj;
         __next_obj = (_Obj*)(void*)((char*)__next_obj + __n);
@@ -431,7 +431,7 @@ void* __pool_alloc_base::_M_refill(size_t __n) {
             __current_obj->_M_free_list_link = __next_obj;
         }
     }
-    
+
     return __result;
 }
 
@@ -466,7 +466,7 @@ public:
 
   template<typename _Tp1>
   struct rebind { typedef __pool_alloc<_Tp1> other; };
-  
+
   __pool_alloc() { }
 
   __pool_alloc(const __pool_alloc&) { }
@@ -482,7 +482,7 @@ public:
   const_pointer address(const_reference __x) const
   { return std::__addressof(__x); }
 
-  size_type max_size() const 
+  size_type max_size() const
   { return std::size_t(-1) / sizeof(_Tp); }
 
   template<typename _Up, typename... _Args>
@@ -494,7 +494,7 @@ public:
 
   pointer allocate(size_type __n, const void* = 0);
 
-  void deallocate(pointer __p, size_type __n);      
+  void deallocate(pointer __p, size_type __n);
 };
 
 template<typename _Tp>
@@ -531,17 +531,17 @@ _Tp*  __pool_alloc<_Tp>::allocate(size_type __n, const void*) {
             __ret = static_cast<_Tp*>(::operator new(__bytes));
         else {
             _Obj* volatile* __free_list = _M_get_free_list(__bytes);
-            
+
             __scoped_lock sentry(_M_get_mutex());
             _Obj* __result = *__free_list;
-            
+
             if (__builtin_expect(__result == 0, 0))
                 __ret = static_cast<_Tp*>(_M_refill(_M_round_up(__bytes)));
             else {
                 *__free_list = __result->_M_free_list_link;
                 __ret = reinterpret_cast<_Tp*>(__result);
             }
-            
+
             if (__ret == 0)
                 std::__throw_bad_alloc();
         }
@@ -562,7 +562,7 @@ void __pool_alloc<_Tp>::deallocate(pointer __p, size_type __n) {
 
         const size_t __bytes = __n * sizeof(_Tp);
         if (__bytes > static_cast<size_t>(_S_max_bytes) || _S_force_new > 0) {
-            ::operator delete(__p);            
+            ::operator delete(__p);
         } else {
             _Obj* volatile* __free_list = _M_get_free_list(__bytes);
             _Obj* __q = reinterpret_cast<_Obj*>(__p);
@@ -596,7 +596,7 @@ void* public_mALLOc(size_t bytes) {
     arena_get(ar_ptr, bytes);
     if (!ar_ptr)
         return 0;
-        
+
     victim = _int_malloc(ar_ptr, bytes);
     if (!victim) {
         /* Maybe the failure is due to running out of mmapped areas. */
@@ -622,6 +622,67 @@ void* public_mALLOc(size_t bytes) {
     assert(!victim || chunk_is_mmapped(mem2chunk(victim)) || ar_ptr == arena_for_chunk(mem2chunk(victim)));
 
     return victim;
+}
+```
+
+```c++
+// glibc-2.28/malloc/malloc.c
+
+strong_alias (__libc_malloc, __malloc) strong_alias (__libc_malloc, malloc)
+
+void * __libc_malloc (size_t bytes)
+{
+  mstate ar_ptr;
+  void *victim;
+
+  void *(*hook) (size_t, const void *) = atomic_forced_read (__malloc_hook);
+  if (__builtin_expect (hook != NULL, 0))
+    return (*hook)(bytes, RETURN_ADDRESS (0));
+#if USE_TCACHE
+  /* int_free also calls request2size, be careful to not pad twice.  */
+  size_t tbytes;
+  checked_request2size (bytes, tbytes);
+  size_t tc_idx = csize2tidx (tbytes);
+
+  MAYBE_INIT_TCACHE ();
+
+  DIAG_PUSH_NEEDS_COMMENT;
+  if (tc_idx < mp_.tcache_bins
+      /*&& tc_idx < TCACHE_MAX_BINS*/ /* to appease gcc */
+      && tcache
+      && tcache->entries[tc_idx] != NULL)
+    {
+      return tcache_get (tc_idx);
+    }
+  DIAG_POP_NEEDS_COMMENT;
+#endif
+
+  if (SINGLE_THREAD_P)
+    {
+      victim = _int_malloc (&main_arena, bytes);
+      assert (!victim || chunk_is_mmapped (mem2chunk (victim)) ||
+	      &main_arena == arena_for_chunk (mem2chunk (victim)));
+      return victim;
+    }
+
+  arena_get (ar_ptr, bytes);
+
+  victim = _int_malloc (ar_ptr, bytes);
+  /* Retry with another arena only if we were able to find a usable arena
+     before.  */
+  if (!victim && ar_ptr != NULL)
+    {
+      LIBC_PROBE (memory_malloc_retry, 1, bytes);
+      ar_ptr = arena_get_retry (ar_ptr, bytes);
+      victim = _int_malloc (ar_ptr, bytes);
+    }
+
+  if (ar_ptr != NULL)
+    __libc_lock_unlock (ar_ptr->mutex);
+
+  assert (!victim || chunk_is_mmapped (mem2chunk (victim)) ||
+          ar_ptr == arena_for_chunk (mem2chunk (victim)));
+  return victim;
 }
 ```
 
@@ -865,7 +926,7 @@ void* _int_malloc(mstate av, size_t bytes) {
                 if (av != &main_arena)
                     victim->size |= NON_MAIN_ARENA;
                 check_malloced_chunk(av, victim, nb);
-                
+
                 return chunk2mem(victim);
             }
         }
@@ -907,9 +968,9 @@ void* _int_malloc(mstate av, size_t bytes) {
                 exception to best-fit, and applies only when there is
                 no exact fit for a small chunk. */
 
-            if (in_smallbin_range(nb) 
-                && bck == unsorted_chunks(av) 
-                && victim == av->last_remainder 
+            if (in_smallbin_range(nb)
+                && bck == unsorted_chunks(av)
+                && victim == av->last_remainder
                 && (unsigned long)(size) > (unsigned long)(nb + MINSIZE))
             {
                 /* split and reattach remainder */
@@ -937,7 +998,7 @@ void* _int_malloc(mstate av, size_t bytes) {
                 if (av != &main_arena)
                     victim->size |= NON_MAIN_ARENA;
                 check_malloced_chunk(av, victim, nb);
-                
+
                 return chunk2mem(victim);
             }
 
@@ -1001,7 +1062,7 @@ void* _int_malloc(mstate av, size_t bytes) {
                     if (av != &main_arena)
                         victim->size |= NON_MAIN_ARENA;
                     check_malloced_chunk(av, victim, nb);
-                    
+
                     return chunk2mem(victim);
                 } else {  /* Split */
                     remainder = chunk_at_offset(victim, nb);
@@ -1092,7 +1153,7 @@ void* _int_malloc(mstate av, size_t bytes) {
                     set_head(remainder, remainder_size | PREV_INUSE);
                     set_foot(remainder, remainder_size);
                     check_malloced_chunk(av, victim, nb);
-                    
+
                     return chunk2mem(victim);
                 }
             }
@@ -1210,7 +1271,7 @@ static void* sYSMALLOc(size_t nb, mstate av) {
                 if (sum > (unsigned long)(mp_.max_mmapped_mem)) {
                     mp_.max_mmapped_mem = sum;
                 }
-                
+
                 #ifdef NO_THREADS
                     sum += av->system_mem;
                     if (sum > (unsigned long)(mp_.max_total_mem))
@@ -1234,7 +1295,7 @@ static void* sYSMALLOc(size_t nb, mstate av) {
 
     /* If not the first time through, we require old_size to be
         at least MINSIZE and to have prev_inuse set. */
-    assert((old_top == initial_top(av) && old_size == 0) 
+    assert((old_top == initial_top(av) && old_size == 0)
         || ((unsigned long) (old_size) >= MINSIZE && prev_inuse(old_top) && ((unsigned long)old_end & pagemask) == 0));
 
     /* Precondition: not enough current space to satisfy nb request */
@@ -1266,12 +1327,12 @@ static void* sYSMALLOc(size_t nb, mstate av) {
             heap->prev = old_heap;
             av->system_mem += heap->size;
             arena_mem += heap->size;
-            
+
             #if 0
                 if ((unsigned long)(mmapped_mem + arena_mem + sbrked_mem) > max_total_mem)
                     max_total_mem = mmapped_mem + arena_mem + sbrked_mem;
             #endif
-            
+
             /* Set up the new top.  */
             top(av) = chunk_at_offset(heap, sizeof(*heap));
             set_head(top(av), (heap->size - sizeof(*heap)) | PREV_INUSE);
@@ -1711,7 +1772,7 @@ nextchunk-> +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
     2. Chunks allocated via mmap, which have the second-lowest-order
         bit (IS_MMAPPED) set in their size fields.  Because they are
-        allocated one-by-one, each must contain its own trailing size field. 
+        allocated one-by-one, each must contain its own trailing size field.
 */
 ```
 
