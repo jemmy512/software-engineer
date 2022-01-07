@@ -39,6 +39,8 @@ The PPL provides the following features:
 ![pplx.png](../Image/Pplx.png)
 * Task wait-notify work flow
     ![](../Image/cpp-rest-task-flow.png)
+* flows
+    ![CppRest.png](../Image/task.png)
 
 ## class task
 ```C++
@@ -546,6 +548,39 @@ _Task_impl_base::_Wait()
             condition_variable.wait
 ```
 
+## task::then
+```C++
+task::then()
+  task::_ThenImpl()
+    typedef details::_FunctionTypeTraits<_Function, _InternalReturnType> _Function_type_traits;
+    typedef details::_TaskTypeTraits<typename _Function_type_traits::_FuncRetType> _Async_type_traits;
+    typedef typename _Async_type_traits::_TaskRetType _TaskType;
+
+    task<_TaskType> _ContinuationTask;
+    _ContinuationTask._CreateImpl(_PTokenState, _Scheduler);
+
+    continuationTaskHandle = new _ContinuationTaskHandle(
+        _GetImpl(), // continuation task's ancester
+        _ContinuationTask._GetImpl(),
+        _Func,
+        _ContinuationContext,
+        _InliningMode)
+
+    _Task_impl_base::_ScheduleContinuation(continuationTaskHandle)
+        if (!_IsCompleted)
+            _PThenTaskHandle->_M_next = _M_Continuations;
+            _M_Continuations = _PThenTaskHandle;
+        else if (_IsCompleted)
+            _Task_impl_base::_ScheduleContinuationTask(_PThenTaskHandle);
+                --->
+        else if (cancel)
+            _Task_impl_base::_Cancel(true);
+        else if (cancel_and_exception)
+            _Task_impl_base::_CancelWithExceptionHolder(_GetExceptionHolder(), true);
+
+    return _ContinuationTask;
+```
+
 ## Run Task
 ```c++
 struct _TaskProcHandle
@@ -630,39 +665,6 @@ _PTaskHandle->invoke()
                             --->
 ```
 
-## task::then
-```C++
-task::then()
-  task::_ThenImpl()
-    typedef details::_FunctionTypeTraits<_Function, _InternalReturnType> _Function_type_traits;
-    typedef details::_TaskTypeTraits<typename _Function_type_traits::_FuncRetType> _Async_type_traits;
-    typedef typename _Async_type_traits::_TaskRetType _TaskType;
-
-    task<_TaskType> _ContinuationTask;
-    _ContinuationTask._CreateImpl(_PTokenState, _Scheduler);
-
-    continuationTaskHandle = new _ContinuationTaskHandle(
-        _GetImpl(), // continuation task's ancester
-        _ContinuationTask._GetImpl(),
-        _Func,
-        _ContinuationContext,
-        _InliningMode)
-
-    _Task_impl_base::_ScheduleContinuation(continuationTaskHandle)
-        if (!_IsCompleted)
-            _PThenTaskHandle->_M_next = _M_Continuations;
-            _M_Continuations = _PThenTaskHandle;
-        else if (_IsCompleted)
-            _Task_impl_base::_ScheduleContinuationTask(_PThenTaskHandle);
-                --->
-        else if (cancel)
-            _Task_impl_base::_Cancel(true);
-        else if (cancel_and_exception)
-            _Task_impl_base::_CancelWithExceptionHolder(_GetExceptionHolder(), true);
-
-    return _ContinuationTask;
-```
-
 ## Run Continuation
 ```C++
 // 1. _InitialTaskHandle finished
@@ -713,8 +715,6 @@ task_completion_event::set(_Result)
                         _Task_impl_base::_ScheduleTask(_PTaskHandle)
                             --->
 ```
-![CppRest.png](../Image/task.png)
-
 
 # CppRest
 The [C++ REST SDK](https://github.com/microsoft/cpprestsdk) is a Microsoft project for cloud-based client-server communication in native code using a modern asynchronous C++ API design. This project aims to help C++ developers connect to and interact with services.
