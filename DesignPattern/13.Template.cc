@@ -1,3 +1,40 @@
+class HttpServlet {
+public:
+     void service(HttpServletRequest req, HttpServletResponse resp) {
+        String method = req.getMethod();
+
+        if (method.equals(METHOD_GET)) {
+            doGet(req, resp);
+        } else if (method.equals(METHOD_HEAD)) {
+            doHead(req, resp);
+        } else if (method.equals(METHOD_POST)) {
+            doPost(req, resp);
+        } else if (method.equals(METHOD_PUT)) {
+            doPut(req, resp);
+        } else if (method.equals(METHOD_DELETE)) {
+            doDelete(req, resp);
+        } else if (method.equals(METHOD_OPTIONS)) {
+            doOptions(req,resp);
+        } else if (method.equals(METHOD_TRACE)) {
+            doTrace(req,resp);
+        } else {
+            String errMsg = "http.method_not_implemented";
+            resp.sendError(HttpServletResponse.SC_NOT_IMPLEMENTED, errMsg);
+        }
+    }
+};
+
+class HelloServlet : public HttpServlet {
+protected:
+    void doGet(HttpServletRequest req, HttpServletResponse resp) override {
+        this->doPost(req, resp);
+    }
+
+protected:
+    void doPost(HttpServletRequest req, HttpServletResponse resp) override {
+        resp.getWriter().write("Hello World.");
+    }
+};
 
 int main() {
 
