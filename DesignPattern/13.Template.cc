@@ -1,47 +1,62 @@
-class HttpServlet {
-public:
-     void service(HttpServletRequest req, HttpServletResponse resp) {
-        String method = req.getMethod();
+#include <iostream>
 
-        if (method.equals(METHOD_GET)) {
-            doGet(req, resp);
-        } else if (method.equals(METHOD_HEAD)) {
-            doHead(req, resp);
-        } else if (method.equals(METHOD_POST)) {
-            doPost(req, resp);
-        } else if (method.equals(METHOD_PUT)) {
-            doPut(req, resp);
-        } else if (method.equals(METHOD_DELETE)) {
-            doDelete(req, resp);
-        } else if (method.equals(METHOD_OPTIONS)) {
-            doOptions(req,resp);
-        } else if (method.equals(METHOD_TRACE)) {
-            doTrace(req,resp);
-        } else {
-            String errMsg = "http.method_not_implemented";
-            resp.sendError(HttpServletResponse.SC_NOT_IMPLEMENTED, errMsg);
-        }
+#define P(x) std::cout << x << std::endl;
+
+class OrderProcessTemplate {
+public:
+    void processOrder() {
+        doSelect();
+        doPayment();
+        doDelivery();
+    }
+
+protected:
+    virtual void doSelect() = 0;
+    virtual void doPayment() = 0;
+    virtual void doDelivery() = 0;
+};
+
+
+class NetOrder : public OrderProcessTemplate {
+protected:
+    void doSelect() override {
+        P("Item added to online shopping cart");
+        P("Get delivery address.");
+    }
+
+    void doPayment() override {
+        P("Online Payment through Netbanking, card or Paytm");
+    }
+
+    void doDelivery() override {
+        P("Ship the item through post to delivery address");
     }
 };
 
-class HelloServlet : public HttpServlet {
+class StoreOrder : public OrderProcessTemplate {
 protected:
-    void doGet(HttpServletRequest req, HttpServletResponse resp) override {
-        this->doPost(req, resp);
+    void doSelect() override {
+        P("Customer chooses the item from shelf.");
     }
 
-protected:
-    void doPost(HttpServletRequest req, HttpServletResponse resp) override {
-        resp.getWriter().write("Hello World.");
+    void doPayment() override {
+        P("Pays at counter through cash/POS");
+    }
+
+    void doDelivery() override {
+        P("Item delivered to in delivery counter.");
     }
 };
 
 int main() {
-
-    return 0;
+    NetOrder netOrder;
+    netOrder.processOrder();
+    P("");
+    StoreOrder storeOrder;
+    storeOrder.processOrder();
 }
 
-/**
+/**ˇ
  * Define the skeleton of an algorithm in an operation, deferring somesteps to subclasses.
  * Template Method lets subclasses redefine certain steps of an algorithm
  * without changing the algorithm's structure.
