@@ -23,6 +23,16 @@
 2. Simple factory vs factory method:
  * If the Object creation is complex, use factory meothod, encapsulate the complexity into each subfactory; otherwise, use simple factory.
 
+## Factory Method
+
+1. Intent
+    * Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.
+
+## Abstract Factory
+1. Intent
+    * Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
+
+
 ## Builder
 1. Usage:
     1. There are many paramters in the contrcutor. Some are mandatory, some are optional. It's error-prone to use the constructor with many parameters.
@@ -58,6 +68,9 @@
 
 
 ## Decorator
+1. Intent
+    * Attach additional responsibilities to an object dynamically without altering its structure. Decorators provide a flexible alternative to subclassing for extending functionality.
+
 The decorator pattern maily solves the complexity problem of the inheritance, and replaces inheritance through composition. It's main role is to add enhancements to the original class.
 
 You can nest mutiple decorator classes to the original class, this requires the decorator classes need to inherit the same interface with the original class.
@@ -129,6 +142,8 @@ You can nest mutiple decorator classes to the original class, this requires the 
     * Let user add new functionality without change the framework.
 
 ## Iterator
+1. Intent
+    * Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
 
 ## State
 1. Definition
