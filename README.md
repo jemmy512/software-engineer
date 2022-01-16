@@ -273,6 +273,8 @@
     - [x] [Herb Sutter: Move Simply](https://herbsutter.com/2020/02/17/move-simply/)
     - [x] [C++ Move Semantics - The Complete Guide](http://cppmove.com/)
     - [x] [Andreas: Can I touch a moved-from object](https://andreasfertig.blog/2021/04/can-i-touch-a-moved-from-object/)
+    - [ ] [Scott Meyers: Universal References in C++11](https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers)
+    - [x] [C++ Proposal - Forwarding References](https://isocpp.org/files/papers/N4164.pdf)
 
 * C++17
     - [x] [Table: C++17 Features.pdf](https://github.com/Jemmy512/book-notes/blob/master/Cpp/table-cpp17-features.pdf)
@@ -403,6 +405,7 @@
 - [ ] [Red Hat Enterprise Linux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/)
 - [ ] [x86-TSO: A Rigorous and Usable Programmer’s Model for x86 Multiprocessors](https://www.cl.cam.ac.uk/~pes20/weakmemory/cacm.pdf)
 - [x] [Spurious wakeup](https://en.wikipedia.org/wiki/Spurious_wakeup)  [:link: C++ Condition Variable](https://www.modernescpp.com/index.php/c-core-guidelines-be-aware-of-the-traps-of-condition-variables)
+- [ ] [LWN.netNews Kernel Index](https://lwn.net/Kernel/Index)
 
 ### Kernel
 - [x] :pencil2: [Linux Kernel 4.19](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-kernel.md)
