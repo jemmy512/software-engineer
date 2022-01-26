@@ -157,8 +157,8 @@
     - [ ] [Implementing Remote Procedure Calls](https://www.cs.cmu.edu/~dga/15-712/F07/papers/birrell842.pdf)
 
 ## Database
-- [ ] :orange_book: Database System Concepts(Fifth Edition)
-- [ ] :orange_book: High Performance MySQL,3rd
+- [ ] :orange_book: Database System Concepts (Fifth Edition)
+- [ ] :orange_book: High Performance MySQL, 3rd
 - [ ] :orange_book: Inside MySAQL: InnoDB Storage Engine
 - [ ] :orange_book: Relational Database Index Design and the Optimizers
 - [ ] [MySQL Internals Manual](https://dev.mysql.com/doc/internals/en/)
@@ -171,13 +171,13 @@
 - [ ] [MySQL High Availability with InnoDB Cluster](https://www.mysql.com/cn/why-mysql/presentations/mysql-high-availability-innodb-cluster/)
 
 ## Data Structure
-- [ ] :orange_book: Data Structures and Algorithm Analysis in C:Second Edition
+- [ ] :orange_book: Data Structures and Algorithm Analysis in C: Second Edition
 
 ## Algorithm
 - [ ] :orange_book: Algorithms，Fouth Edition
 - [ ] :orange_book: Grokking Algorithms: An illustrated guide for programmers and other curious people
 - [ ] :orange_book: Programming Pearls (2/e)
-- [ ] :orange_book: Data Structures and Algorithm Analysis in C:Second Edition
+- [ ] :orange_book: Data Structures and Algorithm Analysis in C: Second Edition
 
 # Programming Language
 
