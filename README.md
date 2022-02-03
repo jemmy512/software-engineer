@@ -9,9 +9,11 @@
     5. [Publishing](#Publishing)
 * [Computer Science](#Computer-Science)
     1. [Operating System](#Computer-Science)
-    2. [Network](#Network)
-    3. [Data Structure](#Data-Structure)
-    4. [Database](#Database)
+    2. [Computer Architecture](#Computer-Architecture)
+    3. [Compilation](#Compilation)
+    4. [Network](#Network)
+    5. [Data Structure](#Data-Structure)
+    6. [Database](#Database)
 * [Programming Language](#Programming-Language)
     * [C/C++](#CC)
 * [System Design](#System-Design)
@@ -86,13 +88,26 @@
 * [Teach Yourself Computer Science](https://teachyourselfcs.com)
 
 ## Operating System
-- [ ] :orange_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
+- [x] :orange_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
 - [ ] :orange_book: Modern Operating Systems :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/modern-operating-system.md)
-- [ ] :orange_book: Advanced Programming in the UNIX Environment
+- [ ] :orange_book: Operating Systems: Three Easy Pieces
+- [ ] :orange_book: Operating System Concepts
+- [ ] :orange_book: Operating Systems Design and Implementation
 - [x] [CPU Registers x86](https://wiki.osdev.org/CPU_Registers_x86#General_Purpose_Registers)
 
+- [ ] :orange_book: Advanced Programming in the UNIX Environment
+
+## Computer Architecture
+- [ ] :orange_book: Computer Organization and Design: The Hardware/Sofeware Interface :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-organization-and-design.md)
+- [ ] :orange_book: Computer Architecture: A Quantitative Approach
+- [ ] :orange_book: Structure and Interpretation of Computer Programs
+
+## Compilation
+- [ ] :orange_book: Compilers: Principles, Techniques, and Tools
+- [x] :orange_book: Programmer Self-Cultivation: Linking, Loading and Libraries (CN) :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/programmer-self-cultivation-link-load-library.md)
+
 ## Network
-- [ ] :orange_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/tcp-ip-illustrated-volume-1.md)
+- [x] :orange_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/tcp-ip-illustrated-volume-1.md)
 - [ ] :orange_book: UNIX Network Programming, Volume 1: The Sockets Networking API :pencil2: [Book Notes: UNP](https://github.com/Jemmy512/book-notes/blob/master/Linux/unp.md) :pencil2: [Book Notes: Linux Programming](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-programming.md)
 - [ ] :orange_book: UNIX Network Programming, Volume 2: Interprocess Communications
 - [ ] :orange_book: [Linux System Programming](http://igm.univ-mlv.fr/~yahya/progsys/linux.pdf)
