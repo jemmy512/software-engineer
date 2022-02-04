@@ -609,7 +609,7 @@
     - [ ] [Key And Value `TODO`]()
     - [ ] [Lamport Clock `TODO`]()
     - [ ] [Paxos `TODO`]()
-    - [ ] [Replicated Log `TODO`]()
+    - [ ] [Replicated Log](https://martinfowler.com/articles/patterns-of-distributed-systems/replicated-log.html)
     - [ ] [Request Batch `TODO`]()
     - [ ] [Two Phase Commit `TODO`]()
     - [ ] [Version Vector `TODO`]()
