@@ -71,10 +71,10 @@ public:
         vector<vector<vector<int>>> dp(prices.size(), vector(N + 1, vector(2, 0)));
 
         for (auto i = 0; i < prices.size(); ++i) {
-            for (auto k = 1; k <= N; ++k) {
+            for (auto k = 0; k <= N; ++k) {
                 if (i == 0 || k == 0) {
                     dp[i][k][0] = 0;
-                    dp[i][k][1] = -prices[i];
+                    dp[i][k][1] = k == 0 ? INT_MIN : -prices[i];
                 } else {
                     dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]);
                     dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i]);
