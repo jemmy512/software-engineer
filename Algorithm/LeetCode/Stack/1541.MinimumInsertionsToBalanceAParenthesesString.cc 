@@ -1,6 +1,7 @@
 /* Medium
-Given a parentheses string s containing only the characters '(' and ')'. A parentheses string is balanced if:
+Given a parentheses string s containing only the characters '(' and ')'.
 
+A parentheses string is balanced if:
 Any left parenthesis '(' must have a corneedLeftponding two consecutive right parenthesis '))'.
 Left parenthesis '(' must go before the corneedLeftponding two consecutive right parenthesis '))'.
 In other words, we treat '(' as openning parenthesis and '))' as closing parenthesis.
@@ -11,12 +12,11 @@ You can insert the characters '(' and ')' at any position of the string to balan
 
 Return the minimum number of insertions needed to make s balanced.
 
-
 Example 1:
 Input: s = "(()))"
 Output: 1
 Explanation: The second '(' has two matching '))', but the first '(' has only ')' matching.
-We needRight to to add one more ')' at the end of the string to be "(())))" which is balanced.
+We rightNeeds to to add one more ')' at the end of the string to be "(())))" which is balanced.
 
 Example 2:
 Input: s = "())"
@@ -37,7 +37,6 @@ Example 5:
 Input: s = ")))))))"
 Output: 5
 Explanation: Add 4 '(' at the beginning of the string and one ')' at the end. The string becomes "(((())))))))".
-
 
 Constraints:
 1 <= s.length <= 10^5
@@ -66,26 +65,25 @@ using namespace std;
 class Solution {
 public:
     int minInsertions(string s) {
-        int insertCnt = 0, needRight = 0;
+        // insert is the number of left/right parentheses inserted.
+        // rightNeeds is the number of right parentheses needed.
+        int insert = 0, rightNeeds = 0;
 
-        for (int i = 0; i < s.size(); i++) {
-            if (s[i] == '(') {
-                needRight += 2;
-                if (needRight % 2 == 1) {
-                    insertCnt++; // insert a )
-                    needRight--;
+        for (auto chr : s) {
+            if (chr == '(') {
+                if (rightNeeds % 2 == 1) {
+                    ++insert;       // insert a )
+                    --rightNeeds;   // -- since insert alrady inserted a )
                 }
-            }
-
-            if (s[i] == ')') {
-                needRight--;
-                if (needRight == -1) {
-                    insertCnt++; // insert a (
-                    needRight = 1;
+                rightNeeds += 2;
+            } else if (chr == ')') {
+                if (--rightNeeds == -1) {
+                    ++insert;       // insert a (
+                    rightNeeds = 1;
                 }
             }
         }
 
-        return insertCnt + needRight;
+        return insert + rightNeeds;
     }
 };
