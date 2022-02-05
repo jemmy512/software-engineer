@@ -53,24 +53,24 @@ using namespace std;
 class Solution {
 public:
     int minAddToMakeValid(string s) {
-        int insertCnt = 0;
-        int needRight = 0;
+        // insert is the number of left/right parentheses inserted.
+        // rightNeeds is the number of right parentheses needed.
+        int insert = 0;
+        int rightNeeds = 0;
 
         for (const auto& chr : s) {
             if (chr == '(') {
-                ++needRight;
-            }
-
-            if (chr == ')') {
-                --needRight;
-                if (needRight == -1) {
-                    ++insertCnt; // insert a (
-                    needRight = 0;
+                ++rightNeeds;
+            } else if (chr == ')') {
+                --rightNeeds;
+                if (rightNeeds == -1) {
+                    ++insert;       // insert a (
+                    rightNeeds = 0;
                 }
             }
         }
 
-        return insertCnt + needRight;
+        return insert + rightNeeds;
     }
 };
 
