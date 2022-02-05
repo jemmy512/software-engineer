@@ -30,7 +30,9 @@ Constraints:
 m == dungeon.length
 n == dungeon[i].length
 1 <= m, n <= 200
--1000 <= dungeon[i][j] <= 1000 */
+-1000 <= dungeon[i][j] <= 1000
+
+The key point is not to eat the most blood vials, but to lose the least amount of health */
 
 #include <climits>
 #include <vector>
@@ -48,6 +50,7 @@ public:
     }
 
 private:
+    // returns the minimal health from [row, col] to the bottom-right cornel
     int dp(const vector<vector<int>>& dungeon, int row, int col) {
         if (row == RowSize - 1 && col == ColSize - 1)
             return dungeon[row][col] >= 0 ? 1 : -dungeon[row][col] + 1;
@@ -58,7 +61,7 @@ private:
         if (Memo[row][col] != -1)
             return Memo[row][col];
 
-        auto ret = min(dp(dungeon, row + 1, col), dp(dungeon, row, col + 1)) -dungeon[row][col];
+        auto ret = min(dp(dungeon, row + 1, col), dp(dungeon, row, col + 1)) - dungeon[row][col];
         Memo[row][col] = ret <= 0 ? 1 : ret;
 
         return Memo[row][col];
