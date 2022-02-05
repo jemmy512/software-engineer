@@ -83,8 +83,14 @@ public:
         if (wordDict.empty())
             return false;
 
-        memo = vector<int>(wordDict.size(), -1);
-        _Dict.insert(wordDict.cbegin(), wordDict.cend());
+        const auto [minIte, maxIte] = minmax_element(wordDict.cbegin(), wordDict.cend(), [](const auto& lhs, const auto& rhs) {
+            return lhs.size() < rhs.size();
+        });
+        MinDicLen = minIte->size();
+        MaxDicLen = maxIte->size();
+
+        Memo = vector<int>(s.size(), -1);
+        Dict.insert(wordDict.cbegin(), wordDict.cend());
 
         return backtrack(s, 0);
     }
@@ -94,25 +100,32 @@ private:
         if (beg == s.size())
             return true;
 
-        if (memo[beg] != -1)
-            return memo[beg] == 1;
+        if (Memo[beg] != -1)
+            return Memo[beg] == 1;
 
-        for (int end = beg + 1; end <= s.size(); ++end) {
+        for (int end = beg + MinDicLen; end <= min(s.size(), beg + MaxDicLen); ++end) {
             if (find(s, beg, end) && backtrack(s, end)) {
-                return memo[beg] = 1;
+                return Memo[beg] = 1;
             }
         }
 
-        return memo[beg] = 0;
+        return Memo[beg] = 0;
     }
 
     bool find(const string& s, int beg, int end) {
-        return _Dict.find(s.substr(beg, end-beg)) != _Dict.cend();
+        return isValidLen(beg, end) && Dict.find(s.substr(beg, end-beg)) != Dict.cend();
+    }
+
+    bool isValidLen(int beg, int end) {
+        auto len = end - beg;
+        return len >= MinDicLen && len <= MaxDicLen;
     }
 
 private:
-    vector<int> memo;
-    unordered_set<string> _Dict;
+    vector<int> Memo;
+    std::size_t MinDicLen{ 0 };
+    std::size_t MaxDicLen{ 0 };
+    unordered_set<string> Dict;
 };
 
 /* backtrack, burt force, timeout
