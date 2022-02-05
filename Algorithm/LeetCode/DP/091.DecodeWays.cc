@@ -39,26 +39,26 @@ s contains only digits and may contain leading zero(s). */
 using namespace std;
 
 /* dp[i] = 0;
- * dp[i] += dp[i-1] // if (isValid(s[i]))
- * dp[i] += dp[i-2] // if (isVlaid(s[i-1], s[i]) */
+ * dp[i] += dp[i-1] // if (isDigit(s[i]))
+ * dp[i] += dp[i-2] // if (isDigit(s[i-1], s[i]) */
 class Solution {
 public:
     int numDecodings(string s) {
         if (s.empty())
             return 0;
         if (s.size() == 1) {
-            return isValid(s[0]) ? 1 : 0;
+            return isDigit(s[0]) ? 1 : 0;
         }
 
-        int prevTwoSteps = isValid(s[0]) ? 1 : 0;
-        int prevOneStep = (isValid(s[1]) ? prevTwoSteps : 0) + (isValid(s[0], s[1]) ? 1 : 0);
+        int prevTwoSteps = isDigit(s[0]) ? 1 : 0;
+        int prevOneStep = (isDigit(s[1]) ? prevTwoSteps : 0) + (isDigit(s[0], s[1]) ? 1 : 0);
 
         for (int i = 2; i < s.size(); ++i) {
             int path = 0;
-            if (isValid(s[i])) {
+            if (isDigit(s[i])) {
                 path += prevOneStep;
             }
-            if (isValid(s[i-1], s[i])) {
+            if (isDigit(s[i-1], s[i])) {
                 path += prevTwoSteps;
             }
 
@@ -70,11 +70,11 @@ public:
     }
 
 private:
-    bool isValid(char ch) {
-        return ch >= '1' && ch <= '9';
+    bool isDigit(char ones) {
+        return ones >= '1' && ones <= '9';
     }
 
-    bool isValid(char ch, char cha) {
-        return ch == '1' || (ch == '2' && cha <= '6');
+    bool isDigit(char tens, char ones) {
+        return tens == '1' || (tens == '2' && ones <= '6');
     }
 };
