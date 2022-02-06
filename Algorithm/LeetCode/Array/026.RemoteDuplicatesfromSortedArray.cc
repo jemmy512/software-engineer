@@ -40,7 +40,7 @@ It doesn't matter what values are set beyond the returned length.
 Constraints:
 0 <= nums.length <= 3 * 10^4
 -10^4 <= nums[i] <= 10^4
-nums is sorted in ascending order. 
+nums is sorted in ascending order.
 
 Relatives:
 019. Remove Nth Node From End of List
@@ -48,12 +48,12 @@ Relatives:
 026. Remove Duplicates from Sorted Array
 080. Remove Duplicates from Sorted Array II
 083. Remove Duplicates from Sorted List
-082. Remove Duplicates from Sorted List II 
+082. Remove Duplicates from Sorted List II
 203. Remove Linked List Elements
 237. Delete Node In A Linked List
 283. Move Zeroes
 1474. Delete N Nodes After M Nodes of a Linked List
-1721. Swapping Nodes in a Linked List 
+1721. Swapping Nodes in a Linked List
 1836. Remove Duplicates From an Unsorted Linked List */
 
 #include<iostream>
