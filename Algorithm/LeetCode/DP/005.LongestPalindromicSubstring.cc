@@ -22,6 +22,7 @@ Relatives:
 336. Palindrome Pairs */
 
 #include <string>
+#include <string_view>
 #include <utility>
 
 using namespace std;
@@ -31,39 +32,33 @@ using namespace std;
  * O(N^2)
  * O(N^2)
  * the number between (left, right) is right-left-1
- * the number in [left, right]      is right-left+1 */
+ * the number in      [left, right] is right-left+1 */
 class Solution {
 public:
     string longestPalindrome(string s) {
-        int len = s.size();
-        int beg = 0, cnt = 0;
+        std::string_view retView;
 
-        for (int i = 0; i < len; ++i) {
-            auto [left, right] = extend(s, i, i);       // aba
-            auto [left_, right_] = extend(s, i, i+1);   // abba
+        for (int i = 0; i < s.size(); ++i) {
+            auto abaView = palindrome(s, i, i);      // aba
+            auto abbaView = palindrome(s, i, i+1);   // abba
 
-            if (right-left > cnt) {
-                beg = left;
-                cnt = right-left;
-            }
-
-            if (right_-left_ > cnt) {
-                beg = left_;
-                cnt = right_-left_;
-            }
+            if (abaView.size() > retView.size())
+                retView = abaView;
+            if (abbaView.size() > retView.size())
+                retView = abbaView;
         }
 
-        return s.substr(beg, cnt);
+        return string(retView);
     }
 
 private:
-    pair<int, int> extend(const string& str, int left, int right) {
+    std::string_view palindrome(const string& str, int left, int right) {
         while (left >= 0 && right < str.size() && str[left] == str[right]) {
             --left;
             ++right;
         }
 
-        return {left+1, right};
+        return string_view(&str[left+1], right - left - 1);
     }
 };
 
