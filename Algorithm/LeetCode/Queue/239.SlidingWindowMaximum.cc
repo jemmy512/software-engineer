@@ -24,13 +24,13 @@ Window position                Max
 Constraints:
 1 <= nums.length <= 10^5
 -10^4 <= nums[i] <= 10^4
-1 <= k <= nums.length 
+1 <= k <= nums.length
 
 Relatives:
 076. Minimum Window Substring
 155. Min Stack
 239. Sliding Window Maximum
-1696. Jump Game VI 
+1696. Jump Game VI
 
 123. Best Time to Buy and Sell Stock III
 238. Product of Array Except Self */
@@ -40,7 +40,7 @@ Relatives:
 
 using namespace std;
 
-/* dp solution 
+/* dp solution
  * Time complexity: O(N), since all we do is 3 passes along the array of length N.
  * Space complexity: O(N) to keep left and right arrays of length N, and output array of length N - k + 1.*/
 class Solution {
