@@ -101,6 +101,7 @@ public:
     int longestCommonSubsequence(string strA, string strB) {
         int lenA = strA.length();
         int lenB = strB.length();
+        // the lcs of strA[0, i] and strB[0, j] is dp[i][j]
         vector<vector<int>> dp(lenA+1, vector(lenB+1, 0));
 
         for (int i = 1; i <= lenA; i++) {
