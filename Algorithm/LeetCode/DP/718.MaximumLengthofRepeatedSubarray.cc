@@ -22,7 +22,7 @@ Relatives:
 
 using namespace std;
 
-/* top down
+/* bottom up
  * dp[i][j] = dp[i+1][j+1] + 1 */
 class Solution {
 public:
