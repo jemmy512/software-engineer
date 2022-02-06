@@ -46,20 +46,18 @@ int lengthOfLongestSubstring(string str) {
 }
 
 /* Sliding windown */
-int lengthOfLongestSubstring(string str) {
-    int beg = 0, end = 0;
+int lengthOfLongestSubstring(string s) {
     int maxLen = 0;
-    unordered_map<char, int> window;
+    int beg = 0, end = 0;
+    unordered_map<char, int> dict;
 
-    while (end < str.size()) {
-        auto chrEnd = str[end];
-        ++end;
-        ++window[chrEnd];
+    while (end < s.size()) {
+        auto chrEnd =  s[end++];
+        ++dict[chrEnd];
 
-        while (window[chrEnd] > 1) {
-            auto chrBeg = str[beg];
-            ++beg;
-            --window[chrBeg];
+        while (dict[chrEnd] > 1) {
+            auto chrBeg = s[beg++];
+            --dict[chrBeg];
         }
 
         maxLen = max(maxLen, end - beg);
