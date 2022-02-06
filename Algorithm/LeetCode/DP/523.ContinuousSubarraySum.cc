@@ -17,6 +17,12 @@ Note:
 The length of the array won't exceed 10,000.
 You may assume the sum of all the numbers is in the range of a signed 32-bit integer.
 
+Constraints:
+1 <= nums.length <= 10^5
+0 <= nums[i] <= 10^9
+0 <= sum(nums[i]) <= 2^31 - 1
+1 <= k <= 2^31 - 1
+
 Realtives:
 053. Maximum Subarray
 209. Minimum Size Subarray Sum
@@ -45,9 +51,7 @@ public:
         hashMap.emplace(0, -1);
 
         for (int i = 0; i < nums.size(); ++i) {
-            sum += nums[i];
-            if (k != 0)
-                sum = sum % k;
+            sum = (sum + nums[i]) % k;
             if (hashMap.contains(sum)) {
                 if (i - hashMap[sum] > 1)
                     return true;
