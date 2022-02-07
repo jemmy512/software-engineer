@@ -27,6 +27,7 @@ Relatives:
 
 #include <climits>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -56,7 +57,7 @@ private:
         if (Memo[row][col] != INT_MAX)
             return Memo[row][col];
 
-        Memo[row][col] = matrix[row][col] + min(dp(matrix, row-1, col), min(dp(matrix, row-1, col-1), dp(matrix, row-1, col+1)));
+        Memo[row][col] = matrix[row][col] + min({ dp(matrix, row-1, col), dp(matrix, row-1, col-1), dp(matrix, row-1, col+1) });
 
         return Memo[row][col];
     }
