@@ -34,7 +34,6 @@ using namespace std;
 class Solution {
 public:
     int minFallingPathSum(vector<vector<int>>& matrix) {
-        auto result = 0;
         const auto rowSize = matrix.size();
         const auto colSize = matrix[0].size();
 
@@ -42,7 +41,7 @@ public:
             for (auto col = 0; col < colSize; ++col) {
                 const auto tmp = matrix[row-1][col];
                 matrix[row-1][col] = INT_MAX;
-                result = matrix[row][col] += *min_element(matrix[row-1].cbegin(), matrix[row-1].cend());
+                matrix[row][col] += *min_element(matrix[row-1].cbegin(), matrix[row-1].cend());
                 matrix[row-1][col] = tmp;
             }
         }
