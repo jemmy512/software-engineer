@@ -46,7 +46,7 @@ public:
     }
 
 private:
-    // use k egges to test n floors
+    // k egges can drop at most n times
     int dp(int k, int n) {
         if (k == 1) return n;
         if (n == 0) return 0;
