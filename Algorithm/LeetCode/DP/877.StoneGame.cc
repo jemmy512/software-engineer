@@ -46,6 +46,38 @@ Relatives:
 
 using namespace std;
 
+class Solution {
+public:
+    bool stoneGame(vector<int>& piles) {
+        const auto len = piles.size();
+        // dp[i][j][0] the stones of the first one to take stones from piles[i, j]
+        // dp[i][j][1] the stones of the second one to take stones from piles[i, j]
+        vector<vector<vector<int>>> dp(vector(len, vector(len, vector(2, 0))));
+
+        for (auto i = 0; i < len; ++i) {
+            dp[i][i][0] = piles[i];
+            dp[i][i][1] = 0;
+        }
+
+        for (int i = len - 2; i >= 0; --i) {
+            for (int j = i + 1; j < len; ++j) {
+                auto left = piles[i] + dp[i+1][j][1];
+                auto right = piles[j] + dp[i][j-1][1];
+
+                if (left > right) {
+                    dp[i][j][0] = left;
+                    dp[i][j][1] = dp[i+1][j][1];
+                } else {
+                    dp[i][j][0] = right;
+                    dp[i][j][1] = dp[i][j-1][1];
+                }
+            }
+        }
+
+        return dp[0][len-1][0] > dp[0][len-1][1];
+    }
+};
+
 /* Mathematical */
 class Solution {
 public:
