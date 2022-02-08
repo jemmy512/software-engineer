@@ -60,6 +60,33 @@ public:
     }
 };
 
+class Solution {
+public:
+    int maxA(int n) {
+        // dp[i][0] the number of A if (A)
+        // dp[i][1] selection buffer size if (Ctrl-A)
+        // dp[i][2] copy buffer size if (Ctrl-C)
+        // dp[i][3] the number of A if (Ctrl-V)
+        vector<vector<int>> dp(n, vector(4, 0));
+
+        dp[0][0] = 1;
+
+        for (auto i = 1; i < n; ++i) {
+            auto prevMax = max(dp[i-1][0], dp[i-1][3]);
+            dp[i][0] = prevMax + 1;
+            dp[i][1] = prevMax;
+            dp[i][2] = dp[i-1][1];
+
+            for (auto j = 2; j < i; ++j) {
+                dp[i][3] = max(dp[i][3], dp[j][2] * (i-j + 1));
+            }
+
+        }
+
+        return max(dp[n-1][0], dp[n-1][3]);
+    }
+};
+
 /* O(N^3) Time Limit Exceed
 This solution can form unefficient sequences:
 1. C-A C-C C-A C-C ... whiout C-V, the number of 'A' never changes
