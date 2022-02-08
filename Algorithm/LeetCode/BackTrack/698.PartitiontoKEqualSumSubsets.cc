@@ -14,17 +14,25 @@ Output: false
 Constraints:
 1 <= k <= nums.length <= 16
 1 <= nums[i] <= 10^4
-The frequency of each element is in the range [1, 4]. */
+The frequency of each element is in the range [1, 4].
+
+Relatives:
+416. Partition Equal Subset Sum
+698. Partition to K Equal Sum Subsets
+1981. Minimize the Difference Between Target and Chosen Elements
+2025. Maximum Number of Ways to Partition an Array
+2035. Partition Array Into Two Arrays to Minimize Sum Difference */
 
 #include <list>
 #include <vector>
 #include <numeric>
 #include <algorithm>
+#include <unordered_map>
 
 using namespace std;
 
 /* from the perspective of bucket
- * O(k^n) */
+ * O(k*2^n) */
 class Solution {
 public:
     bool canPartitionKSubsets(vector<int>& nums, int k) {
@@ -35,41 +43,49 @@ public:
         if (sum % k != 0)
             return false;
 
-        Used.resize(nums.size(), 0);
+        int used = 0;
 
-        return backtrack(k, 0, nums, 0, sum / k);
+        return backtrack(k, 0, nums, 0, sum / k, used);
     }
 
 private:
-    bool backtrack(const int bktI, const int bktISum, const vector<int>& nums, int pos, const int target) {
+    bool backtrack(const int bktI, const int bktISum, const vector<int>& nums, int pos, const int target, int used) {
         if (bktI == 0)
             return true;
-        if (bktISum == target)
-            return backtrack(bktI - 1, 0, nums, 0, target);
+
+        if (bktISum == target) {
+            auto ret = backtrack(bktI - 1, 0, nums, 0, target, used);
+            Memo[used] = ret;
+            return ret;
+        }
+
+        if (Memo.count(used)) {
+            return Memo[used];
+        }
 
         for (; pos < nums.size(); ++pos) {
-            if (Used[pos])
+            if ((used >> pos) & 1 == 1)
                 continue;
 
             if (nums[pos] + bktISum > target)
                 continue;
 
-            Used[pos] = true;
-            if (backtrack(bktI, bktISum + nums[pos], nums, pos + 1, target)) {
+            used |= 1 << pos;
+            if (backtrack(bktI, bktISum + nums[pos], nums, pos + 1, target, used)) {
                 return true;
             }
-            Used[pos] = false;
+            used ^= 1 << pos;
         }
 
         return false;
     }
 
 private:
-    vector<int> Used;
+    unordered_map<int, int> Memo;
 };
 
 /* from the perspective of digit
- * O(k*2^n) */
+ * O(k^n) */
 class Solution {
 public:
     bool canPartitionKSubsets(vector<int>& nums, int k) {
