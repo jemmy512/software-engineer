@@ -35,15 +35,16 @@ public:
     }
 
     void combination(const string& digits, int idx, string& curStr) {
-        if (idx == digits.size())
-            return;
-
-        for (const auto& chr : _HashMap[digits[idx]]) {
-            curStr += chr;
-            combination(digits, idx+1, curStr);
-            if (idx == digits.size()-1) {
+        if (idx == digits.size()) {
+            if (!curStr.empty()) {
                 _Result.emplace_back(curStr);
             }
+            return;
+        }
+
+        for (const auto& chr : _HashMap[digits[idx]]) {
+            curStr.push_back(chr);
+            combination(digits, idx+1, curStr);
             curStr.pop_back();
         }
     }
@@ -51,14 +52,14 @@ public:
 private:
     vector<string> _Result;
     unordered_map<char, string> _HashMap = {
-        { '2', "abc"},
-        { '3', "def"},
-        { '4', "ghi"},
-        { '5', "jkl"},
-        { '6', "mno"},
-        { '7', "pqrs"},
-        { '8', "tuv"},
-        { '9', "wxyz"},
+        { '2', "abc" },
+        { '3', "def" },
+        { '4', "ghi" },
+        { '5', "jkl" },
+        { '6', "mno" },
+        { '7', "pqrs" },
+        { '8', "tuv" },
+        { '9', "wxyz" }
     };
 };
 
