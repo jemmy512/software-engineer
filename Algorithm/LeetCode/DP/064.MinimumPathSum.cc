@@ -29,6 +29,32 @@ using namespace std;
 class Solution {
 public:
     int minPathSum(const vector<vector<int>>& grid) {
+        const auto rowSize = grid.size();
+        const auto colSize = grid[0].size();
+        vector<vector<int>> dp(rowSize, vector(colSize, 0));
+
+        dp[0][0] = grid[0][0];
+        for (auto row = 1; row < rowSize; ++row) {
+            dp[row][0] = dp[row-1][0] + grid[row][0];
+        }
+        for (auto col = 1; col < colSize; ++col) {
+            dp[0][col] = dp[0][col-1] + grid[0][col];
+        }
+
+        for (auto row = 1; row < rowSize; ++row) {
+            for (auto col = 1; col < colSize; ++col) {
+                dp[row][col] = min(dp[row-1][col], dp[row][col-1]) + grid[row][col];
+            }
+        }
+
+        return dp[rowSize-1][colSize-1];
+    }
+};
+
+// the program can cause lots of CPU hazard than the first one
+class Solution {
+public:
+    int minPathSum(const vector<vector<int>>& grid) {
         int rowSize = grid.size();
         int colSize = grid[0].size();
         vector<int> sum(colSize, 0);
@@ -49,30 +75,5 @@ public:
         }
 
         return sum.back();
-    }
-};
-
-class Solution {
-public:
-    int minPathSum(const vector<vector<int>>& grid) {
-        const auto rowSize = grid.size();
-        const auto colSize = grid[0].size();
-        vector<vector<int>> dp(rowSize, vector(colSize, 0));
-
-        dp[0][0] = grid[0][0];
-        for (auto row = 1; row < rowSize; ++row) {
-            dp[row][0] = dp[row-1][0] + grid[row][0];
-        }
-        for (auto col = 1; col < colSize; ++col) {
-            dp[0][col] = dp[0][col-1] + grid[0][col];
-        }
-
-        for (auto row = 1; row < rowSize; ++row) {
-            for (auto col = 1; col < colSize; ++col) {
-                dp[row][col] = min(dp[row-1][col], dp[row][col-1]) + grid[row][col];
-            }
-        }
-
-        return dp[rowSize-1][colSize-1];
     }
 };
