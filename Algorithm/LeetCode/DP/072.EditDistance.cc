@@ -158,13 +158,11 @@ private:
         if (src[i] == dst[j]) {
             Memo[i][j] = dp(src, i - 1, dst, j - 1);
         } else {
-            Memo[i][j] =  1 + min(
-                dp(src, i, dst, j - 1),         // insert
-                min(
-                    dp(src, i - 1, dst, j),     // delete
-                    dp(src, i - 1, dst, j - 1)  // replace
-                )
-            );
+            Memo[i][j] =  1 + min({
+                dp(src, i, dst, j - 1),     // insert
+                dp(src, i - 1, dst, j),     // delete
+                dp(src, i - 1, dst, j - 1)  // replace
+            });
         }
 
         return Memo[i][j];
