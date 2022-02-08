@@ -100,7 +100,7 @@ private:
             return (rest == 0) ? 1 : 0;
         }
 
-        const auto key = to_string(i) + "," + to_string(rest);
+        const auto key = i * 10000 + rest;
         if (Memo.find(key) != Memo.end()) {
             return Memo[key];
         }
@@ -112,7 +112,7 @@ private:
     }
 
 private:
-    unordered_map<string, int> Memo;
+    unordered_map<int, int> Memo;
     /* 'unordered_map<
             std::pair<int, int>,
             int,
