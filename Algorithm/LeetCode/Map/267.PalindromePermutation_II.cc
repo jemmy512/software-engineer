@@ -44,28 +44,36 @@ public:
         if (!canPermutePalindrome(s, hashMap))
             return {};
 
-        char chr = 0;
+        char singleChar = 0;
         for (const auto& [key, cnt] : hashMap) {
-            chr = (cnt % 2 == 1) ? key : chr;
+            singleChar = (cnt % 2 == 1) ? key : singleChar;
             chars.insert(chars.end(), cnt/2, key);
         }
-        permute(chars, 0, chr);
+        permute(chars, 0, singleChar);
 
-        return vector<string>(hashSet.begin(), hashSet.end());
+        return result;
     }
 
 private:
-    void permute(vector<char>& s, int pos, char chr) {
+    bool canSwap(vector<char>& str, int beg, int end) {
+        for (; beg < end; ++beg) {
+            if (str[beg] == str[end])
+                return false;
+        }
+        return true;
+    }
+
+    void permute(vector<char>& s, int pos, char singleChar) {
         if (pos == s.size()) {
-            hashSet.insert(
+            result.emplace_back(
                 string(s.begin(), s.end())
-                .append(chr == 0 ? string() : string(1, chr))
+                .append(singleChar == 0 ? string() : string(1, singleChar))
                 .append(s.rbegin(), s.rend()));
         } else {
             for (int i = pos; i < s.size(); i++) {
-                if (s[pos] != s[i] || pos == i) {
+                if (canSwap(s, pos, i)) {
                     swap(s[pos], s[i]);
-                    permute(s, pos + 1, chr);
+                    permute(s, pos + 1, singleChar);
                     swap(s[pos], s[i]);
                 }
             }
@@ -82,5 +90,5 @@ private:
     }
 
 private:
-    unordered_set<string> hashSet;
+    vector<string> result;
 };
