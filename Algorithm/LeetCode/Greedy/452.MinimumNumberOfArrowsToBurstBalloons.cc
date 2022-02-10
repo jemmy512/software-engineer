@@ -52,7 +52,7 @@ Relatives:
 
 using namespace std;
 
-/* Greedy algorithms: sort by start coordinate */
+/* Greedy algorithms: sort by end coordinate */
 class Solution {
 public:
     int findMinArrowShots(vector<vector<int>>& points) {
@@ -60,16 +60,14 @@ public:
             return 0;
 
         std::sort(points.begin(), points.end(), [](const auto& lhs, const auto& rhs) {
-           return lhs[0] < rhs[0];
+           return lhs[1] < rhs[1];
         });
 
         int arrows = 1;
         int prevEnd = points[0][1];
 
         for (const auto& point : points) {
-            if (point[0] <= prevEnd) {
-                prevEnd = min(prevEnd, point[1]);
-            } else {
+            if (point[0] > prevEnd) {
                 ++arrows;
                 prevEnd = point[1];
             }
