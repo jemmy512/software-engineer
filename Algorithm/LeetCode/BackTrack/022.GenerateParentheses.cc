@@ -26,35 +26,37 @@ using namespace std;
  * 1. the number of '(' is the same as ')' in a well-formed parentheses
  * 2. 0 <= i < size, [0, i] has much '(' than ')' */
 
-/* Approach: backtrack */
 class Solution {
 public:
     vector<string> generateParenthesis(int n) {
+        Len = n;
         string str;
-        str.reserve(n*2);
-        max = n;
+        str.reserve(2 * Len);
         backtrack(str, 0, 0);
-        return vec;
+
+        return Result;
     }
 
 private:
     void backtrack(string& cur, int open, int close) {
-        if (cur.size() == 2 * max) {
-            vec.push_back(cur);
+        if (cur.size() == 2 * Len) {
+            Result.push_back(cur);
             return;
         }
 
-        if (open < max) {
-            backtrack(cur += "(", open + 1, close);
+        if (open < Len) {
+            cur.push_back('(');
+            backtrack(cur, open + 1, close);
             cur.pop_back();
         }
         if (close < open) {
-            backtrack(cur += ")", open, close + 1);
+            cur.push_back(')');
+            backtrack(cur, open, close + 1);
             cur.pop_back();
         }
     }
 
 private:
-    int max;
-    vector<string> vec;
+    int Len{ 0 };
+    vector<string> Result;
 };
