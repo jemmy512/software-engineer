@@ -20,11 +20,19 @@ Explanation:
 (2*((3-4)*5)) = -10
 (((2*3)-4)*5) = 10
 
-
 Constraints:
 1 <= expr.length <= 20
 expr consists of digits and the operator '+', '-', and '*'.
-All the integer values in the input expr are in the range [0, 99]. */
+All the integer values in the input expr are in the range [0, 99].
+
+Relativeness:
+096. Unique Binary Search Trees
+095. Unique Binary Search Trees II
+224. Basic Calculator
+227. Basic Calculator II
+772. Basic Calculator III
+282. Expression Add Operators
+2019. The Score of Students Solving Math Expression */
 
 #include <string>
 #include <vector>
@@ -70,5 +78,8 @@ public:
     }
 
 private:
+    /* duplicates:
+     * (1 + 1) + (1 + 1 + 1)
+     * (1 + 1 + 1) + (1 + 1) */
     map<string, vector<int>> _Memo;
 };
