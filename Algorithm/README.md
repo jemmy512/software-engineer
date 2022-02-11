@@ -5,7 +5,7 @@ No | Title | Difficulty | Notes
 -- | -- | --- | ---
 006 | Zig Zag Conversion | :star: :star: |
 007 | Reverse Integer | :star: |
-009 | Palindrom Number | :star: |
+009 | Palindrom Number | :star: | :one:
 015 | 3 Sum | :star: :star: |
 016 | 3 Sum Closest | :star: :star: |
 018 | 4 Sum | :star: :star: |
@@ -47,37 +47,37 @@ No | Title | Difficulty | Notes
 011 | Container With Most Water | :star: :star: :star: | `Two Pointers`
 041 | First Missing Positive | :star: :star: :star: |
 054 | Spiral Matrix | :star: :star: | `Matrix`
-056 | Merge Intervals | :star: :star: | `Interval`
-057 | Insert Intervals | :star: :star: | `Interval`
-252 | Meeting Rooms | :star: | `Interval`
-253 | Meeting Rooms II | :star: :star: | `Interval`
-986 | Interval List Intersections | :star: :star: | `Interval`
-1288 | Remove Covered Intervals | :star: :star: | `Interval`
-027 | Remove Element | :star: | `Two Pointers`
-026 | Remove Duplicates from Sorted Array | :star: | `Two Pointers`
-080 | Remove Duplicates from Sorted Array II | :star: :star: | `Can dup N`
-083 | Remove Duplicates from Sorted List | :star: | `Two Pointers`
-082 | Remove Duplicates from Sorted List II | :star: :star: |
-316 | Remove Duplicate Letters | :star: :star: :star: |
+056 | Merge Intervals | :star: :star: | :one: `Interval`
+057 | Insert Intervals | :star: :star: | :one: `Interval`
+252 | Meeting Rooms | :star: | :one: `Interval`
+253 | Meeting Rooms II | :star: :star: | :one: `Interval`
+986 | Interval List Intersections | :star: :star: | :one: `Interval`
+1288 | Remove Covered Intervals | :star: :star: | :one: `Interval`
+027 | Remove Element | :star: | :one: `Two Pointers`
+026 | Remove Duplicates from Sorted Array | :star: | :one: `Two Pointers`
+080 | Remove Duplicates from Sorted Array II | :star: :star: | :one: `Can dup N`
+083 | Remove Duplicates from Sorted List | :star: | :one: `Two Pointers`
+082 | Remove Duplicates from Sorted List II | :star: :star: | :one: `Two Pointers`
+316 | Remove Duplicate Letters | :star: :star: :star: | :one:
 048 | Rotate Image | :star: :star: |
-088 | Merge Sorted Array | :star: |
+088 | Merge Sorted Array | :star: | :one:
 169 | Majority Element | :star: | [:link: Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html)
 189 | Rotate Array | :star: :star: |
-209 | Minimum Size Subarray Sum | :one: :star: :star: | `Prefix Sum` `BS` `Two Pointers`
+209 | Minimum Size Subarray Sum | :star: :star: | :one: `Prefix Sum` `BS` `Two Pointers`
 303 | Range Sum Query Immutable | :star: | `Prefix Sum`
 307 | Range Sum Query Mutable | :star: :star: | `Segment Tree`
 304 | Range Sum Query 2D Immutable | :star: :star: | `Prefix Sum`
 325 | Maximum Size Subarray Sum Equals k | :star: :star: | `Prefix Sum` `Map`
-370 | Range Addition | :star: :star: | `Diff Array` `Prefix Sum`
-598 | Range Addition II | :star: | `Diff Array`
-1094 | Car Pooling | :star: :star: | `Diff Array`
-1109 | Corporate Flight Bookings | :star: :star: | `Diff Array` `Prefix Sum`
+370 | Range Addition | :star: :star: | :one: `Diff Array` `Prefix Sum`
+598 | Range Addition II | :star: | :one: `Diff Array`
+1094 | Car Pooling | :star: :star: | :one: `Diff Array`
+1109 | Corporate Flight Bookings | :star: :star: | :one: `Diff Array` `Prefix Sum`
 560 | Subarray Sum Equals K | :star: :star: | `Prefix Sum` `Map`
 217 | Contains Duplicate I | :star: |
 219 | Contains Duplicate II | :star: |
 220 | Contains Duplicate III | :star: :star: | `bucket sort`
 238 | Product of Array Except Self  | :star: :star: | `L-R vec`
-239 | Sliding Window Maximum | :star: :star: :star: | :thinking: `DP` `L-R vec`
+239 | Sliding Window Maximum | :star: :star: :star: | :one: :thinking: `DP` `L-R vec`
 283 | Move Zeroes | :star: :star: | `Two Pointers`
 448 | Find All Numbers Disappeared in An Array | :star: |
 870 | Advantage Shuffle | :star: :star: |
@@ -90,8 +90,8 @@ No | Title | Difficulty | Notes
 445 | Add Two Numbers II | :star: :star: |
 019 | Remove Nth Node From End of List | :star: :star: |
 203 | Remove Linked List Element | :star: |
-021 | Merge Two Sorted Lists | :star: |
-023 | Merge K Sorted List | :star: :star: :star: | `K-way Merge` `Divide Conquer`
+021 | Merge Two Sorted Lists | :star: | :one:
+023 | Merge K Sorted List | :star: :star: :star: | :one: `K-way Merge` `Divide Conquer`
 025 | Reverse Nodes in K-Group | :star: :star: :star: |
 206 | Reverse Linkded List | :star: | `3 solutions`
 092 | Reverse Linked List II | :star: :star: |
@@ -103,10 +103,10 @@ No | Title | Difficulty | Notes
 142 | Linked List Cycle II | :star: :star: | `Two Pointers` `Cycle`
 287 | Find the Duplicate Number | :star: :star: | `Two Pointers` `Cycle`
 143 | Reorder List | :star: :star: |
-147 | Insertion Sorted List | :star: :star: |
-148 | Sort List | :star: :star: | `Div-Conq` `Merge sort`
+147 | Insertion Sorted List | :star: :star: | :one: `Insertion sort`
+148 | Sort List | :star: :star: | :one: `Div-Conq` `Merge sort`
 160 | Intersection of Two Linked Lists | :star: |
-234 | Palindrome Linked List | :star: |
+234 | Palindrome Linked List | :star: | :one:
 237 | Delete Node In A Linked List | :star: |
 328 | Odd Even Linked List | :star: :star: |
 725 | Split Linked List in Parts | :star: :star: |
@@ -116,7 +116,7 @@ No | Title | Difficulty | Notes
 ## Tree
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-095 | Unique Binary Search Trees  | :star: :star: |
+095 | Unique Binary Search Trees II | :star: :star: |
 096 | Unique Binary Search Trees  | :star: :star: |
 098 | Validate Binary Search Tree | :star: |
 100 | Same Tree | :star: |
@@ -178,14 +178,14 @@ No | Title | Difficulty | Notes
 014 | Longest Common Prefix | :star: |
 028 | Implement Strstr | :star: | `KMP`
 058 | Length of Last Word | :star: |
-125 | Valid Palindrome | :star: |
-680 | Valid Palindrome II | :star: |
+125 | Valid Palindrome | :star: | :one:
+680 | Valid Palindrome II | :star: | :one:
 151 | Reverse Words in a String | :star: :star: |
 161 | One Edit Distance | :star: :star: | :one:
 205 | Isomorphic Strings | :star: |
 242 | Valid Anagra | :star: |
 389 | Find the Difference | :star: |
-409 | Longest Palindrome | :star: |
+409 | Longest Palindrome | :star: | :one:
 415 | Adding Strings | :star: |
 443 | String Compression | :star: :star: |
 468 | Validate IP Address | :star: :star: | `TODO`
@@ -204,8 +204,8 @@ No | Title | Difficulty | Notes
 170 | Two Sum III - Data structure | :star: |
 653 | Two Sum IV | :star: | `Inorder + Two Pointers` `Complement Map`
 1214 | Two Sum BSTs | :star: :star: | `Inorder + Complement Map` `Tree`
-266 | Palindrome Permutation | :star: |
-267 | Palindrome Permutation II | :star: :star: | `Backtracking`
+266 | Palindrome Permutation | :star: | :one:
+267 | Palindrome Permutation II | :star: :star: | :one: `Backtracking`
 290 | Word Pattern | :star: |
 383 | Ransom Note | :star: |
 412 | Fizz Buzz | :star: |
@@ -218,18 +218,18 @@ No | Title | Difficulty | Notes
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 020 | valid Parentheses | :star: | :one:
-032 | Longet Valid Paretheses | :star: :star: :star: | `DP`
+032 | Longet Valid Paretheses | :star: :star: :star: | :one: `DP`
 155 | MinStack | :star: |
 225 | Implement Stack using Queues | :star: |
 232 | Implement Queue using Stacks | :star: |
-316 | Remove Duplicate Letters | :star: :star: :star: | `Monotonic Stack`
+316 | Remove Duplicate Letters | :star: :star: :star: | :one: `Monotonic Stack`
 394 | DecodeString | :star: :star: |
 496 | Next Greater Element I | :star: | `Monotonic Stack`
 503 | Next Greater Element II | :star: :star: | `Monotonic Stack`
 556 | Next Greater Element III | :star: :star: | `Monotonic Stack`
 739 | Daily Temperatures | :star: :star: | `Monotonic Stack`
 921 | Minimum Add to Make Parentheses Valid | :star: :star: | :one:
-1249 | Minimum Remove to Make Valid Parentheses | :star: :star: | `Bit Set`
+1249 | Minimum Remove to Make Valid Parentheses | :star: :star: | :one: `Bit Set`
 1541 | Minimum Insertions to Balance a Parentheses String | :star: :star: | :one: `??`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
@@ -272,30 +272,33 @@ No | Title | Difficulty | Notes
 514 | Freedom Trail  | :star: :star: :star: |
 523 | Continuous Subarray Sum  | :star: :star: | :one: :thinking: `Prefix Sum` `Map`
 546 | Remove Boxes | :star: :star: :star: | `TODO`
-650 | 2 Keys Keyboard | :star: :star: |
-651 | 4 Keys Keyboard | :star: :star: |
-718 | Maximum Length of Repeated Subarray | :star: :star: |
+650 | 2 Keys Keyboard | :star: :star: | :one:
+651 | 4 Keys Keyboard | :star: :star: | :one:
+718 | Maximum Length of Repeated Subarray | :star: :star: | :one:
 787 | Cheapest Flights Within K Stops | :star: :star: | `??`
 1137 | N-th Tribonacci Number | :star: |
 005 | Longest Palindromic Substring | :star: :star: | :one:
-647 | Palindromic Substrings | :star: :star: | `TODO`
-1312 | Minimum Insertion Steps to Make a String Palindrome
-1025 | Divisor Game | :star: |
-887 | Super Egg Drop | :star: :star: :star: |
-931 | Minimum Falling Path Sum | :star: :star: |
-1289 | Minimum Falling Path Sum II | :star: :star: :star: |
-877 | Stone Game | :star: :star: |
+647 | Palindromic Substrings | :star: :star: | :one:
+1312 | Minimum Insertion Steps to Make a String Palindrome | :star: :star: :star: | :one:
+1025 | Divisor Game | :star: | :one:
+887 | Super Egg Drop | :star: :star: :star: | :one:
+931 | Minimum Falling Path Sum | :star: :star: | :one:
+1289 | Minimum Falling Path Sum II | :star: :star: :star: | :one:
+877 | Stone Game | :star: :star: | :one:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ### knapsack
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-knapsack | :star: :star: |
-322 | Coin Change | :star: :star: |
-518 | Coin Change 2 | :star: :star: | :thinking:
-416 | Partition Equal Subset Sum | :star: :star: |
-494 | Target Sum  | :star: :star: |
+322 | Coin Change | :star: :star: | :one:
+518 | Coin Change 2 | :star: :star: | :one: :thinking:
+416 | Partition Equal Subset Sum | :star: :star: | :one:
+494 | Target Sum | :star: :star: | :one:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
+
+Two type of the problem:
+1. Can the goods fill the knapsack?
+2. How many ways to put the goods into knapsack?
 
 ### substring
 No | Title | Difficulty | Notes
@@ -321,20 +324,19 @@ for (state1 : state1_options)
 ## BackTrack
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-017 | Letter Combination of a Phone Number | :star: :star: |
-022 | Generate Parenthesis | :star: :star: | :thinking:
-036 | Valid Sudoku | :star: :star: |
-037 | Sudoku Solver | :star: :star: :star: |
-039 | Combination Sum | :star: :star: |
-040 | Combination Sum II | :star: :star: |
-046 | Permutations | :star: :star: | :thinking:
-047 | Permutations II | :star: :star: | `TODO`
-077 | Combinations | :star: :star: |
-078 | Subsets  | :star: :star: |
-090 | Subsets II  | :star: :star: |
-079 | Word Search | :star: :star: | `Matrix`
-212 | Word Search II | :star: :star: :star: | `Matrix`
-698 | Partition to K Equal Sum Subsets | :star: :star: |
+017 | Letter Combination of a Phone Number | :star: :star: | :one:
+022 | Generate Parenthesis | :star: :star: | :one: :thinking:
+037 | Sudoku Solver | :star: :star: :star: | :one:
+039 | Combination Sum | :star: :star: | :one:
+040 | Combination Sum II | :star: :star: | :one:
+046 | Permutations | :star: :star: | :one: :thinking:
+047 | Permutations II | :star: :star: | :one:
+077 | Combinations | :star: :star: | :one:
+078 | Subsets  | :star: :star: | :one:
+090 | Subsets II  | :star: :star: | :one:
+079 | Word Search | :star: :star: | :one: `Matrix` `DFS`
+212 | Word Search II | :star: :star: :star: | :one: `Matrix` `DFS`
+698 | Partition to K Equal Sum Subsets | :star: :star: | :one:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ```c++
@@ -351,24 +353,73 @@ void backtrack(path, options) {
 }
 ```
 
+* Remove duplicates in combination
+    ```c++
+    // 40. Combination Sum II
+    sort(candidates.begin(), candidates.end());
+
+    void backtrack(const vector<int>& candidates, int pos) {
+        if (remain == 0) {
+            Result.emplace_back(Track);
+            return;
+        }
+
+        for (auto i = pos; i < candidates.size(); ++i) {
+            if (i > pos && candidates[i] == candidates[i-1])
+                continue;
+
+            Track.emplace_back(candidates[i]);
+            backtrack(candidates, i+1);
+            Track.pop_back();
+        }
+    }
+    ```
+
+* Remove duplicates in permutation
+    ```c++
+    // 47. Permutations II
+    void permute(vector<int>& nums, int pos) {
+        if (pos == nums.size()) {
+            Result.emplace_back(nums);
+            return;
+        }
+
+        for (int i = pos; i < nums.size(); ++i) {
+            if (canSwap(nums, pos, i)) {
+                swap(nums[pos], nums[i]);
+                permute(nums, pos + 1);
+                swap(nums[pos], nums[i]);
+            }
+        }
+    }
+
+    bool canSwap(vector<int>& vec, int beg, int end) {
+        while (beg < end && vec[beg] != vec[end]) {
+            ++beg;
+        }
+
+        return beg == end;
+    }
+    ```
+
 ## Greedy
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-055 | Jump Game | :star: :star: |
-045 | Jump Game II | :star: :star: |
-122 | Best Time to Buy and Sell Stock II | :star: |
-134 | Gas Station | :star: :star: |
-435 | Non-overlapping Intervals | :star: :star: | `Interval`
-452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | `Interval`
-763 | Partition Labels | :star: :star: | `Interval`
-1024 | Video Stitching | :star: :star: | `Interval`
+055 | Jump Game | :star: :star: | :one:
+045 | Jump Game II | :star: :star: | :one:
+122 | Best Time to Buy and Sell Stock II | :star: | :one:
+134 | Gas Station | :star: :star: | :one:
+435 | Non-overlapping Intervals | :star: :star: | :one: `Interval`
+452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :one: `Interval`
+763 | Partition Labels | :star: :star: | :one: `Interval`
+1024 | Video Stitching | :star: :star: | :one: `Interval`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Divide Conquer
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-023 | Merge K Sorted List | :star: :star: :star: | `K-way Merge`
-241 | Different Ways to Add Parentheses | :star: :star: |
+023 | Merge K Sorted List | :star: :star: :star: | :one: `K-way Merge`
+241 | Different Ways to Add Parentheses | :star: :star: | :one:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Two Pointers
@@ -390,11 +441,11 @@ No | Title | Difficulty | Notes
 **Sliding Window**
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-076 | Minimum Window Substring | :star: :star: :star: |
-003 | Longest Substring Without Repeating Characters | :star: :star: |
-159 | Longest Substring with At Most Two Distinct Characters | :star: :star: |
-340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: |
-239 | Sliding Window Maximum | :star: :star: :star: | `Monotonic stack` `DP` `L-R vec`
+076 | Minimum Window Substring | :star: :star: :star: | :one:
+003 | Longest Substring Without Repeating Characters | :star: :star: | :one:
+159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | :one:
+340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | :one:
+239 | Sliding Window Maximum | :star: :star: :star: | :one: `Monotonic stack` `DP` `L-R vec`
 438 | Find All Anagrams in a String | :star: :star: |
 567 | Permutation in String | :star: :star: |
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
@@ -570,6 +621,12 @@ No | Title | Difficulty | Notes
 1396 | Design Underground System | :star: :star: |
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
+## Bit
+No | Title | Difficulty | Notes
+-- | -- | ---  | ---
+036 | Valid Sudoku | :star: :star: | :one:
+0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
+
 # Dynamic Programming
 * There are two different techniques we can use to implement a dynamic programming solution:
     * **Memoization** is where we add caching to a function (that has no side effects). In dynamic programming, it is typically used on `recursive` functions for a `top-down` solution that starts with the initial problem and then recursively calls itself to solve smaller problems.
@@ -577,7 +634,7 @@ No | Title | Difficulty | Notes
 
 ## For problems:
 1. Counting Problem
-2. Extreme value problem
+2. Optimum value (maximum or minimum)
 3. Existing Problem
 
 ## Steps:
@@ -773,6 +830,23 @@ get all | 1-bits ~0
     * 214\. Shortest Palindrome
     * 336\. Palindrome Pairs
     * 1312\. Minimum Insertion Steps to Make a String Palindrome
+
+* Parentheses
+    * 20\. Valid Parentheses
+    * 22\. Generate Parentheses
+    * 32\. Longest Valid Parentheses
+    * 241\. Different Ways to Add Parentheses
+    * 301\. Remove Invalid Parentheses
+    * 678\. Valid Parenthesis String
+    * 856\. Score of Parentheses
+    * 921\. Minimum Add to Make Parentheses Valid
+    * 1021\. Remove Outermost Parentheses
+    * 1111\. Maximum Nesting Depth of Two Valid Parentheses Strings
+    * 1190\. Reverse Substrings Between Each Pair of Parentheses
+    * 1249\. Minimum Remove to Make Valid Parentheses
+    * 1541\. Minimum Insertions to Balance a Parentheses String
+    * 1614\. Maximum Nesting Depth of the Parentheses
+    * 2116\. Cheeck if a Parentheses String Can Be Valid
 
 # Reference
 * [labuladong (CN)](https://mp.weixin.qq.com/s/AWsL7G89RtaHyHjRPNJENA)
