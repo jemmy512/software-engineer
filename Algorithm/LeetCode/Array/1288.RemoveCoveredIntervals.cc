@@ -41,8 +41,29 @@ class Solution {
 public:
     int removeCoveredIntervals(vector<vector<int>>& intervals) {
         sort(intervals.begin(), intervals.end(), [](const auto& lhs, const auto& rhs) {
+            return lhs[0] != rhs[0] ? lhs[0] < rhs[0] : lhs[1] > rhs[1];
+        });
+
+        int end = 0;
+        int covered = 0;
+
+        for (const auto& inter : intervals) {
+            if (end < inter[1]) {
+                ++covered;
+                end = inter[1];
+            }
+        }
+
+        return covered;
+    }
+};
+
+class Solution {
+public:
+    int removeCoveredIntervals(vector<vector<int>>& intervals) {
+        sort(intervals.begin(), intervals.end(), [](const auto& lhs, const auto& rhs) {
             // if lhs[0] == rhs[0], place the longer [i][1] at first
-            return lhs[0] == rhs[0] ? rhs[1] < lhs[1] : lhs[0] < rhs[0];
+            return lhs[0] != rhs[0] ? lhs[0] < rhs[0] : lhs[1] > rhs[1];
         });
 
         int covered = 0;
