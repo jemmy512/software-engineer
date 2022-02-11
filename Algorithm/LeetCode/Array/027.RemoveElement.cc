@@ -22,18 +22,30 @@ Relatives:
 026. Remove Duplicates from Sorted Array
 080. Remove Duplicates from Sorted Array II
 083. Remove Duplicates from Sorted List
-082. Remove Duplicates from Sorted List II 
+082. Remove Duplicates from Sorted List II
 203. Remove Linked List Elements
 237. Delete Node In A Linked List
 283. Move Zeroes
 1474. Delete N Nodes After M Nodes of a Linked List
-1721. Swapping Nodes in a Linked List 
+1721. Swapping Nodes in a Linked List
 1836. Remove Duplicates From an Unsorted Linked List */
 
 #include <iostream>
 #include <vector>
 
 using namespace std;
+
+int removeElement(vector<int>& nums, int val) {
+    int pos = 0;
+
+    for (int i = 0; i < nums.size(); i++) {
+        if (nums[i] != val) {
+            nums[pos++] = nums[i];
+        }
+    }
+
+    return pos;
+}
 
 int removeElement(vector<int>& nums, int val) {
     int i = 0;
@@ -64,16 +76,4 @@ int removeElement(vector<int>& nums, int val) {
     }
 
     return len;
-}
-
-int removeElement(vector<int>& nums, int val) {
-    int pos = 0;
-
-    for (int i = 0; i < nums.size(); i++) {
-        if (nums[i] != val) {
-            nums[pos++] = nums[i];
-        }
-    }
-
-    return pos;
 }
