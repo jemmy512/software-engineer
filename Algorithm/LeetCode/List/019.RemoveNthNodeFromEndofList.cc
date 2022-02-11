@@ -34,30 +34,30 @@ Relative:
 struct ListNode {
     int val;
     ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-// beat 35.03%
 ListNode* removeNthFromEnd(ListNode* head, int n) {
-    auto* fast = head;
-    auto* slow = head;
+    ListNode dummy;
+    dummy.next = head;
 
-    while (fast != nullptr) {
+    auto* fast = &dummy;
+    auto* slow = &dummy;
+
+    while (fast) {
         fast = fast->next;
         if (n-- < 0) { // n-- get previous node of the node to be deleted
             slow = slow->next;
         }
     }
 
-    if (n == 0) // the node to be deleted is head
-        head = head->next;
-    else
-        slow->next = slow->next->next;
+    slow->next = slow->next->next;
 
-    return head;
+    return dummy.next;
 }
 
-// beat 5.87%
 ListNode* removeNthFromEnd_1(ListNode* head, int n) {
     auto* fast = head;
     auto* slow = head;
