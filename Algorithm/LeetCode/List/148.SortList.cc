@@ -18,7 +18,8 @@ Relatives:
 021. Merge Two Sorted List
 023. Merge k Sorted Lists
 088. Merge Sorted Array
-148. Sort List
+147. Insertion Sort List (insertion sort)
+148. Sort list (merge sort)
 244. Shortest Word Distance II
 1634. Add Two Polynomials Represented as Linked Lists */
 
