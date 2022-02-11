@@ -86,6 +86,46 @@ public:
     }
 };
 
+// different array
+class Solution {
+public:
+    int minMeetingRooms(vector<vector<int>>& intervals) {
+        if (intervals.empty())
+            return 0;
+
+        const auto size = intervals.size();
+
+        vector<int> startTimes(size);
+        vector<int> endTimes(size);
+
+        for (auto i = 0; i < size; ++i) {
+            startTimes[i] = intervals[i][0];
+            endTimes[i] = intervals[i][1];
+        }
+
+        sort(startTimes.begin(), startTimes.end());
+        sort(endTimes.begin(), endTimes.end());
+
+        int count = 0;
+        int i = 0;
+        int j = 0;
+        int ret = 0;
+
+        while (beg < size && end < size) {
+            if (startTimes[i] < endTimes[j]) {
+                ++i;
+                ++count;
+            } else {
+                ++j;
+                --count;
+            }
+
+            ret = max(ret, count);
+        }
+
+        return ret;
+    }
+};
 
 /* Iterator all rooms:
  * Time complexity: O(N^2) */
