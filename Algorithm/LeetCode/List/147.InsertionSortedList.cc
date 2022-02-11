@@ -25,7 +25,8 @@ The number of nodes in the list is in the range [1, 5000].
 -5000 <= Node.val <= 5000
 
 Relatives:
-147. Insertion Sort List
+147. Insertion Sort List (insertion sort)
+148. Sort list (merge sort)
 708. Insert into a Sorted Circular Linked List */
 
 #include <climits>
