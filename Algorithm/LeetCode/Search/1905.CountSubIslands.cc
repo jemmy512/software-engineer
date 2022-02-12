@@ -54,6 +54,55 @@ public:
 
         for (auto row = 0; row < RowSize; ++row) {
             for (auto col = 0; col < ColSize; ++col) {
+                if (tar[row][col] == 1) {
+                    result += dfs(src, tar, row, col);
+                }
+            }
+        }
+
+        return result;
+    }
+
+private:
+    bool dfs(vector<vector<int>>& src, vector<vector<int>>& dst, int row, int col) {
+        if (row < 0 || row >= RowSize || col < 0 || col >= ColSize)
+            return true;
+
+        if (dst[row][col] == 0)
+            return true;
+
+        dst[row][col] = 0;
+        bool ret = src[row][col];
+
+        for (const auto& [r, c] : Directions) {
+            if (!dfs(src, dst, row + r, col + c)) {
+                ret = false;
+            }
+        }
+
+        return ret;
+    }
+
+private:
+    int RowSize{0};
+    int ColSize{0};
+    const vector<pair<int, int>> Directions {
+        {0, 1},
+        {0, -1},
+        {1, 0},
+        {-1, 0}
+    };
+};
+
+class Solution {
+public:
+    int countSubIslands(vector<vector<int>>& src, vector<vector<int>>& tar) {
+        int result = 0;
+        RowSize = src.size();
+        ColSize = src[0].size();
+
+        for (auto row = 0; row < RowSize; ++row) {
+            for (auto col = 0; col < ColSize; ++col) {
                 if (tar[row][col] == 1 && src[row][col] == 0) {
                     dfs(tar, row, col);
                 }
