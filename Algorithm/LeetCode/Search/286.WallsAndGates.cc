@@ -52,12 +52,12 @@ public:
     void wallsAndGates(vector<vector<int>>& rooms) {
         if (rooms.empty())
             return;
-        
+
         _RowSize = rooms.size();
         _ColSize = rooms[0].size();
-        
+
         queue<pair<int, int>> que;
-        
+
         for (auto row = 0; row < _RowSize; ++row) {
             for (auto col = 0; col < _ColSize; ++col) {
                 if (rooms[row][col] == Gate) {
@@ -65,17 +65,17 @@ public:
                 }
             }
         }
-        
+
         while (!que.empty()) {
             // ERROR: AddressSanitizer: heap-use-after-free on address 0x615000004878
             // const auto& [row, col] = que.front();
             const auto [row, col] = que.front();
             que.pop();
-            
+
             for (const auto& [r, c] : _Directions) {
                 const auto rowNew = row + r;
                 const auto colNew = col + c;
-                
+
                 if (isValid(rooms, rowNew, colNew)) {
                     rooms[rowNew][colNew] = rooms[row][col] + 1;
                     que.emplace(rowNew, colNew);
@@ -83,12 +83,12 @@ public:
             }
         }
     }
-    
+
 private:
     bool isValid(const vector<vector<int>>& rooms, int row, int col) {
         return (row >= 0 && row < _RowSize && col >= 0 && col < _ColSize && rooms[row][col] == Empty);
     }
-    
+
 private:
     int _RowSize{0};
     int _ColSize{0};
