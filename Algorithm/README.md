@@ -44,7 +44,7 @@ No | Title | Difficulty | Notes
 ## Array
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-011 | Container With Most Water | :star: :star: :star: | `Two Pointers`
+011 | Container With Most Water | :star: :star: :star: | :one: `Two Pointers`
 041 | First Missing Positive | :star: :star: :star: |
 054 | Spiral Matrix | :star: :star: | `Matrix`
 056 | Merge Intervals | :star: :star: | :one: `Interval`
@@ -76,9 +76,9 @@ No | Title | Difficulty | Notes
 217 | Contains Duplicate I | :star: |
 219 | Contains Duplicate II | :star: |
 220 | Contains Duplicate III | :star: :star: | `bucket sort`
-238 | Product of Array Except Self  | :star: :star: | `L-R vec`
+238 | Product of Array Except Self  | :star: :star: | :one: `L-R vec`
 239 | Sliding Window Maximum | :star: :star: :star: | :one: :thinking: `DP` `L-R vec`
-283 | Move Zeroes | :star: :star: | `Two Pointers`
+283 | Move Zeroes | :star: :star: | :one: `Two Pointers`
 448 | Find All Numbers Disappeared in An Array | :star: |
 870 | Advantage Shuffle | :star: :star: |
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
@@ -88,7 +88,7 @@ No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 002 | Add Two Numbers | :star: :star: |
 445 | Add Two Numbers II | :star: :star: |
-019 | Remove Nth Node From End of List | :star: :star: |
+019 | Remove Nth Node From End of List | :star: :star: | :one:
 203 | Remove Linked List Element | :star: |
 021 | Merge Two Sorted Lists | :star: | :one:
 023 | Merge K Sorted List | :star: :star: :star: | :one: `K-way Merge` `Divide Conquer`
@@ -107,7 +107,7 @@ No | Title | Difficulty | Notes
 148 | Sort List | :star: :star: | :one: `Div-Conq` `Merge sort`
 160 | Intersection of Two Linked Lists | :star: |
 234 | Palindrome Linked List | :star: | :one:
-237 | Delete Node In A Linked List | :star: |
+237 | Delete Node In A Linked List | :star: | :one:
 328 | Odd Even Linked List | :star: :star: |
 725 | Split Linked List in Parts | :star: :star: |
 817 | Linked List Components | :star: :star: |
@@ -183,7 +183,7 @@ No | Title | Difficulty | Notes
 151 | Reverse Words in a String | :star: :star: |
 161 | One Edit Distance | :star: :star: | :one:
 205 | Isomorphic Strings | :star: |
-242 | Valid Anagra | :star: |
+242 | Valid Anagra | :star: | :one:
 389 | Find the Difference | :star: |
 409 | Longest Palindrome | :star: | :one:
 415 | Adding Strings | :star: |
@@ -427,14 +427,16 @@ No | Title | Difficulty | Notes
 **Fast Slow Pointers**
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-011 | Container With Most Water | :star: :star: :star: |
-027 | Remove Element | :star: |
-026 | Remove Duplicates from Sorted Array | :star: |
-083 | Remove Duplicates from Sorted List | :star: |
-141 | linked List Cycle | :star: | `Cycle`
-142 | Linked List Cycle II | :star: :star: | `Cycle`
-283 | Move Zeroes | :star: :star: |
-287 | Find the Duplicate Number | :star: :star: | `Cycle`
+011 | Container With Most Water | :star: :star: :star: | :one:
+027 | Remove Element | :star: | :one:
+026 | Remove Duplicates from Sorted Array | :star: | :one:
+083 | Remove Duplicates from Sorted List | :star: | :one:
+042 | Trapping Rain Water | :star: :star: :star: | :one:
+407 | Trapping Rain Water II | :star: :star: :star: | `TODO`
+141 | linked List Cycle | :star: | :one: `Cycle`
+142 | Linked List Cycle II | :star: :star: | :one: `Cycle`
+283 | Move Zeroes | :star: :star: | :one:
+287 | Find the Duplicate Number | :star: :star: | :one: `Cycle` `?`
 992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
@@ -446,8 +448,8 @@ No | Title | Difficulty | Notes
 159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | :one:
 340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | :one:
 239 | Sliding Window Maximum | :star: :star: :star: | :one: `Monotonic stack` `DP` `L-R vec`
-438 | Find All Anagrams in a String | :star: :star: |
-567 | Permutation in String | :star: :star: |
+438 | Find All Anagrams in a String | :star: :star: | :one:
+567 | Permutation in String | :star: :star: | :one:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ```c++
@@ -481,26 +483,26 @@ void slidingWindow(string src, string tar) {
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 004 | Median of Two Sorted Arrays | :star: :star: :star: | `BS`
-034 | Search For a Range | :star: :star: | `BS`
-035 | Search Insert Position | :star: | `BS`
-074 | Search a 2D Matrix | :star: :star: | `BS` `Matrix`
-240 | Search a 2D Matrix II | :star: :star: | :thinking: `BS` `Matrix`
-278 | First Bad Version | :star: | `BS`
-130 | Surrounded Regions | :star: :star: | `DFS` `BFS` `Opposite` `Matrix`
-200 | Number of Islands | :star: :star: | `DFS` `BFS` `Matrix`
-286 | Walls and Gates | :star: :star: | :thinking: `BFS` `Matrix`
+034 | Search For a Range | :star: :star: | :one: `BS`
+035 | Search Insert Position | :star: | :one: `BS`
+074 | Search a 2D Matrix | :star: :star: | :one: `BS` `Matrix`
+240 | Search a 2D Matrix II | :star: :star: | :one: :thinking: `BS` `Matrix`
+278 | First Bad Version | :star: | :one: `BS`
+130 | Surrounded Regions | :star: :star: | :one: `DFS` `BFS` `Opposite` `Matrix`
+200 | Number of Islands | :star: :star: | :one: `DFS` `BFS` `Matrix`
+286 | Walls and Gates | :star: :star: | :one: :thinking: `BFS` `Matrix`
 323 | Number of Connected Components in an Undirected Graph | :star: :star: | :thinking: `Union Find` `DFS` `Matrix`
-547 | Number of Provinces | :star: :star: | `DFS` `Matrix`
-694 | Number of Distinct Islands | :star: :star: | `DFS` `Matrix` `Serialization`
+547 | Number of Provinces | :star: :star: | :one: `DFS` `Matrix`
+694 | Number of Distinct Islands | :star: :star: | :one: `DFS` `Matrix` `Serialization`
 410 | Split Array Largest Sum | :star: :star: :star: | `BS`
-695 | Max Area of Island | :star: :star: | `DFS` `Matrix`
-1020 | Number of Enclaves | :star: :star: | `DFS` `Matrix`
-1254 | Number of Closed Islands | :star: :star: | `DFS` `Matrix`
-1905 | Count Sub Islands | :star: :star: | `DFS` `Matrix`
-374 | Guess Number Higher Or Lower | :star: | `BS`
+695 | Max Area of Island | :star: :star: | :one: `DFS` `Matrix`
+1020 | Number of Enclaves | :star: :star: | :one: `DFS` `Matrix`
+1254 | Number of Closed Islands | :star: :star: | :one: `DFS` `Matrix`
+1905 | Count Sub Islands | :star: :star: | :one: `DFS` `Matrix`
+374 | Guess Number Higher Or Lower | :star: | :one: `BS`
 378 | Kth Smallest Element in a Sorted Matrix | :star: :star:| :thinking: `BS` `Matrix`
 973 | K Closest Points to Origin | :star: :star:| :thinking: `Quick Select` `BS`
-752 | Open the Lock | :star: :star:| `BFS`
+752 | Open the Lock | :star: :star:| :one: `BFS`
 875 | Koko Eating Bananas | :star: :star:| :thinking: `BS`
 1011 | Capacity To Ship Packages Within D Days | :star: :star:| :thinking: `BS`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
@@ -600,7 +602,7 @@ No | Title | Difficulty | Notes
 
 
 Algorithm | Best Time Complexity | Average Time Complexity | Worst Time Complexity | Worst Space Complexity | Stable
---- | --- | --- | --- | ---
+--- | --- | --- | --- | --- | ---
 Quick Sort | O(nlogn) | O(nlogn) | O(n^2) | O(logn) | Depends
 Merge Sort | O(nlogn) | O(nlogn) | O(nlogn) | O(n) | Y
 Selection Sort | O(n^2) | O(n^2) | O(n^2) | O(1) | N
