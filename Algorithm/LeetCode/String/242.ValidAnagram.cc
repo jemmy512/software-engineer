@@ -9,7 +9,14 @@ Note:
 You may assume the string contains only lowercase alphabets.
 
 Follow up:
-What if the inputs contain unicode characters? How would you adapt your solution to such case? */
+What if the inputs contain unicode characters? How would you adapt your solution to such case?
+
+Relativeness:
+049. Group Anagrams
+242. Valid Anagram
+438. Find All Anagrams in a String
+760. Find Anagram Mappings
+1347. Minimum Number of Steps to Make Two Strings Anagram */
 
 #include<iostream>
 #include<unordered_map>
