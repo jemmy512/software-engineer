@@ -22,7 +22,14 @@ The substring with start index = 2 is "ab", which is an anagram of "ab".
 
 Constraints:
 1 <= s.length, p.length <= 3 * 10^4
-s and p consist of lowercase English letters. */
+s and p consist of lowercase English letters.
+
+Relativeness:
+049. Group Anagrams
+242. Valid Anagram
+438. Find All Anagrams in a String
+760. Find Anagram Mappings
+1347. Minimum Number of Steps to Make Two Strings Anagram */
 
 #include <vector>
 #include <string>
@@ -43,11 +50,9 @@ public:
         }
 
         while (end < src.size()) {
-            auto chr = src[end];
-            ++end;
+            auto chr = src[end++];
             if (dict.count(chr)) {
-                ++window[chr];
-                if (window[chr] == dict[chr]) {
+                if (++window[chr] == dict[chr]) {
                     ++winSize;
                 }
             }
@@ -57,13 +62,11 @@ public:
                     result.emplace_back(beg);
                 }
 
-                chr = src[beg];
-                ++beg;
+                chr = src[beg++];
                 if (dict.count(chr)) {
-                    if (window[chr] == dict[chr]) {
+                    if (window[chr]-- == dict[chr]) {
                         --winSize;
                     }
-                    --window[chr];
                 }
             }
         }
