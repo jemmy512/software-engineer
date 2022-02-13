@@ -21,8 +21,8 @@ Relatives:
 556. Next Greater Element III
 739. Daily Temperatures */
 
-#include <set>
-#include <map>
+#include <unordered_set>
+#include <unordered_map>
 #include <stack>
 #include <string>
 
@@ -31,33 +31,26 @@ using namespace std;
 class Solution {
 public:
     string removeDuplicateLetters(string s) {
-        stack<char> stk;
-        set<char> hashSet;
-        map<char, int> lastSeen;
+        deque<char> dq;
+        unordered_set<char> hashSet;
+        unordered_map<char, int> lastPos;
 
         for (auto i = 0; i < s.size(); ++i) {
-            lastSeen[s[i]] = i;
+            lastPos[s[i]] = i;
         }
 
         for (auto i = 0; i < s.size(); ++i) {
-            if (hashSet.find(s[i]) == hashSet.end()) {
-                while (!stk.empty() && s[i] < stk.top() && lastSeen[stk.top()] > i) {
-                    hashSet.erase(stk.top());
-                    stk.pop();
+            if (!hashSet.count(s[i])) {
+                while (!dq.empty() && dq.back() > s[i] && lastPos[dq.back()] > i) {
+                    hashSet.erase(dq.back());
+                    dq.pop_back();
                 }
+
+                dq.push_back(s[i]);
                 hashSet.emplace(s[i]);
-                stk.push(s[i]);
             }
         }
 
-        string result;
-        result.reserve(stk.size());
-
-        while (!stk.empty()) {
-            result += stk.top();
-            stk.pop();
-        }
-
-        return string(result.rbegin(), result.rend());
+        return string(dq.begin(), dq.end());
     }
 };
