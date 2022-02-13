@@ -33,7 +33,7 @@ public:
         for (const auto& chr : s) {
             if (chr == '(' || chr == '{' || chr == '[') {
                 stk.emplace(chr);
-            } else if (!stk.empty() && leftOf(chr) == stk.top()) {
+            } else if (!stk.empty() && openPartOf(chr) == stk.top()) {
                 stk.pop();
             } else {
                 return false;
@@ -44,7 +44,7 @@ public:
     }
 
 private:
-    char leftOf(char chr) {
+    char openPartOf(char chr) {
         switch (chr) {
             case '}': return '{';
             case ')': return '(';
