@@ -21,34 +21,30 @@ Relatives:
 016. 3 Sum Closest
 018. 4 Sum */
 
-#include <algorithm>
+/* http://en.wikipedia.org/wiki/3SUM
+the idea as blow:
+    1) sort the array.
+    2) take the element one by one, calculate the two numbers in reset array.
+
+notes: be careful the duplication number.
+
+for example:
+   [-4,-1,-1,1,2]    target=1
+
+   take -4, can cacluate the "two number problem" of the reset array [-1,-1,1,2] while target=5
+   [(-4),-1,-1,1,2]  target=5  distance=4
+          ^      ^
+   because the -1+2 = 1 which < 5, then move the `low` pointer(skip the duplication)
+   [(-4),-1,-1,1,2]  target=5  distance=2
+               ^ ^
+   take -1(skip the duplication), can cacluate the "two number problem" of the reset array [1,2] while target=2
+   [-4,-1,(-1),1,2]  target=2  distance=1 */
+
 #include <cmath>
 #include <climits>
-#include <iostream>
-#include <iterator>
 #include <vector>
 
 using namespace std;
-
-//solution:  http://en.wikipedia.org/wiki/3SUM
-//the idea as blow:
-//  1) sort the array.
-//  2) take the element one by one, calculate the two numbers in reset array.
-//
-//notes: be careful the duplication number.
-//
-// for example:
-//    [-4,-1,-1,1,2]    target=1
-//
-//    take -4, can cacluate the "two number problem" of the reset array [-1,-1,1,2] while target=5
-//    [(-4),-1,-1,1,2]  target=5  distance=4
-//           ^      ^
-//    because the -1+2 = 1 which < 5, then move the `low` pointer(skip the duplication)
-//    [(-4),-1,-1,1,2]  target=5  distance=2
-//                ^ ^
-//    take -1(skip the duplication), can cacluate the "two number problem" of the reset array [1,2] while target=2
-//    [-4,-1,(-1),1,2]  target=2  distance=1
-//
 
 class Solution {
 public:
@@ -59,22 +55,30 @@ public:
         int distance = INT_MAX;
 
         for (int i = 0; i < len-2; ++i) {
-            int low = i + 1;
-            int high = len - 1;
-            while (low < high) {
-                int sum = nums[i] + nums[low] + nums[high];
-                if (sum == target)
-                    return target;
-                else {
-                    if (abs(target - sum) < abs(distance)) {
-                        distance = target - sum;
+            if (i == 0 || nums[i-1] != nums[i]) {
+                int lo = i + 1;
+                int hi = len - 1;
+
+                while (lo < hi) {
+                    int sum = nums[i] + nums[lo] + nums[hi];
+                    if (sum == target) {
+                        return target;
+                    } else {
+                        if (abs(target - sum) < abs(distance)) {
+                            distance = target - sum;
+                        }
+
+                        if (sum > target) {
+                            --hi;
+                        } else {
+                            ++lo;
+                        }
                     }
 
-                    if (sum > target) {
-                        --high;
-                    } else {
-                        ++low;
-                    }
+                    while (lo < len && lo > i + 1 && nums[lo-1] == nums[lo])
+                        ++lo;
+                    while (hi > i + 1 && hi < len - 1 && nums[hi] == nums[hi+1])
+                        --hi;
                 }
             }
         }
