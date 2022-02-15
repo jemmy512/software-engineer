@@ -74,39 +74,36 @@ struct Node {
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        if (!head) {
-            return nullptr;
+        if (!head)
+            return head;
+
+        auto* node = head;
+
+        while (node) {
+            auto* nd = new Node(node->val);
+            nd->next = node->next;
+            node->next = nd;
+
+            node = node->next->next;
         }
 
-        Node *cur, *hd, *tail;
-
-        cur = head;
-        while (cur) {
-            auto* node = new Node(cur->val);
-            node->next = cur->next;
-            cur->next = node;
-            cur = node->next;
+        node = head;
+        while (node) {
+            node->next->random = (node->random) ? node->random->next : nullptr;
+            node = node->next->next;
         }
 
-        cur = head;
-        while (cur) {
-            if (cur->random) {
-                cur->next->random = cur->random->next;
-            }
-            cur = cur->next->next;
+        Node dummy(0);
+        node = head;
+        auto* tail = &dummy;
+
+        while (node) {
+            auto* next = node->next;
+            tail = tail->next = next;
+            node = node->next = next->next;
         }
 
-        cur = head;
-        hd = tail = head->next;
-        while (cur) {
-            cur->next = tail->next;
-            if (tail->next) {
-                tail = tail->next = tail->next->next;
-            }
-            cur = cur->next;
-        }
-
-        return hd;
+        return dummy.next;
     }
 };
 
