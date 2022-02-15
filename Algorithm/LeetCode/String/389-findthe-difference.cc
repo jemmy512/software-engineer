@@ -50,19 +50,35 @@ public:
 class Solution {
 public:
     char findTheDifference(string s, string t) {
+        int num = 0;
+
+        for (auto i = 0; i < s.size(); ++i) {
+            num -= s[i];
+            num += t[i];
+        }
+
+        num += t.back();
+
+        return num;
+    }
+};
+
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
         int ascii[256] = { 0 };
-        
+
         for (auto i = 0; i < s.size(); ++i) {
             ++ascii[s[i]];
             --ascii[t[i]];
         }
         --ascii[t.back()];
-                
+
         for (auto i = 0; i < 256; ++i) {
             if (ascii[i] != 0)
                 return i;
         }
-                
+
         return 0;
     }
 };
