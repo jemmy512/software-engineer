@@ -41,23 +41,24 @@ public:
             return head;
 
         auto len = 1; // 0 is error
-        auto* tail = head;
+        auto* node = head;
 
-        while (tail->next) {
+        while (node->next) {
             ++len;
-            tail = tail->next;
+            node = node->next;
         }
-        tail->next = head;
+        node->next = head;
 
         if (k %= len) {
             for (auto i = 0; i < len-k; ++i) {
-                tail = tail->next;
+                node = node->next;
             }
         }
-        auto* newHead = tail->next;
-        tail->next = nullptr;
 
-        return newHead;
+        head = node->next;
+        node->next = nullptr;
+
+        return head;
     }
 };
 
