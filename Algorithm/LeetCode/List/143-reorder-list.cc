@@ -12,7 +12,14 @@ Given 1->2->3->4->5, reorder it to 1->5->2->4->3.
 
 Constraints:
 The number of nodes in the list is in the range [1, 5 * 10^4].
-1 <= Node.val <= 1000 */
+1 <= Node.val <= 1000
+
+This problem is a combination of these three easy problems:
+876. Middle of the Linked List
+206. Reverse Linked List
+021. Merge Two Sorted Lists
+
+234. Palindrome Linked List */
 
 struct ListNode {
     int val;
@@ -66,4 +73,45 @@ private:
 
         return slow;
     }
+};
+
+// recursion slution
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        Tail = head;
+        recursion(findMid(head));
+    }
+
+private:
+    void recursion(ListNode* node) {
+        if (!node)
+            return;
+
+        recursion(node->next);
+
+        if (Tail == node || Tail->next == node) {
+            node->next = nullptr;
+            return;
+        }
+
+        node->next = Tail->next;
+        Tail->next = node;
+        Tail = Tail->next->next;
+    }
+
+    ListNode* findMid(ListNode* node) {
+        auto* slow = node;
+        auto* fast = node;
+
+        while (fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        return slow;
+    }
+
+private:
+    ListNode* Tail;
 };
