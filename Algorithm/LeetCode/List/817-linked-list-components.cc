@@ -27,7 +27,14 @@ The value of each node in the linked list will be in the range [0, N - 1].
 1 <= G.length <= 10000.
 G is a subset of all values in the linked list.
 
-*/
+Constraints:
+The number of nodes in the linked list is n.
+1 <= n <= 104
+0 <= Node.val < n
+All the values Node.val are unique.
+1 <= nums.length <= n
+0 <= nums[i] < n
+All the values of nums are unique. */
 
 #include <vector>
 #include <unordered_set>
@@ -47,9 +54,7 @@ public:
         std::unordered_set<int> setG(G.begin(), G.end());
 
         while (head) {
-            if (setG.find(head->val) != setG.end()
-                && (head->next == nullptr || setG.find(head->next->val) == setG.end()))
-            {
+            if (setG.count(head->val) && (head->next == nullptr || !setG.count(head->next->val))) {
                 ++cnt;
             }
             head = head->next;
