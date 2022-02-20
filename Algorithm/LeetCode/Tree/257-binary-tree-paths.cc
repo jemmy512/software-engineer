@@ -38,6 +38,52 @@ struct TreeNode {
 class Solution {
 public:
     vector<string> binaryTreePaths(TreeNode* root) {
+        dfs(root);
+
+        return Result;
+    }
+
+private:
+    void dfs(TreeNode* node) {
+        if (!node)
+            return;
+
+        Path.push_back(node->val);
+
+        if (!node->left && !node->right) {
+            Result.push_back(to_path());
+        } else {
+            dfs(node->left);
+            dfs(node->right);
+        }
+
+        // if (!Path.empty())
+            Path.pop_back();
+    }
+
+    string to_path() {
+        ostringstream oss;
+
+        for (auto ite = Path.cbegin(); ite < Path.cend() - 1; ++ite) {
+            oss << *ite;
+            oss << "->";
+        }
+
+        if (!Path.empty())
+            oss << Path.back();
+
+        // return std::move(oss.str()); // str() returns a copy of the underlying string, no need std::move
+        return oss.str();
+    }
+
+private:
+    deque<int> Path;
+    vector<string> Result;
+};
+
+class Solution {
+public:
+    vector<string> binaryTreePaths(TreeNode* root) {
         if (!root)
             return {};
 
