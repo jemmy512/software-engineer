@@ -4,11 +4,19 @@ Given a non-empty binary tree, find the maximum path sum.
 For this problem, a path is defined as any node sequence from some starting node to any node in the tree along the parent-child connections. The path must contain at least one node and does not need to go through the root.
 
 Example 1:
+    1
+   / \
+  2   3
 Input: root = [1,2,3]
 Output: 6
 Explanation: The optimal path is 2 -> 1 -> 3 with a path sum of 2 + 1 + 3 = 6.
 
 Example 2:
+   -10
+   / \
+  9   20
+     / \
+    15  7
 Input: root = [-10,9,20,null,null,15,7]
 Output: 42
 The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 42.
