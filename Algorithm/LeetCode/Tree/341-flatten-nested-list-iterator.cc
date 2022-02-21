@@ -57,9 +57,8 @@ class NestedInteger {
 // lazy evaluation
 class NestedIterator {
 public:
-    NestedIterator(vector<NestedInteger> &nestedList) {
-        Nodes.insert(Nodes.end(), nestedList.begin(), nestedList.end());
-    }
+    NestedIterator(vector<NestedInteger> &nestedList)
+    :   Nodes(Nodes.end(), nestedList.begin(), nestedList.end()) { }
 
     int next() {
         auto ret = Nodes.front().getInteger();
