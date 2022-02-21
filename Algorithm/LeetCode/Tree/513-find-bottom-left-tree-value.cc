@@ -35,6 +35,33 @@ struct TreeNode {
 class Solution {
 public:
     int findBottomLeftValue(TreeNode* root) {
+        int ret = 0;
+
+        deque<TreeNode*> dque;
+        dque.push_back(root);
+
+        while (!dque.empty()) {
+            const auto size = dque.size();
+            ret = dque.front()->val;
+
+            while (size--) {
+                auto* node = dque.front();
+                dque.pop_front();
+
+                if (node->left)
+                    dque.push_back(node->left);
+                if (node->right)
+                    dque.push_back(node->right);
+            }
+        }
+
+        return ret;
+    }
+};
+
+class Solution {
+public:
+    int findBottomLeftValue(TreeNode* root) {
         if (!root)
             return 0;
 
