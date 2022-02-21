@@ -87,3 +87,44 @@ private:
 private:
     int _FindCnt{0};
 };
+
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        auto ret = dfs(root, p, q);
+        return Cnt == 2 ? ret : nullptr;
+    }
+
+    TreeNode* dfs(TreeNode* node, TreeNode* p, TreeNode* q) {
+        if (!node)
+            return nullptr;
+
+        TreeNode* lca = nullptr;
+        TreeNode* left = nullptr;
+        TreeNode* right = nullptr;
+
+        if (node == p ||node == q) {
+            ++Cnt;
+            lca = node;
+        }
+
+        if (Cnt != 2) {
+            left = dfs(node->left, p, q);
+            right = dfs(node->right, p, q);
+        }
+
+        if (lca)
+            lca = lca;
+        else if (left && right)
+            lca = node;
+        else if (left)
+            lca = left;
+        else if (right)
+            lca  = right;
+
+        return lca;
+    }
+
+private:
+    int Cnt = 0;
+};
