@@ -34,6 +34,44 @@ struct TreeNode {
 
 class Solution {
 public:
+    vector<int> findMode(TreeNode* root) {
+        Prev = root;
+        inorder(root);
+
+        return Result;
+    }
+
+private:
+    void inorder(TreeNode* node) {
+        if (!node)
+            return;
+
+        inorder(node->left);
+
+        Cnt = (node->val == Prev->val) ? Cnt + 1 : 1;
+
+        if (Cnt > MaxCnt) {
+            MaxCnt = Cnt;
+            Result.clear();
+            Result.push_back(node->val);
+        } else if (Cnt == MaxCnt) {
+            Result.push_back(node->val);
+        }
+
+        Prev = node;
+
+        inorder(node->right);
+    }
+
+private:
+    int Cnt = 0;
+    int MaxCnt = 0;
+    vector<int> Result;
+    TreeNode* Prev = nullptr;
+};
+
+class Solution {
+public:
     void handleValue(int val) {
         if (val != currVal) {
             currVal = val;
