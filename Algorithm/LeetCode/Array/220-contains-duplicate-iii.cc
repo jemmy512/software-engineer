@@ -34,11 +34,11 @@ public:
         for (auto i = 0; i < nums.size(); ++i) {
             auto index = getIndex(nums[i], bucketSize);
 
-            if (bucket.find(index) != bucket.end())
+            if (bucket.count(index))
                 return true;
-            if (bucket.find(index+1) != bucket.end() && abs(nums[i] - bucket[index+1]) < bucketSize)
+            if (bucket.count(index+1) && abs(nums[i] - bucket[index+1]) < bucketSize)
                 return true;
-            if (bucket.find(index-1) != bucket.end() && abs(nums[i] - bucket[index-1]) < bucketSize)
+            if (bucket.count(index-1) && abs(nums[i] - bucket[index-1]) < bucketSize)
                 return true;
 
             bucket.emplace(index, nums[i]);
