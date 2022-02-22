@@ -51,9 +51,10 @@ private:
     string base26_int2str(long n) {
         string str;
         while (n > 0) {
-            char ch = 'A' + (n - 1) % 26;
+            auto off = (n - 1) % 26;
+            char ch = 'A' + off;
             str += ch;
-            n -= (n - 1) % 26; // n = 26
+            n -= off; // n = 26
             n /= 26;
         }
         return string(str.rbegin(), str.rend());
