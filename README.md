@@ -204,6 +204,7 @@
 <details>
 <summary>Open/Close</summary>
 
+- [ ] [Cheat Sheets & Infographics](https://hackingcpp.com/cpp/cheat_sheets.html#hfold5a)
 - [ ] :orange_book: The C Programming Language
 - [ ] :orange_book: C Programming: A Modern Approach
 - [ ] :orange_book: C Traps and Pitfalls
@@ -219,6 +220,7 @@
 
 - [ ] [C++ FAQ](http://www.stroustrup.com/bs_faq.html)
 - [x] [How C++ Resolves a Function Call](https://preshing.com/20210315/how-cpp-resolves-a-function-call/)
+- [ ] [C Language Function Call Stack :link: Part 1](https://programmerall.com/article/41851468750/) [:link: Part 2](https://programmerall.com/article/6133737731/) [:link: Part 3](https://programmerall.com/article/9966767741/)
 - [x] [How to Use C++ for Cross-Platform Development](https://gusc.lv/2021/03/how-to-use-c-for-cross-platform-development/)
 - [x] [trivial_abi](https://quuxplusone.github.io/blog/2018/05/02/trivial-abi-101/)
 - [x] [Paramter Passing in C and C++](https://wolchok.org/posts/parameter-passing/)
