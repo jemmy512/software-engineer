@@ -45,6 +45,10 @@ Relatives:
 174. Dungeon Game
 741. Cherry Pickup */
 
+#include <vector>
+
+using namespace std;
+
 class Solution {
 public:
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
@@ -64,5 +68,43 @@ public:
         }
 
         return vec.back();
+    }
+};
+
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int>>& grid) {
+        const auto RowSize = grid.size();
+        const auto ColSize = grid[0].size();
+        bool hasObstacle = false;
+
+        if (grid[0][0])
+            return 0;
+
+        for (auto r = 0; r < RowSize; ++r) {
+            if (grid[r][0])
+                hasObstacle = true;
+            grid[r][0] = hasObstacle ? 0 : 1;
+        }
+
+        hasObstacle = false;
+
+        for (auto c = 1; c < ColSize; ++c) {
+            if (grid[0][c])
+                hasObstacle = true;
+            grid[0][c] = hasObstacle ? 0 : 1;
+        }
+
+        for (auto r = 1; r < RowSize; ++r) {
+            for (auto c = 1; c < ColSize; ++c) {
+                if (grid[r][c]) {
+                    grid[r][c] = 0;
+                } else {
+                    grid[r][c] = grid[r-1][c] + grid[r][c-1];
+                }
+            }
+        }
+
+        return grid[RowSize-1][ColSize-1];
     }
 };
