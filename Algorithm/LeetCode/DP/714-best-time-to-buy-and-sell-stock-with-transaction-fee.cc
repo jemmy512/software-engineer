@@ -71,3 +71,62 @@ public:
         return dp_i_0;
     }
 };
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices, int maxK, int fee, int cooldown) {
+        const auto size = prices.size();
+
+        if (size <= 0) {
+            return 0;
+        }
+        if (maxK > size / 2) {
+            return maxProfit(prices, cooldown, fee);
+        }
+
+        vector<vector<vector<int>>> dp(size, vector(maxK + 1, vector(2, 0)));
+
+        for (int i = 0; i < size; i++) {
+            dp[i][0][0] = 0;
+            dp[i][0][1] = INT_MIN;
+        }
+
+        for (int i = 0; i < size; ++i) {
+            for (int k = maxK; k >= 1; --k) {
+                if (i == 0) {
+                    dp[i][k][0] = 0;
+                    dp[i][k][1] = -prices[i] - fee;
+                } else if (i - cooldown < 1) {
+                    dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]);
+                    dp[i][k][1] = max(dp[i-1][k][1], -prices[i] - fee);
+                } else {
+                    dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]);
+                    dp[i][k][1] = max(dp[i-1][k][1], dp[i-cooldown-1][k-1][0] - prices[i] - fee);
+                }
+            }
+        }
+
+        return dp[size - 1][maxK][0];
+    }
+
+private:
+    int maxProfit(vector<int>& prices, int cooldown, int fee) {
+        const auto  size = prices.size();
+        vector<vector<int>> dp(size, vector(2, 0));
+
+        for (int i = 0; i < size; i++) {
+            if (i == 0) {
+                dp[i][0] = 0;
+                dp[i][1] = -prices[i] - fee;
+            }else if (i - cooldown < 1) {
+                dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i]);
+                dp[i][1] = max(dp[i-1][1], -prices[i] - fee);
+            } else {
+                dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+                dp[i][1] = max(dp[i - 1][1], dp[i - cooldown - 1][0] - prices[i] - fee);
+            }
+        }
+
+        return dp[size - 1][0];
+    }
+};
