@@ -63,18 +63,18 @@ public:
             return 0;
 
         // optimization
-        // if (N > prices.size() / 2) {
-        //     // It menas N is infinite
-        //     return maxProfit_k_inf(prices);
-        // }
+        if (N > prices.size() / 2) {
+            // It menas N is infinite
+            return maxProfit(prices);
+        }
 
         vector<vector<vector<int>>> dp(prices.size(), vector(N + 1, vector(2, 0)));
 
         for (auto i = 0; i < prices.size(); ++i) {
-            for (auto k = 0; k <= N; ++k) {
-                if (i == 0 || k == 0) {
+            for (auto k = 1; k <= N; ++k) {
+                if (i == 0) {
                     dp[i][k][0] = 0;
-                    dp[i][k][1] = k == 0 ? INT_MIN : -prices[i];
+                    dp[i][k][1] = -prices[i];
                 } else {
                     dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]);
                     dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i]);
@@ -83,6 +83,25 @@ public:
         }
 
         return dp[prices.size()-1][N][0];
+    }
+
+private:
+    int maxProfit(vector<int>& prices) {
+        const auto size = prices.size();
+
+        vector<vector<int>> dp(size, vector(2, 0));
+
+        for (auto i = 0; i < size; ++i) {
+            if (i == 0) {
+                dp[i][0] = 0;
+                dp[i][1] = -prices[i];
+            } else {
+                dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i]);
+                dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i]);
+            }
+        }
+
+        return dp[size-1][0];
     }
 };
 
