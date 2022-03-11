@@ -37,18 +37,19 @@ using namespace std;
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
+        const auto CDown = 2;
         vector<vector<int>> dp(prices.size(), vector(2, 0));
 
         for (auto i = 0; i < prices.size(); ++i) {
             if (i == 0) {
                 dp[i][0] = 0;
                 dp[i][1] = -prices[i];
-            } else if (i == 1) {
+            } else if (i < CDown) {
                 dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i]);
                 dp[i][1] = max(dp[i-1][1], -prices[i]);
             } else {
                 dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i]);
-                dp[i][1] = max(dp[i-1][1], dp[i-2][0] - prices[i]);
+                dp[i][1] = max(dp[i-1][1], dp[i-CDown][0] - prices[i]);
             }
         }
 
