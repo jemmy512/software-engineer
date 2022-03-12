@@ -39,22 +39,44 @@ public:
         if (matrix.empty())
             return 0;
 
-        int rowSize = matrix.size();
-        int colSize = matrix[0].size();
-        vector dp(colSize+1, 0);
+        int RowSize = matrix.size();
+        int ColSize = matrix[0].size();
+        vector dp(ColSize+1, 0);
         int prev = 0;
         int maxLen = 0;
 
-        for (int row = 1; row <= rowSize; ++row) {
-            for (int col = 1; col <= colSize; ++col) {
-                int tmp = dp[col];
-                if (matrix[row-1][col-1] == '1') {
-                    dp[col] = min({dp[col], dp[col-1], prev}) + 1;
-                    maxLen = max(maxLen, dp[col]);
+        for (int r = 1; r <= RowSize; ++r) {
+            for (int c = 1; c <= ColSize; ++c) {
+                int tmp = dp[c];
+                if (matrix[r-1][c-1] == '1') {
+                    dp[c] = min({dp[c], dp[c-1], prev}) + 1;
+                    maxLen = max(maxLen, dp[c]);
                 } else {
-                    dp[col] = 0;
+                    dp[c] = 0;
                 }
                 prev = tmp;
+            }
+        }
+
+        return maxLen * maxLen;
+    }
+};
+
+class Solution {
+public:
+    int maximalSquare(vector<vector<char>>& matrix) {
+        const auto RowSize = matrix.size();
+        const auto ColSize = matrix[0].size();
+        int maxLen = 0;
+
+        vector<vector<int>> dp(RowSize+1, vector(ColSize+1, 0));
+
+        for (auto r = 1; r <= RowSize; ++r) {
+            for (auto c = 1; c <= ColSize; ++c) {
+                if (matrix[r-1][c-1] == '1') {
+                    dp[r][c] = 1 + min({dp[r-1][c-1], dp[r-1][c], dp[r][c-1]});
+                    maxLen = max(maxLen, dp[r][c]);
+                }
             }
         }
 
