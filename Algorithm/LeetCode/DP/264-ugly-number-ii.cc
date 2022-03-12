@@ -77,6 +77,11 @@ public:
             if (ugly[i] == m2) ++i2;
             if (ugly[i] == m3) ++i3;
             if (ugly[i] == m5) ++i5;
+
+            // 2 * 3 == 3 * 2
+            // if (ugly[i] == m2) ++i2;
+            // else if (ugly[i] == m3) ++i3;
+            // else if (ugly[i] == m5) ++i5;
         }
 
         return ugly[n-1];
