@@ -124,10 +124,15 @@ public:
 
         for (int i = 0; i <= lenSrc; ++i) {
             for (int j = 0; j <= lenDst; ++j) {
-                if (i == 0 || j == 0)
+                if (i == 0 || j == 0) {
                     dp[i][j] = i + j;
-                else
-                    dp[i][j] = min(dp[i-1][j-1] + (src[i-1] == dst[j-1] ? 0 : 1), min(dp[i][j-1], dp[i-1][j]) + 1);
+                } else {
+                    if (src[i-1] == dst[j-1]) {
+                        dp[i][j] = dp[i-1][j-1];
+                    } else {
+                        dp[i][j] = 1 + min({dp[i-1][j], dp[i][j-1], dp[i-1][j-1]});
+                    }
+                }
             }
         }
 
