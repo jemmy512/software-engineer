@@ -5,8 +5,13 @@
 * [async_connect](#async_connect)
 * [async_read](#async_read)
 * [async_read_util](#async_read_until)
+
 * [async_write](#async_write)
+    * [try_speculative](#try_speculative)
+    * [tricky_switch](#tricky_switch)
+
 * [io_context::post](#io_contextpost)
+    * [event_loop_interrupt](#event_loop_interrupt)
 
 * ![boost-asio.png](../Image/boost-asio.png)
 
@@ -51,7 +56,7 @@ io_context::run()
                         task_cleanup on_exit = { this, &lock, &this_thread };
 
                         epoll_reactor::run(ops = this_thread.private_op_queue) {
-                            epoll_wait()
+                            epoll_wait();
                             for (int i = 0; i < num_events; ++i) {
                                 void* ptr = events[i].data.ptr;
                                 if (ptr == &interrupter_) {
@@ -437,8 +442,8 @@ public:
                     iterator end = iterator::end(data_buffers);
 
                     // Look for a match.
-                    std::pair<iterator, bool> result = detail::partial_search(
-                        start_pos, end, delim_.begin(), delim_.end());
+                    std::pair<iterator, bool> result =
+                        detail::partial_search(start_pos, end, delim_.begin(), delim_.end());
                     if (result.first != end && result.second)
                     {
                         // Full match. We're done.
@@ -605,11 +610,17 @@ boost::asio::async_write(m_socket, buffer, completion_handler);
                                                                             reactive_socket_send_op::do_complete()
                                                                                 user_callback()
                     max_size = this->check_for_completion(ec, buffers_.total_consumed());                                                                write.hpp::write_op()
-                } while (max_size > 0)
-                completion_handler()
+                } while (max_size > 0);
+                completion_handler();
 ```
 
-tricky switch
+## try_speculative
+
+If the write queue is empty, this allows speculative, write the socket directly no need to push operation into queue.
+
+If the queueu is not empty, register `EPOLLOUT` event for the socket, it will be available only when socket transform from `SOCK_NOSPACE` to `SOCK_QUEUE_SHRUNK` state. So EPOLLOUT is not need to unregister.
+
+## tricky_switch
 ```C++
 struct write_op {
   void operator()(const boost::system::error_code& ec, std::size_t bytes_transferred, int start = 0) {
@@ -711,4 +722,74 @@ void scheduler::post_immediate_completion(scheduler::operation* op, bool is_cont
                 epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, interrupter_.read_descriptor(), &ev);
             }
 }
+```
+
+## event_loop_interrupt
+
+The interrupter is used to break a blocking epoll_wait call.
+
+When there's only epoll_reactor task in schedule::op_queue, there are three block actions:
+1. epoll_reactor is blocked in epoll_wait
+2. schedule::do_run_on is blocked in event_loop since epoll_reactor blocks event_loop
+3. worker threads are blocked since op_queue is empty.
+
+This time, when an operation is posted into op_queue, if no worker available the epoll_reator need to be woken up by intrrupter to do the operation.
+
+```c++
+class pipe_select_interrupter
+{
+public:
+    pipe_select_interrupter() {
+        open_descriptors();
+    }
+
+    void open_descriptors() {
+        int pipe_fds[2];
+        if (pipe(pipe_fds) == 0) {
+            read_descriptor_ = pipe_fds[0];
+            ::fcntl(read_descriptor_, F_SETFL, O_NONBLOCK);
+            write_descriptor_ = pipe_fds[1];
+            ::fcntl(write_descriptor_, F_SETFL, O_NONBLOCK);
+
+            ::fcntl(read_descriptor_, F_SETFD, FD_CLOEXEC);
+            ::fcntl(write_descriptor_, F_SETFD, FD_CLOEXEC);
+        }
+    }
+
+    void recreate() {
+        close_descriptors();
+
+        write_descriptor_ = -1;
+        read_descriptor_ = -1;
+
+        open_descriptors();
+    }
+
+    bool reset() {
+        for (;;) {
+            char data[1024];
+            signed_size_type bytes_read = ::read(read_descriptor_, data, sizeof(data));
+
+            if (bytes_read < 0 && errno == EINTR)
+                continue;
+
+            bool was_interrupted = (bytes_read > 0);
+
+            while (bytes_read == sizeof(data))
+                bytes_read = ::read(read_descriptor_, data, sizeof(data));
+
+            return was_interrupted;
+        }
+    }
+
+    void interrupt() {
+        char byte = 0;
+        signed_size_type result = ::write(write_descriptor_, &byte, 1);
+        (void)result;
+    }
+
+private:
+  int read_descriptor_;
+  int write_descriptor_;
+};
 ```
