@@ -37,6 +37,7 @@ The PPL provides the following features:
 * [Cancellation in PPL](https://docs.microsoft.com/en-us/cpp/parallel/concrt/cancellation-in-the-ppl?view=msvc-160): Explains how to cancel the work that is being performed by a parallel algorithm.
 
 ![pplx.png](../Image/Pplx.png)
+* ![pplx.png](../Image/ppl-task-handle.png)
 * Task wait-notify work flow
     ![](../Image/cpp-rest-task-flow.png)
 * flows
@@ -564,7 +565,8 @@ task::then()
         _ContinuationTask._GetImpl(),
         _Func,
         _ContinuationContext,
-        _InliningMode)
+        _InliningMode
+    );
 
     _Task_impl_base::_ScheduleContinuation(continuationTaskHandle)
         if (!_IsCompleted)
@@ -631,6 +633,7 @@ _PTaskHandle->invoke()
                         };
                     )
                         _TaskCollectionImpl::_Complete()
+                            condition_variable.notify_all()
                         _Task_impl_base::_RunTaskContinuations()
                             --->
 
@@ -641,6 +644,7 @@ _PTaskHandle->invoke()
                         _LogWorkItemAndInvokeUserLambda(_M_function, std::move(ancestorTask))
                     )
                         _TaskCollectionImpl::_Complete()
+                            condition_variable.notify_all()
                         _Task_impl_base::_RunTaskContinuations()
                             --->
             if (not_task_based && NoAsync)
@@ -652,6 +656,7 @@ _PTaskHandle->invoke()
                         );
                     )
                         _TaskCollectionImpl::_Complete()
+                            condition_variable.notify_all()
                         _Task_impl_base::_RunTaskContinuations()
                             --->
             if (not_task_based && Async)
@@ -661,6 +666,7 @@ _PTaskHandle->invoke()
                         _LogWorkItemAndInvokeUserLambda(_M_function, _M_ancestorTaskImpl->_GetResult())
                     )
                         _TaskCollectionImpl::_Complete()
+                            condition_variable.notify_all()
                         _Task_impl_base::_RunTaskContinuations()
                             --->
 ```
