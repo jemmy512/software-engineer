@@ -36,12 +36,14 @@ The PPL provides the following features:
 * [Parallel containers and objects](https://docs.microsoft.com/en-us/cpp/parallel/concrt/parallel-containers-and-objects?view=msvc-160): generic container types that provide safe concurrent access to their elements
 * [Cancellation in PPL](https://docs.microsoft.com/en-us/cpp/parallel/concrt/cancellation-in-the-ppl?view=msvc-160): Explains how to cancel the work that is being performed by a parallel algorithm.
 
-![pplx.png](../Image/Pplx.png)
-* ![pplx.png](../Image/ppl-task-handle.png)
+* PPLX UML
+    * ![pplx.png](../Image/ppl.png)
+* PPLX task handle
+    * ![pplx.png](../Image/ppl-task-handle.png)
+* PPLX task work flow
+    * ![CppRest.png](../Image/ppl-task-flow.png)
 * Task wait-notify work flow
-    ![](../Image/cpp-rest-task-flow.png)
-* flows
-    ![CppRest.png](../Image/task.png)
+    * ![](../Image/cpp-rest-task-flow.png)
 
 ## class task
 ```C++
@@ -406,7 +408,7 @@ struct _InitFunctorTypeTraits<T, T>
 
 ### Check args compatibility
 
-![](../Image/task-func-type-traits.png)
+![](../Image/ppl-task-func-type-traits.png)
 
 ```C++
 // Unwrap task<T>
@@ -465,7 +467,7 @@ struct _TaskTypeFromParam
 
 ### Get task type from parameter
 
-![](../Image/task-type-from-param.png)
+![](../Image/ppl-task-type-from-param.png)
 
 ## task::task
 ```C++
