@@ -728,12 +728,11 @@ void scheduler::post_immediate_completion(scheduler::operation* op, bool is_cont
 
 The interrupter is used to break a blocking epoll_wait call.
 
-When there's only epoll_reactor task in schedule::op_queue, there are three block actions:
-1. epoll_reactor is blocked in epoll_wait
-2. schedule::do_run_on is blocked in event_loop since epoll_reactor blocks event_loop
-3. worker threads are blocked since op_queue is empty.
+When there's only epoll_reactor task in schedule::op_queue, there are two block actions:
+1. The main thread (executes epoll_reactor) blocked at `schedule::do_run_on` -> `epoll_reactor::run` -> `epoll_wait`.
+2. The worker threads blocked at `schedule::do_run_on` condition variable.
 
-This time, when an operation is posted into op_queue, if no worker available the epoll_reator need to be woken up by intrrupter to do the operation.
+This time, when an operation is posted into op_queue, if no worker available (all worker threads are busy or one thread mode) the epoll_reator need to be woken up by intrrupter to do the operation.
 
 ```c++
 class pipe_select_interrupter
@@ -793,3 +792,35 @@ private:
   int write_descriptor_;
 };
 ```
+
+```c++
+epoll_reactor::epoll_reactor(boost::asio::execution_context& ctx)
+:   interrupter_()
+{
+  // Add the interrupter's descriptor to epoll.
+  epoll_event ev = { 0, { 0 } };
+  ev.events = EPOLLIN | EPOLLERR | EPOLLET;
+  ev.data.ptr = &interrupter_;
+  epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, interrupter_.read_descriptor(), &ev);
+  interrupter_.interrupt();
+}
+
+void scheduler::post_immediate_completion(scheduler::operation* op, bool is_continuation)
+{
+  work_started()
+  mutex::scoped_lock lock(mutex_);
+  op_queue_.push(op);
+  wake_one_thread_and_unlock(lock);
+     if (!wakeup_event_.maybe_unlock_and_signal_one(lock))
+        if (!task_interrupted_ && task_)
+            task_interrupted_ = true;
+            epoll_reactor::interrupt() {
+                epoll_event ev = { 0, { 0 } };
+                ev.events = EPOLLIN | EPOLLERR | EPOLLET;
+                ev.data.ptr = &interrupter_;
+                epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, interrupter_.read_descriptor(), &ev);
+            }
+}
+```
+
+The interruptor is interrupted once when it is created. When epoll_reactor needs to be interrupted, it just calls **epoll_ctl EPOLL_CTL_MOD**, since there is already one byte data in interruptor rcv buffer, epoll_ctrl will add the interruptor fd to epoll ready list and wake up epoll_wait, and epoll doesn't ready that one byte data, the one byte data can be used again and again when epoll needs interrupt.
