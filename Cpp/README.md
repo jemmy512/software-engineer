@@ -167,3 +167,7 @@ VTable indices for 'Derive' (5 entries).
 ```
 ![](https://github.com/Jemmy512/book-notes/blob/master/Images/cpp-virtual-inheritance.png)
      * BaseA has its own virtual `FunB`, Derive overrides it and adds it into vtable of both BaseA and BaseB.
+
+# IPC
+
+![](./Images/ipc.png)
