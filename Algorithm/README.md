@@ -3,33 +3,35 @@
 ## DP
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-032 | Longet Valid Paretheses | :star: :star: :star: | :one: :heavy_plus_sign: `stack`
+032 | Longet Valid Paretheses | :star: :star: :star: | :two: :heavy_plus_sign: `stack`
 010 | Regular Expression Matching | :star: :star: :star: |
-062 | Unique Paths | :star: :star: | :one:
-063 | Unique Paths II | :star: :star: | :one:
+062 | Unique Paths | :star: :star: | :two:
+063 | Unique Paths II | :star: :star: | :two:
 980 | Unique Paths III | :star: :star: :star: | `TODO`
-064 | Minimum Path Sum | :star: :star: | :one:
-070 | Climbing Stairs | :star: | :one:
-746 | MinCost Climb Stair | :star: | :one:
-091 | Decode Ways | :star: :star: | :one:
-121 | Best Time to Buy and Sell Stock | :star: | :one:  `Prefix Sum`
-122 | Best Time to Buy and Sell Stock II | :star: | :one: `Greedy`
-123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | :one: `L-R vec`
-188 | Best Time to Buy and Sell Stock IV | :star: :star: :star: | :one: :thinking:
-309 | Best Time to Buy and Sell Stock with Cooldown | :star: :star: | [Stock Problems Solution](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems)
-714 | Best Time to Buy and Sell Stock with Transaction Fee | :star: :star: |
-139 | Word Break | :star: :star: | :one: :thinking: `Bottom Up`
-152 | Maximum Product Subarry | :star: :star: | :one: `Prefix Sum`
-174 | Dungeon Game | :star: :star: :star: | :one:
-198 | House Robber | :star: | :one:
-213 | House Robber II | :star: :star: | :one:
-337 | House Robber III | :star: :star: | :one:
-221 | Maximal Square | :star: :star: | :one: :thinking:
-264 | Ugly Number II | :star: :star: | :one:
+064 | Minimum Path Sum | :star: :star: | :two:
+070 | Climbing Stairs | :star: | :two:
+746 | MinCost Climb Stair | :star: | :two:
+084 | Largest Rectangle in Histogram | :star: :star: :star: | :two: `Monotonic stack`
+085 | Maximal Rectangle | :star: :star: :star: | `TODO`
+221 | Maximal Square | :star: :star: | :two: :thinking:
+091 | Decode Ways | :star: :star: | :two:
+121 | Best Time to Buy and Sell Stock | :star: | :two:  `Prefix Sum`
+122 | Best Time to Buy and Sell Stock II | :star: | :two: `Greedy`
+123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | :two: `2 times`
+188 | Best Time to Buy and Sell Stock IV | :star: :star: :star: | :two: :thinking: `N times`
+309 | Best Time to Buy and Sell Stock with Cooldown | :star: :star: | :two:[Stock Problems Solution](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems)
+714 | Best Time to Buy and Sell Stock with Transaction Fee | :star: :star: |:two:
+139 | Word Break | :star: :star: | :two: :thinking: `Bottom Up`
+152 | Maximum Product Subarry | :star: :star: | :two: `Prefix Sum`
+174 | Dungeon Game | :star: :star: :star: | :two:
+198 | House Robber | :star: | :two:
+213 | House Robber II | :star: :star: | :two:
+337 | House Robber III | :star: :star: | :two:
+264 | Ugly Number II | :star: :star: | :two:
 292 | Nim Gaem | :star: | :one:
 338 | Counting Bits | :star: :star: | :thinking: `Bit`
 392 | Is Subsequence | :star: :star: | :one:
-509 | Fibonacci Number| :star: | :one:
+509 | Fibonacci Number| :star: | :two:
 514 | Freedom Trail  | :star: :star: :star: |
 523 | Continuous Subarray Sum  | :star: :star: | :one: :thinking: `Prefix Sum` `Map`
 546 | Remove Boxes | :star: :star: :star: | `TODO`
@@ -209,7 +211,7 @@ No | Title | Difficulty | Notes
 003 | Longest Substring Without Repeating Characters | :star: :star: | :one:
 159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | :one:
 340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | :one:
-239 | Sliding Window Maximum | :star: :star: :star: | :one: `Monotonic stack` `DP` `L-R vec`
+239 | Sliding Window Maximum | :star: :star: :star: | :two: `Monotonic deque` `DP` `L-R vec`
 438 | Find All Anagrams in a String | :star: :star: | :one:
 567 | Permutation in String | :star: :star: | :one:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
@@ -404,7 +406,7 @@ No | Title | Difficulty | Notes
 082 | Remove Duplicates from Sorted List II | :star: :star: | :one: :heavy_plus_sign: `Two Pointers`
 316 | Remove Duplicate Letters | :star: :star: :star: | :one: :heavy_plus_sign:
 048 | Rotate Image | :star: :star: |
-088 | Merge Sorted Array | :star: | :one:
+088 | Merge Sorted Array | :star: | :two:
 169 | Majority Element | :star: | [:link: Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html)
 189 | Rotate Array | :star: :star: | :one:
 209 | Minimum Size Subarray Sum | :star: :star: | :one: `Prefix Sum` `BS` `Two Pointers`
@@ -421,7 +423,6 @@ No | Title | Difficulty | Notes
 219 | Contains Duplicate II | :star: | :one:
 220 | Contains Duplicate III | :star: :star: | :one: :heavy_plus_sign: `bucket sort`
 238 | Product of Array Except Self  | :star: :star: | :one: `L-R vec`
-239 | Sliding Window Maximum | :star: :star: :star: | :one: :thinking: `DP` `L-R vec`
 283 | Move Zeroes | :star: :star: | :one: `Two Pointers`
 448 | Find All Numbers Disappeared in An Array | :star: | :one:
 870 | Advantage Shuffle | :star: :star: |
@@ -434,8 +435,8 @@ No | Title | Difficulty | Notes
 445 | Add Two Numbers II | :star: :star: | :one:
 019 | Remove Nth Node From End of List | :star: :star: | :one:
 203 | Remove Linked List Element | :star: | :one:
-021 | Merge Two Sorted Lists | :star: | :one:
-023 | Merge K Sorted List | :star: :star: :star: | :one: `K-way Merge` `Divide Conquer`
+021 | Merge Two Sorted Lists | :star: | :two:
+023 | Merge K Sorted List | :star: :star: :star: | :two: `K-way Merge` `Divide Conquer`
 024 | Swap Nodes in Pairs | :star: :star: | :one:
 025 | Reverse Nodes in K-Group | :star: :star: :star: | :one:
 206 | Reverse Linkded List | :star: | :one: `3 solutions`
@@ -447,8 +448,8 @@ No | Title | Difficulty | Notes
 142 | Linked List Cycle II | :star: :star: | :one: `Two Pointers` `Cycle`
 287 | Find the Duplicate Number | :star: :star: | :one: `Two Pointers` `Cycle`
 143 | Reorder List | :star: :star: | :one:
-147 | Insertion Sorted List | :star: :star: | :one: `Insertion sort`
-148 | Sort List | :star: :star: | :one: `Div-Conq` `Merge sort`
+147 | Insertion Sorted List | :star: :star: | :two: `Insertion sort`
+148 | Sort List | :star: :star: | :two: `Div-Conq` `Merge sort`
 160 | Intersection of Two Linked Lists | :star: | :one:
 234 | Palindrome Linked List | :star: | :one:
 237 | Delete Node In A Linked List | :star: | :one:
@@ -493,11 +494,11 @@ No | Title | Difficulty | Notes
 226 | Invert Binary Tree | :star: | :one:
 230 | kth Smallest Element In The BST | :star: :star: | :one: `Inorder`
 671 | Second Minimum Node in a Binary Tree | :star: | :one:
-235 | Lowest Common Ancestor of a Binary Search Tree | :star: | :one:
-236 | Lowest Common Ancestor of a Binary Tree | :star: :star: | :one: :thinking:
-1644 | Lowest Common Ancestor of a Binary Tree II | :star: :star: | :one: `p, q may be null`
-1650 | Lowest Common Ancestor of a Binary Tree III | :star: :star: | :one: `List Common Node`
-1676 | Lowest Common Ancestor of a Binary Tree IV | :star: :star: | :one: `Multiple-nodes`
+235 | Lowest Common Ancestor of a Binary Search Tree | :star: | :two:
+236 | Lowest Common Ancestor of a Binary Tree | :star: :star: | :two: :thinking:
+1644 | Lowest Common Ancestor of a Binary Tree II | :star: :star: | :two: `p, q may be null`
+1650 | Lowest Common Ancestor of a Binary Tree III | :star: :star: | :two: `List Common Node`
+1676 | Lowest Common Ancestor of a Binary Tree IV | :star: :star: | :two: `Multiple-nodes`
 1123 | Lowest Common Ancestor of Deepest Leaves | :star: :star: | `TODO`
 1214 | Two Sum BSTs | :star: :star: | :one: `Inorder` `Complement Map`
 1257 | Smallest Common Region | :star: :star: | `TODO`
@@ -568,12 +569,12 @@ No | Title | Difficulty | Notes
 155 | MinStack | :star: | :one:
 225 | Implement Stack using Queues | :star: | :one:
 232 | Implement Queue using Stacks | :star: | :one:
-316 | Remove Duplicate Letters | :star: :star: :star: | :one: :heavy_plus_sign: `Monotonic Stack`
+316 | Remove Duplicate Letters | :star: :star: :star: | :two: :heavy_plus_sign: `Monotonic Stack`
 394 | DecodeString | :star: :star: | :one: :heavy_plus_sign:
-496 | Next Greater Element I | :star: | :one: `Monotonic Stack`
-503 | Next Greater Element II | :star: :star: | :one: `Monotonic Stack` `Circular`
+496 | Next Greater Element I | :star: | :two: `Monotonic Stack`
+503 | Next Greater Element II | :star: :star: | :two: `Monotonic Stack` `Circular`
 556 | Next Greater Element III | :star: :star: | `TODO` `Monotonic Stack`
-739 | Daily Temperatures | :star: :star: | :one: `Monotonic Stack`
+739 | Daily Temperatures | :star: :star: | :two: `Monotonic Stack`
 921 | Minimum Add to Make Parentheses Valid | :star: :star: | :one:
 1249 | Minimum Remove to Make Valid Parentheses | :star: :star: | :one: `Bit Set`
 1541 | Minimum Insertions to Balance a Parentheses String | :star: :star: | :one: :heavy_plus_sign:
