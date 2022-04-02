@@ -20,9 +20,10 @@ n == matrix[i].length
 1 <= m, n <= 300
 matrix[i][j] is '0' or '1'.
 
-Rlatives:
+Relatives:
+084. Largest Rectangle in Histogram
 085. Maximal Rectangle
-764. Largest Plus Sign */
+221. Maximal Square */
 
 #include <vector>
 #include <initializer_list>
