@@ -46,6 +46,58 @@ Relatives:
 
 using namespace std;
 
+// min-max + memorization
+class Solution {
+public:
+    bool stoneGame(vector<int>& piles) {
+        const auto size = piles.size();
+        Memo.resize(size, vector(size, -1));
+
+        return dp(piles, 0, size - 1) > 0;
+    }
+
+private:
+    // best relative score of subarry piles[l] ~ piles[r]
+    int dp(const vector<int>& piles, int l, int r) {
+        if (l == r)
+            return piles[l];
+
+        if (Memo[l][r] == -1) {
+            Memo[l][r] = max(
+                piles[l] - dp(piles, l+1, r),
+                piles[r] - dp(piles, l, r-1)
+            );
+        }
+
+        return Memo[l][r];
+    }
+
+private:
+    vector<vector<int>> Memo;
+};
+
+// min-max + dp bottom-up
+class Solution {
+public:
+  bool stoneGame(vector<int>& piles) {
+    const int size = piles.size();
+    // dp[i][j] := max(your_stones - op_stones) for piles[i] ~ piles[j]
+    vector<vector<int>> dp(size, vector<int>(size, 0));
+
+    for (int i = 0; i < size; ++i)
+        dp[i][i] = piles[i];
+
+    for (int l = 1; l < size; ++l) {
+        for (int i = 0; i < size - l; ++i) {
+            int j = i + l;
+            dp[i][j] = max(piles[i] - dp[i + 1][j], piles[j] - dp[i][j - 1]);
+        }
+    }
+
+    return dp[0][size - 1] > 0;
+  }
+};
+
 class Solution {
 public:
     bool stoneGame(vector<int>& piles) {
