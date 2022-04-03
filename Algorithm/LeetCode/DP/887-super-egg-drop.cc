@@ -28,7 +28,11 @@ Output: 4
 
 Constraints:
 1 <= k <= 100
-1 <= n <= 10^4 */
+1 <= n <= 10^4
+
+Reletives:
+887. Super Egg Drop
+1884. Egg Drop With 2 Eggs and N Floors */
 
 #include <climits>
 #include <vector>
@@ -37,6 +41,59 @@ Constraints:
 #include <unordered_map>
 
 using namespace std;
+
+
+// optimization with binary search
+// O(K*N*logN)
+class Solution {
+public:
+    int superEggDrop(int k, int n) {
+        return dp(k, n);
+    }
+
+private:
+    int dp(int k, int n) {
+        if (k == 1) return n;
+        if (n == 0) return 0;
+
+        const auto key = k * 10000 + n;
+        auto ite = Memo.find(key);
+        if (ite != Memo.end()) {
+            return ite->second;
+        }
+
+        auto beg = 1;
+        auto end = n;
+        auto ret = INT_MAX;
+
+        /*  broken[i]   = dp(k - 1, i - 1) is incresing with i.
+            unbroken[i] = dp(k,     n - i) is decresing with i.
+            dp[k][n] = 1 + min(max(broken[i], unbroken[i])), 1 <= i <= n
+            find the smallest i such that broken[i] >= unbroken[i],
+            which minimizes max(broken[i], unbroken[i]).    */
+
+        while (beg <= end) {
+            const auto mid  = beg + (end - beg) / 2;
+            const auto broken = dp(k-1, mid - 1);
+            const auto unbroken = dp(k, n - mid);
+
+            if (broken > unbroken) {
+                end = mid - 1;
+                ret = min(ret, broken + 1);
+            } else {
+                beg = mid + 1;
+                ret = min(ret, unbroken + 1);
+            }
+        }
+
+        Memo[key] = ret;
+
+        return ret;
+    }
+
+private:
+    unordered_map<int, int> Memo;
+};
 
 // O(K*N^2)
 class Solution {
@@ -59,53 +116,10 @@ private:
         auto ret = INT_MAX;
 
         for (auto i = 1; i <= n; ++i) {
-            const auto subProblem = 1 + max(dp(k, n - i), dp(k - 1, i - 1));
+            auto broken = dp(k-1, i-1);
+            auto unbroekn = dp(k, n - i);
+            const auto subProblem = 1 + max(broken, unbroekn);
             ret = min(ret, subProblem);
-        }
-
-        Memo[key] = ret;
-
-        return ret;
-    }
-
-private:
-    unordered_map<int, int> Memo;
-};
-
-// optimization with binary search
-// O(K*N*logN)
-class Solution {
-public:
-    int superEggDrop(int k, int n) {
-        return dp(k, n);
-    }
-
-private:
-    int dp(int k, int n) {
-        if (k == 1) return n;
-        if (n == 0) return 0;
-
-        const auto key = k * 10000 + n;
-        if (Memo.find(key) != Memo.end()) {
-            return Memo[key];
-        }
-
-        auto beg = 1;
-        auto end = n;
-        auto ret = INT_MAX;
-
-        while (beg <= end) {
-            const auto mid  = beg + (end - beg) / 2;
-            const auto broken = dp(k-1, mid - 1);
-            const auto notBroken = dp(k, n - mid);
-
-            if (broken > notBroken) {
-                end = mid - 1;
-                ret = min(ret, broken + 1);
-            } else {
-                beg = mid + 1;
-                ret = min(ret, notBroken + 1);
-            }
         }
 
         Memo[key] = ret;
