@@ -56,12 +56,12 @@ public:
 
     bool find(int value) {
        for (const auto& [num, cnt] : hashMap) {
-            long complement = value - num; // -2147484648 - 1 overflow
-            // if (hashMap.contains(complement)) { // c++20
-            if (hashMap.find(complement) != hashMap.end()) {
-                if (complement == num)
-                    return cnt > 1;
-                else
+            long complement = value - num; // INT_MIN - 1 overflow
+            if (complement != num) {
+                if (hashMap.count(complement))
+                    return true;
+            } else {
+                if (cnt > 1)
                     return true;
             }
         }
