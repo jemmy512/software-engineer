@@ -53,6 +53,12 @@ Relatives:
 
 using namespace std;
 
+/*
+[a ... a]   -> dp(i+1, j-1)
+[a ... b]   -> dp(i+1, j)   -> [a  ... ba]
+            -> dp(i, j-1)   -> [ba ... b]
+*/
+
 class Solution {
 public:
     int minInsertions(string s) {
@@ -70,5 +76,28 @@ public:
         }
 
         return dp[0][size-1];
+    }
+};
+
+/* longest common substring
+Split the string s into to two parts,
+and we try to make them symmetrical by adding letters.
+
+The more common symmetrical subsequence they have,
+the less letters we need to add. */
+
+class Solution {
+public:
+    int minInsertions(string s) {
+        const auto size = s.size();
+        vector<vector<int>> dp(size+1, vector(size+1, 0));
+
+        for (auto i = 0; i < size; ++i) {
+            for (auto j = 0; j < size; ++j) {
+                dp[i+1][j+1] = s[i] == s[size-j-1] ? dp[i][j] + 1 : max(dp[i+1][j], dp[i][j+1]);
+            }
+        }
+
+        return size - dp[size][size];
     }
 };
