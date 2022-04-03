@@ -12,7 +12,7 @@ No | Title | Difficulty | Notes
 070 | Climbing Stairs | :star: | :two:
 746 | MinCost Climb Stair | :star: | :two:
 084 | Largest Rectangle in Histogram | :star: :star: :star: | :two: `Monotonic stack`
-085 | Maximal Rectangle | :star: :star: :star: | `TODO`
+085 | Maximal Rectangle | :star: :star: :star: | :two:
 221 | Maximal Square | :star: :star: | :two: :thinking:
 091 | Decode Ways | :star: :star: | :two:
 121 | Best Time to Buy and Sell Stock | :star: | :two:  `Prefix Sum`
@@ -27,27 +27,29 @@ No | Title | Difficulty | Notes
 198 | House Robber | :star: | :two:
 213 | House Robber II | :star: :star: | :two:
 337 | House Robber III | :star: :star: | :two:
+241 | Different Ways to Add Parentheses | :star: :star: | :two:
 264 | Ugly Number II | :star: :star: | :two:
-292 | Nim Gaem | :star: | :one:
-338 | Counting Bits | :star: :star: | :thinking: `Bit`
-392 | Is Subsequence | :star: :star: | :one:
+292 | Nim Game | :star: | :one:
+338 | Counting Bits | :star: :star: | :one: :thinking: `Bit`
+392 | Is Subsequence | :star: :star: | :two:
 509 | Fibonacci Number| :star: | :two:
-514 | Freedom Trail  | :star: :star: :star: |
-523 | Continuous Subarray Sum  | :star: :star: | :one: :thinking: `Prefix Sum` `Map`
+514 | Freedom Trail  | :star: :star: :star: | :two:
+523 | Continuous Subarray Sum  | :star: :star: | :two: :thinking: `Prefix Sum` `Map`
 546 | Remove Boxes | :star: :star: :star: | `TODO`
 650 | 2 Keys Keyboard | :star: :star: | :one:
 651 | 4 Keys Keyboard | :star: :star: | :one:
-718 | Maximum Length of Repeated Subarray | :star: :star: | :one:
-787 | Cheapest Flights Within K Stops | :star: :star: | `??`
-1137 | N-th Tribonacci Number | :star: |
-005 | Longest Palindromic Substring | :star: :star: | :one:
-647 | Palindromic Substrings | :star: :star: | :one:
-1312 | Minimum Insertion Steps to Make a String Palindrome | :star: :star: :star: | :one:
-1025 | Divisor Game | :star: | :one:
-887 | Super Egg Drop | :star: :star: :star: | :one:
-931 | Minimum Falling Path Sum | :star: :star: | :one:
-1289 | Minimum Falling Path Sum II | :star: :star: :star: | :one:
-877 | Stone Game | :star: :star: | :one:
+718 | Maximum Length of Repeated Subarray | :star: :star: | :two:
+787 | Cheapest Flights Within K Stops | :star: :star: | :two:
+1137 | N-th Tribonacci Number | :star: | :two:
+005 | Longest Palindromic Substring | :star: :star: | :two:
+647 | Palindromic Substrings | :star: :star: | :two:
+1312 | Minimum Insertion Steps to Make a String Palindrome | :star: :star: :star: | :two:
+1025 | Divisor Game | :star: | :two:
+887 | Super Egg Drop | :star: :star: :star: | :two:
+1884 | Egg Drop With 2 Eggs and N Floors  | :star: :star: | :two:
+931 | Minimum Falling Path Sum | :star: :star: | :two:
+1289 | Minimum Falling Path Sum II | :star: :star: :star: | :two:
+877 | Stone Game | :star: :star: | :two:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ### knapsack
@@ -66,12 +68,12 @@ Two type of the problem:
 ### substring
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-053 | Maximum Subarray | :star: | :one: `Prefix Sum` `kadane` `Divide Conquer`
+053 | Maximum Subarray | :star: | :two: `Prefix Sum` `kadane` `Divide Conquer`
 072 | Edit Distance | :star: :star: :star: | :one:
 300 | Longest Increasing Subsequence | :star: :star: | :one:
 354 | Russian Doll Envelopes | :star: :star: :star: | :one:
-516 | Longest Palindromic Subsequence | :star: :star: | :one:
-1143 | Longest Common Subsequence | :star: :star: | :one:
+516 | Longest Palindromic Subsequence | :star: :star: | :two:
+1143 | Longest Common Subsequence | :star: :star: | :two:
 1048 | Longest String Chain | :star: :star: | :one:
 583 | Delete Operation for Two Strings | :star: :star: | :one:
 712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: | :one:
@@ -183,7 +185,6 @@ No | Title | Difficulty | Notes
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 023 | Merge K Sorted List | :star: :star: :star: | :one: `K-way Merge`
-241 | Different Ways to Add Parentheses | :star: :star: | :one:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Two Pointers
@@ -413,12 +414,12 @@ No | Title | Difficulty | Notes
 303 | Range Sum Query Immutable | :star: | `Prefix Sum`
 307 | Range Sum Query Mutable | :star: :star: | `Segment Tree`
 304 | Range Sum Query 2D Immutable | :star: :star: | `Prefix Sum`
-325 | Maximum Size Subarray Sum Equals k | :star: :star: | `Prefix Sum` `Map`
+325 | Maximum Size Subarray Sum Equals k | :star: :star: | :two: `Prefix Sum` `Map`
 370 | Range Addition | :star: :star: | :one: `Diff Array` `Prefix Sum`
 598 | Range Addition II | :star: | :one: `Diff Array`
 1094 | Car Pooling | :star: :star: | :one: `Diff Array`
 1109 | Corporate Flight Bookings | :star: :star: | :one: `Diff Array` `Prefix Sum`
-560 | Subarray Sum Equals K | :star: :star: | `Prefix Sum` `Map`
+560 | Subarray Sum Equals K | :star: :star: | :two: `Prefix Sum` `Map`
 217 | Contains Duplicate I | :star: | :one:
 219 | Contains Duplicate II | :star: | :one:
 220 | Contains Duplicate III | :star: :star: | :one: :heavy_plus_sign: `bucket sort`
@@ -539,20 +540,20 @@ No | Title | Difficulty | Notes
 344 | Reverse String | :star: |
 345 | Reverse Vowels of a String | :star: |
 796 | Rotate String | :star: |
-1062 | Longest Repeating Substring | :star: :star: | `BS + Hash` `Rabin-Karp`
+1062 | Longest Repeating Substring | :star: :star: | :two: `BS + Hash` `Rabin-Karp`
 1784 | Check if Binary String Has at Most One Segment of Ones | :star: |
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Map
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-001 | Two Sum | :star: | :one:
-167 | Two Sum II | :star: | :one: `Two Pointers`
-170 | Two Sum III - Data structure | :star: | :one:
-653 | Two Sum IV | :star: | :one: `Inorder + Two Pointers` `Complement Map`
-1214 | Two Sum BSTs | :star: :star: | :one: `Inorder + Complement Map` `Tree`
-266 | Palindrome Permutation | :star: | :one:
-267 | Palindrome Permutation II | :star: :star: | :one: `Backtracking`
+001 | Two Sum | :star: | :two:
+167 | Two Sum II | :star: | :two: `Two Pointers`
+170 | Two Sum III - Data structure | :star: | :two:
+653 | Two Sum IV | :star: | :two: `Inorder + Two Pointers` `Complement Map`
+1214 | Two Sum BSTs | :star: :star: | :two: `Inorder + Complement Map` `Tree`
+266 | Palindrome Permutation | :star: | :two:
+267 | Palindrome Permutation II | :star: :star: | :two: `Backtracking`
 290 | Word Pattern | :star: | :one: :heavy_plus_sign:
 383 | Ransom Note | :star: | :one:
 412 | Fizz Buzz | :star: | :one:
