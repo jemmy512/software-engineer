@@ -61,6 +61,7 @@ public:
     }
 
 private:
+    // the minimum operatios when pointer in src[i] and input is tar[j...]
     int dp(const string& src, int i, const string& tar, int j) {
         if (j == tar.size())
             return 0;
@@ -69,7 +70,7 @@ private:
 
         auto ret = INT_MAX;
 
-        for (const auto& chrIdx : CharIndex[tar[j]]) {
+        for (const auto chrIdx : CharIndex[tar[j]]) {
             size_t delta = abs(chrIdx - i);
             // clockwise or anticlockwise
             delta = min(delta, src.size() - delta);
