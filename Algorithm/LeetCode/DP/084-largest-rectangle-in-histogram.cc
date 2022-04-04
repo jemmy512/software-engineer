@@ -30,6 +30,29 @@ using namespace std;
 class Solution {
 public:
     int largestRectangleArea(vector<int>& heights) {
+        heights.push_back(0);
+        const auto size = heights.size();
+        stack<int> stk;
+        int ret = 0;
+        int i = 0;
+
+        while (i < size) {
+            if (stk.empty() || heights[i] >= heights[stk.top()]) {
+                stk.push(i++);
+            } else {
+                auto h = heights[stk.top()]; stk.pop();
+                auto w = stk.empty() ? i : i - stk.top() - 1;
+                ret = max(ret, h * w);
+            }
+        }
+
+        return ret;
+    }
+};
+
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
         stack<int> stk;
         stk.push(-1);
         int maxArea = 0;
