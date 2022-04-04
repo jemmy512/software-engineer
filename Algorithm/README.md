@@ -55,10 +55,10 @@ No | Title | Difficulty | Notes
 ### knapsack
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-322 | Coin Change | :star: :star: | :one:
-518 | Coin Change 2 | :star: :star: | :one: :thinking:
-416 | Partition Equal Subset Sum | :star: :star: | :one:
-494 | Target Sum | :star: :star: | :one:
+322 | Coin Change | :star: :star: | :two:
+518 | Coin Change 2 | :star: :star: | :two: :thinking:
+416 | Partition Equal Subset Sum | :star: :star: | :two:
+494 | Target Sum | :star: :star: | :two:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 Two type of the problem:
@@ -69,14 +69,14 @@ Two type of the problem:
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 053 | Maximum Subarray | :star: | :two: `Prefix Sum` `kadane` `Divide Conquer`
-072 | Edit Distance | :star: :star: :star: | :one:
-300 | Longest Increasing Subsequence | :star: :star: | :one:
-354 | Russian Doll Envelopes | :star: :star: :star: | :one:
+072 | Edit Distance | :star: :star: :star: | :two:
+300 | Longest Increasing Subsequence | :star: :star: | :two:
+354 | Russian Doll Envelopes | :star: :star: :star: | :two:
 516 | Longest Palindromic Subsequence | :star: :star: | :two:
 1143 | Longest Common Subsequence | :star: :star: | :two:
-1048 | Longest String Chain | :star: :star: | :one:
-583 | Delete Operation for Two Strings | :star: :star: | :one:
-712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: | :one:
+1048 | Longest String Chain | :star: :star: | :two:
+583 | Delete Operation for Two Strings | :star: :star: | :two:
+712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: | :two:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ```c++
@@ -89,20 +89,20 @@ for (state1 : state1_options)
 ## BackTrack
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-017 | Letter Combination of a Phone Number | :star: :star: | :one:
-022 | Generate Parenthesis | :star: :star: | :one: :thinking:
-037 | Sudoku Solver | :star: :star: :star: | :one:
-039 | Combination Sum | :star: :star: | :one:
-040 | Combination Sum II | :star: :star: | :one:
-046 | Permutations | :star: :star: | :one: :thinking:
-047 | Permutations II | :star: :star: | :one:
-077 | Combinations | :star: :star: | :one:
-078 | Subsets  | :star: :star: | :one:
-090 | Subsets II  | :star: :star: | :one:
-079 | Word Search | :star: :star: | :one: `Matrix` `DFS`
-212 | Word Search II | :star: :star: :star: | :one: `Matrix` `DFS`
-291 | Word Pattern II | :star: :star: | :one: :heavy_plus_sign:
-698 | Partition to K Equal Sum Subsets | :star: :star: | :one:
+017 | Letter Combination of a Phone Number | :star: :star: | :two:
+022 | Generate Parenthesis | :star: :star: | :two: :thinking:
+037 | Sudoku Solver | :star: :star: :star: | :two:
+077 | Combinations | :star: :star: | :two:
+039 | Combination Sum | :star: :star: | :two:
+040 | Combination Sum II | :star: :star: | :two:
+046 | Permutations | :star: :star: | :two:
+047 | Permutations II | :star: :star: | :two:
+078 | Subsets  | :star: :star: | :two:
+090 | Subsets II  | :star: :star: | :two:
+079 | Word Search | :star: :star: | :two: `Matrix` `DFS`
+212 | Word Search II | :star: :star: :star: | :two: `Matrix` `DFS`
+291 | Word Pattern II | :star: :star: | :two: :heavy_plus_sign:
+698 | Partition to K Equal Sum Subsets | :star: :star: | :two:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ```c++
@@ -131,12 +131,11 @@ void backtrack(path, options) {
         }
 
         for (auto i = pos; i < candidates.size(); ++i) {
-            if (i > pos && candidates[i] == candidates[i-1])
-                continue;
-
-            Track.emplace_back(candidates[i]);
-            backtrack(candidates, i+1);
-            Track.pop_back();
+            if (i == pos || candidates[i] != candidates[i-1]) {
+                Track.emplace_back(candidates[i]);
+                backtrack(candidates, i+1);
+                Track.pop_back();
+            }
         }
     }
     ```
@@ -171,10 +170,9 @@ void backtrack(path, options) {
 ## Greedy
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-055 | Jump Game | :star: :star: | :one:
-045 | Jump Game II | :star: :star: | :one:
-122 | Best Time to Buy and Sell Stock II | :star: | :one:
-134 | Gas Station | :star: :star: | :one:
+055 | Jump Game | :star: :star: | :two:
+045 | Jump Game II | :star: :star: | :two:
+134 | Gas Station | :star: :star: | :two:
 435 | Non-overlapping Intervals | :star: :star: | :one: `Interval`
 452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :one: `Interval`
 763 | Partition Labels | :star: :star: | :one: `Interval`
@@ -184,7 +182,7 @@ No | Title | Difficulty | Notes
 ## Divide Conquer
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-023 | Merge K Sorted List | :star: :star: :star: | :one: `K-way Merge`
+023 | Merge K Sorted List | :star: :star: :star: | :two: `K-way Merge`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Two Pointers
@@ -554,7 +552,7 @@ No | Title | Difficulty | Notes
 1214 | Two Sum BSTs | :star: :star: | :two: `Inorder + Complement Map` `Tree`
 266 | Palindrome Permutation | :star: | :two:
 267 | Palindrome Permutation II | :star: :star: | :two: `Backtracking`
-290 | Word Pattern | :star: | :one: :heavy_plus_sign:
+290 | Word Pattern | :star: | :two: :heavy_plus_sign:
 383 | Ransom Note | :star: | :one:
 412 | Fizz Buzz | :star: | :one:
 771 | Jewelsand Stones | :star: | :one:
@@ -565,7 +563,7 @@ No | Title | Difficulty | Notes
 ## Stack
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-020 | valid Parentheses | :star: | :one:
+020 | valid Parentheses | :star: | :two:
 032 | Longet Valid Paretheses | :star: :star: :star: | :one: :heavy_plus_sign: `DP`
 155 | MinStack | :star: | :one:
 225 | Implement Stack using Queues | :star: | :one:
