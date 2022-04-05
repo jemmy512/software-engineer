@@ -39,9 +39,9 @@ nums2.length == n
 
 using namespace std;
 
+// O(logN) approch : binary search for partition
 class Solution {
 public:
-    // O(logN) approch : binary search for partition
     double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
         if (a.size() > b.size()) {
             swap(a, b);
@@ -50,7 +50,7 @@ public:
         const auto sizeA = a.size();
         const auto sizeB = b.size();
         const auto halfSize = (sizeA + sizeB + 1) / 2;
-        const auto isOddArray = (sizeA + sizeB) % 2 == 1;
+        const auto isOdd = (sizeA + sizeB) % 2 == 1;
         int beg = 0;
         int end = sizeA;
 
@@ -58,18 +58,18 @@ public:
             int posA = (beg + end) / 2;
             int posB = halfSize - posA;
 
-            int maxALeft = (posA == 0) ? INT_MIN : a[posA-1];
-            int minARight = (posA == sizeA) ? INT_MAX : a[posA];
+            int leftAmax = (posA == 0) ? INT_MIN : a[posA-1];
+            int rightAmin = (posA == sizeA) ? INT_MAX : a[posA];
 
-            int maxBLeft = (posB == 0) ? INT_MIN : b[posB-1];
-            int minBRight = (posB == sizeB) ? INT_MAX : b[posB];
+            int leftBmax = (posB == 0) ? INT_MIN : b[posB-1];
+            int rightBmin = (posB == sizeB) ? INT_MAX : b[posB];
 
-            if (maxALeft <= minBRight && maxBLeft <= minARight) {
-                if (isOddArray)
-                    return double(max(maxALeft, maxBLeft));
+            if (leftAmax <= rightBmin && leftBmax <= rightAmin) {
+                if (isOdd)
+                    return double(max(leftAmax, leftBmax));
                 else
-                    return double(max(maxALeft, maxBLeft) + min(minARight, minBRight))/2;
-            } else if (maxALeft > minBRight) {
+                    return double(max(leftAmax, leftBmax) + min(rightAmin, rightBmin))/2;
+            } else if (leftAmax > rightBmin) {
                 end = posA-1;
             } else {
                 beg = posA+1;
