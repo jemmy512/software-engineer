@@ -27,6 +27,12 @@ The string S consists of only lowercase English letters from 'a' - 'z'.
 1 <= S.length <= 1500
 
 Relatives:
+003. Longest Substring Without Repeating Characters
+159. Longest Substring with At Most Two Distinct Characters
+340. Longest Substring with At Most K Distinct Characters
+239. Sliding Window Maximum
+992. Subarrays with K Different Integers
+
 0516. Longest Palindromic Subsequence
 1682. Longest Palindromic Subsequence II
 1062. Longest Repeating Substring
