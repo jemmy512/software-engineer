@@ -173,10 +173,10 @@ No | Title | Difficulty | Notes
 055 | Jump Game | :star: :star: | :two:
 045 | Jump Game II | :star: :star: | :two:
 134 | Gas Station | :star: :star: | :two:
-435 | Non-overlapping Intervals | :star: :star: | :one: `Interval`
-452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :one: `Interval`
-763 | Partition Labels | :star: :star: | :one: `Interval`
-1024 | Video Stitching | :star: :star: | :one: `Interval`
+435 | Non-overlapping Intervals | :star: :star: | :two: `Interval`
+452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :two: `Interval`
+763 | Partition Labels | :star: :star: | :two: `Interval`
+1024 | Video Stitching | :star: :star: | :two: `Interval`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Divide Conquer
@@ -190,29 +190,29 @@ No | Title | Difficulty | Notes
 **Fast Slow Pointers**
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-011 | Container With Most Water | :star: :star: :star: | :one:
-027 | Remove Element | :star: | :one:
-026 | Remove Duplicates from Sorted Array | :star: | :one:
-083 | Remove Duplicates from Sorted List | :star: | :one:
-042 | Trapping Rain Water | :star: :star: :star: | :one:
+011 | Container With Most Water | :star: :star: :star: | :two:
+027 | Remove Element | :star: | :two:
+026 | Remove Duplicates from Sorted Array | :star: | :two:
+083 | Remove Duplicates from Sorted List | :star: | :two:
+042 | Trapping Rain Water | :star: :star: :star: | :two:
 407 | Trapping Rain Water II | :star: :star: :star: | `TODO`
-141 | linked List Cycle | :star: | :one: `Cycle`
-142 | Linked List Cycle II | :star: :star: | :one: `Cycle`
-283 | Move Zeroes | :star: :star: | :one:
+141 | linked List Cycle | :star: | :two: `Cycle`
+142 | Linked List Cycle II | :star: :star: | :two: `Cycle`
+283 | Move Zeroes | :star: :star: | :two:
 287 | Find the Duplicate Number | :star: :star: | :one: `Cycle` `?`
-992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 **Sliding Window**
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-076 | Minimum Window Substring | :star: :star: :star: | :one:
-003 | Longest Substring Without Repeating Characters | :star: :star: | :one:
-159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | :one:
-340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | :one:
+076 | Minimum Window Substring | :star: :star: :star: | :two:
+003 | Longest Substring Without Repeating Characters | :star: :star: | :two:
+159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | :two:
+340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | :two:
+992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
 239 | Sliding Window Maximum | :star: :star: :star: | :two: `Monotonic deque` `DP` `L-R vec`
-438 | Find All Anagrams in a String | :star: :star: | :one:
-567 | Permutation in String | :star: :star: | :one:
+438 | Find All Anagrams in a String | :star: :star: | :two:
+567 | Permutation in String | :star: :star: | :two:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ```c++
@@ -221,20 +221,29 @@ void slidingWindow(string src, string tar) {
     int winSize = 0;
     unordered_map<char, int> dict, window;
 
+    // 0. init dict
     for (char chr : tar) {
         ++dict[chr];
     }
 
     while (end < src.size()) {
-        char chr = src[end];
-        ++end;
-        // 1. rigt shift, expanding, update data
+        // 1. right shift, expanding, update data
+        char chr = src[end++];
+        if (dict.count(chr)) {
+            if (++window[chr] == dict[chr]) {
+                ++winSize;
+            }
+        }
 
         // 2. when to shrink
-        while (window needs shrink) {
-            chr = src[beg];
-            ++beg;
+        while (winSize == dict.size()) {
             // 3. left shift, shrinking, upate data
+            chr = src[beg++];
+            if (dict.count(chr)) {
+                if (window[chr]-- == dict[chr]) {
+                    --winSize;
+                }
+            }
         }
 
         // 4. update the reuslt: at expanding or shrinking?
@@ -245,24 +254,24 @@ void slidingWindow(string src, string tar) {
 ## Search
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-004 | Median of Two Sorted Arrays | :star: :star: :star: | `BS`
-034 | Search For a Range | :star: :star: | :one: `BS`
-035 | Search Insert Position | :star: | :one: `BS`
-074 | Search a 2D Matrix | :star: :star: | :one: `BS` `Matrix`
-240 | Search a 2D Matrix II | :star: :star: | :one: :thinking: `BS` `Matrix`
-278 | First Bad Version | :star: | :one: `BS`
-130 | Surrounded Regions | :star: :star: | :one: `DFS` `BFS` `Opposite` `Matrix`
-200 | Number of Islands | :star: :star: | :one: `DFS` `BFS` `Matrix`
-286 | Walls and Gates | :star: :star: | :one: :thinking: `BFS` `Matrix`
+004 | Median of Two Sorted Arrays | :star: :star: :star: | :two: `BS`
+034 | Search For a Range | :star: :star: | :two: `BS`
+035 | Search Insert Position | :star: | :two: `BS`
+074 | Search a 2D Matrix | :star: :star: | :two: `BS` `Matrix`
+240 | Search a 2D Matrix II | :star: :star: | :two: :thinking: `BS` `Matrix`
+278 | First Bad Version | :star: | :two: `BS`
+130 | Surrounded Regions | :star: :star: | :two: `DFS` `BFS` `Opposite` `Matrix`
+200 | Number of Islands | :star: :star: | :two: `DFS` `BFS` `Matrix`
+286 | Walls and Gates | :star: :star: | :two: :thinking: `BFS` `Matrix`
 323 | Number of Connected Components in an Undirected Graph | :star: :star: | :thinking: `Union Find` `DFS` `Matrix`
-547 | Number of Provinces | :star: :star: | :one: `DFS` `Matrix`
-694 | Number of Distinct Islands | :star: :star: | :one: `DFS` `Matrix` `Serialization`
-410 | Split Array Largest Sum | :star: :star: :star: | `BS`
-695 | Max Area of Island | :star: :star: | :one: `DFS` `Matrix`
-1020 | Number of Enclaves | :star: :star: | :one: `DFS` `Matrix`
-1254 | Number of Closed Islands | :star: :star: | :one: `DFS` `Matrix`
-1905 | Count Sub Islands | :star: :star: | :one: `DFS` `Matrix`
-374 | Guess Number Higher Or Lower | :star: | :one: `BS`
+547 | Number of Provinces | :star: :star: | :two: `DFS` `Matrix`
+694 | Number of Distinct Islands | :star: :star: | :two: `DFS` `Matrix` `Serialization`
+410 | Split Array Largest Sum | :star: :star: :star: | :two: `BS`
+695 | Max Area of Island | :star: :star: | :two: `DFS` `Matrix`
+1020 | Number of Enclaves | :star: :star: | :two: `DFS` `Matrix`
+1254 | Number of Closed Islands | :star: :star: | :two: `DFS` `Matrix`
+1905 | Count Sub Islands | :star: :star: | :two: `DFS` `Matrix`
+374 | Guess Number Higher Or Lower | :star: | :two: `BS`
 378 | Kth Smallest Element in a Sorted Matrix | :star: :star:| :thinking: `BS` `Matrix`
 973 | K Closest Points to Origin | :star: :star:| :thinking: `Quick Select` `BS`
 752 | Open the Lock | :star: :star:| :one: `BFS`
