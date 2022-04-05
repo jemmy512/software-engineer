@@ -28,16 +28,16 @@ public:
         if (matrix.empty()) {
             return false;
         }
-        
+
         auto rowSize = matrix.size();
         auto colSize = matrix[0].size();
         int beg = 0;
         int end = rowSize * colSize - 1;
-        
+
         while (beg <= end) {
             auto pivot = beg + (end - beg) / 2;
             auto mid = matrix[pivot/colSize][pivot%colSize];
-            
+
             if (mid == target) {
                 return true;
             } else if (mid < target) {
@@ -46,7 +46,7 @@ public:
                 end = pivot - 1;
             }
         }
-        
+
         return false;
     }
 };
