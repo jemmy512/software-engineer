@@ -62,16 +62,15 @@ private:
         }
 
         for (auto i = pos; i < candidates.size(); ++i) {
-            if (i > pos && candidates[i] == candidates[i-1])
-                continue;
+            if (i == pos || candidates[i] != candidates[i-1]) {
+                remain -= candidates[i];
+                Track.emplace_back(candidates[i]);
 
-            remain -= candidates[i];
-            Track.emplace_back(candidates[i]);
+                backtrack(candidates, i+1, remain);
 
-            backtrack(candidates, i+1, remain);
-
-            remain += candidates[i];
-            Track.pop_back();
+                remain += candidates[i];
+                Track.pop_back();
+            }
         }
     }
 
