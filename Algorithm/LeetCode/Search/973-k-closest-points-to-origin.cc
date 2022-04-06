@@ -46,7 +46,69 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int K) {
-        quickSelect(points.begin(), points.end(), K, [](const auto& lhs, const auto& rhs) {
+        quickSelect(points, 0, points.size(), K, [](const auto& lhs, const auto& rhs) {
+            return (lhs[0] * lhs[0] + lhs[1] * lhs[1]) < (rhs[0] * rhs[0] + rhs[1] * rhs[1]);
+        });
+
+        points.resize(K);
+        return points;
+    }
+
+private:
+    template<typename Compare>
+    void quickSelect(vector<vector<int>>& points, int beg, int end, int k, Compare cmp) { // [beg, end}
+        if (beg + 1 >= end)
+            return;
+
+        auto pivot = partition(points, beg, end, cmp);
+        if (pivot == k) {
+            return;
+        } else if (pivot > k) {
+            quickSelect(points, beg, pivot, k, cmp);
+        } else {
+            quickSelect(points, pivot + 1, end, k, cmp);
+        }
+    }
+
+    template<typename Compare>
+    int partition(vector<vector<int>>& points, int beg, int end, Compare cmp) {
+        --end;
+        auto pivot = points[beg];
+
+        while (beg < end) {
+            while (beg < end && !cmp(points[end], pivot)) --end;
+            points[beg] = points[end];
+
+            while (beg < end && cmp(points[beg], pivot)) ++beg;
+            points[end] = points[beg];
+        }
+
+        points[beg] = pivot;
+
+        return beg;
+    }
+
+    template<typename Compare>
+    int partition_(vector<vector<int>>& points, int beg, int end, Compare cmp) {
+        auto i = beg + 1;
+        auto pivot = points[beg];
+
+        for (auto j = i; j < end; ++j) {
+            if (cmp(points[j], pivot)) {
+                swap(points[i++], points[j]);
+            }
+        }
+
+        swap(points[beg], points[i-1]);
+
+        return i-1;
+    }
+};
+
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int K) {
+        quickSelect(points.beg(), points.end(), K, [](const auto& lhs, const auto& rhs) {
             return (lhs[0] * lhs[0] + lhs[1] * lhs[1]) < (rhs[0] * rhs[0] + rhs[1] * rhs[1]);
         });
 
@@ -56,36 +118,36 @@ public:
 
 private:
     template<typename Iter, typename Compare>
-    void quickSelect(Iter begin, Iter end, int k, Compare cmp) { // [begin, end}
-        if (begin + 1 >= end)
+    void quickSelect(Iter beg, Iter end, int k, Compare cmp) { // [beg, end}
+        if (beg + 1 >= end)
             return;
 
-        auto pivot = partition(begin, end, cmp);
-        auto dis = std::distance(begin, pivot);
+        auto pivot = partition(beg, end, cmp);
+        auto dis = std::distance(beg, pivot);
         if (dis == k) {
             return;
         } else if (dis > k) {
-            quickSelect(begin, pivot, k, cmp);
+            quickSelect(beg, pivot, k, cmp);
         } else {
             quickSelect(pivot, end, k - dis, cmp);
         }
     }
 
     template<typename Iter, typename Compare>
-    Iter partition(Iter begin, Iter end, Compare cmp) {
+    Iter partition(Iter beg, Iter end, Compare cmp) {
         --end;
-        auto pivot = *std::next(begin, getRandom<int>(0, std::distance(begin, end)));
+        auto pivot = *std::next(beg, getRandom<int>(0, std::distance(beg, end)));
 
-        while (begin <= end) {
-            while (cmp(*begin, pivot))
-                ++begin;
+        while (beg <= end) {
+            while (cmp(*beg, pivot))
+                ++beg;
             while (cmp(pivot, *end))
                 --end;
-            if (begin <= end)
-                std::swap(*begin++, *end--);
+            if (beg <= end)
+                std::swap(*beg++, *end--);
         }
 
-        return begin;
+        return beg;
     }
 
     template<typename Size = int>
