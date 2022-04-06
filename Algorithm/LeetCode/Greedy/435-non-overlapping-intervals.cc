@@ -31,18 +31,23 @@ using namespace std;
 class Solution {
 public:
     int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+        /* minimum remove means if two intervals have same start time, remove the long one.
+        If sort by start time, the first inteval will be the long one when first two intervals have same start time,
+        the long one will be reserved, this doesn't meet the requirment.
+
+        Sort by end time will sort the long one after the short one. */
         sort(intervals.begin(), intervals.end(), [](const auto& lhs, const auto& rhs) {
             return lhs[1] < rhs[1];
         });
 
-        auto idx = 0;
+        auto end = 0;
         auto result = 0;
 
         for (auto  i = 1; i < intervals.size(); ++i) {
-            if (intervals[i][0] < intervals[idx][1]) {
+            if (intervals[i][0] < intervals[end][1]) {
                 ++result;
             } else {
-                idx = i;
+                end = i;
             }
         }
 
