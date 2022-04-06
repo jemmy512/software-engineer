@@ -1,12 +1,5 @@
 # Table of Contents
 * [Road Map](https://roadmap.sh)
-* [Formal Entry](#Formal-Entry)
-* [Programmer Cultivation](#Programmer-Cultivation)
-    1. [Coding Cultivation](#Coding-Cultivation)
-    2. [Code Review](#Code-Review)
-    3. [Safety Precaution](#Safety-Precaution)
-    4. [Testing](#Testing)
-    5. [Publishing](#Publishing)
 * [Computer Science](#Computer-Science)
     1. [Operating System](#Computer-Science)
     2. [Computer Architecture](#Computer-Architecture)
@@ -16,6 +9,12 @@
     6. [Database](#Database)
 * [Programming Language](#Programming-Language)
     * [C/C++](#CC)
+* [Software Engineering](#Software-Engineering)
+    1. [Coding Cultivation](#Coding-Cultivation)
+    2. [Code Review](#Code-Review)
+    3. [Safety Precaution](#Safety-Precaution)
+    4. [Testing](#Testing)
+    5. [Publishing](#Publishing)
 * [System Design](#System-Design)
 * [Linux](#Linux)
     1. [Kernel](#Kernel)
@@ -51,41 +50,9 @@
 
 * [Thanks](#Thanks)
 
-# Formal Entry
-- [ ] [The key to Accelerating Your Coding Skills](http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/)
-- [ ] [Character Encoding](https://en.wikipedia.org/wiki/Character_encoding)
-
-# Programmer Cultivation
-- [ ] [What are some of the most basic things every programmer should know?](https://www.quora.com/What-are-some-of-the-most-basic-things-every-programmer-should-know)
-- [ ] [97 things every programmer should know?](https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/index.html)
-- [ ] [How to Ask Question The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html)
-
-### Coding Cultivation
-- [ ] :orange_book: Refactoring: Improving the Design of Existing Code :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/SE/SE/refactoring-2.md)
-- [ ] :orange_book: Working Effectively with Legacy Code
-- [ ] :orange_book: Clean Code: A Handbook of Agile Software Craftsmanship :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/SE/clean-code.md)
-- [ ] :orange_book: The Clean Coder：A Code of Conduct for Professional Programmers
-
-### Code Review
-- [ ] [Code Review Best Practices](https://medium.com/palantir/code-review-best-practices-19e02780015f?)
-- [ ] [How Google Does Code Review](https://dzone.com/articles/how-google-does-code-review)
-
-### Safety Precaution
-- [ ] https://www.owasp.org/index.php/Main_Page
-- [ ] [Secure Coding Practice Guidelines](https://security.berkeley.edu/secure-coding-practice-guidelines)
-- [ ] [SEI SERT Coding Standards](https://wiki.sei.cmu.edu/confluence/display/seccode/SEI+CERT+Coding+Standards)
-- [ ] [Hardening Your HTTP Security Headers](https://www.keycdn.com/blog/http-security-headers)
-
-### Testing
-- [ ] :orange_book: Perfect Software: And Other Illusions about Testing
-- [ ] :orange_book: How Google Tests Software
-
-### Publishing
-- [x] [Checklist](https://github.com/mtdvio/going-to-production)
-
 # Computer Science
 
-* [Teach Yourself Computer Science](https://teachyourselfcs.com)
+* [**Teach Yourself Computer Science**](https://teachyourselfcs.com)
 
 ## Operating System
 - [x] :orange_book: Computer Systems A Programmer’s Perspective :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-system-a-programmers-perspective.md)
@@ -396,6 +363,38 @@
         * [:link: Part 5: Bowing out via cancellation](https://devblogs.microsoft.com/oldnewthing/20210910-00/?p=105669)
         </details>
 
+# Software Engineering
+- [ ] [The key to Accelerating Your Coding Skills](http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/)
+- [ ] [Character Encoding](https://en.wikipedia.org/wiki/Character_encoding)
+- [ ] [What are some of the most basic things every programmer should know?](https://www.quora.com/What-are-some-of-the-most-basic-things-every-programmer-should-know)
+- [ ] [97 things every programmer should know?](https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know/content/en/index.html)
+- [ ] [How to Ask Question The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html)
+
+### Coding Cultivation
+- [ ] :orange_book: Refactoring: Improving the Design of Existing Code :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/SE/SE/refactoring-2.md)
+- [ ] :orange_book: Working Effectively with Legacy Code
+- [ ] :orange_book: Clean Code: A Handbook of Agile Software Craftsmanship :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/SE/clean-code.md)
+- [ ] :orange_book: The Clean Coder：A Code of Conduct for Professional Programmers
+
+- [ ] [https://refactoring.guru](https://refactoring.guru)
+
+### Code Review
+- [ ] [Code Review Best Practices](https://medium.com/palantir/code-review-best-practices-19e02780015f?)
+- [ ] [How Google Does Code Review](https://dzone.com/articles/how-google-does-code-review)
+
+### Safety Precaution
+- [ ] https://www.owasp.org/index.php/Main_Page
+- [ ] [Secure Coding Practice Guidelines](https://security.berkeley.edu/secure-coding-practice-guidelines)
+- [ ] [SEI SERT Coding Standards](https://wiki.sei.cmu.edu/confluence/display/seccode/SEI+CERT+Coding+Standards)
+- [ ] [Hardening Your HTTP Security Headers](https://www.keycdn.com/blog/http-security-headers)
+
+### Testing
+- [ ] :orange_book: Perfect Software: And Other Illusions about Testing
+- [ ] :orange_book: How Google Tests Software
+
+### Publishing
+- [x] [Checklist](https://github.com/mtdvio/going-to-production)
+
 # System Design
 
 - [ ] :orange_book: Domain-Driven Design: Tackling Complexity in the Heart of Software
@@ -416,7 +415,6 @@
 - [ ] [HTTP API Desgin](https://github.com/interagent/http-api-design)
 - [ ] [API Guildlines](https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md)
 - [ ] [The Problem With Logging](https://blog.codinghorror.com/the-problem-with-logging)
-
 
 # Linux
 - [ ] [Red Hat Enterprise Linux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/)
