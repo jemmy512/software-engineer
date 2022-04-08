@@ -29,8 +29,10 @@ Relatives:
 324. Wiggle Sort II
 347. Top K Frequent Elements
 414. Third Maximum Number
+692. Top K Frequent Words
 703. Kth Largest Element in a Stream
 973. K Closest Points to Origin
+1471. The k Strongest Values in an Array
 1985. Find the Kth Largest Integer in the Array */
 
 #include <vector>
@@ -41,12 +43,10 @@ Relatives:
 
 using namespace std;
 
-/* Quick Select
- * Time complexity: O(N), worst O(N^2) */
 class Solution {
 public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int K) {
-        quickSelectK(points, 0, points.size(), K);
+        quickSelect(points, 0, points.size()-1, K);
 
         points.resize(K);
         return points;
@@ -54,57 +54,46 @@ public:
 
 private:
     template<typename T>
-    void quickSelectK(T& points, int beg, int end, int k) { // [beg, end}
-        if (beg + 1 >= end)
+    void quickSelect(T& data, int beg, int end, int k) { // [beg, end]
+        if (beg >= end)
             return;
 
-        while (beg < end) {
-            auto pivot = partition(points, beg, end);
-            if (pivot < k) {
-                beg = pivot + 1;
-            } else if (pivot > k) {
-                end = pivot - 1;
-            } else {
-                return;
-            }
+        auto pivot = partition(data, beg, end);
+        if (pivot == k) {
+            return;
+        } else if (pivot > k) {
+            quickSelect(data, beg, pivot-1, k);
+        } else {
+            quickSelect(data, pivot, end, k);
         }
     }
 
-    // left <= pivot < right
     template<typename T>
-    int partition(T& points, int beg, int end) {
-        --end;
-        const auto pivot = dis(points[random(beg, end)]);
+    int partition(T& data, int beg, int end) {
+        auto pivot = dis(data[(beg + end) / 2]);
 
         while (beg <= end) {
-            while (beg < end && dis(points[beg]) <= pivot)
+            while (dis(data[beg]) < pivot)
                 ++beg;
-            while (beg < end && pivot < dis(points[end]))
+            while (pivot < dis(data[end]))
                 --end;
-
             if (beg <= end)
-                swap(points[beg++], points[end--]);
+                std::swap(data[beg++], data[end--]);
         }
 
         return beg;
     }
 
 private:
-    int dis(const vector<int>& point) {
-        return point[0] * point[0] + point[1] * point[1];
-    }
-
-    template<typename Size = int>
-    Size random(Size min, Size max) {
-        static std::random_device dev;
-        static std::default_random_engine engine(dev());
-        static std::uniform_int_distribution distribute(min, max);
-
-        return distribute(engine);
+    template<typename T>
+    int dis(T& point) {
+        return (point[0] * point[0] + point[1] * point[1]);
     }
 };
 
-class Solution__ {
+namespace Iterator {
+
+class Solution {
 public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int K) {
         quickSelect(points.begin(), points.end(), K, [](const auto& lhs, const auto& rhs) {
@@ -159,9 +148,12 @@ private:
     }
 };
 
+} // namespace Iterator
+
+namespace Heap {
 /* heap sort
  * Time complexity: heap sort O(NlogN) */
-class Solution_ {
+class Solution {
 public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int K) {
         auto comparator = [](const auto& lhs, auto& rhs){
@@ -185,8 +177,9 @@ public:
     }
 };
 
+} // namespace Heap
+
 int main() {
-    Solution s;
     vector<vector<int>> points {
         {6373,4245},{1496,8228},{-3554,9008},{-5530,-6663},{4443,3262},{2179,-1675},{7450,-5056},
         {3752,9600},{1562,-9517},{1160,1963},{5499,7288},{2464,-7491},{-766,43},{-7764,3673},
@@ -1619,6 +1612,7 @@ int main() {
         {-9465,-7336},{4572,119}
     };
 
+    Solution s;
     auto i = 0;
     for (const auto& d : s.kClosest(points, 5313)) {
         std::cout << ++i << " ";
