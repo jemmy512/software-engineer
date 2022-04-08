@@ -173,8 +173,8 @@ No | Title | Difficulty | Notes
 055 | Jump Game | :star: :star: | :two:
 045 | Jump Game II | :star: :star: | :two:
 134 | Gas Station | :star: :star: | :two:
-435 | Non-overlapping Intervals | :star: :star: | :two: `Interval`
-452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :two: `Interval`
+435 | Non-overlapping Intervals | :star: :star: | :two: `Interval` `Sort End`
+452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :two: `Interval` `Sort End`
 763 | Partition Labels | :star: :star: | :two: `Interval`
 1024 | Video Stitching | :star: :star: | :two: `Interval`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
@@ -191,11 +191,11 @@ No | Title | Difficulty | Notes
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 011 | Container With Most Water | :star: :star: :star: | :two:
+042 | Trapping Rain Water | :star: :star: :star: | :two:
+407 | Trapping Rain Water II | :star: :star: :star: | `TODO`
 027 | Remove Element | :star: | :two:
 026 | Remove Duplicates from Sorted Array | :star: | :two:
 083 | Remove Duplicates from Sorted List | :star: | :two:
-042 | Trapping Rain Water | :star: :star: :star: | :two:
-407 | Trapping Rain Water II | :star: :star: :star: | `TODO`
 141 | linked List Cycle | :star: | :two: `Cycle`
 142 | Linked List Cycle II | :star: :star: | :two: `Cycle`
 283 | Move Zeroes | :star: :star: | :two:
@@ -266,18 +266,20 @@ No | Title | Difficulty | Notes
 323 | Number of Connected Components in an Undirected Graph | :star: :star: | :thinking: `Union Find` `DFS` `Matrix`
 547 | Number of Provinces | :star: :star: | :two: `DFS` `Matrix`
 694 | Number of Distinct Islands | :star: :star: | :two: `DFS` `Matrix` `Serialization`
-410 | Split Array Largest Sum | :star: :star: :star: | :two: `BS`
+410 | Split Array Largest Sum | :star: :star: :star: | :two: :thinking: `BS`
 695 | Max Area of Island | :star: :star: | :two: `DFS` `Matrix`
 1020 | Number of Enclaves | :star: :star: | :two: `DFS` `Matrix`
 1254 | Number of Closed Islands | :star: :star: | :two: `DFS` `Matrix`
 1905 | Count Sub Islands | :star: :star: | :two: `DFS` `Matrix`
 374 | Guess Number Higher Or Lower | :star: | :two: `BS`
 378 | Kth Smallest Element in a Sorted Matrix | :star: :star:| :thinking: `BS` `Matrix`
-973 | K Closest Points to Origin | :star: :star:| :thinking: `Quick Select` `BS`
-752 | Open the Lock | :star: :star:| :one: `BFS`
-875 | Koko Eating Bananas | :star: :star:| :one: :thinking: `BS`
-1011 | Capacity To Ship Packages Within D Days | :star: :star:| :one: :thinking: `BS`
+973 | K Closest Points to Origin | :star: :star:| :two: :thinking: `Quick Select` `BS`
+752 | Open the Lock | :star: :star:| :two: `BFS`
+875 | Koko Eating Bananas | :star: :star:| :two: :thinking: `BS`
+1011 | Capacity To Ship Packages Within D Days | :star: :star:| :two: :thinking: `BS`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
+
+[Binary Search, Search `1st`, `last`, `not less`, `not great` :link:](./Search/binary-search.cc)
 
 ```c++
 int fn(int x, int[] nums) {
@@ -333,6 +335,7 @@ int end_bound(int[] nums, int target) {
 ```c++
 int bfs(Node start, Node target) {
     Queue<Node> que;
+    Set<Node> visited;
 
     que.push(start);
     visited.add(start);
@@ -365,11 +368,11 @@ int bfs(Node start, Node target) {
 ## Sort
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-215 | Kth Largest Element in an Array | :star: :star: | :one: `Heap Sort` `Quick Sort`
-295 | Find Median from Data Stream | :star: :star: :star: | :one: `Heap Sort`
-347 | Top K Frequent Elements | :star: :star: | :one: `Heap Sort` `Quick Sort`
-414 | Third Maximum Number | :star: | :one: `Heap Sort`
-937 | Reorder Data in Log Files | :star: | :one:
+215 | Kth Largest Element in an Array | :star: :star: | :two: `??` `Heap Sort` `Quick Sort`
+295 | Find Median from Data Stream | :star: :star: :star: | :two: `Heap Sort`
+347 | Top K Frequent Elements | :star: :star: | :two: `Heap Sort` `Quick Sort`
+414 | Third Maximum Number | :star: | :two: `Heap Sort`
+937 | Reorder Data in Log Files | :star: | :two:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 
@@ -389,31 +392,32 @@ Shell Sort | O(n) | O((nlogn)^2) | O((nlogn)^2) | O(1) |
 ## Design
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-146 | LRU Cache | :star: :star: | :one: `Map + List (O(1) + Date Move)`
-460 | LFU Cache  | :star: :star: :star: | :one:
-380 | Insert Delete GetRandom O(1) | :star: :star: | :one: `Map + Vec (O(1) + Random Access)`
+146 | LRU Cache | :star: :star: | :two: `Map + List (O(1) + Date Move)`
+460 | LFU Cache  | :star: :star: :star: | :two:
+380 | Insert Delete GetRandom O(1) | :star: :star: | :two: `Map + Vec (O(1) + Random Access)`
 1396 | Design Underground System | :star: :star: |
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Array
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-011 | Container With Most Water | :star: :star: :star: | :one: `Two Pointers`
 041 | First Missing Positive | :star: :star: :star: |
-054 | Spiral Matrix | :star: :star: | `Matrix`
-056 | Merge Intervals | :star: :star: | :one: `Interval`
-057 | Insert Intervals | :star: :star: | :one: `Interval`
-252 | Meeting Rooms | :star: | :one: `Interval`
-253 | Meeting Rooms II | :star: :star: | :one: `Interval`
-986 | Interval List Intersections | :star: :star: | :one: `Interval`
-1288 | Remove Covered Intervals | :star: :star: | :one: `Interval`
-027 | Remove Element | :star: | :one: `Two Pointers`
-026 | Remove Duplicates from Sorted Array | :star: | :one: `Two Pointers`
-080 | Remove Duplicates from Sorted Array II | :star: :star: | :one: `Can dup N`
-083 | Remove Duplicates from Sorted List | :star: | :one: `Two Pointers`
-082 | Remove Duplicates from Sorted List II | :star: :star: | :one: :heavy_plus_sign: `Two Pointers`
-316 | Remove Duplicate Letters | :star: :star: :star: | :one: :heavy_plus_sign:
-048 | Rotate Image | :star: :star: |
+048 | Rotate Image | :star: :star: | :two: `Matrix`
+054 | Spiral Matrix | :star: :star: | :two: `Matrix`
+059 | Spiral Matrix II | :star: :star: | :two: `Matrix`
+056 | Merge Intervals | :star: :star: | :two: `Interval`
+057 | Insert Intervals | :star: :star: | :two: `Interval`
+252 | Meeting Rooms | :star: | :two: `Interval`
+253 | Meeting Rooms II | :star: :star: | :two: `Interval`
+986 | Interval List Intersections | :star: :star: | :two: `Interval`
+1288 | Remove Covered Intervals | :star: :star: | :two: `Interval`
+027 | Remove Element | :star: | :two: `Two Pointers`
+026 | Remove Duplicates from Sorted Array | :star: | :two: `Two Pointers`
+080 | Remove Duplicates from Sorted Array II | :star: :star: | :two: `Can dup N`
+083 | Remove Duplicates from Sorted List | :star: | :two: `Two Pointers`
+082 | Remove Duplicates from Sorted List II | :star: :star: | :two: :heavy_plus_sign: `Two Pointers`
+316 | Remove Duplicate Letters | :star: :star: :star: | :two: :heavy_plus_sign:
+1081 | Smallest Subsequence of Distinct Characters | :star: :star: | :two:
 088 | Merge Sorted Array | :star: | :two:
 169 | Majority Element | :star: | [:link: Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html)
 189 | Rotate Array | :star: :star: | :one:
