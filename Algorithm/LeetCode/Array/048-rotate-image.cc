@@ -23,7 +23,12 @@ Constraints:
 matrix.length == size
 matrix[i].length == size
 1 <= size <= 20
--1000 <= matrix[i][j] <= 1000 */
+-1000 <= matrix[i][j] <= 1000
+
+Relatives:
+048. Rotate Image
+054. Spiral Matrix
+059. Spiral Matrix II */
 
 #include <vector>
 
@@ -36,6 +41,72 @@ using namespace std;
 x - - - - [n-1-j, i]
 - - - x - [n-1-i, n-1-j]
 */
+
+// 1. rotate 90 degree clockwise
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        roateDiagnoal(matrix);
+        rotateVertical(matrix);
+    }
+
+private:
+    // left bottom / right top diagnoal roate
+    void roateDiagnoal(vector<vector<int>>& matrix) {
+        const auto size = matrix.size();
+
+        for (auto r = 0; r < size; ++r) {
+            for (auto c = r; c < size; ++c) {
+                swap(matrix[r][c], matrix[c][r]);
+            }
+        }
+    }
+
+    void rotateVertical(vector<vector<int>>& matrix) {
+        const auto size = matrix.size();
+
+        for (auto r = 0; r < size; ++r) {
+            auto b = 0;
+            auto e = size - 1;
+            while (b < e) {
+                swap(matrix[r][b++], matrix[r][e--]);
+            }
+        }
+    }
+};
+
+// 2. rotate 90 degree anticlockwise
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        roateDiagnoal(matrix);
+        rotateVertical(matrix);
+    }
+
+private:
+    // left bottom / right top diagnoal roate
+    void roateDiagnoal(vector<vector<int>>& matrix) {
+        const auto size = matrix.size();
+
+        for (auto r = 0; r < size; ++r) {
+            for (auto c = 0; c < size - r; ++c) {
+                swap(matrix[r][c], matrix[size-c-1][size-r-1]);
+            }
+        }
+    }
+
+    void rotateVertical(vector<vector<int>>& matrix) {
+        const auto size = matrix.size();
+
+        for (auto r = 0; r < size; ++r) {
+            auto b = 0;
+            auto e = size - 1;
+            while (b < e) {
+                swap(matrix[r][b++], matrix[r][e--]);
+            }
+        }
+    }
+};
 
 class Solution {
 public:
