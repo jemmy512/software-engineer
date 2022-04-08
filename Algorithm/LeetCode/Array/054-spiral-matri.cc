@@ -26,6 +26,55 @@ public:
         if (matrix.empty())
             return {};
 
+        const auto RowSize = matrix.size();
+        const auto ColSize = matrix[0].size();
+        const auto Size = RowSize * ColSize;
+        int left = 0, top = 0;
+        int right = ColSize - 1, bottom = RowSize - 1;
+
+        vector<int> result;
+        result.reserve(Size);
+
+        while (result.size() < Size) {
+            if (top <= bottom) {
+                for (auto i = left; i <= right; ++i) {
+                    result.push_back(matrix[top][i]);
+                }
+                ++top;
+            }
+
+            if (left <= right) {
+                for (auto i = top; i <= bottom; ++i) {
+                    result.push_back(matrix[i][right]);
+                }
+                --right;
+            }
+
+            if (top <= bottom) {
+                for (auto i = right; i >= left; --i) {
+                    result.push_back(matrix[bottom][i]);
+                }
+                --bottom;
+            }
+
+            if (left <= right) {
+                for (auto i = bottom; i >= top; --i) {
+                    result.push_back(matrix[i][left]);
+                }
+                ++left;
+            }
+        }
+
+        return result;
+    }
+};
+
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        if (matrix.empty())
+            return {};
+
         _RowSize = matrix.size();
         _ColSize = matrix[0].size();
 
