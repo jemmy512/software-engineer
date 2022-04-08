@@ -1,85 +1,99 @@
 #include <iostream>
 #include <vector>
-#include <random>
 
 using namespace std;
 
-template<typename Size = int>
-Size getRandom(Size min, Size max) {
-    std::random_device dev;
-    std::default_random_engine engine(dev());
-    std::uniform_int_distribution<Size> distribute(min, max);
+/* Relatives:
+215. Kth Largest Element in an Array
+324. Wiggle Sort II
+347. Top K Frequent Elements
+414. Third Maximum Number
+692. Top K Frequent Words
+703. Kth Largest Element in a Stream
+973. K Closest Points to Origin
+1471. The k Strongest Values in an Array
+1985. Find the Kth Largest Integer in the Array */
 
-    return distribute(engine);
-}
+/* Hoare partition scheme
+The pivot's final location is not necessarily at the index that is returned,
+as the pivot and elements equal to the pivot can end up anywhere within the partition after a partition step,
+and may not be sorted until the base case of a partition with a single element is reached via recursion. */
 
-// left <= pivot < right
 template<typename T>
-int partition(T& data, int beg, int end) {// [beg, end}
-    --end;
-    auto pivot = data[getRandom(beg, end)];
+int partition(T& data, int beg, int end) {
+    auto pivot = data[(beg + end) / 2];
 
     while (beg <= end) {
-        while (beg < end && data[beg] <= pivot)
+        while (data[beg] < pivot)
             ++beg;
-        while (beg < end && pivot < data[end])
+        while (data[end] > pivot)
             --end;
-
         if (beg <= end)
-            swap(data[beg++], data[end--]);
+            std::swap(data[beg++], data[end--]);
     }
 
+    // beg points to the position past the pivot
     return beg;
 }
 
-template<typename T>
+template<typename T> // [beg, end]
 void quickSort(T& data, int beg, int end) {
-    if (beg + 1 < end) {
+    if (beg < end) {
         auto pivot = partition(data, beg, end);
         /* dead loop if pivot not -1 +1 when beg = 0 end = 7 pivot = 3
         0 1 2 3 4 5 6 7 8 9 10 11 12
         3 3 2 3 3 3 3 4 7 6 5  9  8 */
         quickSort(data, beg, pivot-1);
-        quickSort(data, pivot+1, end);
+        quickSort(data, pivot, end);
     }
 }
 
-template<typename T>
-void quickSelectK(T& points, int beg, int end, int k) { // [beg, end}
-    if (beg + 1 < end) {
-        while (beg < end) {
-            auto pivot = partition(points, beg, end);
-            if (pivot < k) {
-                beg = pivot + 1;
-            } else if (pivot > k) {
-                end = pivot - 1;
-            } else {
-                break;
-            }
-        }
+template<typename T> // [beg, end]
+void quickSelectK(T& data, int beg, int end, int k) {
+    while (beg < end) {
+        auto pivot = partition(data, beg, end);
+        if (pivot < k)
+            beg = pivot;
+        else if (pivot > k)
+            end = pivot - 1;
+        else
+            return;
     }
-
-    std::cout << k << " [" << points[k] << "]" << std::endl;
 }
 
 int main(void) {
-    vector data{3, 3, 2, 5, 3, 3, 8, 4, 7, 6, 9, 3, 3};
-    quickSort(data, 0, data.size());
-    copy(data.begin(), data.end(), ostream_iterator<int>(cout," "));
-    std::cout << std::endl;
+    {
+        vector<vector<int>> datas {
+            { 3, 3, 2, 5, 3, 3, 8, 4, 7, 6, 9, 3, 3},
+            { 2, 4, 5, 4, 3, 4, 7 },
+            { -1, 2, 0 },
+            { 7, 5, 2 },
+            { 5, 2 },
+            { 2, 5 }
+        };
 
-    quickSelectK(data, 0, data.size(), 1);
-    copy(data.begin(), data.end(), ostream_iterator<int>(cout," "));
-    std::cout << std::endl;
+        for (auto& data : datas) {
+            quickSort(data, 0, data.size()-1);
+            copy(data.begin(), data.end(), ostream_iterator<int>(cout," "));
+            std::cout << std::endl;
 
-    quickSelectK(data, 0, data.size(), 10);
-    copy(data.begin(), data.end(), ostream_iterator<int>(cout," "));
-    std::cout << std::endl;
+        }
+    }
+
+    {
+        for (auto i = 1; i < 13; ++i) {
+            vector<int> data {
+                3, 3, 2, 5, 3, 3, 8, 4, 7, 6, 9, 3, 3
+            };
+
+            quickSelectK(data, 0, data.size()-1, i);
+            data.resize(i);
+            copy(data.begin(), data.end(), ostream_iterator<int>(cout," "));
+            std::cout <<  "- " << i << std::endl;
+        }
+    }
+
 }
-
-/* left <= [pivto = 5] < right
-7' 5 2^ -> 2 5'^ 7 -> 2^ 5 7'
-7' 5^ -> 5' 7^ */
 
 /* left <= pivot < right
 This solution doesn't chagne the first data, which will cause dead loop
@@ -88,7 +102,7 @@ beg = 0 end = 7 pivot = 3
 0 1 2 3 4 5 6 7 8 9 10 11 12
 3 3 2 3 3 3 3 4 7 6 5  9  8 */
 template<typename T>
-int partition_(T& data, int beg, int end) {
+int partition_2(T& data, int beg, int end) {
     int i = beg + 1;
     int pivot = data[beg];
 
