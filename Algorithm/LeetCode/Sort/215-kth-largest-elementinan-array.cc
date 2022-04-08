@@ -123,3 +123,41 @@ private:
         return r;
     }
 };
+
+// TODO: not work
+class Solution {
+public:
+    int findKthLargest(vector<int> &nums, int k) {
+        quickSelectK(nums, 0, nums.size()-1, k-1);
+
+        return nums[k-1];
+    }
+
+private:
+    void quickSelectK(vector<int>& nums, int beg, int end, int k) {
+        while (beg < end) {
+            auto pivot = partition(nums, beg, end);
+            if (pivot < k)
+                beg = pivot;
+            else if (pivot > k)
+                end = pivot - 1;
+            else
+                return;
+        }
+    }
+
+    int partition(vector<int> &nums, int beg, int end) {
+        auto pivot = nums[(beg + end) / 2];
+
+        while (beg <= end) {
+            while (nums[beg] > pivot)
+                ++beg;
+            while (nums[end] < pivot)
+                --end;
+            if (beg <= end)
+                swap(nums[beg++], nums[end--]);
+        }
+
+        return beg;
+    }
+};
