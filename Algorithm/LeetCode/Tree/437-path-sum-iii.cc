@@ -21,10 +21,14 @@ root = [10,5,-3,3,2,null,11,3,-2,null,1], sum = 8
 3  -2   1
 
 Return 3. The paths that sum to 8 are:
-
 1.  5 -> 3
 2.  5 -> 2 -> 1
 3. -3 -> 11
+
+Constraints:
+The number of nodes in the tree is in the range [0, 1000].
+-10^9 <= Node.val <= 10^9
+-1000 <= targetSum <= 1000
 
 Relatives:
 053. Maximum Subarray
@@ -55,7 +59,8 @@ struct TreeNode {
 class Solution {
 public:
     int pathSum(TreeNode* root, int sum) {
-        _Sum = sum;
+        Sum = sum;
+        HashMap.emplace(0, 1); // curSum == Sum
 
         dfs(root, 0);
 
@@ -63,30 +68,25 @@ public:
     }
 
 private:
-    void dfs(TreeNode* node, int curSum) {
+    void dfs(TreeNode* node, long curSum) {
         if (!node)
             return;
 
         curSum += node->val;
+        _Cnt += HashMap[curSum-Sum];
 
-        /* case 1: curSum == _Sum */
-        _Cnt += curSum == _Sum ? 1 : 0;
-        /* case 2: curSum + x == _Sum */
-        /* can't reorder following two lines: _Sum may 0, so curSum-_Sum == curSum */
-        _Cnt += _HashMap[curSum-_Sum];
-
-        ++_HashMap[curSum];
+        ++HashMap[curSum];
 
         dfs(node->left, curSum);
         dfs(node->right, curSum);
 
-        --_HashMap[curSum];
+        --HashMap[curSum];
     }
 
 private:
     int _Cnt{0};
-    int _Sum{0};
-    unordered_map<int, int> _HashMap;
+    int Sum{0};
+    unordered_map<int, int> HashMap;
 };
 
 class Solution {
@@ -99,7 +99,7 @@ public:
     }
 
 private:
-    int dfs(TreeNode *root, int curSum) {
+    int dfs(TreeNode *root, long curSum) {
         if (!root)
             return 0;
 
