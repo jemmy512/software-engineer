@@ -14,7 +14,17 @@ One possible answer is: [0,-3,9,-10,null,5], which represents the following heig
      / \
    -3   9
    /   /
- -10  5 */
+ -10  5
+
+ * Even nodes
+    Node -> Node -> Node -> Node ->   ^
+                      |               |
+                    slow            fast
+
+ * Odd nodes
+    Node -> Node -> Node -> Node -> Node
+                     |               |
+                    slow            fast */
 
 struct ListNode {
     int val;
