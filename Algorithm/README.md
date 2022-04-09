@@ -402,9 +402,11 @@ No | Title | Difficulty | Notes
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
 041 | First Missing Positive | :star: :star: :star: |
+448 | Find All Numbers Disappeared in An Array | :star: | :two:
 048 | Rotate Image | :star: :star: | :two: `Matrix`
 054 | Spiral Matrix | :star: :star: | :two: `Matrix`
 059 | Spiral Matrix II | :star: :star: | :two: `Matrix`
+189 | Rotate Array | :star: :star: | :two:
 056 | Merge Intervals | :star: :star: | :two: `Interval`
 057 | Insert Intervals | :star: :star: | :two: `Interval`
 252 | Meeting Rooms | :star: | :two: `Interval`
@@ -414,60 +416,57 @@ No | Title | Difficulty | Notes
 027 | Remove Element | :star: | :two: `Two Pointers`
 026 | Remove Duplicates from Sorted Array | :star: | :two: `Two Pointers`
 080 | Remove Duplicates from Sorted Array II | :star: :star: | :two: `Can dup N`
-083 | Remove Duplicates from Sorted List | :star: | :two: `Two Pointers`
-082 | Remove Duplicates from Sorted List II | :star: :star: | :two: :heavy_plus_sign: `Two Pointers`
+083 | Remove Duplicates from Sorted List - only once | :star: | :two: `Two Pointers`
+082 | Remove Duplicates from Sorted List II - no dup | :star: :star: | :two: :heavy_plus_sign: `Two Pointers`
 316 | Remove Duplicate Letters | :star: :star: :star: | :two: :heavy_plus_sign:
 1081 | Smallest Subsequence of Distinct Characters | :star: :star: | :two:
 088 | Merge Sorted Array | :star: | :two:
-169 | Majority Element | :star: | [:link: Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html)
-189 | Rotate Array | :star: :star: | :one:
-209 | Minimum Size Subarray Sum | :star: :star: | :one: `Prefix Sum` `BS` `Two Pointers`
-303 | Range Sum Query Immutable | :star: | `Prefix Sum`
-307 | Range Sum Query Mutable | :star: :star: | `Segment Tree`
-304 | Range Sum Query 2D Immutable | :star: :star: | `Prefix Sum`
+169 | Majority Element | :star: | :two: [:link: Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html)
+209 | Minimum Size Subarray Sum | :star: :star: | :two: `Prefix Sum` `BS` `Two Pointers`
 325 | Maximum Size Subarray Sum Equals k | :star: :star: | :two: `Prefix Sum` `Map`
-370 | Range Addition | :star: :star: | :one: `Diff Array` `Prefix Sum`
-598 | Range Addition II | :star: | :one: `Diff Array`
-1094 | Car Pooling | :star: :star: | :one: `Diff Array`
-1109 | Corporate Flight Bookings | :star: :star: | :one: `Diff Array` `Prefix Sum`
 560 | Subarray Sum Equals K | :star: :star: | :two: `Prefix Sum` `Map`
-217 | Contains Duplicate I | :star: | :one:
-219 | Contains Duplicate II | :star: | :one:
-220 | Contains Duplicate III | :star: :star: | :one: :heavy_plus_sign: `bucket sort`
-238 | Product of Array Except Self  | :star: :star: | :one: `L-R vec`
-283 | Move Zeroes | :star: :star: | :one: `Two Pointers`
-448 | Find All Numbers Disappeared in An Array | :star: | :one:
-870 | Advantage Shuffle | :star: :star: |
+303 | Range Sum Query Immutable | :star: | :two: `Prefix Sum`
+307 | Range Sum Query Mutable | :star: :star: | `Segment Tree` `Binary indexed Tree`
+304 | Range Sum Query 2D Immutable | :star: :star: | :two: `Prefix Sum`
+370 | Range Addition | :star: :star: | :two: `Diff Array` `Prefix Sum`
+598 | Range Addition II | :star: | :two: `Diff Array`
+1094 | Car Pooling | :star: :star: | :two: `Diff Array`
+1109 | Corporate Flight Bookings | :star: :star: | :two: `Diff Array` `Prefix Sum`
+217 | Contains Duplicate I | :star: | :two:
+219 | Contains Duplicate II | :star: | :two:
+220 | Contains Duplicate III | :star: :star: | :two: :heavy_plus_sign: `bucket sort`
+238 | Product of Array Except Self  | :star: :star: | :two: `L-R vec`
+870 | Advantage Shuffle | :star: :star: | :two:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## List
 No | Title | Difficulty | Notes
 -- | -- | ---  | ---
-002 | Add Two Numbers | :star: :star: | :one:
-445 | Add Two Numbers II | :star: :star: | :one:
-019 | Remove Nth Node From End of List | :star: :star: | :one:
-203 | Remove Linked List Element | :star: | :one:
+002 | Add Two Numbers | :star: :star: | :two:
+445 | Add Two Numbers II | :star: :star: | :two:
+019 | Remove Nth Node From End of List | :star: :star: | :two:
+203 | Remove Linked List Element | :star: | :two:
+237 | Delete Node In a Linked List | :star: | :two:
 021 | Merge Two Sorted Lists | :star: | :two:
 023 | Merge K Sorted List | :star: :star: :star: | :two: `K-way Merge` `Divide Conquer`
-024 | Swap Nodes in Pairs | :star: :star: | :one:
-025 | Reverse Nodes in K-Group | :star: :star: :star: | :one:
-206 | Reverse Linkded List | :star: | :one: `3 solutions`
-092 | Reverse Linked List II | :star: :star: | :one:
-061 | Roate List By K | :star: :star: | :one:
-086 | Partition List | :star: :star: | :one:
-138 | Copy List With Random Pointer  | :star: | :one: :thinking:
-141 | linked List Cycle | :star: | :one: `Two Pointers` `Cycle`
-142 | Linked List Cycle II | :star: :star: | :one: `Two Pointers` `Cycle`
-287 | Find the Duplicate Number | :star: :star: | :one: `Two Pointers` `Cycle`
-143 | Reorder List | :star: :star: | :one:
+024 | Swap Nodes in Pairs | :star: :star: | :two:
+025 | Reverse Nodes in K-Group | :star: :star: :star: | :two:
+206 | Reverse Linkded List | :star: | :two: `3 solutions`
+092 | Reverse Linked List II | :star: :star: | :two:
+061 | Roate List By K | :star: :star: | :two:
+086 | Partition List | :star: :star: | :two:
+138 | Copy List With Random Pointer  | :star: | :two: :thinking:
+141 | linked List Cycle | :star: | :two: `Two Pointers` `Cycle`
+142 | Linked List Cycle II | :star: :star: | :two: `Two Pointers` `Cycle`
+287 | Find the Duplicate Number | :star: :star: | :two: `Two Pointers` `Cycle`
+143 | Reorder List | :star: :star: | :two:
 147 | Insertion Sorted List | :star: :star: | :two: `Insertion sort`
 148 | Sort List | :star: :star: | :two: `Div-Conq` `Merge sort`
-160 | Intersection of Two Linked Lists | :star: | :one:
-234 | Palindrome Linked List | :star: | :one:
-237 | Delete Node In A Linked List | :star: | :one:
-328 | Odd Even Linked List | :star: :star: | :one:
-725 | Split Linked List in Parts | :star: :star: | :one:
-817 | Linked List Components | :star: :star: | :one:
+160 | Intersection of Two Linked Lists | :star: | :two:
+234 | Palindrome Linked List | :star: | :two:
+328 | Odd Even Linked List | :star: :star: | :two:
+725 | Split Linked List in Parts | :star: :star: | :two:
+817 | Linked List Components | :star: :star: | :two:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Tree
@@ -476,26 +475,26 @@ No | Title | Difficulty | Notes
 095 | Unique Binary Search Trees II | :star: :star: | `DP`
 096 | Unique Binary Search Trees  | :star: :star: | `DP`
 098 | Validate Binary Search Tree | :star: |
-100 | Same Tree | :star: | :one:
-101 | Symmetric Tree | :star: | :one:
-102 | Binary Tree Level Order Traversal | :star: :star: | :one: `BFS: recursion, level loop, sentinel`
-107 | Binary Tree Level Order Traversal II | :star: | :one:
-103 | Bianry Tree Zig Zag Level Tree Traverse | :star: :star: | :one:
-104 | Maximum Depth of Binary Tree | :star: | :one:
-111 | Minimum Depth of Binary Tree | :star: | :one: `DFS` `BFS`
-105 | Construct Binary Tree from Preorder and Inorder Traversal | :star: :star: | :one: :thinking:
-106 | Construct Binary Tree from Inorder and Postorder Traversal | :star: :star: | :one:
-654 | Maximum Binary Tree | :star: :star: | :one:
-108 | Convert Sorted Array to Binary Search Tree | :star: :star: | :one:
-109 | Convert Sorted List to Binary Search Tree | :star: | :one:
-110 | Balanced Bianry Tree | :star: | :one: `DFS`
-112 | Path Sum | :star: | :one: `DFS`
-113 | Path Sum II | :star: :star: | :one: `DFS`
-437 | Path Sum III | :star: :star: | :one: `Prefix Sum` `DFS`
-666 | Path Sum IV | :star: :star: | :one: `DFS`
-129 | Sum Root to Leaf Numbers | :star: :star: | :one:
-124 | Binary Tree Maximum Path Sum | :star: :star: :star: | :one: `DFS` `Prefix Sum`
-257 | Binary Tree Paths | :star: | :one: `DFS`
+100 | Same Tree | :star: | :two:
+101 | Symmetric Tree | :star: | :two:
+102 | Binary Tree Level Order Traversal | :star: :star: | :two: `BFS: recursion, level loop, sentinel`
+107 | Binary Tree Level Order Traversal II | :star: | :two:
+103 | Bianry Tree Zig Zag Level Tree Traverse | :star: :star: | :two:
+104 | Maximum Depth of Binary Tree | :star: | :two:
+111 | Minimum Depth of Binary Tree | :star: | :two: `DFS` `BFS`
+105 | Construct Binary Tree from Preorder and Inorder Traversal | :star: :star: | :two: :thinking:
+106 | Construct Binary Tree from Inorder and Postorder Traversal | :star: :star: | :two:
+654 | Maximum Binary Tree | :star: :star: | :two:
+108 | Convert Sorted Array to Binary Search Tree | :star: :star: | :two:
+109 | Convert Sorted List to Binary Search Tree | :star: | :two:
+110 | Balanced Bianry Tree | :star: | :two: `DFS`
+112 | Path Sum [root to leaf] | :star: | :two: `DFS`
+113 | Path Sum II [root to leaf sum]| :star: :star: | :two: `DFS`
+437 | Path Sum III [path sum] | :star: :star: | :two: `Prefix Sum` `DFS`
+666 | Path Sum IV | :star: :star: | :two: `DFS`
+129 | Sum Root to Leaf Numbers | :star: :star: | :two:
+124 | Binary Tree Maximum Path Sum | :star: :star: :star: | :two: `DFS` `Prefix Sum`
+257 | Binary Tree Paths | :star: | :two: `DFS`
 687 | Longest Univalue Path | :star: :star: | :one: `DFS`
 114 | Flatten Binary Tree To Linked List | :star: :star: | :one: `Preorder`
 116 | Populating Next Right Pointers in Each Node | :star: :star: | :one: `BFS`
