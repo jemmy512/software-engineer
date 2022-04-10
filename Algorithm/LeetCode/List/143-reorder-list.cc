@@ -19,7 +19,17 @@ This problem is a combination of these three easy problems:
 206. Reverse Linked List
 021. Merge Two Sorted Lists
 
-234. Palindrome Linked List */
+234. Palindrome Linked List
+
+ * Even nodes
+    Node -> Node -> Node -> Node ->   ^
+                      |               |
+                    slow            fast
+
+ * Odd nodes
+    Node -> Node -> Node -> Node -> Node
+                     |               |
+                    slow            fast */
 
 struct ListNode {
     int val;
