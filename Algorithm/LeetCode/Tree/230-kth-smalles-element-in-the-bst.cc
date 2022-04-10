@@ -61,25 +61,24 @@ public:
 class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
-        int init = 0;
-        auto opt = dfs(root, k, init);
+        auto opt = dfs(root, k);
 
         return opt ? opt.value() : -1;
     }
 
 private:
-    optional<int> dfs(TreeNode* node, int k, int& cur) {
+    optional<int> dfs(TreeNode* node, int& k) {
         if (!node)
             return {};
 
-        if (auto opt = dfs(node->left, k, cur))
+        if (auto opt = dfs(node->left, k))
             return opt;
 
-        if (++cur == k) {
+        if (--k == 0) {
             return { node->val };
         }
 
-        if (auto opt = dfs(node->right, k, cur))
+        if (auto opt = dfs(node->right, k))
             return opt;
 
         return {};
