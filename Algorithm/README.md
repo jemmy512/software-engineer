@@ -1,7 +1,7 @@
 # LeetCode Algorithm
 
 ## DP
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 032 | Longet Valid Paretheses | :star: :star: :star: | :two: :heavy_plus_sign: `stack`
 010 | Regular Expression Matching | :star: :star: :star: |
@@ -53,7 +53,7 @@ No | Title | Difficulty | Notes
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ### knapsack
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 322 | Coin Change | :star: :star: | :two:
 518 | Coin Change 2 | :star: :star: | :two: :thinking:
@@ -66,7 +66,7 @@ Two type of the problem:
 2. How many ways to put the goods into knapsack?
 
 ### substring
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 053 | Maximum Subarray | :star: | :two: `Prefix Sum` `kadane` `Divide Conquer`
 072 | Edit Distance | :star: :star: :star: | :two:
@@ -87,7 +87,7 @@ for (state1 : state1_options)
 ```
 
 ## BackTrack
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 017 | Letter Combination of a Phone Number | :star: :star: | :two:
 022 | Generate Parenthesis | :star: :star: | :two: :thinking:
@@ -168,7 +168,7 @@ void backtrack(path, options) {
     ```
 
 ## Greedy
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 055 | Jump Game | :star: :star: | :two:
 045 | Jump Game II | :star: :star: | :two:
@@ -180,7 +180,7 @@ No | Title | Difficulty | Notes
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Divide Conquer
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 023 | Merge K Sorted List | :star: :star: :star: | :two: `K-way Merge`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
@@ -188,7 +188,7 @@ No | Title | Difficulty | Notes
 ## Two Pointers
 
 **Fast Slow Pointers**
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 011 | Container With Most Water | :star: :star: :star: | :two:
 042 | Trapping Rain Water | :star: :star: :star: | :two:
@@ -199,11 +199,11 @@ No | Title | Difficulty | Notes
 141 | linked List Cycle | :star: | :two: `Cycle`
 142 | Linked List Cycle II | :star: :star: | :two: `Cycle`
 283 | Move Zeroes | :star: :star: | :two:
-287 | Find the Duplicate Number | :star: :star: | :one: `Cycle` `?`
+287 | Find the Duplicate Number | :star: :star: | :two: `Cycle Detection`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 **Sliding Window**
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 076 | Minimum Window Substring | :star: :star: :star: | :two:
 003 | Longest Substring Without Repeating Characters | :star: :star: | :two:
@@ -252,7 +252,7 @@ void slidingWindow(string src, string tar) {
 ```
 
 ## Search
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 004 | Median of Two Sorted Arrays | :star: :star: :star: | :two: `BS`
 034 | Search For a Range | :star: :star: | :two: `BS`
@@ -366,7 +366,7 @@ int bfs(Node start, Node target) {
 ```
 
 ## Sort
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 215 | Kth Largest Element in an Array | :star: :star: | :two: `??` `Heap Sort` `Quick Sort`
 295 | Find Median from Data Stream | :star: :star: :star: | :two: `Heap Sort`
@@ -390,7 +390,7 @@ Tim Sort | O(n) | O(nlogn) | O(nlogn) | O(n) |
 Shell Sort | O(n) | O((nlogn)^2) | O((nlogn)^2) | O(1) |
 
 ## Design
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 146 | LRU Cache | :star: :star: | :two: `Map + List (O(1) + Date Move)`
 460 | LFU Cache  | :star: :star: :star: | :two:
@@ -399,14 +399,14 @@ No | Title | Difficulty | Notes
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Array
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 041 | First Missing Positive | :star: :star: :star: |
 448 | Find All Numbers Disappeared in An Array | :star: | :two:
 048 | Rotate Image | :star: :star: | :two: `Matrix`
 054 | Spiral Matrix | :star: :star: | :two: `Matrix`
 059 | Spiral Matrix II | :star: :star: | :two: `Matrix`
-189 | Rotate Array | :star: :star: | :two:
+189 | Rotate Array `right by k steps` | :star: :star: | :two:
 056 | Merge Intervals | :star: :star: | :two: `Interval`
 057 | Insert Intervals | :star: :star: | :two: `Interval`
 252 | Meeting Rooms | :star: | :two: `Interval`
@@ -416,8 +416,8 @@ No | Title | Difficulty | Notes
 027 | Remove Element | :star: | :two: `Two Pointers`
 026 | Remove Duplicates from Sorted Array | :star: | :two: `Two Pointers`
 080 | Remove Duplicates from Sorted Array II | :star: :star: | :two: `Can dup N`
-083 | Remove Duplicates from Sorted List - only once | :star: | :two: `Two Pointers`
-082 | Remove Duplicates from Sorted List II - no dup | :star: :star: | :two: :heavy_plus_sign: `Two Pointers`
+083 | Remove Duplicates from Sorted List `only once` | :star: | :two: `Two Pointers`
+082 | Remove Duplicates from Sorted List II `no dup` | :star: :star: | :two: :heavy_plus_sign: `Two Pointers`
 316 | Remove Duplicate Letters | :star: :star: :star: | :two: :heavy_plus_sign:
 1081 | Smallest Subsequence of Distinct Characters | :star: :star: | :two:
 088 | Merge Sorted Array | :star: | :two:
@@ -426,26 +426,26 @@ No | Title | Difficulty | Notes
 325 | Maximum Size Subarray Sum Equals k | :star: :star: | :two: `Prefix Sum` `Map`
 560 | Subarray Sum Equals K | :star: :star: | :two: `Prefix Sum` `Map`
 303 | Range Sum Query Immutable | :star: | :two: `Prefix Sum`
-307 | Range Sum Query Mutable | :star: :star: | `Segment Tree` `Binary indexed Tree`
+307 | Range Sum Query Mutable | :star: :star: | `TODO` `Segment Tree` `Binary indexed Tree`
 304 | Range Sum Query 2D Immutable | :star: :star: | :two: `Prefix Sum`
 370 | Range Addition | :star: :star: | :two: `Diff Array` `Prefix Sum`
 598 | Range Addition II | :star: | :two: `Diff Array`
 1094 | Car Pooling | :star: :star: | :two: `Diff Array`
 1109 | Corporate Flight Bookings | :star: :star: | :two: `Diff Array` `Prefix Sum`
 217 | Contains Duplicate I | :star: | :two:
-219 | Contains Duplicate II | :star: | :two:
-220 | Contains Duplicate III | :star: :star: | :two: :heavy_plus_sign: `bucket sort`
+219 | Contains Duplicate II `nums[i]=nums[j] i-j<=k` | :star: | :two: `Set`
+220 | Contains Duplicate III `nums[i]-nums[j]<=t i-j<=k` | :star: :star: | :two: :heavy_plus_sign: `bucket sort`
 238 | Product of Array Except Self  | :star: :star: | :two: `L-R vec`
 870 | Advantage Shuffle | :star: :star: | :two:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## List
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 002 | Add Two Numbers | :star: :star: | :two:
 445 | Add Two Numbers II | :star: :star: | :two:
 019 | Remove Nth Node From End of List | :star: :star: | :two:
-203 | Remove Linked List Element | :star: | :two:
+203 | Remove Linked List Element `remove all val` | :star: | :two:
 237 | Delete Node In a Linked List | :star: | :two:
 021 | Merge Two Sorted Lists | :star: | :two:
 023 | Merge K Sorted List | :star: :star: :star: | :two: `K-way Merge` `Divide Conquer`
@@ -454,27 +454,27 @@ No | Title | Difficulty | Notes
 206 | Reverse Linkded List | :star: | :two: `3 solutions`
 092 | Reverse Linked List II | :star: :star: | :two:
 061 | Roate List By K | :star: :star: | :two:
-086 | Partition List | :star: :star: | :two:
+086 | Partition List `< x <` | :star: :star: | :two:
 138 | Copy List With Random Pointer  | :star: | :two: :thinking:
 141 | linked List Cycle | :star: | :two: `Two Pointers` `Cycle`
 142 | Linked List Cycle II | :star: :star: | :two: `Two Pointers` `Cycle`
-287 | Find the Duplicate Number | :star: :star: | :two: `Two Pointers` `Cycle`
-143 | Reorder List | :star: :star: | :two:
+287 | Find the Duplicate Number | :star: :star: | :two: `Two Pointers` `Cycle Detection`
+143 | Reorder List `L0 Ln L1 Ln-1 L2 Ln-2` | :star: :star: | :two:
 147 | Insertion Sorted List | :star: :star: | :two: `Insertion sort`
 148 | Sort List | :star: :star: | :two: `Div-Conq` `Merge sort`
 160 | Intersection of Two Linked Lists | :star: | :two:
 234 | Palindrome Linked List | :star: | :two:
 328 | Odd Even Linked List | :star: :star: | :two:
-725 | Split Linked List in Parts | :star: :star: | :two:
+725 | Split Linked List in Parts `k length equal parts`| :star: :star: | :two:
 817 | Linked List Components | :star: :star: | :two:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Tree
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
-095 | Unique Binary Search Trees II | :star: :star: | `DP`
 096 | Unique Binary Search Trees  | :star: :star: | `DP`
-098 | Validate Binary Search Tree | :star: |
+095 | Unique Binary Search Trees II | :star: :star: | `DP`
+098 | Validate Binary Search Tree | :star: | :two:
 100 | Same Tree | :star: | :two:
 101 | Symmetric Tree | :star: | :two:
 102 | Binary Tree Level Order Traversal | :star: :star: | :two: `BFS: recursion, level loop, sentinel`
@@ -488,14 +488,15 @@ No | Title | Difficulty | Notes
 108 | Convert Sorted Array to Binary Search Tree | :star: :star: | :two:
 109 | Convert Sorted List to Binary Search Tree | :star: | :two:
 110 | Balanced Bianry Tree | :star: | :two: `DFS`
-112 | Path Sum [root to leaf] | :star: | :two: `DFS`
-113 | Path Sum II [root to leaf sum]| :star: :star: | :two: `DFS`
-437 | Path Sum III [path sum] | :star: :star: | :two: `Prefix Sum` `DFS`
+112 | Path Sum `root to leaf` | :star: | :two: `DFS`
+113 | Path Sum II `root to leaf sum` | :star: :star: | :two: `DFS`
+437 | Path Sum III `nums of sum paths` | :star: :star: | :two: `Prefix Sum` `DFS`
 666 | Path Sum IV | :star: :star: | :two: `DFS`
 129 | Sum Root to Leaf Numbers | :star: :star: | :two:
 124 | Binary Tree Maximum Path Sum | :star: :star: :star: | :two: `DFS` `Prefix Sum`
 257 | Binary Tree Paths | :star: | :two: `DFS`
-687 | Longest Univalue Path | :star: :star: | :one: `DFS`
+543 | Diameter of Binary Tree | :star: | :two:
+687 | Longest Univalue Path | :star: :star: | :two: `DFS`
 114 | Flatten Binary Tree To Linked List | :star: :star: | :one: `Preorder`
 116 | Populating Next Right Pointers in Each Node | :star: :star: | :one: `BFS`
 117 | Populating Next Right Pointers in Each Node II  | :star: :star: | :one: `BFS-non-queue`
@@ -530,7 +531,7 @@ No | Title | Difficulty | Notes
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## String
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 008 | atoi | :star: | :one:
 014 | Longest Common Prefix | :star: |
@@ -555,7 +556,7 @@ No | Title | Difficulty | Notes
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Map
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 001 | Two Sum | :star: | :two:
 167 | Two Sum II | :star: | :two: `Two Pointers`
@@ -573,7 +574,7 @@ No | Title | Difficulty | Notes
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Stack
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 020 | valid Parentheses | :star: | :two:
 032 | Longet Valid Paretheses | :star: :star: :star: | :one: :heavy_plus_sign: `DP`
@@ -592,13 +593,13 @@ No | Title | Difficulty | Notes
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Queue
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 641 | Design Circular Deque | :star: :star:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Math
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | --- | ---
 006 | Zig Zag Conversion | :star: :star: |
 007 | Reverse Integer | :star: | :one:
@@ -639,7 +640,7 @@ No | Title | Difficulty | Notes
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Bit
-No | Title | Difficulty | Notes
+No | Title | Difficulty | Note
 -- | -- | ---  | ---
 036 | Valid Sudoku | :star: :star: | :one:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
