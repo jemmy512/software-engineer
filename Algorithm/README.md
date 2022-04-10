@@ -497,49 +497,52 @@ No | Title | Difficulty | Note
 257 | Binary Tree Paths | :star: | :two: `DFS`
 543 | Diameter of Binary Tree | :star: | :two:
 687 | Longest Univalue Path | :star: :star: | :two: `DFS`
-114 | Flatten Binary Tree To Linked List | :star: :star: | :one: `Preorder`
-116 | Populating Next Right Pointers in Each Node | :star: :star: | :one: `BFS`
-117 | Populating Next Right Pointers in Each Node II  | :star: :star: | :one: `BFS-non-queue`
-173 | Binary Search Tree Iterator | :star: :star: | :one: `Inorder`
-199 | Binary Tree Right Side View | :star: :star: | :one:
-222 | Count Complete Tree Nodes | :star: :star: | :one:
-226 | Invert Binary Tree | :star: | :one:
-230 | kth Smallest Element In The BST | :star: :star: | :one: `Inorder`
-671 | Second Minimum Node in a Binary Tree | :star: | :one:
+114 | Flatten Binary Tree To Linked List | :star: :star: | :two: `Preorder`
+116 | Populating Next Right Pointers in Each Node | :star: :star: | :two: `BFS`
+117 | Populating Next Right Pointers in Each Node II  | :star: :star: | :two: `BFS-non-queue`
+173 | Binary Search Tree Iterator | :star: :star: | :two: `Inorder`
+199 | Binary Tree Right Side View | :star: :star: | :two:
+222 | Count Complete Tree Nodes | :star: :star: | :two:
+226 | Invert Binary Tree | :star: | :two:
+230 | kth Smallest Element In The BST | :star: :star: | :two: `Inorder`
+671 | Second Minimum Node in a Binary Tree | :star: | :two:
 235 | Lowest Common Ancestor of a Binary Search Tree | :star: | :two:
 236 | Lowest Common Ancestor of a Binary Tree | :star: :star: | :two: :thinking:
 1644 | Lowest Common Ancestor of a Binary Tree II | :star: :star: | :two: `p, q may be null`
 1650 | Lowest Common Ancestor of a Binary Tree III | :star: :star: | :two: `List Common Node`
 1676 | Lowest Common Ancestor of a Binary Tree IV | :star: :star: | :two: `Multiple-nodes`
 1123 | Lowest Common Ancestor of Deepest Leaves | :star: :star: | `TODO`
-1214 | Two Sum BSTs | :star: :star: | :one: `Inorder` `Complement Map`
+1214 | Two Sum BSTs | :star: :star: | :two: `Inorder` `Complement Map`
 1257 | Smallest Common Region | :star: :star: | `TODO`
-297 | Serialize and Deserialize Binary Tree | :star: :star: :star: | `preorder` `postorder` `level`
-341 | Flatten Nested List Iterator | :star: :star: | :one: `Lazy Evaluation` `Iterator`
-404 | Sum of Left Leaves | :star: | :one:
-501 | Find Mode in Binary Search Tree | :star: | :one: :heavy_plus_sign: `inorder`
-513 | Find Bottom Left Tree Value | :star: | :one: `BFS-Queue`
-652 | Find Duplicate Subtrees | :star: :star: | :one: `Serialization`
-538 | Convert BST to Greater Tree | :star: :star: | :one: `Inorder` `Descending`
-637 | Average of Levels in Binary Tree | :star: | :one: `BFS` `BFS-Recursion`
-450 | Delete Node in a BST | :star: :star: | :one:
-700 | Search in a Binary Search Tree | :star: | :one:
-701 | Insert into a Binary Search Tree | :star: :star: | :one:
-814 | Binary Tree Pruning | :star: | :one: `DFS`
-1373 | Maximum Sum BST in Binary Tree | :star: :star: :star: | :one:
-1803 | Count Pairs With XOR in a Range | :star: :star: :star: | `XOR` `Prefix Sum`
+297 | Serialize and Deserialize Binary Tree | :star: :star: :star: | :two: `preorder` `postorder` `level`
+341 | Flatten Nested List Iterator | :star: :star: | :two: `Lazy Evaluation` `Iterator`
+404 | Sum of Left Leaves | :star: | :two:
+501 | Find Mode in Binary Search Tree | :star: | :two: :heavy_plus_sign: `inorder`
+513 | Find Bottom Left Tree Value | :star: | :two: `BFS-Queue`
+652 | Find Duplicate Subtrees | :star: :star: | :two: `Serialization`
+538 | Convert BST to Greater Tree | :star: :star: | :two: `Inorder Descending`
+637 | Average of Levels in Binary Tree | :star: | :two: `BFS` `BFS-Recursion`
+662 | Maximum Width of Binary Tree | :star: :star: | :two:
+450 | Delete Node in a BST | :star: :star: | :two:
+700 | Search in a Binary Search Tree | :star: | :two:
+701 | Insert into a Binary Search Tree | :star: :star: | :two:
+814 | Binary Tree Pruning | :star: | :two: `DFS`
+1373 | Maximum Sum BST in Binary Tree | :star: :star: :star: | :two:
+1803 | Count Pairs With XOR in a Range | :star: :star: :star: | `XOR` `Prefix Sum` `Trie`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## String
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-008 | atoi | :star: | :one:
-014 | Longest Common Prefix | :star: |
+008 | atoi | :star: | :two:
+014 | Longest Common Prefix | :star: | :two:
 028 | Implement Strstr | :star: | `KMP`
-058 | Length of Last Word | :star: |
-125 | Valid Palindrome | :star: | :one:
-680 | Valid Palindrome II | :star: | :one:
-151 | Reverse Words in a String | :star: :star: |
+058 | Length of Last Word | :star: | :two:
+125 | Valid Palindrome | :star: | :two:
+680 | Valid Palindrome II | :star: | :two:
+151 | Reverse Words in a String | :star: :star: | :two:
+344 | Reverse String | :star: | :two:
+345 | Reverse Vowels of a String | :star: |
 161 | One Edit Distance | :star: :star: | :one:
 205 | Isomorphic Strings | :star: |
 242 | Valid Anagra | :star: | :one:
@@ -548,8 +551,6 @@ No | Title | Difficulty | Note
 415 | Adding Strings | :star: |
 443 | String Compression | :star: :star: |
 468 | Validate IP Address | :star: :star: | `TODO`
-344 | Reverse String | :star: |
-345 | Reverse Vowels of a String | :star: |
 796 | Rotate String | :star: |
 1062 | Longest Repeating Substring | :star: :star: | :two: `BS + Hash` `Rabin-Karp`
 1784 | Check if Binary String Has at Most One Segment of Ones | :star: |
