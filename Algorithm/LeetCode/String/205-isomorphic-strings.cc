@@ -2,7 +2,7 @@
 Given two strings s and t, determine if they are isomorphic.
 Two strings are isomorphic if the characters in s can be replaced to get t.
 
-All occurrences of a character must be replaced with another character while preserving 
+All occurrences of a character must be replaced with another character while preserving
 the order of characters. No two characters may map to the same character but a character may map to itself.
 
 For example,
@@ -16,7 +16,12 @@ You may assume both s and t have the same length.
 Constraints:
 1 <= s.length <= 5 * 10^4
 t.length == s.length
-s and t consist of any valid ascii character. */
+s and t consist of any valid ascii character.
+
+Relatives:
+205. Isomorphic Strings
+290. Word Pattern
+291. Word Pattern II */
 
 #include <iostream>
 #include <string>
@@ -26,7 +31,7 @@ using std::string;
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
-        if (s.size() != t.size()) 
+        if (s.size() != t.size())
             return false;
 
         char maps[256] = { 0 };
@@ -40,7 +45,7 @@ public:
                 return false;
             }
         }
-        
+
         return true;
     }
 };
@@ -51,7 +56,7 @@ public:
     bool isIsomorphic(string s, string t) {
         if (s == "" && t == "")
             return true;
-        
+
         int len = s.size();
         for (int i = 0; i < len; ++i) {
             for (int j = 0; j <= i; ++j) {
@@ -64,7 +69,7 @@ public:
                 }
             }
         }
-        
+
         return true;
     }
 };
