@@ -12,7 +12,10 @@ Examples:
 Notes:
 You may assume pattern contains only lowercase letters, and str contains lowercase letters separated by a single space.
 
-Related Problem: 205. Isomorphic Strings */
+Relatives:
+205. Isomorphic Strings
+290. Word Pattern
+291. Word Pattern II */
 
 #include <iostream>
 #include <vector>
