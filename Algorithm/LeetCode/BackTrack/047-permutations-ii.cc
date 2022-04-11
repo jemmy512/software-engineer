@@ -15,7 +15,20 @@ Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 
 Constraints:
 1 <= nums.length <= 8
--10 <= nums[i] <= 10 */
+-10 <= nums[i] <= 10
+
+Relatives:
+078. Subsets
+090. Subsets II
+
+046. Permutations
+047. Permutations II
+
+077. Combinations
+039. Combination Sum
+040. Combination Sum II
+216. Combination Sum III
+377. Combination Sum IV */
 
 #include <vector>
 

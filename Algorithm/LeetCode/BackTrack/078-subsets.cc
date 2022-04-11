@@ -17,12 +17,22 @@ Constraints:
 All the numbers of nums are unique.
 
 Relatives:
-078. Subsets
-090. Subsets II
 320. Generalized Abbreviation
 784. Letter Case Permutation
 1982. Find Array Given Subset Sums
-2044. Count Number of Maximum Bitwise-OR Subsets */
+2044. Count Number of Maximum Bitwise-OR Subsets
+
+078. Subsets
+090. Subsets II
+
+046. Permutations
+047. Permutations II
+
+077. Combinations
+039. Combination Sum
+040. Combination Sum II
+216. Combination Sum III
+377. Combination Sum IV */
 
 #include <vector>
 

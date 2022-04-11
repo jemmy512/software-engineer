@@ -20,7 +20,20 @@ Output: [[1]]
 Constraints:
 1 <= nums.length <= 6
 -10 <= nums[i] <= 10
-All the integers of nums are unique. */
+All the integers of nums are unique.
+
+Relatives:
+078. Subsets
+090. Subsets II
+
+046. Permutations
+047. Permutations II
+
+077. Combinations
+039. Combination Sum
+040. Combination Sum II
+216. Combination Sum III
+377. Combination Sum IV */
 
 #include <vector>
 

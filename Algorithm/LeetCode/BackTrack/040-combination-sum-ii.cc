@@ -30,13 +30,18 @@ Constraints:
 
 Relatives:
 017. Letter Combinations of a Phone Number
+
+078. Subsets
+090. Subsets II
+
+046. Permutations
+047. Permutations II
+
+077. Combinations
 039. Combination Sum
 040. Combination Sum II
 216. Combination Sum III
-377. Combination Sum IV
-
-078. Subsets
-090. Subsets II */
+377. Combination Sum IV */
 
 #include <vector>
 
