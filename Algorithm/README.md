@@ -101,6 +101,7 @@ No | Title | Difficulty | Note
 090 | Subsets II  | :star: :star: | :two:
 079 | Word Search | :star: :star: | :two: `Matrix` `DFS`
 212 | Word Search II | :star: :star: :star: | :two: `Matrix` `DFS`
+290 | Word Pattern | :star: | :two: :heavy_plus_sign:
 291 | Word Pattern II | :star: :star: | :two: :heavy_plus_sign:
 698 | Partition to K Equal Sum Subsets | :star: :star: | :two:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
@@ -522,12 +523,12 @@ No | Title | Difficulty | Note
 652 | Find Duplicate Subtrees | :star: :star: | :two: `Serialization`
 538 | Convert BST to Greater Tree | :star: :star: | :two: `Inorder Descending`
 637 | Average of Levels in Binary Tree | :star: | :two: `BFS` `BFS-Recursion`
-662 | Maximum Width of Binary Tree | :star: :star: | :two:
+662 | Maximum Width of Binary Tree | :star: :star: | :two: `TODO: overflow`
 450 | Delete Node in a BST | :star: :star: | :two:
 700 | Search in a Binary Search Tree | :star: | :two:
 701 | Insert into a Binary Search Tree | :star: :star: | :two:
 814 | Binary Tree Pruning | :star: | :two: `DFS`
-1373 | Maximum Sum BST in Binary Tree | :star: :star: :star: | :two:
+1373 | Maximum Sum BST in Binary Tree | :star: :star: :star: | :two: :heavy_plus_sign:
 1803 | Count Pairs With XOR in a Range | :star: :star: :star: | `XOR` `Prefix Sum` `Trie`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
@@ -540,20 +541,20 @@ No | Title | Difficulty | Note
 058 | Length of Last Word | :star: | :two:
 125 | Valid Palindrome | :star: | :two:
 680 | Valid Palindrome II | :star: | :two:
-151 | Reverse Words in a String | :star: :star: | :two:
+151 | Reverse Words in a String | :star: :star: | :two: :heavy_plus_sign:
 344 | Reverse String | :star: | :two:
-345 | Reverse Vowels of a String | :star: |
-161 | One Edit Distance | :star: :star: | :one:
-205 | Isomorphic Strings | :star: |
-242 | Valid Anagra | :star: | :one:
-389 | Find the Difference | :star: | :one:
-409 | Longest Palindrome | :star: | :one:
-415 | Adding Strings | :star: |
-443 | String Compression | :star: :star: |
+345 | Reverse Vowels of a String | :star: | :two:
+161 | One Edit Distance | :star: :star: | :two:
+242 | Valid Anagram | :star: | :two:
+389 | Find the Difference | :star: | :two:
+409 | Longest Palindrome | :star: | :two:
+415 | Adding Strings | :star: | :two:
+443 | String Compression | :star: :star: | :two: :heavy_plus_sign: `Two Pointers`
 468 | Validate IP Address | :star: :star: | `TODO`
-796 | Rotate String | :star: |
-1062 | Longest Repeating Substring | :star: :star: | :two: `BS + Hash` `Rabin-Karp`
-1784 | Check if Binary String Has at Most One Segment of Ones | :star: |
+796 | Rotate String | :star: | :two:
+1062 | Longest Repeating Substring | :star: :star: | :two: :heavy_plus_sign: `BS + Hash` `Rabin-Karp`
+1784 | Check if Binary String Has at Most One Segment of Ones | :star: | :two:
+1869 | Longer Contiguous Segments of Ones than Zeros | :star: | :two:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Map
@@ -566,10 +567,10 @@ No | Title | Difficulty | Note
 1214 | Two Sum BSTs | :star: :star: | :two: `Inorder + Complement Map` `Tree`
 266 | Palindrome Permutation | :star: | :two:
 267 | Palindrome Permutation II | :star: :star: | :two: `Backtracking`
-290 | Word Pattern | :star: | :two: :heavy_plus_sign:
-383 | Ransom Note | :star: | :one:
-412 | Fizz Buzz | :star: | :one:
-771 | Jewelsand Stones | :star: | :one:
+205 | Isomorphic Strings | :star: | :two:
+383 | Ransom Note | :star: | :two:
+412 | Fizz Buzz | :star: | :two:
+771 | Jewelsand Stones | :star: | :two:
 811 | Subdomain Visit Count | :star: | :one:
 953 | Verifying an Alien Dictionary  | :star: | :one:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
@@ -605,9 +606,9 @@ No | Title | Difficulty | Note
 006 | Zig Zag Conversion | :star: :star: |
 007 | Reverse Integer | :star: | :one:
 009 | Palindrom Number | :star: | :one:
-015 | 3 Sum | :star: :star: | :one:
-016 | 3 Sum Closest | :star: :star: | :one:
-018 | 4 Sum | :star: :star: | :one:
+015 | 3 Sum | :star: :star: | :two:
+016 | 3 Sum Closest | :star: :star: | :two:
+018 | 4 Sum | :star: :star: | :two:
 043 | Multiply Strings | :star: :star: | :one:
 050 | pow-x-n | :star: :star: | `TODO`
 065 | Valid Number | :star: :star: :star: |
