@@ -50,19 +50,19 @@ private:
         if (!node)
             return nullptr;
 
-        if (!node->left && !node->right)
-            return node;
+        auto* leftLeaf = dfs(node->left);
+        auto* rightLeaf = dfs(node->right);
 
-        auto* leftTail = dfs(node->left);
-        auto* rightTail = dfs(node->right);
-
-        if (leftTail) {
-            leftTail->right = node->right;
+        if (leftLeaf) {
+            leftLeaf->right = node->right;
             node->right = node->left;
             node->left = nullptr;
         }
 
-        return rightTail ? rightTail : leftTail;
+        if (!leftLeaf && !rightLeaf)
+            return node;
+
+        return rightLeaf ? rightLeaf : leftLeaf;
     }
 };
 
