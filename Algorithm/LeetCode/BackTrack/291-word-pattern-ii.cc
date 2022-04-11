@@ -29,6 +29,7 @@ Constraints:
 pattern and s consist of only lowercase English letters.
 
 Relativeness:
+205. Isomorphic Strings
 290. Word Pattern
 291. Word Pattern II */
 
