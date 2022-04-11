@@ -53,8 +53,7 @@ public:
 private:
     map<int, string> hashMap{
         {3, "Fizz"},
-        {5, "Buzz"},
-        {15, ""}
+        {5, "Buzz"}
     };
 };
 
