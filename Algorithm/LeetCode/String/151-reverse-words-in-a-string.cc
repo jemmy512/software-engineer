@@ -29,8 +29,43 @@ For C programmers, try to solve it in-place in O(1) extra space. */
 #include <memory>
 #include <iostream>
 #include <sstream>
+#include <vector>
 
-using std::string;
+using namespace std;
+
+// iterate from begin -> end
+class Solution {
+public:
+    string reverseWords(string s) {
+        vector<string> tokens;
+        size_t beg = 0;
+        size_t end = 0;
+
+        while (end < s.size()) {
+            beg = end;
+            while (beg < s.size() && s[beg] == ' ')
+                ++beg;
+
+            end = beg;
+            while (end < s.size() && s[end] != ' ')
+                ++end;
+
+            if (beg < s.size())
+                tokens.emplace_back(s.substr(beg, end-beg));
+        }
+
+        string result;
+        result.reserve(s.size());
+
+        for (int i = tokens.size()-1; i >= 0; --i) {
+            result += tokens[i];
+            if (i != 0)
+                result += ' ';
+        }
+
+        return result;
+    }
+};
 
 // iterate from end -> begin
 class Solution {
@@ -45,7 +80,7 @@ public:
         while (end >=0) {
             end = beg;
             while (end >=0 && s[end] == ' ') { --end; };
-            
+
             beg = end;
             while (beg >=0 && s[beg] != ' ') { --beg; };
 
@@ -61,40 +96,6 @@ public:
             end = beg;
         }
 
-        return result;
-    }
-};
-
-// iterate from begin -> end
-class Solution {
-public:
-    string reverseWords(string s) {
-        vector<string> vec;
-        size_t beg = 0;
-        size_t end = 0;
-        
-        while (end < s.size()) {
-            beg = end;
-            while (beg < s.size() && s[beg] == ' ')
-                ++beg;
-            
-            end = beg;
-            while (end < s.size() && s[end] != ' ')
-                ++end;
-            
-            if (beg < s.size())
-                vec.emplace_back(s.substr(beg, end-beg));
-        }
-        
-        string result;
-        result.reserve(s.size());
-        
-        for (int i = vec.size()-1; i >= 0; --i) {
-            result.append(vec[i]);
-            if (i != 0)
-                result.append(" ");
-        }
-        
         return result;
     }
 };
