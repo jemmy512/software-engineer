@@ -14,7 +14,7 @@ minStack.push(-3);
 minStack.getMin();   --> Returns -3.
 minStack.pop();
 minStack.top();      --> Returns 0.
-minStack.getMin();   --> Returns -2. 
+minStack.getMin();   --> Returns -2.
 
 Constraints:
 -2^31 <= val <= 2^31 - 1
@@ -28,9 +28,9 @@ At most 3 * 104 calls will be made to push, pop, top, and getMin. */
 using namespace std;
 
 class MinStack {
-public:    
+public:
     MinStack() = default;
-    
+
     void push(int x) {
         _Data.emplace_back(x, [this, x]() -> std::size_t {
             if (_Data.empty()) {
@@ -41,25 +41,29 @@ public:
         }());
     }
 
-    void pop() {    
-        if (_Data.empty()) {
-            throw std::out_of_range("Stack is empty");
-        }
+    void pop() {
+        throwExceptionIf();
+
         _Data.pop_back();
     }
 
-    int top() {
-        if (_Data.empty()) {
-            throw std::out_of_range("Stack is empty");
-        }
+    int top() const {
+        throwExceptionIf();
+
         return _Data.back().first;
     }
 
-    int getMin() {
+    int getMin() const {
+        throwExceptionIf();
+
+        return _Data[_Data.back().second].first;
+    }
+
+private:
+    void throwExceptionIf() const {
         if (_Data.empty()) {
             throw std::out_of_range("Stack is empty");
         }
-        return _Data[_Data.back().second].first;
     }
 
 private:
