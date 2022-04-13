@@ -39,7 +39,15 @@ Notice each digit has it's own entry in the array.
 
 Note:
 All characters have an ASCII value in [35, 126].
-1 <= len(chars) <= 1000 */
+1 <= len(chars) <= 1000
+
+Relatives:
+038. Count and Say
+271. Encode and Decode Strings
+394. Decode String
+443. String Compression
+604. Design Compressed String Iterator
+1313. Decompress Run-Length Encoded List */
 
 #include <iostream>
 #include <vector>
@@ -53,11 +61,11 @@ public:
     int compress(vector<char>& chars) {
         int i = 0;
         std::stack<int> stk;
-        
+
         for (auto j = 0; j < chars.size();) {
             int cnt = 0;
             chars[i++] = chars[j];
-            
+
             while (j < chars.size() && chars[j] == chars[i-1]) {
                 ++j;
                 ++cnt;
@@ -78,7 +86,7 @@ public:
             //     }
             // }
         }
-        
+
         return i;
     }
 };
