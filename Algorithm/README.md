@@ -3,8 +3,8 @@
 ## DP
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-032 | Longet Valid Paretheses | :star: :star: :star: | :two: :heavy_plus_sign: `stack`
 010 | Regular Expression Matching | :star: :star: :star: |
+032 | Longet Valid Paretheses | :star: :star: :star: | :two: :heavy_plus_sign: `stack`
 062 | Unique Paths | :star: :star: | :two:
 063 | Unique Paths II | :star: :star: | :two:
 980 | Unique Paths III | :star: :star: :star: | `TODO`
@@ -101,7 +101,7 @@ No | Title | Difficulty | Note
 090 | Subsets II  | :star: :star: | :two:
 079 | Word Search | :star: :star: | :two: `Matrix` `DFS`
 212 | Word Search II | :star: :star: :star: | :two: `Matrix` `DFS`
-290 | Word Pattern | :star: | :two: :heavy_plus_sign:
+290 | Word Pattern | :star: | :two:
 291 | Word Pattern II | :star: :star: | :two: :heavy_plus_sign:
 698 | Partition to K Equal Sum Subsets | :star: :star: | :two:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
@@ -194,6 +194,8 @@ No | Title | Difficulty | Note
 011 | Container With Most Water | :star: :star: :star: | :two:
 042 | Trapping Rain Water | :star: :star: :star: | :two:
 407 | Trapping Rain Water II | :star: :star: :star: | `TODO`
+151 | Reverse Words in a String | :star: :star: | :two: :heavy_plus_sign:
+344 | Reverse String | :star: | :two:
 027 | Remove Element | :star: | :two:
 026 | Remove Duplicates from Sorted Array | :star: | :two:
 083 | Remove Duplicates from Sorted List | :star: | :two:
@@ -395,6 +397,7 @@ No | Title | Difficulty | Note
 -- | -- | ---  | ---
 146 | LRU Cache | :star: :star: | :two: `Map + List (O(1) + Date Move)`
 460 | LFU Cache  | :star: :star: :star: | :two:
+155 | Min Stack | :star: | :two: :heavy_plus_sign:
 380 | Insert Delete GetRandom O(1) | :star: :star: | :two: `Map + Vec (O(1) + Random Access)`
 1396 | Design Underground System | :star: :star: |
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
@@ -541,14 +544,13 @@ No | Title | Difficulty | Note
 058 | Length of Last Word | :star: | :two:
 125 | Valid Palindrome | :star: | :two:
 680 | Valid Palindrome II | :star: | :two:
-151 | Reverse Words in a String | :star: :star: | :two: :heavy_plus_sign:
-344 | Reverse String | :star: | :two:
 345 | Reverse Vowels of a String | :star: | :two:
 161 | One Edit Distance | :star: :star: | :two:
 242 | Valid Anagram | :star: | :two:
 389 | Find the Difference | :star: | :two:
 409 | Longest Palindrome | :star: | :two:
 415 | Adding Strings | :star: | :two:
+394 | Decode String | :star: :star: | :two: :heavy_plus_sign: `Two Pointers`
 443 | String Compression | :star: :star: | :two: :heavy_plus_sign: `Two Pointers`
 468 | Validate IP Address | :star: :star: | `TODO`
 796 | Rotate String | :star: | :two:
@@ -571,27 +573,25 @@ No | Title | Difficulty | Note
 383 | Ransom Note | :star: | :two:
 412 | Fizz Buzz | :star: | :two:
 771 | Jewelsand Stones | :star: | :two:
-811 | Subdomain Visit Count | :star: | :one:
-953 | Verifying an Alien Dictionary  | :star: | :one:
+811 | Subdomain Visit Count | :star: | :two:
+953 | Verifying an Alien Dictionary  | :star: | :two:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Stack
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
 020 | valid Parentheses | :star: | :two:
-032 | Longet Valid Paretheses | :star: :star: :star: | :one: :heavy_plus_sign: `DP`
-155 | MinStack | :star: | :one:
-225 | Implement Stack using Queues | :star: | :one:
-232 | Implement Queue using Stacks | :star: | :one:
+032 | Longet Valid Paretheses | :star: :star: :star: | :two: :heavy_plus_sign: `DP`
+225 | Implement Stack using Queues | :star: | :two:
+232 | Implement Queue using Stacks | :star: | :two:
 316 | Remove Duplicate Letters | :star: :star: :star: | :two: :heavy_plus_sign: `Monotonic Stack`
-394 | DecodeString | :star: :star: | :one: :heavy_plus_sign:
 496 | Next Greater Element I | :star: | :two: `Monotonic Stack`
 503 | Next Greater Element II | :star: :star: | :two: `Monotonic Stack` `Circular`
 556 | Next Greater Element III | :star: :star: | `TODO` `Monotonic Stack`
 739 | Daily Temperatures | :star: :star: | :two: `Monotonic Stack`
-921 | Minimum Add to Make Parentheses Valid | :star: :star: | :one:
-1249 | Minimum Remove to Make Valid Parentheses | :star: :star: | :one: `Bit Set`
-1541 | Minimum Insertions to Balance a Parentheses String | :star: :star: | :one: :heavy_plus_sign:
+921 | Minimum Add to Make Parentheses Valid | :star: :star: | :two: :heavy_plus_sign:
+1249 | Minimum Remove to Make Valid Parentheses | :star: :star: | :two: :heavy_plus_sign: `Bit Set`
+1541 | Minimum Insertions to Balance a Parentheses String | :star: :star: | :two: :heavy_plus_sign:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Queue
