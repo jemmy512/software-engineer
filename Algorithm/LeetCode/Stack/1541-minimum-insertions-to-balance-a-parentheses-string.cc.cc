@@ -71,7 +71,7 @@ public:
 
         for (auto chr : s) {
             if (chr == '(') {
-                if (rightNeeds % 2 == 1) {
+                if (rightNeeds % 2 == 1) { // (()))'(()))()())))
                     ++insert;       // insert a )
                     --rightNeeds;   // -- since insert alrady inserted a )
                 }
