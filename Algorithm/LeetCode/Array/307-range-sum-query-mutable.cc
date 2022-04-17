@@ -23,6 +23,50 @@ Relatives:
 
 using namespace std;
 
+/* Approach 2: The following idea is using `Binary Index Tree`
+ * There are two articles explaine this technique quite well:
+ * 1) http://www.geeksforgeeks.org/binary-indexed-tree-or-fenwick-tree-2/
+ * 2) http://cs.stackexchange.com/questions/10538/bit-what-is-the-intuition-behind-a-binary-indexed-tree-and-how-was-it-thought-a */
+class NumArray {
+public:
+    NumArray(vector<int> &nums)  {
+        _sz = nums.size();
+        _nums.resize(_sz+1, 0);
+        _sums.resize(_sz+1, 0);
+
+        for (int i = 0; i < _sz; i++) {
+            update(i, nums[i]);
+        }
+    }
+
+    void update(int i, int val) {
+        int oldv = _nums[i+1];
+        // Move index to ancestors node
+        for (int idx = i+1; idx <= _sz; idx += (idx & (-idx))) {
+            _sums[idx] = _sums[idx] - oldv + val;
+        }
+        _nums[i+1] = val;
+    }
+
+    int sumRange(int i, int j) {
+        return sumRange(j+1) - sumRange(i);
+    }
+
+    int sumRange(int i) {
+        int ret = 0;
+        // Move index to parent node
+        for (int idx = i; idx > 0; idx -= (idx & (-idx))) {
+            ret += _sums[idx];
+        }
+        return ret;
+    }
+
+private:
+    int _sz;
+    vector<int> _nums;
+    vector<int> _sums;
+};
+
 /* Approach 1: segment tree:
  * is a very flexible data structure, because it is used to solve numerous range query problems
  * like finding minimum, maximum, sum, greatest common divisor, least common denominator
@@ -79,12 +123,6 @@ private:
     int _Size;
     vector<int> _Tree;
 };
-
-/* Approach 2: The following idea is using `Binary Index Tree`
- * There are two articles explaine this technique quite well:
- * 1) http://www.geeksforgeeks.org/binary-indexed-tree-or-fenwick-tree-2/
- * 2) http://cs.stackexchange.com/questions/10538/bit-what-is-the-intuition-behind-a-binary-indexed-tree-and-how-was-it-thought-a */
-
 
 /* Approach 3: brut force*/
 class NumArray {
