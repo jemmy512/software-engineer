@@ -20,9 +20,9 @@ Input: envelopes = [[1,1],[1,1],[1,1]]
 Output: 1
 
 Constraints:
-1 <= envelopes.length <= 5000
+1 <= envelopes.length <= 10^5
 envelopes[i].length == 2
-1 <= wi, hi <= 10^4
+1 <= wi, hi <= 10^5
 
 Relatives:
 300. Longest Increasing Subsequence
@@ -34,6 +34,50 @@ Relatives:
 #include <algorithm>
 
 using namespace std;
+
+class Solution {
+public:
+    int maxEnvelopes(vector<vector<int>>& envelopes) {
+        vector<int> dp;
+        dp.reserve(envelopes.size());
+
+        sort(envelopes.begin(), envelopes.end(), [](const auto& lhs, const auto& rhs) {
+            return lhs[0] != rhs[0] ? lhs[0] < rhs[0] : lhs[1] > rhs[1];
+        });
+
+        dp.push_back(envelopes[0][1]);
+
+        for (auto i = 1; i < envelopes.size(); ++i) {
+            int num = envelopes[i][1];
+            if (dp.back() < num) {
+                dp.push_back(num);
+            } else if (dp.back() > num) {
+                int idx = binarySearch(dp, num);
+                dp[idx] = num;
+            }
+        }
+
+        return dp.size();
+    }
+
+private:
+    int binarySearch(const vector<int>& vec, int tar) {
+        int beg = 0, end = vec.size() - 1;
+
+        while (beg <= end) {
+            int mid = beg + (end - beg) / 2;
+            if (vec[mid] == tar) {
+                return mid;
+            } else if (vec[mid] < tar) {
+                beg = mid + 1;
+            } else {
+                end = mid - 1;
+            }
+        }
+
+        return beg;
+    }
+};
 
 class Solution {
 public:
