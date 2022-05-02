@@ -96,7 +96,10 @@
 - [ ] [Nginx HTTP/2](https://www.nginx.com/wp-content/uploads/2015/09/NGINX_HTTP2_White_Paper_v4.pdf)
 
 * ARP
-    - [ ] RFC 826 - An Ethernet Address Resolution Protocol
+    - [ ] [RFC 826 - An Ethernet Address Resolution Protocol](https://datatracker.ietf.org/doc/html/rfc826)
+
+* ICMP
+    - [ ] [RFC 792 - Inernet Control Message protocol](https://datatracker.ietf.org/doc/html/rfc792)
 
 * Tunnel
     - [ ] RFC 1853 - IP in IP Tunneling
@@ -105,7 +108,7 @@
     - [ ] RFC 2637 - Point-to-Point Tunneling Protocol (PPTP)
 
 * TCP
-    - [ ] RFC 793 - Transmission Control Protocol
+    - [ ] [RFC 793 - Transmission Control Protocol](https://datatracker.ietf.org/doc/html/rfc793)
     - [ ] RFC 813 - Window and Acknowledgement Strategy in TCP
     - [ ] RFC 879 - The TCP Maximum Segment Size and Related Topics
     - [ ] RFC 896 - Congestion Control in IP/TCP Internetworks
@@ -116,6 +119,9 @@
         - [ ] RFC 2883 - An Extension to the Selective Acknowledgement (SACK) Option for TCP
     - [ ] RFC 2988 - Computing TCP’s Retransmission Timer
     - [ ] RFC 6298 - Computing TCP’s Retransmission Timer
+
+* UDP
+    - [ ] [RFC 768 User Datagram Protocol](https://www.ietf.org/rfc/rfc768.txt)
 
 * TLS
     - [ ] [RFC 8446 - The Transport Layer Security (TLS) Protocol Version 1.3](https://www.rfc-editor.org/rfc/rfc8446)
@@ -133,6 +139,9 @@
 
 * QUIC
     - [ ] [RFC 9000 - QUIC: A UDP-Based Multiplexed and Secure Transport](https://www.rfc-editor.org/rfc/rfc9000)
+
+* IP
+    - [ ] [RFC 791 - Internet Protocol](https://datatracker.ietf.org/doc/html/rfc791)
 
 * Other
     - [ ] [STUN Traceroute](https://datatracker.ietf.org/doc/html/draft-martinsen-tram-stuntrace-01)
