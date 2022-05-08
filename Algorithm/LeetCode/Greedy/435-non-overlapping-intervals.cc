@@ -28,14 +28,29 @@ intervals[i].length == 2
 
 using namespace std;
 
+/* minimum remove means if two intervals have same start time, remove the long one.
+If sort by start time, the first inteval will be the longer one
+when first two intervals have same start time,
+the long one will be reserved, this doesn't meet the requirment.
+
+Sort by end time will sort the long one after the short one.
+
+E.g., [[1,100],[11,22],[1,11],[2,12]]
+Sort by start time;
+1                       100
+1       11
+    2       12
+        11      22
+
+Sort by end time:
+1       11
+    2       12
+        11      22
+1                       100 */
+
 class Solution {
 public:
     int eraseOverlapIntervals(vector<vector<int>>& intervals) {
-        /* minimum remove means if two intervals have same start time, remove the long one.
-        If sort by start time, the first inteval will be the long one when first two intervals have same start time,
-        the long one will be reserved, this doesn't meet the requirment.
-
-        Sort by end time will sort the long one after the short one. */
         sort(intervals.begin(), intervals.end(), [](const auto& lhs, const auto& rhs) {
             return lhs[1] < rhs[1];
         });
