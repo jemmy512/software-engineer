@@ -84,7 +84,7 @@ private:
             }
         }
 
-        return low < nums.size() && nums[low] == target ? low : -1;
+        return -1;
     }
 };
 
