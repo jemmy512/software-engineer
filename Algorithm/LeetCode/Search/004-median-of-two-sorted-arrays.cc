@@ -42,37 +42,37 @@ using namespace std;
 // O(logN) approch : binary search for partition
 class Solution {
 public:
-    double findMedianSortedArrays(vector<int>& a, vector<int>& b) {
-        if (a.size() > b.size()) {
-            swap(a, b);
+    double findMedianSortedArrays(vector<int>& A, vector<int>& B) {
+        if (A.size() > B.size()) {
+            swap(A, B);
         }
 
-        const auto sizeA = a.size();
-        const auto sizeB = b.size();
-        const auto halfSize = (sizeA + sizeB + 1) / 2;
-        const auto isOdd = (sizeA + sizeB) % 2 == 1;
-        int beg = 0;
-        int end = sizeA;
+        auto sizeA = A.size();
+        auto sizeB = B.size();
+        auto mediumPos = (sizeA + sizeB + 1) / 2;
+        auto isOdd = (sizeA + sizeB) % 2 == 1;
+
+        int beg = 0, end = sizeA;
 
         while (beg <= end) {
-            int posA = (beg + end) / 2;
-            int posB = halfSize - posA;
+            auto medA = (beg + end) / 2;
+            auto medB = mediumPos - medA;
 
-            int leftAmax = (posA == 0) ? INT_MIN : a[posA-1];
-            int rightAmin = (posA == sizeA) ? INT_MAX : a[posA];
+            auto leftAmax = (medA == 0) ? INT_MIN : A[medA - 1];
+            auto rightAmin = (medA == sizeA) ? INT_MAX : A[medA];
 
-            int leftBmax = (posB == 0) ? INT_MIN : b[posB-1];
-            int rightBmin = (posB == sizeB) ? INT_MAX : b[posB];
+            auto leftBmax = (medB == 0) ? INT_MIN : B[medB - 1];
+            auto rightBmin = (medB == sizeB) ? INT_MAX : B[medB];
 
             if (leftAmax <= rightBmin && leftBmax <= rightAmin) {
                 if (isOdd)
                     return double(max(leftAmax, leftBmax));
                 else
-                    return double(max(leftAmax, leftBmax) + min(rightAmin, rightBmin))/2;
+                    return double(max(leftAmax, leftBmax) + min(rightAmin, rightBmin)) / 2;
             } else if (leftAmax > rightBmin) {
-                end = posA-1;
+                end = medA - 1;
             } else {
-                beg = posA+1;
+                beg = medA + 1;
             }
         }
 
