@@ -55,28 +55,49 @@ No | Title | Difficulty | Note
 ### knapsack
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-322 | Coin Change | :star: :star: | :two:
-518 | Coin Change 2 | :star: :star: | :two: :thinking:
-416 | Partition Equal Subset Sum | :star: :star: | :two:
-494 | Target Sum | :star: :star: | :two:
+322 | Coin Change | :star: :star: | :three:
+518 | Coin Change 2 | :star: :star: | :three: :thinking:
+416 | Partition Equal Subset Sum | :star: :star: | :three:
+494 | Target Sum | :star: :star: | :three:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 Two type of the problem:
 1. Can the goods fill the knapsack?
 2. How many ways to put the goods into knapsack?
 
+```java
+int knapsack(int W, int N, int[] wt, int[] val) {
+    int[][] dp = new int[N + 1][W + 1];
+
+    for (int i = 1; i <= N; i++) {
+        for (int w = 1; w <= W; w++) {
+            if (w - wt[i - 1] < 0) {
+                dp[i][w] = dp[i - 1][w];
+            } else {
+                dp[i][w] = max(
+                    dp[i - 1][w - wt[i-1]] + val[i-1],
+                    dp[i - 1][w]
+                );
+            }
+        }
+    }
+
+    return dp[N][W];
+}
+```
+
 ### substring
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-053 | Maximum Subarray | :star: | :two: `Prefix Sum` `kadane` `Divide Conquer`
-072 | Edit Distance | :star: :star: :star: | :two:
-300 | Longest Increasing Subsequence | :star: :star: | :two:
-354 | Russian Doll Envelopes | :star: :star: :star: | :two:
-516 | Longest Palindromic Subsequence | :star: :star: | :two:
-1143 | Longest Common Subsequence | :star: :star: | :two:
-1048 | Longest String Chain | :star: :star: | :two:
-583 | Delete Operation for Two Strings | :star: :star: | :two:
-712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: | :two:
+053 | Maximum Subarray | :star: | :three: `Prefix Sum` `kadane` `Divide Conquer`
+072 | Edit Distance | :star: :star: :star: | :three:
+300 | Longest Increasing Subsequence | :star: :star: | :three:
+354 | Russian Doll Envelopes | :star: :star: :star: | :three: `BS`
+516 | Longest Palindromic Subsequence | :star: :star: | :three:
+1143 | Longest Common Subsequence | :star: :star: | :three:
+1048 | Longest String Chain | :star: :star: | :three:
+583 | Delete Operation for Two Strings | :star: :star: | :three:
+712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: | :three:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ```c++
@@ -89,21 +110,21 @@ for (state1 : state1_options)
 ## BackTrack
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-017 | Letter Combination of a Phone Number | :star: :star: | :two:
-022 | Generate Parenthesis | :star: :star: | :two: :thinking:
-037 | Sudoku Solver | :star: :star: :star: | :two:
-077 | Combinations | :star: :star: | :two:
-039 | Combination Sum | :star: :star: | :two:
-040 | Combination Sum II | :star: :star: | :two:
-046 | Permutations | :star: :star: | :two:
-047 | Permutations II | :star: :star: | :two:
-078 | Subsets  | :star: :star: | :two:
-090 | Subsets II  | :star: :star: | :two:
-079 | Word Search | :star: :star: | :two: `Matrix` `DFS`
-212 | Word Search II | :star: :star: :star: | :two: `Matrix` `DFS`
-290 | Word Pattern | :star: | :two:
-291 | Word Pattern II | :star: :star: | :two: :heavy_plus_sign:
-698 | Partition to K Equal Sum Subsets | :star: :star: | :two:
+017 | Letter Combination of a Phone Number | :star: :star: | :three:
+022 | Generate Parenthesis | :star: :star: | :three: :thinking:
+037 | Sudoku Solver | :star: :star: :star: | :three:
+077 | Combinations | :star: :star: | :three:
+039 | Combination Sum | :star: :star: | :three:
+040 | Combination Sum II | :star: :star: | :three:
+046 | Permutations | :star: :star: | :three:
+047 | Permutations II | :star: :star: | :three:
+078 | Subsets  | :star: :star: | :three:
+090 | Subsets II  | :star: :star: | :three:
+079 | Word Search | :star: :star: | :three: `Matrix` `DFS`
+212 | Word Search II | :star: :star: :three: | :two: `Matrix` `DFS`
+290 | Word Pattern | :star: | :three:
+291 | Word Pattern II | :star: :star: | :three: :heavy_plus_sign:
+698 | Partition to K Equal Sum Subsets | :star: :star: | :three:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ```c++
@@ -171,19 +192,19 @@ void backtrack(path, options) {
 ## Greedy
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-055 | Jump Game | :star: :star: | :two:
-045 | Jump Game II | :star: :star: | :two:
-134 | Gas Station | :star: :star: | :two:
-435 | Non-overlapping Intervals | :star: :star: | :two: `Interval` `Sort End`
-452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :two: `Interval` `Sort End`
-763 | Partition Labels | :star: :star: | :two: `Interval`
-1024 | Video Stitching | :star: :star: | :two: `Interval`
+055 | Jump Game | :star: :star: | :three:
+045 | Jump Game II | :star: :star: | :three:
+134 | Gas Station | :star: :star: | :three:
+435 | Non-overlapping Intervals | :star: :star: | :three: `Interval` `Sort End`
+452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :three: `Interval` `Sort End`
+763 | Partition Labels | :star: :star: | :three: `Interval`
+1024 | Video Stitching | :star: :star: | :three: `Interval`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Divide Conquer
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-023 | Merge K Sorted List | :star: :star: :star: | :two: `K-way Merge`
+023 | Merge K Sorted List | :star: :star: :star: | :three: `K-way Merge`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Two Pointers
@@ -191,31 +212,31 @@ No | Title | Difficulty | Note
 **Fast Slow Pointers**
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-011 | Container With Most Water | :star: :star: :star: | :two:
-042 | Trapping Rain Water | :star: :star: :star: | :two:
+011 | Container With Most Water | :star: :star: :star: | :three:
+042 | Trapping Rain Water | :star: :star: :star: | :three:
 407 | Trapping Rain Water II | :star: :star: :star: | `TODO`
-151 | Reverse Words in a String | :star: :star: | :two: :heavy_plus_sign:
-344 | Reverse String | :star: | :two:
-027 | Remove Element | :star: | :two:
-026 | Remove Duplicates from Sorted Array | :star: | :two:
-083 | Remove Duplicates from Sorted List | :star: | :two:
-141 | linked List Cycle | :star: | :two: `Cycle`
-142 | Linked List Cycle II | :star: :star: | :two: `Cycle`
-283 | Move Zeroes | :star: :star: | :two:
+151 | Reverse Words in a String | :star: :star: | :three: :heavy_plus_sign:
+344 | Reverse String | :star: | :three:
+027 | Remove Element | :star: | :three:
+026 | Remove Duplicates from Sorted Array | :star: | :three:
+083 | Remove Duplicates from Sorted List | :star: | :three:
+141 | linked List Cycle | :star: | :three: `Cycle`
+142 | Linked List Cycle II | :star: :star: | :three: `Cycle`
+283 | Move Zeroes | :star: :star: | :three:
 287 | Find the Duplicate Number | :star: :star: | :two: `Cycle Detection`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 **Sliding Window**
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-076 | Minimum Window Substring | :star: :star: :star: | :two:
-003 | Longest Substring Without Repeating Characters | :star: :star: | :two:
-159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | :two:
-340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | :two:
+076 | Minimum Window Substring | :star: :star: :star: | :three:
+003 | Longest Substring Without Repeating Characters | :star: :star: | :three:
+159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | :three:
+340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | :three:
 992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
-239 | Sliding Window Maximum | :star: :star: :star: | :two: `Monotonic deque` `DP` `L-R vec`
-438 | Find All Anagrams in a String | :star: :star: | :two:
-567 | Permutation in String | :star: :star: | :two:
+239 | Sliding Window Maximum | :star: :star: :star: | :three: `Monotonic deque` `DP` `L-R vec`
+438 | Find All Anagrams in a String | :star: :star: | :three:
+567 | Permutation in String | :star: :star: | :three:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ```c++
@@ -257,9 +278,9 @@ void slidingWindow(string src, string tar) {
 ## Search
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-004 | Median of Two Sorted Arrays | :star: :star: :star: | :two: `BS`
-034 | Search For a Range | :star: :star: | :two: `BS`
-035 | Search Insert Position | :star: | :two: `BS`
+004 | Median of Two Sorted Arrays | :star: :star: :star: | :three: :heavy_plus_sign: `BS`
+034 | Search For a Range | :star: :star: | :three: `BS`
+035 | Search Insert Position | :star: | :three: `BS`
 074 | Search a 2D Matrix | :star: :star: | :two: `BS` `Matrix`
 240 | Search a 2D Matrix II | :star: :star: | :two: :thinking: `BS` `Matrix`
 278 | First Bad Version | :star: | :two: `BS`
@@ -371,7 +392,7 @@ int bfs(Node start, Node target) {
 ## Sort
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-215 | Kth Largest Element in an Array | :star: :star: | :two: `??` `Heap Sort` `Quick Sort`
+215 | Kth Largest Element in an Array | :star: :star: | :three: `??` `Heap Sort` `Quick Sort`
 295 | Find Median from Data Stream | :star: :star: :star: | :two: `Heap Sort`
 347 | Top K Frequent Elements | :star: :star: | :two: `Heap Sort` `Quick Sort`
 414 | Third Maximum Number | :star: | :two: `Heap Sort`
@@ -429,9 +450,9 @@ No | Title | Difficulty | Note
 209 | Minimum Size Subarray Sum | :star: :star: | :two: `Prefix Sum` `BS` `Two Pointers`
 325 | Maximum Size Subarray Sum Equals k | :star: :star: | :two: `Prefix Sum` `Map`
 560 | Subarray Sum Equals K | :star: :star: | :two: `Prefix Sum` `Map`
-303 | Range Sum Query Immutable | :star: | :two: `Prefix Sum`
-307 | Range Sum Query Mutable | :star: :star: | `TODO` `Segment Tree` `Binary indexed Tree`
-304 | Range Sum Query 2D Immutable | :star: :star: | :two: `Prefix Sum`
+303 | Range Sum Query Immutable | :star: | :three: `Prefix Sum`
+307 | Range Sum Query Mutable | :star: :star: | :three: `Segment Tree` `Binary indexed Tree`
+304 | Range Sum Query 2D Immutable | :star: :star: | :three: `Prefix Sum`
 370 | Range Addition | :star: :star: | :two: `Diff Array` `Prefix Sum`
 598 | Range Addition II | :star: | :two: `Diff Array`
 1094 | Car Pooling | :star: :star: | :two: `Diff Array`
@@ -619,7 +640,7 @@ No | Title | Difficulty | Note
 171 | Excel Sheet Colum Number | :star: | :one:
 172 | Factorial Trailing Zeros | :star: :star: |
 367 | Valid Perfect Square | :star: |
-136 | Single Number | :star: | :one:
+136 | Single Number | :star: | :two:
 137 | Single Number II | :star: :star: | :one: :heavy_plus_sign:
 260 | Single Number III | :star: :star: | :one:
 179 | Largest Number | :star: :star: | :one: `(a+b) > (b+a)`
