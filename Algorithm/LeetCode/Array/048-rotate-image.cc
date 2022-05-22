@@ -51,7 +51,7 @@ public:
     }
 
 private:
-    // left bottom / right top diagnoal roate
+    // left top / right bottom diagnoal roate
     void roateDiagnoal(vector<vector<int>>& matrix) {
         const auto size = matrix.size();
 
