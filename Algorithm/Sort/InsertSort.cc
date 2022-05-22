@@ -7,7 +7,7 @@ using namespace std;
 template<typename T>
 void insertSort(T& data) {
     for (auto i = 1; i < data.size(); ++i) {
-        for (auto j = i; j > 0; --j) {
+        for (int j = i; j > 0; --j) {
             if (data[j-1] > data[j]) {
                 std::swap(data[j-1], data[j]);
             } else {
