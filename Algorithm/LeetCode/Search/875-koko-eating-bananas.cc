@@ -27,7 +27,11 @@ Output: 23
 Constraints:
 1 <= piles.length <= 10^4
 piles.length <= h <= 10^9
-1 <= piles[i] <= 10^9 */
+1 <= piles[i] <= 10^9
+
+Releatives:
+875. Koko Eating Bananas
+1011. Capacity To Ship Packages Within D Days */
 
 #include <vector>
 

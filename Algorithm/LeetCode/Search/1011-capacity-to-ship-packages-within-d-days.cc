@@ -45,9 +45,11 @@ Constraints:
 
 Relatives:
 410. Split Array Largest Sum
+875. Koko Eating Bananas
 1011. Capacity To Ship Packages Within D Days
 1231. Divide Chocolate
-1891. Cutting Ribbons */
+1891. Cutting Ribbons
+2064. Minimized Maximum of Products Distributed to Any Store */
 
 #include <vector>
 #include <algorithm>
