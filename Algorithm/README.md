@@ -281,26 +281,26 @@ No | Title | Difficulty | Note
 004 | Median of Two Sorted Arrays | :star: :star: :star: | :three: :heavy_plus_sign: `BS`
 034 | Search For a Range | :star: :star: | :three: `BS`
 035 | Search Insert Position | :star: | :three: `BS`
-074 | Search a 2D Matrix | :star: :star: | :two: `BS` `Matrix`
-240 | Search a 2D Matrix II | :star: :star: | :two: :thinking: `BS` `Matrix`
-278 | First Bad Version | :star: | :two: `BS`
-130 | Surrounded Regions | :star: :star: | :two: `DFS` `BFS` `Opposite` `Matrix`
-200 | Number of Islands | :star: :star: | :two: `DFS` `BFS` `Matrix`
-286 | Walls and Gates | :star: :star: | :two: :thinking: `BFS` `Matrix`
+074 | Search a 2D Matrix | :star: :star: | :three: `BS` `Matrix`
+240 | Search a 2D Matrix II | :star: :star: | :three: :thinking: `BS` `Matrix`
+278 | First Bad Version | :star: | :three: `BS`
+130 | Surrounded Regions | :star: :star: | :three: `DFS` `BFS` `Opposite` `Matrix`
+200 | Number of Islands | :star: :star: | :three: `DFS` `BFS` `Matrix`
+286 | Walls and Gates | :star: :star: | :three: :thinking: `BFS` `Matrix`
 323 | Number of Connected Components in an Undirected Graph | :star: :star: | :thinking: `Union Find` `DFS` `Matrix`
-547 | Number of Provinces | :star: :star: | :two: `DFS` `Matrix`
-694 | Number of Distinct Islands | :star: :star: | :two: `DFS` `Matrix` `Serialization`
-410 | Split Array Largest Sum | :star: :star: :star: | :two: :thinking: `BS`
-695 | Max Area of Island | :star: :star: | :two: `DFS` `Matrix`
-1020 | Number of Enclaves | :star: :star: | :two: `DFS` `Matrix`
-1254 | Number of Closed Islands | :star: :star: | :two: `DFS` `Matrix`
-1905 | Count Sub Islands | :star: :star: | :two: `DFS` `Matrix`
-374 | Guess Number Higher Or Lower | :star: | :two: `BS`
+547 | Number of Provinces | :star: :star: | :three: `DFS` `Matrix`
+694 | Number of Distinct Islands | :star: :star: | :three: `DFS` `Matrix` `Serialization`
+410 | Split Array Largest Sum | :star: :star: :star: | :three: :thinking: `BS`
+695 | Max Area of Island | :star: :star: | :three: `DFS` `Matrix`
+1020 | Number of Enclaves | :star: :star: | :three: `DFS` `Matrix`
+1254 | Number of Closed Islands | :star: :star: | :three: `DFS` `Matrix`
+1905 | Count Sub Islands | :star: :star: | :three: `DFS` `Matrix`
+374 | Guess Number Higher Or Lower | :star: | :three: `BS`
 378 | Kth Smallest Element in a Sorted Matrix | :star: :star:| :thinking: `BS` `Matrix`
-973 | K Closest Points to Origin | :star: :star:| :two: :thinking: `Quick Select` `BS`
-752 | Open the Lock | :star: :star:| :two: `BFS`
-875 | Koko Eating Bananas | :star: :star:| :two: :thinking: `BS`
-1011 | Capacity To Ship Packages Within D Days | :star: :star:| :two: :thinking: `BS`
+973 | K Closest Points to Origin | :star: :star:| :three: :thinking: `Quick Select` `BS`
+752 | Open the Lock | :star: :star:| :three: `BFS`
+875 | Koko Eating Bananas | :star: :star:| :three: :thinking: `BS`
+1011 | Capacity To Ship Packages Within D Days | :star: :star:| :three: :thinking: `BS`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 [Binary Search, Search `1st`, `last`, `not less`, `not great` :link:](./Search/binary-search.cc)
@@ -393,10 +393,10 @@ int bfs(Node start, Node target) {
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
 215 | Kth Largest Element in an Array | :star: :star: | :three: `??` `Heap Sort` `Quick Sort`
-295 | Find Median from Data Stream | :star: :star: :star: | :two: `Heap Sort`
-347 | Top K Frequent Elements | :star: :star: | :two: `Heap Sort` `Quick Sort`
-414 | Third Maximum Number | :star: | :two: `Heap Sort`
-937 | Reorder Data in Log Files | :star: | :two:
+295 | Find Median from Data Stream | :star: :star: :star: | :three: `Heap Sort`
+347 | Top K Frequent Elements | :star: :star: | :three: `Heap Sort` `Quick Sort`
+414 | Third Maximum Number | :star: | :three: `Heap Sort`
+937 | Reorder Data in Log Files | :star: | :three:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 
@@ -416,10 +416,10 @@ Shell Sort | O(n) | O((nlogn)^2) | O((nlogn)^2) | O(1) |
 ## Design
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-146 | LRU Cache | :star: :star: | :two: `Map + List (O(1) + Date Move)`
-460 | LFU Cache  | :star: :star: :star: | :two:
-155 | Min Stack | :star: | :two: :heavy_plus_sign:
-380 | Insert Delete GetRandom O(1) | :star: :star: | :two: `Map + Vec (O(1) + Random Access)`
+146 | LRU Cache | :star: :star: | :three: `Map + List (O(1) + Date Move)`
+460 | LFU Cache  | :star: :star: :star: | :three:
+155 | Min Stack | :star: | :three: :heavy_plus_sign:
+380 | Insert Delete GetRandom O(1) | :star: :star: | :three: `Map + Vec (O(1) + Random Access)`
 1396 | Design Underground System | :star: :star: |
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
@@ -427,26 +427,26 @@ No | Title | Difficulty | Note
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
 041 | First Missing Positive | :star: :star: :star: |
-448 | Find All Numbers Disappeared in An Array | :star: | :two:
-048 | Rotate Image | :star: :star: | :two: `Matrix`
-054 | Spiral Matrix | :star: :star: | :two: `Matrix`
-059 | Spiral Matrix II | :star: :star: | :two: `Matrix`
-189 | Rotate Array `right by k steps` | :star: :star: | :two:
-056 | Merge Intervals | :star: :star: | :two: `Interval`
-057 | Insert Intervals | :star: :star: | :two: `Interval`
-252 | Meeting Rooms | :star: | :two: `Interval`
-253 | Meeting Rooms II | :star: :star: | :two: `Interval`
-986 | Interval List Intersections | :star: :star: | :two: `Interval`
-1288 | Remove Covered Intervals | :star: :star: | :two: `Interval`
-027 | Remove Element | :star: | :two: `Two Pointers`
-026 | Remove Duplicates from Sorted Array | :star: | :two: `Two Pointers`
-080 | Remove Duplicates from Sorted Array II | :star: :star: | :two: `Can dup N`
-083 | Remove Duplicates from Sorted List `only once` | :star: | :two: `Two Pointers`
-082 | Remove Duplicates from Sorted List II `no dup` | :star: :star: | :two: :heavy_plus_sign: `Two Pointers`
-316 | Remove Duplicate Letters | :star: :star: :star: | :two: :heavy_plus_sign:
-1081 | Smallest Subsequence of Distinct Characters | :star: :star: | :two:
-088 | Merge Sorted Array | :star: | :two:
-169 | Majority Element | :star: | :two: [:link: Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html)
+448 | Find All Numbers Disappeared in An Array | :star: | :three:
+048 | Rotate Image | :star: :star: | :three: `Matrix`
+054 | Spiral Matrix | :star: :star: | :three: `Matrix`
+059 | Spiral Matrix II | :star: :star: | :three: `Matrix`
+189 | Rotate Array `right by k steps` | :star: :star: | :three:
+056 | Merge Intervals | :star: :star: | :three: `Interval`
+057 | Insert Intervals | :star: :star: | :three: `Interval`
+252 | Meeting Rooms | :star: | :three: `Interval`
+253 | Meeting Rooms II | :star: :three: | :two: `Interval`
+986 | Interval List Intersections | :star: :star: | :three: `Interval`
+1288 | Remove Covered Intervals | :star: :star: | :three: `Interval`
+027 | Remove Element | :star: | :three: `Two Pointers`
+026 | Remove Duplicates from Sorted Array | :star: | :three: `Two Pointers`
+080 | Remove Duplicates from Sorted Array II `dup N` | :star: :star: | :three:
+083 | Remove Duplicates from Sorted List `dup once` | :star: | :three: `Two Pointers`
+082 | Remove Duplicates from Sorted List II `no dup` | :star: :star: | :three: :heavy_plus_sign: `Two Pointers`
+316 | Remove Duplicate Letters | :star: :star: :star: | :three: :heavy_plus_sign:
+1081 | Smallest Subsequence of Distinct Characters | :star: :star: | :three:
+088 | Merge Sorted Array | :star: | :three:
+169 | Majority Element | :star: | :three: [:link: Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html)
 209 | Minimum Size Subarray Sum | :star: :star: | :two: `Prefix Sum` `BS` `Two Pointers`
 325 | Maximum Size Subarray Sum Equals k | :star: :star: | :two: `Prefix Sum` `Map`
 560 | Subarray Sum Equals K | :star: :star: | :two: `Prefix Sum` `Map`
