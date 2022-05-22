@@ -17,7 +17,7 @@ Constraints:
 nums1.length == m + n
 nums2.length == n
 
-elatives:
+Relatives:
 021. Merge Two Sorted List
 023. Merge k Sorted Lists
 088. Merge Sorted Array
@@ -34,7 +34,7 @@ using namespace std;
 
 /* Two pointers / Start from the end */
 void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-    nums1.reserve(nums1.size() + nums2.size());
+    nums1.resize(m + n);
     int i = m - 1, j = n - 1;
     int k = m + n - 1;
 
