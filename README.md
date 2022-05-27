@@ -143,6 +143,10 @@
 * IP
     - [ ] [RFC 791 - Internet Protocol](https://datatracker.ietf.org/doc/html/rfc791)
 
+* VXLAN
+    -
+    - [RFC 7348 - Virtual eXtensible Local Area Network](https://datatracker.ietf.org/doc/html/rfc7348)
+
 * Other
     - [ ] [STUN Traceroute](https://datatracker.ietf.org/doc/html/draft-martinsen-tram-stuntrace-01)
     - [ ] [Implementing Remote Procedure Calls](https://www.cs.cmu.edu/~dga/15-712/F07/papers/birrell842.pdf)
@@ -435,7 +439,7 @@
 - [x] :pencil2: [Linux Kernel 4.19](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-kernel.md)
 - [x] :pencil2: [Understanding Linux Kernel](https://github.com/Jemmy512/book-notes/blob/master/Linux/understanding-linux-kernel.md)
 - [x] :pencil2: [Linux Kernel Development](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-kernel-development.md)
-- [x] [RCU]() [:link: Part 1](https://lwn.net/Articles/262464/) [:link: Part 2](https://lwn.net/Articles/263130/) [:link: Part 3](https://lwn.net/Articles/264090/)
+- [x] [What is RCU? – "Read, Copy, Update"](https://www.kernel.org/doc/html/latest/RCU/whatisRCU.html)
 - [x] [Linux Insides](https://github.com/0xAX/linux-insides)
 - [x] [LWN’s kernel page](https://lwn.net/Kernel/Index/)
 - [x] [Learn Linux Kernel from Android Perspective](https://learnlinuxconcepts.blogspot.com/2014/10/this-blog-is-to-help-those-students-and.html)
