@@ -144,8 +144,12 @@
     - [ ] [RFC 791 - Internet Protocol](https://datatracker.ietf.org/doc/html/rfc791)
 
 * VXLAN
-    -
     - [RFC 7348 - Virtual eXtensible Local Area Network](https://datatracker.ietf.org/doc/html/rfc7348)
+
+* Generic Routing Encapsulation
+    - [RFC 2784 - Generic Routing Encapsulation (GRE)](https://datatracker.ietf.org/doc/html/rfc2784)
+    - [RFC 2890 - Key and Sequence Number Extensions to GRE](https://datatracker.ietf.org/doc/html/rfc2890)
+    - [RFC 8086 - GRE-in-UDP Encapsulation](https://datatracker.ietf.org/doc/html/rfc8086)
 
 * Other
     - [ ] [STUN Traceroute](https://datatracker.ietf.org/doc/html/draft-martinsen-tram-stuntrace-01)
