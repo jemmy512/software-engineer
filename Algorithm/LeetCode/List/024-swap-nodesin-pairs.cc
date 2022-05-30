@@ -54,34 +54,29 @@ public:
 
 private:
     ListNode* reverseKGroup(ListNode* head, int k) {
-        ListNode dummy{0};
-        dummy.next = head;
-        auto* groupBeg = head; // [groupBeg, groupEnd]
-        auto* groupEnd = head;
-        auto* listTail = &dummy;
+        ListNode dummy(0, head);
 
-        int i = 0;
-        while (groupEnd) {
+        auto i = 0;
+        auto* tail = &dummy;
+        auto* beg = head;
+        auto* end = head;
+
+        while (end) {
             if (++i % k == 0) {
-                auto* slow = groupEnd->next;
-                auto* mid = groupBeg;
-                auto* fast = groupBeg;
-
-                while (slow != groupEnd) {
-                    fast = mid->next;
-                    mid->next = slow;
-                    slow = mid;
-                    mid = fast;
+                while (tail->next != end) {
+                    auto* node = beg->next;
+                    beg->next = node->next;
+                    node->next = tail->next;
+                    tail->next = node;
                 }
 
-                listTail->next = groupEnd;
-                listTail = groupBeg;
-                groupBeg = groupEnd = fast;
+                tail = beg;
+                end = beg = beg->next;
             } else {
-                groupEnd = groupEnd->next;
+                end = end->next;
             }
         }
 
         return dummy.next;
     }
-}
+};

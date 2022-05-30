@@ -39,8 +39,7 @@ struct ListNode {
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-        ListNode dummy;
-        dummy.next = head;
+        ListNode dummy(0, head);
 
         auto i = 0;
         auto* tail = &dummy;
