@@ -66,15 +66,15 @@ public:
             node = node->next;
         }
 
-        auto remainder = len < k ? 0 : len % k;
-        auto split = len < k ? 1 : len / k;
+        auto remain = len % k;
+        auto split = len / k;
         auto i = 0;
         node = root;
         vector<ListNode*> result(k, nullptr);
 
         while (node) {
             result[i++] = node;
-            auto size = remainder ? (--remainder, split + 1) : split;
+            auto size = remain ? (--remain, split + 1) : split;
             auto* prev = node;
             while (size && node) {
                 --size;
