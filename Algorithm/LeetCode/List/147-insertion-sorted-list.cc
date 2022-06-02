@@ -42,8 +42,8 @@ public:
     ListNode* insertionSortList(ListNode* head) {
         while (head) {
             auto* next = head->next;
-            auto* pos = findPos(head);
-            insertNode(pos, head);
+            auto* prev = findPos(head);
+            insertBack(prev, head);
             head = next;
         }
 
@@ -63,9 +63,9 @@ private:
         return prev;
     }
 
-    void insertNode(ListNode* pos, ListNode* node) {
-        node->next = pos->next;
-        pos->next = node;
+    void insertBack(ListNode* prev, ListNode* node) {
+        node->next = prev->next;
+        prev->next = node;
     }
 
 private:
