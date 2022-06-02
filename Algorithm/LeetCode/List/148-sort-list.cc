@@ -77,4 +77,25 @@ private:
 
         return mid;
     }
+
+    ListNode* getMid(ListNode* head) {
+        // ERROR: AddressSanitizer: stack-overflow
+        // [4, 2, 1, 3]
+        // head = [4, 2]
+        auto* prev = head;
+
+        while (head && head->next) {
+            prev = prev->next;
+            head = head->next->next;
+        }
+
+        // prev = [2], mid = nullptr
+        auto* mid = prev->next;
+        prev->next = nullptr;
+
+        // the left part [4, 2] is not partitioned, it is sitll the left part of next recursion,
+        // which causes dead loop
+
+        return mid;
+    }
 };
