@@ -95,17 +95,28 @@
 - [ ] [Congestion Avoidance and Control.pdf](https://ee.lbl.gov/papers/congavoid.pdf)
 - [ ] [Nginx HTTP/2](https://www.nginx.com/wp-content/uploads/2015/09/NGINX_HTTP2_White_Paper_v4.pdf)
 
+* HTTP
+    - [ ] RFC 7230 - Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing
+    - [ ] RFC 7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
+    - [ ] RFC 7232 - Hypertext Transfer Protocol (HTTP/1.1): Conditional Requests
+    - [ ] RFC 7233 - Hypertext Transfer Protocol (HTTP/1.1): Range Requests
+    - [ ] RFC 7234 - Hypertext Transfer Protocol (HTTP/1.1): Caching
+    - [ ] RFC 7235 - Hypertext Transfer Protocol (HTTP/1.1): Authentication
+    - [ ] RFC 7540 - Hypertext Transfer Protocol Version 2 (HTTP/2)
+    - [ ] RFC 7541 - HPACK: Header Compression for HTTP/2
+
+* TLS
+    - [ ] [RFC 8446 - The Transport Layer Security (TLS) Protocol Version 1.3](https://www.rfc-editor.org/rfc/rfc8446)
+    - [ ] [RFC 8449 - Record Size Limit Extension for TLS](https://www.rfc-editor.org/rfc/rfc8449)
+
+* QUIC
+    - [ ] [RFC 9000 - QUIC: A UDP-Based Multiplexed and Secure Transport](https://www.rfc-editor.org/rfc/rfc9000)
+
 * ARP
     - [ ] [RFC 826 - An Ethernet Address Resolution Protocol](https://datatracker.ietf.org/doc/html/rfc826)
 
 * ICMP
     - [ ] [RFC 792 - Inernet Control Message protocol](https://datatracker.ietf.org/doc/html/rfc792)
-
-* Tunnel
-    - [ ] RFC 1853 - IP in IP Tunneling
-    - [ ] RFC 2784 - Generic Routing Encapsulation (GRE)
-    - [ ] RFC 2661 - Layer Two Tunneling Protocol “L2TP”
-    - [ ] RFC 2637 - Point-to-Point Tunneling Protocol (PPTP)
 
 * TCP
     - [ ] [RFC 793 - Transmission Control Protocol](https://datatracker.ietf.org/doc/html/rfc793)
@@ -123,23 +134,6 @@
 * UDP
     - [ ] [RFC 768 User Datagram Protocol](https://www.ietf.org/rfc/rfc768.txt)
 
-* TLS
-    - [ ] [RFC 8446 - The Transport Layer Security (TLS) Protocol Version 1.3](https://www.rfc-editor.org/rfc/rfc8446)
-    - [ ] [RFC 8449 - Record Size Limit Extension for TLS](https://www.rfc-editor.org/rfc/rfc8449)
-
-* HTTP
-    - [ ] RFC 7230 - Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing
-    - [ ] RFC 7231 - Hypertext Transfer Protocol (HTTP/1.1): Semantics and Content
-    - [ ] RFC 7232 - Hypertext Transfer Protocol (HTTP/1.1): Conditional Requests
-    - [ ] RFC 7233 - Hypertext Transfer Protocol (HTTP/1.1): Range Requests
-    - [ ] RFC 7234 - Hypertext Transfer Protocol (HTTP/1.1): Caching
-    - [ ] RFC 7235 - Hypertext Transfer Protocol (HTTP/1.1): Authentication
-    - [ ] RFC 7540 - Hypertext Transfer Protocol Version 2 (HTTP/2)
-    - [ ] RFC 7541 - HPACK: Header Compression for HTTP/2
-
-* QUIC
-    - [ ] [RFC 9000 - QUIC: A UDP-Based Multiplexed and Secure Transport](https://www.rfc-editor.org/rfc/rfc9000)
-
 * IP
     - [ ] [RFC 791 - Internet Protocol](https://datatracker.ietf.org/doc/html/rfc791)
 
@@ -150,6 +144,12 @@
     - [RFC 2784 - Generic Routing Encapsulation (GRE)](https://datatracker.ietf.org/doc/html/rfc2784)
     - [RFC 2890 - Key and Sequence Number Extensions to GRE](https://datatracker.ietf.org/doc/html/rfc2890)
     - [RFC 8086 - GRE-in-UDP Encapsulation](https://datatracker.ietf.org/doc/html/rfc8086)
+
+* Tunnel
+    - [ ] RFC 1853 - IP in IP Tunneling
+    - [ ] RFC 2784 - Generic Routing Encapsulation (GRE)
+    - [ ] RFC 2661 - Layer Two Tunneling Protocol "L2TP"
+    - [ ] RFC 2637 - Point-to-Point Tunneling Protocol (PPTP)
 
 * Other
     - [ ] [STUN Traceroute](https://datatracker.ietf.org/doc/html/draft-martinsen-tram-stuntrace-01)
@@ -185,8 +185,9 @@
 - [Robert Kowalski: Algorithm = Logic + Control .pdf](https://www.doc.ic.ac.uk/~rak/papers/algorithm%20=%20logic%20+%20control.pdf)
 
 ### C/C++
+
 <details>
-<summary>Open/Close</summary>
+<summary>Open-Close</summary>
 
 - [ ] [Cheat Sheets & Infographics](https://hackingcpp.com/cpp/cheat_sheets.html#hfold5a)
 - [ ] :orange_book: The C Programming Language
@@ -268,7 +269,7 @@
     - [x] [Build Throughput Series: More Efficient Template Metaprogramming](https://devblogs.microsoft.com/cppblog/build-throughput-series-more-efficient-template-metaprogramming/)
     - [x] [How to Pass a Variadic Pack as a First Argument of a Function](https://www.fluentcpp.com/2021/01/22/how-to-pass-a-variadic-pack-as-a-first-argument-of-a-function-in-cpp/)
     - [x] [Dependent Name: Inheritance and Member Functions of Class Templates](http://www.modernescpp.com/index.php/surprise-included-inheritance-and-member-functions-of-class-templates)
-    - [ ] [CppCon 2019: Jorg Brown “Reducing Template Compilation Overhead, Using C++11, 14, 17, and 20.”n](https://www.youtube.com/watch?v=TyiiNVA1syk&list=PLHTh1InhhwT6KhvViwRiTR7I5s09dLCSw&index=11)
+    - [ ] [CppCon 2019: Jorg Brown "Reducing Template Compilation Overhead, Using C++11, 14, 17, and 20."](https://www.youtube.com/watch?v=TyiiNVA1syk&list=PLHTh1InhhwT6KhvViwRiTR7I5s09dLCSw&index=11)
 
 * C++11
     - [x] [Herb Sutter: Move Simply](https://herbsutter.com/2020/02/17/move-simply/)
