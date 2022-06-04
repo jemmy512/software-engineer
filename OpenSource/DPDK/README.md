@@ -1,5 +1,6 @@
 # eal_init
 
+![](../Image/DPDK/mem.png)
 
 ## eal_hugepage_info_init
 ```c++
