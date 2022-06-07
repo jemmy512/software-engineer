@@ -108,3 +108,37 @@ private:
         return (curSum == 0) + dfs(root->left, curSum) + dfs(root->right, curSum);
     }
 };
+
+// error: path(node->left, Sum) will be called multiple times,
+// since restarting is embeded within continue operation
+// the previous solution separates the both operations
+class Solution {
+public:
+    int pathSum(TreeNode* root, int targetSum) {
+        Sum = targetSum;
+        path(root, Sum);
+
+        return Cnt;
+    }
+
+    void path(TreeNode* node, int tar) {
+        if (!node)
+            return;
+
+        tar -= node->val;
+        if (tar == 0)
+            ++Cnt;
+
+        // 1. continue from current node
+        path(node->left, tar);
+        path(node->right, tar);
+
+        // 2. restart from current
+        path(node->left, Sum);
+        path(node->right, Sum);
+    }
+
+private:
+    int Sum = 0;
+    int Cnt = 0;
+};
