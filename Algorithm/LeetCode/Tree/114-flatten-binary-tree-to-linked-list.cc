@@ -41,8 +41,7 @@ struct TreeNode {
 class Solution {
 public:
     void flatten(TreeNode* root) {
-        TreeNode sentinel(0, nullptr, root);
-        dfs(&sentinel);
+        dfs(root);
     }
 
 private:
