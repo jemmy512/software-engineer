@@ -38,22 +38,22 @@ Relatives:
 class Node {
 public:
     int val;
-    Node* left;
-    Node* right;
+    Node* pi;
+    Node* qi;
     Node* parent;
 };
 
 class Solution {
 public:
     Node* lowestCommonAncestor(Node* p, Node * q) {
-        auto* left = p;
-        auto* right = q;
+        auto* pi = p;
+        auto* qi = q;
 
-        while (left != right) {
-            left = left ? left->parent : q;
-            right = right ? right->parent : p;
+        while (pi != qi) {
+            pi = pi ? pi->parent : q;
+            qi = qi ? qi->parent : p;
         }
 
-        return (left == right) ? left : nullptr;
+        return pi;
     }
 };
