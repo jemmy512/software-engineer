@@ -50,12 +50,14 @@ public:
         levelCount(root, flag);
 
         return flag;
-
     }
 
 private:
     int levelCount(TreeNode* root, bool& flag) {
-        if (!root) return 0;
+        if (!root)
+            return 0;
+        if (!flag)
+            return 0;
 
         int ll = levelCount(root->left, flag);
         int lr = levelCount(root->right, flag);
@@ -63,7 +65,8 @@ private:
             flag = false;
             return 0;
         }
-        return (ll > lr ? ll + 1 : lr + 1);
+
+        return 1 + max(ll, lr);
     }
 };
 
