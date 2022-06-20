@@ -60,7 +60,7 @@ public:
             }
         }
 
-        return src.size() + 1 == dst.size();
+        return src.size() + 1 == dst.size(); /* handle the case: src is the same as dst */
     }
 };
 
