@@ -64,24 +64,25 @@ public:
 
         for (auto j = 0; j < chars.size();) {
             int cnt = 0;
-            chars[i++] = chars[j];
+            chars[i] = chars[j];
 
-            while (j < chars.size() && chars[j] == chars[i-1]) {
+            while (j < chars.size() && chars[j] == chars[i]) {
                 ++j;
                 ++cnt;
             }
             if (cnt > 1) {
                 for (const auto& chr : std::to_string(cnt)) {
-                    chars[i++] = chr;
+                    chars[++i] = chr;
                 }
             }
+            ++i;
             // if (cnt > 1) {
             //     while (cnt) {
             //         stk.push(cnt % 10 + '0');
             //         cnt /= 10;
             //     }
             //     while (!stk.empty()) {
-            //         chars[i++] = stk.top();
+            //         chars[++i] = stk.top();
             //         stk.pop();
             //     }
             // }
