@@ -2,6 +2,10 @@
 
 ![](../Image/DPDK/mem.png)
 
+---
+
+![](../Image/DPDK/dpdk-mempool.svg)
+
 ## rte_eal_config_create
 ```c++
 rte_config_init()
@@ -25,7 +29,6 @@ rte_config_init()
             struct rte_mem_config *mcfg = rte_eal_get_configuration()->mem_config;
             while (mcfg->magic != RTE_MAGIC)
                 rte_pause();
-
 ```
 
 ## eal_hugepage_info_init
@@ -248,11 +251,11 @@ struct rte_intr_source {
 };
 
 struct rte_intr_callback {
-	TAILQ_ENTRY(rte_intr_callback) next;
-	rte_intr_callback_fn cb_fn;
-	void *cb_arg;
-	uint8_t pending_delete;
-	rte_intr_unregister_callback_fn ucb_fn;
+    TAILQ_ENTRY(rte_intr_callback) next;
+    rte_intr_callback_fn cb_fn;
+    void *cb_arg;
+    uint8_t pending_delete;
+    rte_intr_unregister_callback_fn ucb_fn;
 };
 
 struct rte_intr_handle {
@@ -300,10 +303,8 @@ eal_intr_thread_main()
 
         int pfd = epoll_create(1);
         pipe_event.data.fd = intr_pipe.readfd;
-        /**
-         * add pipe fd into wait list, this pipe is used to
-         * rebuild the wait list.
-         */
+        /* add pipe fd into wait list, this pipe is used to
+         * rebuild the wait list. */
         epoll_ctl(pfd, EPOLL_CTL_ADD, intr_pipe.readfd, &pipe_event)
 
         TAILQ_FOREACH(src, &intr_sources, next) {
@@ -464,4 +465,293 @@ malloc_heap_alloc_on_heap_id()
     heap_alloc()
         elem = find_suitable_element(heap, size, flags, align, bound, contig)
         elem = malloc_elem_alloc(elem, size, align, bound, contig)
+```
+
+## ring
+
+```c++
+struct rte_ring {
+    char name[RTE_MEMZONE_NAMESIZE] __rte_cache_aligned;
+    int flags;
+    const struct rte_memzone *memzone;
+
+    uint32_t size;
+    uint32_t mask;
+    uint32_t capacity;
+    char pad0 __rte_cache_aligned;
+
+    struct rte_ring_headtail prod __rte_cache_aligned;
+    char pad1 __rte_cache_aligned;
+
+    struct rte_ring_headtail cons __rte_cache_aligned;
+    char pad2 __rte_cache_aligned;
+};
+
+struct rte_ring_headtail {
+    volatile uint32_t head;
+    volatile uint32_t tail;
+    uint32_t single;
+};
+```
+
+### rte_ring_create
+```c++
+
+```
+
+### rte_ring_dequeue_bulk
+```c++
+__rte_ring_do_dequeue()
+    __rte_ring_move_cons_head()
+    DEQUEUE_PTRS(r, &r[1], cons_head, obj_table, n, void *)
+    update_tail(&r->cons, cons_head, cons_next, is_sc, 0)
+```
+
+## mempool
+```c++
+struct rte_mempool {
+    char name[RTE_MEMZONE_NAMESIZE];
+
+    union {
+        void *pool_data;
+        uint64_t pool_id;
+    };
+    void *pool_config;
+    const struct rte_memzone *mz;
+    unsigned int flags;
+    int socket_id;
+    uint32_t size;
+    uint32_t cache_size;
+
+    uint32_t elt_size;
+    uint32_t header_size;
+    uint32_t trailer_size;
+
+    unsigned private_data_size;
+
+    int32_t ops_index;
+
+    struct rte_mempool_cache *local_cache;
+
+    uint32_t populated_size;
+    struct rte_mempool_objhdr_list elt_list;
+    uint32_t nb_mem_chunks;
+    struct rte_mempool_memhdr_list mem_list;
+};
+```
+
+### rte_mempool_create
+```c++
+rte_mempool_create_empty()
+    rte_mempool_calc_obj_size()
+    mz = rte_memzone_reserve()
+        --->
+    mp = mz->addr
+
+rte_mempool_set_ops_byname() /* ring_sp_sc, ring_sp_mc, ring_mp_sc, ring_mp_mc */
+rte_mempool_populate_default()
+    /* 1. alloc ring */
+    mempool_ops_alloc_once()
+        rte_mempool_ops_alloc()
+            mp->ops->alloc(mp)
+                common_ring_alloc()
+                    rte_ring_create()
+
+    /* 2. alloc for each obj */
+    for (mz_id = 0, n = mp->size; n > 0; mz_id++, n -= ret) {
+        rte_mempool_ops_calc_mem_size()
+        rte_memzone_reserve_aligned()
+        if (pg_sz == 0 || (mz_flags & RTE_MEMZONE_IOVA_CONTIG))
+            rte_mempool_populate_iova()
+                __rte_mempool_populate_iova()
+                    memhdr = rte_zmalloc("MEMPOOL_MEMHDR", sizeof(struct rte_mempool_memhdr), 0)
+                    memhdr->mp = mp;
+                    memhdr->addr = vaddr;
+                    memhdr->iova = iova;
+                    memhdr->len = len;
+                    memhdr->free_cb = free_cb;
+                    memhdr->opaque = opaque;
+                    rte_mempool_ops_populate(obj_cb)
+                        obj_cb()
+                            mempool_add_elem(mempool_add_elem)
+                                STAILQ_INSERT_TAIL(&mp->elt_list, hdr, next)
+                        rte_mempool_ops_enqueue_bulk()
+        else
+            rte_mempool_populate_virt()
+                __rte_mempool_populate_iova()
+    }
+
+rte_mempool_obj_iter()
+```
+
+### rte_pktmbuf_pool_create
+```c++
+rte_pktmbuf_pool_create_by_ops()
+    rte_mempool_create_empty()
+        rte_memzone_reserve()
+            --->
+    rte_mempool_set_ops_byname()
+    rte_pktmbuf_pool_init()
+    rte_mempool_populate_default()
+    rte_mempool_obj_iter(mp, rte_pktmbuf_init, NULL)
+```
+
+### rte_mempool_get_bulk
+```c++
+cache = rte_mempool_default_cache()
+    mp->local_cache[lcore_id]
+rte_mempool_generic_get(cache)
+    __mempool_generic_get()
+        /* 1. get from local cache*/
+        for (index = 0, len = cache->len - 1; index < n; ++index, len--, obj_table++)
+            *obj_table = cache_objs[len];
+
+        /* 2. get from ring */
+        rte_mempool_ops_dequeue_bulk()
+            mp->ops->dequeue()
+                common_ring_sc_dequeue()
+                    rte_ring_sc_dequeue_bulk()
+```
+
+### rte_mempool_put_bulk
+```c++
+cache = rte_mempool_default_cache()
+    mp->local_cache[lcore_id]
+rte_mempool_generic_put(cache)
+    __mempool_generic_put()
+        /* 1. put to cache */
+        rte_memcpy(&cache->objs[cache->len], obj_table, sizeof(void *) * n)
+
+        /* 2. put to ring*/
+        rte_mempool_ops_enqueue_bulk()
+            mp->ops->enqueue()
+                common_ring_sp_enqueue()
+                    rte_ring_sp_enqueue_bulk()
+                        __rte_ring_do_enqueue()
+                            __rte_ring_move_prod_head()
+                            ENQUEUE_PTRS(r, &r[1], prod_head, obj_table, n, void *)
+                            update_tail()
+```
+
+## ret_mbuf
+
+![](../Image/DPDK/rte_mbuf.svg)
+
+![](../Image/DPDK/rte_mbuf_chain.svg)
+
+```c++
+struct rte_mbuf {
+    MARKER cacheline0;
+
+    void *buf_addr;
+
+    union {
+        rte_iova_t buf_iova;
+        rte_iova_t buf_physaddr;
+    } __rte_aligned(sizeof(rte_iova_t));
+
+    MARKER64 rearm_data;
+    uint16_t data_off;
+
+    union {
+        rte_atomic16_t refcnt_atomic;
+
+        uint16_t refcnt;
+    };
+    uint16_t nb_segs;
+
+
+    uint16_t port;
+    uint64_t ol_flags;
+
+    MARKER rx_descriptor_fields1;
+
+    union {
+        uint32_t packet_type;
+        struct {
+            uint32_t l2_type:4;
+            uint32_t l3_type:4;
+            uint32_t l4_type:4;
+            uint32_t tun_type:4;
+
+            union {
+                uint8_t inner_esp_next_proto;
+                struct {
+                    uint8_t inner_l2_type:4;
+                    uint8_t inner_l3_type:4;
+                };
+            };
+            uint32_t inner_l4_type:4;
+        };
+    };
+
+    uint32_t pkt_len;
+    uint16_t data_len;
+    uint16_t vlan_tci;
+
+    union {
+        union {
+            uint32_t rss;
+            struct {
+                union {
+                    struct {
+                        uint16_t hash;
+                        uint16_t id;
+                    };
+                    uint32_t lo;
+                };
+                uint32_t hi;
+            } fdir;
+            struct rte_mbuf_sched sched;
+
+            struct {
+                uint32_t reserved1;
+                uint16_t reserved2;
+                uint16_t txq;
+            } txadapter;
+
+            uint32_t usr;
+        } hash;
+    };
+
+
+    uint16_t vlan_tci_outer;
+
+    uint16_t buf_len;
+
+    uint64_t timestamp;
+
+    /* second cache line - fields only used in slow path or on TX */
+    MARKER cacheline1 __rte_cache_min_aligned;
+
+    union {
+        void *userdata;
+        uint64_t udata64;
+    };
+
+    struct rte_mempool *pool;
+    struct rte_mbuf *next;
+
+    /* fields to support TX offloads */
+
+    union {
+        uint64_t tx_offload;
+        struct {
+            uint64_t l2_len:RTE_MBUF_L2_LEN_BITS;
+            uint64_t l3_len:RTE_MBUF_L3_LEN_BITS;
+            uint64_t l4_len:RTE_MBUF_L4_LEN_BITS;
+            uint64_t tso_segsz:RTE_MBUF_TSO_SEGSZ_BITS;
+
+            uint64_t outer_l3_len:RTE_MBUF_OUTL3_LEN_BITS;
+            uint64_t outer_l2_len:RTE_MBUF_OUTL2_LEN_BITS;
+        };
+    };
+
+    uint16_t priv_size;
+    uint16_t timesync;
+    uint32_t seqn;
+
+    struct rte_mbuf_ext_shared_info *shinfo;
+    uint64_t dynfield1[2];
+}
 ```
