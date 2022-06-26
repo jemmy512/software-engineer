@@ -639,6 +639,8 @@ rte_mempool_generic_put(cache)
 
 ![](../Image/DPDK/rte_mbuf_chain.svg)
 
+![](../Image/DPDK/rte_mbuf-gso.svg)
+
 ```c++
 struct rte_mbuf {
     MARKER cacheline0;
@@ -692,6 +694,7 @@ struct rte_mbuf {
     union {
         union {
             uint32_t rss;
+
             struct {
                 union {
                     struct {
@@ -702,6 +705,7 @@ struct rte_mbuf {
                 };
                 uint32_t hi;
             } fdir;
+
             struct rte_mbuf_sched sched;
 
             struct {
@@ -754,4 +758,213 @@ struct rte_mbuf {
     struct rte_mbuf_ext_shared_info *shinfo;
     uint64_t dynfield1[2];
 }
+```
+
+# dev
+
+![](../Image/DPDK/dev-config-setup.jpg)
+
+Ref:
+* http://blog.chinaunix.net/uid-28541347-id-5785122.html
+
+## rte_eth_dev_configure
+```c++
+rte_eth_dev_configure(uint16_t port_id, uint16_t nb_rx_q, uint16_t nb_tx_q, const struct rte_eth_conf *dev_conf)
+    struct rte_eth_dev* dev = &rte_eth_devices[port_id]
+
+    memcpy(&dev->data->dev_conf, dev_conf, sizeof(dev->data->dev_conf))
+
+    rte_eth_dev_rx_queue_config(dev, nb_rx_q)
+        dev->data->rx_queues = rte_zmalloc(sizeof(dev->data->rx_queues[0]) * nb_queues)
+
+    rte_eth_dev_tx_queue_config(dev, nb_tx_q)
+        dev->data->tx_queues = rte_zmalloc(sizeof(dev->data->tx_queues[0]) * nb_queues)
+
+    /* eth_dev->dev_ops = &ixgbe_eth_dev_ops */
+    (*dev->dev_ops->dev_configure)(dev)
+```
+
+## rte_eth_rx_queue_setup
+```c++
+struct rte_eth_dev* dev = &rte_eth_devices[port_id]
+(*dev->dev_ops->rx_queue_setup)(dev, rx_queue_id, nb_rx_desc, socket_id, &local_conf, mp)
+    ixgbe_dev_rx_queue_setup()
+        /* 1. alloc ixgbe_rx_queue */
+        struct ixgbe_rx_queue* rxq = rte_zmalloc_socket(sizeof(struct ixgbe_rx_queue))
+        rxq->mb_pool = mp;
+        rxq->nb_rx_desc = nb_desc;
+        rxq->rx_free_thresh = rx_conf->rx_free_thresh;
+        rxq->queue_id = queue_idx;
+
+        rxq->rdt_reg_addr = IXGBE_PCI_REG_ADDR(hw, IXGBE_RDT(rxq->reg_idx));
+        rxq->rdh_reg_addr = IXGBE_PCI_REG_ADDR(hw, IXGBE_RDH(rxq->reg_idx));
+
+         /* 2. alloc rx ring */
+        const struct rte_memzone* rz = rte_eth_dma_zone_reserve(queue_idx, RX_RING_SZ, IXGBE_ALIGN)
+        rxq->rx_ring_phys_addr = rz->iova;
+        rxq->rx_ring = (union ixgbe_adv_rx_desc *) rz->addr;
+        rxq->sw_ring = rte_zmalloc_socket(sizeof(struct ixgbe_rx_entry) * nb_rx_q)
+        rxq->sw_sc_ring = rte_zmalloc_socket(sizeof(struct ixgbe_scattered_rx_entry) * nb_rx_q)
+
+        dev->data->rx_queues[queue_idx] = rxq
+
+        ixgbe_reset_rx_queue(adapter, rxq)
+            rxq->rx_nb_avail = 0;
+            rxq->rx_next_avail = 0;
+            rxq->rx_free_trigger = (uint16_t)(rxq->rx_free_thresh - 1);
+            rxq->rx_tail = 0;
+            rxq->nb_rx_hold = 0;
+            rxq->pkt_first_seg = NULL;
+            rxq->pkt_last_seg = NULL;
+```
+
+## rte_eth_tx_queue_setup
+```c++
+```
+
+## rte_eth_dev_start
+```c++
+(*dev->dev_ops->dev_start)(dev)
+    ixgbe_dev_start()
+        rte_intr_disable(intr_handle);
+
+        hw->adapter_stopped = 0;
+        ixgbe_stop_adapter(hw);
+
+        ixgbe_pf_reset_hw(hw);
+
+        /* check and configure queue intr-vector mapping */
+        rte_intr_efd_enable(intr_handle, intr_vector)
+
+        ixgbe_dev_tx_init(dev);
+            /* Setup the Base and Length of the Tx Descriptor Rings */
+            for (i = 0; i < dev->data->nb_tx_queues; i++) {
+                txq = dev->data->tx_queues[i];
+                bus_addr = txq->tx_ring_phys_addr;
+                IXGBE_WRITE_REG(hw, IXGBE_TDBAL(txq->reg_idx), (uint32_t)(bus_addr & 0x00000000ffffffffULL));
+                IXGBE_WRITE_REG(hw, IXGBE_TDBAH(txq->reg_idx), (uint32_t)(bus_addr >> 32));
+                IXGBE_WRITE_REG(hw, IXGBE_TDLEN(txq->reg_idx), txq->nb_tx_desc * sizeof(union ixgbe_adv_tx_desc));
+                /* Setup the HW Tx Head and TX Tail descriptor pointers */
+                IXGBE_WRITE_REG(hw, IXGBE_TDH(txq->reg_idx), 0);
+                IXGBE_WRITE_REG(hw, IXGBE_TDT(txq->reg_idx), 0);
+            }
+
+            /* Device configured with multiple TX queues. */
+            ixgbe_dev_mq_tx_configure(dev);
+
+        ixgbe_dev_rx_init(dev);
+            /* Setup the Base and Length of the Rx Descriptor Rings */
+            for (i = 0; i < dev->data->nb_rx_queues; i++) {
+                rxq = dev->data->rx_queues[i];
+                bus_addr = rxq->rx_ring_phys_addr;
+                IXGBE_WRITE_REG(hw, IXGBE_RDBAL(rxq->reg_idx), (uint32_t)(bus_addr & 0x00000000ffffffffULL));
+                IXGBE_WRITE_REG(hw, IXGBE_RDBAH(rxq->reg_idx), (uint32_t)(bus_addr >> 32));
+                IXGBE_WRITE_REG(hw, IXGBE_RDLEN(rxq->reg_idx), rxq->nb_rx_desc * sizeof(union ixgbe_adv_rx_desc));
+                IXGBE_WRITE_REG(hw, IXGBE_RDH(rxq->reg_idx), 0);
+                IXGBE_WRITE_REG(hw, IXGBE_RDT(rxq->reg_idx), 0);
+            }
+
+            /* Device configured with multiple RX queues. */
+            ixgbe_dev_mq_rx_configure(dev);
+
+        ixgbe_vlan_offload_config(dev, mask);
+
+        ixgbe_flow_ctrl_enable(dev, hw);
+
+        ixgbe_dev_rxtx_start(dev);
+            /* Setup Transmit Threshold Registers */
+            for (i = 0; i < dev->data->nb_tx_queues; i++) {
+                txq = dev->data->tx_queues[i];
+                txdctl = IXGBE_READ_REG(hw, IXGBE_TXDCTL(txq->reg_idx));
+                txdctl |= txq->pthresh & 0x7F;
+                txdctl |= ((txq->hthresh & 0x7F) << 8);
+                txdctl |= ((txq->wthresh & 0x7F) << 16);
+                IXGBE_WRITE_REG(hw, IXGBE_TXDCTL(txq->reg_idx), txdctl);
+            }
+
+            for (i = 0; i < dev->data->nb_tx_queues; i++) {
+                txq = dev->data->tx_queues[i];
+                if (!txq->tx_deferred_start) {
+                    ret = ixgbe_dev_tx_queue_start(dev, i);
+                        txdctl = IXGBE_READ_REG(hw, IXGBE_TXDCTL(txq->reg_idx));
+                        txdctl |= IXGBE_TXDCTL_ENABLE;
+                        IXGBE_WRITE_REG(hw, IXGBE_TXDCTL(txq->reg_idx), txdctl);
+                        IXGBE_WRITE_REG(hw, IXGBE_TDH(txq->reg_idx), 0);
+                        IXGBE_WRITE_REG(hw, IXGBE_TDT(txq->reg_idx), 0);
+                    dev->data->rx_queue_state[rx_queue_id] = RTE_ETH_QUEUE_STATE_STARTED;
+                }
+            }
+
+            for (i = 0; i < dev->data->nb_rx_queues; i++) {
+                rxq = dev->data->rx_queues[i];
+                if (!rxq->rx_deferred_start) {
+                    ret = ixgbe_dev_rx_queue_start(dev, i);
+                        ixgbe_alloc_rx_queue_mbufs(rxq)
+                            /* Initialize software ring entries
+                             * establish relation ship: mempool, queue, DMA, ring */
+                            for (i = 0; i < rxq->nb_rx_desc; i++) {
+                                volatile union ixgbe_adv_rx_desc *rxd;
+                                struct rte_mbuf *mbuf = rte_mbuf_raw_alloc(rxq->mb_pool);
+                                mbuf->data_off = RTE_PKTMBUF_HEADROOM;
+                                mbuf->port = rxq->port_id;
+
+                                dma_addr = rte_cpu_to_le_64(rte_mbuf_data_iova_default(mbuf));
+                                rxd = &rxq->rx_ring[i];
+                                rxd->read.hdr_addr = 0;
+                                rxd->read.pkt_addr = dma_addr;
+                                rxe[i].mbuf = mbuf;
+                            }
+                }
+            }
+
+        ixgbe_setup_link(hw, speed, link_up);
+```
+
+## rte_eth_rx_burst
+```c++
+rte_eth_rx_burst(uint16_t port_id, uint16_t queue_id, struct rte_mbuf **rx_pkts, const uint16_t nb_pkts)
+    nb_rx = (*dev->rx_pkt_burst)(dev->data->rx_queues[queue_id], rx_pkts, nb_pkts)
+        ixgbe_recv_pkts()
+            nb_rx = 0;
+            nb_hold = 0;
+            rxq = rx_queue;
+            rx_id = rxq->rx_tail;
+            rx_ring = rxq->rx_ring;
+            sw_ring = rxq->sw_ring;
+            vlan_flags = rxq->vlan_flags;
+
+            while (nb_rx < nb_pkts) {
+                rxdp = &rx_ring[rx_id];
+                staterr = rxdp->wb.upper.status_error;
+                if (!(staterr & rte_cpu_to_le_32(IXGBE_RXDADV_STAT_DD)))
+                    break;
+
+                rxd = *rxdp;
+
+                nmb = rte_mbuf_raw_alloc(rxq->mb_pool);
+                rxe = &sw_ring[rx_id];
+                rxm = rxe->mbuf;
+                rxe->mbuf = nmb;
+                rxdp->read.hdr_addr = 0; /* set DD 0 */
+                dma_addr = rte_cpu_to_le_64(rte_mbuf_data_iova_default(nmb));
+                rxdp->read.pkt_addr = dma_addr;
+
+                rx_pkts[nb_rx++] = rxm;
+            }
+
+            rxq->rx_tail = rx_id;
+
+            return nb_rx;
+```
+
+## rte_eth_tx_burst
+```c++
+/* write-back:
+ * 1. Updating by writing back into the Tx descriptor
+ * 2. Update by writing to the head pointer in system memory */
+
+rte_eth_tx_burst(uint16_t port_id, uint16_t queue_id, struct rte_mbuf **tx_pkts, uint16_t nb_pkts)
+    (*dev->tx_pkt_burst)(dev->data->tx_queues[queue_id], tx_pkts, nb_pkts)
+        ixgbe_xmit_pkts()
+
 ```
