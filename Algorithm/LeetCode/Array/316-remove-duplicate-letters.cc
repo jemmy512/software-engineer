@@ -40,7 +40,7 @@ public:
         }
 
         for (auto i = 0; i < s.size(); ++i) {
-            if (!hashSet.count(s[i])) {
+            if (!hashSet.count(s[i])) { // "cbacdcbc" -> "acdbc" vs "acdb"
                 while (!dq.empty() && dq.back() > s[i] && lastPos[dq.back()] > i) {
                     hashSet.erase(dq.back());
                     dq.pop_back();
