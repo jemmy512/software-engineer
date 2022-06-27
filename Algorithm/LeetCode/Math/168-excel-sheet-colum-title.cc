@@ -28,7 +28,6 @@ Example 4:
 Input: columnNumber = 2147483647
 Output: "FXSHRXW"
 
-
 Constraints:
 1 <= columnNumber <= 2^31 - 1
 
@@ -38,8 +37,16 @@ Relatives:
 
 #include <iostream>
 #include <stack>
+#include <algorithm>
 
 using namespace std;
+
+class Solution {
+public:
+    string convertToTitle(int n) {
+        return n ? (convertToTitle(n / 26) + (char)(--n % 26 + 'A')) : "";
+    }
+};
 
 class Solution {
 public:
@@ -50,21 +57,25 @@ public:
 private:
     string base26_int2str(long n) {
         string str;
+
         while (n > 0) {
-            auto off = (n - 1) % 26;
-            char ch = 'A' + off;
-            str += ch;
-            n -= off; // n = 26
+            --n; // n staring at 1
+            auto off = n % 26;
+            str += 'A' + off;
             n /= 26;
         }
-        return string(str.rbegin(), str.rend());
+        std::reverse(str.begin(), str.end());
+
+        return str;
     }
 
     long long base26_str2int(string s) {
         long long ret = 0;
-        std::for_each(s.begin(), s.end(), [&ret](const auto& ch) {
-            ret = ret * 26 + (ch - 'A' + 1);
-        });
+
+        for (auto chr : s) {
+            ret = ret * 26 + (chr - 'A' + 1);
+        }
+
         return ret;
     }
 };
