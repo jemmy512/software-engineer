@@ -1,3 +1,38 @@
+* [eal_init](#eal_init)
+    * [rte_eal_config_create](#rte_eal_config_create)
+    * [eal_hugepage_info_init](#eal_hugepage_info_init)
+    * [rte_eal_memzone_init](#rte_eal_memzone_init)
+    * [rte_eal_memory_init](#rte_eal_memory_init)
+    * [rte_eal_malloc_heap_init](#rte_eal_malloc_heap_init)
+    * [rte_eal_intr_init](#rte_eal_intr_init)
+        * [rte_intr_callback_register](#rte_intr_callback_register)
+    * [rte_eal_alarm_init](#rte_eal_alarm_init)
+    * [rte_eal_pci_init](#rte_eal_pci_init)
+    * [rte_bus_scan](#rte_bus_scan)
+    * [rte_bus_probe](#rte_bus_probe)
+
+* [memory](#memory)
+    * [rte_malloc](#rte_malloc)
+    * [rte_memzone_reserve](#rte_memzone_reserve)
+    * [malloc_heap_alloc](#malloc_heap_alloc)
+    * [ring](#ring)
+        * [rte_ring_create](#rte_ring_create)
+        * [rte_ring_dequeue_bulk](#rte_ring_dequeue_bulk)
+    * [mempool](#mempool)
+        * [rte_mempool_create](#rte_mempool_create)
+        * [rte_pktmbuf_pool_create](#rte_pktmbuf_pool_create)
+        * [rte_mempool_get_bulk](#rte_mempool_get_bulk)
+        * [rte_mempool_put_bulk](#rte_mempool_put_bulk)
+    * [ret_mbuf](#ret_mbuf)
+
+* [dev](#dev)
+    * [rte_eth_dev_configure](#rte_eth_dev_configure)
+    * [rte_eth_rx_queue_setup](#rte_eth_rx_queue_setup)
+    * [rte_eth_tx_queue_setup](#rte_eth_tx_queue_setup)
+    * [rte_eth_dev_start](#rte_eth_dev_start)
+    * [rte_eth_rx_burst](#rte_eth_rx_burst)
+    * [rte_eth_tx_burst](#rte_eth_tx_burst)
+
 # eal_init
 
 ![](../Image/DPDK/mem.png)
@@ -403,11 +438,98 @@ ret = rte_intr_callback_register(&dev->vfio_req_intr_handle, pci_vfio_req_handle
 ```c++
 ```
 
+## rte_bus_scan
+```c++
+struct rte_pci_bus rte_pci_bus = {
+    .bus = {
+        .scan = rte_pci_scan,
+        .probe = pci_probe,
+        .find_device = pci_find_device,
+        .plug = pci_plug,
+        .unplug = pci_unplug,
+        .parse = pci_parse,
+        .dma_map = pci_dma_map,
+        .dma_unmap = pci_dma_unmap,
+        .get_iommu_class = rte_pci_get_iommu_class,
+        .dev_iterate = rte_pci_dev_iterate,
+        .hot_unplug_handler = pci_hot_unplug_handler,
+        .sigbus_handler = pci_sigbus_handler,
+    },
+    .device_list = TAILQ_HEAD_INITIALIZER(rte_pci_bus.device_list),
+    .driver_list = TAILQ_HEAD_INITIALIZER(rte_pci_bus.driver_list),
+};
+
+RTE_REGISTER_BUS(pci, rte_pci_bus.bus);
+```
+
+```c++
+struct rte_bus *bus;
+TAILQ_FOREACH(bus, &rte_bus_list, next) {
+    bus->scan()
+        rte_pci_scan()
+            struct rte_pci_addr addr; /* 0000:01:11.4 <domain.bus.devid.function> */
+            struct dirent * dir = opendir("/sys/bus/pci/devices")
+            while ((e = readdir(dir)) != NULL) {
+                snprintf(dirname, sizeof(dirname), "%s/%s", rte_pci_get_sysfs_path(), e->d_name);
+                pci_scan_one(dirname, &addr);
+                    struct rte_pci_device *dev = malloc(sizeof(*dev))
+                    dev->device.bus = &rte_pci_bus.bus;
+	                dev->addr = *addr;
+                    dev->id.device_id = (uint16_t)tmp;
+                    dev->device.numa_node = tmp;
+                    dev->id.class_id = (uint32_t)tmp & RTE_CLASS_ANY_ID;
+
+                    pci_parse_sysfs_resource("%s/resource", dev);
+                    pci_get_kernel_driver_by_path( "%s/driver", driver, sizeof(driver));
+                    dev->kdrv = RTE_KDRV_IGB_UIO; /* RTE_KDRV_VFIO, RTE_KDRV_UIO_GENERIC */
+
+                    rte_pci_add_device(dev);
+                        TAILQ_INSERT_TAIL(&rte_pci_bus.device_list, pci_dev, next)
+            }
+}
+```
+
+## rte_bus_probe
+
+```c++
+struct rte_bus *bus, *vbus = NULL;
+TAILQ_FOREACH(bus, &rte_bus_list, next)
+    bus->probe();
+
+```
+
 # memory
 
 ## rte_malloc
 ```c++
-malloc_heap_alloc()
+rte_malloc_socket(type, size, align, SOCKET_ID_ANY)
+    malloc_heap_alloc()
+        /* 1. alloc on local socket */
+        heap_id = malloc_socket_to_heap_id(socket)
+            for (i = 0; i < RTE_MAX_HEAPS; i++) {
+                struct malloc_heap *heap = &mcfg->malloc_heaps[i];
+                if (heap->socket_id == socket_id)
+                    return i;
+            }
+        malloc_heap_alloc_on_heap_id(type, size, heap_id, flags, align, bound, contig)
+            heap_alloc()
+                elem = find_suitable_element()
+                    malloc_elem_free_list_index()
+                        /*  heap->free_head[0] - (0   , 2^8]
+                        *   heap->free_head[1] - (2^8 , 2^10]
+                        *   heap->free_head[2] - (2^10 ,2^12]
+                        *   heap->free_head[3] - (2^12, 2^14]
+                        *   heap->free_head[4] - (2^14, MAX_SIZE] */
+                elem = malloc_elem_alloc(elem, size, align, bound, contig)
+
+        /* 2. alloc on remote socket */
+        for (i = 0; i < (int) rte_socket_count(); i++) {
+            if (i == heap_id)
+                continue;
+            ret = malloc_heap_alloc_on_heap_id();
+            if (ret != NULL)
+                return ret;
+        }
 ```
 
 ## rte_memzone_reserve
@@ -469,6 +591,8 @@ malloc_heap_alloc_on_heap_id()
 
 ## ring
 
+* [DPDK Ring Library](http://doc.dpdk.org/guides/prog_guide/ring_lib.html#single-producer-enqueue)
+
 ```c++
 struct rte_ring {
     char name[RTE_MEMZONE_NAMESIZE] __rte_cache_aligned;
@@ -501,12 +625,36 @@ struct rte_ring_headtail {
 
 ### rte_ring_dequeue_bulk
 ```c++
-__rte_ring_do_dequeue()
+rte_ring_do_dequeue()
     __rte_ring_move_cons_head()
     DEQUEUE_PTRS(r, &r[1], cons_head, obj_table, n, void *)
     update_tail(&r->cons, cons_head, cons_next, is_sc, 0)
 ```
 
+```c++
+rte_ring_do_enqueue()
+    __rte_ring_move_prod_head(r, is_sp, n, behavior, &prod_head, &prod_next, &free_entries)
+    ENQUEUE_PTRS(r, &r[1], prod_head, obj_table, n, void *);
+    update_tail(&r->prod, prod_head, prod_next, is_sp, 1);
+```
+
+### Anatomy
+* Multiple Producers Enqueue
+    * rte_ring_move_prod_head
+        * On both cores, ring->prod_head and ring->cons_tail are copied in local variables.
+            * ![](../Image/DPDK/ring-mp-1.svg)
+        * modify ring->prod_head in the ring structure to point to the same location as prod_next.
+            * ![](../Image/DPDK/ring-mp-2.svg)
+            * If ring->prod_head is different to local variable prod_head, the CAS operation fails, and the code restarts at first step.
+            * Otherwise, ring->prod_head is set to local prod_next, the CAS operation is successful, and processing continues.
+    * ENQUEUE_PTRS
+        * ![](../Image/DPDK/ring-mp-3.svg)
+        * The core 1 updates one element of the ring(obj4), and the core 2 updates another one (obj5).
+    * update_tail
+        * ![](../Image/DPDK/ring-mp-4.svg)
+            * Each core now wants to update ring->prod_tail. A core can only update it if ring->prod_tail is equal to the prod_head local variable.
+        *  ![](../Image/DPDK/ring-mp-4.svg)
+            * Once ring->prod_tail is updated by core 1, core 2 is allowed to update it too. The operation is also finished on core 2.
 ## mempool
 ```c++
 struct rte_mempool {
@@ -737,7 +885,6 @@ struct rte_mbuf {
     struct rte_mbuf *next;
 
     /* fields to support TX offloads */
-
     union {
         uint64_t tx_offload;
         struct {
@@ -762,6 +909,8 @@ struct rte_mbuf {
 
 # dev
 
+![](../Image/DPDK/ixgbe_rx_queue.png)
+
 ![](../Image/DPDK/dev-config-setup.jpg)
 
 Ref:
@@ -771,6 +920,11 @@ Ref:
 ```c++
 rte_eth_dev_configure(uint16_t port_id, uint16_t nb_rx_q, uint16_t nb_tx_q, const struct rte_eth_conf *dev_conf)
     struct rte_eth_dev* dev = &rte_eth_devices[port_id]
+
+    /* Check the numbers of RX and TX queues */
+    /* Check the device supports requested interrupts */
+    /* Check offloading capabilities */
+    /* Check device supports requested rss hash functions. */
 
     memcpy(&dev->data->dev_conf, dev_conf, sizeof(dev->data->dev_conf))
 
@@ -782,6 +936,8 @@ rte_eth_dev_configure(uint16_t port_id, uint16_t nb_rx_q, uint16_t nb_tx_q, cons
 
     /* eth_dev->dev_ops = &ixgbe_eth_dev_ops */
     (*dev->dev_ops->dev_configure)(dev)
+
+    /* Validate Rx Tx offloads. */
 ```
 
 ## rte_eth_rx_queue_setup
@@ -959,12 +1115,70 @@ rte_eth_rx_burst(uint16_t port_id, uint16_t queue_id, struct rte_mbuf **rx_pkts,
 
 ## rte_eth_tx_burst
 ```c++
-/* write-back:
+/* descriptor write-back:
  * 1. Updating by writing back into the Tx descriptor
+    * TXDCTL[n].WTHRESH = 0 and a descriptor that has RS set is ready to be written back.
+    * TXDCTL[n].WTHRESH > 0 and TXDCTL[n].WTHRESH descriptors have accumulated.
+    * TXDCTL[n].WTHRESH > 0 and the corresponding EITR counter has reached zero.
+       The timer expiration flushes any accumulated descriptors and sets an interrupt event(TXDW).
  * 2. Update by writing to the head pointer in system memory */
 
 rte_eth_tx_burst(uint16_t port_id, uint16_t queue_id, struct rte_mbuf **tx_pkts, uint16_t nb_pkts)
     (*dev->tx_pkt_burst)(dev->data->tx_queues[queue_id], tx_pkts, nb_pkts)
         ixgbe_xmit_pkts()
+            /* Determine if the descriptor ring needs to be cleaned. */
+            if (txq->nb_tx_free < txq->tx_free_thresh)
+                ixgbe_xmit_cleanup(txq);
 
+            tx_id = txq->tx_tail;
+
+            for (nb_tx = 0; nb_tx < nb_pkts; nb_tx++) {
+                /* Determine how many (if any) context descriptors are needed for offload functionality. */
+
+                /* Keep track of how many descriptors are used this loop */
+                nb_used = (uint16_t)(tx_pkt->nb_segs + new_ctx);
+
+                /* Determine the last TX descriptor to allocate in the TX ring */
+                tx_last = (uint16_t) (tx_id + nb_used - 1);
+
+                /* Make sure there are enough TX descriptors available to transmit the entire packet */
+                if (nb_used > txq->nb_tx_free) {
+                    ixgbe_xmit_cleanup(txq);
+                }
+
+                /* send mbuf to sw_ring */
+                m_seg = tx_pkt;
+                do {
+                    txd = &txr[tx_id];
+                    txn = &sw_ring[txe->next_id];
+                    rte_prefetch0(&txn->mbuf->pool);
+
+                    txe->mbuf = m_seg;
+
+                    /* Set up Transmit Data Descriptor. */
+                    slen = m_seg->data_len;
+                    buf_dma_addr = rte_mbuf_data_iova(m_seg);
+                    txd->read.buffer_addr = rte_cpu_to_le_64(buf_dma_addr);
+                    txd->read.cmd_type_len = rte_cpu_to_le_32(cmd_type_len | slen);
+                    txd->read.olinfo_status = rte_cpu_to_le_32(olinfo_status);
+                    txe->last_id = tx_last;
+                    tx_id = txe->next_id;
+                    txe = txn;
+                    m_seg = m_seg->next;
+                } while (m_seg != NULL);
+
+                /* The last packet data descriptor needs End Of Packet (EOP) */
+                cmd_type_len |= IXGBE_TXD_CMD_EOP;
+                txq->nb_tx_used = (uint16_t)(txq->nb_tx_used + nb_used);
+                txq->nb_tx_free = (uint16_t)(txq->nb_tx_free - nb_used);
+
+                /* Set RS bit only on threshold packets' last descriptor */
+                if (txq->nb_tx_used >= txq->tx_rs_thresh) {
+                    cmd_type_len |= IXGBE_TXD_CMD_RS;
+                }
+                txd->read.cmd_type_len |= rte_cpu_to_le_32(cmd_type_len);
+            }
+
+            IXGBE_PCI_REG_WRITE_RELAXED(txq->tdt_reg_addr, tx_id);
+            txq->tx_tail = tx_id;
 ```
