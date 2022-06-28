@@ -44,7 +44,7 @@ using namespace std;
 class Solution {
 public:
     string convertToTitle(int n) {
-        return n ? (convertToTitle(n / 26) + (char)(--n % 26 + 'A')) : "";
+        return (n--) ? (convertToTitle(n / 26) + (char)(n % 26 + 'A')) : "";
     }
 };
 
