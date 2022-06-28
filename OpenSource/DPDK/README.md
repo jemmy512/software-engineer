@@ -35,7 +35,7 @@
 
 # eal_init
 
-![](../Image/DPDK/mem.png)
+![](../Image/DPDK/mem-arch.png)
 
 ---
 
@@ -352,6 +352,7 @@ eal_intr_thread_main()
         }
 
         eal_intr_handle_interrupts(pfd, numfds) {
+            struct epoll_event events[totalfds];
             for (;;) {
                 nfds = epoll_wait(pfd, events, totalfds, EAL_INTR_EPOLL_WAIT_FOREVER);
                 ret = eal_intr_process_interrupts(events, nfds) {
@@ -424,7 +425,13 @@ dev->vfio_req_intr_handle.fd = fd;
 dev->vfio_req_intr_handle.type = RTE_INTR_HANDLE_VFIO_REQ;
 dev->vfio_req_intr_handle.vfio_dev_fd = vfio_dev_fd;
 
-ret = rte_intr_callback_register(&dev->vfio_req_intr_handle, pci_vfio_req_handler, (void *)&dev->device);
+ret = rte_intr_callback_register(intr_handle, cb, cb_arg);
+    struct rte_intr_callback *callback = calloc(1, sizeof(*callback))
+    callback->cb_fn = cb;
+    callback->cb_arg = cb_arg;
+    callback->pending_delete = 0;
+    callback->ucb_fn = NULL;
+
     struct rte_intr_source *src = alloc(1, sizeof(*src));
     src->intr_handle = *intr_handle;
     TAILQ_INIT(&src->callbacks);
@@ -432,6 +439,66 @@ ret = rte_intr_callback_register(&dev->vfio_req_intr_handle, pci_vfio_req_handle
     TAILQ_INSERT_TAIL(&intr_sources, src, next);
 
     write(intr_pipe.writefd, "1", 1)
+```
+
+### rte_eth_dev_rx_intr_ctl_q
+```c++
+rte_eth_dev_rx_intr_ctl_q(uint16_t port_id, uint16_t queue_id, int epfd, int op, void *data)
+    dev = &rte_eth_devices[port_id];
+    intr_handle = dev->intr_handle;
+    vec = intr_handle->intr_vec[queue_id];
+    rte_intr_rx_ctl(intr_handle, epfd, op, vec, data);
+        switch (op) {
+	    case RTE_INTR_EVENT_ADD:
+            epfd_op = EPOLL_CTL_ADD;
+            epdata = &rev->epdata;
+            epdata->event  = EPOLLIN | EPOLLPRI | EPOLLET;
+            epdata->data   = data;
+            epdata->cb_fun = (rte_intr_event_cb_t)eal_intr_proc_rxtx_intr;
+            epdata->cb_arg = (void *)intr_handle;
+            rc = rte_epoll_ctl(epfd, epfd_op,
+                    intr_handle->efds[efd_idx], rev);
+                if (epfd == RTE_EPOLL_PER_THREAD)
+                    epfd = rte_intr_tls_epfd();
+                if (op == EPOLL_CTL_ADD) {
+                    event->status = RTE_EPOLL_VALID;
+                    event->fd = fd;  /* ignore fd in event */
+                    event->epfd = epfd;
+                    ev.data.ptr = (void *)event;
+                }
+                ev.events = event->epdata.event;
+	            epoll_ctl(epfd, op, fd, &ev);
+        }
+
+
+rte_epoll_wait()
+    while (1) {
+		rc = epoll_wait(epfd, evs, maxevents, timeout);
+		if (likely(rc > 0)) {
+			rc = eal_epoll_process_event(evs, rc, events);
+                for (i = 0; i < n; i++) {
+		            rev = evs[i].data.ptr;
+                    events[count].status        = RTE_EPOLL_VALID;
+                    events[count].fd            = rev->fd;
+                    events[count].epfd          = rev->epfd;
+                    events[count].epdata.event  = evs[i].events;
+                    events[count].epdata.data   = rev->epdata.data;
+                    if (rev->epdata.cb_fun)
+                        rev->epdata.cb_fun(rev->fd, rev->epdata.cb_arg);
+                            eal_intr_proc_rxtx_intr()
+                                switch (intr_handle->type) {
+                                case RTE_INTR_HANDLE_UIO:
+                                case RTE_INTR_HANDLE_UIO_INTX:
+                                    bytes_read = sizeof(buf.uio_intr_count);
+                                    break;
+                                }
+
+                                do {
+                                    nbytes = read(fd, &buf, bytes_read);
+                                } while (1);
+                }
+		}
+	}
 ```
 
 ## rte_eal_alarm_init
@@ -495,6 +562,45 @@ TAILQ_FOREACH(bus, &rte_bus_list, next) {
 struct rte_bus *bus, *vbus = NULL;
 TAILQ_FOREACH(bus, &rte_bus_list, next)
     bus->probe();
+        pci_probe()
+            FOREACH_DEVICE_ON_PCIBUS(dev) {
+                pci_probe_all_drivers()
+                    struct rte_pci_driver *dr = NULL;
+                    FOREACH_DRIVER_ON_PCIBUS(dr) {
+                        if (!rte_pci_match(dr, dev))
+                            return 1;
+                        rte_pci_probe_one_driver(dr, dev);
+                            if (!already_probed && (dr->drv_flags & RTE_PCI_DRV_NEED_MAPPING)) {
+                                /* map resources for devices that use igb_uio */
+                                rte_pci_map_device(dev);
+                            }
+                            dr->probe(dr, dev);
+                                eth_ixgbe_pci_probe()
+                                    rte_eth_dev_create(&pci_dev->device)
+                                    eth_dev_pci_specific_init()
+
+                                    eth_ixgbe_dev_init(eth_dev, init_param)
+                                        eth_dev->dev_ops = &ixgbe_eth_dev_ops;
+                                        eth_dev->rx_pkt_burst = &ixgbe_recv_pkts;
+                                        eth_dev->tx_pkt_burst = &ixgbe_xmit_pkts;
+                                        eth_dev->tx_pkt_prepare = &ixgbe_prep_pkts;
+
+                                        rte_intr_callback_register(intr_handle, ixgbe_dev_interrupt_handler, eth_dev);
+                                        ixgbe_fdir_filter_init(eth_dev)
+
+                                    rte_eth_dev_probing_finish()
+                                        _rte_eth_dev_callback_process(dev, RTE_ETH_EVENT_NEW, NULL)
+                                            struct rte_eth_dev_callback *cb_lst;
+	                                        struct rte_eth_dev_callback dev_cb;
+                                            TAILQ_FOREACH(cb_lst, &(dev->link_intr_cbs), next) {
+                                                dev_cb = *cb_lst;
+                                                rc = dev_cb.cb_fn(dev->data->port_id, dev_cb.event,
+                                                        dev_cb.cb_arg, dev_cb.ret_param);
+                                                cb_lst->active = 0;
+                                            }
+
+                    }
+            }
 
 ```
 
@@ -640,17 +746,17 @@ rte_ring_do_enqueue()
 
 ### Anatomy
 * Multiple Producers Enqueue
-    * rte_ring_move_prod_head
+    1. rte_ring_move_prod_head
         * On both cores, ring->prod_head and ring->cons_tail are copied in local variables.
             * ![](../Image/DPDK/ring-mp-1.svg)
         * modify ring->prod_head in the ring structure to point to the same location as prod_next.
             * ![](../Image/DPDK/ring-mp-2.svg)
             * If ring->prod_head is different to local variable prod_head, the CAS operation fails, and the code restarts at first step.
             * Otherwise, ring->prod_head is set to local prod_next, the CAS operation is successful, and processing continues.
-    * ENQUEUE_PTRS
+    2. ENQUEUE_PTRS
         * ![](../Image/DPDK/ring-mp-3.svg)
         * The core 1 updates one element of the ring(obj4), and the core 2 updates another one (obj5).
-    * update_tail
+    3. update_tail
         * ![](../Image/DPDK/ring-mp-4.svg)
             * Each core now wants to update ring->prod_tail. A core can only update it if ring->prod_tail is equal to the prod_head local variable.
         *  ![](../Image/DPDK/ring-mp-4.svg)
