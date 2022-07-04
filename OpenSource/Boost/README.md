@@ -348,6 +348,10 @@ read.hpp::async_read()
                                         operation::complete()
                                             descriptor_state::do_complete()
                                                 descriptor_state::perform_io() // loop op_queue[]
+                        /* when this descriptor is poped from scheduler's op_queue, it's next pointor is 0,
+                        * so this descriptor may be executed by two threads which cause data curruption.
+                        * The lock guards the critical region to avoid concurrent access of the descriptor */
+                                                    mutex_.lock();
                                                     perform_io_cleanup_on_block_exit io_cleanup(reactor_)
                                                     static const int flag[max_ops] = { EPOLLIN, EPOLLOUT, EPOLLPRI };
                                                     for (int j = max_ops - 1; j >= 0; --j) {
