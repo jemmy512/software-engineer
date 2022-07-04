@@ -63,7 +63,7 @@
 - [ ] :orange_book: Advanced Programming in the UNIX Environment
 
 - [x] [CPU Registers x86_32](https://www.eecg.utoronto.ca/~amza/www.mindsec.com/files/x86regs.html)
-- [x] [CPU Registers x86_64](https://wiki.osdev.org/CPU_Registers_x86#General_Purpose_Registers)
+- [x] [CPU Registers x86_64](https://wiki.osdev.org/CPU_Registers_x86-64)
 
 ## Computer Architecture
 - [ ] :orange_book: Computer Organization and Design: The Hardware/Sofeware Interface :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/computer-organization-and-design.md)
