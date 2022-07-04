@@ -35,25 +35,28 @@ Constraints:
 -10 <= nums[i] <= 10
 The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer. */
 
+#include <vector>
+#include <climits>
+
+using namespace std;
+
 class Solution {
 public:
     int maxProduct(vector<int>& nums) {
-       if (nums.empty())
-            return 0;
+        auto minPro = 1;
+        auto maxPro = 1;
+        auto ret = INT_MIN;
 
-        auto maxPro = nums[0];
-        auto minPro = nums[0];
-        auto result = nums[0];
-
-        for (auto i = 1; i < nums.size(); ++i) {
-            if (nums[i] < 0) {
-                swap(maxPro, minPro);
+        for (auto n : nums) {
+            if (n < 0) {
+                swap(minPro, maxPro);
             }
-            maxPro = max(nums[i], maxPro *= nums[i]);
-            minPro = min(nums[i], minPro *= nums[i]);
-            result = max(result, maxPro);
+
+            maxPro = max(n, maxPro * n);
+            minPro = min(n, minPro * n);
+            ret = max(ret, maxPro);
         }
 
-        return result;
+        return ret;
     }
 };
