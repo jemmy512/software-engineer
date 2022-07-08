@@ -68,7 +68,7 @@ public:
 
         vector dp(s.size(), 1);
 
-        for (int i = s.size()-2; i >= 0; --i) {
+        for (int i = s.size()-1; i >= 0; --i) {
             int pre = 0;
             for (int j = i+1; j < s.size(); ++j) {
                 int temp = dp[j];
@@ -100,12 +100,10 @@ public:
         vector dp(s.size(), vector(s.size(), 0));
 
         /* the deduced type of `auto i` is unsigned long [0 to 4,294,967,295], when i is 0, --i will rewind */
-        for (int i = s.size()-2; i >= 0; --i) {
+        for (int i = s.size()-1; i >= 0; --i) {
             dp[i][i] = 1;
             for (int j = i+1; j < s.size(); ++j) {
-                dp[i][j] = (s[i] == s[j])
-                    ? (dp[i+1][j-1] + 2)
-                    : max(dp[i+1][j], dp[i][j-1]);
+                dp[i][j] = (s[i] == s[j]) ? (dp[i+1][j-1] + 2) : max(dp[i+1][j], dp[i][j-1]);
             }
         }
 
@@ -126,9 +124,7 @@ public:
         for (int i = 0; i < s.size(); ++i) {
             dp[i][i] = 1;
             for (int j = i-1; j >= 0;--j) {
-                dp[i][j] = s[i] == s[j]
-                    ? dp[i-1][j+1] + 2
-                    : max(dp[i-1][j], dp[i][j+1]);
+                dp[i][j] = s[i] == s[j] ? (2 + dp[i-1][j+1]): max(dp[i-1][j], dp[i][j+1]);
             }
         }
 
