@@ -4,52 +4,51 @@
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
 010 | Regular Expression Matching | :star: :star: :star: |
-032 | Longet Valid Paretheses | :star: :star: :star: | :two: :heavy_plus_sign: `stack`
-062 | Unique Paths | :star: :star: | :two:
-063 | Unique Paths II | :star: :star: | :two:
+032 | Longet Valid Paretheses | :star: :star: :star: | :three: :heavy_plus_sign: `stack`
+062 | Unique Paths | :star: :star: | :three:
+063 | Unique Paths II | :star: :star: | :three:
 980 | Unique Paths III | :star: :star: :star: | `TODO`
-064 | Minimum Path Sum | :star: :star: | :two:
-070 | Climbing Stairs | :star: | :two:
-746 | MinCost Climb Stair | :star: | :two:
-084 | Largest Rectangle in Histogram | :star: :star: :star: | :two: `Monotonic stack`
-085 | Maximal Rectangle | :star: :star: :star: | :two:
-221 | Maximal Square | :star: :star: | :two: :thinking:
-091 | Decode Ways | :star: :star: | :two:
-121 | Best Time to Buy and Sell Stock | :star: | :two:  `Prefix Sum`
-122 | Best Time to Buy and Sell Stock II | :star: | :two: `Greedy`
-123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | :two: `2 times`
-188 | Best Time to Buy and Sell Stock IV | :star: :star: :star: | :two: :thinking: `N times`
-309 | Best Time to Buy and Sell Stock with Cooldown | :star: :star: | :two:[Stock Problems Solution](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems)
-714 | Best Time to Buy and Sell Stock with Transaction Fee | :star: :star: |:two:
-139 | Word Break | :star: :star: | :two: :thinking: `Bottom Up`
-152 | Maximum Product Subarry | :star: :star: | :two: `Prefix Sum`
-174 | Dungeon Game | :star: :star: :star: | :two:
-198 | House Robber | :star: | :two:
-213 | House Robber II | :star: :star: | :two:
-337 | House Robber III | :star: :star: | :two:
-241 | Different Ways to Add Parentheses | :star: :star: | :two:
-264 | Ugly Number II | :star: :star: | :two:
-292 | Nim Game | :star: | :one:
+064 | Minimum Path Sum | :star: :star: | :three:
+070 | Climbing Stairs | :star: | :three:
+746 | MinCost Climb Stair | :star: | :three:
+085 | Maximal Rectangle | :star: :star: :star: | :three:
+221 | Maximal Square | :star: :star: | :three: :thinking:
+091 | Decode Ways | :star: :star: | :three:
+121 | Best Time to Buy and Sell Stock | :star: | :three:  `Prefix Sum`
+122 | Best Time to Buy and Sell Stock II | :star: | :three: `Greedy`
+123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | :three: `2 times`
+188 | Best Time to Buy and Sell Stock IV | :star: :star: :star: | :three: :thinking: `N times`
+309 | Best Time to Buy and Sell Stock with Cooldown | :star: :star: | :three: [Stock Problems Solution](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems)
+714 | Best Time to Buy and Sell Stock with Transaction Fee | :star: :star: | :three:
+139 | Word Break | :star: :star: | :three: :thinking: `Bottom Up`
+152 | Maximum Product Subarry | :star: :star: | :three: `Prefix Sum`
+174 | Dungeon Game | :star: :star: :star: | :three:
+198 | House Robber | :star: | :three:
+213 | House Robber II | :star: :star: | :three:
+337 | House Robber III | :star: :star: | :three:
+241 | Different Ways to Add Parentheses | :star: :star: | :three:
+264 | Ugly Number II | :star: :star: | :three:
+292 | Nim Game | :star: | :three:
 338 | Counting Bits | :star: :star: | :one: :thinking: `Bit`
-392 | Is Subsequence | :star: :star: | :two:
-509 | Fibonacci Number| :star: | :two:
-514 | Freedom Trail  | :star: :star: :star: | :two:
-523 | Continuous Subarray Sum  | :star: :star: | :two: :thinking: `Prefix Sum` `Map`
+392 | Is Subsequence | :star: :star: | :three:
+509 | Fibonacci Number| :star: | :three:
+514 | Freedom Trail  | :star: :star: :star: | :three:
+523 | Continuous Subarray Sum  | :star: :star: | :three: :thinking: `Prefix Sum` `Map`
 546 | Remove Boxes | :star: :star: :star: | `TODO`
 650 | 2 Keys Keyboard | :star: :star: | :one:
 651 | 4 Keys Keyboard | :star: :star: | :one:
-718 | Maximum Length of Repeated Subarray | :star: :star: | :two:
-787 | Cheapest Flights Within K Stops | :star: :star: | :two:
-1137 | N-th Tribonacci Number | :star: | :two:
-005 | Longest Palindromic Substring | :star: :star: | :two:
-647 | Palindromic Substrings | :star: :star: | :two:
-1312 | Minimum Insertion Steps to Make a String Palindrome | :star: :star: :star: | :two:
+718 | Maximum Length of Repeated Subarray | :star: :star: | :three:
+787 | Cheapest Flights Within K Stops | :star: :star: | :three:
+1137 | N-th Tribonacci Number | :star: | :three:
+005 | Longest Palindromic Substring | :star: :star: | :three:
+647 | Palindromic Substrings | :star: :star: | :three:
+1312 | Minimum Insertion Steps to Make a String Palindrome | :star: :star: :star: | :three:
 1025 | Divisor Game | :star: | :two:
 887 | Super Egg Drop | :star: :star: :star: | :two:
 1884 | Egg Drop With 2 Eggs and N Floors  | :star: :star: | :two:
-931 | Minimum Falling Path Sum | :star: :star: | :two:
-1289 | Minimum Falling Path Sum II | :star: :star: :star: | :two:
-877 | Stone Game | :star: :star: | :two:
+931 | Minimum Falling Path Sum | :star: :star: | :three:
+1289 | Minimum Falling Path Sum II | :star: :star: :star: | :three:
+877 | Stone Game | :star: :star: | :two: :heavy_plus_sign:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ### knapsack
@@ -121,7 +120,7 @@ No | Title | Difficulty | Note
 078 | Subsets  | :star: :star: | :three:
 090 | Subsets II  | :star: :star: | :three:
 079 | Word Search | :star: :star: | :three: `Matrix` `DFS`
-212 | Word Search II | :star: :star: :three: | :two: `Matrix` `DFS`
+212 | Word Search II | :star: :star: | :three: `Matrix` `DFS`
 290 | Word Pattern | :star: | :three:
 291 | Word Pattern II | :star: :star: | :three: :heavy_plus_sign:
 698 | Partition to K Equal Sum Subsets | :star: :star: | :three:
@@ -609,28 +608,29 @@ No | Title | Difficulty | Note
 266 | Palindrome Permutation | :star: | :three:
 267 | Palindrome Permutation II | :star: :star: | :three: `Backtracking`
 205 | Isomorphic Strings | :star: | :three:
-383 | Ransom Note | :star: | :two:
-412 | Fizz Buzz | :star: | :two:
-771 | Jewelsand Stones | :star: | :two:
-811 | Subdomain Visit Count | :star: | :two:
-953 | Verifying an Alien Dictionary  | :star: | :two:
+383 | Ransom Note | :star: | :three:
+412 | Fizz Buzz | :star: | :three:
+771 | Jewels and Stones | :star: | :three:
+811 | Subdomain Visit Count | :star: | :three:
+953 | Verifying an Alien Dictionary  | :star: | :three:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Stack
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-020 | valid Parentheses | :star: | :two:
-032 | Longet Valid Paretheses | :star: :star: :star: | :two: :heavy_plus_sign: `DP`
-225 | Implement Stack using Queues | :star: | :two:
-232 | Implement Queue using Stacks | :star: | :two:
-316 | Remove Duplicate Letters | :star: :star: :star: | :two: :heavy_plus_sign: `Monotonic Stack`
-496 | Next Greater Element I | :star: | :two: `Monotonic Stack`
-503 | Next Greater Element II | :star: :star: | :two: `Monotonic Stack` `Circular`
+020 | valid Parentheses | :star: | :three:
+032 | Longet Valid Parentheses | :star: :star: :star: | :three: :heavy_plus_sign: `DP`
+225 | Implement Stack using Queues | :star: | :three:
+232 | Implement Queue using Stacks | :star: | :three:
+084 | Largest Rectangle in Histogram | :star: :star: :star: | :three: `Monotonic stack`
+316 | Remove Duplicate Letters | :star: :star: :star: | :three: :heavy_plus_sign: `Monotonic Stack`
+496 | Next Greater Element I | :star: | :three: `Monotonic Stack`
+503 | Next Greater Element II | :star: :star: | :three: `Monotonic Stack` `Circular`
 556 | Next Greater Element III | :star: :star: | `TODO` `Monotonic Stack`
-739 | Daily Temperatures | :star: :star: | :two: `Monotonic Stack`
-921 | Minimum Add to Make Parentheses Valid | :star: :star: | :two: :heavy_plus_sign:
-1249 | Minimum Remove to Make Valid Parentheses | :star: :star: | :two: :heavy_plus_sign: `Bit Set`
-1541 | Minimum Insertions to Balance a Parentheses String | :star: :star: | :two: :heavy_plus_sign:
+739 | Daily Temperatures | :star: :star: | :three: `Monotonic Stack`
+921 | Minimum Add to Make Parentheses Valid | :star: :star: | :three: :heavy_plus_sign:
+1249 | Minimum Remove to Make Valid Parentheses | :star: :star: | :three: :heavy_plus_sign: `Bit Set`
+1541 | Minimum Insertions to Balance a Parentheses String | :star: :star: | :three: :heavy_plus_sign:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Queue
@@ -643,35 +643,35 @@ No | Title | Difficulty | Note
 No | Title | Difficulty | Note
 -- | -- | --- | ---
 006 | Zig Zag Conversion | :star: :star: |
-007 | Reverse Integer | :star: | :one:
-009 | Palindrom Number | :star: | :one:
-015 | 3 Sum | :star: :star: | :two:
-016 | 3 Sum Closest | :star: :star: | :two:
-018 | 4 Sum | :star: :star: | :two:
-043 | Multiply Strings | :star: :star: | :one:
+007 | Reverse Integer | :star: | :three:
+009 | Palindrom Number | :star: | :three:
+015 | 3 Sum | :star: :star: | :three:
+016 | 3 Sum Closest | :star: :star: | :three:
+018 | 4 Sum | :star: :star: | :three:
+043 | Multiply Strings | :star: :star: | :three:
 050 | pow-x-n | :star: :star: | `TODO`
 065 | Valid Number | :star: :star: :star: |
-066 | Plus One | :star: | :one:
-067 | Add Binary | :star: | :one:
-069 | Sqrt(x) | :star: | :one:
-168 | Excel Sheet Colum Title | :star: | :one:
-171 | Excel Sheet Colum Number | :star: | :one:
+066 | Plus One | :star: | :three:
+067 | Add Binary | :star: | :three:
+069 | Sqrt(x) | :star: | :three:
+168 | Excel Sheet Colum Title | :star: | :three:
+171 | Excel Sheet Colum Number | :star: | :three:
 172 | Factorial Trailing Zeros | :star: :star: |
 367 | Valid Perfect Square | :star: |
-136 | Single Number | :star: | :two:
+136 | Single Number | :star: | :three:
 137 | Single Number II | :star: :star: | :one: :heavy_plus_sign:
 260 | Single Number III | :star: :star: | :one:
-179 | Largest Number | :star: :star: | :one: `(a+b) > (b+a)`
-190 | Reverse Bits | :star: | :one:
-191 | Numberof 1 Bits | :star: | :one:
+179 | Largest Number | :star: :star: | :three: `(a+b) > (b+a)`
+190 | Reverse Bits | :star: | :three:
+191 | Numberof 1 Bits | :star: | :three:
 202 | Happy Number | :star: |
 204 | Count Primes | :star: |
 224 | Basic Calculator | :star: :star: :star: | `stack`
 227 | Basic Calculator II | :star: :star: |
 772 | Basic Calculator II  | :star: :star: |
 231 | Power Of Two | :star: |
-263 | Ugly Number | :star: | :one:
-268 | Missing Number | :star: | :one:
+263 | Ugly Number | :star: | :three:
+268 | Missing Number | :star: | :three:
 292 | Nim Game | :star: |
 326 | Power of Three | :star: |
 371 | Sum of Two Integers | :star: :star: |
