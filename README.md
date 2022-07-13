@@ -47,6 +47,8 @@
     4. [Authentication & Authorization](#Authentication--Authorization)
     5. [Design Pattern](#Design-Pattern)
 * [Cloud Native](#cloud-native)
+* [Cloud Computing](#cloud-Computing)
+    1. [IO Virtualization](#IO-Virtualization)
 
 * [Thanks](#Thanks)
 
@@ -912,6 +914,39 @@
 
 # Cloud Native
 - [ ] [Architecting Cloud Native .NET Applications for Azure](https://docs.microsoft.com/en-us/dotnet/architecture/cloud-native/)
+
+# Cloud Computing
+
+## IO Virtualization
+- [x] [Introducing virtio-networking: Combining virtualization and networking for modern IT](https://www.redhat.com/en/blog/introducing-virtio-networking-combining-virtualization-and-networking-modern-it)
+- [x] [Introduction to virtio-networking and vhost-net](https://www.redhat.com/en/blog/introduction-virtio-networking-and-vhost-net)
+- [ ] [Deep dive into Virtio-networking and vhost-net](https://www.redhat.com/en/blog/deep-dive-virtio-networking-and-vhost-net)
+- [ ] [Hands on vhost-net: Do. Or do not. There is no try](https://www.redhat.com/en/blog/hands-vhost-net-do-or-do-not-there-no-try)
+
+---
+
+- [ ] [A journey to the vhost-users realm](https://www.redhat.com/en/blog/journey-vhost-users-realm)
+- [ ] [How vhost-user came into being: Virtio-networking and DPDK](https://www.redhat.com/en/blog/how-vhost-user-came-being-virtio-networking-and-dpdk)
+- [ ] [Hands on vhost-user: A warm welcome to DPDK](https://www.redhat.com/en/blog/hands-vhost-user-warm-welcome-dpdk)
+- [ ] [Virtqueues and virtio ring: How the data travels](https://www.redhat.com/en/blog/virtqueues-and-virtio-ring-how-data-travels)
+- [ ] [Packed virtqueue: How to reduce overhead with virtio](https://www.redhat.com/en/blog/packed-virtqueue-how-reduce-overhead-virtio)
+
+---
+
+- [x] [Achieving network wirespeed in an open standard manner: introducing vDPA](https://www.redhat.com/en/blog/achieving-network-wirespeed-open-standard-manner-introducing-vdpa)
+- [ ] [How deep does the vDPA rabbit hole go?](https://www.redhat.com/en/blog/how-deep-does-vdpa-rabbit-hole-go)
+- [x] [Introduction to vDPA kernel framework](https://www.redhat.com/en/blog/introduction-vdpa-kernel-framework)
+- [ ] [vDPA kernel framework part 1: vDPA bus for abstracting hardware](https://www.redhat.com/en/blog/vdpa-kernel-framework-part-1-vdpa-bus-abstracting-hardware)
+- [ ] [vDPA kernel framework part 2: vDPA bus drivers for kernel subsystem interactions](https://www.redhat.com/en/blog/vdpa-kernel-framework-part-2-vdpa-bus-drivers-kernel-subsystem-interactions)
+- [ ] [https://www.redhat.com/en/blog/hyperscale-virtiovdpa-introduction-one-control-plane-rule-them-all](https://www.redhat.com/en/blog/hyperscale-virtiovdpa-introduction-one-control-plane-rule-them-all)
+- [ ] [Hardening Virtio for emerging security usecases](https://www.redhat.com/en/blog/hardening-virtio-emerging-security-usecases)
+
+## Edge Computing
+- [ ] [What is edge computing?](https://www.redhat.com/en/topics/edge-computing/what-is-edge-computing)
+- [ ] [Red Hat's edge computing approach](https://www.redhat.com/en/topics/edge-computing/approach)
+- [ ] [The latest news and announcements on edge computing](https://www.redhat.com/en/blog/red-hat-edge-stories)
+- [ ] [Evaluate your edge capabilities](https://www.redhat.com/en/about/contact/edge-offering)
+
 
 # Thanks
 This roadmap is highly inspired by course: https://time.geekbang.org/column/intro/48. Thanks [Hao Chen](https://github.com/haoel).
