@@ -48,9 +48,10 @@ public:
         });
 
         for (const auto& w : words) {
-            for (int i = 0; i < w.size(); ++i) {
+            for (auto i = 0; i < w.size(); ++i) {
                 auto pred = w.substr(0, i) + w.substr(i+1);
-                auto predLen = dp.find(pred) == dp.end() ? 1 : dp[pred] + 1;
+                auto ite = dp.find(pred);
+                auto predLen = ite != dp.end() ? ite->second + 1 : 1;
                 dp[w] = max(dp[w], predLen);
             }
             maxLen = max(dp[w], maxLen);
