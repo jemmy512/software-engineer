@@ -78,13 +78,12 @@ private:
 
         for (auto i = 0; i < ColSize; ++i) {
             if (i != col) {
-                minElem = min(minElem, matrix[row][col] + dp(matrix, row-1, i));
+                minElem = min(minElem, dp(matrix, row-1, i));
             }
         }
 
-        Memo[row][col] = minElem;
+        return Memo[row][col] = minElem + matrix[row][col];
 
-        return minElem;
     }
 
 private:
