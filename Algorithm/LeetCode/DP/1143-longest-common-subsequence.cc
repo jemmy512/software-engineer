@@ -104,16 +104,40 @@ public:
         // the lcs of strA[0, i] and strB[0, j] is dp[i][j]
         vector<vector<int>> dp(lenA+1, vector(lenB+1, 0));
 
-        for (int i = 1; i <= lenA; i++) {
-            for (int j = 1; j <= lenB; j++) {
-                if (strA[i-1] == strB[j-1]) {
-                    dp[i][j] = 1 + dp[i-1][j-1];
-                } else {
-                    dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
-                }
+        for (auto i = 1; i <= lenA; ++i) {
+            for (auto j = 1; j <= lenB; ++j) {
+                dp[i][j] = (strA[i-1] == strB[j-1])
+                    ? 1 + dp[i-1][j-1]
+                    : max(dp[i-1][j], dp[i][j-1]);
             }
         }
 
         return dp[lenA][lenB];
     }
+};
+
+class Solution {
+public:
+    int longestCommonSubsequence(string strA, string strB) {
+        int lenA = strA.length();
+        int lenB = strB.length();
+        // the lcs of strA[i...] and strB[j...] is Memo[i][j]
+        Memo = vector(lenA+1, vector(lenB+1, -1));
+
+        return dp(strA, 0, strB, 0);
+    }
+
+    int dp(const string& strA, int i, const string& strB, int j) {
+        if (i == strA.size() || j == strB.size())
+            return 0;
+
+        if (Memo[i][j] != -1)
+            return Memo[i][j];
+
+        return Memo[i][j] = (strA[i] == strB[j])
+            ? 1 + dp(strA, i + 1, strB, j + 1)
+            : max(dp(strA, i+1, strB, j), dp(strA, i, strB, j+1));
+    }
+
+    vector<vector<int>> Memo;
 };
