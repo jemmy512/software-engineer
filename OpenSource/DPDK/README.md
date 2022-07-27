@@ -6,6 +6,7 @@
     * [rte_eal_malloc_heap_init](#rte_eal_malloc_heap_init)
     * [rte_eal_intr_init](#rte_eal_intr_init)
         * [rte_intr_callback_register](#rte_intr_callback_register)
+        * [rte_eth_dev_rx_intr_ctl_q](#rte_eth_dev_rx_intr_ctl_q)
     * [rte_eal_alarm_init](#rte_eal_alarm_init)
     * [rte_eal_pci_init](#rte_eal_pci_init)
     * [rte_bus_scan](#rte_bus_scan)
@@ -277,6 +278,9 @@ rte_eal_malloc_heap_init()
 ```
 
 ## rte_eal_intr_init
+
+http://blog.chinaunix.net/uid-28541347-id-5784092.html
+
 ```c++
 struct rte_intr_source {
     TAILQ_ENTRY(rte_intr_source) next;
@@ -323,6 +327,7 @@ struct rte_epoll_data {
 };
 ```
 
+### eal_intr_thread_main
 ```c++
 TAILQ_INIT(&intr_sources)
 pipe(intr_pipe.pipefd)
@@ -338,8 +343,7 @@ eal_intr_thread_main()
 
         int pfd = epoll_create(1);
         pipe_event.data.fd = intr_pipe.readfd;
-        /* add pipe fd into wait list, this pipe is used to
-         * rebuild the wait list. */
+        /* add pipe fd into wait list, this pipe is used to rebuild the wait list. */
         epoll_ctl(pfd, EPOLL_CTL_ADD, intr_pipe.readfd, &pipe_event)
 
         TAILQ_FOREACH(src, &intr_sources, next) {
@@ -413,12 +417,81 @@ eal_intr_thread_main()
                     return;
             }
         }
+
         close(pfd);
     }
 ```
 
-### rte_intr_callback_register
+### register rte_intr_source
 ```c++
+int eth_vhost_install_intr(struct rte_eth_dev *dev)
+{
+    struct rte_vhost_vring vring;
+    struct vhost_queue *vq;
+    int count = 0;
+    int nb_rxq = dev->data->nb_rx_queues;
+    int i;
+    int ret;
+
+    /* uninstall firstly if we are reconnecting */
+    if (dev->intr_handle)
+        eth_vhost_uninstall_intr(dev);
+
+    dev->intr_handle = malloc(sizeof(*dev->intr_handle));
+    memset(dev->intr_handle, 0, sizeof(*dev->intr_handle));
+
+    dev->intr_handle->efd_counter_size = sizeof(uint64_t);
+
+    dev->intr_handle->intr_vec = malloc(nb_rxq * sizeof(dev->intr_handle->intr_vec[0]));
+
+    for (i = 0; i < nb_rxq; i++) {
+        vq = dev->data->rx_queues[i];
+        if (!vq) {
+            VHOST_LOG(INFO, "rxq-%d not setup yet, skip!\n", i);
+            continue;
+        }
+
+        ret = rte_vhost_get_vhost_vring(vq->vid, (i << 1) + 1, &vring);
+        if (ret < 0) {
+            VHOST_LOG(INFO,
+                "Failed to get rxq-%d's vring, skip!\n", i);
+            continue;
+        }
+
+        if (vring.kickfd < 0) {
+            VHOST_LOG(INFO,
+                "rxq-%d's kickfd is invalid, skip!\n", i);
+            continue;
+        }
+        dev->intr_handle->intr_vec[i] = RTE_INTR_VEC_RXTX_OFFSET + i;
+        dev->intr_handle->efds[i] = vring.kickfd;
+        count++;
+    }
+
+    dev->intr_handle->nb_efd = count;
+    dev->intr_handle->max_intr = count + 1;
+    dev->intr_handle->type = RTE_INTR_HANDLE_VDEV;
+
+    return 0;
+}
+```
+
+### register ctrl callback
+```c++
+static struct rte_pci_driver rte_ixgbevf_pmd = {
+    .id_table = pci_id_ixgbevf_map,
+    .drv_flags = RTE_PCI_DRV_NEED_MAPPING,
+    .probe = eth_ixgbevf_pci_probe,
+    .remove = eth_ixgbevf_pci_remove,
+};
+
+int eth_ixgbevf_pci_probe(struct rte_pci_driver *pci_drv __rte_unused,
+    struct rte_pci_device *pci_dev)
+{
+    return rte_eth_dev_pci_generic_probe(pci_dev,
+        sizeof(struct ixgbe_adapter), eth_ixgbevf_dev_init);
+}
+
 fd = eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC);
 
 dev->vfio_req_intr_handle.fd = fd;
@@ -441,23 +514,47 @@ ret = rte_intr_callback_register(intr_handle, cb, cb_arg);
     write(intr_pipe.writefd, "1", 1)
 ```
 
-### rte_eth_dev_rx_intr_ctl_q
+### register data callback
 ```c++
+static int event_register(struct lcore_conf *qconf)
+{
+    struct lcore_rx_queue *rx_queue;
+    uint8_t portid, queueid;
+    uint32_t data;
+    int ret;
+    int i;
+
+    /* register callback for each queue indexed at id */
+    for (i = 0; i < qconf->n_rx_queue; ++i) {
+        rx_queue = &(qconf->rx_queue_list[i]);
+        portid = rx_queue->port_id;
+        queueid = rx_queue->queue_id;
+        data = portid << CHAR_BIT | queueid;
+
+        ret = rte_eth_dev_rx_intr_ctl_q(portid, queueid,
+            RTE_EPOLL_PER_THREAD, RTE_INTR_EVENT_ADD, (void *)((uintptr_t)data)
+        );
+    }
+
+    return 0;
+}
+
 rte_eth_dev_rx_intr_ctl_q(uint16_t port_id, uint16_t queue_id, int epfd, int op, void *data)
     dev = &rte_eth_devices[port_id];
     intr_handle = dev->intr_handle;
     vec = intr_handle->intr_vec[queue_id];
+
     rte_intr_rx_ctl(intr_handle, epfd, op, vec, data);
         switch (op) {
-	    case RTE_INTR_EVENT_ADD:
+        case RTE_INTR_EVENT_ADD:
             epfd_op = EPOLL_CTL_ADD;
             epdata = &rev->epdata;
             epdata->event  = EPOLLIN | EPOLLPRI | EPOLLET;
             epdata->data   = data;
             epdata->cb_fun = (rte_intr_event_cb_t)eal_intr_proc_rxtx_intr;
             epdata->cb_arg = (void *)intr_handle;
-            rc = rte_epoll_ctl(epfd, epfd_op,
-                    intr_handle->efds[efd_idx], rev);
+
+            rc = rte_epoll_ctl(epfd, epfd_op, intr_handle->efds[efd_idx], rev);
                 if (epfd == RTE_EPOLL_PER_THREAD)
                     epfd = rte_intr_tls_epfd();
                 if (op == EPOLL_CTL_ADD) {
@@ -467,17 +564,39 @@ rte_eth_dev_rx_intr_ctl_q(uint16_t port_id, uint16_t queue_id, int epfd, int op,
                     ev.data.ptr = (void *)event;
                 }
                 ev.events = event->epdata.event;
-	            epoll_ctl(epfd, op, fd, &ev);
+                epoll_ctl(epfd, op, fd, &ev);
         }
 
+rte_event_eth_rx_adapter_queue_add()
+    rxa_sw_add()
+        rxa_add_intr_queue()
+            rxa_config_intr()
+                rxa_create_intr_thread(rx_adapter)
+                    rx_adapter->intr_ring = rte_ring_create();
+                    rx_adapter->epoll_events = rte_zmalloc_socket();
+                    rte_ctrl_thread_create(&rx_adapter->rx_intr_thread, thread_name, NULL, rxa_intr_thread, rx_adapter);
 
-rte_epoll_wait()
+                    rxa_intr_thread(void *arg)
+                        struct rte_event_eth_rx_adapter *rx_adapter = arg;
+                        struct rte_epoll_event *epoll_events = rx_adapter->epoll_events;
+                        int n, i;
+
+                        while (1) {
+                            n = rte_epoll_wait(rx_adapter->epd, epoll_events, RTE_EVENT_ETH_INTR_RING_SIZE, -1);
+
+                            for (i = 0; i < n; i++) {
+                                rxa_intr_ring_enqueue(rx_adapter, epoll_events[i].epdata.data);
+                            }
+                        }
+
+rte_epoll_wait(int epfd, struct rte_epoll_event *events, int maxevents, int timeout)
+    struct epoll_event evs[maxevents];
     while (1) {
-		rc = epoll_wait(epfd, evs, maxevents, timeout);
-		if (likely(rc > 0)) {
-			rc = eal_epoll_process_event(evs, rc, events);
+        rc = epoll_wait(epfd, evs, maxevents, timeout);
+        if (likely(rc > 0)) {
+            rc = eal_epoll_process_event(evs, rc, events);
                 for (i = 0; i < n; i++) {
-		            rev = evs[i].data.ptr;
+                    struct rte_epoll_event *rev = evs[i].data.ptr;
                     events[count].status        = RTE_EPOLL_VALID;
                     events[count].fd            = rev->fd;
                     events[count].epfd          = rev->epfd;
@@ -497,8 +616,8 @@ rte_epoll_wait()
                                     nbytes = read(fd, &buf, bytes_read);
                                 } while (1);
                 }
-		}
-	}
+        }
+    }
 ```
 
 ## rte_eal_alarm_init
@@ -541,7 +660,7 @@ TAILQ_FOREACH(bus, &rte_bus_list, next) {
                 pci_scan_one(dirname, &addr);
                     struct rte_pci_device *dev = malloc(sizeof(*dev))
                     dev->device.bus = &rte_pci_bus.bus;
-	                dev->addr = *addr;
+                    dev->addr = *addr;
                     dev->id.device_id = (uint16_t)tmp;
                     dev->device.numa_node = tmp;
                     dev->id.class_id = (uint32_t)tmp & RTE_CLASS_ANY_ID;
@@ -591,7 +710,7 @@ TAILQ_FOREACH(bus, &rte_bus_list, next)
                                     rte_eth_dev_probing_finish()
                                         _rte_eth_dev_callback_process(dev, RTE_ETH_EVENT_NEW, NULL)
                                             struct rte_eth_dev_callback *cb_lst;
-	                                        struct rte_eth_dev_callback dev_cb;
+                                            struct rte_eth_dev_callback dev_cb;
                                             TAILQ_FOREACH(cb_lst, &(dev->link_intr_cbs), next) {
                                                 dev_cb = *cb_lst;
                                                 rc = dev_cb.cb_fn(dev->data->port_id, dev_cb.event,
@@ -1287,4 +1406,149 @@ rte_eth_tx_burst(uint16_t port_id, uint16_t queue_id, struct rte_mbuf **tx_pkts,
 
             IXGBE_PCI_REG_WRITE_RELAXED(txq->tdt_reg_addr, tx_id);
             txq->tx_tail = tx_id;
+```
+
+![](../Image/DPDK/vhost-net-virtio-net-ovs.png)
+The vhost-net/virtio-net architecture provides a working solution which has been widely deployed over the years.
+1. On the one hand the solution is very convenient for a user developing an application running on a VM given that it uses standard Linux sockets to connect to the network (through the host).
+2. On the other hand, the solution is not optimal and contains a number of performance overheads, e.g, context switching and interrupt processing overhead, which will be described later on.
+
+![](../Image/DPDK/vhost-user-virtio-user-ovs.png)
+
+# virtio-user
+
+![](../Image/DPDK/virtio-vhost.png)
+
+* [Redhat: Introducing virtio-networking: Combining virtualization and networking for modern IT](https://www.redhat.com/en/blog/introducing-virtio-networking-combining-virtualization-and-networking-modern-it)
+* [Redhat: Introduction to virtio-networking and vhost-net](https://www.redhat.com/en/blog/introduction-virtio-networking-and-vhost-net)
+* [Redhat: Deep dive into Virtio-networking and vhost-net](https://www.redhat.com/en/blog/deep-dive-virtio-networking-and-vhost-net)
+* [Hands on vhost-net: Do. Or do not. There is no try](https://www.redhat.com/en/blog/hands-vhost-net-do-or-do-not-there-no-try)
+* [Redhat: How vhost-user came into being: Virtio-networking and DPDK](https://www.redhat.com/en/blog/how-vhost-user-came-being-virtio-networking-and-dpdk)
+
+```c++
+static struct rte_pci_driver rte_virtio_pmd = {
+    .driver = {
+        .name = "net_virtio",
+    },
+    .id_table = pci_id_virtio_map,
+    .drv_flags = 0,
+    .probe = eth_virtio_pci_probe,
+    .remove = eth_virtio_pci_remove,
+};
+
+RTE_INIT(rte_virtio_pmd_init)
+{
+    rte_eal_iopl_init();
+    rte_pci_register(&rte_virtio_pmd);
+}
+
+/* VirtIO PCI vendor/device ID. */
+#define VIRTIO_PCI_VENDORID     0x1AF4
+#define VIRTIO_PCI_LEGACY_DEVICEID_NET 0x1000
+#define VIRTIO_PCI_MODERN_DEVICEID_NET 0x1041
+
+static const struct rte_pci_id pci_id_virtio_map[] = {
+	{ RTE_PCI_DEVICE(VIRTIO_PCI_VENDORID, VIRTIO_PCI_LEGACY_DEVICEID_NET) },
+	{ RTE_PCI_DEVICE(VIRTIO_PCI_VENDORID, VIRTIO_PCI_MODERN_DEVICEID_NET) },
+	{ .vendor_id = 0, /* sentinel */ },
+};
+
+eth_virtio_pci_probe()
+    eth_dev = rte_eth_dev_pci_allocate(pci_dev, sizeof(struct virtio_hw), eth_virtio_dev_init)
+
+    eth_virtio_dev_init(eth_dev)
+        eth_dev->dev_ops = &virtio_eth_dev_ops;
+        eth_dev->data->mac_addrs = rte_zmalloc()
+        hw->port_id = eth_dev->data->port_id;
+        if (!hw->virtio_user_dev)
+		    ret = vtpci_init()
+                if (virtio_read_caps(dev, hw) == 0)
+                    virtio_hw_internal[hw->port_id].vtpci_ops = &modern_ops;
+                    hw->modern = 1;
+        return 0;
+
+        virtio_init_device()
+
+
+    rte_eth_dev_probing_finish()
+        _rte_eth_dev_callback_process(dev, RTE_ETH_EVENT_NEW, NULL);
+        dev->state = RTE_ETH_DEV_ATTACHED;
+
+```
+
+```c++
+static struct rte_bus rte_vdev_bus = {
+    .scan           = vdev_scan,
+    .probe          = vdev_probe,
+    .find_device    = rte_vdev_find_device,
+    .plug           = vdev_plug,
+    .unplug         = vdev_unplug,
+    .parse          = vdev_parse,
+    .dev_iterate    = rte_vdev_dev_iterate,
+};
+
+rte_bus_register(&rte_vdev_bus);
+
+rte_bus_probe()
+    struct rte_bus *bus, *vbus = NULL;
+    TAILQ_FOREACH(bus, &rte_bus_list, next)
+        bus->probe();
+            vdev_probe()
+                TAILQ_FOREACH(dev, &vdev_device_list, next)
+                    vdev_probe_all_drivers(dev)
+                        driver->probe(dev)
+
+static struct rte_vdev_driver virtio_user_driver = {
+    .probe = virtio_user_pmd_probe,
+    .remove = virtio_user_pmd_remove,
+};
+
+RTE_PMD_REGISTER_VDEV(net_virtio_user, virtio_user_driver);
+
+virtio_user_pmd_probe()
+    rte_kvargs_parse(rte_vdev_device_args(dev), valid_args);
+
+    eth_dev = virtio_user_eth_dev_alloc(dev);
+
+    struct virtio_hw *hw = eth_dev->data->dev_private;
+    virtio_user_dev_init(hw->virtio_user_dev, path, queues, cq, queue_size, mac_addr, &ifname, server_mode, mrg_rx  buf, in_order, packed_vq);
+        virtio_user_dev_setup()
+            if (dev->is_server)
+                dev->ops = &virtio_ops_user;
+            else
+                dev->ops = &virtio_ops_kernel;
+                dev->vhostfds = malloc(dev->max_queue_pairs * sizeof(int));
+                dev->tapfds = malloc(dev->max_queue_pairs * sizeof(int));
+                for (q = 0; q < dev->max_queue_pairs; ++q) {
+                    dev->vhostfds[q] = -1;
+                    dev->tapfds[q] = -1;
+                }
+
+            dev->ops->setup(dev)
+                vhost_kernel_setup()
+                    for (i = 0; i < dev->max_queue_pairs; ++i) {
+                        vhostfd = open(dev->path, O_RDWR);
+                        dev->vhostfds[i] = vhostfd;
+                    }
+
+                vhost_user_setup()
+                    fd = socket(AF_UNIX, SOCK_STREAM, 0);
+                    if (dev->is_server) {
+                        dev->listenfd = fd;
+                        virtio_user_start_server(dev, &un);
+                    } else {
+                        connect(fd, (struct sockaddr *)&un, sizeof(un));
+                        dev->vhostfd = fd;
+                    }
+
+        virtio_user_fill_intr_handle()
+
+    eth_virtio_dev_init(eth_dev);
+        virtio_init_device()
+            vtpci_set_status(hw, VIRTIO_CONFIG_STATUS_ACK)
+            virtio_alloc_queues(eth_dev);
+            virtio_configure_intr()
+            vtpci_reinit_complete(hw);
+
+    rte_eth_dev_probing_finish(eth_dev);
 ```
