@@ -97,6 +97,7 @@
 - [ ] [The Secret To 10 Million Concurrent Connections - The Kernel Is The Problem, Not The Solution](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
 - [ ] [Congestion Avoidance and Control.pdf](https://ee.lbl.gov/papers/congavoid.pdf)
 - [ ] [Nginx HTTP/2](https://www.nginx.com/wp-content/uploads/2015/09/NGINX_HTTP2_White_Paper_v4.pdf)
+- [ ] [Coping with the TCP TIME-WAIT state on busy Linux servers](https://vincent.bernat.ch/en/blog/2014-tcp-time-wait-state-linux)
 
 * HTTP
     - [ ] RFC 7230 - Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing
