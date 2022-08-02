@@ -24,6 +24,48 @@
 * [Boost.Asio](../Boost/README.md)
 
 
+Demo
+```c++
+#include <cpprest/http_client.h>
+#include <cpprest/filestream.h>
+
+using namespace utility;
+using namespace web;
+using namespace web::http;
+using namespace web::http::client;
+using namespace concurrency::streams;
+
+int main(int argc, char* argv[])
+{
+    auto fileStream = std::make_shared<ostream>();
+
+    pplx::task<void> requestTask = fstream::open_ostream(U("results.html"))
+    .then([=](ostream outFile) {
+        *fileStream = outFile;
+
+        http_client client(U("http://www.bing.com/"));
+
+        uri_builder builder(U("/search"));
+        builder.append_query(U("q"), U("cpprestsdk github"));
+        return client.request(methods::GET, builder.to_string());
+    })
+    .then([=](http_response response) {
+        return response.body().read_to_end(fileStream->streambuf());
+    })
+    .then([=](size_t) {
+        return fileStream->close();
+    });
+
+    try {
+        requestTask.wait();
+    } catch (const std::exception &e) {
+        printf("Error exception:%s\n", e.what());
+    }
+
+    return 0;
+}
+```
+
 # PPLX
 
 PPLX is a special version of PPL for non-winodws platform.
@@ -634,6 +676,7 @@ _PTaskHandle->invoke()
                             return _func(std::forward<_Arg>(_value))
                         };
                     )
+                        _M_Result.Set(_Result);
                         _TaskCollectionImpl::_Complete()
                             condition_variable.notify_all()
                         _Task_impl_base::_RunTaskContinuations()
@@ -657,6 +700,7 @@ _PTaskHandle->invoke()
                             _M_ancestorTaskImpl->_GetResult()
                         );
                     )
+                        _M_Result.Set(_Result);
                         _TaskCollectionImpl::_Complete()
                             condition_variable.notify_all()
                         _Task_impl_base::_RunTaskContinuations()
@@ -686,42 +730,42 @@ task_completion_event::set(_Result)
   // while loops all tasks
   _Task_impl_base::_FinalizeAndRunContinuations(_M_Impl->_M_value.Get());
     _M_Result.Set(_Result);
-        _TaskCollectionImpl::_Complete()
-            condition_variable.notify_all()
-        // while loops all continuations
-        _Task_impl_base::_RunTaskContinuations()
-            _ContinuationList _Cur = _M_Continuations, _Next;
-            _M_Continuations = nullptr;
-            while (_Cur) {
-                _Next = _Cur->_M_next;
-                _RunContinuation(_Cur);
-                _Cur = _Next;
-            }
-            _Task_impl_base::_RunContinuation(_PTaskHandle)
-                _Task_ptr_base _ImplBase = _PTaskHandle->_GetTaskImplBase()
-                _ImplBase->_ScheduleContinuationTask()
-                _Task_impl_base::_ScheduleContinuationTask() // _ContinuationTaskHandleBase * _PTaskHandle
-                    if (_HasCapturedContext)
-                        _ScheduleFuncWithAutoInline(const std::function<void ()> & _Func, _InliningMode)
-                            _TaskCollectionImpl::_RunTask(&_TaskProcThunk::_Bridge, new _TaskProcThunk(_Func), _InliningMode);
-                                if (__ForceInline)
-                                    _TaskProcThunk::_Bridge(_ThunkFunc);
-                                        _ThunkFunc->_M_func()
-                    --->                    _Func = []() {
-                                                if (_M_continuationContext == _ContextCallback::_CaptureCurrent)
-                                                    _Task_impl_base::_ScheduleTask()
-                                                        --->
-                                                else
-                                                    task_continuation_context::_CallInContext()
-                                            }
-                                else // not _ForceInline
-                                    linux_scheduler::schedule(_Bridge, _ThunkFunc)
-                                        crossplat::threadpool::shared_instance().schedule(boost::bind(proc, param))
-                                            threadpoll::schedule(T task)
-                                                boost::asio::io_service(task)
-                    else // no _HasCapturedContext
-                        _Task_impl_base::_ScheduleTask(_PTaskHandle)
-                            --->
+    _TaskCollectionImpl::_Complete()
+        condition_variable.notify_all()
+    // while loops all continuations
+    _Task_impl_base::_RunTaskContinuations()
+        _ContinuationList _Cur = _M_Continuations, _Next;
+        _M_Continuations = nullptr;
+        while (_Cur) {
+            _Next = _Cur->_M_next;
+            _RunContinuation(_Cur);
+            _Cur = _Next;
+        }
+        _Task_impl_base::_RunContinuation(_PTaskHandle)
+            _Task_ptr_base _ImplBase = _PTaskHandle->_GetTaskImplBase()
+            _ImplBase->_ScheduleContinuationTask()
+            _Task_impl_base::_ScheduleContinuationTask() // _ContinuationTaskHandleBase * _PTaskHandle
+                if (_HasCapturedContext)
+                    _ScheduleFuncWithAutoInline(const std::function<void ()> & _Func, _InliningMode)
+                        _TaskCollectionImpl::_RunTask(&_TaskProcThunk::_Bridge, new _TaskProcThunk(_Func), _InliningMode);
+                            if (__ForceInline)
+                                _TaskProcThunk::_Bridge(_ThunkFunc);
+                                    _ThunkFunc->_M_func()
+                --->                    _Func = []() {
+                                            if (_M_continuationContext == _ContextCallback::_CaptureCurrent)
+                                                _Task_impl_base::_ScheduleTask()
+                                                    --->
+                                            else
+                                                task_continuation_context::_CallInContext()
+                                        }
+                            else // not _ForceInline
+                                linux_scheduler::schedule(_Bridge, _ThunkFunc)
+                                    crossplat::threadpool::shared_instance().schedule(boost::bind(proc, param))
+                                        threadpoll::schedule(T task)
+                                            boost::asio::io_service(task)
+                else // no _HasCapturedContext
+                    _Task_impl_base::_ScheduleTask(_PTaskHandle)
+                        --->
 ```
 
 # CppRest
@@ -775,6 +819,7 @@ pplx::task<http_response> http_client::request()
                 _http_client_communicator::open_and_send_request()  // 2. don't gurantee order
                     _http_client_communicator::open_if_required()
                     asio_client::send_request()
+                        client_config().invoke_nativehandle_options(&(ctx->m_connection->m_socket))
                         asio_context::start_request()
                             ssl_proxy_tunnel::start_proxy_connect()  // if it's ssl and not connected
                                 ssl_proxy_tunnel::write_connect()
@@ -855,11 +900,11 @@ asio_context::handle_write_headers() // request header has sent, then send reque
                                     task_completion_event<http_response>::set(m_response)
                                         _Task_impl_base::_FinalizeAndRunContinuations(m_response); // while loops all tasks
                                             _M_Result.Set(m_response);
-                                                _TaskCollectionImpl::_Complete()
+                                            _TaskCollectionImpl::_Complete()
 // [notify 2-1] clients which are blocked at task<http_reponse>::wait/get()
-                                                    condition_variable.notify_all()
-                                                _Task_impl_base::_RunTaskContinuations() // while loops all continuations
-                                                    --->
+                                                condition_variable.notify_all()
+                                            _Task_impl_base::_RunTaskContinuations() // while loops all continuations
+                                                --->
                             if (!needChunked)
                                 asio_context::async_read_until_buffersize(asio_context::m_body_buf, Content-Length, asio_context::handle_read_content)
                             --->asio_context::handle_read_content()
@@ -871,7 +916,7 @@ asio_context::handle_write_headers() // request header has sent, then send reque
                                         writeBuffer.putn_nocopy(m_body_buf.data(), m_body_buf.size(), m_content_length - m_downloaded)
 
                                         asio_context::async_read_until_buffersize()
-                                            boost::asio::async_read(m_socket, buffer, readCondition, asio_context::handle_read_content();
+                                            boost::asio::async_read(m_socket, buffer, readCondition, asio_context::handle_read_content())
                                     else
 // [complete 2-2] complete_request
                                         request_context::complete_request(request_context::m_downloaded)
@@ -881,11 +926,11 @@ asio_context::handle_write_headers() // request header has sent, then send reque
                                                         task_completion_event<size64_t>::set(body_size)
                                                             _Task_impl_base::_FinalizeAndRunContinuations(body_size); // while loops all tasks
                                                                 _M_Result.Set(body_size);
-                                                                    _TaskCollectionImpl::_Complete()
+                                                                _TaskCollectionImpl::_Complete()
 // [notify 2-2] clients which are blocked at reponse.extract_string()
-                                                                        condition_variable.notify_all()
-                                                                    _Task_impl_base::_RunTaskContinuations() // while loops all continuations
-                                                                        --->
+                                                                    condition_variable.notify_all()
+                                                                _Task_impl_base::_RunTaskContinuations() // while loops all continuations
+                                                                    --->
                                             request_context::finish()
                                                 m_http_client->finish_request()
                                                 _http_client_communicator::finish_request()
@@ -974,7 +1019,7 @@ http_listener::open()
                                 epoll_reactor::register_descriptor()
                                     allocate_descriptor_state()
                                     epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, descriptor, &ev);
-                            // set reuse address
+                            reactive_socket_service::set_option(socket_base::reuse_address)
                             reactive_socket_service::bind()
                             reactive_socket_service::listen()
                     auto socket = new ip::tcp::socket(service);
@@ -1006,7 +1051,7 @@ hostport_listener::on_accept()
 ```C++
     connection::connection()
         connection::start_request_response()
-            boost::asio::async_read_until() // crlfcrlf_nonascii_searcher
+            boost::asio::async_read_until() // "\r\n\r\n"
                 ---> Boost.Asio
                 connection::handle_http_line()
                     m_request = http_request::_create_request(new linux_request_context())
