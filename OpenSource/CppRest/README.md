@@ -24,47 +24,109 @@
 * [Boost.Asio](../Boost/README.md)
 
 
+The [C++ REST SDK](https://github.com/microsoft/cpprestsdk) is a Microsoft project for cloud-based client-server communication in native code using a modern asynchronous C++ API design. This project aims to help C++ developers connect to and interact with services.
+
+Features:
+* [Programming with Tasks](https://github.com/microsoft/cpprestsdk/wiki/Programming-with-Tasks)
+* [JSON](https://github.com/microsoft/cpprestsdk/wiki/JSON)
+* Asynchronous Stream
+* URIs
+* [HTTP Client](https://github.com/microsoft/cpprestsdk/wiki/HTTP-Client)
+* HTTP Listener
+* [Websocket Client](https://github.com/microsoft/cpprestsdk/wiki/Web-Socket)
+* OAuth Client
+
+C++ Rest consists of three components:
+* [PPL](#PPLX)
+* [C++ Rest](#CppRest)
+* [Boost Asio](#BoostAsio)
+
 Demo
-```c++
-#include <cpprest/http_client.h>
-#include <cpprest/filestream.h>
-
-using namespace utility;
-using namespace web;
-using namespace web::http;
-using namespace web::http::client;
-using namespace concurrency::streams;
-
-int main(int argc, char* argv[])
-{
-    auto fileStream = std::make_shared<ostream>();
-
-    pplx::task<void> requestTask = fstream::open_ostream(U("results.html"))
-    .then([=](ostream outFile) {
-        *fileStream = outFile;
-
-        http_client client(U("http://www.bing.com/"));
-
-        uri_builder builder(U("/search"));
-        builder.append_query(U("q"), U("cpprestsdk github"));
-        return client.request(methods::GET, builder.to_string());
-    })
-    .then([=](http_response response) {
-        return response.body().read_to_end(fileStream->streambuf());
-    })
-    .then([=](size_t) {
-        return fileStream->close();
-    });
-
-    try {
-        requestTask.wait();
-    } catch (const std::exception &e) {
-        printf("Error exception:%s\n", e.what());
+* Client
+    ```c++
+    #include <cpprest/http_client.h>
+    #include <cpprest/filestream.h>
+    
+    using namespace utility;
+    using namespace web;
+    using namespace web::http;
+    using namespace web::http::client;
+    using namespace concurrency::streams;
+    
+    int main(int argc, char* argv[])
+    {
+        auto fileStream = std::make_shared<ostream>();
+    
+        pplx::task<void> requestTask = fstream::open_ostream(U("results.html"))
+        .then([=](ostream outFile) {
+            *fileStream = outFile;
+    
+            http_client client(U("http://www.bing.com/"));
+    
+            uri_builder builder(U("/search"));
+            builder.append_query(U("q"), U("cpprestsdk github"));
+            return client.request(methods::GET, builder.to_string());
+        })
+        .then([=](http_response response) {
+            return response.body().read_to_end(fileStream->streambuf());
+        })
+        .then([=](size_t) {
+            return fileStream->close();
+        });
+    
+        try {
+            requestTask.wait();
+        } catch (const std::exception &e) {
+            printf("Error exception:%s\n", e.what());
+        }
+    
+        return 0;
     }
+    ```
 
-    return 0;
-}
-```
+* Server
+    ```c++
+    class HttpServer {
+    public:
+        void start() {
+            http_listener_config config;
+            config.set_timeout(utility::seconds(15));
+    
+            mListener = std::make_shared<http_listener>("http://0.0.0.0:8000/", config);
+            mListener->support(methods::GET, std::bind(&HttpServer::handle_get, this, std::placeholders::_1));
+            mListener->support(methods::POST, std::bind(&HttpServer::handle_post, this, std::placeholders::_1));
+    
+            try {
+                mListener->open().wait();
+            } catch (std::exception const& ex) {
+    
+            }
+        }
+    
+        void stop() {
+            mListener->close();
+        }
+    
+    private:
+        void handle_post(http_request request) {
+            json::value payload;
+            payload["Name"] = json::value::string("Jemmy");
+            request.reply(status_codes::OK, payload);
+        }
+    
+        void handle_get(http_request request) {
+    
+        }
+    
+    private:
+        std::make_shared<http_listener> mListener;
+    };
+    
+    int main() {
+        HttpServer server;
+        server.start();
+    }
+    ```
 
 # PPLX
 
@@ -769,22 +831,6 @@ task_completion_event::set(_Result)
 ```
 
 # CppRest
-The [C++ REST SDK](https://github.com/microsoft/cpprestsdk) is a Microsoft project for cloud-based client-server communication in native code using a modern asynchronous C++ API design. This project aims to help C++ developers connect to and interact with services.
-
-Features:
-* [Programming with Tasks](https://github.com/microsoft/cpprestsdk/wiki/Programming-with-Tasks)
-* [JSON](https://github.com/microsoft/cpprestsdk/wiki/JSON)
-* Asynchronous Stream
-* URIs
-* [HTTP Client](https://github.com/microsoft/cpprestsdk/wiki/HTTP-Client)
-* HTTP Listener
-* [Websocket Client](https://github.com/microsoft/cpprestsdk/wiki/Web-Socket)
-* OAuth Client
-
-C++ Rest consists of three components:
-* [PPL](#PPLX)
-* [C++ Rest](#CppRest)
-* [Boost Asio](#BoostAsio)
 
 ![CppRest.png](../Image/cpp-rest.png)
 
@@ -998,6 +1044,7 @@ ws_client_wspp.cpp::connect_impl()
 ```
 
 ## Server
+
 ```c++
 typedef basic_stream_socket<tcp>    socket;
 typedef basic_socket_acceptor<tcp>  acceptor;
@@ -1125,10 +1172,11 @@ connection::do_response(isBadRequest)
     .then()
         m_request.content_ready()
 // [http_request::m_data_available 2-2] wait
-            pplx::create_task(m_data_available).then([req](utility::size64_t) { return req; }
+            pplx::create_task(m_data_available).then([req](utility::size64_t) { return req; })
         .then()
             connection::async_process_response(response)
                 // compose response header
+                // "HTTP/1.1 200 ok\r\n"
                 connection::async_write(&connection::handle_headers_written, response);
                     boost::asio::async_write()
                         --->
