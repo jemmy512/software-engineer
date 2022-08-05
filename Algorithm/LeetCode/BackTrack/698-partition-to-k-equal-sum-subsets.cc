@@ -54,9 +54,7 @@ private:
             return true;
 
         if (bktISum == target) {
-            auto ret = backtrack(bktI - 1, 0, nums, 0, target, used);
-            Memo[used] = ret;
-            return ret;
+            return Memo[used] = backtrack(bktI - 1, 0, nums, 0, target, used);
         }
 
         if (Memo.count(used)) {
