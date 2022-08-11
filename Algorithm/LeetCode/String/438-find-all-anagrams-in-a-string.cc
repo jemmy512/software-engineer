@@ -57,7 +57,7 @@ public:
                 }
             }
 
-            while (end - beg >= tar.size()) {
+            while (end - beg == tar.size()) {
                 if (winSize == dict.size()) {
                     result.emplace_back(beg);
                 }
