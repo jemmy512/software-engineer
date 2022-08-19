@@ -829,3 +829,80 @@ void scheduler::post_immediate_completion(scheduler::operation* op, bool is_cont
 ```
 
 The interruptor is interrupted only once when it is created. When epoll_reactor needs to be interrupted, it just calls **epoll_ctl EPOLL_CTL_MOD**, since there is already one byte data in interruptor rcv buffer, epoll_ctrl will add the interruptor fd to epoll ready list and wake up epoll_wait, and epoll doesn't read that one byte data, the one byte data can be used again and again when epoll needs interrupt.
+
+
+# strand
+
+```c++
+#include <thread>
+#include <iostream>
+
+#include "boost/asio.hpp"
+
+int main() {
+    boost::asio::io_context ctx;
+    // const auto guard = boost::asio::make_work_guard(ctx);
+
+    std::thread workers[5];
+
+    for (auto& worker : workers) {
+        worker = std::thread([&ctx] {
+            ctx.run();
+        });
+    }
+
+    std::allocator<void> alloc;
+
+    boost::asio::io_context::strand strand(ctx);
+
+    for (int i = 0; i < 10; i++) {
+        strand.post([i] {
+            std::cout << i << std::endl;
+        },
+        alloc);
+    }
+
+    for (auto& worker : workers) {
+        worker.join();
+    }
+}
+```
+
+```c++
+io_context::strand();
+    strand_service::construct(impl)
+       strand_impl()
+       :    operation(&strand_service::do_complete),
+            locked_(false)
+
+io_context::strand::post(lambda)
+    strand_service::post(impl, lambda)
+        if (!impl->locked_) { // first strand operation
+            impl->locked_ = true;
+            impl->mutex_.unlock();
+            impl->ready_queue_.push(op);
+            io_context_.post_immediate_completion(impl, is_continuation);
+        } else { // subsequent strand operation
+            impl->waiting_queue_.push(op);
+            impl->mutex_.unlock();
+        }
+
+strand_service::do_complete()
+    on_do_complete_exit on_exit;
+    on_exit.owner_ = static_cast<io_context_impl*>(owner);
+    on_exit.impl_ = impl;
+
+    while (operation* o = impl->ready_queue_.front()) {
+      impl->ready_queue_.pop();
+      o->complete(owner, ec, 0);
+    }
+
+    ~on_do_complete_exit()
+        impl_->mutex_.lock();
+        impl_->ready_queue_.push(impl_->waiting_queue_);
+        bool more_handlers = impl_->locked_ = !impl_->ready_queue_.empty();
+        impl_->mutex_.unlock();
+
+        if (more_handlers)
+            owner_->post_immediate_completion(impl_, true);
+```
