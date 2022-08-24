@@ -193,7 +193,7 @@
 <details>
 <summary>Open-Close</summary>
 
-- [ ] [Cheat Sheets & Infographics](https://hackingcpp.com/cpp/cheat_sheets.html#hfold5a)
+- [ ] [C++ Cheat Sheets & Infographics](https://hackingcpp.com/cpp/cheat_sheets.html#hfold5a)
 - [ ] :orange_book: The C Programming Language
 - [ ] :orange_book: C Programming: A Modern Approach
 - [ ] :orange_book: C Traps and Pitfalls
@@ -213,16 +213,21 @@
 - [x] [How to Use C++ for Cross-Platform Development](https://gusc.lv/2021/03/how-to-use-c-for-cross-platform-development/)
 - [x] [trivial_abi](https://quuxplusone.github.io/blog/2018/05/02/trivial-abi-101/)
 - [x] [Paramter Passing in C and C++](https://wolchok.org/posts/parameter-passing/)
+- [x] [Pass-by-value vs Pass-by-reference](https://reductor.dev/cpp/2022/06/27/pass-by-value-vs-pass-by-reference.html)
 - [x] [Type Erasure](http://davekilian.com/cpp-type-erasure.html)
 - [x] [Lambdas: From C++11 to C++20]() [:link: Part 1](https://www.cppstories.com/2019/02/lambdas-story-part1/) [:link: Part 2](https://www.cppstories.com/2019/03/lambdas-story-part2/)
 - [ ] [Eli Bendersky: How debuggers work]() [:link: Part 1](https://eli.thegreenplace.net/2011/01/23/how-debuggers-work-part-1/) [:link: Part 2](https://eli.thegreenplace.net/2011/01/27/how-debuggers-work-part-2-breakpoints) [:link: Part 3](https://eli.thegreenplace.net/2011/02/07/how-debuggers-work-part-3-debugging-information)
+- [ ] [What Every C Programmer Should Know About Undefined Behavior :link: Part 1](http://blog.llvm.org/2011/05/what-every-c-programmer-should-know.html) [:link: Part 2](http://blog.llvm.org/2011/05/what-every-c-programmer-should-know_14.html) [:link: Part 3](http://blog.llvm.org/2011/05/what-every-c-programmer-should-know_21.html)
 - [ ] [GNU Compiler Collection (GCC) Internals](https://gcc.gnu.org/onlinedocs/gccint/index.html#SEC_Contents)
 - [x] [Linux x86 Program Start Up or How do we get to main?](http://www.dbp-consulting.com/tutorials/debugging/linuxProgramStartup.html)
 
 * OOP
+    - [x] [What does C++ Object Layout Look Like?](https://nimrod.blog/posts/what-does-cpp-object-layout-look-like/)
+    - [x] [C++ Virtual Table Tables(VTT)](https://nimrod.blog/posts/cpp-virtual-table-tables/)
+    - [x] [Understand C++ vtable from assembly code :link: Part 1](https://guihao-liang.github.io/2020/05/30/what-is-vtable-in-cpp)
+    - [x] [coolshell: C++ virtual function table analysis (CN)](https://coolshell.cn/articles/12165.html)
     - [x] [Inheritance Without Pointers](https://www.fluentcpp.com/2021/01/29/inheritance-without-pointers/)
     - [x] [Runtime Polymorphism Without Objects or Virtual Functions](https://www.fluentcpp.com/2020/05/15/runtime-polymorphism-without-virtual-functions/)
-    - [x] [coolshell: C++ virtual function table analysis (CN)](https://coolshell.cn/articles/12165.html)
     - [x] [The cost of dynamic (virtual calls) vs. static (CRTP) dispatch in C++](https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c)
     - [x] [The Sad True about C++ Copy Elision](https://wolchok.org/posts/sad-truth-about-cxx-copy-elision/)
 
