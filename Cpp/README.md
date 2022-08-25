@@ -1,9 +1,17 @@
 * [C++](#c)
    * [OOP](#oop)
-      * [VTable Layout](#layout)
+      * [Polymorphism](#polymorphism)
+         * [VTable Layout](#vtable-layout)
+         * [Record Layout](#record-layout)
+         * [Assemly](#assembly)
+         * [VTable](#vtable)
+         * [VTT](#vtt)
+         * [Construction VTable](#construction-vtable)
+         * [Type Info](#typeinfo)
+
+    * [Build Commands](#build-commands)
 
 * [STL](#stl)
-   * [Build Commands](#build-commands)
    * [shared_ptr](#sharedptr)
    * [malloc](#gcc)
 
@@ -11,7 +19,12 @@
 
 # C++
 ## OOP
-### Layout
+### Polymorphism
+
+* [What does C++ Object Layout Look Like?](https://nimrod.blog/posts/what-does-cpp-object-layout-look-like/)
+* [C++ Virtual Table Tables(VTT)](https://nimrod.blog/posts/cpp-virtual-table-tables/)
+* [Understand C++ vtable from assembly code :link: Part 1](https://guihao-liang.github.io/2020/05/30/what-is-vtable-in-cpp)
+
 ```c++
 g++ -fdump-class-hierarchy layout.cc
 clang -Xclang -fdump-record-layouts -stdlib=libc++ -std=c++17 -c layout.cc
@@ -19,7 +32,6 @@ clang -Xclang -fdump-vtable-layouts -stdlib=libc++ -std=c++17 -c layout.cc
 ```
 
 ```c++
-// layout.cc
 struct Base {
    virtual ~Base() = default;
 
@@ -31,6 +43,7 @@ struct Base {
 
 struct BaseA : virtual public Base {
    virtual void FnBaseA() {  }
+   virtual void FnBaseA2() {  }  // Not overrided by Derive
 
    int a;
    int b;
@@ -50,12 +63,19 @@ struct Derive : public BaseB, public BaseA {
 };
 
 int main() {
-   Derive d;
+   Base* bptr = new Derive();
+   bptr->FnBase();
+
    return 0;
 }
 ```
+
+![](https://github.com/Jemmy512/book-notes/blob/master/Images/cpp-virtual-inheritance.png)
+* BaseA has its own virtual `FunB`, Derive overrides it and adds it into vtable of both BaseA and BaseB.
+
+#### VTable Layout
 ```c++
-Vtable for 'Derive' (21 entries).
+Vtable for 'Derive' (22 entries).
    0 | vbase_offset (32)
    1 | offset_to_top (0)
    2 | Derive RTTI
@@ -72,20 +92,21 @@ Vtable for 'Derive' (21 entries).
        -- (BaseA, 16) vtable address --
   11 | void Derive::FnBaseA()
        [this adjustment: -16 non-virtual] method: void BaseA::FnBaseA()
-  12 | Derive::~Derive() [complete]
+  12 | void BaseA::FnBaseA2()
+  13 | Derive::~Derive() [complete]
        [this adjustment: -16 non-virtual] method: BaseA::~BaseA()
-  13 | Derive::~Derive() [deleting]
+  14 | Derive::~Derive() [deleting]
        [this adjustment: -16 non-virtual] method: BaseA::~BaseA()
-  14 | vcall_offset (-32)
   15 | vcall_offset (-32)
-  16 | offset_to_top (-32)
-  17 | Derive RTTI
+  16 | vcall_offset (-32)
+  17 | offset_to_top (-32)
+  18 | Derive RTTI
        -- (Base, 32) vtable address --
-  18 | Derive::~Derive() [complete]
+  19 | Derive::~Derive() [complete]
        [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
-  19 | Derive::~Derive() [deleting]
+  20 | Derive::~Derive() [deleting]
        [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
-  20 | void Derive::FnBase()
+  21 | void Derive::FnBase()
        [this adjustment: 0 non-virtual, -32 vcall offset offset] method: void Base::FnBase()
 
 Virtual base offset offsets for 'Derive' (1 entry).
@@ -109,7 +130,40 @@ VTable indices for 'Derive' (5 entries).
    4 | void Derive::FnBaseA()
 ```
 
+#### Record Layout
 ```c++
+*** Dumping AST Record Layout
+         0 | struct Base
+         0 |   (Base vtable pointer)
+         8 |   int a
+        12 |   int b
+           | [sizeof=16, dsize=16, align=8,
+           |  nvsize=16, nvalign=8]
+
+*** Dumping AST Record Layout
+         0 | struct BaseA
+         0 |   (BaseA vtable pointer)
+         8 |   int a
+        12 |   int b
+        16 |   struct Base (virtual base)
+        16 |     (Base vtable pointer)
+        24 |     int a
+        28 |     int b
+           | [sizeof=32, dsize=32, align=8,
+           |  nvsize=16, nvalign=8]
+
+*** Dumping AST Record Layout
+         0 | struct BaseB
+         0 |   (BaseB vtable pointer)
+         8 |   int a
+        12 |   int b
+        16 |   struct Base (virtual base)
+        16 |     (Base vtable pointer)
+        24 |     int a
+        28 |     int b
+           | [sizeof=32, dsize=32, align=8,
+           |  nvsize=16, nvalign=8]
+
 *** Dumping AST Record Layout
          0 | struct Derive
          0 |   struct BaseB (primary base)
@@ -127,55 +181,93 @@ VTable indices for 'Derive' (5 entries).
            | [sizeof=48, dsize=48, align=8,
            |  nvsize=32, nvalign=8]
 ```
-![](https://github.com/Jemmy512/book-notes/blob/master/Images/cpp-virtual-inheritance.png)
-     * BaseA has its own virtual `FunB`, Derive overrides it and adds it into vtable of both BaseA and BaseB.
 
-```c++
+#### Assembly
+
+```assembly
+# https://godbolt.org/z/ssvnfxc3n
+
 main:
         pushq   %rbp
         movq    %rsp, %rbp
-        subq    $64, %rsp
+        subq    $32, %rsp
         movl    $0, -4(%rbp)
-        leaq    -56(%rbp), %rdi
+        movl    $48, %edi                       # 48 = sizeof(Derive)
+        callq   operator new(unsigned long)
+        movq    %rax, %rdi                      # ptr = derive_this = rax = new Derive()
+        movq    %rdi, -32(%rbp)
+        xorl    %esi, %esi                      # val = 0
+        movl    $48, %edx                       # len = 48
+        callq   memset@PLT                      # memset(void *ptr, int val, int len)
+        movq    -32(%rbp), %rdi                 # rdi = derive_this
         callq   Derive::Derive() [complete object constructor]
-        movl    $0, -4(%rbp)
-        leaq    -56(%rbp), %rdi
-        callq   Derive::~Derive() [complete object destructor]
-        movl    -4(%rbp), %eax
-        addq    $64, %rsp
+        movq    -32(%rbp), %rcx                 # rcx = derive_this
+        xorl    %eax, %eax
+        cmpq    $0, %rcx
+        movq    %rax, -24(%rbp)
+        je      .LBB0_2
+        movq    -32(%rbp), %rax                 # rax = derive_this
+        movq    (%rax), %rcx                    # rcx = derive_vtptr
+        movq    -24(%rcx), %rcx                 # vbase_offset = derive_vtptr - 24
+        addq    %rcx, %rax                      # base_this = derive_this + vbase_offset
+        movq    %rax, -24(%rbp)
+.LBB0_2:
+        movq    -24(%rbp), %rax
+        movq    %rax, -16(%rbp)
+        movq    -16(%rbp), %rdi
+        movq    (%rdi), %rax                    # rax = base_vtptr
+        callq   *16(%rax)                       # FnBase = base_vtptr + 16
+        xorl    %eax, %eax
+        addq    $32, %rsp
         popq    %rbp
         retq
+
+# Constructor execution order:
+# 1. construct virtual base
+# 2. construct immediate base
+# 3. initialize every base subobject vtptrs
+# 4. member initialization list
+# 5. explicit user code
+
 Derive::Derive() [complete object constructor]:
         pushq   %rbp
         movq    %rsp, %rbp
         subq    $16, %rsp
         movq    %rdi, -8(%rbp)
+
+        # 1. construct virtual base
         movq    -8(%rbp), %rdi
-        movq    %rdi, -16(%rbp)         # 8-byte Spill derive_this
-        addq    $32, %rdi               # base_this = derive_this + 32
+        movq    %rdi, -16(%rbp)             # 8-byte Spill derive_this
+        addq    $32, %rdi                   # base_this = derive_this + 32
         callq   Base::Base() [base object constructor]
-        movq    -16(%rbp), %rdi         # 8-byte Reload derive_this
+
+        # 2. construct immediate base
+        movq    -16(%rbp), %rdi             # rdi = derive_this
         movabsq $VTT for Derive, %rsi
-        addq    $8, %rsi
+        addq    $8, %rsi                    # baseB_vtptr = vtt_derive + 8
         callq   BaseB::BaseB() [base object constructor]
-        movq    -16(%rbp), %rdi
-        addq    $16, %rdi               # baseA_this = derive_this + 16
+        movq    -16(%rbp), %rdi             # rdi = derive_this
+        addq    $16, %rdi                   # baseA_this = derive_this + 16
         movabsq $VTT for Derive, %rsi
-        addq    $24, %rsi
+        addq    $24, %rsi                   # baseA_vtptr = vtt_derive + 24
         callq   BaseA::BaseA() [base object constructor]
-        movq    -16(%rbp), %rax
+        movq    -16(%rbp), %rax             # rax = derive_this
+
+        # 3. init each base subobject vtptrs
         movabsq $vtable for Derive, %rcx
-        addq    $24, %rcx
-        movq    %rcx, (%rax)            # derive_vptr = vtable + 24
+        addq    $24, %rcx                   # derive_vtptr = vtable_derive + 24
+        movq    %rcx, (%rax)
         movabsq $vtable for Derive, %rcx
-        addq    $144, %rcx
-        movq    %rcx, 32(%rax)          # base_vptr = vtable + 144
+        addq    $152, %rcx                  # base_vtptr = vtable_derive + 152
+        movq    %rcx, 32(%rax)
         movabsq $vtable for Derive, %rcx
-        addq    $88, %rcx
-        movq    %rcx, 16(%rax)          # baseA_vptr = vtable + 88
+        addq    $88, %rcx                   # baseA_vtptr = vtable_derive + 88
+        movq    %rcx, 16(%rax)
+
         addq    $16, %rsp
         popq    %rbp
         retq
+
 Derive::~Derive() [complete object destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -194,26 +286,26 @@ Derive::~Derive() [complete object destructor]:
 Base::Base() [base object constructor]:
         pushq   %rbp
         movq    %rsp, %rbp
-        movq    %rdi, -8(%rbp)
-        movq    -8(%rbp), %rax
+        movq    %rdi, -8(%rbp)      # rdi = base_this
+        movq    -8(%rbp), %rax      # rax = base_this
         movabsq $vtable for Base, %rcx
         addq    $16, %rcx
-        movq    %rcx, (%rax)
+        movq    %rcx, (%rax)        # base_vtptr = vtable_base + 16
         popq    %rbp
         retq
 BaseB::BaseB() [base object constructor]:
         pushq   %rbp
         movq    %rsp, %rbp
-        movq    %rdi, -8(%rbp)
-        movq    %rsi, -16(%rbp)
-        movq    -8(%rbp), %rax
-        movq    -16(%rbp), %rcx
-        movq    (%rcx), %rdx
-        movq    %rdx, (%rax)
-        movq    8(%rcx), %rdx
-        movq    (%rax), %rcx
-        movq    -24(%rcx), %rcx
-        movq    %rdx, (%rax,%rcx)
+        movq    %rdi, -8(%rbp)      # rdi = baseB_this
+        movq    %rsi, -16(%rbp)     # rsi = baseB_vtptr_vtt
+        movq    -8(%rbp), %rax      # rax = baseB_this
+        movq    -16(%rbp), %rcx     # rcx = baseB_vtptr_vtt
+        movq    (%rcx), %rdx        # rdx = baseB_vtptr
+        movq    %rdx, (%rax)        # baseB_this_vtptr = baseB_vtptr
+        movq    8(%rcx), %rdx       # rdx = base_vtptr_vtt = baseB_vtptr_vtt + 8
+        movq    (%rax), %rcx        # rcx = baseB_vtptr
+        movq    -24(%rcx), %rcx     # rcx = vbase_offset = baseB_vtptr - 24
+        movq    %rdx, (%rax,%rcx)   # base_vtptr = baseB_vtptr + vbase_offset
         popq    %rbp
         retq
 BaseA::BaseA() [base object constructor]:
@@ -292,6 +384,12 @@ Base::FnBase():
         popq    %rbp
         retq
 BaseA::FnBaseA():
+        pushq   %rbp
+        movq    %rsp, %rbp
+        movq    %rdi, -8(%rbp)
+        popq    %rbp
+        retq
+BaseA::FnBaseA2():
         pushq   %rbp
         movq    %rsp, %rbp
         movq    %rdi, -8(%rbp)
@@ -483,11 +581,18 @@ Derive::~Derive() [base object destructor]:
         addq    $32, %rsp
         popq    %rbp
         retq
+```
+
+There's a correspond thunk function for each overrided virtual function.
+
+#### VTable
+
+```assembly
 vtable for Derive:
         .quad   32
         .quad   0
         .quad   typeinfo for Derive
-        .quad   Derive::FnBaseB()
+        .quad   Derive::FnBaseB()                                                # derive_vtptr = +24
         .quad   Derive::~Derive() [complete object destructor]
         .quad   Derive::~Derive() [deleting destructor]
         .quad   Derive::FnBase()
@@ -495,26 +600,83 @@ vtable for Derive:
         .quad   16
         .quad   -16
         .quad   typeinfo for Derive
-        .quad   non-virtual thunk to Derive::FnBaseA()
+        .quad   non-virtual thunk to Derive::FnBaseA()                           # baseA_vtptr = +88
+        .quad   BaseA::FnBaseA2()
         .quad   non-virtual thunk to Derive::~Derive() [complete object destructor]
         .quad   non-virtual thunk to Derive::~Derive() [deleting destructor]
         .quad   -32
         .quad   -32
         .quad   -32
         .quad   typeinfo for Derive
-        .quad   virtual thunk to Derive::~Derive() [complete object destructor]
+        .quad   virtual thunk to Derive::~Derive() [complete object destructor]  # base_vtptr = +152
         .quad   virtual thunk to Derive::~Derive() [deleting destructor]
         .quad   virtual thunk to Derive::FnBase()
 
-VTT for Derive:
-        .quad   vtable for Derive+24
-        .quad   construction vtable for BaseB-in-Derive+24
-        .quad   construction vtable for BaseB-in-Derive+80
-        .quad   construction vtable for BaseA-in-Derive+24
-        .quad   construction vtable for BaseA-in-Derive+80
-        .quad   vtable for Derive+144
-        .quad   vtable for Derive+88
+vtable for Base:
+        .quad   0
+        .quad   typeinfo for Base
+        .quad   Base::~Base() [base object destructor]
+        .quad   Base::~Base() [deleting destructor]
+        .quad   Base::FnBase()
 
+vtable for BaseB:
+        .quad   16
+        .quad   0
+        .quad   typeinfo for BaseB
+        .quad   BaseB::FnBaseB()
+        .quad   BaseB::~BaseB() [complete object destructor]
+        .quad   BaseB::~BaseB() [deleting destructor]
+        .quad   0
+        .quad   -16
+        .quad   -16
+        .quad   typeinfo for BaseB
+        .quad   virtual thunk to BaseB::~BaseB() [complete object destructor]
+        .quad   virtual thunk to BaseB::~BaseB() [deleting destructor]
+        .quad   Base::FnBase()
+
+vtable for BaseA:
+        .quad   16
+        .quad   0
+        .quad   typeinfo for BaseA
+        .quad   BaseA::FnBaseA()
+        .quad   BaseA::FnBaseA2()
+        .quad   BaseA::~BaseA() [complete object destructor]
+        .quad   BaseA::~BaseA() [deleting destructor]
+        .quad   0
+        .quad   -16
+        .quad   -16
+        .quad   typeinfo for BaseA
+        .quad   virtual thunk to BaseA::~BaseA() [complete object destructor]
+        .quad   virtual thunk to BaseA::~BaseA() [deleting destructor]
+        .quad   Base::FnBase()
+```
+
+#### VTT
+
+Virtual Table Table(VTT) is a table holding vtable pointers to ensure virtual table pointers are set correctly during the construction of base classes under the virtual inheritance hierarchy.
+
+```assembly
+VTT for BaseB:
+        .quad   vtable for BaseB+24                         # baseB_vtptr
+        .quad   vtable for BaseB+80                         # base_vtptr
+
+VTT for BaseA:
+        .quad   vtable for BaseA+24                         # baseA_vtptr
+        .quad   vtable for BaseA+88                         # base_vtptr
+
+VTT for Derive:
+        .quad   vtable for Derive+24                        # derive_vtptr
+        .quad   construction vtable for BaseB-in-Derive+24  # baseB_vtptr
+        .quad   construction vtable for BaseB-in-Derive+80  # base_vtptr in BaseB
+        .quad   construction vtable for BaseA-in-Derive+24  # baesA_vtptr
+        .quad   construction vtable for BaseA-in-Derive+88  # base_vtptr in BaseA
+        .quad   vtable for Derive+152                       # Base vtptr in Derive
+        .quad   vtable for Derive+88                        # baseA_vtptr in Derive
+```
+
+#### Construction VTable
+
+```assembly
 construction vtable for BaseB-in-Derive:
         .quad   32
         .quad   0
@@ -530,6 +692,25 @@ construction vtable for BaseB-in-Derive:
         .quad   virtual thunk to BaseB::~BaseB() [deleting destructor]
         .quad   Base::FnBase()
 
+construction vtable for BaseA-in-Derive:
+        .quad   16
+        .quad   0
+        .quad   typeinfo for BaseA
+        .quad   BaseA::FnBaseA()
+        .quad   BaseA::FnBaseA2()
+        .quad   BaseA::~BaseA() [complete object destructor]
+        .quad   BaseA::~BaseA() [deleting destructor]
+        .quad   0
+        .quad   -16
+        .quad   -16
+        .quad   typeinfo for BaseA
+        .quad   virtual thunk to BaseA::~BaseA() [complete object destructor]
+        .quad   virtual thunk to BaseA::~BaseA() [deleting destructor]
+        .quad   Base::FnBase()
+```
+
+#### TypeInfo
+```c++
 typeinfo name for BaseB:
         .asciz  "5BaseB"
 
@@ -547,21 +728,6 @@ typeinfo for BaseB:
         .long   1                               # 0x1
         .quad   typeinfo for Base
         .quad   -6141                           # 0xffffffffffffe803
-
-construction vtable for BaseA-in-Derive:
-        .quad   16
-        .quad   0
-        .quad   typeinfo for BaseA
-        .quad   BaseA::FnBaseA()
-        .quad   BaseA::~BaseA() [complete object destructor]
-        .quad   BaseA::~BaseA() [deleting destructor]
-        .quad   0
-        .quad   -16
-        .quad   -16
-        .quad   typeinfo for BaseA
-        .quad   virtual thunk to BaseA::~BaseA() [complete object destructor]
-        .quad   virtual thunk to BaseA::~BaseA() [deleting destructor]
-        .quad   Base::FnBase()
 
 typeinfo name for BaseA:
         .asciz  "5BaseA"
@@ -586,55 +752,7 @@ typeinfo for Derive:
         .quad   2                               # 0x2
         .quad   typeinfo for BaseA
         .quad   4098                            # 0x1002
-
-vtable for Base:
-        .quad   0
-        .quad   typeinfo for Base
-        .quad   Base::~Base() [base object destructor]
-        .quad   Base::~Base() [deleting destructor]
-        .quad   Base::FnBase()
-
-vtable for BaseB:
-        .quad   16
-        .quad   0
-        .quad   typeinfo for BaseB
-        .quad   BaseB::FnBaseB()
-        .quad   BaseB::~BaseB() [complete object destructor]
-        .quad   BaseB::~BaseB() [deleting destructor]
-        .quad   0
-        .quad   -16
-        .quad   -16
-        .quad   typeinfo for BaseB
-        .quad   virtual thunk to BaseB::~BaseB() [complete object destructor]
-        .quad   virtual thunk to BaseB::~BaseB() [deleting destructor]
-        .quad   Base::FnBase()
-
-VTT for BaseB:
-        .quad   vtable for BaseB+24
-        .quad   vtable for BaseB+80
-
-vtable for BaseA:
-        .quad   16
-        .quad   0
-        .quad   typeinfo for BaseA
-        .quad   BaseA::FnBaseA()
-        .quad   BaseA::~BaseA() [complete object destructor]
-        .quad   BaseA::~BaseA() [deleting destructor]
-        .quad   0
-        .quad   -16
-        .quad   -16
-        .quad   typeinfo for BaseA
-        .quad   virtual thunk to BaseA::~BaseA() [complete object destructor]
-        .quad   virtual thunk to BaseA::~BaseA() [deleting destructor]
-        .quad   Base::FnBase()
-
-VTT for BaseA:
-        .quad   vtable for BaseA+24
-        .quad   vtable for BaseA+80
 ```
-
-# STL
-
 ## Build Commands
 ```c++
 /* 1. Preprocess
@@ -675,6 +793,8 @@ gcc -static -o p2 main2.o ./libvector.a
 gcc -shared -fPIC -o libvector.so addvec.c multvec.c
 gcc -o p2 main2.c ./libvector.so
 ```
+
+# STL
 
 ## shared_ptr
 * ![gcc-shared-ptr.png](./STL/gcc-shared-ptr.png)
