@@ -24,10 +24,10 @@
 ## OOP
 ### Polymorphism
 
-* [VTable Entry 1: Interview Series C++ object layout](https://developpaper.com/interview-series-c-object-layout/)
-* [VTable Entry 2: Understand C++ vtable from assembly code :link: Part 1](https://guihao-liang.github.io/2020/05/30/what-is-vtable-in-cpp)
-* [VTable Proficient 1: What does C++ Object Layout Look Like?](https://nimrod.blog/posts/what-does-cpp-object-layout-look-like/)
-* [VTable Proficient 2: C++ Virtual Table Tables(VTT)](https://nimrod.blog/posts/cpp-virtual-table-tables/)
+* [VTable Beginner 1: Interview Series C++ object layout](https://developpaper.com/interview-series-c-object-layout/)
+* [VTable Beginner 2: Understand C++ vtable from assembly code :link: Part 1](https://guihao-liang.github.io/2020/05/30/what-is-vtable-in-cpp)
+* [VTable Expert 1: What does C++ Object Layout Look Like?](https://nimrod.blog/posts/what-does-cpp-object-layout-look-like/)
+* [VTable Expert 2: C++ Virtual Table Tables(VTT)](https://nimrod.blog/posts/cpp-virtual-table-tables/)
 
 ```c++
 g++ -fdump-class-hierarchy layout.cc
