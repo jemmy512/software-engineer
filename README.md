@@ -74,7 +74,7 @@
 
 ## Compilation
 - [ ] :orange_book: Compilers: Principles, Techniques, and Tools
-- [x] :orange_book: Programmer Self-Cultivation: Linking, Loading and Libraries (CN) :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/programmer-self-cultivation-link-load-library.md)
+- [x] :orange_book: Programmer Self-Cultivation: Linking, Loading and Libraries (:cn: CN) :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/programmer-self-cultivation-link-load-library.md)
 
 ## Network
 - [x] :orange_book: TCP/IP ILLustrated Volume 1: The Protocols :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/CS/tcp-ip-illustrated-volume-1.md)
@@ -222,11 +222,11 @@
 - [x] [Linux x86 Program Start Up or How do we get to main?](http://www.dbp-consulting.com/tutorials/debugging/linuxProgramStartup.html)
 
 * OOP
-    - [x] [VTable Beginner 1: Interview Series C++ object layout](https://developpaper.com/interview-series-c-object-layout/)
+    - [x] [VTable Beginner 1: Interview Series C++ object layout :us: EN](https://developpaper.com/interview-series-c-object-layout/)    [:cn: CN](https://mp.weixin.qq.com/s?__biz=MzkyODE5NjU2Mw==&mid=2247484758&idx=1&sn=4e614430f666f63ab135c13a716d07c1&source=41#wechat_redirect)
     - [x] [VTable Beginner 2: Understand C++ vtable from assembly code :link: Part 1](https://guihao-liang.github.io/2020/05/30/what-is-vtable-in-cpp)
     - [x] [VTable Expert 1: What does C++ Object Layout Look Like?](https://nimrod.blog/posts/what-does-cpp-object-layout-look-like/)
     - [x] [VTable Expert 2: C++ Virtual Table Tables(VTT)](https://nimrod.blog/posts/cpp-virtual-table-tables/)
-    - [x] [coolshell: C++ virtual function table analysis (CN)](https://coolshell.cn/articles/12165.html)
+    - [x] [coolshell: C++ virtual function table analysis (:cn: CN)](https://coolshell.cn/articles/12165.html)
     - [x] [Inheritance Without Pointers](https://www.fluentcpp.com/2021/01/29/inheritance-without-pointers/)
     - [x] [Runtime Polymorphism Without Objects or Virtual Functions](https://www.fluentcpp.com/2020/05/15/runtime-polymorphism-without-virtual-functions/)
     - [x] [The cost of dynamic (virtual calls) vs. static (CRTP) dispatch in C++](https://eli.thegreenplace.net/2013/12/05/the-cost-of-dynamic-virtual-calls-vs-static-crtp-dispatch-in-c)
@@ -241,8 +241,8 @@
     - [x] [Creating STL Containers in Shared Memory](https://www.drdobbs.com/creating-stl-containers-in-shared-memory/184401639)
 
 * C++ Memory Model
-    - [x] [Memory layout of C ++ objects (CN)](https://coolshell.cn/articles/12176.html)
-    - [x] [C++ objects Memory layout (CN)](https://mp.weixin.qq.com/s/I3mQAZAycd5KJnbfywYT8g)
+    - [x] [Memory layout of C ++ objects (:cn: CN)](https://coolshell.cn/articles/12176.html)
+    - [x] [C++ objects Memory layout (:cn: CN)](https://mp.weixin.qq.com/s/I3mQAZAycd5KJnbfywYT8g)
     - [x] [std::memory_order](https://en.cppreference.com/w/cpp/atomic/memory_order)
     - [x] [C++ Memory Model](https://www.modernescpp.com/index.php/c-memory-model)
     - [x] [Sequential Consistency](https://www.modernescpp.com/index.php/sequential-consistency)
@@ -473,13 +473,13 @@
 - [x] [tcmalloc](https://github.com/google/tcmalloc) [:link: Ref](https://wallenwang.com/2018/11/tcmalloc/) [:link: Ref](https://www.programmersought.com/article/84461226079/)
 - [x] [jemalloc.pdf](http://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf)
 - [x] [C dynamic memory allocation](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation)
-- [x] [Research on ptmalloc, tcmalloc and jemalloc memory allocation strategies (CN)](https://owent.net/2013/867.html)
+- [x] [Research on ptmalloc, tcmalloc and jemalloc memory allocation strategies (:cn: CN)](https://owent.net/2013/867.html)
 - [x] [Memory optimization summary: ptmalloc, tcmalloc, and jemalloc](http://www.cnhalo.net/2016/06/13/memory-optimize)
 - [x] [Scalable memory allocation using jemalloc](https://www.facebook.com/notes/facebook-engineering/scalable-memory-allocation-using-jemalloc/480222803919)
 - [ ] Linux Kernel Vs. Memory Fragmentation [Part I](http://highscalability.com/blog/2021/6/8/linux-kernel-vs-memory-fragmentation-part-i.html)
 
 ### Linux Network
-- [ ] :orange_book: [Linux High Performance Server Programming (CN)](https://book.douban.com/subject/24722611/) :pencil2:  [Linux Programmnig Noetes](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-programming.md) :pencil2: [Linux System Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxBasic.md)
+- [ ] :orange_book: [Linux High Performance Server Programming (:cn: CN)](https://book.douban.com/subject/24722611/) :pencil2:  [Linux Programmnig Noetes](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-programming.md) :pencil2: [Linux System Notes](https://github.com/Jemmy512/book-notes/blob/master/Linux/LinuxBasic.md)
 - [ ] :orange_book: Network tuning
 
 - [ ] [Linux Advanced Routing & Traffic Control HOWTO](https://lartc.org)
@@ -561,7 +561,7 @@
 - [ ] [CAP Theorem](https://en.wikipedia.org/wiki/CAP_theorem)
 - [ ] [A Brief Tour of FLP Impossibility](https://www.the-paper-trail.org/post/2008-08-13-a-brief-tour-of-flp-impossibility/)
 - [ ] [DLS.pdf](http://groups.csail.mit.edu/tds/papers/Lynch/jacm88.pdf)
-- [ ] [Introduction to Distributed System Priciples(CN)](http://guanzhou.pub/2018/06/04/Distributed/)
+- [ ] [Introduction to Distributed System Priciples (:cn: CN)](http://guanzhou.pub/2018/06/04/Distributed/)
 
 - [ ] [CAP Twelve Years Later: How the "Rules" Have Changed](https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/)
 - [ ] [Harvest, yield, and scalable tolerant systems](https://www.semanticscholar.org/paper/9c9ceb29a358149e9617d103f5624f325bf08b1e?p2df)
@@ -774,7 +774,7 @@
 - [ ] [MySQL Sharding with ProxySQL](https://www.percona.com/blog/2016/08/30/mysql-sharding-with-proxysql/)
 
 ### Cache
-- [ ] [Cache update routine (CN)](https://coolshell.cn/articles/17416.html)
+- [ ] [Cache update routine (:cn: CN)](https://coolshell.cn/articles/17416.html)
 - [ ] [Design Of A Modern Cache](http://highscalability.com/blog/2016/1/25/design-of-a-modern-cache.html)
 - [ ] [Netflix: Caching for a Global Netflix](https://netflixtechblog.com/caching-for-a-global-netflix-7bcc457012f1)
 - [ ] [Facebook: An analysis of Facebook photo caching](https://engineering.fb.com/2014/02/20/web/an-analysis-of-facebook-photo-caching/)

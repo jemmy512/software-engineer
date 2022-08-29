@@ -24,7 +24,7 @@
 ## OOP
 ### Polymorphism
 
-* [VTable Beginner 1: Interview Series C++ object layout](https://developpaper.com/interview-series-c-object-layout/)
+* [VTable Beginner 1: Interview Series C++ object layout :link: :us: EN](https://developpaper.com/interview-series-c-object-layout/)    [:link: :cn: CN](https://mp.weixin.qq.com/s?__biz=MzkyODE5NjU2Mw==&mid=2247484758&idx=1&sn=4e614430f666f63ab135c13a716d07c1&source=41#wechat_redirect)
 * [VTable Beginner 2: Understand C++ vtable from assembly code :link: Part 1](https://guihao-liang.github.io/2020/05/30/what-is-vtable-in-cpp)
 * [VTable Expert 1: What does C++ Object Layout Look Like?](https://nimrod.blog/posts/what-does-cpp-object-layout-look-like/)
 * [VTable Expert 2: C++ Virtual Table Tables(VTT)](https://nimrod.blog/posts/cpp-virtual-table-tables/)
