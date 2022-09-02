@@ -4,9 +4,9 @@
          * [VTable Layout](#vtable-layout)
          * [Record Layout](#record-layout)
          * [Constructor](#constructor)
-         * [Derive Distructor](#derive-distructor)
-         * [BaseB Distructor](#baseb-distructor)
-         * [BaseA Distructor](#basea-distructor)
+         * [Derive Destructor](#derive-distructor)
+         * [BaseB Destructor](#baseb-distructor)
+         * [BaseA Destructor](#basea-distructor)
          * [VTable](#vtable)
          * [VTT](#vtt)
          * [Construction VTable](#construction-vtable)
@@ -391,7 +391,7 @@ BaseA::FnBaseA2():
         retq
 ```
 
-#### Derive Distructor
+#### Derive Destructor
 ```c++
 non-virtual thunk to Derive::~Derive() [complete object destructor]:
         pushq   %rbp
@@ -479,7 +479,7 @@ Derive::~Derive() [base object destructor]:
         retq
 ```
 
-#### BaseB Distructor
+#### BaseB Destructor
 ```c++
 virtual thunk to BaseB::~BaseB() [complete object destructor]:
         pushq   %rbp
@@ -538,7 +538,7 @@ BaseB::~BaseB() [base object destructor]:
         retq
 ```
 
-#### BaseA Distructor
+#### BaseA Destructor
 ```c++
 virtual thunk to BaseA::~BaseA() [complete object destructor]:
         pushq   %rbp
