@@ -283,7 +283,7 @@ Derive::Derive() [complete object constructor]:
         addq    $152, %rcx                  # base_vtptr = derive_vt_addr + 152
         movq    %rcx, 32(%rax)
         movabsq $vtable for Derive, %rcx
-        addq    $88, %rcx                   # baseA_vtptr = derive_vt_addr + 88
+        addq    $88, %rcx               # baseA_vtptr = derive_vt_addr + 88
         movq    %rcx, 16(%rax)
 
         addq    $16, %rsp
@@ -348,9 +348,9 @@ virtual thunk to Derive::FnBase():
         movq    %rsp, %rbp
         movq    %rdi, -8(%rbp)
         movq    -8(%rbp), %rdi
-        movq    (%rdi), %rax
-        movq    -32(%rax), %rax     # derive_this = base_this - 32
-        addq    %rax, %rdi
+        movq    (%rdi), %rax        # base_vt_addr = M[base_this]
+        movq    -32(%rax), %rax     # vcall_offset = M[base_vt_addr - 32]
+        addq    %rax, %rdi          # derive_this = base_this + vcall_offset
         popq    %rbp
         jmp     Derive::FnBase()
 Derive::FnBase():
@@ -412,9 +412,9 @@ non-virtual thunk to Derive::~Derive() [deleting destructor]:
 virtual thunk to Derive::~Derive() [complete object destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
-        movq    %rdi, -8(%rbp)          # rdi = base_this
+        movq    %rdi, -8(%rbp)
         movq    -8(%rbp), %rdi
-        movq    (%rdi), %rax            # rax = base_vt_addr
+        movq    (%rdi), %rax            # base_vt_addr = M[base_this]
         movq    -24(%rax), %rax         # vcall_offset = M[base_vt_addr - 24]
         addq    %rax, %rdi              # derive_this = base_this + vcall_offset
         popq    %rbp
@@ -422,9 +422,9 @@ virtual thunk to Derive::~Derive() [complete object destructor]:
 virtual thunk to Derive::~Derive() [deleting destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
-        movq    %rdi, -8(%rbp)          # rdi = base_this
+        movq    %rdi, -8(%rbp)
         movq    -8(%rbp), %rdi
-        movq    (%rdi), %rax            # rax = base_vt_addr
+        movq    (%rdi), %rax            # base_vt_addr = M[base_this]
         movq    -24(%rax), %rax         # vcall_offset = M[base_vt_addr - 24]
         addq    %rax, %rdi              # derive_this = base_this + vcall_offset
         popq    %rbp
@@ -486,9 +486,9 @@ virtual thunk to BaseB::~BaseB() [complete object destructor]:
         movq    %rsp, %rbp
         movq    %rdi, -8(%rbp)
         movq    -8(%rbp), %rdi
-        movq    (%rdi), %rax
-        movq    -24(%rax), %rax
-        addq    %rax, %rdi
+        movq    (%rdi), %rax            # base_vt_addr = M[base_this]
+        movq    -24(%rax), %rax         # vcall_offset = M[base_vt_addr - 24]
+        addq    %rax, %rdi              # baseB_this = base_this + vcall_offset
         popq    %rbp
         jmp     BaseB::~BaseB() [complete object destructor]
 virtual thunk to BaseB::~BaseB() [deleting destructor]:
@@ -496,9 +496,9 @@ virtual thunk to BaseB::~BaseB() [deleting destructor]:
         movq    %rsp, %rbp
         movq    %rdi, -8(%rbp)
         movq    -8(%rbp), %rdi
-        movq    (%rdi), %rax
-        movq    -24(%rax), %rax
-        addq    %rax, %rdi
+        movq    (%rdi), %rax            # base_vt_addr = M[base_this]
+        movq    -24(%rax), %rax         # vcall_offset = M[base_vt_addr - 24]
+        addq    %rax, %rdi              # baseB_this = base_this + vcall_offset
         popq    %rbp
         jmp     BaseB::~BaseB() [deleting destructor]
 BaseB::~BaseB() [deleting destructor]:
@@ -545,18 +545,18 @@ virtual thunk to BaseA::~BaseA() [complete object destructor]:
         movq    %rsp, %rbp
         movq    %rdi, -8(%rbp)
         movq    -8(%rbp), %rdi
-        movq    (%rdi), %rax
-        movq    -24(%rax), %rax
-        addq    %rax, %rdi
+        movq    (%rdi), %rax            # base_vt_addr = M[base_this]
+        movq    -24(%rax), %rax         # vcall_offset = M[base_vt_addr - 24]
+        addq    %rax, %rdi              # baseA_this = base_this + vcall_offset
         popq    %rbp
         jmp     BaseA::~BaseA() [complete object destructor]
 virtual thunk to BaseA::~BaseA() [deleting destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
         movq    %rdi, -8(%rbp)
-        movq    -8(%rbp), %rdi          # rdi = base_this
-        movq    (%rdi), %rax
-        movq    -24(%rax), %rax         # vcall_offset = base_vt_addr - 24
+        movq    -8(%rbp), %rdi
+        movq    (%rdi), %rax            # base_vt_addr = M[base_this]
+        movq    -24(%rax), %rax         # vcall_offset = M[base_vt_addr - 24]
         addq    %rax, %rdi              # baseA_this = base_this + vcall_offset
         popq    %rbp
         jmp     BaseA::~BaseA() [deleting destructor]
