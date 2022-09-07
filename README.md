@@ -444,6 +444,8 @@
 - [ ] [API Guildlines](https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md)
 - [ ] [The Problem With Logging](https://blog.codinghorror.com/the-problem-with-logging)
 
+- [ ] [The Onion Architecture :link: Part 1](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)  [:link: Part 2](http://jeffreypalermo.com/blog/the-onion-architecture-part-2/)  [:link: Part 3](http://jeffreypalermo.com/blog/the-onion-architecture-part-3/)  [:link: Part 4](http://jeffreypalermo.com/blog/onion-architecture-part-4-after-four-years/)
+
 # Linux
 - [ ] [Red Hat Enterprise Linux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/)
 - [ ] [x86-TSO: A Rigorous and Usable Programmer’s Model for x86 Multiprocessors](https://www.cl.cam.ac.uk/~pes20/weakmemory/cacm.pdf)
