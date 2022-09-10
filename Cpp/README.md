@@ -24,7 +24,7 @@
 ## OOP
 ### Polymorphism
 
-* [Itanium C++ ABI (Revision: 1.75)](https://refspecs.linuxfoundation.org/cxxabi-1.75.html#vtable)
+* [Itanium C++ ABI (Revision: 1.75)](https://refspecs.linuxfoundation.org/cxxabi-1.75.html)
 ---
 * [VTable Beginner 1: Interview Series C++ object layout :link: :us: EN](https://developpaper.com/interview-series-c-object-layout/)    [:link: :cn: CN](https://mp.weixin.qq.com/s?__biz=MzkyODE5NjU2Mw==&mid=2247484758&idx=1&sn=4e614430f666f63ab135c13a716d07c1&source=41#wechat_redirect)
 * [VTable Beginner 2: Understand C++ vtable from assembly code :link: Part 1](https://guihao-liang.github.io/2020/05/30/what-is-vtable-in-cpp)
@@ -150,6 +150,18 @@ VTable indices for 'Derive' (5 entries).
 
 
 * The **offset to top** holds the displacement to the top of the object from the location within the object of the virtual table pointer that addresses this virtual table, as a  ptrdiff_t. It is always present. The offset provides a way to find the top of the object from any base subobject with a virtual table pointer. This is necessary for dynamic_cast<void*> in particular.
+
+Why does C++ need vcall_offset for virtual inheritance but not for non-virtual inheritance?
+* In the non-virtual inheritance, this pointer is adjusted in the thunk function directly since the offset between the base class pointer and the derived class pointer is a constant, so the offset can be a constant in the thunk function.
+* In virtual inheritance, the offset between the base class pointer and the derived class pointer is vary. This pointer is adjusted indirectly in virtual thunk:
+    1. find the vcall_offset
+    2. adjust this pointer.
+
+    E.g., the vcall_offset between baseB_this and base_this is different in BaseB->Base inheritance and Derive->(BaseB, BaseA)->Base inheritance even though they have the same thunk when constructing BaseB.
+
+    The reason behide vcall_offfset is code reusability.
+    * `BaseB vtable` and `construction vtable for BaseB-in-Derive` have same virtual thunk to BaseB::~BaseB() [deleting destructor], but have different vcall_offset.
+    * If vcall_offset is a constant in thunk, the compiler has to generate two versions of thunk, which only differ in vcall_offset, and both pointers point to the same BaseB::~BaseB.
 
 #### Record Layout
 ```c++
