@@ -89,28 +89,30 @@ class Solution {
 public:
     string minRemoveToMakeValid(string s) {
         stack<int> stk;
-        vector<bool> validParenthese(s.size(), false);
+        vector<bool> validChar(s.size(), false);
 
         for (int i = 0; i < s.size(); ++i) {
             if (s[i] == '(') {
                 stk.emplace(i);
             } else if (s[i] == ')') {
-                if (!stk.empty() && s[stk.top()] == '(') {
-                    validParenthese[stk.top()] = validParenthese[i] = true;
+                if (stk.size() && s[stk.top()] == '(') {
+                    validChar[stk.top()] = validChar[i] = true;
                     stk.pop();
                 }
             } else {
-                validParenthese[i] = true;
+                validChar[i] = true;
             }
         }
 
-        string result;
-        for (int i = 0; i < validParenthese.size(); ++i) {
-            if (validParenthese[i]) {
-                result += s[i];
+        string str;
+        str.reserve(s.size());
+
+        for (auto i = 0; i < s.size(); ++i) {
+            if (validChar[i]) {
+                str += s[i];
             }
         }
 
-        return result;
+        return str;
     }
 };
