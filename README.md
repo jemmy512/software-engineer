@@ -190,6 +190,8 @@
 
 ### C/C++
 
+* [ISO/IEC C++ Standards](https://www.open-std.org/jtc1/sc22/wg21/docs/standards)
+
 <details>
 <summary>Open-Close</summary>
 
