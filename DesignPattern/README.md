@@ -1,3 +1,5 @@
+* [Wikipedia: Software design pattern](https://en.wikipedia.org/wiki/Software_design_pattern#Creational_patterns)
+
 # Creational Patterns
 
 ## Singleton
