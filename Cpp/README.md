@@ -34,7 +34,7 @@ g++ -fdump-class-hierarchy layout.cc
 clang -Xclang -fdump-record-layouts -stdlib=libc++ -std=c++17 -c layout.cc
 clang -Xclang -fdump-vtable-layouts -stdlib=libc++ -std=c++17 -c layout.cc
 ```
-<img src='./Images/cpp-diamond-hierarchy.png' style='max-height:550px;height:auto;width:auto;'/>
+<img src='./Images/cpp-diamond-hierarchy.png' height="600px"/>
 
 ```c++
 //  https://godbolt.org/z/3hz5WsKnv
