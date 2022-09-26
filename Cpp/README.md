@@ -1,16 +1,15 @@
 * [C++](#c)
-   * [OOP](#oop)
-      * [Polymorphism](#polymorphism)
-         * [VTable Layout](#vtable-layout)
-         * [Record Layout](#record-layout)
-         * [Constructor](#constructor)
-         * [Derive Destructor](#derive-distructor)
-         * [BaseB Destructor](#baseb-distructor)
-         * [BaseA Destructor](#basea-distructor)
-         * [VTable](#vtable)
-         * [VTT](#vtt)
-         * [Construction VTable](#construction-vtable)
-         * [Type Info](#typeinfo)
+    * [Understanding C++ Virutal Table from Assembly](#Understanding-C-Virutal-Table-from-Assembly)
+        * [VTable Layout](#vtable-layout)
+        * [Record Layout](#record-layout)
+        * [Constructor](#constructor)
+        * [Derive Destructor](#derive-distructor)
+        * [BaseB Destructor](#baseb-distructor)
+        * [BaseA Destructor](#basea-distructor)
+        * [VTable](#vtable)
+        * [VTT](#vtt)
+        * [Construction VTable](#construction-vtable)
+        * [Type Info](#typeinfo)
 
     * [Build Commands](#build-commands)
 
@@ -21,8 +20,7 @@
 * [IPC](#ipc)
 
 # C++
-## OOP
-### Polymorphism
+## Understanding C++ Virutal Table from Assembly
 
 * [Itanium C++ ABI (Revision: 1.75)](https://refspecs.linuxfoundation.org/cxxabi-1.75.html)
 ---
@@ -36,6 +34,7 @@ g++ -fdump-class-hierarchy layout.cc
 clang -Xclang -fdump-record-layouts -stdlib=libc++ -std=c++17 -c layout.cc
 clang -Xclang -fdump-vtable-layouts -stdlib=libc++ -std=c++17 -c layout.cc
 ```
+<img src='./Images/cpp-diamond-hierarchy.png' style='max-height:550px;height:auto;width:auto;'/>
 
 ```c++
 //  https://godbolt.org/z/3hz5WsKnv
@@ -78,7 +77,7 @@ int main() {
 }
 ```
 
-![](https://github.com/Jemmy512/book-notes/blob/master/Images/cpp-vtable.png)
+![](./Images/cpp-vtable.png)
 * BaseA has its own virtual `FunB`, Derive overrides it and adds it into vtable of both BaseA and BaseB.
 
 #### VTable Layout
