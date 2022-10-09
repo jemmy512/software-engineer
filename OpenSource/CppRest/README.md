@@ -119,7 +119,7 @@ Demo
         }
 
     private:
-        std::make_shared<http_listener> mListener;
+        std::shared_ptr<http_listener> mListener;
     };
 
     int main() {
