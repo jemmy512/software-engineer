@@ -45,8 +45,9 @@ using namespace std;
 class Solution {
 public:
     bool carPooling(vector<vector<int>>& trips, int capacity) {
-        for (const auto& vec : trips) {
-            update(vec[1], vec[2] - 1, vec[0]);
+        for (const auto& trip : trips) {
+            Len = max(Len, trip[2] + 1);
+            update(trip[1], trip[2], trip[0]);
         }
 
         auto result = getResult();
@@ -59,15 +60,15 @@ public:
 private:
     void update(int beg, int end, int val) {
         Diff[beg] += val;
-        if (end + 1 < Diff.size()) {
-            Diff[end+1] -= val;
+        if (end < Diff.size()) {
+            Diff[end] -= val;
         }
     }
 
     vector<int> getResult() const {
-        auto result = Diff;
+        auto result = vector(Diff.begin(), Diff.begin() + Len);
 
-        for (auto i = 1; i < result.size(); ++i) {
+        for (auto i = 1; i < Len; ++i) {
             result[i] += result[i-1];
         }
 
@@ -75,5 +76,6 @@ private:
     }
 
 private:
+    int Len = 0;
     vector<int> Diff = vector(1001, 0);
 };
