@@ -296,7 +296,7 @@ No | Title | Difficulty | Note
 1905 | Count Sub Islands | :star: :star: | :four: `DFS` `Matrix`
 374 | Guess Number Higher Or Lower | :star: | :four: `BS`
 378 | Kth Smallest Element in a Sorted Matrix | :star: :star:| :thinking: `BS` `Matrix`
-973 | K Closest Points to Origin | :star: :star:| :three: :thinking: `Quick Select` `BS`
+973 | K Closest Points to Origin | :star: :star:| :four: :thinking: `Quick Select` `BS`
 752 | Open the Lock | :star: :star:| :four: `BFS`
 875 | Koko Eating Bananas | :star: :star:| :four: :thinking: `BS`
 1011 | Capacity To Ship Packages Within D Days | :star: :star:| :four: :thinking: `BS`
@@ -416,9 +416,9 @@ Shell Sort | O(n) | O((nlogn)^2) | O((nlogn)^2) | O(1) |
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
 146 | LRU Cache | :star: :star: | :four: `Map + List (O(1) + Date Move)`
-460 | LFU Cache  | :star: :star: :star: | :three:
-155 | Min Stack | :star: | :three: :heavy_plus_sign:
-380 | Insert Delete GetRandom O(1) | :star: :star: | :three: `Map + Vec (O(1) + Random Access)`
+460 | LFU Cache  | :star: :star: :star: | :four:
+155 | Min Stack | :star: | :four: :heavy_plus_sign:
+380 | Insert Delete GetRandom O(1) | :star: :star: | :four: `Map + Vec (O(1) + Random Access)`
 1396 | Design Underground System | :star: :star: |
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
@@ -426,35 +426,35 @@ No | Title | Difficulty | Note
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
 041 | First Missing Positive | :star: :star: :star: |
-448 | Find All Numbers Disappeared in An Array | :star: | :three:
+448 | Find All Numbers Disappeared in An Array | :star: | :four:
 048 | Rotate Image | :star: :star: | :three: `Matrix`
 054 | Spiral Matrix | :star: :star: | :three: `Matrix`
 059 | Spiral Matrix II | :star: :star: | :three: `Matrix`
-189 | Rotate Array `right by k steps` | :star: :star: | :three:
-056 | Merge Intervals | :star: :star: | :three: `Interval`
-057 | Insert Intervals | :star: :star: | :three: `Interval`
-252 | Meeting Rooms | :star: | :three: `Interval`
-253 | Meeting Rooms II | :star: | :three: `Interval`
-986 | Interval List Intersections | :star: :star: | :three: `Interval`
-1288 | Remove Covered Intervals | :star: :star: | :three: `Interval`
-027 | Remove Element | :star: | :three: `Two Pointers`
-026 | Remove Duplicates from Sorted Array | :star: | :three: `Two Pointers`
-080 | Remove Duplicates from Sorted Array II `dup N` | :star: :star: | :three:
-083 | Remove Duplicates from Sorted List `dup once` | :star: | :three: `Two Pointers`
-082 | Remove Duplicates from Sorted List II `no dup` | :star: :star: | :three: :heavy_plus_sign: `Two Pointers`
-316 | Remove Duplicate Letters | :star: :star: :star: | :three: :heavy_plus_sign:
-1081 | Smallest Subsequence of Distinct Characters | :star: :star: | :three:
-088 | Merge Sorted Array | :star: | :three:
-169 | Majority Element | :star: | :three: [:link: Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html)
-209 | Minimum Size Subarray Sum | :star: :star: | :three: `Prefix Sum` `BS` `Two Pointers`
-325 | Maximum Size Subarray Sum Equals k | :star: :star: | :three: `Prefix Sum` `Map`
-560 | Subarray Sum Equals K | :star: :star: | :three: `Prefix Sum` `Map`
-303 | Range Sum Query Immutable | :star: | :three: `Prefix Sum`
+189 | Rotate Array `right by k steps` | :star: :star: | :four:
+056 | Merge Intervals | :star: :star: | :four: `Interval`
+057 | Insert Intervals | :star: :star: | :four: `Interval`
+252 | Meeting Rooms | :star: | :four: `Interval`
+253 | Meeting Rooms II | :star: | :four: `Interval`
+986 | Interval List Intersections | :star: :star: | :four: `Interval`
+1288 | Remove Covered Intervals | :star: :star: | :four: `Interval`
+027 | Remove Element | :star: | :four: `Two Pointers`
+026 | Remove Duplicates from Sorted Array | :star: | :four: `Two Pointers`
+080 | Remove Duplicates from Sorted Array II `dup N` | :star: :star: | :four:
+083 | Remove Duplicates from Sorted List `dup once` | :star: | :four: `Two Pointers`
+082 | Remove Duplicates from Sorted List II `no dup` | :star: :star: | :four: :heavy_plus_sign: `Two Pointers`
+316 | Remove Duplicate Letters | :star: :star: :star: | :four: :heavy_plus_sign:
+1081 | Smallest Subsequence of Distinct Characters | :star: :star: | :four:
+088 | Merge Sorted Array | :star: | :four:
+169 | Majority Element | :star: | :four: [:link: Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html)
+209 | Minimum Size Subarray Sum | :star: :star: | :four: `Prefix Sum` `BS` `Two Pointers`
+325 | Maximum Size Subarray Sum Equals k | :star: :star: | :four: `Prefix Sum` `Map`
+560 | Subarray Sum Equals K | :star: :star: | :four: `Prefix Sum` `Map`
+303 | Range Sum Query Immutable | :star: | :four: `Prefix Sum`
 307 | Range Sum Query Mutable | :star: :star: | :three: `Segment Tree` `Binary indexed Tree`
-304 | Range Sum Query 2D Immutable | :star: :star: | :three: `Prefix Sum`
-370 | Range Addition | :star: :star: | :three: `Diff Array` `Prefix Sum`
-598 | Range Addition II | :star: | :three: `Diff Array`
-1094 | Car Pooling | :star: :star: | :three: `Diff Array`
+304 | Range Sum Query 2D Immutable | :star: :star: | :four: `Prefix Sum`
+370 | Range Addition | :star: :star: | :four: `Diff Array` `Prefix Sum`
+598 | Range Addition II | :star: | :four: `Diff Array`
+1094 | Car Pooling | :star: :star: | :four: `Diff Array`
 1109 | Corporate Flight Bookings | :star: :star: | :three: `Diff Array` `Prefix Sum`
 217 | Contains Duplicate I | :star: | :three:
 219 | Contains Duplicate II `nums[i]=nums[j] i-j<=k` | :star: | :three: `Set`
@@ -568,68 +568,68 @@ No | Title | Difficulty | Note
 450 | Delete Node in a BST | :star: :star: | :four:
 700 | Search in a Binary Search Tree | :star: | :four:
 701 | Insert into a Binary Search Tree | :star: :star: | :four:
-814 | Binary Tree Pruning | :star: | :three: `DFS`
-1373 | Maximum Sum BST in Binary Tree | :star: :star: :star: | :three: :heavy_plus_sign:
+814 | Binary Tree Pruning | :star: | :four: `DFS`
+1373 | Maximum Sum BST in Binary Tree | :star: :star: :star: | :four: :heavy_plus_sign:
 1803 | Count Pairs With XOR in a Range | :star: :star: :star: | `XOR` `Prefix Sum` `Trie`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## String
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-008 | atoi | :star: | :three:
-014 | Longest Common Prefix | :star: | :three:
+008 | atoi | :star: | :four:
+014 | Longest Common Prefix | :star: | :four:
 028 | Implement Strstr | :star: | `KMP`
-058 | Length of Last Word | :star: | :three:
-125 | Valid Palindrome | :star: | :three:
-680 | Valid Palindrome II | :star: | :three:
-345 | Reverse Vowels of a String | :star: | :three:
-161 | One Edit Distance | :star: :star: | :three:
-242 | Valid Anagram | :star: | :three:
-389 | Find the Difference | :star: | :three:
-409 | Longest Palindrome | :star: | :three:
-415 | Adding Strings | :star: | :three:
-394 | Decode String | :star: :star: | :three: :heavy_plus_sign: `Two Pointers`
+058 | Length of Last Word | :star: | :four:
+125 | Valid Palindrome | :star: | :four:
+680 | Valid Palindrome II | :star: | :four:
+345 | Reverse Vowels of a String | :star: | :four:
+161 | One Edit Distance | :star: :star: | :four:
+242 | Valid Anagram | :star: | :four:
+389 | Find the Difference | :star: | :four:
+409 | Longest Palindrome | :star: | :four:
+415 | Adding Strings | :star: | :four:
+394 | Decode String | :star: :star: | :four: :heavy_plus_sign: `Two Pointers`
 443 | String Compression | :star: :star: | :three: :heavy_plus_sign: `Two Pointers`
 468 | Validate IP Address | :star: :star: | `TODO`
-796 | Rotate String | :star: | :three:
-1062 | Longest Repeating Substring | :star: :star: | :three: :heavy_plus_sign: `BS + Hash` `Rabin-Karp`
-1784 | Check if Binary String Has at Most One Segment of Ones | :star: | :three:
-1869 | Longer Contiguous Segments of Ones than Zeros | :star: | :three:
+796 | Rotate String | :star: | :four:
+1062 | Longest Repeating Substring | :star: :star: | :four: :heavy_plus_sign: `BS + Hash` `Rabin-Karp`
+1784 | Check if Binary String Has at Most One Segment of Ones | :star: | :four:
+1869 | Longer Contiguous Segments of Ones than Zeros | :star: | :four:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Map
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-001 | Two Sum | :star: | :three:
-167 | Two Sum II | :star: | :three: `Two Pointers`
-170 | Two Sum III - Data structure | :star: | :three:
-653 | Two Sum IV | :star: | :three: `Inorder + Two Pointers` `Complement Map`
-1214 | Two Sum BSTs | :star: :star: | :three: `Inorder + Complement Map` `Tree`
-266 | Palindrome Permutation | :star: | :three:
-267 | Palindrome Permutation II | :star: :star: | :three: `Backtracking`
+001 | Two Sum | :star: | :four:
+167 | Two Sum II | :star: | :four: `Two Pointers`
+170 | Two Sum III - Data structure | :star: | :four:
+653 | Two Sum IV | :star: | :four: `Inorder + Two Pointers` `Complement Map`
+1214 | Two Sum BSTs | :star: :star: | :four: `Inorder + Complement Map` `Tree`
+266 | Palindrome Permutation | :star: | :four:
+267 | Palindrome Permutation II | :star: :star: | :four: `Backtracking`
 205 | Isomorphic Strings | :star: | :four:
-383 | Ransom Note | :star: | :three:
-412 | Fizz Buzz | :star: | :three:
-771 | Jewels and Stones | :star: | :three:
-811 | Subdomain Visit Count | :star: | :three:
-953 | Verifying an Alien Dictionary  | :star: | :three:
+383 | Ransom Note | :star: | :four:
+412 | Fizz Buzz | :star: | :four:
+771 | Jewels and Stones | :star: | :four:
+811 | Subdomain Visit Count | :star: | :four:
+953 | Verifying an Alien Dictionary  | :star: | :four:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Stack
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-020 | valid Parentheses | :star: | :three:
-032 | Longet Valid Parentheses | :star: :star: :star: | :three: :heavy_plus_sign: `DP`
-225 | Implement Stack using Queues | :star: | :three:
-232 | Implement Queue using Stacks | :star: | :three:
-084 | Largest Rectangle in Histogram | :star: :star: :star: | :three: `Monotonic stack`
-316 | Remove Duplicate Letters | :star: :star: :star: | :three: :heavy_plus_sign: `Monotonic Stack`
-496 | Next Greater Element I | :star: | :three: `Monotonic Stack`
-503 | Next Greater Element II | :star: :star: | :three: `Monotonic Stack` `Circular`
+020 | valid Parentheses | :star: | :four:
+032 | Longet Valid Parentheses | :star: :star: :star: | :four: :heavy_plus_sign: `DP`
+225 | Implement Stack using Queues | :star: | :four:
+232 | Implement Queue using Stacks | :star: | :four:
+084 | Largest Rectangle in Histogram | :star: :star: :star: | :four: `Monotonic stack`
+316 | Remove Duplicate Letters | :star: :star: :star: | :four: :heavy_plus_sign: `Monotonic Stack`
+496 | Next Greater Element I | :star: | :four: `Monotonic Stack`
+503 | Next Greater Element II | :star: :star: | :four: `Monotonic Stack` `Circular`
 556 | Next Greater Element III | :star: :star: | `TODO` `Monotonic Stack`
-739 | Daily Temperatures | :star: :star: | :three: `Monotonic Stack`
-921 | Minimum Add to Make Parentheses Valid | :star: :star: | :three: :heavy_plus_sign:
-1249 | Minimum Remove to Make Valid Parentheses | :star: :star: | :three: :heavy_plus_sign: `Bit Set`
+739 | Daily Temperatures | :star: :star: | :four: `Monotonic Stack`
+921 | Minimum Add to Make Parentheses Valid | :star: :star: | :four: :heavy_plus_sign:
+1249 | Minimum Remove to Make Valid Parentheses | :star: :star: | :four: :heavy_plus_sign: `Bit Set`
 1541 | Minimum Insertions to Balance a Parentheses String | :star: :star: | :three: :heavy_plus_sign:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
@@ -644,8 +644,8 @@ No | Title | Difficulty | Note
 -- | -- | --- | ---
 006 | Zig Zag Conversion | :star: :star: |
 007 | Reverse Integer | :star: | :three:
-009 | Palindrom Number | :star: | :three:
-015 | 3 Sum | :star: :star: | :three:
+009 | Palindrom N voiumber | :star: | :three:
+015 | 3 Sum | :star: :star: | :four:
 016 | 3 Sum Closest | :star: :star: | :three:
 018 | 4 Sum | :star: :star: | :three:
 043 | Multiply Strings | :star: :star: | :three:
