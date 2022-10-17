@@ -73,9 +73,9 @@ public:
                     que.push({node->left, 2 * id});
                 if (node->right)
                     que.push({node->right, 2 * id + 1});
-
-                maxWidth = max(maxWidth, end - beg + 1);
             }
+
+            maxWidth = max(maxWidth, end - beg + 1);
         }
 
         return maxWidth;
