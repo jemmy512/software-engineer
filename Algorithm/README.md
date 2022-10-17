@@ -4,94 +4,155 @@
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
 010 | Regular Expression Matching | :star: :star: :star: |
-032 | Longet Valid Paretheses | :star: :star: :star: | :three: :heavy_plus_sign: `stack`
-062 | Unique Paths | :star: :star: | :three:
-063 | Unique Paths II | :star: :star: | :three:
+032 | Longet Valid Paretheses | :star: :star: :star: | :four: :heavy_plus_sign: `stack`
+062 | Unique Paths | :star: :star: | :four:
+063 | Unique Paths II | :star: :star: | :four:
 980 | Unique Paths III | :star: :star: :star: | `TODO`
-064 | Minimum Path Sum | :star: :star: | :three:
-070 | Climbing Stairs | :star: | :three:
-746 | MinCost Climb Stair | :star: | :three:
-085 | Maximal Rectangle | :star: :star: :star: | :three:
-221 | Maximal Square | :star: :star: | :three: :thinking:
-091 | Decode Ways | :star: :star: | :three:
-121 | Best Time to Buy and Sell Stock | :star: | :three:  `Prefix Sum`
-122 | Best Time to Buy and Sell Stock II | :star: | :three: `Greedy`
-123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | :three: `2 times`
-188 | Best Time to Buy and Sell Stock IV | :star: :star: :star: | :three: :thinking: `N times`
-309 | Best Time to Buy and Sell Stock with Cooldown | :star: :star: | :three: [Stock Problems Solution](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems)
-714 | Best Time to Buy and Sell Stock with Transaction Fee | :star: :star: | :three:
-139 | Word Break | :star: :star: | :three: :thinking: `Bottom Up`
-152 | Maximum Product Subarry | :star: :star: | :three: `Prefix Sum`
-174 | Dungeon Game | :star: :star: :star: | :three:
-198 | House Robber | :star: | :three:
-213 | House Robber II | :star: :star: | :three:
-337 | House Robber III | :star: :star: | :three:
-241 | Different Ways to Add Parentheses | :star: :star: | :three:
-264 | Ugly Number II | :star: :star: | :three:
-292 | Nim Game | :star: | :three:
+064 | Minimum Path Sum | :star: :star: | :four:
+070 | Climbing Stairs | :star: | :four:
+746 | MinCost Climb Stair | :star: | :four:
+085 | Maximal Rectangle | :star: :star: :star: | :four:
+221 | Maximal Square | :star: :star: | :four: :thinking:
+091 | Decode Ways | :star: :star: | :four:
+121 | Best Time to Buy and Sell Stock | :star: | :four:  `Prefix Sum`
+122 | Best Time to Buy and Sell Stock II | :star: | :four: `Greedy`
+123 | Best Time to Buy and Sell Stock III | :star: :star: :star: | :four: `2 times`
+188 | Best Time to Buy and Sell Stock IV | :star: :star: :star: | :four: :thinking: `N times`
+309 | Best Time to Buy and Sell Stock with Cooldown | :star: :star: | :four: [Stock Problems Solution](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems)
+714 | Best Time to Buy and Sell Stock with Transaction Fee | :star: :star: | :four:
+139 | Word Break | :star: :star: | :four: :thinking: `Bottom Up`
+152 | Maximum Product Subarry | :star: :star: | :four: `Prefix Sum`
+174 | Dungeon Game | :star: :star: :star: | :four:
+198 | House Robber | :star: | :four:
+213 | House Robber II | :star: :star: | :four:
+337 | House Robber III | :star: :star: | :four:
+241 | Different Ways to Add Parentheses | :star: :star: | :four:
+264 | Ugly Number II | :star: :star: | :four:
+292 | Nim Game | :star: | :two:
 338 | Counting Bits | :star: :star: | :one: :thinking: `Bit`
-392 | Is Subsequence | :star: :star: | :three:
-509 | Fibonacci Number| :star: | :three:
-514 | Freedom Trail  | :star: :star: :star: | :three:
-523 | Continuous Subarray Sum  | :star: :star: | :three: :thinking: `Prefix Sum` `Map`
+392 | Is Subsequence | :star: :star: | :four:
+509 | Fibonacci Number| :star: | :four:
+514 | Freedom Trail  | :star: :star: :star: | :four:
+523 | Continuous Subarray Sum  | :star: :star: | :four: :thinking: `Prefix Sum` `Map`
 546 | Remove Boxes | :star: :star: :star: | `TODO`
 650 | 2 Keys Keyboard | :star: :star: | :one:
 651 | 4 Keys Keyboard | :star: :star: | :one:
-718 | Maximum Length of Repeated Subarray | :star: :star: | :three:
-787 | Cheapest Flights Within K Stops | :star: :star: | :three:
-1137 | N-th Tribonacci Number | :star: | :three:
-005 | Longest Palindromic Substring | :star: :star: | :three:
-647 | Palindromic Substrings | :star: :star: | :three:
-1312 | Minimum Insertion Steps to Make a String Palindrome | :star: :star: :star: | :three:
+718 | Maximum Length of Repeated Subarray | :star: :star: | :four:
+787 | Cheapest Flights Within K Stops | :star: :star: | :four: `Graph`
+1137 | N-th Tribonacci Number | :star: | :four:
+005 | Longest Palindromic Substring | :star: :star: | :four:
+647 | Palindromic Substrings | :star: :star: | :four:
+1312 | Minimum Insertion Steps to Make a String Palindrome | :star: :star: :star: | :four:
 1025 | Divisor Game | :star: | :two:
 887 | Super Egg Drop | :star: :star: :star: | :two:
 1884 | Egg Drop With 2 Eggs and N Floors  | :star: :star: | :two:
-931 | Minimum Falling Path Sum | :star: :star: | :three:
-1289 | Minimum Falling Path Sum II | :star: :star: :star: | :three:
-877 | Stone Game | :star: :star: | :two: :heavy_plus_sign:
+931 | Minimum Falling Path Sum | :star: :star: | :four:
+1289 | Minimum Falling Path Sum II | :star: :star: :star: | :four:
+877 | Stone Game | :star: :star: | :four: :heavy_plus_sign:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ### knapsack
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-322 | Coin Change | :star: :star: | :three:
-518 | Coin Change 2 | :star: :star: | :three: :thinking:
-416 | Partition Equal Subset Sum | :star: :star: | :three:
-494 | Target Sum | :star: :star: | :three:
+322 | Coin Change | :star: :star: | :four:
+518 | Coin Change 2 | :star: :star: | :four: :thinking:
+416 | Partition Equal Subset Sum | :star: :star: | :four:
+494 | Target Sum | :star: :star: | :four: `Knapsack` `DP` `Backtrack`
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
-Two type of the problem:
-1. Can the goods fill the knapsack?
-2. How many ways to put the goods into knapsack?
+Three type of the problem:
+1. What's the maximum value of the knapsack when it is fulfilled?
+    <details>
+    <summary>Open-Close</summary>
 
-```java
-int knapsack(int W, int N, int[] wt, int[] val) {
-    int[][] dp = new int[N + 1][W + 1];
+    ```c++
+    int knapsack(int W, const vector<int>& vals, const vector<int>& weights) {
+        const auto N = weights.size();
+        vector<vector<int>> dp(N+1, vectror(W+1, 0));
 
-    for (int i = 1; i <= N; i++) {
-        for (int w = 1; w <= W; w++) {
-            if (w - wt[i - 1] < 0) {
-                dp[i][w] = dp[i - 1][w];
-            } else {
-                dp[i][w] = max(
-                    dp[i - 1][w - wt[i-1]] + val[i-1],
-                    dp[i - 1][w]
-                );
+        for (auto n = 1; n <= N; ++n) {
+            for (auto w = 1; w <= W; ++w) {
+                if (w >= weights[n-1]) {
+                    dp[n][w] = max(
+                        dp[n-1][w],
+                        dp[n-1][w - weights[n-1]] + vals[n-1];
+                    );
+                } else {
+                    dp[n][w] = dp[n-1][w];
+                }
             }
         }
-    }
 
-    return dp[N][W];
-}
-```
+        return dp[N][W];
+    }
+    ```
+    </details>
+
+2. [Can the goods fulfill the knapsack?](./LeetCode/DP/416-partition-equal-subset-sum.cc)
+    <details>
+    <summary>Open-Close</summary>
+
+    ```c++
+    bool knapsack(int W, const vector<int>& weights) {
+        const auto N = weights.size();
+        vector<vector<bool>> dp(N+1, vectror(W+1, false));
+
+        for (auto n = 0; n <= N; ++n) {
+            dp[n][0] = true;
+        }
+
+        for (auto n = 1; n <= N; ++n) {
+            for (auto w = 1; w <= W; ++w) {
+                if (w >= weights[n-1]) {
+                    dp[n][w] = dp[n-1][w] || dp[n-1][w - weights[n-1]];
+                } else {
+                    dp[n][w] = dp[n-1][w];
+                }
+            }
+        }
+
+        return dp[N][W];
+    }
+    ```
+
+    </details>
+
+3. [How many ways to put the goods into knapsack?](./LeetCode/DP/518-coin-change-ii.cc)
+    <details>
+    <summary>Open-Close</summary>
+
+    ```c++
+    int knapsack(int W, const vector<int>& weights) {
+        const auto N = weights.size();
+        vector<vector<int>> dp(N+1, vectror(W+1, 0));
+
+        for (auto n = 0; n <= N; ++n) {
+            dp[n][0] = 1;
+        }
+
+        for (auto n = 1; n <= N; ++n) {
+            for (auto w = 1; w <= W; ++w) {
+                if (w >= weights[n-1]) {
+                    dp[n][w] = dp[n-1][w] + dp[n-1][w - weights[n-1]];
+                } else {
+                    dp[n][w] = dp[n-1][w];
+                }
+            }
+        }
+
+        return dp[N][W];
+    }
+    ```
+
+    </details>
 
 ### substring
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-053 | Maximum Subarray | :star: | :three: `Prefix Sum` `kadane` `Divide Conquer`
-072 | Edit Distance | :star: :star: :star: | :three:
-300 | Longest Increasing Subsequence | :star: :star: | :three:
-354 | Russian Doll Envelopes | :star: :star: :star: | :three: `BS`
+053 | Maximum Subarray | :star: | :four: `Prefix Sum` `kadane` `Divide Conquer`
+072 | Edit Distance | :star: :star: :star: | :four:
+300 | Longest Increasing Subsequence | :star: :star: | :four:
+354 | Russian Doll Envelopes | :star: :star: :star: | :four: `BS`
 516 | Longest Palindromic Subsequence | :star: :star: | :three:
 1143 | Longest Common Subsequence | :star: :star: | :three:
 1048 | Longest String Chain | :star: :star: | :three:
@@ -289,7 +350,7 @@ No | Title | Difficulty | Note
 323 | Number of Connected Components in an Undirected Graph | :star: :star: | :thinking: `Union Find` `DFS` `Matrix`
 547 | Number of Provinces | :star: :star: | :four: `DFS` `Matrix`
 694 | Number of Distinct Islands | :star: :star: | :four: `DFS` `Matrix` `Serialization`
-410 | Split Array Largest Sum | :star: :star: :star: | :three: :thinking: `BS`
+410 | Split Array Largest Sum | :star: :star: :star: | :four: :thinking: `BS`
 695 | Max Area of Island | :star: :star: | :four: `DFS` `Matrix`
 1020 | Number of Enclaves | :star: :star: | :four: `DFS` `Matrix`
 1254 | Number of Closed Islands | :star: :star: | :four: `DFS` `Matrix`
@@ -391,7 +452,7 @@ int bfs(Node start, Node target) {
 ## Sort
 No | Title | Difficulty | Note
 -- | -- | ---  | ---
-215 | Kth Largest Element in an Array | :star: :star: | :three: `??` `Heap Sort` `Quick Sort`
+215 | Kth Largest Element in an Array | :star: :star: | :four: `??` `Heap Sort` `Quick Sort`
 295 | Find Median from Data Stream | :star: :star: :star: | :four: `Heap Sort`
 347 | Top K Frequent Elements | :star: :star: | :four: `Heap Sort` `Quick Sort`
 414 | Third Maximum Number | :star: | :four: `Heap Sort`
@@ -455,12 +516,12 @@ No | Title | Difficulty | Note
 370 | Range Addition | :star: :star: | :four: `Diff Array` `Prefix Sum`
 598 | Range Addition II | :star: | :four: `Diff Array`
 1094 | Car Pooling | :star: :star: | :four: `Diff Array`
-1109 | Corporate Flight Bookings | :star: :star: | :three: `Diff Array` `Prefix Sum`
-217 | Contains Duplicate I | :star: | :three:
-219 | Contains Duplicate II `nums[i]=nums[j] i-j<=k` | :star: | :three: `Set`
-220 | Contains Duplicate III `nums[i]-nums[j]<=t i-j<=k` | :star: :star: | :three: :heavy_plus_sign: `bucket sort`
-238 | Product of Array Except Self  | :star: :star: | :three: `L-R vec`
-870 | Advantage Shuffle | :star: :star: | :three:
+1109 | Corporate Flight Bookings | :star: :star: | :four: `Diff Array` `Prefix Sum`
+217 | Contains Duplicate I | :star: | :four:
+219 | Contains Duplicate II `nums[i]=nums[j] i-j<=k` | :star: | :four: `Set`
+220 | Contains Duplicate III `nums[i]-nums[j]<=t i-j<=k` | :star: :star: | :four: :heavy_plus_sign: `bucket sort`
+238 | Product of Array Except Self  | :star: :star: | :four: `L-R vec`
+870 | Advantage Shuffle | :star: :star: | :four:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## List
@@ -589,7 +650,7 @@ No | Title | Difficulty | Note
 409 | Longest Palindrome | :star: | :four:
 415 | Adding Strings | :star: | :four:
 394 | Decode String | :star: :star: | :four: :heavy_plus_sign: `Two Pointers`
-443 | String Compression | :star: :star: | :three: :heavy_plus_sign: `Two Pointers`
+443 | String Compression | :star: :star: | :four: :heavy_plus_sign: `Two Pointers`
 468 | Validate IP Address | :star: :star: | `TODO`
 796 | Rotate String | :star: | :four:
 1062 | Longest Repeating Substring | :star: :star: | :four: :heavy_plus_sign: `BS + Hash` `Rabin-Karp`
@@ -643,16 +704,16 @@ No | Title | Difficulty | Note
 No | Title | Difficulty | Note
 -- | -- | --- | ---
 006 | Zig Zag Conversion | :star: :star: |
-007 | Reverse Integer | :star: | :three:
+007 | Reverse Integer | :star: | :four:
 009 | Palindrom N voiumber | :star: | :three:
 015 | 3 Sum | :star: :star: | :four:
-016 | 3 Sum Closest | :star: :star: | :three:
-018 | 4 Sum | :star: :star: | :three:
-043 | Multiply Strings | :star: :star: | :three:
+016 | 3 Sum Closest | :star: :star: | :four:
+018 | 4 Sum | :star: :star: | :four:
+043 | Multiply Strings | :star: :star: | :four:
 050 | pow-x-n | :star: :star: | `TODO`
 065 | Valid Number | :star: :star: :star: |
-066 | Plus One | :star: | :three:
-067 | Add Binary | :star: | :three:
+066 | Plus One | :star: | :four:
+067 | Add Binary | :star: | :four:
 069 | Sqrt(x) | :star: | :three:
 168 | Excel Sheet Colum Title | :star: | :three:
 171 | Excel Sheet Colum Number | :star: | :three:
