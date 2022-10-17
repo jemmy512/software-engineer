@@ -56,21 +56,28 @@ int mySqrt(int x) {
  * Time complexity : O(logN)
  * Space complexity :  O(1). */
 int mySqrt(int x) {
-    if (x < 2) return x;
-
-    long left = 2, right = x / 2;
-    while (left <= right) {
-        long pivot = left + (right - left) / 2;
-        long num = pivot * pivot;
-        if (num > x)
-            right = pivot - 1;
-        else if (num < x)
-            left = pivot + 1;
-        else
-            return pivot;
+    if (x < 2) {
+        return x;
     }
 
-    return right;
+    long beg = 2;
+    long end = x / 2;
+
+    while (beg <= end) {
+        long mid = beg + (end - beg) / 2;
+        long product = mid * mid;
+
+        if (product == x) {
+            return mid;
+        } else if (product < x) {
+            beg = mid + 1;
+        } else {
+            end = mid - 1;
+        }
+    }
+
+    // note: end, not beg
+    return end;
 }
 
 /* Recursion + Bit Shifts
