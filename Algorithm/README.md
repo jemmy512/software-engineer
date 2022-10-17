@@ -40,8 +40,6 @@ No | Title | Difficulty | Note
 718 | Maximum Length of Repeated Subarray | :star: :star: | :four:
 787 | Cheapest Flights Within K Stops | :star: :star: | :four: `Graph`
 1137 | N-th Tribonacci Number | :star: | :four:
-005 | Longest Palindromic Substring | :star: :star: | :four:
-647 | Palindromic Substrings | :star: :star: | :four:
 1312 | Minimum Insertion Steps to Make a String Palindrome | :star: :star: :star: | :four:
 1025 | Divisor Game | :star: | :two:
 887 | Super Egg Drop | :star: :star: :star: | :two:
@@ -63,7 +61,7 @@ No | Title | Difficulty | Note
 Three type of the problem:
 1. What's the maximum value of the knapsack when it is fulfilled?
     <details>
-    <summary>Open-Close</summary>
+    <summary>Collapse</summary>
 
     ```c++
     int knapsack(int W, const vector<int>& vals, const vector<int>& weights) {
@@ -90,7 +88,7 @@ Three type of the problem:
 
 2. [Can the goods fulfill the knapsack?](./LeetCode/DP/416-partition-equal-subset-sum.cc)
     <details>
-    <summary>Open-Close</summary>
+    <summary>Collapse</summary>
 
     ```c++
     bool knapsack(int W, const vector<int>& weights) {
@@ -119,7 +117,7 @@ Three type of the problem:
 
 3. [How many ways to put the goods into knapsack?](./LeetCode/DP/518-coin-change-ii.cc)
     <details>
-    <summary>Open-Close</summary>
+    <summary>Collapse</summary>
 
     ```c++
     int knapsack(int W, const vector<int>& weights) {
@@ -152,12 +150,14 @@ No | Title | Difficulty | Note
 053 | Maximum Subarray | :star: | :four: `Prefix Sum` `kadane` `Divide Conquer`
 072 | Edit Distance | :star: :star: :star: | :four:
 300 | Longest Increasing Subsequence | :star: :star: | :four:
-354 | Russian Doll Envelopes | :star: :star: :star: | :four: `BS`
-516 | Longest Palindromic Subsequence | :star: :star: | :three:
-1143 | Longest Common Subsequence | :star: :star: | :three:
-1048 | Longest String Chain | :star: :star: | :three:
-583 | Delete Operation for Two Strings | :star: :star: | :three:
-712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: | :three:
+354 | Russian Doll Envelopes | :star: :star: :star: | :four: :heavy_plus_sign: `BS`
+005 | Longest Palindromic Substring | :star: :star: | :four:
+516 | Longest Palindromic Subsequence | :star: :star: | :four:
+647 | Palindromic Substrings | :star: :star: | :four:
+1143 | Longest Common Subsequence | :star: :star: | :four:
+1048 | Longest String Chain | :star: :star: | :four:
+583 | Delete Operation for Two Strings | :star: :star: | :four:
+712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: | :four:
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ```c++
@@ -202,6 +202,9 @@ void backtrack(path, options) {
 ```
 
 * Remove duplicates in combination
+    <details>
+    <summary>Collapse</summary>
+
     ```c++
     // 40. Combination Sum II
     sort(candidates.begin(), candidates.end());
@@ -222,7 +225,12 @@ void backtrack(path, options) {
     }
     ```
 
+    </details>
+
 * Remove duplicates in permutation
+    <details>
+    <summary>Collapse</summary>
+
     ```c++
     // 47. Permutations II
     void permute(vector<int>& nums, int pos) {
@@ -248,6 +256,8 @@ void backtrack(path, options) {
         return beg == end;
     }
     ```
+
+    </details>
 
 ## Greedy
 No | Title | Difficulty | Note
@@ -625,7 +635,7 @@ No | Title | Difficulty | Note
 652 | Find Duplicate Subtrees | :star: :star: | :four: `Serialization`
 538 | Convert BST to Greater Tree | :star: :star: | :four: `Inorder Descending`
 637 | Average of Levels in Binary Tree | :star: | :four: `BFS` `BFS-Recursion`
-662 | Maximum Width of Binary Tree | :star: :star: | :three: `TODO: overflow`
+662 | Maximum Width of Binary Tree | :star: :star: | :four: `TODO: overflow`
 450 | Delete Node in a BST | :star: :star: | :four:
 700 | Search in a Binary Search Tree | :star: | :four:
 701 | Insert into a Binary Search Tree | :star: :star: | :four:
@@ -714,7 +724,7 @@ No | Title | Difficulty | Note
 065 | Valid Number | :star: :star: :star: |
 066 | Plus One | :star: | :four:
 067 | Add Binary | :star: | :four:
-069 | Sqrt(x) | :star: | :three:
+069 | Sqrt(x) | :star: | :four:
 168 | Excel Sheet Colum Title | :star: | :three:
 171 | Excel Sheet Colum Number | :star: | :three:
 172 | Factorial Trailing Zeros | :star: :star: |
@@ -731,8 +741,8 @@ No | Title | Difficulty | Note
 227 | Basic Calculator II | :star: :star: |
 772 | Basic Calculator II  | :star: :star: |
 231 | Power Of Two | :star: |
-263 | Ugly Number | :star: | :three:
-268 | Missing Number | :star: | :three:
+263 | Ugly Number | :star: | :four:
+268 | Missing Number | :star: | :four:
 292 | Nim Game | :star: |
 326 | Power of Three | :star: |
 371 | Sum of Two Integers | :star: :star: |
