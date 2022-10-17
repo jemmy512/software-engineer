@@ -55,6 +55,10 @@ public:
                 int idx = binarySearch(dp, num);
                 dp[idx] = num;
             }
+            // } else if (dp.back() > num) {
+            //     auto ite = lower_bound(dp.begin(), dp.end(), num);
+            //     *ite = num;
+            // }
         }
 
         return dp.size();
