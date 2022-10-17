@@ -38,6 +38,32 @@ using namespace std;
 class Solution {
 public:
     int maxEnvelopes(vector<vector<int>>& envelopes) {
+        int maxLen = 0;
+        vector<int> dp;
+        dp.reserve(envelopes.size());
+
+        sort(envelopes.begin(), envelopes.end(), [](const auto& lhs, const auto& rhs) {
+            return lhs[0] != rhs[0] ? lhs[0] < rhs[0] : lhs[1] > rhs[1];
+        });
+
+        for (const auto& env : envelopes) {
+            const auto en  = env[1];
+            const auto ite = lower_bound(dp.begin(), dp.end(), en);
+
+            if (ite == dp.end()) {
+                dp.push_back(en);
+            } else {
+                *ite = en;
+            }
+        }
+
+        return dp.size();
+    }
+};
+
+class Solution {
+public:
+    int maxEnvelopes(vector<vector<int>>& envelopes) {
         vector<int> dp;
         dp.reserve(envelopes.size());
 
@@ -83,6 +109,8 @@ private:
     }
 };
 
+
+// time out
 class Solution {
 public:
     int maxEnvelopes(vector<vector<int>>& envelopes) {
