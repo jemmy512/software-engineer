@@ -142,8 +142,12 @@ basic_socket_acceptor::async_accept()
                                     }
 
                                     if (op_type == write_op) {
-                                        if ((descriptor_data->registered_events_ & EPOLLOUT) == 0)
+                                        if ((descriptor_data->registered_events_ & EPOLLOUT) == 0) {
+                                            epoll_event ev = { 0, { 0 } };
+                                            ev.events = descriptor_data->registered_events_ | EPOLLOUT;
+                                            ev.data.ptr = descriptor_data;
                                             epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, descriptor, &ev)
+                                        }
                                     }
                                 } else if (descriptor_data->registered_events_ == 0) {
                                     op->ec_ = boost::asio::error::operation_not_supported;
