@@ -901,6 +901,10 @@ pplx::task<http_response> http_client::request()
                                     std::ostream request_stream(&ctx->m_body_buf)
                                     request_stream << method << " " << encoded_resource << " " << "HTTP/1.1" << CRLF;
                                     request_stream << "Host: " << host << ":" << port << CRLF;
+
+                                if (!ctx->m_timer.has_started())
+                                    ctx->m_timer.start();
+
                                 if (ctx->m_connection->is_reused() || proxy_type == http_proxy_type::ssl_tunnel)
                                     asio_context::write_request()
                                         if (m_connection->is_ssl() && !m_connection->is_reused())
@@ -1243,6 +1247,114 @@ _Task_impl_base::_Wait()
             std::rethrow_exception(_M_stdException)
     if (_IsCanceled())
         return canceled
+```
+
+## Error
+```c++
+class timeout_timer
+{
+public:
+
+    timeout_timer(const std::chrono::microseconds& timeout)
+    :   m_duration(timeout.count()),
+        m_state(created),
+        m_timer(crossplat::threadpool::shared_instance().service())
+    {}
+
+    void set_ctx(const std::weak_ptr<asio_context> &ctx) { m_ctx = ctx; }
+
+    void start()
+    {
+        assert(m_state == created);
+        assert(!m_ctx.expired());
+        m_state = started;
+
+        m_timer.expires_from_now(m_duration);
+        auto ctx = m_ctx;
+        m_timer.async_wait([ctx](const boost::system::error_code& ec) {
+            handle_timeout(ec, ctx);
+        });
+    }
+
+    void reset()
+    {
+        assert(m_state == started || m_state == timedout);
+        assert(!m_ctx.expired());
+        if (m_timer.expires_from_now(m_duration) > 0) {
+            // The existing handler was canceled so schedule a new one.
+            assert(m_state == started);
+            auto ctx = m_ctx;
+            m_timer.async_wait([ctx](const boost::system::error_code& ec) {
+                handle_timeout(ec, ctx);
+            });
+        }
+    }
+
+    bool has_timedout() const { return m_state == timedout; }
+
+    bool has_started() const { return m_state == started; }
+
+    void stop()
+    {
+        m_state = stopped;
+        m_timer.cancel();
+    }
+
+    static void handle_timeout(
+        const boost::system::error_code& ec,
+        const std::weak_ptr<asio_context> &ctx
+    ) {
+        if (!ec) {
+            if (auto shared_ctx = ctx.lock()) {
+                assert(shared_ctx->m_timer.m_state != timedout);
+                shared_ctx->m_timer.m_state = timedout;
+                // read(socket) returns immediately
+                shared_ctx->m_connection->close();
+            }
+        }
+    }
+};
+
+asio_context::start_request()
+{
+    auto = start_http_request_flow = []() {
+        if (!ctx->m_timer.has_started()) {
+            ctx->m_timer.start();
+        }
+
+        ctx->write_request();
+    };
+}
+
+virtual ~asio_context()
+{
+    m_timer.stop();
+    std::static_pointer_cast<asio_client>(m_http_client)->release_connection(m_connection);
+}
+
+void handle_write_request(const boost::system::error_code& err)
+{
+    if (!err) {
+        m_context->m_timer.reset();
+        m_context->m_connection->async_read_until(
+            m_response, CRLF + CRLF,
+            boost::bind(&ssl_proxy_tunnel::handle_status_line, shared_from_this(), boost::asio::placeholders::error)
+        );
+    } else {
+        m_context->report_error("Failed to send connect request to proxy.", err, httpclient_errorcode_context::writebody);
+            asio_context::report_error()
+                if (m_timer.has_timedout())
+                    errorcodeValue = make_error_code(std::errc::timed_out).value();
+                if (ec == boost::system::errc::broken_pipe)
+                    errorcodeValue = make_error_code(std::errc::host_unreachable).value();
+
+                request_context::report_error(errorcodeValue, message);
+                    request_context::report_exception(http_exception(static_cast<int>(error_code), errorMessage));
+                        auto response_impl = m_response._get_impl();
+                        response_impl->_complete(0, exceptionPtr);
+                        request_context::finish();
+    }
+}
 ```
 
 # [Boost.Asio](../Asio/README.md)
