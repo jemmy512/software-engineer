@@ -20,6 +20,7 @@
         * [read](#read-server)
         * [write](#write-server)
     * [Exception](#Exception)
+    * [Error](#Error)
 
 * [Boost.Asio](../Asio/README.md)
 
