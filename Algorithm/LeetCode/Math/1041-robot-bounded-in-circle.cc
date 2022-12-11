@@ -44,10 +44,10 @@ public:
         int dir = 0;
         int x = 0, y = 0;
 
-        for (const auto& ch : instructions) {
-            if (ch == 'L') {
+        for (const auto ins : instructions) {
+            if (ins == 'L') {
                 dir = (dir + 3) % 4; // dir -= 1
-            } else if (ch == 'R') {
+            } else if (ins == 'R') {
                 dir = (dir + 1) % 4;
             } else {
                 x += directions[dir].first;
