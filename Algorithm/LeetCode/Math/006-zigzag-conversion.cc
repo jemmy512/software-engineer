@@ -34,9 +34,7 @@ s consists of English letters (lower-case and upper-case), ',' and '.'.
 #include <algorithm>
 #include <sstream>
 
-using std::min;
-using std::string;
-using std::vector;
+using namespace std;
 
 class Solution {
 public:
