@@ -27,22 +27,17 @@ sx, sy, tx, ty will all be integers in the range [1, 10^9]. */
 class Solution {
 public:
     bool reachingPoints(int sx, int sy, int tx, int ty) {
-        while (tx >= sx && ty >= sy) {
-            if (tx == ty)
-                break;
-            if (tx > ty) {
-                if (ty > sy)
-                    tx %= ty;
-                else
-                    return (tx - sx) % ty == 0;
+        while (sx < tx && sy < ty) {
+            if (ty > tx) {
+                ty %= tx;
             } else {
-                if (tx > sx)
-                    ty %= tx;
-                else
-                    return (ty - sy) % tx == 0;
+                tx %= ty;
             }
         }
 
-        return (tx == sx && ty == sy);
+        if (sx > tx || sy > ty)
+            return false;
+
+        return (sx == tx) ? ((ty - sy) % sx == 0) : ((tx - sx) % sy == 0);
     }
 };
