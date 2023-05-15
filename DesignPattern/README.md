@@ -1,4 +1,5 @@
-* [Wikipedia: Software design pattern](https://en.wikipedia.org/wiki/Software_design_pattern#Creational_patterns)
+* [Wikipedia - Software design pattern](https://en.wikipedia.org/wiki/Software_design_pattern#Creational_patterns)
+* [Wikipedia - Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm)
 
 ![](./Images/design-pattern-1.png)
 ![](./Images/design-pattern-2.png)

@@ -450,6 +450,9 @@
 
 - [ ] [The Onion Architecture :link: Part 1](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)  [:link: Part 2](http://jeffreypalermo.com/blog/the-onion-architecture-part-2/)  [:link: Part 3](http://jeffreypalermo.com/blog/the-onion-architecture-part-3/)  [:link: Part 4](http://jeffreypalermo.com/blog/onion-architecture-part-4-after-four-years/)
 
+- [ ] [Wikipedia - Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm)
+- [ ] [Wikipedia - Software design pattern](https://en.wikipedia.org/wiki/Software_design_pattern#Creational_patterns)
+
 # Linux
 - [ ] [Red Hat Enterprise Linux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/)
 - [ ] [x86-TSO: A Rigorous and Usable Programmer’s Model for x86 Multiprocessors](https://www.cl.cam.ac.uk/~pes20/weakmemory/cacm.pdf)
