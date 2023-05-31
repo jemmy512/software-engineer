@@ -57,3 +57,9 @@ si/
 .idea/
 
 .DS_Store
+
+# gnu global files
+GPATH
+GRTAGS
+GSYMS
+GTAGS
