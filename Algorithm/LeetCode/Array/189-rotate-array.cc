@@ -63,15 +63,26 @@ public:
         while (cnt--) {
             auto beg = nums.begin() + cnt;
             auto end = beg + newK;
-            while (beg != end && end < nums.end()) {
+            for (;beg != end && end < nums.end(); ++beg) {
                 std::swap(*beg, *(beg+1));
-                ++beg;
             }
         }
     }
 };
-/*
-Edge case:
+
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int newK = k % nums.size();
+
+        while (newK--) {
+            for (auto ite = nums.end() - 2; ite >= nums.begin(); --ite) {
+                swap(*ite, *(ite + 1));
+            }
+        }
+    }
+};
+
+/* Edge case:
 [1] 1
-[1, 2] 3
-*/
+[1, 2] 3 */
