@@ -441,6 +441,7 @@
 - [ ] [Programming Paradigms for Dummies.pdf](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)
 - [ ] [Stanford Programming Paradigm](https://see.stanford.edu/Course/CS107)
 - [ ] [The Twelve-Factor App](https://12factor.net)
+    * ![](./images/12-factor-app.png)
 - [ ] [Avoid Over Engineering](https://medium.com/@rdsubhas/10-modern-software-engineering-mistakes-bc67fbef4fc8)
 
 - [ ] [Best Practices for Designing a Pragmatic RESTful API](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
@@ -548,6 +549,7 @@
 - [ ] [Nonblocking Algorithms and Scalable Multicore Programming ](https://queue.acm.org/detail.cfm?id=2492433)
 - [ ] [Optimizing for instruction caches Part 1](https://www.eetimes.com/optimizing-for-instruction-caches-part-1/) [Part 2](https://www.eetimes.com/optimizing-for-instruction-caches-part-2/) [Part 3](https://www.eetimes.com/optimizing-for-instruction-caches-part-3/)
 - [ ] [Latency Numbers Every Programmer Should Know](https://gist.github.com/jboner/2841832)
+- [ ] [arm64 cache :cn:](https://mp.weixin.qq.com/s/P1hh9dBEde2g5N4XMPErHQ)
 
 
 # Distributed Architecture
@@ -965,7 +967,6 @@
 - [ ] [Red Hat's edge computing approach](https://www.redhat.com/en/topics/edge-computing/approach)
 - [ ] [The latest news and announcements on edge computing](https://www.redhat.com/en/blog/red-hat-edge-stories)
 - [ ] [Evaluate your edge capabilities](https://www.redhat.com/en/about/contact/edge-offering)
-
 
 # Thanks
 This roadmap is highly inspired by course: https://time.geekbang.org/column/intro/48. Thanks [Hao Chen](https://github.com/haoel).
