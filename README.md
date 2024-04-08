@@ -192,6 +192,14 @@
 
 * [ISO/IEC C++ Standards](https://www.open-std.org/jtc1/sc22/wg21/docs/standards)
 
+* coolshell :cn:
+    * [How to lear C language well](https://coolshell.cn/articles/4102.html)
+    * [Deep understanding of C language](https://coolshell.cn/articles/5761.html)
+    * [C language puzzle](https://coolshell.cn/articles/945.html)
+    * [Is C language easy?](https://coolshell.cn/articles/873.html)
+    * [The overflow of integer](https://coolshell.cn/articles/11466.html)
+    * [Pointers and array member of structure](https://coolshell.cn/articles/11377.html)
+
 <details>
 <summary>Open-Close</summary>
 
