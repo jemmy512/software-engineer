@@ -34,13 +34,14 @@ g++ -fdump-class-hierarchy layout.cc
 clang -Xclang -fdump-record-layouts -stdlib=libc++ -std=c++17 -c layout.cc
 clang -Xclang -fdump-vtable-layouts -stdlib=libc++ -std=c++17 -c layout.cc
 ```
-<img src='./Images/cpp-diamond-hierarchy.png' height="600px"/>
+
+![](./Images/cpp-diamond-hierarchy.svg)
 
 ```c++
-//  https://godbolt.org/z/3hz5WsKnv
+// https://godbolt.org/z/r6qesraKx
+
 struct Base {
    virtual ~Base() = default;
-
    virtual void FnBase() {  }
 
    int a;
@@ -63,9 +64,14 @@ struct BaseB : virtual public Base {
 };
 
 struct Derive : public BaseB, public BaseA {
-   void FnBase() override {  }
-   void FnBaseA() override {  }
-   void FnBaseB() override {  }
+   virtual void FnBase() override {  }
+   virtual void FnBaseA() override {  }
+   virtual void FnBaseB() override {  }
+
+   virtual void FnDerive() { }
+
+    int a;
+    int b;
 };
 
 int main() {
@@ -77,13 +83,15 @@ int main() {
 }
 ```
 
-![](./Images/cpp-vtable.png)
+![](./Images/cpp-vtable.svg)
+
 * BaseA has its own virtual `FunB`, Derive overrides it and adds it into vtable of both BaseA and BaseB.
 
 #### VTable Layout
+
 ```c++
-Vtable for 'Derive' (22 entries).
-   0 | vbase_offset (32)
+Vtable for 'Derive' (23 entries).
+   0 | vbase_offset (40)
    1 | offset_to_top (0)
    2 | Derive RTTI
        -- (BaseB, 0) vtable address --
@@ -93,27 +101,28 @@ Vtable for 'Derive' (22 entries).
    5 | Derive::~Derive() [deleting]
    6 | void Derive::FnBase()
    7 | void Derive::FnBaseA()
-   8 | vbase_offset (16)
-   9 | offset_to_top (-16)
-  10 | Derive RTTI
+   8 | void Derive::FnDerive()
+   9 | vbase_offset (24)
+  10 | offset_to_top (-16)
+  11 | Derive RTTI
        -- (BaseA, 16) vtable address --
-  11 | void Derive::FnBaseA()
+  12 | void Derive::FnBaseA()
        [this adjustment: -16 non-virtual] method: void BaseA::FnBaseA()
-  12 | void BaseA::FnBaseA2()
-  13 | Derive::~Derive() [complete]
+  13 | void BaseA::FnBaseA2()
+  14 | Derive::~Derive() [complete]
        [this adjustment: -16 non-virtual] method: BaseA::~BaseA()
-  14 | Derive::~Derive() [deleting]
+  15 | Derive::~Derive() [deleting]
        [this adjustment: -16 non-virtual] method: BaseA::~BaseA()
-  15 | vcall_offset (-32)
-  16 | vcall_offset (-32)
-  17 | offset_to_top (-32)
-  18 | Derive RTTI
-       -- (Base, 32) vtable address --
-  19 | Derive::~Derive() [complete]
+  16 | vcall_offset (-40)
+  17 | vcall_offset (-40)
+  18 | offset_to_top (-40)
+  19 | Derive RTTI
+       -- (Base, 40) vtable address --
+  20 | Derive::~Derive() [complete]
        [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
-  20 | Derive::~Derive() [deleting]
+  21 | Derive::~Derive() [deleting]
        [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
-  21 | void Derive::FnBase()
+  22 | void Derive::FnBase()
        [this adjustment: 0 non-virtual, -32 vcall offset offset] method: void Base::FnBase()
 
 Virtual base offset offsets for 'Derive' (1 entry).
@@ -129,13 +138,81 @@ Thunks for 'void Derive::FnBase()' (1 entry).
 Thunks for 'void Derive::FnBaseA()' (1 entry).
    0 | this adjustment: -16 non-virtual
 
-VTable indices for 'Derive' (5 entries).
+VTable indices for 'Derive' (6 entries).
    0 | void Derive::FnBaseB()
    1 | Derive::~Derive() [complete]
    2 | Derive::~Derive() [deleting]
    3 | void Derive::FnBase()
    4 | void Derive::FnBaseA()
+   5 | void Derive::FnDerive()
 ```
+
+```cpp
+Vtable for 'Base' (5 entries).
+   0 | offset_to_top (0)
+   1 | Base RTTI
+       -- (Base, 0) vtable address --
+   2 | Base::~Base() [complete]
+   3 | Base::~Base() [deleting]
+   4 | void Base::FnBase()
+
+VTable indices for 'Base' (3 entries).
+   0 | Base::~Base() [complete]
+   1 | Base::~Base() [deleting]
+   2 | void Base::FnBase()
+```
+
+```cpp
+Vtable for 'BaseB' (13 entries).
+   0 | vbase_offset (16)
+   1 | offset_to_top (0)
+   2 | BaseB RTTI
+       -- (BaseB, 0) vtable address --
+   3 | void BaseB::FnBaseB()
+   4 | BaseB::~BaseB() [complete]
+   5 | BaseB::~BaseB() [deleting]
+   6 | vcall_offset (0)
+   7 | vcall_offset (-16)
+   8 | offset_to_top (-16)
+   9 | BaseB RTTI
+       -- (Base, 16) vtable address --
+  10 | BaseB::~BaseB() [complete]
+       [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
+  11 | BaseB::~BaseB() [deleting]
+       [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
+  12 | void Base::FnBase()
+```
+
+```cpp
+Vtable for 'BaseA' (14 entries).
+   0 | vbase_offset (16)
+   1 | offset_to_top (0)
+   2 | BaseA RTTI
+       -- (BaseA, 0) vtable address --
+   3 | void BaseA::FnBaseA()
+   4 | void BaseA::FnBaseA2()
+   5 | BaseA::~BaseA() [complete]
+   6 | BaseA::~BaseA() [deleting]
+   7 | vcall_offset (0)
+   8 | vcall_offset (-16)
+   9 | offset_to_top (-16)
+  10 | BaseA RTTI
+       -- (Base, 16) vtable address --
+  11 | BaseA::~BaseA() [complete]
+       [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
+  12 | BaseA::~BaseA() [deleting]
+       [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
+  13 | void Base::FnBase()
+```
+
+```cpp
+VTable indices for 'BaseA' (4 entries).
+   0 | void BaseA::FnBaseA()
+   1 | void BaseA::FnBaseA2()
+   2 | BaseA::~BaseA() [complete]
+   3 | BaseA::~BaseA() [deleting]
+```
+
 [Itanium C++ ABI 1.1 Definitions](https://refspecs.linuxfoundation.org/cxxabi-1.75.html#definitions)
 * **Thunk**: A segment of code associated (in this ABI) with a target function, which is called instead of the target function for the purpose of modifying parameters (e.g. this) or other parts of the environment before transferring control to the target function, and possibly making further modifications after its return. A thunk may contain as little as an instruction to be executed prior to falling through to an immediately following target function, or it may be a full function with its own stack frame that does a full call to the target function.
 * **dsize**: the data size of an object, which is the size of O without tail padding.
@@ -163,6 +240,7 @@ Why does C++ need vcall_offset for virtual inheritance but not for non-virtual i
     * If vcall_offset is a constant in thunk, the compiler has to generate two versions of thunk, which only differ in vcall_offset, and both pointers point to the same BaseB::~BaseB.
 
 #### Record Layout
+
 ```c++
 *** Dumping AST Record Layout
          0 | struct Base
@@ -206,28 +284,37 @@ Why does C++ need vcall_offset for virtual inheritance but not for non-virtual i
         16 |     (BaseA vtable pointer)
         24 |     int a
         28 |     int b
-        32 |   struct Base (virtual base)
-        32 |     (Base vtable pointer)
-        40 |     int a
-        44 |     int b
-           | [sizeof=48, dsize=48, align=8,
-           |  nvsize=32, nvalign=8]
+        32 |   int a
+        36 |   int b
+        40 |   struct Base (virtual base)
+        40 |     (Base vtable pointer)
+        48 |     int a
+        52 |     int b
+           | [sizeof=56, dsize=56, align=8,
+           |  nvsize=40, nvalign=8]
 ```
 
 #### Constructor
+
+Constructor execution order:
+1. construct virtual base
+2. construct non-virtual base
+3. initialize every base subobject vtptrs
+4. member initialization list
+5. explicit user code
 
 ```c++
 main:
         pushq   %rbp
         movq    %rsp, %rbp
-        subq    $32, %rsp                   # alloc stack
+        subq    $48, %rsp                   # alloc stack
         movl    $0, -4(%rbp)
-        movl    $48, %edi                   # 48 = sizeof(Derive)
+        movl    $56, %edi                   # 48 = sizeof(Derive)
         callq   operator new(unsigned long)
         movq    %rax, %rdi                  # ptr = derive_this = new Derive()
         movq    %rdi, -32(%rbp)
         xorl    %esi, %esi                  # val = 0
-        movl    $48, %edx                   # len = 48
+        movl    $56, %edx                   # len = 48
         callq   memset@PLT                  # memset(void* ptr, int val, int len)
         movq    -32(%rbp), %rdi             # derive_this
         callq   Derive::Derive() [complete object constructor]
@@ -260,13 +347,6 @@ main:
         popq    %rbp
         retq
 
-# Constructor execution order:
-# 1. construct virtual base
-# 2. construct non-virtual base
-# 3. initialize every base subobject vtptrs
-# 4. member initialization list
-# 5. explicit user code
-
 Derive::Derive() [complete object constructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -276,7 +356,7 @@ Derive::Derive() [complete object constructor]:
         # 1. construct virtual base
         movq    -8(%rbp), %rdi
         movq    %rdi, -16(%rbp)
-        addq    $32, %rdi                   # base_this = derive_this + 32
+        addq    $40, %rdi                   # base_this = derive_this + 32
         callq   Base::Base() [base object constructor] # base_vtptr is not set correctly
 
         # 2. construct non-virtual base
@@ -296,15 +376,16 @@ Derive::Derive() [complete object constructor]:
         addq    $24, %rcx                   # derive_vtptr = derive_vt_addr + 24
         movq    %rcx, (%rax)
         movabsq $vtable for Derive, %rcx
-        addq    $152, %rcx                  # base_vtptr = derive_vt_addr + 152
-        movq    %rcx, 32(%rax)
+        addq    $160, %rcx                  # base_vtptr = derive_vt_addr + 152
+        movq    %rcx, 40(%rax)
         movabsq $vtable for Derive, %rcx
-        addq    $88, %rcx                   # baseA_vtptr = derive_vt_addr + 88
+        addq    $96, %rcx                   # baseA_vtptr = derive_vt_addr + 88
         movq    %rcx, 16(%rax)
 
         addq    $16, %rsp
         popq    %rbp
         retq
+
 Base::Base() [base object constructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -315,6 +396,7 @@ Base::Base() [base object constructor]:
         movq    %rcx, (%rax)        # M[base_vtptr] = vtable_base + 16
         popq    %rbp
         retq
+
 BaseB::BaseB() [base object constructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -330,6 +412,7 @@ BaseB::BaseB() [base object constructor]:
         movq    %rdx, (%rax,%rcx)   # M[base_vtptr] = M[baseB_vt_addr + vbase_offset] = base_vt_addr
         popq    %rbp
         retq
+
 BaseA::BaseA() [base object constructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -345,6 +428,7 @@ BaseA::BaseA() [base object constructor]:
         movq    %rdx, (%rax,%rcx)   # M[base_vtptr] = M[baseA_vt_addr + vbase_offset] = base_vt_addr
         popq    %rbp
         retq
+
 non-virtual thunk to Derive::FnBaseA():
         pushq   %rbp
         movq    %rsp, %rbp
@@ -353,12 +437,14 @@ non-virtual thunk to Derive::FnBaseA():
         addq    $-16, %rdi          # derive_this = baseA_this - 16
         popq    %rbp
         jmp     Derive::FnBaseA()
+
 Derive::FnBaseA():
         pushq   %rbp
         movq    %rsp, %rbp
         movq    %rdi, -8(%rbp)
         popq    %rbp
         retq
+
 virtual thunk to Derive::FnBase():
         pushq   %rbp
         movq    %rsp, %rbp
@@ -369,36 +455,47 @@ virtual thunk to Derive::FnBase():
         addq    %rax, %rdi          # derive_this = base_this + vcall_offset
         popq    %rbp
         jmp     Derive::FnBase()
+
 Derive::FnBase():
         pushq   %rbp
         movq    %rsp, %rbp
         movq    %rdi, -8(%rbp)
         popq    %rbp
         retq
+
 Derive::FnBaseB():
         pushq   %rbp
         movq    %rsp, %rbp
         movq    %rdi, -8(%rbp)
         popq    %rbp
         retq
+
 BaseB::FnBaseB():
         pushq   %rbp
         movq    %rsp, %rbp
         movq    %rdi, -8(%rbp)
         popq    %rbp
         retq
+
 Base::FnBase():
         pushq   %rbp
         movq    %rsp, %rbp
         movq    %rdi, -8(%rbp)
         popq    %rbp
         retq
+        pushq   %rbp
+        movq    %rsp, %rbp
+        movq    %rdi, -8(%rbp)
+        popq    %rbp
+        retq
+
 BaseA::FnBaseA():
         pushq   %rbp
         movq    %rsp, %rbp
         movq    %rdi, -8(%rbp)
         popq    %rbp
         retq
+
 BaseA::FnBaseA2():
         pushq   %rbp
         movq    %rsp, %rbp
@@ -422,6 +519,7 @@ non-virtual thunk to Derive::~Derive() [complete object destructor]:
         addq    $-16, %rdi              # derive_this = this - 16
         popq    %rbp
         jmp     Derive::~Derive() [complete object destructor]
+
 non-virtual thunk to Derive::~Derive() [deleting destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -430,6 +528,7 @@ non-virtual thunk to Derive::~Derive() [deleting destructor]:
         addq    $-16, %rdi              # derive_this = this - 16
         popq    %rbp
         jmp     Derive::~Derive() [deleting destructor]
+
 virtual thunk to Derive::~Derive() [complete object destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -440,6 +539,7 @@ virtual thunk to Derive::~Derive() [complete object destructor]:
         addq    %rax, %rdi              # derive_this = base_this + vcall_offset
         popq    %rbp
         jmp     Derive::~Derive() [complete object destructor]
+
 virtual thunk to Derive::~Derive() [deleting destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -450,6 +550,7 @@ virtual thunk to Derive::~Derive() [deleting destructor]:
         addq    %rax, %rdi              # derive_this = base_this + vcall_offset
         popq    %rbp
         jmp     Derive::~Derive() [deleting destructor]
+
 Derive::~Derive() [deleting destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -463,6 +564,7 @@ Derive::~Derive() [deleting destructor]:
         addq    $16, %rsp
         popq    %rbp
         retq
+
 Derive::~Derive() [complete object destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -473,11 +575,12 @@ Derive::~Derive() [complete object destructor]:
         movabsq $VTT for Derive, %rsi
         callq   Derive::~Derive() [base object destructor]
         movq    -16(%rbp), %rdi
-        addq    $32, %rdi               # base_this = derive_this + 32
+        addq    $40, %rdi               # base_this = derive_this + 32
         callq   Base::~Base() [base object destructor]
         addq    $16, %rsp
         popq    %rbp
         retq
+
 Derive::~Derive() [base object destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -512,6 +615,7 @@ virtual thunk to BaseB::~BaseB() [complete object destructor]:
         addq    %rax, %rdi              # baseB_this = base_this + vcall_offset
         popq    %rbp
         jmp     BaseB::~BaseB() [complete object destructor]
+
 virtual thunk to BaseB::~BaseB() [deleting destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -522,6 +626,7 @@ virtual thunk to BaseB::~BaseB() [deleting destructor]:
         addq    %rax, %rdi              # baseB_this = base_this + vcall_offset
         popq    %rbp
         jmp     BaseB::~BaseB() [deleting destructor]
+
 BaseB::~BaseB() [deleting destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -535,6 +640,7 @@ BaseB::~BaseB() [deleting destructor]:
         addq    $16, %rsp
         popq    %rbp
         retq
+
 BaseB::~BaseB() [complete object destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -550,6 +656,7 @@ BaseB::~BaseB() [complete object destructor]:
         addq    $16, %rsp
         popq    %rbp
         retq
+
 BaseB::~BaseB() [base object destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -560,6 +667,7 @@ BaseB::~BaseB() [base object destructor]:
 ```
 
 #### BaseA Destructor
+
 ```c++
 virtual thunk to BaseA::~BaseA() [complete object destructor]:
         pushq   %rbp
@@ -571,6 +679,7 @@ virtual thunk to BaseA::~BaseA() [complete object destructor]:
         addq    %rax, %rdi              # baseA_this = base_this + vcall_offset
         popq    %rbp
         jmp     BaseA::~BaseA() [complete object destructor]
+
 virtual thunk to BaseA::~BaseA() [deleting destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -581,6 +690,7 @@ virtual thunk to BaseA::~BaseA() [deleting destructor]:
         addq    %rax, %rdi              # baseA_this = base_this + vcall_offset
         popq    %rbp
         jmp     BaseA::~BaseA() [deleting destructor]
+
 BaseA::~BaseA() [deleting destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -594,6 +704,7 @@ BaseA::~BaseA() [deleting destructor]:
         addq    $16, %rsp
         popq    %rbp
         retq
+
 BaseA::~BaseA() [complete object destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -609,6 +720,7 @@ BaseA::~BaseA() [complete object destructor]:
         addq    $16, %rsp
         popq    %rbp
         retq
+
 BaseA::~BaseA() [base object destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -616,12 +728,14 @@ BaseA::~BaseA() [base object destructor]:
         movq    %rsi, -16(%rbp)
         popq    %rbp
         retq
+
 Base::~Base() [base object destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
         movq    %rdi, -8(%rbp)
         popq    %rbp
         retq
+
 Base::~Base() [deleting destructor]:
         pushq   %rbp
         movq    %rsp, %rbp
@@ -643,7 +757,7 @@ There's a correspond thunk function for each overrided virtual function.
 
 ```c++
 vtable for Derive:
-        .quad   32                                          # vbase_offset
+        .quad   40                                          # vbase_offset
         .quad   0                                           # offset_to_top
         .quad   typeinfo for Derive
         .quad   Derive::FnBaseB()                           # derive_vtptr = +24
@@ -651,16 +765,17 @@ vtable for Derive:
         .quad   Derive::~Derive() [deleting destructor]
         .quad   Derive::FnBase()
         .quad   Derive::FnBaseA()
-        .quad   16                                          # vbase_offset
+        .quad   Derive::FnDerive()
+        .quad   24                                          # vbase_offset
         .quad   -16                                         # offset_to_top
         .quad   typeinfo for Derive
         .quad   non-virtual thunk to Derive::FnBaseA()      # baseA_vtptr = +88
         .quad   BaseA::FnBaseA2()
         .quad   non-virtual thunk to Derive::~Derive() [complete object destructor]
         .quad   non-virtual thunk to Derive::~Derive() [deleting destructor]
-        .quad   -32                                         # vcall_offset
-        .quad   -32                                         # vcall_offset
-        .quad   -32                                         # offset_to_top
+        .quad   -40                                         # vcall_offset
+        .quad   -40                                         # vcall_offset
+        .quad   -40                                         # offset_to_top
         .quad   typeinfo for Derive
         .quad   virtual thunk to Derive::~Derive() [complete object destructor]  # base_vtptr = +152
         .quad   virtual thunk to Derive::~Derive() [deleting destructor]
@@ -724,30 +839,30 @@ VTT for Derive:
         .quad   construction vtable for BaseB-in-Derive+80  # base_vtptr in BaseB
         .quad   construction vtable for BaseA-in-Derive+24  # baesA_vtptr
         .quad   construction vtable for BaseA-in-Derive+88  # base_vtptr in BaseA
-        .quad   vtable for Derive+152                       # Base vtptr in Derive
-        .quad   vtable for Derive+88                        # baseA_vtptr in Derive
+        .quad   vtable for Derive+160                       # Base vtptr in Derive
+        .quad   vtable for Derive+96                        # baseA_vtptr in Derive
 ```
 
 #### Construction VTable
 
 ```c++
 construction vtable for BaseB-in-Derive:
-        .quad   32                                          # vbase_offset
+        .quad   40                                          # vbase_offset
         .quad   0                                           # offset_to_top
         .quad   typeinfo for BaseB
         .quad   BaseB::FnBaseB()
         .quad   BaseB::~BaseB() [complete object destructor]
         .quad   BaseB::~BaseB() [deleting destructor]
         .quad   0                                           # vcall_offset
-        .quad   -32                                         # vcall_offset
-        .quad   -32                                         # offset_to_top
+        .quad   -40                                         # vcall_offset
+        .quad   -40                                         # offset_to_top
         .quad   typeinfo for BaseB
         .quad   virtual thunk to BaseB::~BaseB() [complete object destructor]
         .quad   virtual thunk to BaseB::~BaseB() [deleting destructor]
         .quad   Base::FnBase()
 
 construction vtable for BaseA-in-Derive:
-        .quad   16                                          # vbase_offset
+        .quad  24                                           # vbase_offset
         .quad   0                                           # offset_to_top
         .quad   typeinfo for BaseA
         .quad   BaseA::FnBaseA()
@@ -755,8 +870,8 @@ construction vtable for BaseA-in-Derive:
         .quad   BaseA::~BaseA() [complete object destructor]
         .quad   BaseA::~BaseA() [deleting destructor]
         .quad   0                                           # vcall_offset
-        .quad   -16                                         # vcall_offset
-        .quad   -16                                         # offset_to_top
+        .quad   -24                                         # vcall_offset
+        .quad   -24                                         # offset_to_top
         .quad   typeinfo for BaseA
         .quad   virtual thunk to BaseA::~BaseA() [complete object destructor]
         .quad   virtual thunk to BaseA::~BaseA() [deleting destructor]
@@ -809,6 +924,7 @@ typeinfo for Derive:
 ```
 
 ## Build Commands
+
 ```c++
 /* 1. Preprocess
  * runs the C preprocessor (cpp),
