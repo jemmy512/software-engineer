@@ -441,10 +441,11 @@
 - [ ] :orange_book: The Art of UNIX Programming
 - [ ] :orange_book: Clean Architecture
 
+- [ ] [凤凰架构](https://icyfenix.cn)
 - [ ] [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer)
-- [x] [Grokking System Design](https://www.educative.io/courses/grokking-the-system-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/object-oriented-design.md)
-- [ ] [Grokking Advanced System Design](https://www.educative.io/courses/grokking-adv-system-design-intvw) [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/system-design-advanced.md)
-- [x] [Grokking the Object Oriented Design](https://www.educative.io/courses/grokking-the-object-oriented-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/object-oriented-design.md)
+- [x] [Grokking System Design](https://www.educative.io/courses/grokking-the-system-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/arch/object-oriented-design.md)
+- [ ] [Grokking Advanced System Design](https://www.educative.io/courses/grokking-adv-system-design-intvw) [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/arch/system-design-advanced.md)
+- [x] [Grokking the Object Oriented Design](https://www.educative.io/courses/grokking-the-object-oriented-design-interview)  [:pencil2: Book Notes](https://github.com/Jemmy512/book-notes/blob/master/arch/object-oriented-design.md)
 - [ ] [Six Programming Paradigm](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will)
 - [ ] [Programming Paradigms for Dummies.pdf](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)
 - [ ] [Stanford Programming Paradigm](https://see.stanford.edu/Course/CS107)
@@ -566,7 +567,7 @@
 - [ ] :orange_book: [Distributed Systems for fun and profit](http://book.mixu.net/distsys/single-page.html)
 - [ ] :orange_book: Designing Data Intensive Applications
 - [ ] :orange_book: [Distributed Systems: Principles and Paradigms.pdf](http://barbie.uta.edu/~jli/Resources/MapReduce&Hadoop/Distributed%20Systems%20Principles%20and%20Paradigms.pdf)
-- [ ] :orange_book: [Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services](https://azure.microsoft.com/en-us/resources/designing-distributed-systems/) :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/Arch/designing-distributed-systems.md)
+- [ ] :orange_book: [Designing Distributed Systems: Patterns and Paradigms for Scalable, Reliable Services](https://azure.microsoft.com/en-us/resources/designing-distributed-systems/) :pencil2: [Book Notes](https://github.com/Jemmy512/book-notes/blob/master/arch/designing-distributed-systems.md)
 - [ ] :orange_book: [Principles of Distributed Systems.pdf](https://disco.ethz.ch/courses/podc_allstars/lecture/podc.pdf)
 - [ ] :newspaper: [Transaction Across DataCenter](https://snarfed.org/transactions_across_datacenters_io.html)   [:tv: YouTuBe](https://www.youtube.com/watch?v=srOgpXECblk)
 - [ ] [Scalable Web Architecture and Distributed Systems](http://www.aosabook.org/en/distsys.html)
