@@ -43,37 +43,39 @@ clang -Xclang -fdump-vtable-layouts -stdlib=libc++ -std=c++17 -c layout.cc
 ![](./images/cpp-diamond-hierarchy.svg)
 
 ```c++
-// https://godbolt.org/z/r6qesraKx
+// https://godbolt.org/z/xj8rxbMje
 
 struct Base {
-   virtual ~Base() = default;
-   virtual void FnBase() {  }
+    virtual ~Base() = default;
+    virtual void FnBase() {  }
 
-   int a;
-   int b;
+    int a;
+    int b;
 };
 
 struct BaseA : virtual public Base {
-   virtual void FnBaseA() {  }
-   virtual void FnBaseA2() {  }  // Not overrided by Derive
+    virtual void FnBase() override {  }
+    virtual void FnBaseA() {  }
+    virtual void FnBaseA2() {  }  // Not overrided by Derive
 
-   int a;
-   int b;
+    int a;
+    int b;
 };
 
 struct BaseB : virtual public Base {
-   virtual void FnBaseB() {  }
+    virtual void FnBase() override {  }
+    virtual void FnBaseB() {  }
 
-   int a;
-   int b;
+    int a;
+    int b;
 };
 
 struct Derive : public BaseB, public BaseA {
-   virtual void FnBase() override {  }
-   virtual void FnBaseA() override {  }
-   virtual void FnBaseB() override {  }
+    virtual void FnBase() override {  }
+    virtual void FnBaseA() override {  }
+    virtual void FnBaseB() override {  }
 
-   virtual void FnDerive() { }
+    virtual void FnDerive() { }
 
     int a;
     int b;
@@ -94,8 +96,17 @@ int main() {
 
 #### VTable Layout
 
+Virtual Table Setup:
+1. Base Sub-object: Initially, the FnBase slot in its virtual table points to Base::FnBase.
+2. BaseA: When constructed, the FnBase slot in its virtual table points to BaseA::FnBase. This does not affect the Base virtual table directly because of the virtual inheritance mechanism.
+3. BaseB: Similarly, when constructed, the FnBase slot in its virtual table points to BaseB::FnBase.
+4. Derive: When constructed, it overrides the FnBase slots in all related virtual tables (including Base, BaseA, and BaseB) to point to Derive::FnBase.
+
 ```c++
-Vtable for 'Derive' (23 entries).
+Original map
+ Derive::~Derive() -> BaseB::~BaseB()
+ void Derive::FnBaseB() -> void BaseB::FnBaseB()
+Vtable for 'Derive' (24 entries).
    0 | vbase_offset (40)
    1 | offset_to_top (0)
    2 | Derive RTTI
@@ -111,23 +122,25 @@ Vtable for 'Derive' (23 entries).
   10 | offset_to_top (-16)
   11 | Derive RTTI
        -- (BaseA, 16) vtable address --
-  12 | void Derive::FnBaseA()
+  12 | void Derive::FnBase()
+       [this adjustment: -16 non-virtual] method: void BaseA::FnBase()
+  13 | void Derive::FnBaseA()
        [this adjustment: -16 non-virtual] method: void BaseA::FnBaseA()
-  13 | void BaseA::FnBaseA2()
-  14 | Derive::~Derive() [complete]
+  14 | void BaseA::FnBaseA2()
+  15 | Derive::~Derive() [complete]
        [this adjustment: -16 non-virtual] method: BaseA::~BaseA()
-  15 | Derive::~Derive() [deleting]
+  16 | Derive::~Derive() [deleting]
        [this adjustment: -16 non-virtual] method: BaseA::~BaseA()
-  16 | vcall_offset (-40)
   17 | vcall_offset (-40)
-  18 | offset_to_top (-40)
-  19 | Derive RTTI
+  18 | vcall_offset (-40)
+  19 | offset_to_top (-40)
+  20 | Derive RTTI
        -- (Base, 40) vtable address --
-  20 | Derive::~Derive() [complete]
+  21 | Derive::~Derive() [complete]
        [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
-  21 | Derive::~Derive() [deleting]
+  22 | Derive::~Derive() [deleting]
        [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
-  22 | void Derive::FnBase()
+  23 | void Derive::FnBase()
        [this adjustment: 0 non-virtual, -32 vcall offset offset] method: void Base::FnBase()
 
 Virtual base offset offsets for 'Derive' (1 entry).
@@ -137,8 +150,9 @@ Thunks for 'Derive::~Derive()' (2 entries).
    0 | this adjustment: -16 non-virtual
    1 | this adjustment: 0 non-virtual, -24 vcall offset offset
 
-Thunks for 'void Derive::FnBase()' (1 entry).
-   0 | this adjustment: 0 non-virtual, -32 vcall offset offset
+Thunks for 'void Derive::FnBase()' (2 entries).
+   0 | this adjustment: -16 non-virtual
+   1 | this adjustment: 0 non-virtual, -32 vcall offset offset
 
 Thunks for 'void Derive::FnBaseA()' (1 entry).
    0 | this adjustment: -16 non-virtual
@@ -150,6 +164,7 @@ VTable indices for 'Derive' (6 entries).
    3 | void Derive::FnBase()
    4 | void Derive::FnBaseA()
    5 | void Derive::FnDerive()
+
 ```
 
 ```cpp
@@ -168,54 +183,87 @@ VTable indices for 'Base' (3 entries).
 ```
 
 ```cpp
-Vtable for 'BaseB' (13 entries).
+Original map
+ Derive::~Derive() -> BaseB::~BaseB()
+ void Derive::FnBaseB() -> void BaseB::FnBaseB()
+Vtable for 'BaseB' (14 entries).
    0 | vbase_offset (16)
    1 | offset_to_top (0)
    2 | BaseB RTTI
        -- (BaseB, 0) vtable address --
-   3 | void BaseB::FnBaseB()
-   4 | BaseB::~BaseB() [complete]
-   5 | BaseB::~BaseB() [deleting]
-   6 | vcall_offset (0)
+   3 | void BaseB::FnBase()
+   4 | void BaseB::FnBaseB()
+   5 | BaseB::~BaseB() [complete]
+   6 | BaseB::~BaseB() [deleting]
    7 | vcall_offset (-16)
-   8 | offset_to_top (-16)
-   9 | BaseB RTTI
+   8 | vcall_offset (-16)
+   9 | offset_to_top (-16)
+  10 | BaseB RTTI
        -- (Base, 16) vtable address --
-  10 | BaseB::~BaseB() [complete]
+  11 | BaseB::~BaseB() [complete]
        [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
-  11 | BaseB::~BaseB() [deleting]
+  12 | BaseB::~BaseB() [deleting]
        [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
-  12 | void Base::FnBase()
+  13 | void BaseB::FnBase()
+       [this adjustment: 0 non-virtual, -32 vcall offset offset] method: void Base::FnBase()
+
+Virtual base offset offsets for 'BaseB' (1 entry).
+   Base | -24
+
+Thunks for 'BaseB::~BaseB()' (1 entry).
+   0 | this adjustment: 0 non-virtual, -24 vcall offset offset
+
+Thunks for 'void BaseB::FnBase()' (1 entry).
+   0 | this adjustment: 0 non-virtual, -32 vcall offset offset
+
+VTable indices for 'BaseB' (4 entries).
+   0 | void BaseB::FnBase()
+   1 | void BaseB::FnBaseB()
+   2 | BaseB::~BaseB() [complete]
+   3 | BaseB::~BaseB() [deleting]
 ```
 
 ```cpp
-Vtable for 'BaseA' (14 entries).
+Original map
+ Derive::~Derive() -> BaseB::~BaseB()
+ void Derive::FnBaseB() -> void BaseB::FnBaseB()
+Vtable for 'BaseA' (15 entries).
    0 | vbase_offset (16)
    1 | offset_to_top (0)
    2 | BaseA RTTI
        -- (BaseA, 0) vtable address --
-   3 | void BaseA::FnBaseA()
-   4 | void BaseA::FnBaseA2()
-   5 | BaseA::~BaseA() [complete]
-   6 | BaseA::~BaseA() [deleting]
-   7 | vcall_offset (0)
+   3 | void BaseA::FnBase()
+   4 | void BaseA::FnBaseA()
+   5 | void BaseA::FnBaseA2()
+   6 | BaseA::~BaseA() [complete]
+   7 | BaseA::~BaseA() [deleting]
    8 | vcall_offset (-16)
-   9 | offset_to_top (-16)
-  10 | BaseA RTTI
+   9 | vcall_offset (-16)
+  10 | offset_to_top (-16)
+  11 | BaseA RTTI
        -- (Base, 16) vtable address --
-  11 | BaseA::~BaseA() [complete]
+  12 | BaseA::~BaseA() [complete]
        [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
-  12 | BaseA::~BaseA() [deleting]
+  13 | BaseA::~BaseA() [deleting]
        [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
-  13 | void Base::FnBase()
-```
+  14 | void BaseA::FnBase()
+       [this adjustment: 0 non-virtual, -32 vcall offset offset] method: void Base::FnBase()
 
-```cpp
-VTable indices for 'BaseA' (4 entries).
-   0 | void BaseA::FnBaseA()
-   1 | void BaseA::FnBaseA2()
-   2 | BaseA::~BaseA() [complete]
-   3 | BaseA::~BaseA() [deleting]
+Virtual base offset offsets for 'BaseA' (1 entry).
+   Base | -24
+
+Thunks for 'BaseA::~BaseA()' (1 entry).
+   0 | this adjustment: 0 non-virtual, -24 vcall offset offset
+
+Thunks for 'void BaseA::FnBase()' (1 entry).
+   0 | this adjustment: 0 non-virtual, -32 vcall offset offset
+
+VTable indices for 'BaseA' (5 entries).
+   0 | void BaseA::FnBase()
+   1 | void BaseA::FnBaseA()
+   2 | void BaseA::FnBaseA2()
+   3 | BaseA::~BaseA() [complete]
+   4 | BaseA::~BaseA() [deleting]
 ```
 
 [Itanium C++ ABI 1.1 Definitions](https://refspecs.linuxfoundation.org/cxxabi-1.75.html#definitions)
@@ -232,7 +280,7 @@ VTable indices for 'BaseA' (4 entries).
 
 * The **offset to top** holds the displacement to the top of the object from the location within the object of the virtual table pointer that addresses this virtual table, as a  ptrdiff_t. It is always present. The offset provides a way to find the top of the object from any base subobject with a virtual table pointer. This is necessary for dynamic_cast<void*> in particular.
 
-Why does C++ need vcall_offset for virtual inheritance but not for non-virtual inheritance?
+QA: Why does C++ need `vcall_offset` for virtual inheritance but not for non-virtual inheritance?
 * In the non-virtual inheritance, this pointer is adjusted in the thunk function directly since the offset between the base class pointer and the derived class pointer is a constant, so the offset can be a constant in the thunk function.
 * In virtual inheritance, the offset between the base class pointer and the derived class pointer is vary. This pointer is adjusted indirectly in virtual thunk:
     1. find the vcall_offset
@@ -851,39 +899,56 @@ VTT for Derive:
 #### Construction VTable
 
 ```c++
-construction vtable for BaseB-in-Derive:
-        .quad   40                                          # vbase_offset
-        .quad   0                                           # offset_to_top
-        .quad   typeinfo for BaseB
-        .quad   BaseB::FnBaseB()
-        .quad   BaseB::~BaseB() [complete object destructor]
-        .quad   BaseB::~BaseB() [deleting destructor]
-        .quad   0                                           # vcall_offset
-        .quad   -40                                         # vcall_offset
-        .quad   -40                                         # offset_to_top
-        .quad   typeinfo for BaseB
-        .quad   virtual thunk to BaseB::~BaseB() [complete object destructor]
-        .quad   virtual thunk to BaseB::~BaseB() [deleting destructor]
-        .quad   Base::FnBase()
+Original map
+ Derive::~Derive() -> BaseB::~BaseB()
+ void Derive::FnBaseB() -> void BaseB::FnBaseB()
+Construction vtable for ('BaseB', 0) in 'Derive' (13 entries).
+   0 | vbase_offset (40)
+   1 | offset_to_top (0)
+   2 | BaseB RTTI
+       -- (BaseB, 0) vtable address --
+   3 | void BaseB::FnBaseB()
+   4 | BaseB::~BaseB() [complete]
+   5 | BaseB::~BaseB() [deleting]
+   6 | vcall_offset (0)
+   7 | vcall_offset (-40)
+   8 | offset_to_top (-40)
+   9 | BaseB RTTI
+       -- (Base, 40) vtable address --
+  10 | BaseB::~BaseB() [complete]
+       [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
+  11 | BaseB::~BaseB() [deleting]
+       [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
+  12 | void Base::FnBase()
 
-construction vtable for BaseA-in-Derive:
-        .quad  24                                           # vbase_offset
-        .quad   0                                           # offset_to_top
-        .quad   typeinfo for BaseA
-        .quad   BaseA::FnBaseA()
-        .quad   BaseA::FnBaseA2()
-        .quad   BaseA::~BaseA() [complete object destructor]
-        .quad   BaseA::~BaseA() [deleting destructor]
-        .quad   0                                           # vcall_offset
-        .quad   -24                                         # vcall_offset
-        .quad   -24                                         # offset_to_top
-        .quad   typeinfo for BaseA
-        .quad   virtual thunk to BaseA::~BaseA() [complete object destructor]
-        .quad   virtual thunk to BaseA::~BaseA() [deleting destructor]
-        .quad   Base::FnBase()
+Original map
+ Derive::~Derive() -> BaseB::~BaseB()
+ void Derive::FnBaseB() -> void BaseB::FnBaseB()
+Construction vtable for ('BaseA', 16) in 'Derive' (15 entries).
+   0 | vbase_offset (24)
+   1 | offset_to_top (0)
+   2 | BaseA RTTI
+       -- (BaseA, 16) vtable address --
+   3 | void BaseA::FnBase()
+   4 | void BaseA::FnBaseA()
+   5 | void BaseA::FnBaseA2()
+   6 | BaseA::~BaseA() [complete]
+   7 | BaseA::~BaseA() [deleting]
+   8 | vcall_offset (-24)
+   9 | vcall_offset (-24)
+  10 | offset_to_top (-24)
+  11 | BaseA RTTI
+       -- (Base, 40) vtable address --
+  12 | BaseA::~BaseA() [complete]
+       [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
+  13 | BaseA::~BaseA() [deleting]
+       [this adjustment: 0 non-virtual, -24 vcall offset offset] method: Base::~Base()
+  14 | void BaseA::FnBase()
+       [this adjustment: 0 non-virtual, -32 vcall offset offset] method: void Base::FnBase()
 ```
 
 #### TypeInfo
+
 ```c++
 typeinfo name for BaseB:
         .asciz  "5BaseB"

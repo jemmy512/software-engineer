@@ -21,27 +21,27 @@ public:
     shared_ptr(const shared_ptr&) noexcept = default; ///< Copy constructor
 
     template<typename _Yp, typename = _Constructible<_Yp*>>
-    explicit shared_ptr(_Yp* __p) 
+    explicit shared_ptr(_Yp* __p)
     : __shared_ptr<_Tp>(__p) { }
 
     template<typename _Yp, typename _Deleter, typename = _Constructible<_Yp*, _Deleter>>
-    shared_ptr(_Yp* __p, _Deleter __d) 
+    shared_ptr(_Yp* __p, _Deleter __d)
     : __shared_ptr<_Tp>(__p, std::move(__d)) { }
 
     template<typename _Deleter>
-    shared_ptr(nullptr_t __p, _Deleter __d) 
+    shared_ptr(nullptr_t __p, _Deleter __d)
     : __shared_ptr<_Tp>(__p, std::move(__d)) { }
 
     template<typename _Yp, typename _Deleter, typename _Alloc, typename = _Constructible<_Yp*, _Deleter, _Alloc>>
-    shared_ptr(_Yp* __p, _Deleter __d, _Alloc __a) 
+    shared_ptr(_Yp* __p, _Deleter __d, _Alloc __a)
     : __shared_ptr<_Tp>(__p, std::move(__d), std::move(__a)) { }
 
     template<typename _Deleter, typename _Alloc>
-    shared_ptr(nullptr_t __p, _Deleter __d, _Alloc __a) 
+    shared_ptr(nullptr_t __p, _Deleter __d, _Alloc __a)
     : __shared_ptr<_Tp>(__p, std::move(__d), std::move(__a)) { }
 
     template<typename _Yp>
-    shared_ptr(const shared_ptr<_Yp>& __r, element_type* __p) noexcept 
+    shared_ptr(const shared_ptr<_Yp>& __r, element_type* __p) noexcept
     : __shared_ptr<_Tp>(__r, __p) { }
 
     template<typename _Yp>
@@ -445,7 +445,7 @@ public:
     { }
 
     template<typename _Ptr, typename _Deleter, typename _Alloc, typename = typename __not_alloc_shared_tag<_Deleter>::type>
-    __shared_count(_Ptr __p, _Deleter __d, _Alloc __a) 
+    __shared_count(_Ptr __p, _Deleter __d, _Alloc __a)
     : _M_pi(0) {
         typedef _Sp_counted_deleter<_Ptr, _Deleter, _Alloc, _Lp> _Sp_cd_type;
         __try {
@@ -476,7 +476,7 @@ public:
 
     // Special case for unique_ptr<_Tp,_Del> to provide the strong guarantee.
     template<typename _Tp, typename _Del>
-    explicit __shared_count(std::unique_ptr<_Tp, _Del>&& __r) 
+    explicit __shared_count(std::unique_ptr<_Tp, _Del>&& __r)
     : _M_pi(0) {
         // _GLIBCXX_RESOLVE_LIB_DEFECTS
         // 2415. Inconsistency between unique_ptr and shared_ptr
@@ -505,7 +505,7 @@ public:
     : _M_pi(__r._M_pi) {
       if (_M_pi == nullptr || !_M_pi->_M_add_ref_lock_nothrow())
         __throw_bad_weak_ptr();
-        
+
     }
 
     // Does not throw if __r._M_get_use_count() == 0, caller must check.
@@ -575,10 +575,10 @@ private:
 template<typename _Tp>
 class weak_ptr : public __weak_ptr<_Tp>
 {
-    template<typename _Arg> 
+    template<typename _Arg>
     using _Constructible = typename enable_if<is_constructible<__weak_ptr<_Tp>, _Arg>::value>::type;
 
-    template<typename _Arg> 
+    template<typename _Arg>
     using _Assignable = typename enable_if<is_assignable<__weak_ptr<_Tp>&, _Arg>::value, weak_ptr&>::type;
 
 public:
@@ -622,8 +622,8 @@ public:
         return *this;
     }
 
-    shared_ptr<_Tp> lock() const noexcept { 
-        return shared_ptr<_Tp>(*this, std::nothrow); 
+    shared_ptr<_Tp> lock() const noexcept {
+        return shared_ptr<_Tp>(*this, std::nothrow);
     }
 };
 ```
@@ -755,7 +755,7 @@ public:
             _M_destroy();
         }
       }
-      
+
 private:
     _Sp_counted_base(_Sp_counted_base const&) = delete;
     _Sp_counted_base& operator=(_Sp_counted_base const&) = delete;
@@ -775,16 +775,16 @@ class _Sp_counted_ptr final : public _Sp_counted_base<_Lp>
 public:
     explicit _Sp_counted_ptr(_Ptr __p) noexcept : _M_ptr(__p) { }
 
-    virtual void _M_dispose() noexcept { 
-        delete _M_ptr; 
+    virtual void _M_dispose() noexcept {
+        delete _M_ptr;
     }
 
-    virtual void _M_destroy() noexcept { 
-        delete this; 
+    virtual void _M_destroy() noexcept {
+        delete this;
     }
 
-    virtual void* _M_get_deleter(const std::type_info&) noexcept { 
-        return nullptr; 
+    virtual void* _M_get_deleter(const std::type_info&) noexcept {
+        return nullptr;
     }
 
     _Sp_counted_ptr(const _Sp_counted_ptr&) = delete;
@@ -799,20 +799,20 @@ private:
 ```c++
 template<typename _Ptr, typename _Deleter, _Lock_policy _Lp>
 class _Sp_counted_base_impl : public _Sp_counted_base<_Lp> {
-public: 
+public:
     _Sp_counted_base_impl(_Ptr __p, _Deleter __d) : _M_ptr(__p), _M_del(__d) { }
 
     virtual void _M_dispose() // nothrow
     { _M_del(_M_ptr); }
-    
+
     virtual void* _M_get_deleter(const std::type_info& __ti) {
         return __ti == typeid(_Deleter) ? &_M_del : 0;
     }
-    
+
 private:
     _Sp_counted_base_impl(const _Sp_counted_base_impl&);
     _Sp_counted_base_impl& operator=(const _Sp_counted_base_impl&);
-    
+
     _Ptr      _M_ptr;  // copy constructor must not throw
     _Deleter  _M_del;  // copy constructor must not throw
 };
@@ -870,33 +870,33 @@ protected:
 
     enable_shared_from_this(const enable_shared_from_this&) noexcept { }
 
-    enable_shared_from_this& operator=(const enable_shared_from_this&) noexcept { 
-        return *this; 
+    enable_shared_from_this& operator=(const enable_shared_from_this&) noexcept {
+        return *this;
     }
 
     ~enable_shared_from_this() { }
 
 public:
-    shared_ptr<_Tp> shared_from_this() { 
-        return shared_ptr<_Tp>(this->_M_weak_this); 
+    shared_ptr<_Tp> shared_from_this() {
+        return shared_ptr<_Tp>(this->_M_weak_this);
     }
 
-    shared_ptr<const _Tp> shared_from_this() const { 
-        return shared_ptr<const _Tp>(this->_M_weak_this); 
+    shared_ptr<const _Tp> shared_from_this() const {
+        return shared_ptr<const _Tp>(this->_M_weak_this);
     }
 
-    weak_ptr<_Tp> weak_from_this() noexcept { 
-        return this->_M_weak_this; 
+    weak_ptr<_Tp> weak_from_this() noexcept {
+        return this->_M_weak_this;
     }
 
-    weak_ptr<const _Tp> weak_from_this() const noexcept { 
-        return this->_M_weak_this; 
+    weak_ptr<const _Tp> weak_from_this() const noexcept {
+        return this->_M_weak_this;
     }
 
 private:
     template<typename _Tp1>
-    void _M_weak_assign(_Tp1* __p, const __shared_count<>& __n) const noexcept { 
-        _M_weak_this._M_assign(__p, __n); 
+    void _M_weak_assign(_Tp1* __p, const __shared_count<>& __n) const noexcept {
+        _M_weak_this._M_assign(__p, __n);
     }
 
     // Found by ADL when this is an associated class.
@@ -938,10 +938,12 @@ class __shared_ptr : public __shared_ptr_access<_Tp, _Lp> {
 public:
     template<typename _Alloc, typename... _Args>
     __shared_ptr(_Sp_alloc_shared_tag<_Alloc> __tag, _Args&&... __args)
+    /* _M_refcount allocates memory and init _M_ptr */
     : _M_ptr(), _M_refcount(_M_ptr, __tag, std::forward<_Args>(__args)...) {
+        /* init weak_ptr of enable_shared_from_this */
         _M_enable_shared_from_this_with(_M_ptr);
     }
-    
+
     template<typename _Yp, typename _Yp2 = typename remove_cv<_Yp>::type>
     typename enable_if<__has_esft_base<_Yp2>::value>::type
     _M_enable_shared_from_this_with(_Yp* __p) noexcept {
@@ -959,21 +961,27 @@ public:
         typename _Sp_cp_type::__allocator_type __a2(__a._M_a);
         auto __guard = std::__allocate_guarded(__a2);
         _Sp_cp_type* __mem = __guard.get();
-        auto __pi = ::new (__mem)
-        _Sp_cp_type(__a._M_a, std::forward<_Args>(__args)...);
+        /* allocate memory and call constructor */
+        auto __pi = ::new (__mem)_Sp_cp_type(__a._M_a, std::forward<_Args>(__args)...);
         __guard = nullptr;
         _M_pi = __pi;
         __p = __pi->_M_ptr();
     }
+
+private:
+    _Sp_counted_base<_Lp>*  _M_pi;
 };
 
 template<typename _Tp>
 class enable_shared_from_this {
 public:
     template<typename _Tp1>
-    void _M_weak_assign(_Tp1* __p, const __shared_count<>& __n) const noexcept { 
-        _M_weak_this._M_assign(__p, __n); 
-    }        
+    void _M_weak_assign(_Tp1* __p, const __shared_count<>& __n) const noexcept {
+        _M_weak_this._M_assign(__p, __n);
+    }
+
+private:
+    mutable weak_ptr<_Tp>  _M_weak_this;
 };
 
 template<typename _Tp, _Lock_policy _Lp>
@@ -985,5 +993,9 @@ private:
             _M_refcount = __refcount;
         }
     }
+
+private:
+    element_type*       _M_ptr;         // Contained pointer.
+    __weak_count<_Lp>   _M_refcount;    // Reference counter.
 };
 ```
