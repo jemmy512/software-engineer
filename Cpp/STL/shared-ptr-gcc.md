@@ -716,7 +716,7 @@ public:
     virtual void _M_destroy() noexcept { delete this; }
 
     void _M_release() noexcept {
-        // Be race-detector-friendly.  For more info see bits/c++config.
+      	// 1. dispose(delete) memory of stored object in smart pointer
         _GLIBCXX_SYNCHRONIZATION_HAPPENS_BEFORE(&_M_use_count);
         if (__gnu_cxx::__exchange_and_add_dispatch(&_M_use_count, -1) == 1) {
             _GLIBCXX_SYNCHRONIZATION_HAPPENS_AFTER(&_M_use_count);
@@ -728,8 +728,8 @@ public:
             if (_Mutex_base<_Lp>::_S_need_barriers) {
                 __atomic_thread_fence (__ATOMIC_ACQ_REL);
             }
-
-            // Be race-detector-friendly.  For more info see bits/c++config.
+          	
+          	// 2. destroy counter memoery
             _GLIBCXX_SYNCHRONIZATION_HAPPENS_BEFORE(&_M_weak_count);
             if (__gnu_cxx::__exchange_and_add_dispatch(&_M_weak_count, -1) == 1) {
                 _GLIBCXX_SYNCHRONIZATION_HAPPENS_AFTER(&_M_weak_count);
