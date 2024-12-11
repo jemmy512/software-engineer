@@ -88,10 +88,10 @@ struct Derive : public BaseB, public BaseA {
 
     /* The construction of Base is ignored in the constructor of both BaseB and BaseA,
      * Derive is responsible for constructing Base
-	   *
+     *
      * The base object constructor is called for BaseB and BaseA,
      * not complete object constructor eventhough Base paramters are
-  	 * passed to their constructor */
+     * passed to their constructor */
     Derive(int a, int b, int aa, int ab, int ba, int bb, int da, int db)
     : Base(a, b), BaseB(a, b, ba, bb), BaseA(a, b, aa, ab), a(da), b(db) {}
 

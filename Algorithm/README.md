@@ -765,6 +765,9 @@ No | Title | Difficulty | Note
 0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 # Dynamic Programming
+
+* [20 Patterns to Master Dynamic Programming](https://blog.algomaster.io/p/20-patterns-to-master-dynamic-programming)
+
 * There are two different techniques we can use to implement a dynamic programming solution:
     * **Memoization** is where we add caching to a function (that has no side effects). In dynamic programming, it is typically used on `recursive` functions for a `top-down` solution that starts with the initial problem and then recursively calls itself to solve smaller problems.
     * **Tabulation** uses a table to keep track of subproblem results and works in a `bottom-up` manner: solving the smallest subproblems before the large ones, in an `iterative` manner. Often, people use the words "tabulation" and "dynamic programming" interchangeably.
@@ -795,9 +798,21 @@ No | Title | Difficulty | Note
 6. Longest sequence
 7. Game
 
-# DFS BFS
-1. Recursion
-2. Deque
+# Graph
+
+* [Master Graph Algorithms for Coding Interviews](https://blog.algomaster.io/p/master-graph-algorithms-for-coding)
+    1. Depth First Search (DFS)
+    2. Breadth First Search (BFS)
+    3. Topological Sort
+    4. Union Find
+        * [:link: Disjoint Set (Or Union-Find) | Set 1 (Detect Cycle in an Undirected Graph)](https://www.geeksforgeeks.org/union-find/)
+        * [:link: Union-Find Algorithm | Set 2 (Union By Rank and Path Compression)](https://www.geeksforgeeks.org/union-find-algorithm-set-2-union-by-rank/)
+    5. Cycle Detection
+    6. Connected Components
+    7. Bipartite Graphs
+    8. Flood Fill
+    9. Minimum Spanning Tree
+    10. Shortest Path
 
 # List
 * Add/delete head, middle or tail node
@@ -807,10 +822,6 @@ No | Title | Difficulty | Note
 * Copy list
     * 138. Copy List with Ramdom Pointer
 * Cycle in List
-
-# Union Find
-* [:link: Disjoint Set (Or Union-Find) | Set 1 (Detect Cycle in an Undirected Graph)](https://www.geeksforgeeks.org/union-find/)
-* [:link: Union-Find Algorithm | Set 2 (Union By Rank and Path Compression)](https://www.geeksforgeeks.org/union-find-algorithm-set-2-union-by-rank/)
 
 # Bit Operations
 Name | Operation
