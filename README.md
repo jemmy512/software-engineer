@@ -472,7 +472,6 @@
 - [ ] [LWN.netNews Kernel Index](https://lwn.net/Kernel/Index)
 
 ### Kernel
-- [x] :pencil2: [Linux Kernel 4.19](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-kernel.md)
 - [x] :pencil2: [Understanding Linux Kernel](https://github.com/Jemmy512/book-notes/blob/master/Linux/understanding-linux-kernel.md)
 - [x] :pencil2: [Linux Kernel Development](https://github.com/Jemmy512/book-notes/blob/master/Linux/linux-kernel-development.md)
 - [x] [What is RCU? – "Read, Copy, Update"](https://www.kernel.org/doc/html/latest/RCU/whatisRCU.html)
