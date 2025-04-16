@@ -35,35 +35,50 @@ Relatives:
 189. Rotate Array
 725. Split Linked List in Parts */
 
-#include<iostream>
-#include<vector>
-#include<iterator>
+#include <iostream>
+#include <vector>
+#include <iterator>
+#include <algorithm>
 
 using namespace std;
 
 class Solution {
 public:
-    void rotate(vector<int>& nums, int k) {
-        int len = nums.size();
-        int newK = len - k % len;
+    void rotate(vector<int>& vec, int k) {
+        const auto size = vec.size();
+        if ((k %= size) == 0) {
+            return;
+        }
 
-        vector vec(nums.begin() + newK, nums.end());
-        nums.insert(nums.begin(), vec.begin(), vec.end());
-        nums.resize(len);
+        std::reverse(vec.begin(), vec.end());
+        std::reverse(vec.begin(), vec.begin() + k);
+        std::reverse(vec.begin() + k, vec.end());
     }
 };
 
 class Solution {
 public:
-    void rotate(vector<int>& nums, int k) {
-        int len = nums.size();
+    void rotate(vector<int>& vec, int k) {
+        int len = vec.size();
+        int newK = len - k % len;
+
+        vector vec(vec.begin() + newK, vec.end());
+        vec.insert(vec.begin(), vec.begin(), vec.end());
+        vec.resize(len);
+    }
+};
+
+class Solution {
+public:
+    void rotate(vector<int>& vec, int k) {
+        int len = vec.size();
         int newK = k % len;
         int cnt = len - newK;
 
         while (cnt--) {
-            auto beg = nums.begin() + cnt;
+            auto beg = vec.begin() + cnt;
             auto end = beg + newK;
-            for (;beg != end && end < nums.end(); ++beg) {
+            for (;beg != end && end < vec.end(); ++beg) {
                 std::swap(*beg, *(beg+1));
             }
         }
@@ -72,11 +87,11 @@ public:
 
 class Solution {
 public:
-    void rotate(vector<int>& nums, int k) {
-        int newK = k % nums.size();
+    void rotate(vector<int>& vec, int k) {
+        int newK = k % vec.size();
 
         while (newK--) {
-            for (auto ite = nums.end() - 2; ite >= nums.begin(); --ite) {
+            for (auto ite = vec.end() - 2; ite >= vec.begin(); --ite) {
                 swap(*ite, *(ite + 1));
             }
         }
