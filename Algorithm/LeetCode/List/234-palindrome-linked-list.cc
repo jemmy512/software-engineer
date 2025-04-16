@@ -41,10 +41,10 @@ public:
         if (!head)
             return false;
 
-        auto* mid = findMid(head);
-        auto* lead = reverseList(mid);
+        auto* midOrNext = getMidOrNext(head);
+        auto* lead = reverseListForward(midOrNext);
 
-        while (head != mid) {
+        while (head != midOrNext) {
             if (head->val != lead->val) {
                 return false;
             }
@@ -56,7 +56,7 @@ public:
     }
 
 private:
-    ListNode* findMid(ListNode* head) {
+    ListNode* getMidOrNext(ListNode* head) {
         auto* fast = head;
         auto* slow = head;
 
@@ -68,7 +68,7 @@ private:
         return slow;
     }
 
-    ListNode* reverseList(ListNode* head) {
+    ListNode* reverseListForward(ListNode* head) {
         auto* fast = head;
         auto* mid = head;
         ListNode* tail = nullptr;
