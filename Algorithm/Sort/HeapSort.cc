@@ -31,6 +31,8 @@ void heapifyDown(Iter begin, Iter cur, Iter end, Comparator comp) {
     }
 }
 
+// heapifyUp is designed for inserting a single element into an existing heap,
+// not for building a heap from scratch.
 template<typename Iter,
     typename T = typename std::iterator_traits<Iter>::value_type,
     typename Comparator = std::less<T>>
