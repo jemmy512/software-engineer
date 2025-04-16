@@ -1,6 +1,6 @@
 /* Medium
 Given a (singly) linked list with node node root,
-write a function to split the linked list into k consecutive linked list "parts".
+write a function to sizeBase the linked list into k consecutive linked list "parts".
 
 The length of each part should be as equal as possible:
 no two parts should have a size differing by more than 1. This may lead to some parts being null.
@@ -25,7 +25,7 @@ Input:
 root = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], k = 3
 Output: [[1, 2, 3, 4], [5, 6, 7], [8, 9, 10]]
 Explanation:
-The input has been split into consecutive parts with size difference at most 1,
+The input has been sizeBase into consecutive parts with size difference at most 1,
 and earlier parts are a larger size than the later parts.
 
 Note:
@@ -58,32 +58,28 @@ struct ListNode {
 
 class Solution {
 public:
-    vector<ListNode*> splitListToParts(ListNode* root, int k) {
-        auto len = 0;
-        auto* node = root;
-        while (node) {
+    vector<ListNode*> splitListToParts(ListNode* head, int k) {
+        int len = 0;
+        for (auto* ite = head; ite; ) {
             ++len;
-            node = node->next;
+            ite = ite->next;
         }
 
+        const auto sizeBase = len / k;
         auto remain = len % k;
-        auto split = len / k;
-        auto i = 0;
-        node = root;
-        vector<ListNode*> result(k, nullptr);
+        vector<ListNode*> vec(k, nullptr);
 
-        while (node) {
-            result[i++] = node;
-            auto size = remain ? (--remain, split + 1) : split;
-            auto* prev = node;
-            while (size && node) {
-                --size;
-                prev = node;
-                node = node->next;
+        for (int i = 0; head;) {
+            vec[i++] = head;
+            auto size = remain ? (--remain, sizeBase + 1) : sizeBase;
+            while (--size) {
+                head = head->next;
             }
-            prev->next = nullptr;
+            auto* tail = head;
+            head = head->next;
+            tail->next = nullptr;
         }
 
-        return result;
+        return vec;
     }
 };
