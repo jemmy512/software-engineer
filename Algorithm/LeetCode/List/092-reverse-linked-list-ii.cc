@@ -54,3 +54,37 @@ public:
         return dummy.next;
     }
 };
+
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+        ListNode dummy(0, head);
+        auto* begPrev = &dummy;
+        auto* end = &dummy;
+
+        while (--left > 0) {
+            begPrev = begPrev->next;
+        }
+
+        while (right-- > 0) {
+            end = end->next;
+        }
+
+        reverseListBackward(begPrev, end);
+
+        return dummy.next;
+    }
+
+private:
+    // begPrev -> [beg -> ... -> end]
+    void reverseListBackward(ListNode* begPrev, ListNode* end) {
+        auto* newEnd = begPrev->next;
+
+        while (begPrev->next != end) {
+            auto* n = newEnd->next;
+            newEnd->next = n->next;
+            n->next = begPrev->next;
+            begPrev->next = n;
+        }
+    }
+};
