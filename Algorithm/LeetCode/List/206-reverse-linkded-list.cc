@@ -28,6 +28,11 @@ struct ListNode {
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
+        return reverseListForward(head);
+    }
+
+private:
+    ListNode* reverseListForward(ListNode* head) {
         auto* fast = head;
         auto* mid = head;
         ListNode* slow = nullptr;
@@ -51,6 +56,11 @@ public:
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
+        return reverseListBackward(head);
+    }
+
+private:
+    ListNode* reverseListBackward(ListNode* head) {
         ListNode dummy;
         dummy.next = head;
         auto* slow = &dummy;
@@ -71,11 +81,16 @@ public:
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
+        return reverseListRecursive(head);
+    }
+
+private:
+    ListNode* reverseListRecursive(ListNode* head) {
         if (!head || !head->next) {
             return head;
         }
 
-        auto* prev = reverseList(head->next);
+        auto* prev = reverseListRecursive(head->next);
         head->next->next = head;
         head->next = nullptr;
 
