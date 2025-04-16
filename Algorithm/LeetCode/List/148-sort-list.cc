@@ -39,9 +39,9 @@ public:
         if (!head || !head->next)
             return head;
 
-        auto* mid = getMid(head);
+        auto* midPrev = getMidPrev(head);
         auto* left = sortList(head);
-        auto* right = sortList(mid);
+        auto* right = sortList(midPrev);
 
         return merge(left, right);
     }
@@ -63,8 +63,9 @@ private:
         return dummy.next;
     }
 
-    ListNode* getMid(ListNode* head) {
+    ListNode* getMidPrev(ListNode* head) {
         ListNode dummy(0, head);
+        /* the prev of mid, so init value shoule be one step before head */
         auto* prev = &dummy;
 
         while (head && head->next) {
@@ -72,13 +73,13 @@ private:
             head = head->next->next;
         }
 
-        auto* mid = prev->next;
+        auto* midPrev = prev->next;
         prev->next = nullptr;
 
-        return mid;
+        return midPrev;
     }
 
-    ListNode* getMid(ListNode* head) {
+    ListNode* getMidOrNext(ListNode* head) {
         // ERROR: AddressSanitizer: stack-overflow
         // [4, 2, 1, 3]
         // head = [4, 2]
@@ -90,12 +91,27 @@ private:
         }
 
         // prev = [2], mid = nullptr
-        auto* mid = prev->next;
+        auto* midOrNext = prev->next;
         prev->next = nullptr;
 
-        // the left part [4, 2] is not partitioned, it is sitll the left part of next recursion,
-        // which causes dead loop
+        /* the left part [4, 2] is not partitioned, it is sitll the left part of next recursion,
+            which causes dead loop
+            4   2   1   3
+                        H
+                P   M
 
-        return mid;
+            4   2   1
+                    H
+                P   M
+
+            4   2
+                    H
+                P   M       --> dead looop
+
+            4   2
+                    H
+                P   M   */
+
+        return midOrNext;
     }
 };
