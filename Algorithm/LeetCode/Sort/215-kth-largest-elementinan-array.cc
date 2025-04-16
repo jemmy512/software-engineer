@@ -54,7 +54,7 @@ public:
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
-        for (int i = k/2-1; i >=0; --i)
+        for (int i = (k-1)/2; i >=0; --i)
             heapifyDown(nums, i, k);
 
         for (int i = k; i < nums.size(); ++i) {
@@ -69,13 +69,14 @@ public:
 
 private:
     void heapifyDown(vector<int> &nums, int b, int e) {
-        for (int i = 2 * b + 1; i < e; i = 2 * i + 1) {
-            if (i + 1 < e && nums[i + 1] < nums[i])
+        for (int i = 2 * b + 1; i < e; b = i, i = 2 * i + 1) {
+            if (i + 1 < e && nums[i + 1] < nums[i]) {
                 ++i;
-            if (nums[b] <= nums[i])
+            }
+            if (nums[b] <= nums[i]) {
                 break;
+            }
             swap(nums[b], nums[i]);
-            b = i;
         }
     }
 };
