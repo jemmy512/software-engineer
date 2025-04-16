@@ -39,30 +39,40 @@ struct ListNode {
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-        ListNode dummy(0, head);
+        if (!head) {
+            return head;
+        }
 
-        auto i = 0;
-        auto* tail = &dummy;
+        ListNode dummy{0, head};
+        auto* begPrev = &dummy;
         auto* beg = head;
         auto* end = head;
+        int i = 0;
 
         while (end) {
             if (++i % k == 0) {
-                while (tail->next != end) {
-                    auto* node = beg->next;
-                    beg->next = node->next;
-                    node->next = tail->next;
-                    tail->next = node;
-                }
-
-                tail = beg;
-                end = beg = beg->next;
+                reverseListBackward(begPrev, end);
+                begPrev = beg;
+                beg = end = beg->next;
             } else {
                 end = end->next;
             }
         }
 
         return dummy.next;
+    }
+
+private:
+    // (begPrev, ..., end]
+    void reverseListBackward(ListNode* begPrev, ListNode* end) {
+        auto* newEnd = begPrev->next;
+
+        while (begPrev->next != end) {
+            auto* n = newEnd->next;
+            newEnd->next = n->next;
+            n->next = begPrev->next;
+            begPrev->next = n;
+        }
     }
 };
 
