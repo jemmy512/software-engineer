@@ -110,3 +110,76 @@ private:
 private:
     unordered_map<int, int> _HashMap;
 };
+
+#include <vector>
+#include <unordered_map>
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        clear();
+
+        for (const auto& n : nums) {
+            ++_FreqMap[n];
+        }
+
+        for (const auto& [n, f] : _FreqMap) {
+            if (_TopK.size() < k) {
+                _TopK.emplace_back(n);
+                heapifyUp(_TopK.size() - 1);
+            } else if (f > getFreq(0)) {
+                _TopK[0] = n;
+                heapifyDown(0);
+            }
+        }
+
+        return _TopK;
+    }
+
+private:
+    void heapifyDown(int beg) {
+        for (auto parent = beg, child = 2 * parent + 1;
+            child < _TopK.size();
+            parent = child, child = 2 * parent + 1) {
+
+            if (child + 1 < _TopK.size() && getFreq(child +1 ) < getFreq(child)) {
+                ++child;
+            }
+
+            if (getFreq(parent) <= getFreq(child)) {
+                break;
+            }
+
+            swap(_TopK[parent], _TopK[child]);
+        }
+    }
+
+    // heapifyUp is designed for inserting a single element into an existing heap,
+    // not for building a heap from scratch.
+    void heapifyUp(int i) {
+        for (auto parent = (i-1)/2, child = i;
+            child > 0;
+            child = parent, parent = (child-1)/2) {
+
+            if (getFreq(parent) <= getFreq(child)) {
+                break;
+            }
+
+            swap(_TopK[parent], _TopK[child]);
+        }
+    }
+
+private:
+    int getFreq(int i) {
+        return _FreqMap[_TopK[i]];
+    }
+
+    void clear() {
+        _TopK.clear();
+        _FreqMap.clear();
+    }
+
+private:
+    vector<int> _TopK;
+    unordered_map<int, int> _FreqMap;
+};
