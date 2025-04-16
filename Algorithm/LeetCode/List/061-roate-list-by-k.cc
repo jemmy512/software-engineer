@@ -49,6 +49,11 @@ public:
         }
         node->next = head;
 
+        // k = (k %= len) ? len - k : 0;
+        // while (k-- > 0) {
+        //     node = node->next;
+        // }
+
         if (k %= len) {
             for (auto i = 0; i < len-k; ++i) {
                 node = node->next;
