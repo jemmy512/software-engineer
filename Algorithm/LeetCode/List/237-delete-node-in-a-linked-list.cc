@@ -6,10 +6,19 @@ Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node wi
 the linked list should become 1 -> 2 -> 4 after calling your function.
 
 Relatives:
+
+019. Remove Nth Node From End of List
 027. Remove Element
-203. Remove Linked List Element
-237. Delete Node in a Linked List
+026. Remove Duplicates from Sorted Array
+080. Remove Duplicates from Sorted Array II
+083. Remove Duplicates from Sorted List
+082. Remove Duplicates from Sorted List II
+203. Remove Linked List Elements
+237. Delete Node In A Linked List
 283. Move Zeroes
+1474. Delete N Nodes After M Nodes of a Linked List
+1721. Swapping Nodes in a Linked List
+1836. Remove Duplicates From an Unsorted Linked List
 
 Constraints:
 The number of the nodes in the given list is in the range [2, 1000].
