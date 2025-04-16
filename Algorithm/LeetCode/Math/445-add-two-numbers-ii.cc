@@ -25,6 +25,7 @@ struct ListNode {
     int val;
     ListNode *next;
     ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
 class Solution {
@@ -43,9 +44,9 @@ public:
         }
 
         int sum = 0;
-        auto* head = new ListNode(0);
+        ListNode* head = nullptr;
 
-        while (!one.empty() || !two.empty()) {
+        while (!one.empty() || !two.empty() || sum) {
             if (!one.empty()) {
                 sum += one.top()->val;
                 one.pop();
@@ -54,14 +55,12 @@ public:
                 sum += two.top()->val;
                 two.pop();
             }
-            head->val = sum % 10;
-            auto* node = new ListNode(sum/10);
-            node->next = head;
-            head = node;
+
+            head = new ListNode(sum%10, head);
             sum /= 10;
         }
 
-        return (head->val ? head : head->next);
+        return head;
     }
 };
 
