@@ -7,10 +7,10 @@
  *       http://www.cnblogs.com/skywang12345/p/3245399.html#a1
  *       http://blog.csdn.net/weewqrer/article/details/51866488
  *       https://blog.csdn.net/v_JULY_v/article/details/6284050 */
-#include <array>
-#include <iomanip>
-#include <iostream>
-#include <algorithm>
+ #include <array>
+ #include <iomanip>
+ #include <iostream>
+ #include <algorithm>
 
 template<typename T>
 class RBTree {
@@ -35,6 +35,7 @@ public:
     }
 
     ~RBTree() {
+        clear(_Root);
         delete _Nil;
     }
 
@@ -65,6 +66,15 @@ protected:
     }
 
 private:
+    void clear(Node* node) {
+        if (node != _Nil) {
+            clear(node->left);
+            clear(node->right);
+            delete node;
+        }
+    }
+
+private:
     Node* _Root = nullptr, *_Nil = nullptr;
 };
 
@@ -76,37 +86,43 @@ void RBTree<T>::insert(T value) {
 
 template<typename T>
 typename RBTree<T>::Node* RBTree<T>::_insert(Node* node) {
-    if (node == _Nil)
+    if (node == _Nil) {
         return _Nil;
-
-    Node* fast = _Root, *slow = _Root;
-    while (fast != _Nil) {
-        slow = fast;
-        if (fast->value < node->value)
-            fast = fast->right;
-        else if (fast->value > node->value)
-            fast = fast->left;
-        else
-            return _Nil;
     }
 
-    if (slow == _Nil)
+    Node* cur = _Root, *prev = _Root;
+    while (cur != _Nil) {
+        prev = cur;
+        if (cur->value < node->value) {
+            cur = cur->right;
+        } else if (cur->value > node->value) {
+            cur = cur->left;
+        } else {
+            return _Nil;
+        }
+    }
+
+    if (prev == _Nil) {
         _Root = node;
-    else if (slow->value < node->value)
-        slow->right = node;
-    else
-        slow->left = node;
-    node->parent = slow;
+    } else if (prev->value < node->value) {
+        prev->right = node;
+    } else {
+        prev->left = node;
+    }
+
+    node->parent = prev;
 
     return node;
 }
 
 template<typename T>
 void RBTree<T>::balanceInsertion(Node* node) {
-    if (node == _Nil)
+    if (node == _Nil) {
         return;
+    }
 
     Node* parent = _Nil, *grandpa = _Nil, *uncle = _Nil;
+
     while ((node != _Root) && (Red == getColor(node)) && (Red == getColor(node->parent))) {
         parent = node->parent;
         grandpa = parent->parent;
@@ -153,7 +169,10 @@ void RBTree<T>::balanceInsertion(Node* node) {
 
 template<typename T>
 void RBTree<T>::erase(T value) {
-    balanceErasion(_erase(value));
+    auto* node = _erase(value);
+    if (node != _Nil) {
+        balanceErasion(node);
+    }
 }
 
 template<typename T>
@@ -183,12 +202,14 @@ void RBTree<T>::balanceErasion(Node* node) {
         return;
 
     Node* child = node->left != _Nil ? node->left : node->right;
-    if (node == _Root)
+    if (node == _Root) {
         _Root = child;
-    else if (node == node->parent->left)
+    } else if (node == node->parent->left) {
         node->parent->left = child;
-    else
+    } else {
         node->parent->right = child;
+    }
+
     child->parent = node->parent;   // child may be nullptr
 
     if (Black != getColor(node)) {
@@ -261,65 +282,92 @@ void RBTree<T>::balanceErasion(Node* node) {
 
 template<typename T>
 typename RBTree<T>::Node* RBTree<T>::minNode(Node* node) {
-    while (node->left != _Nil)
-        node = node->left;
-    return node;
+while (node->left != _Nil) {
+    node = node->left;
+}
+return node;
 }
 
+/*      G             G
+ *     / \           / \
+ *    p   U  -->    n   U
+ *   / \           / \
+ *      n         p
+ *     /         / \
+ *    c             c       */
 template<typename T>
-void RBTree<T>::lRotate(Node* node) {
-    if (node == _Nil)
+void RBTree<T>::lRotate(Node* p) {
+    if (p == _Nil) {
         return;
+    }
 
-    Node* tmp = node->right;
-    node->right = tmp->left;
-    if (node->right != _Nil)
-        node->right->parent = node;
+    Node* n = p->right;
+    Node* gp = p->parent;
 
-    if (node == _Root)
-        _Root = tmp;
-    else if (node == node->parent->left)
-        node->parent->left = tmp;
-    else
-        node->parent->right = tmp;
+    // link p & c
+    p->right = n->left;
+    if (p->right != _Nil) {
+        p->right->parent = p;
+    }
 
-    tmp->left = node;
-    tmp->parent = node->parent;
+    // link n & gp
+    n->parent = gp;
+    if (p == _Root) {
+        _Root = n;
+    } else if (p == gp->left) {
+        gp->left = n;
+    } else {
+        gp->right = n;
+    }
 
-    node->parent = tmp;
+    // link p & n
+    n->left = p;
+    p->parent = n;
 }
 
+/*        G           G
+ *       / \         / \
+ *      u   p  -->  u   n
+ *         /             \
+ *        n               p
+ *         \             /
+ *          c           c   */
 template<typename T>
-void RBTree<T>::rRotate(Node* node) {
-    if (node == _Nil)
+void RBTree<T>::rRotate(Node* p) {
+    if (p == _Nil) {
         return;
+    }
 
-    Node* tmp = node->left;
-    node->left = tmp->right;
-    if (node->left != _Nil)
-        node->left->parent = node;
+    Node* n = p->left;
+    Node* gp = p->parent;
 
-    if (node == _Root)
-        _Root = tmp;
-    else if (node == node->parent->left)
-        node->parent->left = tmp;
-    else
-        node->parent->right = tmp;
+    p->left = n->right;
+    if (p->left) {
+        p->left->parent = p;
+    }
 
-    tmp->right = node;
-    tmp->parent = node->parent;
+    n->parent = gp;
+    if (p == _Root) {
+        _Root = n;
+    } else if (p == gp->left) {
+        gp->left = n;
+    } else {
+        gp->right = n;
+    }
 
-    node->parent = tmp;
+    n->right = p;
+    p->parent = n;
 }
 
 template<typename T>
 void RBTree<T>::print(Order order) {
-    if (order == Order::PreOrder)
+    if (order == Order::PreOrder) {
         preOrderPrint(_Root);
-    else if (order == Order::InOrder)
+    } else if (order == Order::InOrder) {
         inOrderPrint(_Root);
-    else if (order == Order::PostOrder)
+    } else if (order == Order::PostOrder) {
         postOrderPrint(_Root);
+    }
 }
 
 template<typename T>
@@ -371,26 +419,27 @@ int main() {
     return 0;
 }
 
-/**
- * 1. Each node is either red or black.
- * 2. The root is black. This rule is sometimes omitted.
- * 3. All leaves (NIL) are black.
- * 4. If a node is red, then both its children are black.
- * 5. Every path from a given node to any of its descendant NIL nodes
- *  goes through the same number of black nodes.
- *
- *
- * Insert:
- * 1. N is the root node, i.e., first node of red–black tree
- * 2. N-P-U: red-red-red
- * 3. N-P-U: red(L)-red-black
- * 4. N-P-U: red(R)-red-black
- *
- *
- * Remove:
- * 1. N is the new root.
- * 2. S is red.
- * 3. P, S, and S's children are black.
- * 4. S and S's children are black, but P is red.
- * 5. S is black, S's left child is red, S's right child is black, and N is the left child of its parent.
- * 6. S is black, S's right child is red, and N is the left child of its parent P*/
+ /**
+  * 1. Each node is either red or black.
+  * 2. The root is black. This rule is sometimes omitted.
+  * 3. All leaves (NIL) are black.
+  * 4. No adjacent red nodes. If a node is red, then both its children are black.
+  * 5. Every path from a given node to any of its descendant NIL nodes
+  *  goes through the same number of black nodes.
+  *
+  *
+  * Insert:
+  * 1. N is the root node, i.e., first node of red–black tree
+  * 2. N-P-U: red-red-red        just flip colors
+  * 3. N-P-U: red(L)-red-black   LRorate(P) - RRotate(GP)
+  * 4. N-P-U: red(R)-red-black   RRotate(GP)
+  *
+  *
+  * Remove:
+  * 1. N is the new root.
+  * 2. S is red.
+  * 3. P, S, and S's children are black.
+  * 4. S and S's children are black, but P is red.
+  * 5. S is black, S's left child is red, S's right child is black,
+  *      and N is the left child of its parent.
+  * 6. S is black, S's right child is red, and N is the left child of its parent P */
