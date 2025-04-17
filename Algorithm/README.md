@@ -486,13 +486,12 @@ Shell Sort | O(n) | O((nlogn)^2) | O((nlogn)^2) | O(1) |
 
 ## Design
 No | Title | Difficulty | Note
--- | -- | :-:  | ---
+-- | ----------------------------------------------------------------| :-:  | ---
 146 | LRU Cache | :star: :star: | `Map + List (O(1) + Date Move)`
 460 | LFU Cache  | :star: :star: :star: |
 155 | Min Stack | :star: | :heavy_plus_sign:
 380 | Insert Delete GetRandom O(1) | :star: :star: | `Map + Vec (O(1) + Random Access)`
 1396 | Design Underground System | :star: :star: |
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Array
 No | Title | Difficulty | Note
