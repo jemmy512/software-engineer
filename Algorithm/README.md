@@ -1,7 +1,7 @@
 # LeetCode Algorithm
 
 ## DP
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 010 | Regular Expression Matching | :star: :star: :star: |
 032 | Longet Valid Paretheses | :star: :star: :star: | :heavy_plus_sign: `stack`
@@ -46,16 +46,14 @@ No | Title | Difficulty | Note
 931 | Minimum Falling Path Sum | :star: :star: |
 1289 | Minimum Falling Path Sum II | :star: :star: :star: |
 877 | Stone Game | :star: :star: | :heavy_plus_sign:
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ### knapsack
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 322 | Coin Change | :star: :star: |
 518 | Coin Change 2 | :star: :star: | :thinking:
 416 | Partition Equal Subset Sum | :star: :star: |
 494 | Target Sum | :star: :star: | `Knapsack` `DP` `Backtrack`
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 Three type of the problem:
 1. What's the maximum value of the knapsack when it is fulfilled?
@@ -144,7 +142,7 @@ Three type of the problem:
     </details>
 
 ### substring
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 053 | Maximum Subarray | :star: | `Prefix Sum` `kadane` `Divide Conquer`
 072 | Edit Distance | :star: :star: :star: |
@@ -157,7 +155,6 @@ No | Title | Difficulty | Note
 1048 | Longest String Chain | :star: :star: |
 583 | Delete Operation for Two Strings | :star: :star: |
 712 | Minimum ASCII Delete Sum for Two Strings | :star: :star: |
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ```c++
 for (state1 : state1_options)
@@ -167,7 +164,7 @@ for (state1 : state1_options)
 ```
 
 ## BackTrack
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 017 | Letter Combination of a Phone Number | :star: :star: |
 022 | Generate Parenthesis | :star: :star: | :thinking:
@@ -184,7 +181,6 @@ No | Title | Difficulty | Note
 290 | Word Pattern | :star: |
 291 | Word Pattern II | :star: :star: | :heavy_plus_sign:
 698 | Partition to K Equal Sum Subsets | :star: :star: |
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ```c++
 void backtrack(path, options) {
@@ -259,7 +255,7 @@ void backtrack(path, options) {
     </details>
 
 ## Greedy
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 055 | Jump Game | :star: :star: |
 045 | Jump Game II | :star: :star: |
@@ -268,18 +264,16 @@ No | Title | Difficulty | Note
 452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | `Interval` `Sort End`
 763 | Partition Labels | :star: :star: | `Interval`
 1024 | Video Stitching | :star: :star: | `Interval`
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Divide Conquer
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 023 | Merge K Sorted List | :star: :star: :star: | `K-way Merge`
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Two Pointers
 
 **Fast Slow Pointers**
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 011 | Container With Most Water | :star: :star: :star: |
 042 | Trapping Rain Water | :star: :star: :star: |
@@ -293,10 +287,9 @@ No | Title | Difficulty | Note
 142 | Linked List Cycle II | :star: :star: | `Cycle`
 283 | Move Zeroes | :star: :star: |
 287 | Find the Duplicate Number | :star: :star: | `Cycle Detection`
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 **Sliding Window**
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | ---  | ---
 076 | Minimum Window Substring | :star: :star: :star: |
 003 | Longest Substring Without Repeating Characters | :star: :star: |
@@ -306,7 +299,6 @@ No | Title | Difficulty | Note
 239 | Sliding Window Maximum | :star: :star: :star: | `Monotonic deque` `DP` `L-R vec`
 438 | Find All Anagrams in a String | :star: :star: |
 567 | Permutation in String | :star: :star: |
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ```c++
 void slidingWindow(string src, string tar) {
@@ -345,7 +337,7 @@ void slidingWindow(string src, string tar) {
 ```
 
 ## Search
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 004 | Median of Two Sorted Arrays | :star: :star: :star: | :heavy_plus_sign: `BS`
 034 | Search For a Range | :star: :star: | `BS`
@@ -370,7 +362,6 @@ No | Title | Difficulty | Note
 752 | Open the Lock | :star: :star:| `BFS`
 875 | Koko Eating Bananas | :star: :star:| :thinking: `BS`
 1011 | Capacity To Ship Packages Within D Days | :star: :star:| :thinking: `BS`
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 [:link: Binary Search, Search `1st`, `last`, `not less`, `not great`](./Search/binary-search.cc)
 
@@ -459,7 +450,7 @@ int bfs(Node start, Node target) {
 ```
 
 ## Sort
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 215 | Kth Largest Element in an Array | :star: :star: | `??` `Heap Sort` `Quick Sort` :one:
 295 | Find Median from Data Stream | :star: :star: :star: | `Heap Sort`
@@ -467,7 +458,6 @@ No | Title | Difficulty | Note
 414 | Third Maximum Number | :star: | `Heap Sort`
 912 | Sort Array | :star: :star: | :one:
 937 | Reorder Data in Log Files | :star: |
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 heapifyUp is designed for inserting a single element into an w heap, not for building a heap from scratch.
 
@@ -485,16 +475,16 @@ Tim Sort | O(n) | O(nlogn) | O(nlogn) | O(n) |
 Shell Sort | O(n) | O((nlogn)^2) | O((nlogn)^2) | O(1) |
 
 ## Design
-| No | Title | Difficulty | Note |
+No | `Title                                       ` | Difficulty | Note
 | -- | ----------------------------------------------------------------| :-:  | --- |
 | 146 | LRU Cache | :star: :star: | `Map + List (O(1) + Date Move)` |
 | 460 | LFU Cache  | :star: :star: :star: | |
 | 155 | Min Stack | :star: | :heavy_plus_sign: |
 | 380 | Insert Delete GetRandom O(1) | :star: :star: | `Map + Vec (O(1) + Random Access)` |
-| 1396 | Design Underground System &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| :star: :star: | |
+| 1396 | Design Underground System | :star: :star: | |
 
 ## Array
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 041 | First Missing Positive | :star: :star: :star: |
 448 | Find All Numbers Disappeared in An Array | :star: |
@@ -533,10 +523,9 @@ No | Title | Difficulty | Note
 220 | Contains Duplicate III `nums[i]-nums[j]<=t i-j<=k` | :star: :star: | :heavy_plus_sign: `bucket sort`
 238 | Product of Array Except Self  | :star: :star: | `L-R vec`
 870 | Advantage Shuffle | :star: :star: |
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## List
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 002 | Add Two Numbers | :star: :star: | :one:
 445 | Add Two Numbers II | :star: :star: | :one:
@@ -565,7 +554,6 @@ No | Title | Difficulty | Note
 817 | Linked List Components | :star: :star: | :one:
 876 | Middle of the Linked List | :star: | :one:
 1836 | Remove Duplicates From an Unsorted Linked List | :start: :star: | :one:
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ```c++
 /* Even nodes
@@ -595,7 +583,7 @@ Get List Median:
 * getMidOrNext(). The middle or next one of real median. [Could dead loop](./LeetCode/List/148-sort-list.cc)
 
 ## Tree
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 096 | Unique Binary Search Trees  | :star: :star: | `DP`
 095 | Unique Binary Search Trees II | :star: :star: | `DP`
@@ -654,10 +642,9 @@ No | Title | Difficulty | Note
 814 | Binary Tree Pruning | :star: | `DFS`
 1373 | Maximum Sum BST in Binary Tree | :star: :star: :star: | :heavy_plus_sign:
 1803 | Count Pairs With XOR in a Range | :star: :star: :star: | `XOR` `Prefix Sum` `Trie`
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## String
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 008 | atoi | :star: |
 014 | Longest Common Prefix | :star: |
@@ -678,10 +665,9 @@ No | Title | Difficulty | Note
 1062 | Longest Repeating Substring | :star: :star: | :heavy_plus_sign: `BS + Hash` `Rabin-Karp`
 1784 | Check if Binary String Has at Most One Segment of Ones | :star: |
 1869 | Longer Contiguous Segments of Ones than Zeros | :star: |
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Map
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 001 | Two Sum | :star: |
 167 | Two Sum II | :star: | `Two Pointers`
@@ -696,10 +682,9 @@ No | Title | Difficulty | Note
 771 | Jewels and Stones | :star: |
 811 | Subdomain Visit Count | :star: |
 953 | Verifying an Alien Dictionary  | :star: |
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Stack
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 020 | valid Parentheses | :star: |
 032 | Longet Valid Parentheses | :star: :star: :star: | :heavy_plus_sign: `DP`
@@ -714,16 +699,14 @@ No | Title | Difficulty | Note
 921 | Minimum Add to Make Parentheses Valid | :star: :star: | :heavy_plus_sign:
 1249 | Minimum Remove to Make Valid Parentheses | :star: :star: | :heavy_plus_sign: `Bit Set`
 1541 | Minimum Insertions to Balance a Parentheses String | :star: :star: | :heavy_plus_sign:
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Queue
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 641 | Design Circular Deque | :star: :star:|
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Math
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-: | ---
 006 | ZigZag Conversion | :star: :star: |
 007 | Reverse Integer | :star: |
@@ -767,13 +750,11 @@ No | Title | Difficulty | Note
 780 | Reaching Points | :star: :star: :star: |
 1041 | Robot Bounded In Circle | :star: :star: | :thinking:
  \- | [Least Common Multiple & Greatest Common Disisor](./Leetcode/Math/lcm-gcd.cc) | |
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 ## Bit
-No | Title | Difficulty | Note
+No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 036 | Valid Sudoku | :star: :star: |
-0000 | 0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0--0 | :star: :star: :star: |
 
 # Dynamic Programming
 
