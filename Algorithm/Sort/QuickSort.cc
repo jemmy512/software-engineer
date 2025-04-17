@@ -19,49 +19,79 @@ The pivot's final location is not necessarily at the index that is returned,
 as the pivot and elements equal to the pivot can end up anywhere within the partition after a partition step,
 and may not be sorted until the base case of a partition with a single element is reached via recursion. */
 
-template<typename T>
-int partition(T& data, int beg, int end) {
-    auto pivot = data[(beg + end) / 2];
-
-    while (beg <= end) {
-        while (data[beg] < pivot)
-            ++beg;
-        while (data[end] > pivot)
-            --end;
-        if (beg <= end)
-            std::swap(data[beg++], data[end--]);
+namespace SearchForward {
+    void quickSort(vector<int>& nums, int beg, int end) {
+        if (beg < end) {
+            int pivot = partition(nums, beg, end);
+            quickSort(nums, beg, pivot - 1);
+            quickSort(nums, pivot + 1, end);
+        }
     }
 
-    // beg points to the position past the pivot
-    return beg;
-}
+    int partition(vector<int>& nums, int beg, int end) {
+        auto pivot = nums[end];
+        auto i = beg;
 
-template<typename T> // [beg, end]
-void quickSort(T& data, int beg, int end) {
-    if (beg < end) {
-        auto pivot = partition(data, beg, end);
-        /* dead loop if pivot not -1 +1 when beg = 0 end = 7 pivot = 3
-        0 1 2 3 4 5 6 7 8 9 10 11 12
-        3 3 2 3 3 3 3 4 7 6 5  9  8 */
-        quickSort(data, beg, pivot-1);
-        quickSort(data, pivot, end);
+        for (int j = beg; j < end; ++j) {
+            if (nums[j] <= pivot) {
+                std::swap(nums[i++], nums[j]);
+            }
+        }
+
+        std::swap(nums[i], nums[end]);
+
+        return i;
     }
 }
 
-template<typename T> // [beg, end]
-void quickSelectK(T& data, int beg, int end, int k) {
-    while (beg < end) {
-        auto pivot = partition(data, beg, end);
-        if (pivot < k)
-            beg = pivot;
-        else if (pivot > k)
-            end = pivot - 1;
-        else
-            return;
+namespace SearchBidirectional {
+    template<typename T>
+    int partition(T& data, int beg, int end) {
+        auto pivot = data[(beg + end) / 2];
+
+        while (beg <= end) {
+            while (data[beg] < pivot)
+                ++beg;
+            while (data[end] > pivot)
+                --end;
+            if (beg <= end)
+                std::swap(data[beg++], data[end--]);
+        }
+
+        // beg points to the position past the pivot
+        return beg;
+    }
+
+    template<typename T> // [beg, end]
+    void quickSort(T& data, int beg, int end) {
+        if (beg < end) {
+            auto pivot = partition(data, beg, end);
+            /* dead loop if pivot not -1 +1 when beg = 0 end = 7 pivot = 3
+            0 1 2 3 4 5 6 7 8 9 10 11 12
+            3 3 2 3 3 3 3 4 7 6 5  9  8 */
+            quickSort(data, beg, pivot-1);
+            quickSort(data, pivot, end);
+        }
+    }
+
+    template<typename T> // [beg, end]
+    void quickSelectK(T& data, int beg, int end, int k) {
+        while (beg < end) {
+            auto pivot = partition(data, beg, end);
+            if (pivot < k)
+                beg = pivot;
+            else if (pivot > k)
+                end = pivot - 1;
+            else
+                return;
+        }
     }
 }
 
 int main(void) {
+    using namespace SearchForward;
+    // using namespace SearchBidirectional;
+
     {
         vector<vector<int>> datas {
             { 3, 3, 2, 5, 3, 3, 8, 4, 7, 6, 9, 3, 3},
