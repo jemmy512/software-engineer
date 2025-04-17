@@ -58,7 +58,7 @@ No | `Title                                       ` | Difficulty | Note
 Three type of the problem:
 1. What's the maximum value of the knapsack when it is fulfilled?
     <details>
-    <summary>Collapse</summary>
+    <summary>:open_file_folder: Expand</summary>
 
     ```c++
     int knapsack(int W, const vector<int>& vals, const vector<int>& weights) {
@@ -85,7 +85,7 @@ Three type of the problem:
 
 2. [Can the goods fulfill the knapsack?](./LeetCode/DP/416-partition-equal-subset-sum.cc)
     <details>
-    <summary>Collapse</summary>
+    <summary>:open_file_folder: Expand</summary>
 
     ```c++
     bool knapsack(int W, const vector<int>& weights) {
@@ -114,7 +114,7 @@ Three type of the problem:
 
 3. [How many ways to put the goods into knapsack?](./LeetCode/DP/518-coin-change-ii.cc)
     <details>
-    <summary>Collapse</summary>
+    <summary>:open_file_folder: Expand</summary>
 
     ```c++
     int knapsack(int W, const vector<int>& weights) {
@@ -198,7 +198,7 @@ void backtrack(path, options) {
 
 * Remove duplicates in combination
     <details>
-    <summary>Collapse</summary>
+    <summary>:open_file_folder: Expand</summary>
 
     ```c++
     // 40. Combination Sum II
@@ -224,7 +224,7 @@ void backtrack(path, options) {
 
 * Remove duplicates in permutation
     <details>
-    <summary>Collapse</summary>
+    <summary>:open_file_folder: Expand</summary>
 
     ```c++
     // 47. Permutations II
