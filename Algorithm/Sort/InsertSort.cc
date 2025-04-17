@@ -5,15 +5,15 @@
 using namespace std;
 
 template<typename T>
-void insertSort(T& data) {
-    for (auto i = 1; i < data.size(); ++i) {
-        for (int j = i; j > 0; --j) {
-            if (data[j-1] > data[j]) {
-                std::swap(data[j-1], data[j]);
-            } else {
-                break;
-            }
+void insertSort(T& vec) {
+    for (auto i = 1; i < vec.size(); ++i) {
+        auto key = vec[i];
+        int j = i - 1;
+        while (j >= 0 && vec[j] > key) {
+            vec[j+1] = vec[j];
+            --j;
         }
+        vec[j+1] = key;
     }
 }
 
