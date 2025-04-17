@@ -56,10 +56,12 @@ template<typename Iter,
     typename T = typename std::iterator_traits<Iter>::value_type,
     typename Comparator = std::less<T>>
 void heapSort(Iter begin, Iter end, Comparator comp = Comparator()) {
+    // Converts the array into a max-heap.
     for (Iter iter = begin + std::distance(begin, end) / 2 - 1; iter >= begin; --iter) {
         heapifyDown(begin, iter, end, comp);
     }
 
+    // Extract Elements and Build Sorted Array
     for (Iter iter = end - 1; iter > begin; --iter) {
         std::swap(*begin, *iter);
         heapifyDown(begin, begin, iter, comp);
