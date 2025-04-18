@@ -1,73 +1,72 @@
-/* Find a path summary equals to the expected value. */
+/* Find vec path summary equals to the expected value. */
 
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
-typedef struct node {
-    int data;
+typedef struct Node_ {
+    int val;
     struct node *left, *right;
-}BTNode;
 
-BTNode *creatBTree(int a[], int n) {
-    BTNode *root, *p, *c, *pn;
-    root = (BTNode *)malloc(sizeof(BTNode));
-    root->data = a[0];
-    root->left = root->right = NULL;
+    Node() : val(0), left(nullptr), right(nullptr) {}
+    Node(int v) : val(v), left(nullptr), right(nullptr) {}
+} Node;
 
-    for (int i = 1; i < n; ++i) {
-        pn = (BTNode *)malloc(sizeof(BTNode));
-        pn->data = a[i];
-        pn->left = pn->right = NULL;
+Node *creatBTree(int vec[], int len) {
+    Node *root, *prev, *cur, *n;
+    root = new Node(vec[0]);
 
-        c = root;
-        while (c) {
-            p = c;
-            c = c->data > pn->data ? c->left : c->right;
+    for (int i = 1; i < len; ++i) {
+        cur = root;
+        n = new Node(vec[i]);
+
+        while (cur) {
+            prev = cur;
+            cur = (cur->val > n->val) ? cur->left : cur->right;
         }
-        if (p->data > pn->data)
-            p->left = pn;
+        if (prev->val > n->val)
+            prev->left = n;
         else
-            p->right = pn;
+            prev->right = n;
     }
     return root;
 }
 
 /**************************** Find Any Path ***********************************/
 
-void FindPath(Tree* root,int expectedSum,int currentSum,vector<int>& path) {
-    currentSum += root->data;
-    path.push_back(root->data);
+void doFindPathAny(Tree* root, int dstSum, int curSum, vector<int>& path) {
+    curSum += root->val;
+    path.push_back(root->val);
 
-    if(currentSum == expectedSum){
-        cout<<"A path is found: "<<endl;
-        for(auto s : path){
+    if (curSum == dstSum) {
+        cout << "A path is found: " << endl;
+        for (auto s : path) {
             cout << s <<" ";
         }
         cout << endl;
-        //找到一条路径返回继续查找
+
         path.pop_back();
         return;
     }
 
-    if(root->left)
-        FindPath(root->left, expectedSum, currentSum, path);
-    if(root->right)
-        FindPath(root->right, expectedSum, currentSum, path);
+    if (root->left)
+        doFindPathAny(root->left, dstSum, curSum, path);
+    if (root->right)
+        doFindPathAny(root->right, dstSum, curSum, path);
 
     path.pop_back();
 }
 
-void Path(Tree* root,int expectedSum) {
-    if(root){
+void findPathAny(Tree* root,int dstSum) {
+    if (root) {
         vector<int> path;
-        int currentSum = 0;
-        FindPath(root, expectedSum, currentSum, path);
+        int curSum = 0;
 
-        Path(root->left, expectedSum);
+        doFindPathAny(root, dstSum, curSum, path);
 
-        Path(root->right, expectedSum);
+        findPathAny(root->left, dstSum);
+        findPathAny(root->right, dstSum);
     }
 
 }
@@ -90,38 +89,45 @@ void Path(Tree* root,int expectedSum) {
 
 /**************************** Find Path from Root to Leaf *********************/
 
-void findPath(BTNode *root, int curVal, int reqVal, vector<int> &vec) {
-    curVal += root->data;
-    vec.push_back(root->data);
+void doFindPathRootLeaf(Node *root, int curSum, int dstSum, vector<int> &vec) {
+    if (!root) {
+        return;
+    }
 
-    bool isLeaf = !root->left && !root->right;
-    if (curVal == reqVal && isLeaf) {
+    curSum += root->val;
+    vec.push_back(root->val);
+
+    const bool isLeaf = !root->left && !root->right;
+    if (isLeaf && curSum == dstSum) {
         cout << "A path is found:\n";
         for (int i : vec)
             cout << i << " ";
         cout << endl;
     }
-    if (root->left)
-        findPath(root->left, curVal, reqVal, vec);
-    if (root->right)
-        findPath(root->right, curVal, reqVal, vec);
+
+    doFindPathRootLeaf(root->left, curSum, dstSum, vec);
+    doFindPathRootLeaf(root->right, curSum, dstSum, vec);
+
     vec.pop_back();
 }
 
-void findPath(BTNode *root, int reqVal) {
-    if (root == NULL)
-        return;
-    vector<int> vec;
-    int curVal = 0;
-    findPath(root, curVal, reqVal, vec);
+void findPathRootLeaf(Node *root, int dstSum) {
+    if (root){
+        vector<int> vec;
+        int curSum = 0;
+        doFindPathRootLeaf(root, curSum, dstSum, vec);
+    }
 }
 
-bool hasPathSum(BTNode* root, int sum) {
+bool hasPathSum(Node* root, int sum) {
     if (!root)
         return false;
 
     sum -= root->val;
 
+    /*  n  left & right must be null at same time
+        \
+        p */
     if (root->left == nullptr && root->right == nullptr)
         return sum == 0;
 
@@ -130,8 +136,8 @@ bool hasPathSum(BTNode* root, int sum) {
 
 int main() {
     int arr[] = {3,2,5,8,4,7,6,9};
-    BTNode *root = creatBTree(arr, 8);
-    findPath(root, 29);
+    Node *root = creatBTree(arr, 8);
+    findPathRootLeaf(root, 29);
 
     return 0;
 }
