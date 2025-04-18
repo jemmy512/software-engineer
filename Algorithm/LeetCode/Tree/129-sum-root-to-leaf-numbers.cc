@@ -54,33 +54,26 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-
 class Solution {
 public:
     int sumNumbers(TreeNode* root) {
-        result = 0;
-
-        dfs(root, 0);
-
-        return result;
+        return dfs(root, 0);
     }
 
 private:
-    void dfs(TreeNode *node, int sumCur) {
-        if (!node) {
-            return;
+    int dfs(TreeNode* root, int sum) {
+        if (!root) {
+            return 0;
         }
 
-        sumCur = sumCur * 10 + node->val;
+        sum = sum * 10 + root->val;
 
-        if (!node->left && !node->right) {
-            result += sumCur;
-        } else {
-            dfs(node->left, sumCur);
-            dfs(node->right, sumCur);
+        // left right must be null at sam time
+        // otherwise the same sum will be returned twice
+        if (!root->left && !root->right) {
+            return sum;
         }
+
+        return dfs(root->left, sum) + dfs(root->right, sum);
     }
-
-private:
-    int result{0};
 };
