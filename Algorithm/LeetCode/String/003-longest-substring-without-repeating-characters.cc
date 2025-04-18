@@ -27,20 +27,13 @@ int lengthOfLongestSubstring(string str) {
     int maxLen = 0;
 
     for (auto beg = -1, end = 0; end < str.size(); ++end) {
-        if (index[str[end]] != -1) {
-            beg = max(beg, index[str[end]]); // abcbade
+        auto chr = index[chr];
+        if (index[chr] != -1) {
+            beg = max(beg, index[chr]); // abcbade
         }
-        index[str[end]] = end;
+        index[chr] = end;
         maxLen = max(maxLen, end - beg);
     }
-
-    // for (auto beg = 0, end = 0; end < str.size(); ++end) {
-    //     if (index[str[end]] != -1) {
-    //         beg = beg > index[str[end]] ? beg : index[str[end]] + 1;
-    //     }
-    //     index[str[end]] = end;
-    //     maxLen = max(maxLen, end - beg);
-    // }
 
     return maxLen;
 }
