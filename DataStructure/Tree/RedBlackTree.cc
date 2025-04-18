@@ -26,6 +26,22 @@ public:
         Node(T val, Node* nill)
         :   value(val), color(Red), left(nill), right(nill), parent(nill)
         { }
+
+        void setColor(Color col) {
+            this->color = col;
+        }
+
+        Color getColor() const {
+            return this->color;
+        }
+
+        bool isRed() const {
+            return this->color == Red;
+        }
+
+        bool isBlack() const {
+            return this->color == Black;
+        }
     };
 
     RBTree() {
@@ -56,15 +72,6 @@ protected:
     void inOrderPrint(Node* node);
     void postOrderPrint(Node* node);
 
-    void setColor(Node* node, Color col) {
-        if (node != _Nil)
-            node->color = col;
-    }
-
-    Color getColor(Node* node) {
-        return node->color;
-    }
-
 private:
     void clear(Node* node) {
         if (node != _Nil) {
@@ -75,6 +82,7 @@ private:
     }
 
 private:
+    friend struct Node;
     Node* _Root = nullptr, *_Nil = nullptr;
 };
 
@@ -123,16 +131,16 @@ void RBTree<T>::balanceInsertion(Node* node) {
 
     Node* parent = _Nil, *grandpa = _Nil, *uncle = _Nil;
 
-    while ((node != _Root) && (Red == getColor(node)) && (Red == getColor(node->parent))) {
+    while ((node != _Root) && node->isRed() && node->parent->isRed()) {
         parent = node->parent;
         grandpa = parent->parent;
 
         if (parent == grandpa->left) {
             uncle = grandpa->right;         //          node - parent - uncle
-            if (Red == getColor(uncle)) {   //  case 1. Red  - Red    - Red
-                setColor(uncle, Black);
-                setColor(parent, Black);
-                setColor(grandpa, Red);
+            if (uncle->isRed()) {           //  case 1. Red  - Red    - Red
+                uncle->setColor(Black);
+                parent->setColor(Black);
+                grandpa->setColor(Red);
                 node = grandpa;
             } else {
                 if (node == parent->right) {// case 2. (right)Red - Red - Black
@@ -146,10 +154,10 @@ void RBTree<T>::balanceInsertion(Node* node) {
             }
         } else {
             uncle = grandpa->left;
-            if (Red == getColor(uncle)) {
-                setColor(uncle, Black);
-                setColor(parent, Black);
-                setColor(grandpa, Red);
+            if (uncle->isRed()) {
+                uncle->setColor(Black);
+                parent->setColor(Black);
+                grandpa->setColor(Red);
                 node = grandpa;
             } else {
                 if (node == parent->left) {
@@ -164,7 +172,7 @@ void RBTree<T>::balanceInsertion(Node* node) {
         }
     }
 
-    setColor(_Root, Black);                  // case 4. _Root insert
+    _Root->setColor(Black);                  // case 4. _Root insert
 }
 
 template<typename T>
@@ -178,18 +186,19 @@ void RBTree<T>::erase(T value) {
 template<typename T>
 typename RBTree<T>::Node* RBTree<T>::_erase(T value) {
     Node* node = _Root;
+
     while (node != _Nil) {
         if (node->value < value)
             node = node->right;
         else if (node->value > value)
             node = node->left;
         else {
-            Node* no = node;
-            if (no->left != _Nil && no->right != _Nil) {
-                no = minNode(node->right);
-                node->value = no->value;
+            Node* min = node;
+            if (min->left != _Nil && min->right != _Nil) {
+                min = minNode(node->right);
+                node->value = min->value;
             }
-            return no;
+            return min;
         }
     }
 
@@ -198,10 +207,11 @@ typename RBTree<T>::Node* RBTree<T>::_erase(T value) {
 
 template<typename T>
 void RBTree<T>::balanceErasion(Node* node) {
-    if (node == _Nil)
+    if (node == _Nil) {
         return;
+    }
 
-    Node* child = node->left != _Nil ? node->left : node->right;
+    Node* child = (node->left != _Nil) ? node->left : node->right;
     if (node == _Root) {
         _Root = child;
     } else if (node == node->parent->left) {
@@ -210,82 +220,84 @@ void RBTree<T>::balanceErasion(Node* node) {
         node->parent->right = child;
     }
 
-    child->parent = node->parent;   // child may be nullptr
+    child->parent = node->parent;   // child may be _Nil(nullptr)
 
-    if (Black != getColor(node)) {
+    if (node->isRed()) {
         delete node;
         return;
     }
 
     Node* parent = _Nil;
     Node* sibling = _Nil;
-    while ((child != _Root) && (Black == getColor(child))) {
+
+    while ((child != _Root) && child->isBlack()) {
         parent = child->parent;
         if (child == parent->left) {
             sibling = parent->right;
-            if (Red == getColor(sibling)) {     // Case 1. Red, change to case 2,3,4
+            if (sibling->isRed()) {             // Case 1. Red, change to case 2,3,4
                 std::swap(sibling->color, parent->color);
                 lRotate(parent);
             } else {                            // Case 2. Black - Black - Black
-                if (Black == getColor(sibling->left) && Black == getColor(sibling->right)) {
-                    setColor(sibling, Red);
-                    if (Red == getColor(parent)) {
-                        setColor(parent, Black);
+                if (sibling->left->isBlack() && sibling->right->isBlack()) {
+                    sibling->setColor(Red);
+                    if (parent->isRed()) {
+                        parent->setColor(Black);
                         break;
                     } else {
                         child = parent;
                     }
                 } else {                        // Case 3. Black - Red - Black, to case 4
-                    if (Black == getColor(sibling->right)) {
+                    if (sibling->right->isBlack()) {
                         std::swap(sibling->color, sibling->left->color);
                         rRotate(sibling);
                         sibling = parent->right;
                     }                           // Case 4. Black - <> - Red
                     std::swap(parent->color, sibling->color);
-                    setColor(sibling->right, Black);
+                    sibling->right->setColor(Black);
                     lRotate(parent);
                     child = _Root;
                 }
             }
         } else {
             sibling = parent->left;
-            if (Red == getColor(sibling)) {
+            if (sibling->isRed()) {
                 std::swap(sibling->color, parent->color);
                 rRotate(parent);
             } else {
-                if (Black == getColor(sibling->left) && Black == getColor(sibling->right)) {
-                    setColor(sibling, Red);
-                    if (Red == getColor(parent)) {
-                        setColor(parent, Black);
+                if (sibling->left->isBlack() && sibling->right->isBlack()) {
+                    sibling->setColor(Red);
+                    if (parent->isRed()) {
+                        parent->setColor(Black);
                         break;
                     } else {
                         child = parent;
                     }
                 } else {
-                    if (Black == getColor(sibling->left)) {
-                        std::swap(sibling->color, sibling->right->color);
+                    if (sibling->left->isBlack()) {
+                        sibling->setColor(sibling->right->getColor());
                         lRotate(sibling);
                         sibling = parent->left;
                     }
+                    // sibling->setColor(parent->getColor()); // segment fault
                     std::swap(sibling->color, parent->color);
-                    setColor(sibling->left, Black);
+                    sibling->left->setColor(Black);
                     rRotate(parent);
                     child = _Root;
                 }
             }
         }
     }
-    setColor(child, Black);
+    child->setColor(Black);
 
     delete node;
 }
 
 template<typename T>
 typename RBTree<T>::Node* RBTree<T>::minNode(Node* node) {
-while (node->left != _Nil) {
-    node = node->left;
-}
-return node;
+    while (node->left != _Nil) {
+        node = node->left;
+    }
+    return node;
 }
 
 /*      G             G
