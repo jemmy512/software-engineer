@@ -36,30 +36,31 @@ Relatives:
 
 using namespace std;
 
-int myAtoi(string str) {
-    if (str.empty())
-        return 0;
-
+int myAtoi(string s) {
+    const int n = s.size();
+    int i = 0;
     int ret = 0;
+    int sign = 1;
 
     // 1. strip white space
-    int i = str.find_first_not_of(' ');
+    while (i < n && s[i] == ' ') {
+        ++i;
+    }
 
     // 2. process sign
-    bool isPositive = true;
-    if (i < str.size() && (str[i] == '+' || str[i] == '-')) {
-        isPositive = str[i++] == '-' ? false : true;
+    if (i < s.size() && (s[i] == '+' || s[i] == '-')) {
+        sign = (s[i++] == '+') ? 1 : -1;
     }
 
     // 3. process each num
-    while(i < str.size() && str[i] <= '9' && str[i] >= '0') {
-        if (ret > INT_MAX / 10 || (ret == INT_MAX / 10 && str[i] - '0' > INT_MAX % 10)) {
-            return isPositive ? INT_MAX : INT_MIN;
+    while(i < n && s[i] <= '9' && s[i] >= '0') {
+        if (ret > INT_MAX / 10 || (ret == INT_MAX / 10 && s[i] - '0' > INT_MAX % 10)) {
+            return (sign == 1) ? INT_MAX : INT_MIN;
         }
-        ret = ret * 10 + (str[i++] - '0');
+        ret = ret * 10 + (s[i++] - '0');
     }
 
-    return isPositive ? ret : -ret;
+    return sign * ret;
 }
 
 int main() {
@@ -67,6 +68,7 @@ int main() {
     printf("[%s] = %d\n", "   123", myAtoi("    123"));
     printf("[%s] = %d\n", "+123", myAtoi("+123"));
     printf("[%s] = %d\n", " -123", myAtoi(" -123"));
+    printf("[%s] = %d\n", "+-123", myAtoi("+-123"));
     printf("[%s] = %d\n", "123ABC", myAtoi("123ABC"));
     printf("[%s] = %d\n", "12 3 ABC", myAtoi("123ABC"));
     printf("[%s] = %d\n", " abc123ABC", myAtoi(" abc123ABC"));
