@@ -1,18 +1,19 @@
-#include<iostream>
+#include <iostream>
+
 using namespace std;
 
-struct Tree{
+typedef struct Node_ {
     int data;
-    Tree* left;
-    Tree* right;
-};
+    Node* left;
+    Node* right;
 
-Tree *createTree(Tree *root, int key) {
+    Node() : data(0), left(nullptr), right(nullptr) {}
+    Node(int v) : data(v), left(nullptr), right(nullptr) {}
+} Node;
+
+Node *createTree(Node *root, int key) {
     if (!root) {
-        Tree *node = (Tree *)malloc(sizeof(Tree));
-        node->data = key;
-        node->left = node->right = NULL;
-        return node;
+        return new Node(key);
     } else if (root->data > key) {
         root->left = createTree(root->left, key);
     } else if (root->data < key) {
@@ -22,61 +23,63 @@ Tree *createTree(Tree *root, int key) {
     }
 }
 
-Tree* CreateTree(int a[],int n)
+Node* createTree(int a[],int len)
 {
-    Tree* root,* p,* c,*pa;
-    root=(Tree*)malloc(sizeof(Tree));
-    root->data=a[0];
-    root->left=root->right=NULL;
-    for(int i=1;i<n;i++){
-        p=(Tree*)malloc(sizeof(Tree));
-        p->data=a[i];
-        p->left=p->right=NULL;
-        c=root;
-        while(c){
-            pa=c;
-            if(c->data>p->data)
-                c=c->left;
+    Node* root, *n, *cur, *prev;
+
+    root = new Node(a[0]);
+
+    for (int i = 1; i < len; i++) {
+        cur = root;
+        n = new Node(a[i]);
+
+        while (cur) {
+            prev = cur;
+            if (cur->data > n->data)
+                cur = cur->left;
             else
-                c=c->right;
+                cur = cur->right;
         }
-        if(pa->data>p->data)
-            pa->left=p;
+        if (prev->data > n->data)
+            prev->left = n;
         else
-            pa->right=p;
+            prev->right = n;
     }
+
     return root;
 }
 
-bool HaveTree(Tree *root1, Tree *root2) {
-    if (!root2) return true;
-    if (!root1) return false;
-    if (root1->data != root2->data) return false;
-    
-    return HaveTree(root1->left, root2->left) && HaveTree(root1->right, root2->right);
+bool isSubTree(Node* root, Node *sub) {
+    if (!sub) return true;
+    if (!root) return false;
+    if (root->data != sub->data) return false;
+
+    return isSubTree(root->left, sub->left) && isSubTree(root->right, sub->right);
 }
 
-bool HasSubTree(Tree* root1,Tree* root2)
+bool hasSubTree(Node* root,Node* sub)
 {
     bool result = false;
-    if(root1 && root2){
-        if(root1->data == root2->data)
-            result = HaveTree(root1, root2);
-        else if(root1->data > root2->data)
-            result = HasSubTree(root1->left, root2);
+
+    if (root && sub) {
+        if (root->data == sub->data)
+            result = isSubTree(root, sub);
+        else if (root->data > sub->data)
+            result = hasSubTree(root->left, sub);
         else
-            result = HasSubTree(root1->right, root2);
-        
-        // if(!root2)
-            // result = HasSubTree(root1->right, root2);
+            result = hasSubTree(root->right, sub);
+
+        // if (!sub)
+            // result = hasSubTree(root->right, sub);
     }
+
     return result;
 }
 
 
 
-void PrePrint(Tree* root) {
-    if(root!=NULL){
+void PrePrint(Node* root) {
+    if (root!=NULL) {
         cout<<root->data<<" ";
         PrePrint(root->left);
         PrePrint(root->right);
@@ -84,28 +87,27 @@ void PrePrint(Tree* root) {
 }
 
 int main(void) {
-    int a[8]={3,2,5,8,4,7,6,9};
-    int b[4]={8,7,6,7};
+    int a[8] = {3, 2, 5, 8, 4, 7, 6, 9};
+    int b[4] = {8, 7, 6, 7};
 
-    // Tree* root1 = CreateTree(a,8);
-    // Tree* root2 = CreateTree(b,4);
-    Tree *root1 = NULL;
-    Tree *root2 = NULL;
+    // Node* root = createTree(a,8);
+    // Node* sub = createTree(b,4);
+    Node *root = NULL;
+    Node *sub = NULL;
     for (int i = 0; i < 8; ++i) {
-        root1 = createTree(root1, a[i]);
+        root = createTree(root, a[i]);
     }
     for (int i = 0; i < 4; ++i) {
-        root2 = createTree(root2, b[i]);
+        sub = createTree(sub, b[i]);
     }
 
-    PrePrint(root1);
+    PrePrint(root);
     cout << endl;
-    
-    PrePrint(root2);
+
+    PrePrint(sub);
     cout << endl;
-    
-    bool result = HasSubTree(root1, root2);
+
+    bool result = hasSubTree(root, sub);
     cout<<(result ? "Congratulations,Tree1 has Tree2." : "Sorry,Tree1 doesn't has Tree2.") << endl;
     return 0;
-
 }
