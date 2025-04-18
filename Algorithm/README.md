@@ -290,9 +290,9 @@ No | `Title                                       ` | Difficulty | Note
 
 **Sliding Window**
 No | `Title                                       ` | Difficulty | Note
--- | -- | ---  | ---
-076 | Minimum Window Substring | :star: :star: :star: |
-003 | Longest Substring Without Repeating Characters | :star: :star: |
+-- | -- | :-:  | ---
+076 | Minimum Window Substring | :star: :star: :star: |:one:
+003 | Longest Substring Without Repeating Characters | :star: :star: | :one:
 159 | Longest Substring with At Most Two Distinct Characters | :star: :star: |
 340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: |
 992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
@@ -452,9 +452,9 @@ int bfs(Node start, Node target) {
 ## Sort
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
-215 | Kth Largest Element in an Array | :star: :star: | `??` `Heap Sort` `Quick Sort` :one:
+215 | Kth Largest Element in an Array | :star: :star: | :one: `??` `Heap Sort` `Quick Sort`
 295 | Find Median from Data Stream | :star: :star: :star: | `Heap Sort`
-347 | Top K Frequent Elements | :star: :star: | `Heap Sort` `Quick Sort` :one:
+347 | Top K Frequent Elements | :star: :star: | :one: `Heap Sort` `Quick Sort`
 414 | Third Maximum Number | :star: | `Heap Sort`
 912 | Sort Array | :star: :star: | :one:
 937 | Reorder Data in Log Files | :star: |
@@ -501,8 +501,8 @@ No | `Title                                       ` | Difficulty | Note
 027 | Remove Element | :star: | `Two Pointers`
 026 | Remove Duplicates from Sorted Array | :star: | `Two Pointers`
 080 | Remove Duplicates from Sorted Array II `dup N` | :star: :star: | :one:
-083 | Remove Duplicates from Sorted List `dup once` | :star: | `Two Pointers` :one:
-082 | Remove Duplicates from Sorted List II `no dup` | :star: :star: | :heavy_plus_sign: `Two Pointers` :one:
+083 | Remove Duplicates from Sorted List `dup once` | :star: | :one: `Two Pointers`
+082 | Remove Duplicates from Sorted List II `no dup` | :star: :star: | :one: :heavy_plus_sign: `Two Pointers`
 316 | Remove Duplicate Letters | :star: :star: :star: | :heavy_plus_sign:
 442 | Find All Duplicates in an Array | :star: :star: |
 1081 | Smallest Subsequence of Distinct Characters | :star: :star: |
@@ -533,20 +533,20 @@ No | `Title                                       ` | Difficulty | Note
 203 | Remove Linked List Element `remove all val` | :star: | :one:
 237 | Delete Node In a Linked List | :star: | :one:
 021 | Merge Two Sorted Lists | :star: | :one:
-023 | Merge K Sorted List | :star: :star: :star: | `K-way Merge` `Divide Conquer` :one:
+023 | Merge K Sorted List | :star: :star: :star: | :one: `K-way Merge` `Divide Conquer`
 024 | Swap Nodes in Pairs | :star: :star: | :one:
-025 | Reverse Nodes in K-Group | :star: :star: :star: | :heavy_plus_sign: :one:
+025 | Reverse Nodes in K-Group | :star: :star: :star: | :one: :heavy_plus_sign:
 206 | Reverse Linkded List | :star: | :one:
 092 | Reverse Linked List II | :star: :star: | :one:
 061 | Roate List By K | :star: :star: | :one:
 086 | Partition List `< x <` | :star: :star: | :one:
-138 | Copy List With Random Pointer  | :star: | :thinking: :one:
-141 | linked List Cycle | :star: | `Two Pointers` `Cycle` :one:
-142 | Linked List Cycle II | :star: :star: | `Two Pointers` `Cycle` :one:
+138 | Copy List With Random Pointer  | :star: | :one: :thinking:
+141 | linked List Cycle | :star: | :one: `Two Pointers` `Cycle`
+142 | Linked List Cycle II | :star: :star: | :one: `Two Pointers` `Cycle`
 287 | Find the Duplicate Number | :star: :star: | `Two Pointers` `Cycle Detection`
 143 | Reorder List `L0 Ln L1 Ln-1 L2 Ln-2` | :star: :star: | :one:
-147 | Insertion Sorted List | :star: :star: | `Insertion sort` :one:
-148 | Sort List | :star: :star: | `Div-Conq` `Merge sort` :one:
+147 | Insertion Sorted List | :star: :star: | :one: `Insertion sort`
+148 | Sort List | :star: :star: | :one: `Div-Conq` `Merge sort`
 160 | Intersection of Two Linked Lists | :star: | :one:
 234 | Palindrome Linked List | :star: | :one:
 328 | Odd Even Linked List | :star: :star: | :one:
@@ -601,15 +601,15 @@ No | `Title                                       ` | Difficulty | Note
 108 | Convert Sorted Array to Binary Search Tree | :star: :star: |
 109 | Convert Sorted List to Binary Search Tree | :star: |
 110 | Balanced Bianry Tree | :star: | `DFS`
-112 | Path Sum `root to leaf` | :star: | `DFS`
-113 | Path Sum II `root to leaf sum` | :star: :star: | `DFS`
-437 | Path Sum III `nums of sum paths` | :star: :star: | :heavy_plus_sign: `Prefix Sum` `DFS`
-666 | Path Sum IV | :star: :star: | `DFS`
-129 | Sum Root to Leaf Numbers | :star: :star: |
-124 | Binary Tree Maximum Path Sum | :star: :star: :star: | `DFS` `Prefix Sum`
-257 | Binary Tree Paths | :star: | `DFS`
+112 | Path Sum `root to leaf` | :star: | :one: `DFS`
+113 | Path Sum II `root to leaf all` | :star: :star: | :one: `DFS`
+437 | Path Sum III `nums of sum paths` | :star: :star: | :one: `Prefix Sum` `DFS`
+666 | Path Sum IV | :star: :star: | :one: `DFS`
+129 | Sum Root to Leaf Numbers | :star: :star: | :one:
+124 | Binary Tree Maximum Path Sum | :star: :star: :star: | :one: `DFS` `Prefix Sum`
+257 | Binary Tree Paths | :star: | :one: `DFS`
 543 | Diameter of Binary Tree | :star: |
-687 | Longest Univalue Path | :star: :star: | `DFS`
+687 | Longest Univalue Path | :star: :star: | :one: `DFS`
 114 | Flatten Binary Tree To Linked List | :star: :star: | `Preorder`
 116 | Populating Next Right Pointers in Each Node | :star: :star: | `BFS`
 117 | Populating Next Right Pointers in Each Node II  | :star: :star: | `BFS-non-queue`
@@ -646,11 +646,11 @@ No | `Title                                       ` | Difficulty | Note
 ## String
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
-008 | atoi | :star: |
-014 | Longest Common Prefix | :star: |
+008 | atoi | :star: |:one:
+014 | Longest Common Prefix | :star: | :one:
 028 | Implement Strstr | :star: | `KMP`
-058 | Length of Last Word | :star: |
-125 | Valid Palindrome | :star: |
+058 | Length of Last Word | :star: |:one:
+125 | Valid Palindrome | :star: |:one:
 680 | Valid Palindrome II | :star: |
 345 | Reverse Vowels of a String | :star: |
 161 | One Edit Distance | :star: :star: |
@@ -710,10 +710,10 @@ No | `Title                                       ` | Difficulty | Note
 -- | -- | :-: | ---
 006 | ZigZag Conversion | :star: :star: |
 007 | Reverse Integer | :star: |
-009 | Palindrom N voiumber | :star: |
-015 | 3 Sum | :star: :star: |
-016 | 3 Sum Closest | :star: :star: |
-018 | 4 Sum | :star: :star: |
+009 | Palindrom Number | :star: | :one:
+015 | 3 Sum | :star: :star: | :one: `ksum`
+016 | 3 Sum Closest | :star: :star: | :one: `ksum`
+018 | 4 Sum | :star: :star: | :one: `ksum`
 043 | Multiply Strings | :star: :star: |
 050 | pow-x-n | :star: :star: | `TODO`
 065 | Valid Number | :star: :star: :star: |
