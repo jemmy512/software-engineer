@@ -48,6 +48,54 @@ struct TreeNode {
     TreeNode *left;
     TreeNode *right;
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
+class Solution {
+public:
+    int longestUnivaluePath(TreeNode* root) {
+        dfs(root);
+        return maxLen;
+    }
+
+private:
+    int dfs(TreeNode* root) {
+        if (!root) {
+            return 0;
+        }
+
+        const int val = root->val;
+        int lft = dfs(root->left);
+        int rht = dfs(root->right);
+
+        lft = cmp(root, root->left) ? lft + 1 : 0;
+        rht = cmp(root, root->right) ? rht + 1 : 0;
+
+        maxLen = max(maxLen, lft + rht);
+
+        return max(lft, rht);
+    }
+
+private:
+    bool cmp(TreeNode* lhs, TreeNode* rhs) {
+        if (!lhs || !rhs) {
+            return false;
+        }
+
+        return (lhs->val == rhs->val);
+    }
+
+    // bool operator==(const TreeNode* lhs, const TreeNode* rhs) const {
+    //     if (lhs || rhs) {
+    //         return false;
+    //     }
+
+    //     return (lhs->val == rhs->val);
+    // }
+
+
+private:
+    int maxLen = 0;
 };
 
 class Solution {
