@@ -465,6 +465,10 @@
 - [ ] [Wikipedia - Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm)
 - [ ] [Wikipedia - Software design pattern](https://en.wikipedia.org/wiki/Software_design_pattern#Creational_patterns)
 
+- [ ] [ByteByteGo Newsletter](https://blog.bytebytego.com/)
+- [ ] [AlgoMaster Newsletter](https://blog.algomaster.io)
+- [ ] [Blueprints for System Design](https://substack.com/@ramendraparmar)
+
 # Linux
 - [ ] [Red Hat Enterprise Linux](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/)
 - [ ] [x86-TSO: A Rigorous and Usable Programmer’s Model for x86 Multiprocessors](https://www.cl.cam.ac.uk/~pes20/weakmemory/cacm.pdf)
