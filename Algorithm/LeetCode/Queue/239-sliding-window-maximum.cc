@@ -1,7 +1,7 @@
 /* Hard
-Given an array nums, there is a sliding window of size k which is moving from the very
-left of the array to the very right. You can only see the k numbers in the window.
-Each time the sliding window moves right by one position. Return the max sliding window.
+Given an array nums, there is a sliding ret of size k which is moving from the very
+left of the array to the very right. You can only see the k numbers in the ret.
+Each time the sliding ret moves right by one position. Return the max sliding ret.
 
 Follow up:
 Could you solve it in linear time?
@@ -77,28 +77,32 @@ public:
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        if (nums.size() < k)
+        if (nums.size() < k) {
             return {};
-
-        deque<int> dque;
-        vector<int> window;
-        window.reserve(nums.size()-k+1);
-
-        for (int i = 0; i < nums.size(); ++i) {
-            // pop the most left ele which will leave the window
-            if (!dque.empty() && dque.front() == i - k)
-                dque.pop_front();
-
-            // pop all eles less than current ele
-            while (!dque.empty() && nums[i] > nums[dque.back()])
-                dque.pop_back();
-
-            dque.emplace_back(i);
-
-            if (i >= k - 1)
-                window.emplace_back(nums[dque.front()]);
         }
 
-        return window;
+        deque<int> sw; // sliding window
+        vector<int> ret;
+        ret.reserve(nums.size()-k+1);
+
+        for (int i = 0; i < nums.size(); ++i) {
+            // Remove out-of-window indices
+            while (!sw.empty() && sw.front() <= i - k) {
+                sw.pop_front();
+            }
+
+            // Maintain decreasing order
+            while (!sw.empty() && nums[i] > nums[sw.back()]) {
+                sw.pop_back();
+            }
+
+            sw.emplace_back(i);
+
+            if (i >= k - 1) {
+                ret.emplace_back(nums[sw.front()]);
+            }
+        }
+
+        return ret;
     }
 };
