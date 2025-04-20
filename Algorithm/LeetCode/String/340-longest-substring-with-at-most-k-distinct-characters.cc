@@ -31,20 +31,44 @@ using namespace std;
 class Solution {
 public:
     int lengthOfLongestSubstringKDistinct(string s, int k) {
-        unordered_map<char, int> hashMap; // <char, lastPos>
-        hashMap.reserve(s.size());
+        unordered_map<char, int> charIdx;
+        charIdx.reserve(s.size());
         int maxLen = 0;
 
         for (int beg = 0, end = 0; end < s.size(); ++end) {
-            hashMap[s[end]] = end;
-            if (hashMap.size() > k) {
-                const auto& [key, pos] = *min_element(hashMap.begin(), hashMap.end(), [](const auto& lhs, const auto& rhs) {
+            charIdx[s[end]] = end;
+            if (charIdx.size() > k) {
+                const auto& [key, pos] = *min_element(charIdx.begin(), charIdx.end(), [](const auto& lhs, const auto& rhs) {
                     return lhs.second < rhs.second;
                 });
                 beg = pos + 1;
-                hashMap.erase(key);
+                charIdx.erase(key);
             }
             maxLen = max(maxLen, end - beg + 1);
+        }
+
+        return maxLen;
+    }
+};
+
+class Solution {
+public:
+    int lengthOfLongestSubstringKDistinct(string s, int k) {
+        unordered_map<char, int> charCnt;
+        int b = 0, e = 0;
+        int maxLen = 0;
+
+        for (int b = 0, e = 0; e < s.size(); ++e) {
+            ++charCnt[s[e++]];
+
+            while (charCnt.size() > k) {
+                if (--chrCnt[b] == 0) {
+                    charCnt.erase(chrCnt[b]);
+                }
+                ++b;
+            }
+
+            maxLen = max(maxLen, e - b + 1);
         }
 
         return maxLen;
