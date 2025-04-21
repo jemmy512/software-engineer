@@ -94,34 +94,37 @@ public:
 // Qiuck Sort Solution
 class Solution {
 public:
-    int findKthLargest_qsort(vector<int> &nums, int k) {
-        int len = nums.size(), pos;
-        int left = 0, right = len - 1;
-        while (left <= right) {
-            pos = partition(nums, left, right);
-            if (pos == k - 1)
-                return nums[pos];
-            else if (pos < k - 1)
-                left = pos + 1;
-            else
-                right = pos - 1;
+    int findKthLargest(vector<int>& nums, int k) {
+        int b = 0, e = nums.size() - 1;
+
+        while (b <= e) {
+            auto pivot = partition(nums, b, e);
+            if (pivot < k - 1) {
+                b = pivot + 1;
+            } else if (pivot > k - 1) {
+                e = pivot - 1;
+            } else {
+                return nums[pivot];
+            }
         }
 
-        return 0;
+        return -1;
     }
 
 private:
-    int partition(vector<int> &nums, int left, int right) {
-        int pivot = nums[left];
-        int l = left + 1, r = right;
-        while (l <= r) {
-            if (nums[l] < pivot && nums[r] > pivot)
-                swap(nums[l], nums[r]);
-            if (nums[l] >= pivot) ++l;
-            if (nums[r] <= pivot) --r;
+    int partition(vector<int>& vec, int b, int e) { // [b, e]
+        auto key = vec[e];
+        auto pivot = b;
+
+        for (auto i = b; i < e; ++i) {
+            if (vec[i] >= key) {
+                swap(vec[pivot++], vec[i]);
+            }
         }
-        swap(nums[left], nums[r]);
-        return r;
+
+        swap(vec[pivot], vec[e]);
+
+        return pivot;
     }
 };
 
