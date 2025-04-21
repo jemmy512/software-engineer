@@ -43,8 +43,9 @@ Thus, we'll traverse almost NN nodes per pairing and merging, and repeat this pr
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        if (lists.empty())
+        if (lists.empty()) {
             return nullptr;
+        }
 
         auto len = lists.size();
         auto interval = 1;
@@ -61,20 +62,13 @@ public:
 
 private:
     ListNode* merge2List(ListNode* lhs, ListNode* rhs) {
-        if (!lhs || !rhs)
-            return lhs ? lhs : rhs;
-
         ListNode dummy;
         auto* tail = &dummy;
 
         while (lhs && rhs) {
-            if (lhs->val < rhs->val) {
-                tail = tail->next = lhs;
-                lhs = lhs->next;
-            } else {
-                tail = tail->next = rhs;
-                rhs = rhs->next;
-            }
+            auto*& cur = (lhs->val < rhs->val) ? lhs : rhs;
+            tail = tail->next = cur;
+            cur = cur->next;
         }
         tail = tail->next = lhs ? lhs : rhs;
 
@@ -85,22 +79,20 @@ private:
 /* Time Complexity: O(KN), where K is the length of the list, N is the complexity of merge two lists */
 class Solution_1 {
 public:
-    ListNode *merge2List(ListNode *head1, ListNode *head2) {
-        if (!head1) return head2;
-        if (!head2) return head1;
-
-        static ListNode dummy = ListNode(INT_MAX);
+    ListNode *merge2List(ListNode *lhs, ListNode *rhs) {
+        ListNode dummy = ListNode(INT_MAX);
         ListNode *tail = &dummy;
-        while (head1 && head2) {
-            if (head1->val < head2->val) {
-                tail = tail->next = head1;
-                head1 = head1->next;
+
+        while (lhs && rhs) {
+            if (lhs->val < rhs->val) {
+                tail = tail->next = lhs;
+                lhs = lhs->next;
             } else {
-                tail = tail->next = head2;
-                head2 = head2->next;
+                tail = tail->next = rhs;
+                rhs = rhs->next;
             }
         }
-        tail->next = head1 ? head1 : head2;
+        tail->next = lhs ? lhs : rhs;
 
         return dummy.next;
     }
