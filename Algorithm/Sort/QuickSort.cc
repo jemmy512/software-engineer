@@ -22,25 +22,25 @@ and may not be sorted until the base case of a partition with a single element i
 namespace SearchForward {
     void quickSort(vector<int>& nums, int beg, int end) {
         if (beg < end) {
-            int pivot = partition(nums, beg, end);
+            auto pivot = partition(nums, beg, end);
             quickSort(nums, beg, pivot - 1);
             quickSort(nums, pivot + 1, end);
         }
     }
 
     int partition(vector<int>& nums, int beg, int end) {
-        auto pivot = nums[end];
-        auto i = beg;
+        const auto key = nums[end];
+        auto pivot = beg;
 
-        for (int j = beg; j < end; ++j) {
-            if (nums[j] <= pivot) {
-                std::swap(nums[i++], nums[j]);
+        for (int i = beg; i < end; ++i) {
+            if (nums[i] <= key) {
+                std::swap(nums[pivot++], nums[i]);
             }
         }
 
-        std::swap(nums[i], nums[end]);
+        std::swap(nums[pivot], nums[end]);
 
-        return i;
+        return pivot;
     }
 }
 
