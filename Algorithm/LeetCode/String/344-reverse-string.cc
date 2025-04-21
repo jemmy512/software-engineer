@@ -13,11 +13,11 @@ using std::string;
 
 class Solution {
 public:
-    string reverseString(string s) {
-        int len = s.size()-1;
-        for (int i = 0; i < len-i; ++i) {
-            std::swap(s[i], s[len-i]);
+    void reverseString(vector<char>& s) {
+        int b = 0, e = s.size() - 1;
+
+        while (b < e) {
+            swap(s[b++], s[e--]);
         }
-        return s;
     }
 };
