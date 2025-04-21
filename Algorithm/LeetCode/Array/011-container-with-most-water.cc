@@ -23,15 +23,16 @@ using namespace std;
 class Solution {
 public:
     int maxArea(vector<int>& height) {
-        int maxArea = 0, left = 0, right = height.size() - 1;
+        int maxArea = 0, beg = 0, end = height.size() - 1;
 
-        while (left < right) {
-            int curArea = std::min(height[left], height[right]) * (right - left);
+        while (beg < end) {
+            int curArea = std::min(height[beg], height[end]) * (end - beg);
             maxArea = std::max(maxArea, curArea);
-            if (height[left] < height[right])
-                left++;
-            else
-                right--;
+            if (height[beg] < height[end]) {
+                beg++;
+            } else {
+                end--;
+            }
         }
         return maxArea;
     }
@@ -42,31 +43,31 @@ public:
     int maxArea(vector<int>& height) {
         int maxArea = 0;
         int area;
-        int left = 0;
-        int right = height.size() - 1;
-        while (left < right) {
+        int beg = 0;
+        int end = height.size() - 1;
+        while (beg < end) {
             // The area is determined by the shorter edge
-            // area = (right - left) * min(height[left], height[right]);
-            area = (right - left) * (height[left] < height[right] ? height[left] : height[right]);
+            // area = (end - beg) * min(height[beg], height[end]);
+            area = (end - beg) * (height[beg] < height[end] ? height[beg] : height[end]);
             // maxArea = max(area, maxArea);
             maxArea = area > maxArea ? area : maxArea;
             // because the area is decided by the shorter edge
             // so we increase the area is to increase the shorter edge
             //
-            //     height[left] < height[right] ? left++ : right-- ;
+            //     height[beg] < height[end] ? beg++ : end-- ;
             //
             // However, the above code could cause the unnecessary `area` cacluation
             // We can do some improvement as below:
-            if (height[left] < height[right]) {
-                int cur = left;
+            if (height[beg] < height[end]) {
+                int cur = beg;
                 do {
-                    ++left;
-                } while (left < right && height[cur] >= height[left]);
+                    ++beg;
+                } while (beg < end && height[cur] >= height[beg]);
             } else {
-                int cur = right;
+                int cur = end;
                 do {
-                    --right;
-                } while (left < right && height[cur] >= height[right]);
+                    --end;
+                } while (beg < end && height[cur] >= height[end]);
             }
         }
 
