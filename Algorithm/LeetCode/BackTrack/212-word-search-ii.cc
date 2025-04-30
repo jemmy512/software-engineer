@@ -23,7 +23,13 @@ board[i][j] is a lowercase English letter.
 1 <= words.length <= 3 * 10^4
 1 <= words[i].length <= 10
 words[i] consists of lowercase English letters.
-All the strings of words are unique. */
+All the strings of words are unique.
+
+Relatives:
+079. Word Search
+212. Word Search II
+290. Word Pattern
+291. Word Pattern II */
 
 #include <vector>
 #include <string>
@@ -44,7 +50,6 @@ public:
         for (int row = 0; row < _RowSize; ++row) {
             for (int col = 0; col < _ColSize; ++col) {
                 for (int i = 0; i < words.size(); ++i) {
-                    /* Is it worth to save time by an external memory `visitedWord`? It seems doesn't worthy. */
                     if (!visitedWord[i] && backtrack(board, words[i], row, col, 0)) {
                         visitedWord[i] = true;
                         result.emplace_back(words[i]);
@@ -61,7 +66,7 @@ private:
         if (index == word.size())
             return true;
 
-        if (!checkBoundaries(row, col))
+        if (isBoundary(row, col))
             return false;
 
         if (board[row][col] != word[index])
@@ -82,8 +87,8 @@ private:
         return ret;
     }
 
-    bool checkBoundaries(int row, int col) {
-        return (row < 0 || col < 0 || row >= _RowSize || col >= _ColSize) ? false : true;
+    bool isBoundary(int row, int col) {
+        return (row < 0 || col < 0 || row >= _RowSize || col >= _ColSize);
     }
 
 private:
@@ -97,7 +102,7 @@ private:
     };
 };
 
-/*
+/* visitedWord can handle this case:
 [["a","a"]]
 ["a"]
 */

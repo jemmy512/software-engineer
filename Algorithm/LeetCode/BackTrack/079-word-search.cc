@@ -23,7 +23,13 @@ m == board.length
 n = board[i].length
 1 <= m, n <= 200
 1 <= word.length <= 10^3
-board and word consists only of lowercase and uppercase English letters. */
+board and word consists only of lowercase and uppercase English letters.
+
+Relatives:
+079. Word Search
+212. Word Search II
+290. Word Pattern
+291. Word Pattern II */
 
 #include <vector>
 #include <string>
@@ -55,7 +61,7 @@ private:
         if (index == word.size())
             return true;
 
-        if (!checkBoundaries(row, col))
+        if (isBoundary(row, col))
             return false;
 
         if (board[row][col] != word[index])
@@ -76,8 +82,8 @@ private:
         return ret;
     }
 
-    bool checkBoundaries(int row, int col) {
-        return (row < 0 || col < 0 || row >= _RowSize || col >= _ColSize) ? false : true;
+    bool isBoundary(int row, int col) const {
+        return (row < 0 || col < 0 || row >= _RowSize || col >= _ColSize);
     }
 
 private:
