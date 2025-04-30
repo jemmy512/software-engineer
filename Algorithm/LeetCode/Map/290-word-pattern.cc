@@ -14,6 +14,9 @@ You may assume pattern contains only lowercase letters, and str contains lowerca
 
 Relatives:
 205. Isomorphic Strings
+
+079. Word Search
+212. Word Search II
 290. Word Pattern
 291. Word Pattern II */
 
@@ -21,35 +24,38 @@ Relatives:
 #include <vector>
 #include <sstream>
 #include <string>
+#include <string_view>
 #include <unordered_map>
 
 using namespace std;
 
 /* Approch 1: two hash table */
-class Solution{
+class Solution {
 public:
     bool wordPattern(string pattern, string str) {
         istringstream ss(str);
         string s;
-        vector<string> vec;
+        vector<string> tokens;
+
         while (ss >> s) {
-            vec.push_back(s);
+            tokens.emplace_back(s);
         }
 
-        if (vec.size() != pattern.size()) {
+        if (tokens.size() != pattern.size()) {
             return false;
         }
 
-        unordered_map<string, char> stringCharMap;
-        unordered_map<char, string> charStringMap;
-        for (int i = 0; i < vec.size(); ++i) {
-            const auto& c = pattern[i];
-            const auto& w = vec[i];
+        unordered_map<char, string_view> patTokenMap;
+        unordered_map<string_view, char> tokenPatMap;
 
-            if (stringCharMap.find(w) == stringCharMap.end() && charStringMap.find(c) == charStringMap.end()) {
-                stringCharMap[w] = c;
-                charStringMap[c] = w;
-            } else if (stringCharMap[w] != c) {
+        for (auto i = 0; i <  tokens.size(); ++i) {
+            const auto& tok = tokens[i];
+            const auto& pat = pattern[i];
+
+            if (!patTokenMap.count(pat) && !tokenPatMap.count(tok)) {
+                patTokenMap[pat] = tok;
+                tokenPatMap[tok] = pat;
+            } else if (tokenPatMap[tok] != pat) {
                 return false;
             }
         }

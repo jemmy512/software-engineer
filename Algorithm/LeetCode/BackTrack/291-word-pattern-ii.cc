@@ -30,6 +30,9 @@ pattern and s consist of only lowercase English letters.
 
 Relativeness:
 205. Isomorphic Strings
+
+079. Word Search
+212. Word Search II
 290. Word Pattern
 291. Word Pattern II */
 
@@ -43,48 +46,52 @@ using namespace std;
 class Solution {
 public:
     bool wordPatternMatch(string pattern, string s) {
-        return isMatch(pattern, 0, s, 0);
+        return backtrack(pattern, 0, s, 0);
     }
 
 private:
-    bool isMatch(const string& pat, int patI, const string& str, int strI) {
-        if (strI == str.size() && patI == pat.size())
+    bool backtrack(const string& pat, int patI, const string& str, int strI) {
+        if (patI == pat.size() && strI == str.size()) {
             return true;
-        if (strI >= str.size() || patI >= pat.size())
+        }
+
+        if (patI >= pat.size() || strI >= str.size()) {
             return false;
+        }
 
         const auto chr = pat[patI];
 
-        if (Map.count(chr)) {
-            auto word = Map[chr];
-
-            if (strI + word.size() <= str.size() && string_view{&str[strI], word.size()} != word) {
+        if (patTokenMap.count(chr)) {
+            const auto& token = patTokenMap[chr];
+            if (strI + token.size() <= str.size() && string_view(&str[strI], token.size()) != token) {
                 return false;
             }
 
-            return isMatch(pat, patI + 1, str, strI + word.size());
+            return backtrack(pat, patI + 1, str, strI + token.size());
         }
 
-        for (auto i = strI + 1; i <= str.size(); ++i) {
-            auto word = string_view(&str[strI], i - strI);
+        for (auto b = strI, e = b + 1; e <= str.size(); ++e) {
+            auto token = string_view(&str[b], e - b);
 
-            if (Set.count(word))
+            if (tokenSet.count(token)) {
                 continue;
+            }
 
-            Map.emplace(chr, word);
-            Set.emplace(word);
+            tokenSet.emplace(token);
+            patTokenMap.emplace(chr, token);
 
-            if (isMatch(pat, patI + 1, str, i))
+            if (backtrack(pat, patI + 1, str, e)) {
                 return true;
+            }
 
-            Map.erase(chr);
-            Set.erase(word);
+            tokenSet.erase(token);
+            patTokenMap.erase(chr);
         }
 
         return false;
     }
 
 private:
-    set<string_view> Set;
-    map<char, string_view> Map;
+    set<string_view> tokenSet;
+    unordered_map<char, string_view> patTokenMap;
 };
