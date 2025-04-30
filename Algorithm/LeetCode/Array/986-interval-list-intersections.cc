@@ -34,7 +34,19 @@ firstList.length + secondList.length >= 1
 0 <= starti < endi <= 10^9
 endi < starti+1
 0 <= startj < endj <= 10^9
-endj < startj+1 */
+endj < startj+1
+
+Relatives:
+056. Merge Intervals
+057. Insert Interval
+252. Meeting Rooms
+253. Metting Rooms II
+452. Minimum Number of Arrows to Burst Balloons
+435. Non-overlapping Intervals
+763. Partition Labels
+986. Interval List Intersections
+1024. Video Stitching
+1288. Remove Covered Intervals */
 
 #include <vector>
 

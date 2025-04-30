@@ -40,7 +40,19 @@ Explanation: Notice you can have extra video after the event ends.
 Constraints:
 1 <= clips.length <= 100
 0 <= starti <= endi <= 100
-1 <= time <= 100 */
+1 <= time <= 100
+
+Relatives:
+056. Merge Intervals
+057. Insert Interval
+252. Meeting Rooms
+253. Metting Rooms II
+452. Minimum Number of Arrows to Burst Balloons
+435. Non-overlapping Intervals
+763. Partition Labels
+986. Interval List Intersections
+1024. Video Stitching
+1288. Remove Covered Intervals */
 
 #include <vector>
 #include <algorithm>
@@ -50,29 +62,26 @@ using namespace std;
 class Solution {
 public:
     int videoStitching(vector<vector<int>>& clips, int time) {
-        if (time == 0 || clips.empty())
-            return -1;
-
         sort(clips.begin(), clips.end(), [](const auto& lhs, const auto& rhs) {
-            return lhs[0] != rhs[0] ? lhs[0] < rhs[0] : lhs[1] > rhs[1];
+            return (lhs[0] != rhs[0]) ? (lhs[0]  < rhs[0]) : (lhs[1] > rhs[1]);
         });
 
-        auto i = 0;
-        auto count = 0;
-        auto curEnd = 0;
-        auto nextEnd = 0;
+        int i = 0;
+        int cnt = 0;
+        int curEnd = 0;
 
         while (i < clips.size() && clips[i][0] <= curEnd) {
+            int nextEnd = curEnd;
             while (i < clips.size() && clips[i][0] <= curEnd) {
-                nextEnd = max(clips[i][1], nextEnd);
+                nextEnd = max(nextEnd, clips[i][1]);
                 ++i;
             }
 
-            ++count;
+            ++cnt;
             curEnd = nextEnd;
 
-            if (nextEnd >= time) {
-                return count;
+            if (curEnd >= time) {
+                return cnt;
             }
         }
 

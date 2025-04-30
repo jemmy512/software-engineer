@@ -19,6 +19,7 @@ intervals[i].length == 2
 0 <= starti <= endi <= 10^4
 
 Relatives:
+56. Merge Intervals
 57. Insert Interval
 252. Meeting Rooms
 253. Meeting Rooms II
@@ -37,21 +38,25 @@ using namespace std;
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        std::sort(intervals.begin(), intervals.end(), [](const auto& lhs, const auto& rhs) {
-            return lhs[0] < rhs[0];
+        if (intervals.empty()) {
+            return {};
+        }
+
+        sort(intervals.begin(), intervals.end(), [](const auto& lhs, const auto& rhs) {
+            return (lhs[0] < rhs[0]);
         });
 
-        vector<vector<int>> result;
-        result.reserve(intervals.size());
+        vector<vector<int>> ret;
+        ret.emplace_back(intervals[0]);
 
-        for (const auto& pair :  intervals) {
-            if (result.empty() || pair[0] > result.back()[1]) {
-                result.emplace_back(pair);
+        for (auto i = 0; i < intervals.size(); ++i) {
+            if (intervals[i][0] <= ret.back()[1]) {
+                ret.back()[1] = max(ret.back()[1], intervals[i][1]);
             } else {
-                result.back()[1] = max(result.back()[1], pair[1]);
+                ret.emplace_back(intervals[i]);
             }
         }
 
-        return result;
+        return ret;
     }
 };

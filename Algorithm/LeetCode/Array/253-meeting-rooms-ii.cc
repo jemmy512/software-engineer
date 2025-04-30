@@ -18,7 +18,9 @@ Relatives:
 452. Minimum Number of Arrows to Burst Balloons
 435. Non-overlapping Intervals
 763. Partition Labels
-1094. Car Pooling */
+986. Interval List Intersections
+1024. Video Stitching
+1288. Remove Covered Intervals*/
 
 #include <vector>
 #include <queue>

@@ -21,7 +21,19 @@ Explanation: You don't need to remove any of the intervals since they're already
 Constraints:
 1 <= intervals.length <= 10^5
 intervals[i].length == 2
--5 * 104 <= starti < endi <= 5 * 10^4 */
+-5 * 104 <= starti < endi <= 5 * 10^4
+
+Relatives:
+056. Merge Intervals
+057. Insert Interval
+252. Meeting Rooms
+253. Metting Rooms II
+452. Minimum Number of Arrows to Burst Balloons
+435. Non-overlapping Intervals
+763. Partition Labels
+986. Interval List Intersections
+1024. Video Stitching
+1288. Remove Covered Intervals */
 
 #include <vector>
 #include <algorithm>
