@@ -48,6 +48,7 @@ No | `Title                                       ` | Difficulty | Note
 877 | Stone Game | :star: :star: | :heavy_plus_sign:
 
 ### knapsack
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 322 | Coin Change | :star: :star: |
@@ -142,6 +143,7 @@ Three type of the problem:
     </details>
 
 ### substring
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 053 | Maximum Subarray | :star: | `Prefix Sum` `kadane` `Divide Conquer`
@@ -164,22 +166,25 @@ for (state1 : state1_options)
 ```
 
 ## BackTrack
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
-017 | Letter Combination of a Phone Number | :star: :star: |
-022 | Generate Parenthesis | :star: :star: | :thinking:
+017 | Letter Combination of a Phone Number | :star: :star: | :one:
+022 | Generate Parenthesis | :star: :star: | :one: :thinking:
 037 | Sudoku Solver | :star: :star: :star: |
-077 | Combinations | :star: :star: |
-039 | Combination Sum | :star: :star: |
-040 | Combination Sum II | :star: :star: |
-046 | Permutations | :star: :star: |
-047 | Permutations II | :star: :star: |
-078 | Subsets  | :star: :star: |
-090 | Subsets II  | :star: :star: |
-079 | Word Search | :star: :star: | `Matrix` `DFS`
-212 | Word Search II | :star: :star: | `Matrix` `DFS`
-290 | Word Pattern | :star: |
-291 | Word Pattern II | :star: :star: | :heavy_plus_sign:
+077 | Combinations | :star: :star: | :one:
+039 | Combination Sum | :star: :star: | :one:
+040 | Combination Sum II | :star: :star: | :one:
+216 | Combination Sum III | :star: :star: | :one:
+377 | Combination Sum IV | :star: :star: | :one:
+046 | Permutations | :star: :star: | :one:
+047 | Permutations II | :star: :star: | :one:
+078 | Subsets  | :star: :star: | :one:
+090 | Subsets II  | :star: :star: | :one:
+079 | Word Search | :star: :star: | :one: `Matrix` `DFS`
+212 | Word Search II | :star: :star: :star: | :one: `Matrix` `DFS`
+290 | Word Pattern | :star: | :one:
+291 | Word Pattern II | :star: :star: | :one: :heavy_plus_sign:
 698 | Partition to K Equal Sum Subsets | :star: :star: |
 
 ```c++
@@ -223,6 +228,7 @@ void backtrack(path, options) {
     </details>
 
 * Remove duplicates in permutation
+
     <details>
     <summary>:open_file_folder: Expand</summary>
 
@@ -255,50 +261,62 @@ void backtrack(path, options) {
     </details>
 
 ## Greedy
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 055 | Jump Game | :star: :star: |
 045 | Jump Game II | :star: :star: |
 134 | Gas Station | :star: :star: |
-435 | Non-overlapping Intervals | :star: :star: | `Interval` `Sort End`
-452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | `Interval` `Sort End`
-763 | Partition Labels | :star: :star: | `Interval`
-1024 | Video Stitching | :star: :star: | `Interval`
+435 | Non-overlapping Intervals | :star: :star: | :one: `Interval` `Sort End`
+452 | Minimum Number of Arrows to Burst Balloons | :star: :star: | :one: `Interval` `Sort End`
+763 | Partition Labels | :star: :star: | :one: `Interval`
+1024 | Video Stitching | :star: :star: | :one: `Interval`
 
 ## Divide Conquer
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
-023 | Merge K Sorted List | :star: :star: :star: | `K-way Merge`
+023 | Merge K Sorted List | :star: :star: :star: | :one: `K-way Merge`
+088 | Merge Sorted Array | :star: | :one:
+169 | Majority Element ⊙ [Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html) | :star: | :one:
 
 ## Two Pointers
 
 **Fast Slow Pointers**
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
-011 | Container With Most Water | :star: :star: :star: |
+011 | Container With Most Water | :star: :star: | :one:
 042 | Trapping Rain Water | :star: :star: :star: |
 407 | Trapping Rain Water II | :star: :star: :star: | `TODO`
-151 | Reverse Words in a String | :star: :star: | :heavy_plus_sign:
-344 | Reverse String | :star: |
-027 | Remove Element | :star: | :one:
-026 | Remove Duplicates from Sorted Array | :star: | :one:
-083 | Remove Duplicates from Sorted List | :star: |
-141 | linked List Cycle | :star: | `Cycle`
-142 | Linked List Cycle II | :star: :star: | `Cycle`
-283 | Move Zeroes | :star: :star: |
+151 | Reverse Words in a String | :star: :star: | :one: :heavy_plus_sign:
+344 | Reverse String | :star: | :one:
+1288 | Remove Covered Intervals | :star: :star: | :one: `Interval`
+027 | Remove Element | :star: | :one: `Two Pointers`
+026 | Remove Duplicates from Sorted Array       `dup 1` | :star: | :one: `Two Pointers`
+080 | Remove Duplicates from Sorted Array II    `dup 1+` | :star: :star: | :one:
+083 | Remove Duplicates from Sorted List        `dup 1` | :star: | :one: `Two Pointers`
+082 | Remove Duplicates from Sorted List II     `dup 0` | :star: :star: | :one: :heavy_plus_sign: `Two Pointers`
+1836| Remove Duplicates From an Unsorted Linked List | :star: :star: | :one:
+316 | Remove Duplicate Letters | :star: :star: :star: | :heavy_plus_sign:
+141 | linked List Cycle | :star: | :one: `Cycle`
+142 | Linked List Cycle II | :star: :star: | :one: `Cycle`
+283 | Move Zeroes | :star: :star: | :one:
 287 | Find the Duplicate Number | :star: :star: | `Cycle Detection`
 
 **Sliding Window**
 No | `Title                                       ` | Difficulty | Note
--- | -- | :-:  | ---
+-- | :-- | :-:  | ---
 076 | Minimum Window Substring | :star: :star: :star: |:one:
 003 | Longest Substring Without Repeating Characters | :star: :star: | :one:
-159 | Longest Substring with At Most Two Distinct Characters | :star: :star: |
-340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: |
+159 | Longest Substring with At Most Two Distinct Characters | :star: :star: | :one:
+340 | Longest Substring with At Most K Distinct Characters | :star: :star: :star: | :one:
 992 | Subarrays with K Different Integers | :star: :star: :star: | `TODO`
-239 | Sliding Window Maximum | :star: :star: :star: | `Monotonic deque` `DP` `L-R vec`
+239 | Sliding Window Maximum | :star: :star: :star: | :one: `Monotonic deque` `DP` `L-R vec`
 438 | Find All Anagrams in a String | :star: :star: |
 567 | Permutation in String | :star: :star: |
+
+<details>
+<summary>:open_file_folder: Sliding Window Template</summary>
 
 ```c++
 void slidingWindow(string src, string tar) {
@@ -307,7 +325,7 @@ void slidingWindow(string src, string tar) {
     unordered_map<char, int> dict, window;
 
     // 0. init dict
-    for (char chr : tar) {
+    for (auto chr : tar) {
         ++dict[chr];
     }
 
@@ -320,7 +338,7 @@ void slidingWindow(string src, string tar) {
             }
         }
 
-        // 2. when to shrink
+        // 2. check shrink condition
         while (winSize == dict.size()) {
             // 3. left shift, shrinking, upate data
             chr = src[beg++];
@@ -336,7 +354,10 @@ void slidingWindow(string src, string tar) {
 }
 ```
 
+</details>
+
 ## Search
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 004 | Median of Two Sorted Arrays | :star: :star: :star: | :heavy_plus_sign: `BS`
@@ -450,6 +471,7 @@ int bfs(Node start, Node target) {
 ```
 
 ## Sort
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 215 | Kth Largest Element in an Array | :star: :star: | :one: `??` `Heap Sort` `Quick Sort`
@@ -475,7 +497,8 @@ Tim Sort | O(n) | O(nlogn) | O(nlogn) | O(n) |
 Shell Sort | O(n) | O((nlogn)^2) | O((nlogn)^2) | O(1) |
 
 ## Design
-No | `Title                                       ` | Difficulty | Note
+
+| No | `Title                                       ` | Difficulty | Note
 | -- | ----------------------------------------------------------------| :-:  | --- |
 | 146 | LRU Cache | :star: :star: | `Map + List (O(1) + Date Move)` |
 | 460 | LFU Cache  | :star: :star: :star: | |
@@ -484,6 +507,7 @@ No | `Title                                       ` | Difficulty | Note
 | 1396 | Design Underground System | :star: :star: | |
 
 ## Array
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 041 | First Missing Positive | :star: :star: :star: |
@@ -492,22 +516,23 @@ No | `Title                                       ` | Difficulty | Note
 054 | Spiral Matrix | :star: :star: | `Matrix`
 059 | Spiral Matrix II | :star: :star: | `Matrix`
 189 | Rotate Array `right by k steps` | :star: :star: | :one:
-056 | Merge Intervals | :star: :star: | `Interval`
-057 | Insert Intervals | :star: :star: | `Interval`
-252 | Meeting Rooms | :star: | `Interval`
-253 | Meeting Rooms II | :star: | `Interval`
-986 | Interval List Intersections | :star: :star: | `Interval`
-1288 | Remove Covered Intervals | :star: :star: | `Interval`
-027 | Remove Element | :star: | `Two Pointers`
-026 | Remove Duplicates from Sorted Array | :star: | `Two Pointers`
-080 | Remove Duplicates from Sorted Array II `dup N` | :star: :star: | :one:
-083 | Remove Duplicates from Sorted List `dup once` | :star: | :one: `Two Pointers`
-082 | Remove Duplicates from Sorted List II `no dup` | :star: :star: | :one: :heavy_plus_sign: `Two Pointers`
+056 | Merge Intervals | :star: :star: | :one: `Interval`
+057 | Insert Intervals | :star: :star: | :one: `Interval`
+252 | Meeting Rooms | :star: | :one: `Interval`
+253 | Meeting Rooms II | :star: | :one:`Interval`
+986 | Interval List Intersections | :star: :star: | :one: `Interval`
+1288 | Remove Covered Intervals | :star: :star: | :one: `Interval`
+027 | Remove Element | :star: | :one: `Two Pointers`
+026 | Remove Duplicates from Sorted Array       `dup 1` | :star: | :one: `Two Pointers`
+080 | Remove Duplicates from Sorted Array II    `dup 1+` | :star: :star: | :one:
+083 | Remove Duplicates from Sorted List        `dup 1` | :star: | :one: `Two Pointers`
+082 | Remove Duplicates from Sorted List II     `dup 0` | :star: :star: | :one: :heavy_plus_sign: `Two Pointers`
+1836| Remove Duplicates From an Unsorted Linked List | :star: :star: | :one:
 316 | Remove Duplicate Letters | :star: :star: :star: | :heavy_plus_sign:
 442 | Find All Duplicates in an Array | :star: :star: |
 1081 | Smallest Subsequence of Distinct Characters | :star: :star: |
 088 | Merge Sorted Array | :star: | :one:
-169 | Majority Element | :star: | [:link: Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html)
+169 | Majority Element ⊙ [Boyer-Moore Voting Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html) | :star: | :one:
 209 | Minimum Size Subarray Sum | :star: :star: | `Prefix Sum` `BS` `Two Pointers`
 325 | Maximum Size Subarray Sum Equals k | :star: :star: | `Prefix Sum` `Map`
 560 | Subarray Sum Equals K | :star: :star: | `Prefix Sum` `Map`
@@ -524,7 +549,17 @@ No | `Title                                       ` | Difficulty | Note
 238 | Product of Array Except Self  | :star: :star: | `L-R vec`
 870 | Advantage Shuffle | :star: :star: |
 
+---
+
+**Sort by start time or end time in intervals:**
+
+* Sort by Start Time: Use when the problem involves processing intervals in the order they begin, such as checking for containment (one interval fully covers another) or when you need to track intervals that start before or after others.
+    * Early start times allow you to **group intervals** that might overlap or cover each other, and you can track end times to resolve relationships.
+* Sort by End Time: Use when the problem involves selecting the **maximum number** of non-overlapping intervals or minimizing conflicts, such as scheduling tasks or removing overlapping intervals.
+    * Early end times reduce conflicts with future intervals, making it easier to greedily select non-overlapping intervals.
+
 ## List
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 002 | Add Two Numbers | :star: :star: | :one:
@@ -553,7 +588,7 @@ No | `Title                                       ` | Difficulty | Note
 725 | Split Linked List in Parts `k length equal parts`| :star: :star: | :one:
 817 | Linked List Components | :star: :star: | :one:
 876 | Middle of the Linked List | :star: | :one:
-1836 | Remove Duplicates From an Unsorted Linked List | :start: :star: | :one:
+1836 | Remove Duplicates From an Unsorted Linked List | :star: :star: | :one:
 
 ```c++
 /* Even nodes
@@ -583,6 +618,7 @@ Get List Median:
 * getMidOrNext(). The middle or next one of real median. [Could dead loop](./LeetCode/List/148-sort-list.cc)
 
 ## Tree
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 096 | Unique Binary Search Trees  | :star: :star: | `DP`
@@ -644,6 +680,7 @@ No | `Title                                       ` | Difficulty | Note
 1803 | Count Pairs With XOR in a Range | :star: :star: :star: | `XOR` `Prefix Sum` `Trie`
 
 ## String
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 008 | atoi | :star: |:one:
@@ -667,6 +704,7 @@ No | `Title                                       ` | Difficulty | Note
 1869 | Longer Contiguous Segments of Ones than Zeros | :star: |
 
 ## Map
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 001 | Two Sum | :star: |
@@ -684,6 +722,7 @@ No | `Title                                       ` | Difficulty | Note
 953 | Verifying an Alien Dictionary  | :star: |
 
 ## Stack
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 020 | valid Parentheses | :star: |
@@ -706,6 +745,7 @@ No | `Title                                       ` | Difficulty | Note
 641 | Design Circular Deque | :star: :star:|
 
 ## Math
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-: | ---
 006 | ZigZag Conversion | :star: :star: |
@@ -752,6 +792,7 @@ No | `Title                                       ` | Difficulty | Note
  \- | [Least Common Multiple & Greatest Common Disisor](./Leetcode/Math/lcm-gcd.cc) | |
 
 ## Bit
+
 No | `Title                                       ` | Difficulty | Note
 -- | -- | :-:  | ---
 036 | Valid Sudoku | :star: :star: |
@@ -765,23 +806,27 @@ No | `Title                                       ` | Difficulty | Note
     * **Tabulation** uses a table to keep track of subproblem results and works in a `bottom-up` manner: solving the smallest subproblems before the large ones, in an `iterative` manner. Often, people use the words "tabulation" and "dynamic programming" interchangeably.
 
 ## For problems:
+
 1. Counting Problem
 2. Optimum value (maximum or minimum)
 3. Existing Problem
 
 ## Steps:
+
 1. Define last step status and subproblems
 2. Define the state transition equation
 3. Define initializers and boundary
 4. Define calculating order
 
 ## Solution
+
 1. Define state and selection
 2. Define the meaning of dp array
 3. Define transition equation from selection
 4. Define initializers and boundary
 
 ## Catogories
+
 1. Coordinate
 2. Sequence
 3. Divide
@@ -807,6 +852,7 @@ No | `Title                                       ` | Difficulty | Note
     10. Shortest Path
 
 # List
+
 * Add/delete head, middle or tail node
 * Reverse
     * solution one: 206. Reverse Linked List (reverse whole list)
@@ -816,6 +862,7 @@ No | `Title                                       ` | Difficulty | Note
 * Cycle in List
 
 # Bit Operations
+
 Name | Operation
 --- | ---
 set union | A \| B
@@ -835,6 +882,7 @@ get all | 1-bits ~0
 * Carry is logical AND of two input numbers, shifted one bit to the left: carry=(x&y)<<1.
 
 # Patterns
+
 * Pattern: Sliding Window
     * 325\. Maximum Sum Subarray of Size K (easy)
     * Smallest Subarray with a given sum (easy)
@@ -990,4 +1038,5 @@ get all | 1-bits ~0
     * 2116\. Cheeck if a Parentheses String Can Be Valid
 
 # Reference
+
 * [labuladong (:cn: CN)](https://mp.weixin.qq.com/s/AWsL7G89RtaHyHjRPNJENA)
