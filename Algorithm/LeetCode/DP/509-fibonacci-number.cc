@@ -31,6 +31,10 @@ Relatives:
 509. Fibonacci Number
 1137. N-th Tribonacci Number */
 
+#include <vector>
+
+using namespace std;
+
 class Solution {
 public:
     int fib(int N) {
@@ -49,3 +53,48 @@ public:
         return oneStep;
     }
 };
+
+class Solution {
+public:
+    int fib(int N) {
+        if (N < 2) {
+            return N;
+        }
+
+        vector<int> dp(N + 1);
+        dp[0] = 0;
+        dp[1] = 1;
+
+        for (auto i = 2; i < N; ++i) {
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+
+        return dp[N];
+    }
+};
+
+class Solution {
+public:
+    int fib(int N) {
+        if (N < 2) {
+            return N;
+        }
+
+        vector<int> memo(N+1, -1);
+
+        return dp(memo, N);
+    }
+
+private:
+    int dp(vector<int>& memo, int n) {
+        if (n == 0 || n == 1) {
+            return n;
+        }
+
+        if (memo[n] != -1) {
+            return memo[n];
+        }
+
+        return (memo[n] = dp(memo, n - 1) + dp(memo, n - 2));
+    }
+}
