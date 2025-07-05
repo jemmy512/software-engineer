@@ -30,7 +30,7 @@ No | `Title                                       ` | Difficulty | Note
 292 | Nim Game | :star: |
 338 | Counting Bits | :star: :star: | :thinking: `Bit`
 392 | Is Subsequence | :star: :star: |
-509 | Fibonacci Number| :star: |
+509 | Fibonacci Number| :star: | :one:
 514 | Freedom Trail  | :star: :star: :star: |
 523 | Continuous Subarray Sum  | :star: :star: | :thinking: `Prefix Sum` `Map`
 546 | Remove Boxes | :star: :star: :star: | `TODO`
@@ -801,9 +801,18 @@ No | `Title                                       ` | Difficulty | Note
 
 * [20 Patterns to Master Dynamic Programming](https://blog.algomaster.io/p/20-patterns-to-master-dynamic-programming)
 
-* There are two different techniques we can use to implement a dynamic programming solution:
-    * **Memoization** is where we add caching to a function (that has no side effects). In dynamic programming, it is typically used on `recursive` functions for a `top-down` solution that starts with the initial problem and then recursively calls itself to solve smaller problems.
-    * **Tabulation** uses a table to keep track of subproblem results and works in a `bottom-up` manner: solving the smallest subproblems before the large ones, in an `iterative` manner. Often, people use the words "tabulation" and "dynamic programming" interchangeably.
+* **What is DP?**:
+
+    Learn the essence of DP—solving problems by combining solutions to smaller subproblems, typically using:
+    * **memoization** (top-down): where we add caching to a function (that has no side effects). In dynamic programming, it is typically used on `recursive` functions for a `top-down` solution that starts with the initial problem and then recursively calls itself to solve smaller problems.
+    * **tabulation** (bottom-up): uses a table to keep track of subproblem results and works in a `bottom-up` manner: solving the smallest subproblems before the large ones, in an `iterative` manner. Often, people use the words "tabulation" and "dynamic programming" interchangeably.
+
+* **Key Concepts:**
+    * **Overlapping Subproblems**: The problem can be broken into subproblems that are reused multiple times.
+    * **Optimal Substructure**: The optimal solution to the problem can be constructed from optimal solutions of its subproblems.
+    * **State**: Define the variables (state) that represent a subproblem (e.g., dp[i] for a 1D problem or dp[i][j] for a 2D problem).
+    * **Transition**: Understand how to move from one state to another (e.g., dp[i] = dp[i-1] + dp[i-2] for Fibonacci).
+    * **Base Cases**: Identify the smallest subproblems and their solutions.
 
 ## For problems:
 
